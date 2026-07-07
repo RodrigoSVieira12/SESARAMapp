@@ -1,0 +1,12 @@
+{
+  "descricao": "Dicionário de sinónimos para a pesquisa da queixa em texto livre. LISTA-EXEMPLO: alargar com a equipa clínica (palavras que os utentes realmente usam). Acentos e maiúsculas são ignorados na comparação. Cada chave tem de ser o id de um fluxo em app/data/rules/ — o script scripts/validar_dados.py verifica isso. Podem misturar-se termos em português e inglês na mesma lista.",
+  "sinonimos": {
+    "dor_toracica": ["peito", "coração", "aperto no peito", "peito apertado", "chest", "chest pain", "heart"],
+    "dor_abdominal": ["barriga", "dor de barriga", "estômago", "abdómen", "abdominal", "cólica", "stomach", "belly", "tummy", "abdomen"],
+    "febre": ["temperatura", "febril", "quente", "arrepios", "calafrios", "fever", "temperature", "chills"],
+    "falta_de_ar": ["respirar", "respiração", "ofegante", "falta de ar", "asma", "pieira", "breath", "breathing", "shortness of breath", "wheezing"],
+    "dor_cabeca": ["cabeça", "dor de cabeça", "enxaqueca", "cefaleia", "headache", "migraine", "head"],
+    "vomitos_diarreia": ["vómito", "vomitar", "enjoo", "enjoado", "náusea", "diarreia", "intestino", "soltura", "vomit", "vomiting", "nausea", "diarrhea", "diarrhoea", "sick", "upset stomach"],
+    "trauma_queda": ["queda", "caiu", "cai", "pancada", "bateu", "torceu", "entorse", "golpe", "ferida", "fall", "fell", "injury", "sprain", "hit", "wound"]
+  }
+}

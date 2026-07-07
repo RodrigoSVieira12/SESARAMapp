@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="utf-8" />
+<title>Validação clínica, Onde ir? (protótipo SESARAM)</title>
+<style>
+  body { font-family: Georgia, "Times New Roman", serif; color: #1c1c1c;
+         max-width: 820px; margin: 2rem auto; padding: 0 1.5rem; line-height: 1.5; }
+  h1, h2, h3 { font-family: Arial, Helvetica, sans-serif; }
+  h1 { font-size: 1.6rem; }
+  h2 { font-size: 1.3rem; border-bottom: 2px solid #1c1c1c; padding-bottom: 0.3rem; }
+  .capa p { font-size: 1.05rem; }
+  .aviso { border: 2px solid #b00; padding: 0.75rem 1rem; background: #fff5f5; }
+  table.cores { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+  table.cores th, table.cores td { border: 1px solid #999; padding: 0.4rem 0.6rem;
+         font-size: 0.95rem; text-align: left; }
+  .amostra { display: inline-block; width: 2.2rem; height: 1rem; border-radius: 3px;
+         vertical-align: middle; border: 1px solid #0003; }
+  section.queixa { page-break-before: always; }
+  .meta { color: #555; font-size: 0.9rem; }
+  .pergunta { margin: 1.1rem 0; padding-left: 0.5rem; border-left: 3px solid #ccc; }
+  .pergunta p { margin: 0.25rem 0; }
+  .ajuda { color: #555; font-style: italic; }
+  .ramo { margin-left: 1rem; }
+  .cor-tag { font-weight: bold; text-transform: uppercase; }
+  .caixa-validacao { border: 1.5px solid #1c1c1c; padding: 0.9rem 1rem; margin-top: 1.5rem; }
+  .caixa-validacao .linha { margin: 1.1rem 0 0; }
+  .caixa-validacao .espaco { display: inline-block; border-bottom: 1px solid #1c1c1c;
+         min-width: 260px; height: 1rem; }
+  .obs { border: 1px dashed #888; min-height: 90px; margin-top: 0.75rem; }
+  .diagrama { margin: 1rem 0; break-inside: avoid; }
+  .diagrama svg { max-width: 100%; height: auto; }
+  pre.mermaid { background: none; border: 0; padding: 0; }
+  @media print { body { margin: 0.5rem auto; } .no-print { display: none; } }
+</style>
+</head>
+<body>
+  <div class="capa">
+    <h1>Onde ir?, Documento de validação clínica das regras de triagem</h1>
+    <p class="meta">Gerado automaticamente a partir de app/data/rules/ em 2026-07-07.
+    Protótipo académico, SESARAM, Região Autónoma da Madeira.</p>
+    <div class="aviso"><strong>Estado atual:</strong> todos os fluxos abaixo são
+    EXEMPLOS de desenvolvimento e ainda não foram validados clinicamente.
+    Este documento existe precisamente para essa revisão: por favor risque,
+    corrija e anote diretamente no papel.</div>
+    <p><strong>Como ler:</strong> cada queixa tem perguntas de sim/não numeradas.
+    Cada resposta ou remete para outra pergunta, ou termina numa cor de
+    prioridade (inspirada na Triagem de Manchester). Cada queixa inclui também
+    o <strong>fluxograma desenhado</strong> — a mesma árvore em formato visual,
+    com os desfechos nas cinco cores e os números a cruzar com a lista. Em caso
+    de dúvida, a regra do projeto é errar por excesso de urgência.</p>
+    <p><strong>Tempos de espera:</strong> o encaminhamento pode ainda considerar
+    os tempos de espera em tempo real do SESARAM (regra experimental com
+    salvaguardas: só troca a unidade mais próxima se poupar ≥30 min e o desvio
+    for ≤15 km) — igualmente por validar.</p>
+    <table class="cores">
+      <tr><th>Cor</th><th>Classificação</th><th>Tempo-alvo de observação</th></tr>
+      <tr><td><span class="amostra" style="background:#D32F2F"></span>
+        Vermelho</td><td>Emergente</td><td>Atendimento imediato</td></tr><tr><td><span class="amostra" style="background:#EF6C00"></span>
+        Laranja</td><td>Muito urgente</td><td>Observação em cerca de 10 minutos</td></tr><tr><td><span class="amostra" style="background:#F9A825"></span>
+        Amarelo</td><td>Urgente</td><td>Observação em cerca de 60 minutos</td></tr><tr><td><span class="amostra" style="background:#2E7D32"></span>
+        Verde</td><td>Pouco urgente</td><td>Observação em cerca de 120 minutos</td></tr><tr><td><span class="amostra" style="background:#1565C0"></span>
+        Azul</td><td>Não urgente</td><td>Observação em cerca de 240 minutos</td></tr>
+    </table>
+    <p><strong>Fases:</strong> cada pergunta pertence a uma fase: 1 perguntas gerais, 2 perguntas específicas, 3 avaliação da gravidade. A ordem real depende das respostas.</p>
+    <h2>Sinais de emergência (avaliados antes de qualquer queixa)</h2>
+    <p class="meta">Qualquer um selecionado ⇒ VERMELHO e indicação para ligar 112.</p>
+    <ul><li>Perda de consciência ou pessoa que não responde</li><li>Dificuldade grave em respirar ou lábios/rosto azulados</li><li>Dor intensa no peito com suores frios ou náuseas</li><li>Boca ao lado, fraqueza súbita num braço ou fala arrastada (sinais de AVC)</li><li>Hemorragia abundante que não para com pressão</li><li>Convulsão neste momento ou há poucos minutos</li></ul>
+    <p class="no-print"><em>Para imprimir: Ctrl+P (cada queixa sai numa página própria).</em></p>
+  </div>
+  
+    <section class="queixa">
+      <h2>Dor de barriga <span class="meta">(dor_abdominal)</span></h2>
+      <p class="meta">Descrição mostrada ao utente: Dor ou desconforto abdominal.<br />
+      Estado atual do campo "fonte": FLUXO-EXEMPLO para desenvolvimento. Obrigatória validação clínica antes de uso real.</p>
+      <h3>Fluxograma</h3>
+      <p class="meta">Desenhado automaticamente a partir do ficheiro de regras —
+      é a mesma informação das perguntas numeradas abaixo, no formato dos
+      protocolos de triagem. (O desenho precisa de ligação à internet ao abrir
+      este documento; sem ela, valem as perguntas numeradas.)</p>
+      <pre class="mermaid diagrama">flowchart TD
+  inicio([&quot;Início: Dor de barriga&quot;])
+  da_q1[&quot;1. A dor começou de repente, de um&lt;br/&gt;momento para o outro?&quot;]
+  da_q2[&quot;2. A dor é muito intensa?&quot;]
+  da_q3[&quot;3. A barriga está dura como uma tábua&lt;br/&gt;ou não tolera qualquer toque?&quot;]
+  da_q4[&quot;4. Está grávida ou existe essa&lt;br/&gt;possibilidade?&quot;]
+  da_q5[&quot;5. Tem dor forte ou perda de sangue?&quot;]
+  da_q6[&quot;6. Vomitou sangue ou tem fezes pretas&lt;br/&gt;como alcatrão?&quot;]
+  da_q7[&quot;7. Tem febre junto com a dor?&quot;]
+  da_q8[&quot;8. A dor concentra-se na parte&lt;br/&gt;inferior direita da barriga?&quot;]
+  da_q9[&quot;9. A dor é em cólica, ou seja, vai e&lt;br/&gt;vem em ondas?&quot;]
+  da_q10[&quot;10. Já teve pedras nos rins ou na&lt;br/&gt;vesícula?&quot;]
+  da_q11[&quot;11. A dor dura há mais de 48 horas sem&lt;br/&gt;melhorar?&quot;]
+  da_q12[&quot;12. Apesar da dor, continua a&lt;br/&gt;conseguir comer e beber?&quot;]
+  da_q13[&quot;13. A dor é leve e melhora depois de&lt;br/&gt;evacuar ou de libertar gases?&quot;]
+  inicio --&gt; da_q1
+  da_q1 --&gt;|Sim| da_q2
+  da_q1 --&gt;|Não| da_q4
+  da_q2 --&gt;|Sim| da_q3
+  da_q2 --&gt;|Não| da_q4
+  da_q3_sim([&quot;VERMELHO&lt;br/&gt;Dor abdominal súbita com barriga&lt;br/&gt;rígida pode indicar uma situação&lt;br/&gt;grave.&quot;]):::vermelho
+  da_q3 --&gt;|Sim| da_q3_sim
+  da_q3_nao([&quot;LARANJA&lt;br/&gt;Dor abdominal súbita e intensa&lt;br/&gt;deve ser vista com urgência.&quot;]):::laranja
+  da_q3 --&gt;|Não| da_q3_nao
+  da_q4 --&gt;|Sim| da_q5
+  da_q4 --&gt;|Não| da_q6
+  da_q5_sim([&quot;LARANJA&lt;br/&gt;Na gravidez, dor forte ou perda de&lt;br/&gt;sangue exigem observação urgente.&quot;]):::laranja
+  da_q5 --&gt;|Sim| da_q5_sim
+  da_q5_nao([&quot;AMARELO&lt;br/&gt;Dor abdominal na gravidez deve ser&lt;br/&gt;avaliada hoje.&quot;]):::amarelo
+  da_q5 --&gt;|Não| da_q5_nao
+  da_q6_sim([&quot;LARANJA&lt;br/&gt;Possível hemorragia digestiva.&quot;]):::laranja
+  da_q6 --&gt;|Sim| da_q6_sim
+  da_q6 --&gt;|Não| da_q7
+  da_q7 --&gt;|Sim| da_q8
+  da_q7 --&gt;|Não| da_q9
+  da_q8_sim([&quot;LARANJA&lt;br/&gt;Dor com febre nessa zona obriga a&lt;br/&gt;excluir apendicite.&quot;]):::laranja
+  da_q8 --&gt;|Sim| da_q8_sim
+  da_q8_nao([&quot;AMARELO&lt;br/&gt;Dor abdominal com febre deve ser&lt;br/&gt;observada hoje.&quot;]):::amarelo
+  da_q8 --&gt;|Não| da_q8_nao
+  da_q9 --&gt;|Sim| da_q10
+  da_q9 --&gt;|Não| da_q11
+  da_q10_sim([&quot;AMARELO&lt;br/&gt;Cólica em pessoa com historial de&lt;br/&gt;cálculos deve ser avaliada hoje.&quot;]):::amarelo
+  da_q10 --&gt;|Sim| da_q10_sim
+  da_q10 --&gt;|Não| da_q11
+  da_q11_sim([&quot;AMARELO&lt;br/&gt;Dor persistente deve ser&lt;br/&gt;observada.&quot;]):::amarelo
+  da_q11 --&gt;|Sim| da_q11_sim
+  da_q11 --&gt;|Não| da_q12
+  da_q12 --&gt;|Sim| da_q13
+  da_q12_nao([&quot;VERDE&lt;br/&gt;Dor recente com pouca tolerância&lt;br/&gt;alimentar, a avaliar sem urgência.&quot;]):::verde
+  da_q12 --&gt;|Não| da_q12_nao
+  da_q13_sim([&quot;AZUL&lt;br/&gt;Padrão sugestivo de desconforto&lt;br/&gt;intestinal comum.&quot;]):::azul
+  da_q13 --&gt;|Sim| da_q13_sim
+  da_q13_nao([&quot;VERDE&lt;br/&gt;Dor abdominal recente sem sinais&lt;br/&gt;de alarme.&quot;]):::verde
+  da_q13 --&gt;|Não| da_q13_nao
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;</pre>
+      <h3>Perguntas</h3>
+      
+        <div class="pergunta">
+          <p class="meta">Fase 1</p>
+          <p><strong>1.</strong> A dor começou de repente, de um momento para o outro?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: seguir para a pergunta 2</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 4</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 1</p>
+          <p><strong>2.</strong> A dor é muito intensa?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: seguir para a pergunta 3</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 4</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>3.</strong> A barriga está dura como uma tábua ou não tolera qualquer toque?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">vermelho</span>, Dor abdominal súbita com barriga rígida pode indicar uma situação grave.<br /><span class="meta">Nota mostrada ao utente: Ligue 112 ou dirija-se já à urgência. Não coma nem beba entretanto.</span></p>
+          <p class="ramo">Se <strong>NÃO</strong>: RESULTADO: <span class="cor-tag">laranja</span>, Dor abdominal súbita e intensa deve ser vista com urgência.</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 1</p>
+          <p><strong>4.</strong> Está grávida ou existe essa possibilidade?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: seguir para a pergunta 5</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 6</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>5.</strong> Tem dor forte ou perda de sangue?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">laranja</span>, Na gravidez, dor forte ou perda de sangue exigem observação urgente.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: RESULTADO: <span class="cor-tag">amarelo</span>, Dor abdominal na gravidez deve ser avaliada hoje.</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>6.</strong> Vomitou sangue ou tem fezes pretas como alcatrão?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">laranja</span>, Possível hemorragia digestiva.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 7</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>7.</strong> Tem febre junto com a dor?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: seguir para a pergunta 8</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 9</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>8.</strong> A dor concentra-se na parte inferior direita da barriga?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">laranja</span>, Dor com febre nessa zona obriga a excluir apendicite.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: RESULTADO: <span class="cor-tag">amarelo</span>, Dor abdominal com febre deve ser observada hoje.</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>9.</strong> A dor é em cólica, ou seja, vai e vem em ondas?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: seguir para a pergunta 10</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 11</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 3</p>
+          <p><strong>10.</strong> Já teve pedras nos rins ou na vesícula?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">amarelo</span>, Cólica em pessoa com historial de cálculos deve ser avaliada hoje.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 11</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 3</p>
+          <p><strong>11.</strong> A dor dura há mais de 48 horas sem melhorar?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">amarelo</span>, Dor persistente deve ser observada.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 12</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 3</p>
+          <p><strong>12.</strong> Apesar da dor, continua a conseguir comer e beber?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: seguir para a pergunta 13</p>
+          <p class="ramo">Se <strong>NÃO</strong>: RESULTADO: <span class="cor-tag">verde</span>, Dor recente com pouca tolerância alimentar, a avaliar sem urgência.<br /><span class="meta">Nota mostrada ao utente: Dieta leve e líquidos em pequenas quantidades. Se agravar, refaça a avaliação.</span></p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 3</p>
+          <p><strong>13.</strong> A dor é leve e melhora depois de evacuar ou de libertar gases?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">azul</span>, Padrão sugestivo de desconforto intestinal comum.<br /><span class="meta">Nota mostrada ao utente: Dieta leve, água e descanso. Se durar mais de 48 horas ou agravar, refaça a avaliação.</span></p>
+          <p class="ramo">Se <strong>NÃO</strong>: RESULTADO: <span class="cor-tag">verde</span>, Dor abdominal recente sem sinais de alarme.<br /><span class="meta">Nota mostrada ao utente: Dieta leve e hidratação. Se agravar ou surgirem novos sintomas, refaça a avaliação.</span></p>
+        </div>
+      <div class="caixa-validacao">
+        <strong>Validação clínica desta queixa</strong>
+        <p class="linha">Correções necessárias? &nbsp; ☐ Não &nbsp;&nbsp; ☐ Sim (anotadas acima / abaixo)</p>
+        <div class="obs"></div>
+        <p class="linha">Validado por (nome e função): <span class="espaco"></span></p>
+        <p class="linha">Data: <span class="espaco" style="min-width:120px"></span>
+           &nbsp;&nbsp; Assinatura: <span class="espaco"></span></p>
+      </div>
+    </section>
+    <section class="queixa">
+      <h2>Dor de cabeça <span class="meta">(dor_cabeca)</span></h2>
+      <p class="meta">Descrição mostrada ao utente: Cefaleia, enxaqueca, pressão na cabeça.<br />
+      Estado atual do campo "fonte": FLUXO-EXEMPLO para desenvolvimento. Obrigatória validação clínica antes de uso real.</p>
+      <h3>Fluxograma</h3>
+      <p class="meta">Desenhado automaticamente a partir do ficheiro de regras —
+      é a mesma informação das perguntas numeradas abaixo, no formato dos
+      protocolos de triagem. (O desenho precisa de ligação à internet ao abrir
+      este documento; sem ela, valem as perguntas numeradas.)</p>
+      <pre class="mermaid diagrama">flowchart TD
+  inicio([&quot;Início: Dor de cabeça&quot;])
+  dc_q1[&quot;1. A dor apareceu de repente e&lt;br/&gt;atingiu intensidade máxima em&lt;br/&gt;segundos, como uma explosão?&quot;]
+  dc_q2[&quot;2. A dor surgiu depois de uma pancada&lt;br/&gt;na cabeça?&quot;]
+  dc_q3[&quot;3. Perdeu os sentidos, vomitou&lt;br/&gt;repetidamente ou está com&lt;br/&gt;sonolência anormal desde a&lt;br/&gt;pancada?&quot;]
+  dc_q4[&quot;4. É a primeira vez que tem uma dor&lt;br/&gt;deste tipo?&quot;]
+  dc_q5[&quot;5. Tem febre com rigidez no pescoço,&lt;br/&gt;ou a luz incomoda muito os olhos?&quot;]
+  dc_q6[&quot;6. Tem fraqueza num braço ou perna,&lt;br/&gt;fala arrastada ou visão dupla?&quot;]
+  dc_q7[&quot;7. Tem vómitos que não param?&quot;]
+  dc_q8[&quot;8. Tem mais de 50 anos e esta dor é&lt;br/&gt;nova e persistente?&quot;]
+  dc_q9[&quot;9. A dor dura há mais de 3 dias&lt;br/&gt;apesar de analgésicos?&quot;]
+  dc_q10[&quot;10. É semelhante às suas dores de&lt;br/&gt;cabeça ou enxaquecas habituais?&quot;]
+  dc_q11[&quot;11. A sua medicação habitual costuma&lt;br/&gt;aliviar?&quot;]
+  dc_q12[&quot;12. A dor está a impedir as suas&lt;br/&gt;atividades normais do dia?&quot;]
+  dc_q13[&quot;13. Esta crise é mais forte ou&lt;br/&gt;diferente do habitual?&quot;]
+  inicio --&gt; dc_q1
+  dc_q1_sim([&quot;VERMELHO&lt;br/&gt;Dor de cabeça súbita e muito&lt;br/&gt;intensa pode indicar uma situação&lt;br/&gt;grave.&quot;]):::vermelho
+  dc_q1 --&gt;|Sim| dc_q1_sim
+  dc_q1 --&gt;|Não| dc_q2
+  dc_q2 --&gt;|Sim| dc_q3
+  dc_q2 --&gt;|Não| dc_q4
+  dc_q3_sim([&quot;LARANJA&lt;br/&gt;Traumatismo craniano com sinais de&lt;br/&gt;alarme.&quot;]):::laranja
+  dc_q3 --&gt;|Sim| dc_q3_sim
+  dc_q3_nao([&quot;AMARELO&lt;br/&gt;Dor de cabeça após traumatismo&lt;br/&gt;deve ser observada hoje.&quot;]):::amarelo
+  dc_q3 --&gt;|Não| dc_q3_nao
+  dc_q4 --&gt;|Sim| dc_q5
+  dc_q4 --&gt;|Não| dc_q10
+  dc_q5_sim([&quot;LARANJA&lt;br/&gt;Sinais que exigem observação&lt;br/&gt;urgente.&quot;]):::laranja
+  dc_q5 --&gt;|Sim| dc_q5_sim
+  dc_q5 --&gt;|Não| dc_q6
+  dc_q6_sim([&quot;VERMELHO&lt;br/&gt;Sinais neurológicos súbitos exigem&lt;br/&gt;ajuda imediata.&quot;]):::vermelho
+  dc_q6 --&gt;|Sim| dc_q6_sim
+  dc_q6 --&gt;|Não| dc_q7
+  dc_q7_sim([&quot;AMARELO&lt;br/&gt;Dor de cabeça com vómitos&lt;br/&gt;persistentes deve ser avaliada&lt;br/&gt;hoje.&quot;]):::amarelo
+  dc_q7 --&gt;|Sim| dc_q7_sim
+  dc_q7 --&gt;|Não| dc_q8
+  dc_q8_sim([&quot;AMARELO&lt;br/&gt;Dor de cabeça nova e persistente&lt;br/&gt;depois dos 50 anos deve ser&lt;br/&gt;avaliada.&quot;]):::amarelo
+  dc_q8 --&gt;|Sim| dc_q8_sim
+  dc_q8 --&gt;|Não| dc_q9
+  dc_q9_sim([&quot;AMARELO&lt;br/&gt;Dor prolongada que não cede à&lt;br/&gt;medicação deve ser observada.&quot;]):::amarelo
+  dc_q9 --&gt;|Sim| dc_q9_sim
+  dc_q9_nao([&quot;VERDE&lt;br/&gt;Dor de cabeça sem sinais de&lt;br/&gt;alarme.&quot;]):::verde
+  dc_q9 --&gt;|Não| dc_q9_nao
+  dc_q10 --&gt;|Sim| dc_q11
+  dc_q10 --&gt;|Não| dc_q5
+  dc_q11 --&gt;|Sim| dc_q12
+  dc_q11 --&gt;|Não| dc_q13
+  dc_q12_sim([&quot;VERDE&lt;br/&gt;Crise mais forte do que o&lt;br/&gt;habitual, a avaliar sem urgência.&quot;]):::verde
+  dc_q12 --&gt;|Sim| dc_q12_sim
+  dc_q12_nao([&quot;AZUL&lt;br/&gt;Crise ligeira de um padrão já&lt;br/&gt;conhecido.&quot;]):::azul
+  dc_q12 --&gt;|Não| dc_q12_nao
+  dc_q13_sim([&quot;AMARELO&lt;br/&gt;Mudança do padrão habitual deve&lt;br/&gt;ser avaliada.&quot;]):::amarelo
+  dc_q13 --&gt;|Sim| dc_q13_sim
+  dc_q13_nao([&quot;VERDE&lt;br/&gt;Crise habitual sem alívio com a&lt;br/&gt;medicação, a avaliar sem urgência.&quot;]):::verde
+  dc_q13 --&gt;|Não| dc_q13_nao
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;</pre>
+      <h3>Perguntas</h3>
+      
+        <div class="pergunta">
+          <p class="meta">Fase 1</p>
+          <p><strong>1.</strong> A dor apareceu de repente e atingiu intensidade máxima em segundos, como uma explosão?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">vermelho</span>, Dor de cabeça súbita e muito intensa pode indicar uma situação grave.<br /><span class="meta">Nota mostrada ao utente: Ligue 112 já.</span></p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 2</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 1</p>
+          <p><strong>2.</strong> A dor surgiu depois de uma pancada na cabeça?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: seguir para a pergunta 3</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 4</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>3.</strong> Perdeu os sentidos, vomitou repetidamente ou está com sonolência anormal desde a pancada?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">laranja</span>, Traumatismo craniano com sinais de alarme.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: RESULTADO: <span class="cor-tag">amarelo</span>, Dor de cabeça após traumatismo deve ser observada hoje.<br /><span class="meta">Nota mostrada ao utente: Se surgir vómito repetido, sonolência anormal ou confusão, ligue 112.</span></p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 1</p>
+          <p><strong>4.</strong> É a primeira vez que tem uma dor deste tipo?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: seguir para a pergunta 5</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 10</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>5.</strong> Tem febre com rigidez no pescoço, ou a luz incomoda muito os olhos?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">laranja</span>, Sinais que exigem observação urgente.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 6</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>6.</strong> Tem fraqueza num braço ou perna, fala arrastada ou visão dupla?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">vermelho</span>, Sinais neurológicos súbitos exigem ajuda imediata.<br /><span class="meta">Nota mostrada ao utente: Ligue 112 de imediato.</span></p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 7</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>7.</strong> Tem vómitos que não param?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">amarelo</span>, Dor de cabeça com vómitos persistentes deve ser avaliada hoje.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 8</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 3</p>
+          <p><strong>8.</strong> Tem mais de 50 anos e esta dor é nova e persistente?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">amarelo</span>, Dor de cabeça nova e persistente depois dos 50 anos deve ser avaliada.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 9</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 3</p>
+          <p><strong>9.</strong> A dor dura há mais de 3 dias apesar de analgésicos?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">amarelo</span>, Dor prolongada que não cede à medicação deve ser observada.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: RESULTADO: <span class="cor-tag">verde</span>, Dor de cabeça sem sinais de alarme.<br /><span class="meta">Nota mostrada ao utente: Descanse, hidrate-se e evite ecrãs. Se agravar, refaça a avaliação.</span></p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>10.</strong> É semelhante às suas dores de cabeça ou enxaquecas habituais?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: seguir para a pergunta 11</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 5</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 3</p>
+          <p><strong>11.</strong> A sua medicação habitual costuma aliviar?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: seguir para a pergunta 12</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 13</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 3</p>
+          <p><strong>12.</strong> A dor está a impedir as suas atividades normais do dia?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">verde</span>, Crise mais forte do que o habitual, a avaliar sem urgência.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: RESULTADO: <span class="cor-tag">azul</span>, Crise ligeira de um padrão já conhecido.<br /><span class="meta">Nota mostrada ao utente: Tome a medicação habitual e descanse num local calmo. Se o padrão mudar, refaça a avaliação.</span></p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 3</p>
+          <p><strong>13.</strong> Esta crise é mais forte ou diferente do habitual?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">amarelo</span>, Mudança do padrão habitual deve ser avaliada.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: RESULTADO: <span class="cor-tag">verde</span>, Crise habitual sem alívio com a medicação, a avaliar sem urgência.</p>
+        </div>
+      <div class="caixa-validacao">
+        <strong>Validação clínica desta queixa</strong>
+        <p class="linha">Correções necessárias? &nbsp; ☐ Não &nbsp;&nbsp; ☐ Sim (anotadas acima / abaixo)</p>
+        <div class="obs"></div>
+        <p class="linha">Validado por (nome e função): <span class="espaco"></span></p>
+        <p class="linha">Data: <span class="espaco" style="min-width:120px"></span>
+           &nbsp;&nbsp; Assinatura: <span class="espaco"></span></p>
+      </div>
+    </section>
+    <section class="queixa">
+      <h2>Dor no peito <span class="meta">(dor_toracica)</span></h2>
+      <p class="meta">Descrição mostrada ao utente: Dor, aperto ou desconforto na zona do peito.<br />
+      Estado atual do campo "fonte": FLUXO-EXEMPLO para desenvolvimento. Obrigatória validação clínica antes de uso real.</p>
+      <h3>Fluxograma</h3>
+      <p class="meta">Desenhado automaticamente a partir do ficheiro de regras —
+      é a mesma informação das perguntas numeradas abaixo, no formato dos
+      protocolos de triagem. (O desenho precisa de ligação à internet ao abrir
+      este documento; sem ela, valem as perguntas numeradas.)</p>
+      <pre class="mermaid diagrama">flowchart TD
+  inicio([&quot;Início: Dor no peito&quot;])
+  dt_q1[&quot;1. A dor está presente neste momento?&quot;]
+  dt_q2[&quot;2. Começou há menos de uma hora?&quot;]
+  dt_q3[&quot;3. A dor é forte?&quot;]
+  dt_q4[&quot;4. Tem também suores frios, náuseas&lt;br/&gt;ou sensação de desmaio?&quot;]
+  dt_q5[&quot;5. A dor é em aperto ou peso e&lt;br/&gt;espalha-se para o braço, maxilar&lt;br/&gt;ou costas?&quot;]
+  dt_q6[&quot;6. Tem falta de ar associada à dor?&quot;]
+  dt_q7[&quot;7. A dor aparece ou piora quando faz&lt;br/&gt;esforço, por exemplo subir escadas&lt;br/&gt;ou andar depressa?&quot;]
+  dt_q8[&quot;8. A dor piora quando respira fundo,&lt;br/&gt;tosse ou pressiona o local com o&lt;br/&gt;dedo?&quot;]
+  dt_q9[&quot;9. Fez recentemente algum esforço&lt;br/&gt;físico invulgar, teve uma pancada&lt;br/&gt;ou tosse prolongada?&quot;]
+  dt_q10[&quot;10. A dor dura há mais de 3 dias sem&lt;br/&gt;estar a agravar?&quot;]
+  dt_q11[&quot;11. Nos episódios anteriores, a dor&lt;br/&gt;aparecia com o esforço e aliviava&lt;br/&gt;com o repouso?&quot;]
+  dt_q12[&quot;12. Os episódios duram segundos e&lt;br/&gt;mudam com a posição do corpo ou&lt;br/&gt;com o toque?&quot;]
+  dt_q13[&quot;13. Os episódios estão a ficar mais&lt;br/&gt;frequentes ou mais fortes?&quot;]
+  inicio --&gt; dt_q1
+  dt_q1 --&gt;|Sim| dt_q2
+  dt_q1 --&gt;|Não| dt_q11
+  dt_q2 --&gt;|Sim| dt_q4
+  dt_q2 --&gt;|Não| dt_q3
+  dt_q3 --&gt;|Sim| dt_q4
+  dt_q3 --&gt;|Não| dt_q5
+  dt_q4_sim([&quot;VERMELHO&lt;br/&gt;Dor no peito com suores frios ou&lt;br/&gt;náuseas pode indicar um problema&lt;br/&gt;cardíaco.&quot;]):::vermelho
+  dt_q4 --&gt;|Sim| dt_q4_sim
+  dt_q4 --&gt;|Não| dt_q5
+  dt_q5_sim([&quot;LARANJA&lt;br/&gt;Dor torácica com características&lt;br/&gt;de alarme.&quot;]):::laranja
+  dt_q5 --&gt;|Sim| dt_q5_sim
+  dt_q5 --&gt;|Não| dt_q6
+  dt_q6_sim([&quot;LARANJA&lt;br/&gt;Dor torácica com dificuldade&lt;br/&gt;respiratória.&quot;]):::laranja
+  dt_q6 --&gt;|Sim| dt_q6_sim
+  dt_q6 --&gt;|Não| dt_q7
+  dt_q7_sim([&quot;AMARELO&lt;br/&gt;Dor relacionada com esforço deve&lt;br/&gt;ser avaliada hoje.&quot;]):::amarelo
+  dt_q7 --&gt;|Sim| dt_q7_sim
+  dt_q7 --&gt;|Não| dt_q8
+  dt_q8 --&gt;|Sim| dt_q9
+  dt_q8 --&gt;|Não| dt_q10
+  dt_q9_sim([&quot;VERDE&lt;br/&gt;Características sugestivas de dor&lt;br/&gt;muscular ou da parede torácica.&quot;]):::verde
+  dt_q9 --&gt;|Sim| dt_q9_sim
+  dt_q9 --&gt;|Não| dt_q10
+  dt_q10_sim([&quot;VERDE&lt;br/&gt;Dor estável há vários dias, sem&lt;br/&gt;sinais de alarme.&quot;]):::verde
+  dt_q10 --&gt;|Sim| dt_q10_sim
+  dt_q10_nao([&quot;AMARELO&lt;br/&gt;Dor recente sem causa evidente&lt;br/&gt;deve ser observada hoje.&quot;]):::amarelo
+  dt_q10 --&gt;|Não| dt_q10_nao
+  dt_q11_sim([&quot;AMARELO&lt;br/&gt;Episódios de dor com esforço devem&lt;br/&gt;ser avaliados brevemente.&quot;]):::amarelo
+  dt_q11 --&gt;|Sim| dt_q11_sim
+  dt_q11 --&gt;|Não| dt_q12
+  dt_q12_sim([&quot;AZUL&lt;br/&gt;Padrão sugestivo de dor da parede&lt;br/&gt;torácica, sem urgência.&quot;]):::azul
+  dt_q12 --&gt;|Sim| dt_q12_sim
+  dt_q12 --&gt;|Não| dt_q13
+  dt_q13_sim([&quot;AMARELO&lt;br/&gt;Padrão em agravamento deve ser&lt;br/&gt;avaliado brevemente.&quot;]):::amarelo
+  dt_q13 --&gt;|Sim| dt_q13_sim
+  dt_q13_nao([&quot;VERDE&lt;br/&gt;Episódios de dor sem padrão de&lt;br/&gt;alarme, a avaliar sem urgência.&quot;]):::verde
+  dt_q13 --&gt;|Não| dt_q13_nao
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;</pre>
+      <h3>Perguntas</h3>
+      
+        <div class="pergunta">
+          <p class="meta">Fase 1</p>
+          <p><strong>1.</strong> A dor está presente neste momento?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: seguir para a pergunta 2</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 11</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 1</p>
+          <p><strong>2.</strong> Começou há menos de uma hora?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: seguir para a pergunta 4</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 3</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 1</p>
+          <p><strong>3.</strong> A dor é forte?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: seguir para a pergunta 4</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 5</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>4.</strong> Tem também suores frios, náuseas ou sensação de desmaio?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">vermelho</span>, Dor no peito com suores frios ou náuseas pode indicar um problema cardíaco.<br /><span class="meta">Nota mostrada ao utente: Ligue 112 já. Não conduza para o hospital pelos próprios meios.</span></p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 5</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>5.</strong> A dor é em aperto ou peso e espalha-se para o braço, maxilar ou costas?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">laranja</span>, Dor torácica com características de alarme.<br /><span class="meta">Nota mostrada ao utente: Se surgirem suores frios ou falta de ar, ligue 112 em vez de se deslocar.</span></p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 6</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>6.</strong> Tem falta de ar associada à dor?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">laranja</span>, Dor torácica com dificuldade respiratória.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 7</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>7.</strong> A dor aparece ou piora quando faz esforço, por exemplo subir escadas ou andar depressa?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">amarelo</span>, Dor relacionada com esforço deve ser avaliada hoje.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 8</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>8.</strong> A dor piora quando respira fundo, tosse ou pressiona o local com o dedo?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: seguir para a pergunta 9</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 10</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 3</p>
+          <p><strong>9.</strong> Fez recentemente algum esforço físico invulgar, teve uma pancada ou tosse prolongada?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">verde</span>, Características sugestivas de dor muscular ou da parede torácica.<br /><span class="meta">Nota mostrada ao utente: Se a dor mudar de tipo ou surgirem novos sintomas, refaça a avaliação.</span></p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 10</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 3</p>
+          <p><strong>10.</strong> A dor dura há mais de 3 dias sem estar a agravar?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">verde</span>, Dor estável há vários dias, sem sinais de alarme.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: RESULTADO: <span class="cor-tag">amarelo</span>, Dor recente sem causa evidente deve ser observada hoje.</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>11.</strong> Nos episódios anteriores, a dor aparecia com o esforço e aliviava com o repouso?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">amarelo</span>, Episódios de dor com esforço devem ser avaliados brevemente.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 12</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 3</p>
+          <p><strong>12.</strong> Os episódios duram segundos e mudam com a posição do corpo ou com o toque?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">azul</span>, Padrão sugestivo de dor da parede torácica, sem urgência.<br /><span class="meta">Nota mostrada ao utente: Registe quando acontece e fale com o seu centro de saúde na próxima oportunidade.</span></p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 13</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 3</p>
+          <p><strong>13.</strong> Os episódios estão a ficar mais frequentes ou mais fortes?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">amarelo</span>, Padrão em agravamento deve ser avaliado brevemente.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: RESULTADO: <span class="cor-tag">verde</span>, Episódios de dor sem padrão de alarme, a avaliar sem urgência.</p>
+        </div>
+      <div class="caixa-validacao">
+        <strong>Validação clínica desta queixa</strong>
+        <p class="linha">Correções necessárias? &nbsp; ☐ Não &nbsp;&nbsp; ☐ Sim (anotadas acima / abaixo)</p>
+        <div class="obs"></div>
+        <p class="linha">Validado por (nome e função): <span class="espaco"></span></p>
+        <p class="linha">Data: <span class="espaco" style="min-width:120px"></span>
+           &nbsp;&nbsp; Assinatura: <span class="espaco"></span></p>
+      </div>
+    </section>
+    <section class="queixa">
+      <h2>Falta de ar <span class="meta">(falta_de_ar)</span></h2>
+      <p class="meta">Descrição mostrada ao utente: Dificuldade em respirar ou cansaço anormal a respirar.<br />
+      Estado atual do campo "fonte": FLUXO-EXEMPLO para desenvolvimento. Obrigatória validação clínica antes de uso real.</p>
+      <h3>Fluxograma</h3>
+      <p class="meta">Desenhado automaticamente a partir do ficheiro de regras —
+      é a mesma informação das perguntas numeradas abaixo, no formato dos
+      protocolos de triagem. (O desenho precisa de ligação à internet ao abrir
+      este documento; sem ela, valem as perguntas numeradas.)</p>
+      <pre class="mermaid diagrama">flowchart TD
+  inicio([&quot;Início: Falta de ar&quot;])
+  fa_q1[&quot;1. A falta de ar surgiu de repente,&lt;br/&gt;nos últimos minutos ou horas?&quot;]
+  fa_q2[&quot;2. Tem dificuldade em dizer frases&lt;br/&gt;completas sem parar para respirar?&quot;]
+  fa_q3[&quot;3. Os lábios ou o rosto estão&lt;br/&gt;azulados?&quot;]
+  fa_q4[&quot;4. Tem também dor no peito ou&lt;br/&gt;palpitações?&quot;]
+  fa_q5[&quot;5. Tem asma ou doença pulmonar&lt;br/&gt;crónica e os inaladores habituais&lt;br/&gt;não estão a aliviar?&quot;]
+  fa_q6[&quot;6. Teve recentemente uma cirurgia,&lt;br/&gt;uma viagem longa sentado, ou tem&lt;br/&gt;uma perna inchada e dorida?&quot;]
+  fa_q7[&quot;7. Piora quando está deitado, ou&lt;br/&gt;acorda de noite com falta de ar?&quot;]
+  fa_q8[&quot;8. Tem tosse com expetoração e febre?&quot;]
+  fa_q9[&quot;9. Os tornozelos ou as pernas estão&lt;br/&gt;mais inchados do que o costume?&quot;]
+  fa_q10[&quot;10. A falta de ar aparece apenas com&lt;br/&gt;esforços maiores do que os&lt;br/&gt;habituais?&quot;]
+  fa_q11[&quot;11. De resto sente-se bem?&quot;]
+  fa_q12[&quot;12. Já foi observado por um médico por&lt;br/&gt;causa deste cansaço?&quot;]
+  inicio --&gt; fa_q1
+  fa_q1 --&gt;|Sim| fa_q2
+  fa_q1 --&gt;|Não| fa_q7
+  fa_q2 --&gt;|Sim| fa_q3
+  fa_q2 --&gt;|Não| fa_q4
+  fa_q3_sim([&quot;VERMELHO&lt;br/&gt;Dificuldade respiratória grave.&quot;]):::vermelho
+  fa_q3 --&gt;|Sim| fa_q3_sim
+  fa_q3_nao([&quot;LARANJA&lt;br/&gt;Dificuldade respiratória&lt;br/&gt;significativa.&quot;]):::laranja
+  fa_q3 --&gt;|Não| fa_q3_nao
+  fa_q4_sim([&quot;LARANJA&lt;br/&gt;Falta de ar súbita com dor no&lt;br/&gt;peito deve ser vista já.&quot;]):::laranja
+  fa_q4 --&gt;|Sim| fa_q4_sim
+  fa_q4 --&gt;|Não| fa_q5
+  fa_q5_sim([&quot;LARANJA&lt;br/&gt;Crise respiratória sem resposta à&lt;br/&gt;medicação habitual.&quot;]):::laranja
+  fa_q5 --&gt;|Sim| fa_q5_sim
+  fa_q5 --&gt;|Não| fa_q6
+  fa_q6_sim([&quot;LARANJA&lt;br/&gt;Falta de ar súbita nestas&lt;br/&gt;circunstâncias obriga a excluir um&lt;br/&gt;coágulo no pulmão.&quot;]):::laranja
+  fa_q6 --&gt;|Sim| fa_q6_sim
+  fa_q6 --&gt;|Não| fa_q10
+  fa_q7_sim([&quot;AMARELO&lt;br/&gt;Este padrão deve ser avaliado&lt;br/&gt;hoje.&quot;]):::amarelo
+  fa_q7 --&gt;|Sim| fa_q7_sim
+  fa_q7 --&gt;|Não| fa_q8
+  fa_q8_sim([&quot;AMARELO&lt;br/&gt;Possível infeção respiratória a&lt;br/&gt;avaliar hoje.&quot;]):::amarelo
+  fa_q8 --&gt;|Sim| fa_q8_sim
+  fa_q8 --&gt;|Não| fa_q9
+  fa_q9_sim([&quot;AMARELO&lt;br/&gt;Falta de ar com pernas inchadas&lt;br/&gt;deve ser avaliada hoje.&quot;]):::amarelo
+  fa_q9 --&gt;|Sim| fa_q9_sim
+  fa_q9 --&gt;|Não| fa_q10
+  fa_q10 --&gt;|Sim| fa_q11
+  fa_q10_nao([&quot;AMARELO&lt;br/&gt;Falta de ar em atividades ligeiras&lt;br/&gt;deve ser avaliada hoje.&quot;]):::amarelo
+  fa_q10 --&gt;|Não| fa_q10_nao
+  fa_q11 --&gt;|Sim| fa_q12
+  fa_q11_nao([&quot;VERDE&lt;br/&gt;Cansaço com mal-estar associado, a&lt;br/&gt;avaliar sem urgência.&quot;]):::verde
+  fa_q11 --&gt;|Não| fa_q11_nao
+  fa_q12_sim([&quot;AZUL&lt;br/&gt;Situação conhecida e estável, sem&lt;br/&gt;sinais de agravamento.&quot;]):::azul
+  fa_q12 --&gt;|Sim| fa_q12_sim
+  fa_q12_nao([&quot;VERDE&lt;br/&gt;Cansaço de esforço ainda não&lt;br/&gt;avaliado, sem sinais de alarme.&quot;]):::verde
+  fa_q12 --&gt;|Não| fa_q12_nao
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;</pre>
+      <h3>Perguntas</h3>
+      
+        <div class="pergunta">
+          <p class="meta">Fase 1</p>
+          <p><strong>1.</strong> A falta de ar surgiu de repente, nos últimos minutos ou horas?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: seguir para a pergunta 2</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 7</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 1</p>
+          <p><strong>2.</strong> Tem dificuldade em dizer frases completas sem parar para respirar?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: seguir para a pergunta 3</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 4</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>3.</strong> Os lábios ou o rosto estão azulados?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">vermelho</span>, Dificuldade respiratória grave.<br /><span class="meta">Nota mostrada ao utente: Ligue 112 de imediato.</span></p>
+          <p class="ramo">Se <strong>NÃO</strong>: RESULTADO: <span class="cor-tag">laranja</span>, Dificuldade respiratória significativa.<br /><span class="meta">Nota mostrada ao utente: Se piorar rapidamente, ligue 112.</span></p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>4.</strong> Tem também dor no peito ou palpitações?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">laranja</span>, Falta de ar súbita com dor no peito deve ser vista já.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 5</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>5.</strong> Tem asma ou doença pulmonar crónica e os inaladores habituais não estão a aliviar?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">laranja</span>, Crise respiratória sem resposta à medicação habitual.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 6</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>6.</strong> Teve recentemente uma cirurgia, uma viagem longa sentado, ou tem uma perna inchada e dorida?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">laranja</span>, Falta de ar súbita nestas circunstâncias obriga a excluir um coágulo no pulmão.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 10</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>7.</strong> Piora quando está deitado, ou acorda de noite com falta de ar?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">amarelo</span>, Este padrão deve ser avaliado hoje.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 8</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>8.</strong> Tem tosse com expetoração e febre?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">amarelo</span>, Possível infeção respiratória a avaliar hoje.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 9</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>9.</strong> Os tornozelos ou as pernas estão mais inchados do que o costume?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">amarelo</span>, Falta de ar com pernas inchadas deve ser avaliada hoje.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 10</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 3</p>
+          <p><strong>10.</strong> A falta de ar aparece apenas com esforços maiores do que os habituais?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: seguir para a pergunta 11</p>
+          <p class="ramo">Se <strong>NÃO</strong>: RESULTADO: <span class="cor-tag">amarelo</span>, Falta de ar em atividades ligeiras deve ser avaliada hoje.</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 3</p>
+          <p><strong>11.</strong> De resto sente-se bem?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: seguir para a pergunta 12</p>
+          <p class="ramo">Se <strong>NÃO</strong>: RESULTADO: <span class="cor-tag">verde</span>, Cansaço com mal-estar associado, a avaliar sem urgência.</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 3</p>
+          <p><strong>12.</strong> Já foi observado por um médico por causa deste cansaço?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">azul</span>, Situação conhecida e estável, sem sinais de agravamento.<br /><span class="meta">Nota mostrada ao utente: Mencione na próxima consulta se o cansaço se mantiver ou piorar.</span></p>
+          <p class="ramo">Se <strong>NÃO</strong>: RESULTADO: <span class="cor-tag">verde</span>, Cansaço de esforço ainda não avaliado, sem sinais de alarme.<br /><span class="meta">Nota mostrada ao utente: Evite esforços intensos até ser observado. Se agravar, refaça a avaliação.</span></p>
+        </div>
+      <div class="caixa-validacao">
+        <strong>Validação clínica desta queixa</strong>
+        <p class="linha">Correções necessárias? &nbsp; ☐ Não &nbsp;&nbsp; ☐ Sim (anotadas acima / abaixo)</p>
+        <div class="obs"></div>
+        <p class="linha">Validado por (nome e função): <span class="espaco"></span></p>
+        <p class="linha">Data: <span class="espaco" style="min-width:120px"></span>
+           &nbsp;&nbsp; Assinatura: <span class="espaco"></span></p>
+      </div>
+    </section>
+    <section class="queixa">
+      <h2>Febre <span class="meta">(febre)</span></h2>
+      <p class="meta">Descrição mostrada ao utente: Temperatura elevada, arrepios, mal-estar geral.<br />
+      Estado atual do campo "fonte": FLUXO-EXEMPLO para desenvolvimento. Obrigatória validação clínica antes de uso real. Este fluxo é também o MODELO da tradução: os campos *_en mostram como traduzir os restantes (se faltarem, a app mostra o português).</p>
+      <h3>Fluxograma</h3>
+      <p class="meta">Desenhado automaticamente a partir do ficheiro de regras —
+      é a mesma informação das perguntas numeradas abaixo, no formato dos
+      protocolos de triagem. (O desenho precisa de ligação à internet ao abrir
+      este documento; sem ela, valem as perguntas numeradas.)</p>
+      <pre class="mermaid diagrama">flowchart TD
+  inicio([&quot;Início: Febre&quot;])
+  fe_q1[&quot;1. A febre dura há mais de 3 dias?&quot;]
+  fe_q2[&quot;2. Chegou a medir a temperatura com&lt;br/&gt;um termómetro?&quot;]
+  fe_q3[&quot;3. A temperatura foi de 40 graus ou&lt;br/&gt;mais?&quot;]
+  fe_q4[&quot;4. Trata-se de um bebé com menos de 3&lt;br/&gt;meses?&quot;]
+  fe_q5[&quot;5. Tem manchas na pele que não&lt;br/&gt;desaparecem quando pressiona com&lt;br/&gt;um copo de vidro?&quot;]
+  fe_q6[&quot;6. Tem rigidez no pescoço, ou a luz&lt;br/&gt;incomoda muito os olhos?&quot;]
+  fe_q7[&quot;7. Tem falta de ar ou dor no peito ao&lt;br/&gt;respirar?&quot;]
+  fe_q8[&quot;8. Tem uma dor forte localizada, por&lt;br/&gt;exemplo no ouvido, na garganta ao&lt;br/&gt;engolir, ao urinar ou na barriga?&quot;]
+  fe_q9[&quot;9. Está mais confuso ou sonolento do&lt;br/&gt;que o habitual?&quot;]
+  fe_q10[&quot;10. Mesmo com medicação, por exemplo&lt;br/&gt;paracetamol, a febre volta sempre&lt;br/&gt;a subir?&quot;]
+  fe_q11[&quot;11. Tem doença crónica grave, faz&lt;br/&gt;quimioterapia ou toma medicamentos&lt;br/&gt;que baixam as defesas?&quot;]
+  fe_q12[&quot;12. Consegue beber líquidos e urinar&lt;br/&gt;normalmente?&quot;]
+  fe_q13[&quot;13. Entre os picos de febre, sente-se&lt;br/&gt;razoavelmente bem?&quot;]
+  inicio --&gt; fe_q1
+  fe_q1 --&gt;|Sim| fe_q10
+  fe_q1 --&gt;|Não| fe_q2
+  fe_q2 --&gt;|Sim| fe_q3
+  fe_q2 --&gt;|Não| fe_q4
+  fe_q3_sim([&quot;LARANJA&lt;br/&gt;Febre muito alta deve ser&lt;br/&gt;observada com urgência.&quot;]):::laranja
+  fe_q3 --&gt;|Sim| fe_q3_sim
+  fe_q3 --&gt;|Não| fe_q4
+  fe_q4_sim([&quot;LARANJA&lt;br/&gt;Febre num bebé tão pequeno exige&lt;br/&gt;sempre observação urgente.&quot;]):::laranja
+  fe_q4 --&gt;|Sim| fe_q4_sim
+  fe_q4 --&gt;|Não| fe_q5
+  fe_q5_sim([&quot;LARANJA&lt;br/&gt;Febre com manchas que não&lt;br/&gt;desaparecem exige observação&lt;br/&gt;urgente.&quot;]):::laranja
+  fe_q5 --&gt;|Sim| fe_q5_sim
+  fe_q5 --&gt;|Não| fe_q6
+  fe_q6_sim([&quot;LARANJA&lt;br/&gt;Sinais que exigem observação&lt;br/&gt;urgente.&quot;]):::laranja
+  fe_q6 --&gt;|Sim| fe_q6_sim
+  fe_q6 --&gt;|Não| fe_q7
+  fe_q7_sim([&quot;LARANJA&lt;br/&gt;Febre com dificuldade respiratória&lt;br/&gt;deve ser vista já.&quot;]):::laranja
+  fe_q7 --&gt;|Sim| fe_q7_sim
+  fe_q7 --&gt;|Não| fe_q8
+  fe_q8_sim([&quot;AMARELO&lt;br/&gt;Febre com dor localizada sugere&lt;br/&gt;infeção que deve ser avaliada&lt;br/&gt;hoje.&quot;]):::amarelo
+  fe_q8 --&gt;|Sim| fe_q8_sim
+  fe_q8 --&gt;|Não| fe_q9
+  fe_q9_sim([&quot;LARANJA&lt;br/&gt;Febre com alteração do estado de&lt;br/&gt;consciência deve ser vista já.&quot;]):::laranja
+  fe_q9 --&gt;|Sim| fe_q9_sim
+  fe_q9 --&gt;|Não| fe_q12
+  fe_q10_sim([&quot;AMARELO&lt;br/&gt;Febre prolongada e resistente à&lt;br/&gt;medicação deve ser observada hoje.&quot;]):::amarelo
+  fe_q10 --&gt;|Sim| fe_q10_sim
+  fe_q10 --&gt;|Não| fe_q11
+  fe_q11_sim([&quot;AMARELO&lt;br/&gt;Febre em pessoa com defesas&lt;br/&gt;diminuídas deve ser avaliada hoje.&quot;]):::amarelo
+  fe_q11 --&gt;|Sim| fe_q11_sim
+  fe_q11 --&gt;|Não| fe_q12
+  fe_q12 --&gt;|Sim| fe_q13
+  fe_q12_nao([&quot;AMARELO&lt;br/&gt;Dificuldade em manter líquidos&lt;br/&gt;sugere risco de desidratação.&quot;]):::amarelo
+  fe_q12 --&gt;|Não| fe_q12_nao
+  fe_q13_sim([&quot;AZUL&lt;br/&gt;Febre recente e bem tolerada, sem&lt;br/&gt;sinais de alarme.&quot;]):::azul
+  fe_q13 --&gt;|Sim| fe_q13_sim
+  fe_q13_nao([&quot;VERDE&lt;br/&gt;Febre sem sinais de alarme, mas&lt;br/&gt;com mal-estar que justifica&lt;br/&gt;avaliação.&quot;]):::verde
+  fe_q13 --&gt;|Não| fe_q13_nao
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;</pre>
+      <h3>Perguntas</h3>
+      
+        <div class="pergunta">
+          <p class="meta">Fase 1</p>
+          <p><strong>1.</strong> A febre dura há mais de 3 dias?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: seguir para a pergunta 10</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 2</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 1</p>
+          <p><strong>2.</strong> Chegou a medir a temperatura com um termómetro?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: seguir para a pergunta 3</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 4</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 1</p>
+          <p><strong>3.</strong> A temperatura foi de 40 graus ou mais?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">laranja</span>, Febre muito alta deve ser observada com urgência.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 4</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 1</p>
+          <p><strong>4.</strong> Trata-se de um bebé com menos de 3 meses?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">laranja</span>, Febre num bebé tão pequeno exige sempre observação urgente.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 5</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>5.</strong> Tem manchas na pele que não desaparecem quando pressiona com um copo de vidro?</p>
+          <p class="ajuda">Ajuda mostrada ao utente: Pressione um copo transparente contra a mancha. Se ela continuar visível através do vidro, responda sim.</p>
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">laranja</span>, Febre com manchas que não desaparecem exige observação urgente.<br /><span class="meta">Nota mostrada ao utente: Se surgir sonolência anormal ou confusão, ligue 112.</span></p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 6</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>6.</strong> Tem rigidez no pescoço, ou a luz incomoda muito os olhos?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">laranja</span>, Sinais que exigem observação urgente.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 7</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>7.</strong> Tem falta de ar ou dor no peito ao respirar?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">laranja</span>, Febre com dificuldade respiratória deve ser vista já.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 8</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>8.</strong> Tem uma dor forte localizada, por exemplo no ouvido, na garganta ao engolir, ao urinar ou na barriga?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">amarelo</span>, Febre com dor localizada sugere infeção que deve ser avaliada hoje.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 9</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 3</p>
+          <p><strong>9.</strong> Está mais confuso ou sonolento do que o habitual?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">laranja</span>, Febre com alteração do estado de consciência deve ser vista já.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 12</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 3</p>
+          <p><strong>10.</strong> Mesmo com medicação, por exemplo paracetamol, a febre volta sempre a subir?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">amarelo</span>, Febre prolongada e resistente à medicação deve ser observada hoje.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 11</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 3</p>
+          <p><strong>11.</strong> Tem doença crónica grave, faz quimioterapia ou toma medicamentos que baixam as defesas?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">amarelo</span>, Febre em pessoa com defesas diminuídas deve ser avaliada hoje.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 12</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 3</p>
+          <p><strong>12.</strong> Consegue beber líquidos e urinar normalmente?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: seguir para a pergunta 13</p>
+          <p class="ramo">Se <strong>NÃO</strong>: RESULTADO: <span class="cor-tag">amarelo</span>, Dificuldade em manter líquidos sugere risco de desidratação.</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 3</p>
+          <p><strong>13.</strong> Entre os picos de febre, sente-se razoavelmente bem?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">azul</span>, Febre recente e bem tolerada, sem sinais de alarme.<br /><span class="meta">Nota mostrada ao utente: Hidrate-se, descanse e vigie a temperatura. Se durar mais de 3 dias ou surgirem novos sintomas, refaça a avaliação ou ligue ao SNS 24.</span></p>
+          <p class="ramo">Se <strong>NÃO</strong>: RESULTADO: <span class="cor-tag">verde</span>, Febre sem sinais de alarme, mas com mal-estar que justifica avaliação.<br /><span class="meta">Nota mostrada ao utente: Hidrate-se e vigie a temperatura. Se agravar, refaça a avaliação.</span></p>
+        </div>
+      <div class="caixa-validacao">
+        <strong>Validação clínica desta queixa</strong>
+        <p class="linha">Correções necessárias? &nbsp; ☐ Não &nbsp;&nbsp; ☐ Sim (anotadas acima / abaixo)</p>
+        <div class="obs"></div>
+        <p class="linha">Validado por (nome e função): <span class="espaco"></span></p>
+        <p class="linha">Data: <span class="espaco" style="min-width:120px"></span>
+           &nbsp;&nbsp; Assinatura: <span class="espaco"></span></p>
+      </div>
+    </section>
+    <section class="queixa">
+      <h2>Queda ou pancada <span class="meta">(trauma_queda)</span></h2>
+      <p class="meta">Descrição mostrada ao utente: Quedas, pancadas, torções e feridas.<br />
+      Estado atual do campo "fonte": FLUXO-EXEMPLO para desenvolvimento. Obrigatória validação clínica antes de uso real.</p>
+      <h3>Fluxograma</h3>
+      <p class="meta">Desenhado automaticamente a partir do ficheiro de regras —
+      é a mesma informação das perguntas numeradas abaixo, no formato dos
+      protocolos de triagem. (O desenho precisa de ligação à internet ao abrir
+      este documento; sem ela, valem as perguntas numeradas.)</p>
+      <pre class="mermaid diagrama">flowchart TD
+  inicio([&quot;Início: Queda ou pancada&quot;])
+  tq_q1[&quot;1. A queda ou pancada aconteceu nas&lt;br/&gt;últimas 48 horas?&quot;]
+  tq_q2[&quot;2. Foi uma queda de altura&lt;br/&gt;considerável, por exemplo mais de&lt;br/&gt;1 metro ou de umas escadas, ou um&lt;br/&gt;acidente de viação?&quot;]
+  tq_q3[&quot;3. Tem dor forte no pescoço ou nas&lt;br/&gt;costas, ou formigueiro ou fraqueza&lt;br/&gt;nos braços ou pernas?&quot;]
+  tq_q4[&quot;4. Bateu com a cabeça?&quot;]
+  tq_q5[&quot;5. Perdeu os sentidos, vomitou, ou&lt;br/&gt;está confuso ou sonolento desde&lt;br/&gt;então?&quot;]
+  tq_q6[&quot;6. Toma medicamentos anticoagulantes,&lt;br/&gt;os que tornam o sangue mais fino?&quot;]
+  tq_q7[&quot;7. Há deformidade evidente do membro&lt;br/&gt;ou osso exposto?&quot;]
+  tq_q8[&quot;8. Não consegue apoiar o pé no chão&lt;br/&gt;ou mexer normalmente o membro&lt;br/&gt;atingido?&quot;]
+  tq_q9[&quot;9. Tem uma ferida aberta que possa&lt;br/&gt;precisar de pontos ou que continua&lt;br/&gt;a sangrar?&quot;]
+  tq_q10[&quot;10. O local está muito inchado ou com&lt;br/&gt;uma nódoa negra grande a crescer?&quot;]
+  tq_q11[&quot;11. A dor é suportável e melhora com&lt;br/&gt;repouso e gelo?&quot;]
+  tq_q12[&quot;12. Já passaram mais de 48 horas e&lt;br/&gt;continua igual ou pior?&quot;]
+  tq_q13[&quot;13. Consegue usar normalmente a zona&lt;br/&gt;atingida?&quot;]
+  inicio --&gt; tq_q1
+  tq_q1 --&gt;|Sim| tq_q2
+  tq_q1 --&gt;|Não| tq_q12
+  tq_q2 --&gt;|Sim| tq_q3
+  tq_q2 --&gt;|Não| tq_q4
+  tq_q3_sim([&quot;VERMELHO&lt;br/&gt;Possível lesão da coluna.&quot;]):::vermelho
+  tq_q3 --&gt;|Sim| tq_q3_sim
+  tq_q3 --&gt;|Não| tq_q5
+  tq_q4 --&gt;|Sim| tq_q5
+  tq_q4 --&gt;|Não| tq_q7
+  tq_q5_sim([&quot;LARANJA&lt;br/&gt;Traumatismo craniano com sinais de&lt;br/&gt;alarme.&quot;]):::laranja
+  tq_q5 --&gt;|Sim| tq_q5_sim
+  tq_q5 --&gt;|Não| tq_q6
+  tq_q6_sim([&quot;AMARELO&lt;br/&gt;Pancada na cabeça com&lt;br/&gt;anticoagulantes aumenta o risco de&lt;br/&gt;hemorragia.&quot;]):::amarelo
+  tq_q6 --&gt;|Sim| tq_q6_sim
+  tq_q6 --&gt;|Não| tq_q7
+  tq_q7_sim([&quot;LARANJA&lt;br/&gt;Possível fratura grave.&quot;]):::laranja
+  tq_q7 --&gt;|Sim| tq_q7_sim
+  tq_q7 --&gt;|Não| tq_q8
+  tq_q8_sim([&quot;AMARELO&lt;br/&gt;Possível fratura ou lesão que deve&lt;br/&gt;ser observada hoje.&quot;]):::amarelo
+  tq_q8 --&gt;|Sim| tq_q8_sim
+  tq_q8 --&gt;|Não| tq_q9
+  tq_q9_sim([&quot;AMARELO&lt;br/&gt;Feridas que precisam de sutura&lt;br/&gt;devem ser tratadas nas primeiras&lt;br/&gt;horas.&quot;]):::amarelo
+  tq_q9 --&gt;|Sim| tq_q9_sim
+  tq_q9 --&gt;|Não| tq_q10
+  tq_q10_sim([&quot;AMARELO&lt;br/&gt;Inchaço importante deve ser&lt;br/&gt;observado hoje.&quot;]):::amarelo
+  tq_q10 --&gt;|Sim| tq_q10_sim
+  tq_q10 --&gt;|Não| tq_q11
+  tq_q11_sim([&quot;AZUL&lt;br/&gt;Traumatismo ligeiro sem sinais de&lt;br/&gt;alarme.&quot;]):::azul
+  tq_q11 --&gt;|Sim| tq_q11_sim
+  tq_q11_nao([&quot;VERDE&lt;br/&gt;Dor persistente após traumatismo&lt;br/&gt;ligeiro, a avaliar sem urgência.&quot;]):::verde
+  tq_q11 --&gt;|Não| tq_q11_nao
+  tq_q12_sim([&quot;VERDE&lt;br/&gt;Queixas que não melhoram em 48&lt;br/&gt;horas devem ser avaliadas.&quot;]):::verde
+  tq_q12 --&gt;|Sim| tq_q12_sim
+  tq_q12 --&gt;|Não| tq_q13
+  tq_q13_sim([&quot;AZUL&lt;br/&gt;Traumatismo antigo em recuperação.&quot;]):::azul
+  tq_q13 --&gt;|Sim| tq_q13_sim
+  tq_q13_nao([&quot;VERDE&lt;br/&gt;Limitação que persiste deve ser&lt;br/&gt;avaliada sem urgência.&quot;]):::verde
+  tq_q13 --&gt;|Não| tq_q13_nao
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;</pre>
+      <h3>Perguntas</h3>
+      
+        <div class="pergunta">
+          <p class="meta">Fase 1</p>
+          <p><strong>1.</strong> A queda ou pancada aconteceu nas últimas 48 horas?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: seguir para a pergunta 2</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 12</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 1</p>
+          <p><strong>2.</strong> Foi uma queda de altura considerável, por exemplo mais de 1 metro ou de umas escadas, ou um acidente de viação?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: seguir para a pergunta 3</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 4</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>3.</strong> Tem dor forte no pescoço ou nas costas, ou formigueiro ou fraqueza nos braços ou pernas?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">vermelho</span>, Possível lesão da coluna.<br /><span class="meta">Nota mostrada ao utente: Não mova a pessoa e ligue 112.</span></p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 5</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 1</p>
+          <p><strong>4.</strong> Bateu com a cabeça?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: seguir para a pergunta 5</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 7</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>5.</strong> Perdeu os sentidos, vomitou, ou está confuso ou sonolento desde então?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">laranja</span>, Traumatismo craniano com sinais de alarme.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 6</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>6.</strong> Toma medicamentos anticoagulantes, os que tornam o sangue mais fino?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">amarelo</span>, Pancada na cabeça com anticoagulantes aumenta o risco de hemorragia.<br /><span class="meta">Nota mostrada ao utente: Se surgir sonolência anormal, vómitos ou confusão, vá já à urgência.</span></p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 7</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>7.</strong> Há deformidade evidente do membro ou osso exposto?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">laranja</span>, Possível fratura grave.<br /><span class="meta">Nota mostrada ao utente: Não tente endireitar o membro. Imobilize como estiver.</span></p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 8</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>8.</strong> Não consegue apoiar o pé no chão ou mexer normalmente o membro atingido?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">amarelo</span>, Possível fratura ou lesão que deve ser observada hoje.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 9</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>9.</strong> Tem uma ferida aberta que possa precisar de pontos ou que continua a sangrar?</p>
+          <p class="ajuda">Ajuda mostrada ao utente: Feridas profundas, com bordos afastados ou que não param de sangrar com pressão ligeira.</p>
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">amarelo</span>, Feridas que precisam de sutura devem ser tratadas nas primeiras horas.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 10</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 3</p>
+          <p><strong>10.</strong> O local está muito inchado ou com uma nódoa negra grande a crescer?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">amarelo</span>, Inchaço importante deve ser observado hoje.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 11</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 3</p>
+          <p><strong>11.</strong> A dor é suportável e melhora com repouso e gelo?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">azul</span>, Traumatismo ligeiro sem sinais de alarme.<br /><span class="meta">Nota mostrada ao utente: Aplique gelo envolvido num pano e repouse a zona. Se a dor ou o inchaço aumentarem muito, refaça a avaliação.</span></p>
+          <p class="ramo">Se <strong>NÃO</strong>: RESULTADO: <span class="cor-tag">verde</span>, Dor persistente após traumatismo ligeiro, a avaliar sem urgência.</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 3</p>
+          <p><strong>12.</strong> Já passaram mais de 48 horas e continua igual ou pior?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">verde</span>, Queixas que não melhoram em 48 horas devem ser avaliadas.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 13</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 3</p>
+          <p><strong>13.</strong> Consegue usar normalmente a zona atingida?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">azul</span>, Traumatismo antigo em recuperação.<br /><span class="meta">Nota mostrada ao utente: Se voltar a agravar, refaça a avaliação.</span></p>
+          <p class="ramo">Se <strong>NÃO</strong>: RESULTADO: <span class="cor-tag">verde</span>, Limitação que persiste deve ser avaliada sem urgência.</p>
+        </div>
+      <div class="caixa-validacao">
+        <strong>Validação clínica desta queixa</strong>
+        <p class="linha">Correções necessárias? &nbsp; ☐ Não &nbsp;&nbsp; ☐ Sim (anotadas acima / abaixo)</p>
+        <div class="obs"></div>
+        <p class="linha">Validado por (nome e função): <span class="espaco"></span></p>
+        <p class="linha">Data: <span class="espaco" style="min-width:120px"></span>
+           &nbsp;&nbsp; Assinatura: <span class="espaco"></span></p>
+      </div>
+    </section>
+    <section class="queixa">
+      <h2>Vómitos ou diarreia <span class="meta">(vomitos_diarreia)</span></h2>
+      <p class="meta">Descrição mostrada ao utente: Vómitos, diarreia, suspeita de intoxicação alimentar.<br />
+      Estado atual do campo "fonte": FLUXO-EXEMPLO para desenvolvimento. Obrigatória validação clínica antes de uso real.</p>
+      <h3>Fluxograma</h3>
+      <p class="meta">Desenhado automaticamente a partir do ficheiro de regras —
+      é a mesma informação das perguntas numeradas abaixo, no formato dos
+      protocolos de triagem. (O desenho precisa de ligação à internet ao abrir
+      este documento; sem ela, valem as perguntas numeradas.)</p>
+      <pre class="mermaid diagrama">flowchart TD
+  inicio([&quot;Início: Vómitos ou diarreia&quot;])
+  vd_q1[&quot;1. Os sintomas começaram há menos de&lt;br/&gt;48 horas?&quot;]
+  vd_q2[&quot;2. Trata-se de um bebé com menos de 1&lt;br/&gt;ano?&quot;]
+  vd_q3[&quot;3. O bebé recusa líquidos, tem a&lt;br/&gt;moleirinha funda ou está com as&lt;br/&gt;fraldas secas há mais de 6 horas?&quot;]
+  vd_q4[&quot;4. É uma pessoa idosa frágil,&lt;br/&gt;grávida, ou com doença crónica&lt;br/&gt;importante, por exemplo diabetes&lt;br/&gt;ou doença do rim ou do coração?&quot;]
+  vd_q5[&quot;5. Está a conseguir beber e a reter&lt;br/&gt;os líquidos?&quot;]
+  vd_q6[&quot;6. Há sangue no vómito, ou as fezes&lt;br/&gt;estão pretas ou com sangue?&quot;]
+  vd_q7[&quot;7. A pessoa está muito prostrada,&lt;br/&gt;confusa, ou quase a desmaiar&lt;br/&gt;quando se levanta?&quot;]
+  vd_q8[&quot;8. Urina muito pouco, tem a boca&lt;br/&gt;muito seca ou tonturas ao&lt;br/&gt;levantar-se?&quot;]
+  vd_q9[&quot;9. Tem dor abdominal forte ou febre&lt;br/&gt;alta associadas?&quot;]
+  vd_q10[&quot;10. Os sintomas estão a agravar ou já&lt;br/&gt;causaram grande quebra de forças?&quot;]
+  vd_q11[&quot;11. Começou depois de uma refeição&lt;br/&gt;suspeita, e mais alguém que comeu&lt;br/&gt;o mesmo está igual?&quot;]
+  vd_q12[&quot;12. Consegue beber pequenos goles com&lt;br/&gt;frequência sem vomitar tudo?&quot;]
+  vd_q13[&quot;13. Os episódios são poucos e já estão&lt;br/&gt;a espaçar-se?&quot;]
+  inicio --&gt; vd_q1
+  vd_q1 --&gt;|Sim| vd_q2
+  vd_q1 --&gt;|Não| vd_q10
+  vd_q2 --&gt;|Sim| vd_q3
+  vd_q2 --&gt;|Não| vd_q4
+  vd_q3_sim([&quot;LARANJA&lt;br/&gt;Sinais de desidratação num bebé&lt;br/&gt;exigem observação urgente.&quot;]):::laranja
+  vd_q3 --&gt;|Sim| vd_q3_sim
+  vd_q3_nao([&quot;AMARELO&lt;br/&gt;Bebés desidratam depressa e devem&lt;br/&gt;ser avaliados hoje.&quot;]):::amarelo
+  vd_q3 --&gt;|Não| vd_q3_nao
+  vd_q4 --&gt;|Sim| vd_q5
+  vd_q4 --&gt;|Não| vd_q6
+  vd_q5_sim([&quot;AMARELO&lt;br/&gt;Pessoas mais vulneráveis à&lt;br/&gt;desidratação devem ser avaliadas&lt;br/&gt;hoje.&quot;]):::amarelo
+  vd_q5 --&gt;|Sim| vd_q5_sim
+  vd_q5_nao([&quot;LARANJA&lt;br/&gt;Pessoa vulnerável sem conseguir&lt;br/&gt;reter líquidos deve ser vista já.&quot;]):::laranja
+  vd_q5 --&gt;|Não| vd_q5_nao
+  vd_q6_sim([&quot;LARANJA&lt;br/&gt;Possível hemorragia digestiva.&quot;]):::laranja
+  vd_q6 --&gt;|Sim| vd_q6_sim
+  vd_q6 --&gt;|Não| vd_q7
+  vd_q7_sim([&quot;LARANJA&lt;br/&gt;Sinais de desidratação grave ou de&lt;br/&gt;mal-estar importante.&quot;]):::laranja
+  vd_q7 --&gt;|Sim| vd_q7_sim
+  vd_q7 --&gt;|Não| vd_q8
+  vd_q8_sim([&quot;AMARELO&lt;br/&gt;Sinais de desidratação a avaliar&lt;br/&gt;hoje.&quot;]):::amarelo
+  vd_q8 --&gt;|Sim| vd_q8_sim
+  vd_q8 --&gt;|Não| vd_q9
+  vd_q9_sim([&quot;AMARELO&lt;br/&gt;Sintomas associados que justificam&lt;br/&gt;avaliação hoje.&quot;]):::amarelo
+  vd_q9 --&gt;|Sim| vd_q9_sim
+  vd_q9 --&gt;|Não| vd_q11
+  vd_q10_sim([&quot;AMARELO&lt;br/&gt;Sintomas prolongados em&lt;br/&gt;agravamento devem ser observados.&quot;]):::amarelo
+  vd_q10 --&gt;|Sim| vd_q10_sim
+  vd_q10 --&gt;|Não| vd_q11
+  vd_q11_sim([&quot;VERDE&lt;br/&gt;Quadro sugestivo de intoxicação&lt;br/&gt;alimentar sem sinais de alarme.&quot;]):::verde
+  vd_q11 --&gt;|Sim| vd_q11_sim
+  vd_q11 --&gt;|Não| vd_q12
+  vd_q12 --&gt;|Sim| vd_q13
+  vd_q12_nao([&quot;AMARELO&lt;br/&gt;Sem conseguir reter líquidos, o&lt;br/&gt;risco de desidratação aumenta.&quot;]):::amarelo
+  vd_q12 --&gt;|Não| vd_q12_nao
+  vd_q13_sim([&quot;AZUL&lt;br/&gt;Quadro ligeiro e em melhoria.&quot;]):::azul
+  vd_q13 --&gt;|Sim| vd_q13_sim
+  vd_q13_nao([&quot;VERDE&lt;br/&gt;Quadro recente sem sinais de&lt;br/&gt;alarme.&quot;]):::verde
+  vd_q13 --&gt;|Não| vd_q13_nao
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;</pre>
+      <h3>Perguntas</h3>
+      
+        <div class="pergunta">
+          <p class="meta">Fase 1</p>
+          <p><strong>1.</strong> Os sintomas começaram há menos de 48 horas?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: seguir para a pergunta 2</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 10</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 1</p>
+          <p><strong>2.</strong> Trata-se de um bebé com menos de 1 ano?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: seguir para a pergunta 3</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 4</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>3.</strong> O bebé recusa líquidos, tem a moleirinha funda ou está com as fraldas secas há mais de 6 horas?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">laranja</span>, Sinais de desidratação num bebé exigem observação urgente.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: RESULTADO: <span class="cor-tag">amarelo</span>, Bebés desidratam depressa e devem ser avaliados hoje.<br /><span class="meta">Nota mostrada ao utente: Ofereça líquidos em pequenas quantidades e com frequência.</span></p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 1</p>
+          <p><strong>4.</strong> É uma pessoa idosa frágil, grávida, ou com doença crónica importante, por exemplo diabetes ou doença do rim ou do coração?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: seguir para a pergunta 5</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 6</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>5.</strong> Está a conseguir beber e a reter os líquidos?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">amarelo</span>, Pessoas mais vulneráveis à desidratação devem ser avaliadas hoje.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: RESULTADO: <span class="cor-tag">laranja</span>, Pessoa vulnerável sem conseguir reter líquidos deve ser vista já.</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>6.</strong> Há sangue no vómito, ou as fezes estão pretas ou com sangue?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">laranja</span>, Possível hemorragia digestiva.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 7</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>7.</strong> A pessoa está muito prostrada, confusa, ou quase a desmaiar quando se levanta?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">laranja</span>, Sinais de desidratação grave ou de mal-estar importante.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 8</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>8.</strong> Urina muito pouco, tem a boca muito seca ou tonturas ao levantar-se?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">amarelo</span>, Sinais de desidratação a avaliar hoje.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 9</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 2</p>
+          <p><strong>9.</strong> Tem dor abdominal forte ou febre alta associadas?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">amarelo</span>, Sintomas associados que justificam avaliação hoje.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 11</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 3</p>
+          <p><strong>10.</strong> Os sintomas estão a agravar ou já causaram grande quebra de forças?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">amarelo</span>, Sintomas prolongados em agravamento devem ser observados.</p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 11</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 3</p>
+          <p><strong>11.</strong> Começou depois de uma refeição suspeita, e mais alguém que comeu o mesmo está igual?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">verde</span>, Quadro sugestivo de intoxicação alimentar sem sinais de alarme.<br /><span class="meta">Nota mostrada ao utente: Hidrate-se com pequenos goles frequentes e dieta leve. Se agravar, refaça a avaliação.</span></p>
+          <p class="ramo">Se <strong>NÃO</strong>: seguir para a pergunta 12</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 3</p>
+          <p><strong>12.</strong> Consegue beber pequenos goles com frequência sem vomitar tudo?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: seguir para a pergunta 13</p>
+          <p class="ramo">Se <strong>NÃO</strong>: RESULTADO: <span class="cor-tag">amarelo</span>, Sem conseguir reter líquidos, o risco de desidratação aumenta.</p>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Fase 3</p>
+          <p><strong>13.</strong> Os episódios são poucos e já estão a espaçar-se?</p>
+          
+          <p class="ramo">Se <strong>SIM</strong>: RESULTADO: <span class="cor-tag">azul</span>, Quadro ligeiro e em melhoria.<br /><span class="meta">Nota mostrada ao utente: Continue a hidratar-se e faça dieta leve. Se voltar a agravar, refaça a avaliação.</span></p>
+          <p class="ramo">Se <strong>NÃO</strong>: RESULTADO: <span class="cor-tag">verde</span>, Quadro recente sem sinais de alarme.<br /><span class="meta">Nota mostrada ao utente: Beba líquidos em pequenas quantidades e com frequência. Se agravar, refaça a avaliação.</span></p>
+        </div>
+      <div class="caixa-validacao">
+        <strong>Validação clínica desta queixa</strong>
+        <p class="linha">Correções necessárias? &nbsp; ☐ Não &nbsp;&nbsp; ☐ Sim (anotadas acima / abaixo)</p>
+        <div class="obs"></div>
+        <p class="linha">Validado por (nome e função): <span class="espaco"></span></p>
+        <p class="linha">Data: <span class="espaco" style="min-width:120px"></span>
+           &nbsp;&nbsp; Assinatura: <span class="espaco"></span></p>
+      </div>
+    </section>
+    <section class="queixa">
+      <h2>Textos de encaminhamento e autocuidado <span class="meta">(routing)</span></h2>
+      <p class="meta">Estes textos aparecem no ecrã final. Não são regras de
+      triagem, mas orientam decisões do utente — por isso pedem a mesma
+      validação. Regras de contexto já implementadas: ao fim de semana,
+      em feriados (nacionais e regionais da RAM) e fora de horas, o verde
+      apresenta explicitamente a opção de vigiar em casa com o apoio do
+      SNS 24, além do atendimento urgente aberto; e as unidades fechadas
+      indicam quando reabrem.</p>
+      
+        <div class="pergunta">
+          <p class="meta">Cor: <span class="cor-tag">verde</span></p>
+          <p><strong>Título:</strong> Aguardar em casa também pode ser razoável</p>
+          <p><strong>Introdução:</strong> Numa situação pouco urgente, com sintomas ligeiros e estáveis, vigiar em casa é muitas vezes uma opção sensata. Em caso de dúvida, ligue ao SNS 24 (808 24 24 24): um profissional avalia consigo, pelo telefone, se pode esperar ou se deve ser observado.</p>
+          <p><strong>Fazer (lista com visto ✓):</strong></p><ul><li>Descanse e beba líquidos com regularidade.</li><li>Meça e aponte a temperatura e os sintomas, para os conseguir descrever depois.</li><li>Mantenha alguém a par de como se sente, sobretudo se vive sozinho.</li></ul>
+          <p><strong>Evitar (lista com cruz ✕):</strong></p><ul><li>Não tome antibióticos por iniciativa própria nem medicamentos receitados a outra pessoa.</li><li>Não conduza se se sentir fraco, tonto ou muito indisposto.</li></ul>
+          <p><strong>Procure ajuda se:</strong></p><ul><li>Os sintomas piorarem ou surgirem sintomas novos.</li><li>Não houver melhoria em 24 a 48 horas.</li><li>Ficar na dúvida — refaça esta avaliação ou ligue ao SNS 24 (808 24 24 24).</li></ul>
+        </div>
+        <div class="pergunta">
+          <p class="meta">Cor: <span class="cor-tag">azul</span></p>
+          <p><strong>Título:</strong> Autocuidado em casa</p>
+          <p><strong>Introdução:</strong> A situação não aparenta ser urgente: descanso, hidratação e vigilância em casa são normalmente suficientes. Para aconselhamento sobre o que fazer, ligue ao SNS 24 (808 24 24 24) ou contacte o seu centro de saúde.</p>
+          <p><strong>Fazer (lista com visto ✓):</strong></p><ul><li>Descanse, hidrate-se e faça refeições leves.</li><li>Vigie os sintomas e aponte qualquer mudança.</li></ul>
+          <p><strong>Evitar (lista com cruz ✕):</strong></p><ul><li>Não tome antibióticos por iniciativa própria nem medicamentos receitados a outra pessoa.</li></ul>
+          <p><strong>Procure ajuda se:</strong></p><ul><li>Algo mudar para pior.</li><li>Os sintomas persistirem além de 48 horas — refaça esta avaliação ou procure o seu centro de saúde.</li></ul>
+        </div>
+      <div class="pergunta">
+        <p class="meta">Mensagem do verde fora de horas / fim de semana / feriado (modelo)</p>
+        <p>"É sábado e os centros de saúde estão fechados (o mais próximo de
+        si abre segunda-feira às 08:00). Numa situação pouco urgente tem duas
+        opções razoáveis: vigiar em casa com o apoio do SNS 24, ou, se
+        preferir ser observado hoje, dirigir-se a [unidade] ([X] km), com
+        atendimento aberto."</p>
+      </div>
+      <div class="caixa-validacao">
+        <strong>Validação clínica destes textos</strong>
+        <p class="linha">Correções necessárias? &nbsp; ☐ Não &nbsp;&nbsp; ☐ Sim (anotadas abaixo)</p>
+        <div class="obs"></div>
+        <p class="linha">Validado por (nome e função): <span class="espaco"></span></p>
+        <p class="linha">Data: <span class="espaco" style="min-width:120px"></span>
+           &nbsp;&nbsp; Assinatura: <span class="espaco"></span></p>
+      </div>
+    </section>
+  <script src="https://unpkg.com/mermaid@10.9.1/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({ startOnLoad: true, theme: "neutral", flowchart: { useMaxWidth: true } });
+    }
+  </script>
+</body>
+</html>

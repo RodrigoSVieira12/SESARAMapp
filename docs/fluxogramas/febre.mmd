@@ -1,0 +1,58 @@
+flowchart TD
+  inicio(["Início: Febre"])
+  fe_q1["1. A febre dura há mais de 3 dias?"]
+  fe_q2["2. Chegou a medir a temperatura com<br/>um termómetro?"]
+  fe_q3["3. A temperatura foi de 40 graus ou<br/>mais?"]
+  fe_q4["4. Trata-se de um bebé com menos de 3<br/>meses?"]
+  fe_q5["5. Tem manchas na pele que não<br/>desaparecem quando pressiona com<br/>um copo de vidro?"]
+  fe_q6["6. Tem rigidez no pescoço, ou a luz<br/>incomoda muito os olhos?"]
+  fe_q7["7. Tem falta de ar ou dor no peito ao<br/>respirar?"]
+  fe_q8["8. Tem uma dor forte localizada, por<br/>exemplo no ouvido, na garganta ao<br/>engolir, ao urinar ou na barriga?"]
+  fe_q9["9. Está mais confuso ou sonolento do<br/>que o habitual?"]
+  fe_q10["10. Mesmo com medicação, por exemplo<br/>paracetamol, a febre volta sempre<br/>a subir?"]
+  fe_q11["11. Tem doença crónica grave, faz<br/>quimioterapia ou toma medicamentos<br/>que baixam as defesas?"]
+  fe_q12["12. Consegue beber líquidos e urinar<br/>normalmente?"]
+  fe_q13["13. Entre os picos de febre, sente-se<br/>razoavelmente bem?"]
+  inicio --> fe_q1
+  fe_q1 -->|Sim| fe_q10
+  fe_q1 -->|Não| fe_q2
+  fe_q2 -->|Sim| fe_q3
+  fe_q2 -->|Não| fe_q4
+  fe_q3_sim(["LARANJA<br/>Febre muito alta deve ser<br/>observada com urgência."]):::laranja
+  fe_q3 -->|Sim| fe_q3_sim
+  fe_q3 -->|Não| fe_q4
+  fe_q4_sim(["LARANJA<br/>Febre num bebé tão pequeno exige<br/>sempre observação urgente."]):::laranja
+  fe_q4 -->|Sim| fe_q4_sim
+  fe_q4 -->|Não| fe_q5
+  fe_q5_sim(["LARANJA<br/>Febre com manchas que não<br/>desaparecem exige observação<br/>urgente."]):::laranja
+  fe_q5 -->|Sim| fe_q5_sim
+  fe_q5 -->|Não| fe_q6
+  fe_q6_sim(["LARANJA<br/>Sinais que exigem observação<br/>urgente."]):::laranja
+  fe_q6 -->|Sim| fe_q6_sim
+  fe_q6 -->|Não| fe_q7
+  fe_q7_sim(["LARANJA<br/>Febre com dificuldade respiratória<br/>deve ser vista já."]):::laranja
+  fe_q7 -->|Sim| fe_q7_sim
+  fe_q7 -->|Não| fe_q8
+  fe_q8_sim(["AMARELO<br/>Febre com dor localizada sugere<br/>infeção que deve ser avaliada<br/>hoje."]):::amarelo
+  fe_q8 -->|Sim| fe_q8_sim
+  fe_q8 -->|Não| fe_q9
+  fe_q9_sim(["LARANJA<br/>Febre com alteração do estado de<br/>consciência deve ser vista já."]):::laranja
+  fe_q9 -->|Sim| fe_q9_sim
+  fe_q9 -->|Não| fe_q12
+  fe_q10_sim(["AMARELO<br/>Febre prolongada e resistente à<br/>medicação deve ser observada hoje."]):::amarelo
+  fe_q10 -->|Sim| fe_q10_sim
+  fe_q10 -->|Não| fe_q11
+  fe_q11_sim(["AMARELO<br/>Febre em pessoa com defesas<br/>diminuídas deve ser avaliada hoje."]):::amarelo
+  fe_q11 -->|Sim| fe_q11_sim
+  fe_q11 -->|Não| fe_q12
+  fe_q12 -->|Sim| fe_q13
+  fe_q12_nao(["AMARELO<br/>Dificuldade em manter líquidos<br/>sugere risco de desidratação."]):::amarelo
+  fe_q12 -->|Não| fe_q12_nao
+  fe_q13_sim(["AZUL<br/>Febre recente e bem tolerada, sem<br/>sinais de alarme."]):::azul
+  fe_q13 -->|Sim| fe_q13_sim
+  fe_q13_nao(["VERDE<br/>Febre sem sinais de alarme, mas<br/>com mal-estar que justifica<br/>avaliação."]):::verde
+  fe_q13 -->|Não| fe_q13_nao
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;

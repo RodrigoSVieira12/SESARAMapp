@@ -1,0 +1,56 @@
+flowchart TD
+  inicio(["Início: Falta de ar"])
+  fa_q1["1. A falta de ar surgiu de repente,<br/>nos últimos minutos ou horas?"]
+  fa_q2["2. Tem dificuldade em dizer frases<br/>completas sem parar para respirar?"]
+  fa_q3["3. Os lábios ou o rosto estão<br/>azulados?"]
+  fa_q4["4. Tem também dor no peito ou<br/>palpitações?"]
+  fa_q5["5. Tem asma ou doença pulmonar<br/>crónica e os inaladores habituais<br/>não estão a aliviar?"]
+  fa_q6["6. Teve recentemente uma cirurgia,<br/>uma viagem longa sentado, ou tem<br/>uma perna inchada e dorida?"]
+  fa_q7["7. Piora quando está deitado, ou<br/>acorda de noite com falta de ar?"]
+  fa_q8["8. Tem tosse com expetoração e febre?"]
+  fa_q9["9. Os tornozelos ou as pernas estão<br/>mais inchados do que o costume?"]
+  fa_q10["10. A falta de ar aparece apenas com<br/>esforços maiores do que os<br/>habituais?"]
+  fa_q11["11. De resto sente-se bem?"]
+  fa_q12["12. Já foi observado por um médico por<br/>causa deste cansaço?"]
+  inicio --> fa_q1
+  fa_q1 -->|Sim| fa_q2
+  fa_q1 -->|Não| fa_q7
+  fa_q2 -->|Sim| fa_q3
+  fa_q2 -->|Não| fa_q4
+  fa_q3_sim(["VERMELHO<br/>Dificuldade respiratória grave."]):::vermelho
+  fa_q3 -->|Sim| fa_q3_sim
+  fa_q3_nao(["LARANJA<br/>Dificuldade respiratória<br/>significativa."]):::laranja
+  fa_q3 -->|Não| fa_q3_nao
+  fa_q4_sim(["LARANJA<br/>Falta de ar súbita com dor no<br/>peito deve ser vista já."]):::laranja
+  fa_q4 -->|Sim| fa_q4_sim
+  fa_q4 -->|Não| fa_q5
+  fa_q5_sim(["LARANJA<br/>Crise respiratória sem resposta à<br/>medicação habitual."]):::laranja
+  fa_q5 -->|Sim| fa_q5_sim
+  fa_q5 -->|Não| fa_q6
+  fa_q6_sim(["LARANJA<br/>Falta de ar súbita nestas<br/>circunstâncias obriga a excluir um<br/>coágulo no pulmão."]):::laranja
+  fa_q6 -->|Sim| fa_q6_sim
+  fa_q6 -->|Não| fa_q10
+  fa_q7_sim(["AMARELO<br/>Este padrão deve ser avaliado<br/>hoje."]):::amarelo
+  fa_q7 -->|Sim| fa_q7_sim
+  fa_q7 -->|Não| fa_q8
+  fa_q8_sim(["AMARELO<br/>Possível infeção respiratória a<br/>avaliar hoje."]):::amarelo
+  fa_q8 -->|Sim| fa_q8_sim
+  fa_q8 -->|Não| fa_q9
+  fa_q9_sim(["AMARELO<br/>Falta de ar com pernas inchadas<br/>deve ser avaliada hoje."]):::amarelo
+  fa_q9 -->|Sim| fa_q9_sim
+  fa_q9 -->|Não| fa_q10
+  fa_q10 -->|Sim| fa_q11
+  fa_q10_nao(["AMARELO<br/>Falta de ar em atividades ligeiras<br/>deve ser avaliada hoje."]):::amarelo
+  fa_q10 -->|Não| fa_q10_nao
+  fa_q11 -->|Sim| fa_q12
+  fa_q11_nao(["VERDE<br/>Cansaço com mal-estar associado, a<br/>avaliar sem urgência."]):::verde
+  fa_q11 -->|Não| fa_q11_nao
+  fa_q12_sim(["AZUL<br/>Situação conhecida e estável, sem<br/>sinais de agravamento."]):::azul
+  fa_q12 -->|Sim| fa_q12_sim
+  fa_q12_nao(["VERDE<br/>Cansaço de esforço ainda não<br/>avaliado, sem sinais de alarme."]):::verde
+  fa_q12 -->|Não| fa_q12_nao
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

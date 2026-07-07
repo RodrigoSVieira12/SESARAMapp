@@ -1,0 +1,59 @@
+flowchart TD
+  inicio(["Início: Dor de barriga"])
+  da_q1["1. A dor começou de repente, de um<br/>momento para o outro?"]
+  da_q2["2. A dor é muito intensa?"]
+  da_q3["3. A barriga está dura como uma tábua<br/>ou não tolera qualquer toque?"]
+  da_q4["4. Está grávida ou existe essa<br/>possibilidade?"]
+  da_q5["5. Tem dor forte ou perda de sangue?"]
+  da_q6["6. Vomitou sangue ou tem fezes pretas<br/>como alcatrão?"]
+  da_q7["7. Tem febre junto com a dor?"]
+  da_q8["8. A dor concentra-se na parte<br/>inferior direita da barriga?"]
+  da_q9["9. A dor é em cólica, ou seja, vai e<br/>vem em ondas?"]
+  da_q10["10. Já teve pedras nos rins ou na<br/>vesícula?"]
+  da_q11["11. A dor dura há mais de 48 horas sem<br/>melhorar?"]
+  da_q12["12. Apesar da dor, continua a<br/>conseguir comer e beber?"]
+  da_q13["13. A dor é leve e melhora depois de<br/>evacuar ou de libertar gases?"]
+  inicio --> da_q1
+  da_q1 -->|Sim| da_q2
+  da_q1 -->|Não| da_q4
+  da_q2 -->|Sim| da_q3
+  da_q2 -->|Não| da_q4
+  da_q3_sim(["VERMELHO<br/>Dor abdominal súbita com barriga<br/>rígida pode indicar uma situação<br/>grave."]):::vermelho
+  da_q3 -->|Sim| da_q3_sim
+  da_q3_nao(["LARANJA<br/>Dor abdominal súbita e intensa<br/>deve ser vista com urgência."]):::laranja
+  da_q3 -->|Não| da_q3_nao
+  da_q4 -->|Sim| da_q5
+  da_q4 -->|Não| da_q6
+  da_q5_sim(["LARANJA<br/>Na gravidez, dor forte ou perda de<br/>sangue exigem observação urgente."]):::laranja
+  da_q5 -->|Sim| da_q5_sim
+  da_q5_nao(["AMARELO<br/>Dor abdominal na gravidez deve ser<br/>avaliada hoje."]):::amarelo
+  da_q5 -->|Não| da_q5_nao
+  da_q6_sim(["LARANJA<br/>Possível hemorragia digestiva."]):::laranja
+  da_q6 -->|Sim| da_q6_sim
+  da_q6 -->|Não| da_q7
+  da_q7 -->|Sim| da_q8
+  da_q7 -->|Não| da_q9
+  da_q8_sim(["LARANJA<br/>Dor com febre nessa zona obriga a<br/>excluir apendicite."]):::laranja
+  da_q8 -->|Sim| da_q8_sim
+  da_q8_nao(["AMARELO<br/>Dor abdominal com febre deve ser<br/>observada hoje."]):::amarelo
+  da_q8 -->|Não| da_q8_nao
+  da_q9 -->|Sim| da_q10
+  da_q9 -->|Não| da_q11
+  da_q10_sim(["AMARELO<br/>Cólica em pessoa com historial de<br/>cálculos deve ser avaliada hoje."]):::amarelo
+  da_q10 -->|Sim| da_q10_sim
+  da_q10 -->|Não| da_q11
+  da_q11_sim(["AMARELO<br/>Dor persistente deve ser<br/>observada."]):::amarelo
+  da_q11 -->|Sim| da_q11_sim
+  da_q11 -->|Não| da_q12
+  da_q12 -->|Sim| da_q13
+  da_q12_nao(["VERDE<br/>Dor recente com pouca tolerância<br/>alimentar, a avaliar sem urgência."]):::verde
+  da_q12 -->|Não| da_q12_nao
+  da_q13_sim(["AZUL<br/>Padrão sugestivo de desconforto<br/>intestinal comum."]):::azul
+  da_q13 -->|Sim| da_q13_sim
+  da_q13_nao(["VERDE<br/>Dor abdominal recente sem sinais<br/>de alarme."]):::verde
+  da_q13 -->|Não| da_q13_nao
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

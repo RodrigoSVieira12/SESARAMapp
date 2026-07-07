@@ -1,0 +1,71 @@
+{
+  "descricao": "Textos de autocuidado apresentados no ecrã final para as cores verde e azul. TEXTOS-EXEMPLO: obrigatória validação clínica antes de uso real (fazem parte do documento gerado por scripts/gerar_validacao_clinica.py). Estrutura por cor: titulo, intro, fazer (lista com visto), evitar (lista com cruz), alerta_titulo e alerta (lista de sinais para procurar ajuda). Os campos *_en são a versão inglesa; se faltarem, a aplicação mostra o português.",
+  "cores": {
+    "verde": {
+      "titulo": "Aguardar em casa também pode ser razoável",
+      "titulo_en": "Waiting at home can also be reasonable",
+      "intro": "Numa situação pouco urgente, com sintomas ligeiros e estáveis, vigiar em casa é muitas vezes uma opção sensata. Em caso de dúvida, ligue ao SNS 24 (808 24 24 24): um profissional avalia consigo, pelo telefone, se pode esperar ou se deve ser observado.",
+      "intro_en": "In a less urgent situation, with mild and stable symptoms, watching at home is often a sensible option. If in doubt, call SNS 24 (808 24 24 24): a professional will assess with you, over the phone, whether you can wait or should be seen.",
+      "fazer": [
+        "Descanse e beba líquidos com regularidade.",
+        "Meça e aponte a temperatura e os sintomas, para os conseguir descrever depois.",
+        "Mantenha alguém a par de como se sente, sobretudo se vive sozinho."
+      ],
+      "fazer_en": [
+        "Rest and drink fluids regularly.",
+        "Measure and write down your temperature and symptoms, so you can describe them later.",
+        "Keep someone informed of how you feel, especially if you live alone."
+      ],
+      "evitar": [
+        "Não tome antibióticos por iniciativa própria nem medicamentos receitados a outra pessoa.",
+        "Não conduza se se sentir fraco, tonto ou muito indisposto."
+      ],
+      "evitar_en": [
+        "Do not take antibiotics on your own initiative or medicines prescribed for someone else.",
+        "Do not drive if you feel weak, dizzy or very unwell."
+      ],
+      "alerta_titulo": "Procure ajuda se:",
+      "alerta_titulo_en": "Seek help if:",
+      "alerta": [
+        "Os sintomas piorarem ou surgirem sintomas novos.",
+        "Não houver melhoria em 24 a 48 horas.",
+        "Ficar na dúvida — refaça esta avaliação ou ligue ao SNS 24 (808 24 24 24)."
+      ],
+      "alerta_en": [
+        "Symptoms get worse or new symptoms appear.",
+        "There is no improvement within 24 to 48 hours.",
+        "You are unsure — redo this assessment or call SNS 24 (808 24 24 24)."
+      ]
+    },
+    "azul": {
+      "titulo": "Autocuidado em casa",
+      "titulo_en": "Self-care at home",
+      "intro": "A situação não aparenta ser urgente: descanso, hidratação e vigilância em casa são normalmente suficientes. Para aconselhamento sobre o que fazer, ligue ao SNS 24 (808 24 24 24) ou contacte o seu centro de saúde.",
+      "intro_en": "The situation does not appear urgent: rest, hydration and watching at home are usually enough. For advice on what to do, call SNS 24 (808 24 24 24) or contact your health centre.",
+      "fazer": [
+        "Descanse, hidrate-se e faça refeições leves.",
+        "Vigie os sintomas e aponte qualquer mudança."
+      ],
+      "fazer_en": [
+        "Rest, stay hydrated and eat light meals.",
+        "Watch your symptoms and write down any change."
+      ],
+      "evitar": [
+        "Não tome antibióticos por iniciativa própria nem medicamentos receitados a outra pessoa."
+      ],
+      "evitar_en": [
+        "Do not take antibiotics on your own initiative or medicines prescribed for someone else."
+      ],
+      "alerta_titulo": "Procure ajuda se:",
+      "alerta_titulo_en": "Seek help if:",
+      "alerta": [
+        "Algo mudar para pior.",
+        "Os sintomas persistirem além de 48 horas — refaça esta avaliação ou procure o seu centro de saúde."
+      ],
+      "alerta_en": [
+        "Anything changes for the worse.",
+        "Symptoms persist beyond 48 hours — redo this assessment or contact your health centre."
+      ]
+    }
+  }
+}

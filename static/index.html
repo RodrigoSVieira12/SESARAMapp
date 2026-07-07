@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Onde ir? Saúde na Madeira (protótipo)</title>
+  <meta name="description" content="Protótipo de orientação: avalie os sintomas e saiba a que unidade de saúde da RAM se dirigir." />
+  <meta name="theme-color" content="#0c447c" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%230C447C'/%3E%3Cpath d='M42 24h16v18h18v16H58v18H42V58H24V42h18z' fill='white'/%3E%3C/svg%3E" />
+
+  <!-- Tipografia: Public Sans em todos os papéis (direção "Serviço público") -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Leaflet (mapa) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- QR de navegação (gerado localmente, sem chamadas de rede; MIT) -->
+  <script defer src="https://unpkg.com/qrcode-generator@1.4.4/qrcode.js"></script>
+
+  <link rel="stylesheet" href="/static/css/style.css?v=9" />
+  <!-- textos.js primeiro: define TEXTOS (PT/EN); app.js usa-o -->
+  <script defer src="/static/js/textos.js?v=9"></script>
+  <script defer src="/static/js/app.js?v=9"></script>
+</head>
+<body>
+  <header class="topo">
+    <div class="topo__conteudo">
+      <div>
+        <p class="topo__marca">Onde ir? <span class="versao">v0.8</span></p>
+        <p class="topo__sub" id="topo-sub">Orientação de utentes na Região Autónoma da Madeira · protótipo</p>
+      </div>
+      <button class="topo__lingua no-print" id="btn-lingua" type="button" aria-label="Switch to English">EN</button>
+    </div>
+  </header>
+
+  <main id="app" class="app" aria-live="polite">
+    <!-- Os ecrãs são renderizados aqui pelo app.js -->
+    <noscript>
+      <p class="cartao">Esta aplicação precisa de JavaScript ativo para funcionar.</p>
+    </noscript>
+  </main>
+
+  <footer class="rodape">
+    <p id="rodape-aviso">
+      <strong>Aviso:</strong> esta ferramenta dá orientação geral e
+      <strong>não substitui</strong> a avaliação de um profissional de saúde
+      nem a triagem feita na urgência. Em situação de emergência, ligue
+      <a href="tel:112">112</a>. Aconselhamento: SNS&nbsp;24,
+      <a href="tel:808242424">808&nbsp;24&nbsp;24&nbsp;24</a>.
+    </p>
+    <p class="rodape__nota" id="rodape-nota">Protótipo académico, versão 0.8. Regras e dados de unidades por validar com o SESARAM.</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "id": "red_flags",
+  "descricao": "Sinais de emergência avaliados ANTES de qualquer queixa. Qualquer um selecionado implica vermelho e ligar 112. LISTA-EXEMPLO: validar com a equipa clínica. Os campos texto_en são a versão inglesa; se faltarem, a aplicação mostra o português.",
+  "sinais": [
+    { "id": "inconsciencia",
+      "texto": "Perda de consciência ou pessoa que não responde",
+      "texto_en": "Loss of consciousness or an unresponsive person" },
+    { "id": "respiracao_grave",
+      "texto": "Dificuldade grave em respirar ou lábios/rosto azulados",
+      "texto_en": "Severe difficulty breathing or blue lips/face" },
+    { "id": "dor_peito_suores",
+      "texto": "Dor intensa no peito com suores frios ou náuseas",
+      "texto_en": "Intense chest pain with cold sweats or nausea" },
+    { "id": "sinais_avc",
+      "texto": "Boca ao lado, fraqueza súbita num braço ou fala arrastada (sinais de AVC)",
+      "texto_en": "Face drooping, sudden weakness in one arm or slurred speech (signs of stroke)" },
+    { "id": "hemorragia",
+      "texto": "Hemorragia abundante que não para com pressão",
+      "texto_en": "Heavy bleeding that does not stop with pressure" },
+    { "id": "convulsao",
+      "texto": "Convulsão neste momento ou há poucos minutos",
+      "texto_en": "Seizure happening now or a few minutes ago" }
+  ]
+}

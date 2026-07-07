@@ -1,0 +1,1749 @@
+[
+  {
+    "id": "hnm",
+    "nome": "Hospital Dr. Nélio Mendonça",
+    "tipo": "hospital",
+    "concelho": "Funchal",
+    "morada": "Avenida Luís de Camões 27, Funchal",
+    "telefone": "291 705 600",
+    "lat": 32.648496710138915,
+    "lng": -16.92441301943404,
+    "servicos": {
+      "urgencia_polivalente": {
+        "tipo": "24h",
+        "texto": "Urgência aberta 24 horas"
+      }
+    },
+    "notas": "Urgência hospitalar principal da RAM.",
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "marmeleiros",
+    "nome": "Hospital dos Marmeleiros",
+    "tipo": "hospital",
+    "concelho": "Funchal",
+    "morada": "Estrada dos Marmeleiros 232, Monte, Funchal",
+    "telefone": "291 705 730",
+    "lat": 32.672,
+    "lng": -16.90895,
+    "servicos": {},
+    "notas": "Sem serviço de urgência, sobretudo internamento e consultas.",
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_bom_jesus",
+    "nome": "Centro de Saúde do Bom Jesus",
+    "tipo": "centro_saude",
+    "concelho": "Funchal",
+    "morada": "Rua das Hortas 67, Funchal",
+    "telefone": "291 208 700",
+    "lat": 32.65198,
+    "lng": -16.9062,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 08:00-20:00",
+        "horas": {
+          "seg": [
+            "08:00-20:00"
+          ],
+          "ter": [
+            "08:00-20:00"
+          ],
+          "qua": [
+            "08:00-20:00"
+          ],
+          "qui": [
+            "08:00-20:00"
+          ],
+          "sex": [
+            "08:00-20:00"
+          ],
+          "sab": [],
+          "dom": []
+        }
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_santo_antonio",
+    "nome": "Centro de Saúde de Santo António",
+    "tipo": "centro_saude",
+    "concelho": "Funchal",
+    "morada": "Avenida Madalena 165, Santo António, Funchal",
+    "telefone": "291 708 380",
+    "lat": 32.6643,
+    "lng": -16.9359,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 08:00-20:00",
+        "horas": {
+          "seg": [
+            "08:00-20:00"
+          ],
+          "ter": [
+            "08:00-20:00"
+          ],
+          "qua": [
+            "08:00-20:00"
+          ],
+          "qui": [
+            "08:00-20:00"
+          ],
+          "sex": [
+            "08:00-20:00"
+          ],
+          "sab": [],
+          "dom": []
+        }
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_sao_roque",
+    "nome": "Centro de Saúde de São Roque",
+    "tipo": "centro_saude",
+    "concelho": "Funchal",
+    "morada": "Rua da Escola Secundária do Galeão, Funchal",
+    "telefone": "291 705 410",
+    "lat": 32.67,
+    "lng": -16.928,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 08:00-20:00; Sábados 8:30-11:00 (enfermagem)",
+        "horas": {
+          "seg": [
+            "08:00-20:00"
+          ],
+          "ter": [
+            "08:00-20:00"
+          ],
+          "qua": [
+            "08:00-20:00"
+          ],
+          "qui": [
+            "08:00-20:00"
+          ],
+          "sex": [
+            "08:00-20:00"
+          ],
+          "sab": [
+            "08:30-11:00"
+          ],
+          "dom": []
+        }
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_rui_adriano_de_freitas",
+    "nome": "Centro de Saúde Dr. Rui Adriano de Freitas",
+    "tipo": "centro_saude",
+    "concelho": "Funchal",
+    "morada": "Avenida do Colégio Militar, n.º 27, Funchal",
+    "telefone": "291 720 090",
+    "lat": 32.644,
+    "lng": -16.934,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 08:00-20:00; Sábados 8:30-12:30 (enfermagem)",
+        "horas": {
+          "seg": [
+            "08:00-20:00"
+          ],
+          "ter": [
+            "08:00-20:00"
+          ],
+          "qua": [
+            "08:00-20:00"
+          ],
+          "qui": [
+            "08:00-20:00"
+          ],
+          "sex": [
+            "08:00-20:00"
+          ],
+          "sab": [
+            "08:30-12:30"
+          ],
+          "dom": []
+        }
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_camara_lobos",
+    "nome": "Centro de Saúde de Câmara de Lobos",
+    "tipo": "centro_saude",
+    "concelho": "Câmara de Lobos",
+    "morada": "Avenida da Nova Cidade, Câmara de Lobos",
+    "telefone": "291 009 250",
+    "lat": 32.6514,
+    "lng": -16.9799,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 08:00-20:00",
+        "horas": {
+          "seg": [
+            "08:00-20:00"
+          ],
+          "ter": [
+            "08:00-20:00"
+          ],
+          "qua": [
+            "08:00-20:00"
+          ],
+          "qui": [
+            "08:00-20:00"
+          ],
+          "sex": [
+            "08:00-20:00"
+          ],
+          "sab": [],
+          "dom": []
+        }
+      },
+      "atendimento_urgente": {
+        "tipo": "24h",
+        "texto": "Urgência aberta 24 horas"
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_curral_das_freiras",
+    "nome": "Centro de Saúde do Curral das Freiras",
+    "tipo": "centro_saude",
+    "concelho": "Câmara de Lobos",
+    "morada": "Estrada Cónego Camacho, n.º 7 Curral das Freiras, Câmara de Lobos",
+    "telefone": "291 710 050",
+    "lat": 32.7206,
+    "lng": -16.9663,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 08:30-17:00",
+        "horas": {
+          "seg": [
+            "08:30-17:00"
+          ],
+          "ter": [
+            "08:30-17:00"
+          ],
+          "qua": [
+            "08:30-17:00"
+          ],
+          "qui": [
+            "08:30-17:00"
+          ],
+          "sex": [
+            "08:30-17:00"
+          ],
+          "sab": [],
+          "dom": []
+        }
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_estreito_camara_de_lobos",
+    "nome": "Centro de Saúde do Estreito de Câmara de Lobos",
+    "tipo": "centro_saude",
+    "concelho": "Câmara de Lobos",
+    "morada": "Rua João Augusto Ornelas, Câmara de Lobos",
+    "telefone": "291 910 230",
+    "lat": 32.6748,
+    "lng": -16.9791,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 08:00-20:00",
+        "horas": {
+          "seg": [
+            "08:00-20:00"
+          ],
+          "ter": [
+            "08:00-20:00"
+          ],
+          "qua": [
+            "08:00-20:00"
+          ],
+          "qui": [
+            "08:00-20:00"
+          ],
+          "sex": [
+            "08:00-20:00"
+          ],
+          "sab": [],
+          "dom": []
+        }
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_jardim_da_serra",
+    "nome": "Centro de Saúde do Jardim da Serra",
+    "tipo": "centro_saude",
+    "concelho": "Câmara de Lobos",
+    "morada": "Rua de Santo Isidro, Centro Cívico, Câmara de Lobos",
+    "telefone": "291 945 248",
+    "lat": 32.6842,
+    "lng": -16.9892,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 08:30-16:30",
+        "horas": {
+          "seg": [
+            "08:30-16:30"
+          ],
+          "ter": [
+            "08:30-16:30"
+          ],
+          "qua": [
+            "08:30-16:30"
+          ],
+          "qui": [
+            "08:30-16:30"
+          ],
+          "sex": [
+            "08:30-16:30"
+          ],
+          "sab": [],
+          "dom": []
+        }
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_quinta_grande",
+    "nome": "Centro de Saúde da Quinta Grande",
+    "tipo": "centro_saude",
+    "concelho": "Câmara de Lobos",
+    "morada": "Rua Bispo Manuel Joaquim Andrade, n.º 41, Câmara de Lobos",
+    "telefone": "291 910 000",
+    "lat": 32.655,
+    "lng": -17.007,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Segundas-Feiras 08:30-17:00, Terças a Sextas 08:30-16:30",
+        "horas": {
+          "seg": [
+            "08:30-17:00"
+          ],
+          "ter": [
+            "08:30-16:30"
+          ],
+          "qua": [
+            "08:30-16:30"
+          ],
+          "qui": [
+            "08:30-16:30"
+          ],
+          "sex": [
+            "08:30-16:30"
+          ],
+          "sab": [],
+          "dom": []
+        }
+      }
+    },
+    "notas": "Coordenadas corrigidas de forma aproximada (as originais caiam no mar). Reconfirmar no Google Maps.",
+    "dados_confirmados": false,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_ribeira_brava",
+    "nome": "Centro de Saúde da Ribeira Brava",
+    "tipo": "centro_saude",
+    "concelho": "Ribeira Brava",
+    "morada": "Estrada Regional, 104, Ribeira Brava",
+    "telefone": "291 950 200",
+    "lat": 32.67995,
+    "lng": -17.0575,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 08:00-18:00",
+        "horas": {
+          "seg": [
+            "08:00-18:00"
+          ],
+          "ter": [
+            "08:00-18:00"
+          ],
+          "qua": [
+            "08:00-18:00"
+          ],
+          "qui": [
+            "08:00-18:00"
+          ],
+          "sex": [
+            "08:00-18:00"
+          ],
+          "sab": [],
+          "dom": []
+        }
+      },
+      "atendimento_urgente": {
+        "tipo": "24h",
+        "texto": "Urgência aberta 24 horas"
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_campanario",
+    "nome": "Centro de Saúde do Campanário",
+    "tipo": "centro_saude",
+    "concelho": "Ribeira Brava",
+    "morada": "Rua Comandante Camacho de Freitas, n.º 421, Campanário",
+    "telefone": "291 950 330",
+    "lat": 32.6688,
+    "lng": -17.03359,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 08:00-17:00; Sábados 8:30-12:30 (enfermagem, com marcação prévia)",
+        "horas": {
+          "seg": [
+            "08:00-17:00"
+          ],
+          "ter": [
+            "08:00-17:00"
+          ],
+          "qua": [
+            "08:00-17:00"
+          ],
+          "qui": [
+            "08:00-17:00"
+          ],
+          "sex": [
+            "08:00-17:00"
+          ],
+          "sab": [
+            "08:30-12:30"
+          ],
+          "dom": []
+        }
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_serra_de_agua",
+    "nome": "Centro de Saúde da Serra de Água",
+    "tipo": "centro_saude",
+    "concelho": "Ribeira Brava",
+    "morada": "Sítio da Pereira, Serra de Água",
+    "telefone": "291 952 673",
+    "lat": 32.7275,
+    "lng": -17.026,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 08:30-15:30",
+        "horas": {
+          "seg": [
+            "08:30-15:30"
+          ],
+          "ter": [
+            "08:30-15:30"
+          ],
+          "qua": [
+            "08:30-15:30"
+          ],
+          "qui": [
+            "08:30-15:30"
+          ],
+          "sex": [
+            "08:30-15:30"
+          ],
+          "sab": [],
+          "dom": []
+        }
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_ponta_sol",
+    "nome": "Centro de Saúde da Ponta do Sol",
+    "tipo": "centro_saude",
+    "concelho": "Ponta do Sol",
+    "morada": "Rua V Centenário, Ponta do Sol",
+    "telefone": "291 970 040",
+    "lat": 32.6855,
+    "lng": -17.0994,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 08:00-18:00",
+        "horas": {
+          "seg": [
+            "08:00-18:00"
+          ],
+          "ter": [
+            "08:00-18:00"
+          ],
+          "qua": [
+            "08:00-18:00"
+          ],
+          "qui": [
+            "08:00-18:00"
+          ],
+          "sex": [
+            "08:00-18:00"
+          ],
+          "sab": [],
+          "dom": []
+        }
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_canhas",
+    "nome": "Centro de Saúde Dr. Tito Noronha - Canhas",
+    "tipo": "centro_saude",
+    "concelho": "Ponta do Sol",
+    "morada": "Rua do Outeiro, n.º 4, Canhas",
+    "telefone": "291 970 070",
+    "lat": 32.6977,
+    "lng": -17.1181,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 08:30-17:00",
+        "horas": {
+          "seg": [
+            "08:30-17:00"
+          ],
+          "ter": [
+            "08:30-17:00"
+          ],
+          "qua": [
+            "08:30-17:00"
+          ],
+          "qui": [
+            "08:30-17:00"
+          ],
+          "sex": [
+            "08:30-17:00"
+          ],
+          "sab": [],
+          "dom": []
+        }
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_madalena_do_mar",
+    "nome": "Centro de Saúde da Madalena do Mar",
+    "tipo": "centro_saude",
+    "concelho": "Ponta do Sol",
+    "morada": "Estrada IV Centenário, n.º 33, Madalena do Mar",
+    "telefone": "291 972 271",
+    "lat": 32.7023,
+    "lng": -17.1346,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Segundas e Quartas 13:00-15:00, Terças 09:00-13:00, Quintas 09:00-12:00, Sextas 11:00-13:00",
+        "horas": {
+          "seg": [
+            "13:00-15:00"
+          ],
+          "ter": [
+            "09:00-13:00"
+          ],
+          "qua": [
+            "13:00-15:00"
+          ],
+          "qui": [
+            "09:00-12:00"
+          ],
+          "sex": [
+            "11:00-13:00"
+          ],
+          "sab": [],
+          "dom": []
+        }
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_calheta",
+    "nome": "Centro de Saúde da Calheta",
+    "tipo": "centro_saude",
+    "concelho": "Calheta",
+    "morada": "Estrada Regional 222, Estrada da Calheta, nº 598, Calheta",
+    "telefone": "291 820 700",
+    "lat": 32.7318,
+    "lng": -17.1764,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 08:00-17:30",
+        "horas": {
+          "seg": [
+            "08:00-17:30"
+          ],
+          "ter": [
+            "08:00-17:30"
+          ],
+          "qua": [
+            "08:00-17:30"
+          ],
+          "qui": [
+            "08:00-17:30"
+          ],
+          "sex": [
+            "08:00-17:30"
+          ],
+          "sab": [],
+          "dom": []
+        }
+      },
+      "atendimento_urgente": {
+        "tipo": "24h",
+        "texto": "Urgência aberta 24 horas"
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_arco_da_calheta",
+    "nome": "Centro de Saúde do Arco da Calheta",
+    "tipo": "centro_saude",
+    "concelho": "Calheta",
+    "morada": "Impasse da Nazaré, n.º 2, Arco da Calheta",
+    "telefone": "291 822 161",
+    "lat": 32.7182,
+    "lng": -17.1464,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 08:30-17:00",
+        "horas": {
+          "seg": [
+            "08:30-17:00"
+          ],
+          "ter": [
+            "08:30-17:00"
+          ],
+          "qua": [
+            "08:30-17:00"
+          ],
+          "qui": [
+            "08:30-17:00"
+          ],
+          "sex": [
+            "08:30-17:00"
+          ],
+          "sab": [],
+          "dom": []
+        }
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_estreito_da_calheta",
+    "nome": "Centro de Saúde do Estreito da Calheta",
+    "tipo": "centro_saude",
+    "concelho": "Calheta",
+    "morada": "Rua da Igreja, nº 1, Estreito da Calheta",
+    "telefone": "291 820 440",
+    "lat": 32.73574,
+    "lng": -17.18749,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 08:30-17:00",
+        "horas": {
+          "seg": [
+            "08:30-17:00"
+          ],
+          "ter": [
+            "08:30-17:00"
+          ],
+          "qua": [
+            "08:30-17:00"
+          ],
+          "qui": [
+            "08:30-17:00"
+          ],
+          "sex": [
+            "08:30-17:00"
+          ],
+          "sab": [],
+          "dom": []
+        }
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_faja_da_ovelha",
+    "nome": "Centro de Saúde da Fajã da Ovelha",
+    "tipo": "centro_saude",
+    "concelho": "Calheta",
+    "morada": "ER 222, Estrada da Fajã da Ovelha, nº 155",
+    "telefone": "291 872 188",
+    "lat": 32.777,
+    "lng": -17.2231,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 08:30-16:30",
+        "horas": {
+          "seg": [
+            "08:30-16:30"
+          ],
+          "ter": [
+            "08:30-16:30"
+          ],
+          "qua": [
+            "08:30-16:30"
+          ],
+          "qui": [
+            "08:30-16:30"
+          ],
+          "sex": [
+            "08:30-16:30"
+          ],
+          "sab": [],
+          "dom": []
+        }
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_jardim_do_mar",
+    "nome": "Centro de Saúde do Jardim do Mar",
+    "tipo": "centro_saude",
+    "concelho": "Calheta",
+    "morada": "Caminho da Piedade, nº 11, Jardim do Mar",
+    "telefone": "291 822 261",
+    "lat": 32.7371,
+    "lng": -17.21,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Quartas e Sextas 08:30-12:30",
+        "horas": {
+          "seg": [],
+          "ter": [],
+          "qua": [
+            "08:30-12:30"
+          ],
+          "qui": [],
+          "sex": [
+            "08:30-12:30"
+          ],
+          "sab": [],
+          "dom": []
+        }
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_paul_do_mar",
+    "nome": "Centro de Saúde do Paúl do Mar",
+    "tipo": "centro_saude",
+    "concelho": "Calheta",
+    "morada": "Impasse do Centro de Saúde, nº 1",
+    "telefone": "291 870 010",
+    "lat": 32.7587,
+    "lng": -17.2301996,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 08:30-16:30",
+        "horas": {
+          "seg": [
+            "08:30-16:30"
+          ],
+          "ter": [
+            "08:30-16:30"
+          ],
+          "qua": [
+            "08:30-16:30"
+          ],
+          "qui": [
+            "08:30-16:30"
+          ],
+          "sex": [
+            "08:30-16:30"
+          ],
+          "sab": [],
+          "dom": []
+        }
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_ponta_do_pargo",
+    "nome": "Centro de Saúde da Ponta do Pargo",
+    "tipo": "centro_saude",
+    "concelho": "Calheta",
+    "morada": "Rua do Fio, nº 1",
+    "telefone": "291 880 000",
+    "lat": 32.8119,
+    "lng": -17.2482,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 08:30-15:30",
+        "horas": {
+          "seg": [
+            "08:30-15:30"
+          ],
+          "ter": [
+            "08:30-15:30"
+          ],
+          "qua": [
+            "08:30-15:30"
+          ],
+          "qui": [
+            "08:30-15:30"
+          ],
+          "sex": [
+            "08:30-15:30"
+          ],
+          "sab": [],
+          "dom": []
+        }
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_prazeres",
+    "nome": "Centro de Saúde dos Prazeres",
+    "tipo": "centro_saude",
+    "concelho": "Calheta",
+    "morada": "Caminho da Referta, n.º 158",
+    "telefone": "291 820 160",
+    "lat": 32.75203,
+    "lng": -17.20518,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 08:30-16:30",
+        "horas": {
+          "seg": [
+            "08:30-16:30"
+          ],
+          "ter": [
+            "08:30-16:30"
+          ],
+          "qua": [
+            "08:30-16:30"
+          ],
+          "qui": [
+            "08:30-16:30"
+          ],
+          "sex": [
+            "08:30-16:30"
+          ],
+          "sab": [],
+          "dom": []
+        }
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_porto_moniz",
+    "nome": "Centro de Saúde do Porto Moniz",
+    "tipo": "centro_saude",
+    "concelho": "Porto Moniz",
+    "morada": "Rua do Dr. Cosme, n.º 27, Porto Moniz",
+    "telefone": "291 850 170",
+    "lat": 32.8667,
+    "lng": -17.1715,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 08:30-16:30",
+        "horas": {
+          "seg": [
+            "08:30-16:30"
+          ],
+          "ter": [
+            "08:30-16:30"
+          ],
+          "qua": [
+            "08:30-16:30"
+          ],
+          "qui": [
+            "08:30-16:30"
+          ],
+          "sex": [
+            "08:30-16:30"
+          ],
+          "sab": [],
+          "dom": []
+        }
+      },
+      "atendimento_urgente": {
+        "tipo": "24h",
+        "texto": "Urgência aberta 24 horas"
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_achadas_da_cruz",
+    "nome": "Centro de Saúde das Achadas da Cruz",
+    "tipo": "centro_saude",
+    "concelho": "Porto Moniz",
+    "morada": "Estrada Regional 101, n.º 28",
+    "telefone": "291 853 505",
+    "lat": 32.84059,
+    "lng": -17.20811,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 14:00-16:00 (Segundas 13:30-16:00)",
+        "horas": {
+          "seg": [
+            "13:30-16:00"
+          ],
+          "ter": [
+            "14:00-16:00"
+          ],
+          "qua": [
+            "14:00-16:00"
+          ],
+          "qui": [
+            "14:00-16:00"
+          ],
+          "sex": [
+            "14:00-16:00"
+          ],
+          "sab": [],
+          "dom": []
+        }
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_ribeira_da_janela",
+    "nome": "Centro de Saúde da Ribeira da Janela",
+    "tipo": "centro_saude",
+    "concelho": "Porto Moniz",
+    "morada": "Vereda da Ferradura, n.º 6",
+    "telefone": "291 853 138",
+    "lat": 32.847128,
+    "lng": -17.1592169,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 13:00-15:30 (Quintas 09:00-12:30)",
+        "horas": {
+          "seg": [
+            "13:00-15:30"
+          ],
+          "ter": [
+            "13:00-15:30"
+          ],
+          "qua": [
+            "13:00-15:30"
+          ],
+          "qui": [
+            "09:00-12:30"
+          ],
+          "sex": [
+            "13:00-15:30"
+          ],
+          "sab": [],
+          "dom": []
+        }
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_santa",
+    "nome": "Centro de Saúde da Santa",
+    "tipo": "centro_saude",
+    "concelho": "Porto Moniz",
+    "morada": "Estr. Regional 101, n.º 90, Santa",
+    "telefone": "291 853 234",
+    "lat": 32.85771,
+    "lng": -17.182757,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 08:30-16:00",
+        "horas": {
+          "seg": [
+            "08:30-16:00"
+          ],
+          "ter": [
+            "08:30-16:00"
+          ],
+          "qua": [
+            "08:30-16:00"
+          ],
+          "qui": [
+            "08:30-16:00"
+          ],
+          "sex": [
+            "08:30-16:00"
+          ],
+          "sab": [],
+          "dom": []
+        }
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_seixal",
+    "nome": "Centro de Saúde do Seixal",
+    "tipo": "centro_saude",
+    "concelho": "Porto Moniz",
+    "morada": "Caminho da Cruz n.º 11",
+    "telefone": "291 850 240",
+    "lat": 32.825379,
+    "lng": -17.10970679,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 08:30-16:00",
+        "horas": {
+          "seg": [
+            "08:30-16:00"
+          ],
+          "ter": [
+            "08:30-16:00"
+          ],
+          "qua": [
+            "08:30-16:00"
+          ],
+          "qui": [
+            "08:30-16:00"
+          ],
+          "sex": [
+            "08:30-16:00"
+          ],
+          "sab": [],
+          "dom": []
+        }
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_sao_vicente",
+    "nome": "Centro de Saúde de São Vicente",
+    "tipo": "centro_saude",
+    "concelho": "São Vicente",
+    "morada": "Estrada D. João V, 159, Feiteiras, São Vicente",
+    "telefone": "291 840 060",
+    "lat": 32.78939,
+    "lng": -17.035309,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 08:00-17:00",
+        "horas": {
+          "seg": [
+            "08:00-17:00"
+          ],
+          "ter": [
+            "08:00-17:00"
+          ],
+          "qua": [
+            "08:00-17:00"
+          ],
+          "qui": [
+            "08:00-17:00"
+          ],
+          "sex": [
+            "08:00-17:00"
+          ],
+          "sab": [],
+          "dom": []
+        }
+      },
+      "atendimento_urgente": {
+        "tipo": "24h",
+        "texto": "Urgência aberta 24 horas"
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_boaventura",
+    "nome": "Centro de Saúde de Boaventura",
+    "tipo": "centro_saude",
+    "concelho": "São Vicente",
+    "morada": "Rua da Casa do Povo, professora Helena Nunes, nº 17, Sítio do Serrão",
+    "telefone": "291 862 179",
+    "lat": 32.818685,
+    "lng": -16.971807,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 09:00-16:00",
+        "horas": {
+          "seg": [
+            "09:00-16:00"
+          ],
+          "ter": [
+            "09:00-16:00"
+          ],
+          "qua": [
+            "09:00-16:00"
+          ],
+          "qui": [
+            "09:00-16:00"
+          ],
+          "sex": [
+            "09:00-16:00"
+          ],
+          "sab": [],
+          "dom": []
+        }
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_ponta_delgada",
+    "nome": "Centro de Saúde da Ponta Delgada",
+    "tipo": "centro_saude",
+    "concelho": "São Vicente",
+    "morada": "Rua Dr. Horácio Bento de Gouveia, n.º 22 A",
+    "telefone": "291 860 000",
+    "lat": 32.824728389665,
+    "lng": -16.988700558,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 09:00-16:00",
+        "horas": {
+          "seg": [
+            "09:00-16:00"
+          ],
+          "ter": [
+            "09:00-16:00"
+          ],
+          "qua": [
+            "09:00-16:00"
+          ],
+          "qui": [
+            "09:00-16:00"
+          ],
+          "sex": [
+            "09:00-16:00"
+          ],
+          "sab": [],
+          "dom": []
+        }
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_santana",
+    "nome": "Centro de Saúde de Santana",
+    "tipo": "centro_saude",
+    "concelho": "Santana",
+    "morada": "Avenida Manuel Marques da Trindade, n.º 44, Santana",
+    "telefone": "291 570 300",
+    "lat": 32.806,
+    "lng": -16.885,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 08:00-18:00",
+        "horas": {
+          "seg": [
+            "08:00-18:00"
+          ],
+          "ter": [
+            "08:00-18:00"
+          ],
+          "qua": [
+            "08:00-18:00"
+          ],
+          "qui": [
+            "08:00-18:00"
+          ],
+          "sex": [
+            "08:00-18:00"
+          ],
+          "sab": [],
+          "dom": []
+        }
+      },
+      "atendimento_urgente": {
+        "tipo": "24h",
+        "texto": "Urgência aberta 24 horas"
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_arco_de_sao_jorge",
+    "nome": "Centro de Saúde do Arco de São Jorge",
+    "tipo": "centro_saude",
+    "concelho": "Santana",
+    "morada": "Rua Eng. Macedo dos Santos, n.º 12",
+    "telefone": "291 578 079",
+    "lat": 32.825820434549804,
+    "lng": -16.95095813107452,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 08:30-16:00",
+        "horas": {
+          "seg": [
+            "08:30-16:00"
+          ],
+          "ter": [
+            "08:30-16:00"
+          ],
+          "qua": [
+            "08:30-16:00"
+          ],
+          "qui": [
+            "08:30-16:00"
+          ],
+          "sex": [
+            "08:30-16:00"
+          ],
+          "sab": [],
+          "dom": []
+        }
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_sao_roque_do_faial",
+    "nome": "Centro de Saúde de São Roque do Faial",
+    "tipo": "centro_saude",
+    "concelho": "Santana",
+    "morada": "Estrada D. Maria II, n.º 35 B - Regional 203",
+    "telefone": "291 575 264",
+    "lat": 32.76903591483991,
+    "lng": -16.85711672745106,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 08:30-16:30",
+        "horas": {
+          "seg": [
+            "08:30-16:30"
+          ],
+          "ter": [
+            "08:30-16:30"
+          ],
+          "qua": [
+            "08:30-16:30"
+          ],
+          "qui": [
+            "08:30-16:30"
+          ],
+          "sex": [
+            "08:30-16:30"
+          ],
+          "sab": [],
+          "dom": []
+        }
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_sao_jorge",
+    "nome": "Centro de Saúde de São Jorge",
+    "tipo": "centro_saude",
+    "concelho": "Santana",
+    "morada": "Estrada Regional 101 de São Jorge, n.º 51",
+    "telefone": "291 570 190",
+    "lat": 32.8232,
+    "lng": -16.9046,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 08:30-16:30",
+        "horas": {
+          "seg": [
+            "08:30-16:30"
+          ],
+          "ter": [
+            "08:30-16:30"
+          ],
+          "qua": [
+            "08:30-16:30"
+          ],
+          "qui": [
+            "08:30-16:30"
+          ],
+          "sex": [
+            "08:30-16:30"
+          ],
+          "sab": [],
+          "dom": []
+        }
+      }
+    },
+    "notas": "Coordenadas corrigidas de forma aproximada (eram iguais ao Arco de Sao Jorge). Reconfirmar no Google Maps.",
+    "dados_confirmados": false,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_machico",
+    "nome": "Centro de Saúde de Machico",
+    "tipo": "centro_saude",
+    "concelho": "Machico",
+    "morada": "Rua da Ribeira, n.º 21, Sítio do Piquinho",
+    "telefone": "291 969 130",
+    "lat": 32.724941688315155,
+    "lng": -16.77148722922806,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 08:00-20:00",
+        "horas": {
+          "seg": [
+            "08:00-20:00"
+          ],
+          "ter": [
+            "08:00-20:00"
+          ],
+          "qua": [
+            "08:00-20:00"
+          ],
+          "qui": [
+            "08:00-20:00"
+          ],
+          "sex": [
+            "08:00-20:00"
+          ],
+          "sab": [],
+          "dom": []
+        }
+      },
+      "atendimento_urgente": {
+        "tipo": "24h",
+        "texto": "Urgência aberta 24 horas"
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_canical",
+    "nome": "Centro de Saúde do Caniçal",
+    "tipo": "centro_saude",
+    "concelho": "Machico",
+    "morada": "Rua Garcia Moniz, n.º 8",
+    "telefone": "291 961 701",
+    "lat": 32.73695709355149,
+    "lng": -16.740802490596426,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 08:00-17:30",
+        "horas": {
+          "seg": [
+            "08:00-17:30"
+          ],
+          "ter": [
+            "08:00-17:30"
+          ],
+          "qua": [
+            "08:00-17:30"
+          ],
+          "qui": [
+            "08:00-17:30"
+          ],
+          "sex": [
+            "08:00-17:30"
+          ],
+          "sab": [],
+          "dom": []
+        }
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_porto_da_cruz",
+    "nome": "Centro de Saúde do Porto da Cruz",
+    "tipo": "centro_saude",
+    "concelho": "Machico",
+    "morada": "Rua Marçal, n.º 5",
+    "telefone": "291 562 203",
+    "lat": 32.77175050654241,
+    "lng": -16.831341286898088,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 08:30-17:30",
+        "horas": {
+          "seg": [
+            "08:30-17:30"
+          ],
+          "ter": [
+            "08:30-17:30"
+          ],
+          "qua": [
+            "08:30-17:30"
+          ],
+          "qui": [
+            "08:30-17:30"
+          ],
+          "sex": [
+            "08:30-17:30"
+          ],
+          "sab": [],
+          "dom": []
+        }
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_santo_da_serra",
+    "nome": "Centro de Saúde do Santo da Serra",
+    "tipo": "centro_saude",
+    "concelho": "Machico",
+    "morada": "Largo do Santo, n.º 2",
+    "telefone": "291 550 050",
+    "lat": 32.7266,
+    "lng": -16.8203,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 08:30-18:00",
+        "horas": {
+          "seg": [
+            "08:30-18:00"
+          ],
+          "ter": [
+            "08:30-18:00"
+          ],
+          "qua": [
+            "08:30-18:00"
+          ],
+          "qui": [
+            "08:30-18:00"
+          ],
+          "sex": [
+            "08:30-18:00"
+          ],
+          "sab": [],
+          "dom": []
+        }
+      }
+    },
+    "notas": "Coordenadas corrigidas de forma aproximada (eram iguais ao Porto da Cruz). Reconfirmar no Google Maps.",
+    "dados_confirmados": false,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_santa_cruz",
+    "nome": "Centro de Saúde de Santa Cruz",
+    "tipo": "centro_saude",
+    "concelho": "Santa Cruz",
+    "morada": "Rua do Bom Jesus, n.º 26",
+    "telefone": "291 524 826",
+    "lat": 32.68960137504053,
+    "lng": -16.794276586899944,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 08:00-20:00, Sábado 08:30-12:30 (enfermagem)",
+        "horas": {
+          "seg": [
+            "08:00-20:00"
+          ],
+          "ter": [
+            "08:00-20:00"
+          ],
+          "qua": [
+            "08:00-20:00"
+          ],
+          "qui": [
+            "08:00-20:00"
+          ],
+          "sex": [
+            "08:00-20:00"
+          ],
+          "sab": [
+            "08:30-12:30"
+          ],
+          "dom": []
+        }
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_camacha",
+    "nome": "Centro de Saúde da Camacha",
+    "tipo": "centro_saude",
+    "concelho": "Santa Cruz",
+    "morada": "Largo Conselheiro Aires de Ornelas",
+    "telefone": "291 922 221",
+    "lat": 32.679459439871096,
+    "lng": -16.844161004091234,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 08:00-20:00, Sábado 08:30-12:30 (enfermagem)",
+        "horas": {
+          "seg": [
+            "08:00-20:00"
+          ],
+          "ter": [
+            "08:00-20:00"
+          ],
+          "qua": [
+            "08:00-20:00"
+          ],
+          "qui": [
+            "08:00-20:00"
+          ],
+          "sex": [
+            "08:00-20:00"
+          ],
+          "sab": [
+            "08:30-12:30"
+          ],
+          "dom": []
+        }
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_canico",
+    "nome": "Centro de Saúde do Caniço",
+    "tipo": "centro_saude",
+    "concelho": "Santa Cruz",
+    "morada": "Caminho Velho do Jardim do Sol, n.º 1",
+    "telefone": "291 930 070",
+    "lat": 32.65218633919521,
+    "lng": -16.847643023683553,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 08:00-20:00, Sábado 08:30-12:30 (enfermagem)",
+        "horas": {
+          "seg": [
+            "08:00-20:00"
+          ],
+          "ter": [
+            "08:00-20:00"
+          ],
+          "qua": [
+            "08:00-20:00"
+          ],
+          "qui": [
+            "08:00-20:00"
+          ],
+          "sex": [
+            "08:00-20:00"
+          ],
+          "sab": [
+            "08:30-12:30"
+          ],
+          "dom": []
+        }
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_gaula",
+    "nome": "Centro de Saúde de Gaula",
+    "tipo": "centro_saude",
+    "concelho": "Santa Cruz",
+    "morada": "Estrada Padre Alfredo Vieira Freitas, n.º 252",
+    "telefone": "291 526 226",
+    "lat": 32.67181368044229,
+    "lng": -16.81440668690042,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 08:30-17:30, Sábado 08:30-12:30 (enfermagem)",
+        "horas": {
+          "seg": [
+            "08:30-17:30"
+          ],
+          "ter": [
+            "08:30-17:30"
+          ],
+          "qua": [
+            "08:30-17:30"
+          ],
+          "qui": [
+            "08:30-17:30"
+          ],
+          "sex": [
+            "08:30-17:30"
+          ],
+          "sab": [
+            "08:30-12:30"
+          ],
+          "dom": []
+        }
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "madeira"
+  },
+  {
+    "id": "cs_porto_santo",
+    "nome": "Centro de Saúde Dr. Francisco Rodrigues Jardim",
+    "tipo": "centro_saude",
+    "concelho": "Porto Santo",
+    "morada": "Rua Dr. José Diamantino Lima, n.º 4",
+    "telefone": "291 980 060",
+    "lat": 33.05975933528906,
+    "lng": -16.332505659904278,
+    "servicos": {
+      "consulta_aberta": {
+        "tipo": "semanal",
+        "texto": "Dias úteis, 08:00-17:30, Sábados 08:00-15:00",
+        "horas": {
+          "seg": [
+            "08:00-17:30"
+          ],
+          "ter": [
+            "08:00-17:30"
+          ],
+          "qua": [
+            "08:00-17:30"
+          ],
+          "qui": [
+            "08:00-17:30"
+          ],
+          "sex": [
+            "08:00-17:30"
+          ],
+          "sab": [
+            "08:00-15:00"
+          ],
+          "dom": []
+        }
+      },
+      "atendimento_urgente": {
+        "tipo": "24h",
+        "texto": "Urgência aberta 24 horas"
+      }
+    },
+    "notas": null,
+    "dados_confirmados": true,
+    "ilha": "porto_santo"
+  }
+]

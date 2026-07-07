@@ -1,0 +1,60 @@
+flowchart TD
+  inicio(["Início: Dor de cabeça"])
+  dc_q1["1. A dor apareceu de repente e<br/>atingiu intensidade máxima em<br/>segundos, como uma explosão?"]
+  dc_q2["2. A dor surgiu depois de uma pancada<br/>na cabeça?"]
+  dc_q3["3. Perdeu os sentidos, vomitou<br/>repetidamente ou está com<br/>sonolência anormal desde a<br/>pancada?"]
+  dc_q4["4. É a primeira vez que tem uma dor<br/>deste tipo?"]
+  dc_q5["5. Tem febre com rigidez no pescoço,<br/>ou a luz incomoda muito os olhos?"]
+  dc_q6["6. Tem fraqueza num braço ou perna,<br/>fala arrastada ou visão dupla?"]
+  dc_q7["7. Tem vómitos que não param?"]
+  dc_q8["8. Tem mais de 50 anos e esta dor é<br/>nova e persistente?"]
+  dc_q9["9. A dor dura há mais de 3 dias<br/>apesar de analgésicos?"]
+  dc_q10["10. É semelhante às suas dores de<br/>cabeça ou enxaquecas habituais?"]
+  dc_q11["11. A sua medicação habitual costuma<br/>aliviar?"]
+  dc_q12["12. A dor está a impedir as suas<br/>atividades normais do dia?"]
+  dc_q13["13. Esta crise é mais forte ou<br/>diferente do habitual?"]
+  inicio --> dc_q1
+  dc_q1_sim(["VERMELHO<br/>Dor de cabeça súbita e muito<br/>intensa pode indicar uma situação<br/>grave."]):::vermelho
+  dc_q1 -->|Sim| dc_q1_sim
+  dc_q1 -->|Não| dc_q2
+  dc_q2 -->|Sim| dc_q3
+  dc_q2 -->|Não| dc_q4
+  dc_q3_sim(["LARANJA<br/>Traumatismo craniano com sinais de<br/>alarme."]):::laranja
+  dc_q3 -->|Sim| dc_q3_sim
+  dc_q3_nao(["AMARELO<br/>Dor de cabeça após traumatismo<br/>deve ser observada hoje."]):::amarelo
+  dc_q3 -->|Não| dc_q3_nao
+  dc_q4 -->|Sim| dc_q5
+  dc_q4 -->|Não| dc_q10
+  dc_q5_sim(["LARANJA<br/>Sinais que exigem observação<br/>urgente."]):::laranja
+  dc_q5 -->|Sim| dc_q5_sim
+  dc_q5 -->|Não| dc_q6
+  dc_q6_sim(["VERMELHO<br/>Sinais neurológicos súbitos exigem<br/>ajuda imediata."]):::vermelho
+  dc_q6 -->|Sim| dc_q6_sim
+  dc_q6 -->|Não| dc_q7
+  dc_q7_sim(["AMARELO<br/>Dor de cabeça com vómitos<br/>persistentes deve ser avaliada<br/>hoje."]):::amarelo
+  dc_q7 -->|Sim| dc_q7_sim
+  dc_q7 -->|Não| dc_q8
+  dc_q8_sim(["AMARELO<br/>Dor de cabeça nova e persistente<br/>depois dos 50 anos deve ser<br/>avaliada."]):::amarelo
+  dc_q8 -->|Sim| dc_q8_sim
+  dc_q8 -->|Não| dc_q9
+  dc_q9_sim(["AMARELO<br/>Dor prolongada que não cede à<br/>medicação deve ser observada."]):::amarelo
+  dc_q9 -->|Sim| dc_q9_sim
+  dc_q9_nao(["VERDE<br/>Dor de cabeça sem sinais de<br/>alarme."]):::verde
+  dc_q9 -->|Não| dc_q9_nao
+  dc_q10 -->|Sim| dc_q11
+  dc_q10 -->|Não| dc_q5
+  dc_q11 -->|Sim| dc_q12
+  dc_q11 -->|Não| dc_q13
+  dc_q12_sim(["VERDE<br/>Crise mais forte do que o<br/>habitual, a avaliar sem urgência."]):::verde
+  dc_q12 -->|Sim| dc_q12_sim
+  dc_q12_nao(["AZUL<br/>Crise ligeira de um padrão já<br/>conhecido."]):::azul
+  dc_q12 -->|Não| dc_q12_nao
+  dc_q13_sim(["AMARELO<br/>Mudança do padrão habitual deve<br/>ser avaliada."]):::amarelo
+  dc_q13 -->|Sim| dc_q13_sim
+  dc_q13_nao(["VERDE<br/>Crise habitual sem alívio com a<br/>medicação, a avaliar sem urgência."]):::verde
+  dc_q13 -->|Não| dc_q13_nao
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

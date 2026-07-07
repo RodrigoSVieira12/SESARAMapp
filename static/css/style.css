@@ -1,0 +1,916 @@
+/* ==========================================================================
+   Onde ir? Protótipo SESARAM — v0.5
+   Direção visual: "Serviço público".
+
+   A linguagem dos portais institucionais portugueses: banda de cor sólida
+   no topo e no rodapé, superfícies brancas, contornos em vez de sombras,
+   cantos discretos, etiquetas em maiúsculas pequenas.
+
+   Tipo: Public Sans (a fonte de serviços públicos digitais) em todos os
+   papéis — uma família usada bem transmite mais confiança do que duas.
+
+   Elemento-assinatura: o resultado é uma GUIA DE ENCAMINHAMENTO — um
+   cartão com lombada na cor da triagem, pensado também para impressão.
+
+   Nota: os azuis institucionais são provisórios. Quando houver cores
+   oficiais do SESARAM, basta trocar --primaria e --primaria-escura.
+   ========================================================================== */
+
+:root {
+  --fundo: #f5f7fa;
+  --superficie: #ffffff;
+  --tinta: #1c2b36;
+  --tinta-suave: #51606c;
+  --primaria: #185fa5;          /* azul de ação (botões, ligações) */
+  --primaria-escura: #0c447c;   /* azul de serviço (bandas, títulos) */
+  --primaria-clara: #eaf2fa;    /* tinta de fundo (hover, avisos info) */
+  --linha: #d4dbe3;
+  --linha-forte: #aeb9c4;
+  --raio: 6px;                  /* controlos */
+  --raio-cartao: 8px;           /* cartões */
+
+  /* Cores da Triagem de Manchester (funcionais, fixadas pelo domínio) */
+  --vermelho: #d32f2f;
+  --laranja: #ef6c00;
+  --amarelo: #f9a825;
+  --verde: #2e7d32;
+  --azul: #1565c0;
+}
+
+* { box-sizing: border-box; }
+
+html { font-size: 17px; } /* base generosa: legibilidade para todos */
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--fundo);
+  color: var(--tinta);
+  font-family: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Etiqueta institucional: maiúsculas pequenas espaçadas. Reutilizada
+   pelo rótulo da guia, pela fase do progresso e pelos contactos. */
+.etiqueta,
+.pulseira-rotulo,
+.progresso__fase,
+.contacto__nome {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* --------------------------------------------------------------- topo -- */
+
+.topo {
+  background: var(--primaria-escura);
+  border-bottom: 4px solid var(--primaria);
+  color: #fff;
+}
+
+.topo__conteudo {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 1rem 1.25rem 0.9rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.topo__lingua {
+  flex: 0 0 auto;
+  margin-top: 0.2rem;
+  padding: 0.35rem 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 999px;
+  background: transparent;
+  color: #fff;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+}
+
+.topo__lingua:hover { background: rgba(255, 255, 255, 0.12); }
+
+.topo__marca {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.45rem;
+  letter-spacing: -0.01em;
+  color: #fff;
+}
+
+.topo__sub {
+  margin: 0.15rem 0 0;
+  font-size: 0.85rem;
+  color: #b9cfe8;
+}
+
+/* ---------------------------------------------------------------- app -- */
+
+.app {
+  flex: 1;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 3rem;
+}
+
+.ecra { animation: entrar 0.22s ease-out both; }
+
+@keyframes entrar {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.cartao {
+  background: var(--superficie);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio-cartao);
+  padding: 1.5rem;
+}
+
+.cartao + .cartao { margin-top: 1rem; }
+
+.titulo-ecra {
+  margin: 0 0 0.75rem;
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  color: var(--tinta);
+}
+
+.texto-suave { color: var(--tinta-suave); }
+
+.ligacao { color: var(--primaria); font-weight: 600; }
+.ligacao:hover { color: var(--primaria-escura); }
+
+/* -------------------------------------------------------------- botões -- */
+
+.botao {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 54px;               /* alvo de toque generoso */
+  padding: 0.8rem 1.25rem;
+  border: 1px solid var(--primaria);
+  border-radius: var(--raio);
+  background: var(--primaria);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  font-size: 1.02rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.botao:hover { background: var(--primaria-escura); border-color: var(--primaria-escura); }
+.botao:active { transform: translateY(1px); }
+
+.botao--secundario {
+  background: var(--superficie);
+  color: var(--primaria-escura);
+}
+
+.botao--secundario:hover { background: var(--primaria-clara); border-color: var(--primaria-escura); }
+
+.botao--112 {
+  background: var(--vermelho);
+  border-color: var(--vermelho);
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.botao--112:hover { background: #a92222; border-color: #a92222; }
+
+.botao--fantasma {
+  background: none;
+  border: none;
+  min-height: 48px;
+  color: var(--primaria-escura);
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.botao--fantasma:hover { color: var(--primaria); }
+
+.botoes { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.25rem; }
+
+.botoes-sim-nao {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+:focus-visible {
+  outline: 3px solid var(--primaria);
+  outline-offset: 2px;
+  border-radius: var(--raio);
+}
+
+/* -------------------------------------------- início: passos e selo ---- */
+
+.passos {
+  list-style: none;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  counter-reset: passo;
+}
+
+.passos li {
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+  counter-increment: passo;
+}
+
+.passos li::before {
+  content: counter(passo);
+  flex: 0 0 auto;
+  width: 1.9rem;
+  height: 1.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primaria-escura);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-radius: var(--raio);
+}
+
+.passos strong { display: block; }
+.passos__desc { color: var(--tinta-suave); font-size: 0.92rem; }
+
+.selo-privacidade {
+  margin-top: 1.4rem;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--linha);
+  border-left: 4px solid var(--primaria-escura);
+  border-radius: var(--raio);
+  background: var(--primaria-clara);
+  font-size: 0.92rem;
+  color: var(--tinta-suave);
+}
+
+/* ----------------------------------------------------- lista de sinais -- */
+
+.lista-sinais { display: flex; flex-direction: column; gap: 0.6rem; margin: 1rem 0 0; }
+
+.separador-sinais {
+  margin: 1.4rem 0 0;
+  font-weight: 600;
+  color: var(--tinta-suave);
+}
+
+/* Sinais de emergência: linhas com lombada vermelha — a gravidade fica
+   marcada sem transformar a lista num alarme. */
+.sinal-botao {
+  display: block;
+  width: 100%;
+  min-height: 54px;
+  padding: 0.9rem 1rem;
+  text-align: left;
+  font: inherit;
+  color: var(--tinta);
+  background: var(--superficie);
+  border: 1px solid var(--linha);
+  border-left: 4px solid var(--vermelho);
+  border-radius: var(--raio);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.sinal-botao:hover { border-color: var(--vermelho); background: #fbf1f1; }
+
+/* (mantido por compatibilidade com versões antigas do ecrã de sinais) */
+.sinal {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  cursor: pointer;
+  background: var(--superficie);
+}
+
+.sinal input {
+  width: 1.4rem;
+  height: 1.4rem;
+  margin-top: 0.1rem;
+  accent-color: var(--vermelho);
+  flex-shrink: 0;
+}
+
+/* ------------------------------------------------------------- queixas -- */
+
+.grelha-queixas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+@media (max-width: 460px) {
+  .grelha-queixas { grid-template-columns: 1fr; }
+}
+
+.queixa {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  padding: 1rem;
+  min-height: 54px;
+  border: 1px solid var(--linha);
+  border-radius: var(--raio-cartao);
+  background: var(--superficie);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.queixa:hover { border-color: var(--primaria); background: var(--primaria-clara); }
+
+.queixa__nome { font-weight: 700; font-size: 1.02rem; }
+.queixa__descricao { font-size: 0.88rem; color: var(--tinta-suave); }
+
+/* ----------------------------------------------------------- progresso -- */
+
+.progresso { margin-bottom: 1.25rem; }
+
+.fases { display: flex; gap: 0.35rem; margin-bottom: 0.55rem; }
+
+.fases__passo {
+  height: 8px;
+  flex: 1;
+  border-radius: 2px;
+  background: #e3e9f0;
+}
+
+.fases__passo--ativo { background: var(--primaria); }
+
+.progresso__fase {
+  margin: 0 0 0.2rem;
+  color: var(--primaria-escura);
+}
+
+.progresso__texto {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--tinta-suave);
+  margin: 0 0 0.4rem;
+}
+
+.progresso__barra {
+  height: 6px;
+  border-radius: 3px;
+  background: #e3e9f0;
+  overflow: hidden;
+}
+
+.progresso__preenchimento {
+  height: 100%;
+  border-radius: 3px;
+  background: var(--primaria);
+  transition: width 0.25s ease;
+}
+
+.pergunta__texto {
+  font-weight: 700;
+  font-size: 1.35rem;
+  line-height: 1.3;
+  margin: 0;
+  color: var(--tinta);
+}
+
+.pergunta__ajuda { margin: 0.6rem 0 0; color: var(--tinta-suave); }
+
+/* ------------------------------- guia de encaminhamento (assinatura) --- */
+
+.pulseira-rotulo {
+  color: var(--tinta-suave);
+  margin: 0 0 0.6rem;
+}
+
+/* A guia: cartão com lombada de 10px na cor da triagem. A cor exata do
+   texto pequeno é escurecida no amarelo e no laranja para dar contraste
+   suficiente sobre o branco. */
+.pulseira {
+  --cor-triagem: var(--tinta-suave);
+  --cor-texto: var(--cor-triagem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  background: var(--superficie);
+  border: 1px solid var(--linha);
+  border-left: 10px solid var(--cor-triagem);
+  border-radius: var(--raio);
+  padding: 1.05rem 1.25rem;
+}
+
+.pulseira__nome {
+  order: -1; /* a cor ("Verde") aparece como etiqueta acima do título */
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--cor-texto);
+}
+
+.pulseira__classificacao {
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1.15;
+  color: var(--tinta);
+}
+
+.pulseira--vermelho { --cor-triagem: var(--vermelho); }
+.pulseira--laranja  { --cor-triagem: var(--laranja); --cor-texto: #b35400; }
+.pulseira--amarelo  { --cor-triagem: var(--amarelo); --cor-texto: #8f6400; }
+.pulseira--verde    { --cor-triagem: var(--verde); }
+.pulseira--azul     { --cor-triagem: var(--azul); }
+
+.resultado__tempo { font-weight: 700; margin: 1.1rem 0 0; }
+.resultado__motivo { margin: 0.5rem 0 0; }
+.resultado__nota { margin: 0.5rem 0 0; color: var(--tinta-suave); }
+
+/* --------------------------------------------------------------- aviso -- */
+
+.aviso {
+  margin-top: 1.25rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid #ecd9a0;
+  border-left: 4px solid #d9a514;
+  border-radius: var(--raio);
+  background: #fdf7e6;
+  font-size: 0.92rem;
+}
+
+/* ------------------------------------------------------------ unidades -- */
+
+.unidade { margin-top: 1rem; }
+
+.unidade__cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.unidade__nome {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 1.25;
+  color: var(--tinta);
+}
+
+.unidade__meta { margin: 0.35rem 0 0; color: var(--tinta-suave); font-size: 0.95rem; }
+
+.unidade__reabre {
+  margin: 0.35rem 0 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #8c5a11;
+}
+
+.chip {
+  display: inline-block;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.chip--aberto  { background: #e7f2e8; color: #1d5a23; }
+.chip--fechado { background: #f5e8e8; color: #8c2626; }
+
+.unidade__horarios { margin: 0.75rem 0 0; padding-left: 1.2rem; }
+.unidade__horarios li { margin: 0.2rem 0; }
+
+.mapa {
+  height: 320px;
+  margin-top: 1rem;
+  border-radius: var(--raio);
+  border: 1px solid var(--linha);
+  z-index: 0; /* evita que o mapa tape botões */
+}
+
+.alternativas { margin-top: 1rem; }
+
+.alternativa {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  margin-top: 0.6rem;
+  background: var(--superficie);
+}
+
+.alternativa__nome { font-weight: 600; }
+.alternativa__meta { font-size: 0.88rem; color: var(--tinta-suave); }
+
+/* ----------------------------------------------------------- contactos -- */
+
+.contactos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+@media (max-width: 460px) {
+  .contactos { grid-template-columns: 1fr; }
+}
+
+.contacto {
+  display: block;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  text-decoration: none;
+  color: inherit;
+  background: var(--superficie);
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.contacto:hover { border-color: var(--primaria); background: var(--primaria-clara); }
+
+.contacto__nome { color: var(--tinta-suave); }
+.contacto__numero { font-weight: 700; font-size: 1.15rem; }
+
+/* ---------------------------------------------------------------- campo -- */
+
+.campo {
+  width: 100%;
+  min-height: 54px;
+  padding: 0.75rem 1rem;
+  margin-top: 1rem;
+  font: inherit;
+  border: 1px solid var(--linha-forte);
+  border-radius: var(--raio);
+  background: var(--superficie);
+  color: inherit;
+}
+
+/* --------------------------------------------------------------- rodapé -- */
+
+.rodape {
+  border-top: 4px solid var(--primaria);
+  background: var(--primaria-escura);
+  padding: 1.25rem;
+  font-size: 0.88rem;
+  color: #c3d5ea;
+}
+
+.rodape p { max-width: 640px; margin: 0 auto; }
+.rodape strong { color: #fff; }
+.rodape a { color: #fff; font-weight: 600; text-underline-offset: 3px; }
+.rodape__nota { margin-top: 0.5rem !important; font-size: 0.8rem; color: #8fa9c8; }
+
+/* ----------------------------------------- resumo de respostas (details) -- */
+
+.respostas {
+  margin-top: 1.25rem;
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  padding: 0.85rem 1rem;
+  background: var(--superficie);
+}
+
+.respostas summary {
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--primaria-escura);
+}
+
+.respostas ul { margin: 0.75rem 0 0.25rem; padding-left: 1.2rem; }
+.respostas li { margin: 0.35rem 0; }
+
+/* ---------------------------------------------------- foco acessível ----- */
+
+[data-foco]:focus { outline: none; } /* o foco programático não precisa de anel */
+
+/* --------------------------------------------- faixa de modo demonstração -- */
+
+.faixa-demo {
+  margin-bottom: 1rem;
+  padding: 0.6rem 1rem;
+  border-radius: var(--raio);
+  background: var(--tinta);
+  color: #fff;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------- chip versão -- */
+
+.versao {
+  display: inline-block;
+  margin-left: 0.45rem;
+  padding: 0.12rem 0.55rem;
+  vertical-align: middle;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  background: transparent;
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+/* --------------------------------------- localização e autocuidado ------ */
+
+/* Linha "Localização usada: … · Alterar localização" */
+.local-linha {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.ligacao--botao {
+  border: 0;
+  padding: 0;
+  background: none;
+  font: inherit;
+  font-weight: 600;
+  color: var(--primaria);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.ligacao--botao:hover { color: var(--primaria-escura); }
+
+.local-aviso {
+  margin: 0.6rem 0 0;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--linha);
+  border-left: 4px solid var(--primaria);
+  background: var(--primaria-clara);
+  border-radius: var(--raio);
+  font-size: 0.95rem;
+  color: var(--tinta-suave);
+}
+
+/* Cartão de autocuidado: "esperar em casa também é uma opção".
+   Acento no azul institucional, de propósito NÃO verde-triagem, para
+   não parecer uma segunda guia. */
+.autocuidado {
+  border-left: 6px solid var(--primaria);
+}
+
+.autocuidado__alerta {
+  padding: 0.6rem 0.8rem;
+  background: #fdf7e6;
+  border: 1px solid #ecd9a0;
+  border-radius: var(--raio);
+  font-size: 0.98rem;
+}
+
+/* -------------------------------------------- esqueletos de carregamento -- */
+
+.esqueleto { display: flex; flex-direction: column; gap: 0.8rem; }
+
+.esqueleto__linha {
+  height: 16px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #e6ebf1 25%, #f2f5f9 50%, #e6ebf1 75%);
+  background-size: 200% 100%;
+  animation: brilho 1.1s linear infinite;
+}
+
+.esqueleto__linha--titulo { height: 26px; width: 60%; margin-bottom: 0.2rem; }
+.esqueleto__linha--curta { width: 80%; }
+.esqueleto__linha--botao { height: 54px; border-radius: var(--raio); margin-top: 0.4rem; }
+
+@keyframes brilho {
+  to { background-position: -200% 0; }
+}
+
+/* ------------------------------- cartões de cuidado (padrão NHS) ------- */
+
+/* Faixa de cabeçalho colorida + seta + corpo, como os care cards do
+   NHS design system — mas pintados com a NOSSA paleta: azul
+   institucional para "cuidar-se em casa", vermelho de triagem para
+   "procure ajuda se". As cinco cores de Manchester ficam intocadas. */
+.cartao-cuidado { padding: 0; overflow: visible; }
+
+.cartao-cuidado__cabecalho {
+  position: relative;
+  padding: 0.7rem 1.5rem;
+  border-radius: calc(var(--raio-cartao) - 1px) calc(var(--raio-cartao) - 1px) 0 0;
+  color: #fff;
+}
+
+.cartao-cuidado__cabecalho h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.cartao-cuidado__cabecalho::after {
+  content: "";
+  position: absolute;
+  left: 1.5rem;
+  bottom: -9px;
+  border: 9px solid transparent;
+  border-bottom: none;
+}
+
+.cartao-cuidado__cabecalho--info { background: var(--primaria); }
+.cartao-cuidado__cabecalho--info::after { border-top-color: var(--primaria); }
+.cartao-cuidado__cabecalho--alerta { background: var(--vermelho); }
+.cartao-cuidado__cabecalho--alerta::after { border-top-color: var(--vermelho); }
+
+.cartao-cuidado__corpo { padding: 1.2rem 1.5rem 1.35rem; }
+.cartao-cuidado__corpo > p:first-child { margin-top: 0.35rem; }
+
+/* Listas fazer (visto) / evitar (cruz) / alerta, à NHS do-dont-list. */
+.lista-fazer,
+.lista-evitar,
+.lista-alerta {
+  list-style: none;
+  margin: 0.85rem 0 0;
+  padding: 0;
+}
+
+.lista-fazer li,
+.lista-evitar li,
+.lista-alerta li {
+  position: relative;
+  padding-left: 1.9rem;
+  margin: 0.45rem 0;
+}
+
+.lista-fazer li::before {
+  content: "\2713"; /* ✓ */
+  position: absolute;
+  left: 0.15rem;
+  top: 0;
+  font-weight: 700;
+  color: var(--verde);
+}
+
+.lista-evitar li::before {
+  content: "\2715"; /* ✕ */
+  position: absolute;
+  left: 0.15rem;
+  top: 0;
+  font-weight: 700;
+  color: var(--vermelho);
+}
+
+.lista-alerta li::before {
+  content: "!";
+  position: absolute;
+  left: 0.45rem;
+  top: 0;
+  font-weight: 700;
+  color: var(--vermelho);
+}
+
+/* -------------------------------------------------- pesquisa de queixa -- */
+
+.pesquisa { margin-top: 1.1rem; }
+.pesquisa .etiqueta { display: block; color: var(--primaria-escura); }
+.campo--pesquisa { margin-top: 0.45rem; }
+
+.sugestoes {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.sugestoes:empty { margin-top: 0; }
+
+.queixa--sugerida {
+  border-color: var(--primaria);
+  background: var(--primaria-clara);
+}
+
+.etiqueta-sugestao {
+  display: inline-block;
+  margin-left: 0.45rem;
+  padding: 0.1rem 0.55rem;
+  border-radius: 999px;
+  background: var(--primaria-escura);
+  color: #fff;
+  font-size: 0.66rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  vertical-align: middle;
+}
+
+.sugestoes__nota {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--tinta-suave);
+}
+
+.unidade__espera {
+  margin: 0.5rem 0 0;
+  font-weight: 600;
+  color: var(--primaria-escura);
+  font-size: 0.95rem;
+}
+
+.espera-estado { margin-top: 0.35rem; }
+
+/* ------------------------------------------------- QR de navegação ----- */
+
+.qr-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  break-inside: avoid;
+}
+
+.qr-nav__codigo svg {
+  display: block;
+  width: 104px;
+  height: 104px;
+  background: #fff;
+}
+
+.qr-nav p { margin: 0.15rem 0 0; font-size: 0.88rem; }
+
+/* -------------------------------------- texto só para leitores de ecrã -- */
+
+.visualmente-oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --------------------------------------------------- movimento reduzido -- */
+
+@media (prefers-reduced-motion: reduce) {
+  .ecra { animation: none; }
+  .esqueleto__linha { animation: none; background: #e6ebf1; }
+  .progresso__preenchimento { transition: none; }
+  .botao:active { transform: none; }
+}
+
+/* Impressão: guardar/entregar o resultado em papel ou PDF. Esconde-se
+   o que é interativo; fica a guia, a unidade e o aviso. */
+@media print {
+  body { background: #fff; color: #000; }
+  .topo, .rodape { background: #fff; color: #000; border-color: #000; }
+  .topo__marca, .rodape strong, .rodape a { color: #000; }
+  .topo__sub, .rodape__nota { color: #444; }
+  .versao { color: #000; border-color: #000; }
+  .cartao { border: 1px solid #bbb; break-inside: avoid; }
+  .pulseira { border: 1px solid #bbb; border-left: 10px solid var(--cor-triagem); }
+  .no-print,
+  .mapa,
+  .botoes,
+  .botao,
+  .botao--fantasma,
+  .ligacao--botao,
+  .faixa-demo,
+  .respostas { display: none !important; }
+  a { text-decoration: none; color: inherit; }
+}

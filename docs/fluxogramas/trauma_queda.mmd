@@ -1,0 +1,59 @@
+flowchart TD
+  inicio(["Início: Queda ou pancada"])
+  tq_q1["1. A queda ou pancada aconteceu nas<br/>últimas 48 horas?"]
+  tq_q2["2. Foi uma queda de altura<br/>considerável, por exemplo mais de<br/>1 metro ou de umas escadas, ou um<br/>acidente de viação?"]
+  tq_q3["3. Tem dor forte no pescoço ou nas<br/>costas, ou formigueiro ou fraqueza<br/>nos braços ou pernas?"]
+  tq_q4["4. Bateu com a cabeça?"]
+  tq_q5["5. Perdeu os sentidos, vomitou, ou<br/>está confuso ou sonolento desde<br/>então?"]
+  tq_q6["6. Toma medicamentos anticoagulantes,<br/>os que tornam o sangue mais fino?"]
+  tq_q7["7. Há deformidade evidente do membro<br/>ou osso exposto?"]
+  tq_q8["8. Não consegue apoiar o pé no chão<br/>ou mexer normalmente o membro<br/>atingido?"]
+  tq_q9["9. Tem uma ferida aberta que possa<br/>precisar de pontos ou que continua<br/>a sangrar?"]
+  tq_q10["10. O local está muito inchado ou com<br/>uma nódoa negra grande a crescer?"]
+  tq_q11["11. A dor é suportável e melhora com<br/>repouso e gelo?"]
+  tq_q12["12. Já passaram mais de 48 horas e<br/>continua igual ou pior?"]
+  tq_q13["13. Consegue usar normalmente a zona<br/>atingida?"]
+  inicio --> tq_q1
+  tq_q1 -->|Sim| tq_q2
+  tq_q1 -->|Não| tq_q12
+  tq_q2 -->|Sim| tq_q3
+  tq_q2 -->|Não| tq_q4
+  tq_q3_sim(["VERMELHO<br/>Possível lesão da coluna."]):::vermelho
+  tq_q3 -->|Sim| tq_q3_sim
+  tq_q3 -->|Não| tq_q5
+  tq_q4 -->|Sim| tq_q5
+  tq_q4 -->|Não| tq_q7
+  tq_q5_sim(["LARANJA<br/>Traumatismo craniano com sinais de<br/>alarme."]):::laranja
+  tq_q5 -->|Sim| tq_q5_sim
+  tq_q5 -->|Não| tq_q6
+  tq_q6_sim(["AMARELO<br/>Pancada na cabeça com<br/>anticoagulantes aumenta o risco de<br/>hemorragia."]):::amarelo
+  tq_q6 -->|Sim| tq_q6_sim
+  tq_q6 -->|Não| tq_q7
+  tq_q7_sim(["LARANJA<br/>Possível fratura grave."]):::laranja
+  tq_q7 -->|Sim| tq_q7_sim
+  tq_q7 -->|Não| tq_q8
+  tq_q8_sim(["AMARELO<br/>Possível fratura ou lesão que deve<br/>ser observada hoje."]):::amarelo
+  tq_q8 -->|Sim| tq_q8_sim
+  tq_q8 -->|Não| tq_q9
+  tq_q9_sim(["AMARELO<br/>Feridas que precisam de sutura<br/>devem ser tratadas nas primeiras<br/>horas."]):::amarelo
+  tq_q9 -->|Sim| tq_q9_sim
+  tq_q9 -->|Não| tq_q10
+  tq_q10_sim(["AMARELO<br/>Inchaço importante deve ser<br/>observado hoje."]):::amarelo
+  tq_q10 -->|Sim| tq_q10_sim
+  tq_q10 -->|Não| tq_q11
+  tq_q11_sim(["AZUL<br/>Traumatismo ligeiro sem sinais de<br/>alarme."]):::azul
+  tq_q11 -->|Sim| tq_q11_sim
+  tq_q11_nao(["VERDE<br/>Dor persistente após traumatismo<br/>ligeiro, a avaliar sem urgência."]):::verde
+  tq_q11 -->|Não| tq_q11_nao
+  tq_q12_sim(["VERDE<br/>Queixas que não melhoram em 48<br/>horas devem ser avaliadas."]):::verde
+  tq_q12 -->|Sim| tq_q12_sim
+  tq_q12 -->|Não| tq_q13
+  tq_q13_sim(["AZUL<br/>Traumatismo antigo em recuperação."]):::azul
+  tq_q13 -->|Sim| tq_q13_sim
+  tq_q13_nao(["VERDE<br/>Limitação que persiste deve ser<br/>avaliada sem urgência."]):::verde
+  tq_q13 -->|Não| tq_q13_nao
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

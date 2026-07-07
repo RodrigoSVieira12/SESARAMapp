@@ -1,0 +1,16 @@
+{
+  "descricao": "Correspondência entre os nomes mostrados nas páginas de tempo de espera do SESARAM (sistema SEISRAM) e os ids em app/data/unidades.json. A comparação ignora acentos e maiúsculas, por isso 'CAMARA DE LOBOS' e 'Câmara de Lobos' batem na mesma entrada. Se o site acrescentar unidades novas, elas aparecem no campo 'por_mapear' de GET /api/espera e no scripts/testar_espera.py — acrescenta-as aqui. Verificado por scripts/validar_dados.py.",
+  "nomes": {
+    "BOM JESUS": "cs_bom_jesus",
+    "CÂMARA DE LOBOS": "cs_camara_lobos",
+    "CALHETA": "cs_calheta",
+    "MACHICO": "cs_machico",
+    "PORTO MONIZ": "cs_porto_moniz",
+    "PORTO SANTO": "cs_porto_santo",
+    "RIBEIRA BRAVA": "cs_ribeira_brava",
+    "SÃO VICENTE": "cs_sao_vicente",
+    "SANTANA": "cs_santana",
+    "HOSPITAL DR. NÉLIO MENDONÇA": "hnm",
+    "SERVIÇO DE URGÊNCIA HOSPITALAR": "hnm"
+  }
+}

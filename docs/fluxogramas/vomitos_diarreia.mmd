@@ -1,0 +1,59 @@
+flowchart TD
+  inicio(["Início: Vómitos ou diarreia"])
+  vd_q1["1. Os sintomas começaram há menos de<br/>48 horas?"]
+  vd_q2["2. Trata-se de um bebé com menos de 1<br/>ano?"]
+  vd_q3["3. O bebé recusa líquidos, tem a<br/>moleirinha funda ou está com as<br/>fraldas secas há mais de 6 horas?"]
+  vd_q4["4. É uma pessoa idosa frágil,<br/>grávida, ou com doença crónica<br/>importante, por exemplo diabetes<br/>ou doença do rim ou do coração?"]
+  vd_q5["5. Está a conseguir beber e a reter<br/>os líquidos?"]
+  vd_q6["6. Há sangue no vómito, ou as fezes<br/>estão pretas ou com sangue?"]
+  vd_q7["7. A pessoa está muito prostrada,<br/>confusa, ou quase a desmaiar<br/>quando se levanta?"]
+  vd_q8["8. Urina muito pouco, tem a boca<br/>muito seca ou tonturas ao<br/>levantar-se?"]
+  vd_q9["9. Tem dor abdominal forte ou febre<br/>alta associadas?"]
+  vd_q10["10. Os sintomas estão a agravar ou já<br/>causaram grande quebra de forças?"]
+  vd_q11["11. Começou depois de uma refeição<br/>suspeita, e mais alguém que comeu<br/>o mesmo está igual?"]
+  vd_q12["12. Consegue beber pequenos goles com<br/>frequência sem vomitar tudo?"]
+  vd_q13["13. Os episódios são poucos e já estão<br/>a espaçar-se?"]
+  inicio --> vd_q1
+  vd_q1 -->|Sim| vd_q2
+  vd_q1 -->|Não| vd_q10
+  vd_q2 -->|Sim| vd_q3
+  vd_q2 -->|Não| vd_q4
+  vd_q3_sim(["LARANJA<br/>Sinais de desidratação num bebé<br/>exigem observação urgente."]):::laranja
+  vd_q3 -->|Sim| vd_q3_sim
+  vd_q3_nao(["AMARELO<br/>Bebés desidratam depressa e devem<br/>ser avaliados hoje."]):::amarelo
+  vd_q3 -->|Não| vd_q3_nao
+  vd_q4 -->|Sim| vd_q5
+  vd_q4 -->|Não| vd_q6
+  vd_q5_sim(["AMARELO<br/>Pessoas mais vulneráveis à<br/>desidratação devem ser avaliadas<br/>hoje."]):::amarelo
+  vd_q5 -->|Sim| vd_q5_sim
+  vd_q5_nao(["LARANJA<br/>Pessoa vulnerável sem conseguir<br/>reter líquidos deve ser vista já."]):::laranja
+  vd_q5 -->|Não| vd_q5_nao
+  vd_q6_sim(["LARANJA<br/>Possível hemorragia digestiva."]):::laranja
+  vd_q6 -->|Sim| vd_q6_sim
+  vd_q6 -->|Não| vd_q7
+  vd_q7_sim(["LARANJA<br/>Sinais de desidratação grave ou de<br/>mal-estar importante."]):::laranja
+  vd_q7 -->|Sim| vd_q7_sim
+  vd_q7 -->|Não| vd_q8
+  vd_q8_sim(["AMARELO<br/>Sinais de desidratação a avaliar<br/>hoje."]):::amarelo
+  vd_q8 -->|Sim| vd_q8_sim
+  vd_q8 -->|Não| vd_q9
+  vd_q9_sim(["AMARELO<br/>Sintomas associados que justificam<br/>avaliação hoje."]):::amarelo
+  vd_q9 -->|Sim| vd_q9_sim
+  vd_q9 -->|Não| vd_q11
+  vd_q10_sim(["AMARELO<br/>Sintomas prolongados em<br/>agravamento devem ser observados."]):::amarelo
+  vd_q10 -->|Sim| vd_q10_sim
+  vd_q10 -->|Não| vd_q11
+  vd_q11_sim(["VERDE<br/>Quadro sugestivo de intoxicação<br/>alimentar sem sinais de alarme."]):::verde
+  vd_q11 -->|Sim| vd_q11_sim
+  vd_q11 -->|Não| vd_q12
+  vd_q12 -->|Sim| vd_q13
+  vd_q12_nao(["AMARELO<br/>Sem conseguir reter líquidos, o<br/>risco de desidratação aumenta."]):::amarelo
+  vd_q12 -->|Não| vd_q12_nao
+  vd_q13_sim(["AZUL<br/>Quadro ligeiro e em melhoria."]):::azul
+  vd_q13 -->|Sim| vd_q13_sim
+  vd_q13_nao(["VERDE<br/>Quadro recente sem sinais de<br/>alarme."]):::verde
+  vd_q13 -->|Não| vd_q13_nao
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
