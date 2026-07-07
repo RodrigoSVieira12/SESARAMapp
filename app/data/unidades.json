@@ -351,8 +351,8 @@
     "concelho": "Câmara de Lobos",
     "morada": "Rua Bispo Manuel Joaquim Andrade, n.º 41, Câmara de Lobos",
     "telefone": "291 910 000",
-    "lat": 32.655,
-    "lng": -17.007,
+    "lat": 32.662448,
+    "lng": -17.011321,
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
@@ -378,8 +378,8 @@
         }
       }
     },
-    "notas": "Coordenadas corrigidas de forma aproximada (as originais caiam no mar). Reconfirmar no Google Maps.",
-    "dados_confirmados": false,
+    "notas": null,
+    "dados_confirmados": true,
     "ilha": "madeira"
   },
   {
@@ -1355,8 +1355,8 @@
     "concelho": "Santana",
     "morada": "Estrada Regional 101 de São Jorge, n.º 51",
     "telefone": "291 570 190",
-    "lat": 32.8232,
-    "lng": -16.9046,
+    "lat": 32.814684,
+    "lng": -16.899377,
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
@@ -1382,8 +1382,8 @@
         }
       }
     },
-    "notas": "Coordenadas corrigidas de forma aproximada (eram iguais ao Arco de Sao Jorge). Reconfirmar no Google Maps.",
-    "dados_confirmados": false,
+    "notas": null,
+    "dados_confirmados": true,
     "ilha": "madeira"
   },
   {
@@ -1511,8 +1511,8 @@
     "concelho": "Machico",
     "morada": "Largo do Santo, n.º 2",
     "telefone": "291 550 050",
-    "lat": 32.7266,
-    "lng": -16.8203,
+    "lat": 32.724378,
+    "lng": -16.816934,
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
@@ -1538,8 +1538,8 @@
         }
       }
     },
-    "notas": "Coordenadas corrigidas de forma aproximada (eram iguais ao Porto da Cruz). Reconfirmar no Google Maps.",
-    "dados_confirmados": false,
+    "notas": null,
+    "dados_confirmados": true,
     "ilha": "madeira"
   },
   {

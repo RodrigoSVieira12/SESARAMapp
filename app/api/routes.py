@@ -14,12 +14,19 @@ Resumo:
 
 from __future__ import annotations
 
-from fastapi import APIRouter, HTTPException, Query
+import base64
 
-from ..core import espera, feriados, geo, horarios, routing, sugestoes, unidades
+from fastapi import APIRouter, HTTPException, Query, Response
+
+from ..core import espera, feriados, geo, horarios, pdf_clinico, routing, sugestoes, unidades
 from ..core.cores import CONTACTOS, info_cor
 from ..core.triage_engine import ErroTriagem, TriageEngine
-from ..models.schemas import EncaminhamentoRequest, TriagemRequest
+from ..models.schemas import (
+    EncaminhamentoRequest,
+    IntegracaoTriagemRequest,
+    ResumoPdfRequest,
+    TriagemRequest,
+)
 from ..versao import VERSAO
 
 router = APIRouter()
@@ -156,6 +163,105 @@ def tempos_de_espera(
     estão em app/data/espera_nomes.json.
     """
     return espera.obter(force=atualizar)
+
+
+# --------------------------------------------------------------------- #
+# Integração (para consumo por sistemas externos)                         #
+# --------------------------------------------------------------------- #
+
+def _resultado_para(pedido) -> dict | None:
+    """Corre a triagem e devolve o resultado final, OU None se ainda faltam
+    perguntas (nesse caso o chamador recebe a próxima pergunta)."""
+    if pedido.red_flags:
+        resultado = engine.resultado_red_flags(pedido.red_flags)
+        return resultado | {"cor_info": info_cor(resultado["cor"])}
+    if not pedido.queixa:
+        raise HTTPException(
+            status_code=422,
+            detail="Indique uma queixa ou pelo menos um sinal de emergência.",
+        )
+    saida = engine.avaliar(pedido.queixa, pedido.respostas)
+    if saida["tipo"] != "resultado":
+        return None
+    saida["resultado"]["cor_info"] = info_cor(saida["resultado"]["cor"])
+    return saida["resultado"]
+
+
+@router.post("/integracao/triagem", tags=["integracao"])
+def integracao_triagem(pedido: IntegracaoTriagemRequest) -> dict:
+    """Triagem + encaminhamento numa só chamada (stateless).
+
+    Devolve `tipo: "pergunta"` (com a próxima pergunta) enquanto faltarem
+    respostas, ou `tipo: "resultado"` com a cor e, se `lat`/`lng` forem
+    fornecidos, também o bloco de encaminhamento. Desenhado para ser fácil de
+    consumir por um sistema externo com um único POST. Ver INTEGRACAO.md.
+    """
+    try:
+        # Enquanto faltarem perguntas, comporta-se como POST /api/triagem.
+        if not pedido.red_flags:
+            if not pedido.queixa:
+                raise HTTPException(
+                    status_code=422,
+                    detail="Indique uma queixa ou pelo menos um sinal de emergência.",
+                )
+            saida = engine.avaliar(pedido.queixa, pedido.respostas)
+            if saida["tipo"] == "pergunta":
+                return {"tipo": "pergunta", "queixa": pedido.queixa, **saida}
+
+        resultado = _resultado_para(pedido)
+        resposta: dict = {
+            "tipo": "resultado",
+            "queixa": pedido.queixa,
+            "resultado": resultado,
+        }
+        if pedido.lat is not None and pedido.lng is not None:
+            resposta["encaminhamento"] = routing.decidir_encaminhamento(
+                resultado["cor"], pedido.lat, pedido.lng, quando=pedido.quando
+            )
+        return resposta
+    except ErroTriagem as erro:
+        raise HTTPException(status_code=422, detail=str(erro)) from erro
+
+
+def _pdf_bytes(pedido: ResumoPdfRequest) -> bytes:
+    dados = pedido.model_dump()
+    if not dados.get("gerado_em"):
+        dados["gerado_em"] = routing.agora_na_madeira().isoformat(timespec="minutes")
+    if not dados.get("contactos"):
+        dados["contactos"] = CONTACTOS
+    return pdf_clinico.gerar_pdf(dados)
+
+
+@router.post("/exportar_pdf", tags=["integracao"])
+def exportar_pdf(pedido: ResumoPdfRequest) -> Response:
+    """Gera o resumo de orientação em PDF (application/pdf) para descarregar.
+
+    O corpo é o que o utente viu (cor, queixa, respostas, unidade, etc.); o
+    servidor desenha o PDF. É o mesmo documento que serve de anexo em
+    qualquer integração futura.
+    """
+    pdf = _pdf_bytes(pedido)
+    return Response(
+        content=pdf,
+        media_type="application/pdf",
+        headers={"Content-Disposition": 'attachment; filename="orientacao.pdf"'},
+    )
+
+
+@router.post("/exportar_pdf_base64", tags=["integracao"])
+def exportar_pdf_base64(pedido: ResumoPdfRequest) -> dict:
+    """Igual a /exportar_pdf, mas devolve o PDF em base64 dentro de JSON.
+
+    Útil para um sistema que prefira receber o documento embutido numa
+    resposta JSON (por exemplo, para anexar a um registo) em vez de um
+    download binário.
+    """
+    pdf = _pdf_bytes(pedido)
+    return {
+        "nome_ficheiro": "orientacao.pdf",
+        "tipo_mime": "application/pdf",
+        "pdf_base64": base64.b64encode(pdf).decode("ascii"),
+    }
 
 
 @router.get("/feriados", tags=["infra"])

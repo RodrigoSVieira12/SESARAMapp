@@ -300,6 +300,26 @@ computador, e sai também na impressão. O código é gerado localmente
 (biblioteca `qrcode-generator`, MIT), sem enviar nada para lado nenhum;
 se a biblioteca não carregar, o bloco simplesmente não aparece.
 
+## Novidades da v0.9: exportação em PDF e endpoint de integração
+
+**Botão "Descarregar PDF".** No ecrã de resultado, o utente pode descarregar
+um resumo de orientação em PDF (cor de prioridade, queixa, respostas dadas,
+unidade sugerida com morada/telefone/horário, alternativas, autocuidado e
+contactos). O documento é gerado no servidor com `reportlab` (Python puro,
+instala-se com `pip` em qualquer sistema, incluindo Windows). Traz um espaço
+de identificação de **preenchimento manual** e o mesmo aviso da app: é
+orientação, não substitui avaliação clínica. O botão antigo de imprimir
+continua lá.
+
+**Preparação para integração.** Três endpoints novos, pensados para consumo
+externo (ver `docs/INTEGRACAO.md`):
+`POST /api/integracao/triagem` (triagem + encaminhamento numa só chamada),
+`POST /api/exportar_pdf` (PDF para download) e
+`POST /api/exportar_pdf_base64` (o mesmo PDF em base64, para anexar).
+`docs/INTEGRACAO.md` descreve, de forma neutra, o que já está pronto, o
+potencial da integração e as questões a apurar com a equipa de informática
+do SESARAM sobre a plataforma interna de destino.
+
 ## Novidades da v0.8: tempos de espera em tempo real
 
 **De onde vêm.** O SESARAM publica, no sistema SEISRAM, duas páginas

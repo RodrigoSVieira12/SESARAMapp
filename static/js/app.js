@@ -30,6 +30,8 @@ const estado = {
   respostas: {},          // {id_pergunta: "sim"|"nao"}: o que a API recebe
   historico: [],          // [{id, texto, resposta}]: para "voltar" e resumo
   resultado: null,
+  encaminhamento: null,   // última resposta de /api/encaminhamento (para o PDF)
+  queixasPorId: {},       // {id: queixa}: para obter o nome legível no PDF
   unidades: null,         // cache para o fallback manual de localização
   mapa: null,             // instância Leaflet ativa (destruir ao re-renderizar)
   horaSimulada: new URLSearchParams(location.search).get("hora"),
@@ -198,8 +200,153 @@ function recomecar() {
 
 /* ------------------------------------------------------- ecrã: início -- */
 
+/* ---------------------------------------- histórico (só no dispositivo) --
+   As avaliações passadas são guardadas apenas no armazenamento local do
+   navegador (localStorage): nunca saem do dispositivo do utente, nunca vão
+   para o servidor, e o utente pode apagá-las. Isto mantém a promessa de
+   "não guardamos nada" do lado do servidor. Nota de desenho: a gravação é
+   automática; se se quiser consentimento explícito, é aqui que se adiciona.
+*/
+const HIST_CHAVE = "ondeir_historico_v1";
+const HIST_MAX = 20; // limite de entradas guardadas
+
+function historicoLer() {
+  try {
+    const bruto = localStorage.getItem(HIST_CHAVE);
+    const lista = bruto ? JSON.parse(bruto) : [];
+    return Array.isArray(lista) ? lista : [];
+  } catch (_) {
+    return []; // localStorage indisponível (modo privado, etc.): sem histórico
+  }
+}
+
+function historicoGuardar(entrada) {
+  try {
+    const lista = historicoLer();
+    lista.unshift(entrada); // mais recente primeiro
+    localStorage.setItem(HIST_CHAVE, JSON.stringify(lista.slice(0, HIST_MAX)));
+  } catch (_) {
+    /* sem armazenamento ou cheio: falhar em silêncio, não é crítico */
+  }
+}
+
+function historicoApagarTudo() {
+  try {
+    localStorage.removeItem(HIST_CHAVE);
+  } catch (_) {}
+}
+
+function historicoApagarUm(id) {
+  try {
+    localStorage.setItem(
+      HIST_CHAVE,
+      JSON.stringify(historicoLer().filter((e) => e.id !== id))
+    );
+  } catch (_) {}
+}
+
+function dataLegivel(iso) {
+  try {
+    return new Date(iso).toLocaleString(
+      estado.lingua === "en" ? "en-GB" : "pt-PT",
+      { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" }
+    );
+  } catch (_) {
+    return iso || "";
+  }
+}
+
+// Guarda o resultado e mostra-o. Usada nos pontos em que a triagem CHEGA a
+// um resultado (não no re-render por troca de língua, para não duplicar).
+function concluirTriagem(resultado) {
+  const q = estado.queixasPorId[estado.queixa];
+  const info = resultado.cor_info || {};
+  historicoGuardar({
+    id: "av_" + Date.now(),
+    data: new Date().toISOString(),
+    queixa: estado.queixa || null,
+    queixaNome: q ? campo(q, "nome") : null,
+    cor: resultado.cor,
+    classificacao: campo(info, "classificacao") || null,
+    corHex: info.hex || null,
+    respostas: (estado.historico || []).map((h) => ({
+      texto: h.texto,
+      resposta: h.resposta,
+    })),
+  });
+  mostrarResultado(resultado);
+}
+
+function htmlEntradaHistorico(e) {
+  const respostas = (e.respostas || []).length
+    ? `<details class="respostas">
+         <summary>${esc(t("res_resumo"))}</summary>
+         <ul>${e.respostas
+           .map(
+             (r) =>
+               `<li>${esc(r.texto)}: <strong>${esc(
+                 r.resposta === "sim" ? t("sim") : t("nao")
+               )}</strong></li>`
+           )
+           .join("")}</ul>
+       </details>`
+    : "";
+  const estilo = e.corHex ? `style="--cor-hist:${esc(e.corHex)}"` : "";
+  return `
+    <div class="historico-item">
+      <div class="historico-item__topo">
+        <span class="historico-cor" ${estilo}>${esc(e.classificacao || e.cor || "")}</span>
+        <button class="historico-apagar" data-apagar="${esc(e.id)}"
+                aria-label="${esc(t("hist_apagar_um"))}" title="${esc(t("hist_apagar_um"))}">&times;</button>
+      </div>
+      <p class="historico-queixa">${esc(e.queixaNome || t("hist_red_flag"))}</p>
+      <p class="texto-suave historico-data">${esc(dataLegivel(e.data))}</p>
+      ${respostas}
+    </div>`;
+}
+
+function ecraHistorico() {
+  estado.renderAtual = ecraHistorico;
+  const entradas = historicoLer();
+  const conteudo = entradas.length
+    ? `<div class="historico-lista">${entradas.map(htmlEntradaHistorico).join("")}</div>`
+    : `<p class="texto-suave">${esc(t("hist_vazio"))}</p>`;
+  render(`
+    <div class="cartao">
+      <h2 class="titulo-ecra" tabindex="-1" data-foco>${esc(t("hist_titulo"))}</h2>
+      <p class="selo-privacidade">${esc(t("hist_privacidade"))}</p>
+      ${conteudo}
+      <div class="botoes no-print">
+        ${
+          entradas.length
+            ? `<button class="botao--fantasma" id="btn-hist-apagar">${esc(t("hist_apagar_tudo"))}</button>`
+            : ""
+        }
+        <button class="botao" id="btn-hist-voltar">${esc(t("hist_voltar"))}</button>
+      </div>
+    </div>
+  `);
+  document.getElementById("btn-hist-voltar").addEventListener("click", ecraInicio);
+  const btnApagar = document.getElementById("btn-hist-apagar");
+  if (btnApagar) {
+    btnApagar.addEventListener("click", () => {
+      if (confirm(t("hist_confirmar_apagar"))) {
+        historicoApagarTudo();
+        ecraHistorico();
+      }
+    });
+  }
+  $app.querySelectorAll("[data-apagar]").forEach((botao) =>
+    botao.addEventListener("click", () => {
+      historicoApagarUm(botao.dataset.apagar);
+      ecraHistorico();
+    })
+  );
+}
+
 function ecraInicio() {
   estado.renderAtual = ecraInicio;
+  const nHist = historicoLer().length;
   render(`
     <div class="cartao">
       <h2 class="titulo-ecra" tabindex="-1" data-foco>${esc(t("inicio_titulo"))}</h2>
@@ -214,11 +361,18 @@ function ecraInicio() {
       </ol>
       <div class="botoes">
         <button class="botao" id="btn-comecar">${esc(t("comecar"))}</button>
+        ${
+          nHist
+            ? `<button class="botao--fantasma" id="btn-historico">${esc(t("hist_ver"))} (${nHist})</button>`
+            : ""
+        }
       </div>
       <p class="selo-privacidade">${esc(t("selo_privacidade"))}</p>
     </div>
   `);
   document.getElementById("btn-comecar").addEventListener("click", ecraRedFlags);
+  const btnHist = document.getElementById("btn-historico");
+  if (btnHist) btnHist.addEventListener("click", ecraHistorico);
 }
 
 /* ------------------------------------- ecrã: sinais de emergência ------ */
@@ -261,7 +415,7 @@ async function ecraRedFlags() {
     botao.addEventListener("click", async () => {
       try {
         const saida = await api("/api/triagem", { red_flags: [botao.dataset.id] });
-        mostrarResultado(saida.resultado);
+        concluirTriagem(saida.resultado);
       } catch (erro) {
         mostrarErro(erro.message, ecraRedFlags);
       }
@@ -298,6 +452,7 @@ async function ecraQueixas() {
   } catch (erro) {
     return mostrarErro(erro.message, ecraQueixas);
   }
+  queixas.forEach((q) => (estado.queixasPorId[q.id] = q));
 
   render(`
     <div class="cartao">
@@ -344,6 +499,7 @@ async function ecraQueixas() {
       try {
         const dados = await api(`/api/queixas/sugerir?q=${encodeURIComponent(texto)}`);
         if (pedido !== pedidoAtual) return; // resposta atrasada: ignorar
+        dados.sugestoes.forEach((q) => (estado.queixasPorId[q.id] = q));
         $sugestoes.innerHTML = dados.sugestoes.length
           ? dados.sugestoes.map((q) => htmlQueixa(q, true)).join("")
           : `<p class="sugestoes__nota">${esc(t("qx_sem_sugestoes"))}</p>`;
@@ -363,7 +519,7 @@ async function avancarTriagem() {
       respostas: estado.respostas,
     });
     if (saida.tipo === "pergunta") return ecraPergunta(saida);
-    mostrarResultado(saida.resultado);
+    concluirTriagem(saida.resultado);
   } catch (erro) {
     mostrarErro(erro.message, avancarTriagem);
   }
@@ -688,7 +844,84 @@ function htmlAutocuidado(ac) {
     </div>`;
 }
 
+/* -------------------------------------------------- PDF de orientação -- */
+
+// Traduz o bloco de autocuidado para a língua ativa (campo/campoLista já
+// escolhem a variante _en quando existe), para o PDF sair coerente.
+function autocuidadoLocalizado(ac) {
+  if (!ac) return null;
+  return {
+    titulo: campo(ac, "titulo"),
+    intro: campo(ac, "intro"),
+    fazer: campoLista(ac, "fazer"),
+    evitar: campoLista(ac, "evitar"),
+    alerta_titulo: campo(ac, "alerta_titulo"),
+    alerta: campoLista(ac, "alerta"),
+  };
+}
+
+// Reúne o que o utente viu (resultado + encaminhamento + respostas) no
+// formato que POST /api/exportar_pdf espera. Nada de novo é calculado.
+function construirPayloadPdf(dados) {
+  const res = estado.resultado || {};
+  const info = res.cor_info || {};
+  const q = estado.queixasPorId[estado.queixa];
+  return {
+    lingua: estado.lingua,
+    gerado_em: (dados && dados.gerado_em) || null,
+    cor: res.cor || (dados && dados.cor) || null,
+    classificacao: campo(info, "classificacao") || null,
+    cor_hex: info.hex || null,
+    tempo_alvo: campo(info, "tempo_alvo") || null,
+    descricao_cor: campo(info, "descricao") || null,
+    queixa: q ? campo(q, "nome") : estado.queixa || null,
+    motivo: campo(res, "motivo") || null,
+    respostas: (estado.historico || []).map((h) => ({
+      texto: h.texto,
+      resposta: h.resposta,
+    })),
+    mensagem: (dados && dados.mensagem) || null,
+    unidade: (dados && dados.unidade) || null,
+    alternativas: (dados && dados.alternativas) || [],
+    autocuidado: autocuidadoLocalizado(dados && dados.autocuidado),
+    contactos: (dados && dados.contactos) || null,
+  };
+}
+
+async function descarregarPdf(dados, botao) {
+  const original = botao.textContent;
+  botao.disabled = true;
+  botao.textContent = t("pdf_a_gerar");
+  try {
+    const resposta = await fetch("/api/exportar_pdf", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(construirPayloadPdf(dados)),
+    });
+    if (!resposta.ok) throw new Error("Erro " + resposta.status);
+    const blob = await resposta.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "orientacao.pdf";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+    botao.textContent = original;
+    botao.disabled = false;
+  } catch (_) {
+    // Falha de rede/servidor: avisa no próprio botão e restaura, sem sair do ecrã.
+    botao.textContent = t("pdf_erro");
+    setTimeout(() => {
+      botao.textContent = original;
+      botao.disabled = false;
+    }, 2500);
+  }
+}
+
 function ecraEncaminhamento(dados, utente) {
+  estado.encaminhamento = dados;
   estado.renderAtual = () => ecraEncaminhamento(dados, utente);
 
   const alternativas = (dados.alternativas || [])
@@ -799,6 +1032,7 @@ function ecraEncaminhamento(dados, utente) {
         </a>
       </div>
       <div class="botoes no-print">
+        <button class="botao botao--secundario" id="btn-pdf">${esc(t("pdf_descarregar"))}</button>
         <button class="botao botao--secundario" id="btn-imprimir">${esc(t("imprimir"))}</button>
         <button class="botao--fantasma" id="btn-recomecar">${esc(t("nova_avaliacao"))}</button>
       </div>
@@ -807,6 +1041,9 @@ function ecraEncaminhamento(dados, utente) {
 
   document.getElementById("btn-recomecar").addEventListener("click", recomecar);
   document.getElementById("btn-imprimir").addEventListener("click", () => window.print());
+  document
+    .getElementById("btn-pdf")
+    .addEventListener("click", (e) => descarregarPdf(dados, e.currentTarget));
   document
     .getElementById("btn-alterar-local")
     .addEventListener("click", () => ecraLocalManual("loc_alterar"));

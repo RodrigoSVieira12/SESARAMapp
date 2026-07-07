@@ -54,3 +54,53 @@ class EncaminhamentoRequest(BaseModel):
             "se omitido, usa-se a hora atual na Madeira."
         ),
     )
+
+
+class IntegracaoTriagemRequest(BaseModel):
+    """Pedido combinado (triagem + encaminhamento) numa só chamada.
+
+    Pensado para consumo por sistemas externos. O chamador envia a queixa e
+    TODAS as respostas que tem; a API devolve, num só pacote:
+    - se faltarem respostas → a próxima pergunta ('tipo': 'pergunta');
+    - se a cor já foi determinada → o resultado e, quando lat/lng forem
+      dados, também o encaminhamento ('tipo': 'resultado').
+    É stateless: nada é guardado no servidor.
+    """
+
+    queixa: str | None = Field(default=None, examples=["dor_abdominal"])
+    red_flags: list[str] = Field(default_factory=list)
+    respostas: dict[str, Resposta] = Field(
+        default_factory=dict, examples=[{"ab_q1": "sim", "ab_q2": "nao"}]
+    )
+    lat: float | None = Field(default=None, ge=-90, le=90)
+    lng: float | None = Field(default=None, ge=-180, le=180)
+    quando: datetime | None = Field(default=None)
+
+
+class ResumoPdfRequest(BaseModel):
+    """Dados para gerar o PDF de orientação.
+
+    Reflete o que o utente viu no ecrã de resultado/encaminhamento. Todos os
+    campos são opcionais e o gerador desenha defensivamente o que existir —
+    assim o frontend envia simplesmente o estado atual, sem transformações.
+    O modelo aceita campos extra (não os rejeita) para o tornar tolerante a
+    evoluções do frontend.
+    """
+
+    model_config = {"extra": "allow"}
+
+    cor: str | None = None
+    classificacao: str | None = None
+    cor_hex: str | None = None
+    tempo_alvo: str | None = None
+    descricao_cor: str | None = None
+    queixa: str | None = None
+    motivo: str | None = None
+    respostas: list[dict] = Field(default_factory=list)
+    mensagem: str | None = None
+    unidade: dict | None = None
+    alternativas: list[dict] = Field(default_factory=list)
+    autocuidado: dict | None = None
+    contactos: dict | None = None
+    gerado_em: str | None = None
+    lingua: str | None = "pt"

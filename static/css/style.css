@@ -914,3 +914,53 @@ body {
   .respostas { display: none !important; }
   a { text-decoration: none; color: inherit; }
 }
+
+/* ---------------------------------------------------------------------- */
+/* Histórico de avaliações (guardado apenas no dispositivo do utente).     */
+/* ---------------------------------------------------------------------- */
+.historico-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 12px 0;
+}
+.historico-item {
+  border: 1px solid var(--linha);
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+.historico-item__topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+.historico-cor {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.historico-cor::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--cor-hist, var(--linha-forte));
+  flex: 0 0 auto;
+}
+.historico-apagar {
+  border: none;
+  background: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--linha-forte);
+  cursor: pointer;
+  padding: 0 6px;
+  border-radius: 6px;
+}
+.historico-apagar:hover { color: #c62828; }
+.historico-apagar:focus-visible { outline: 3px solid var(--primaria); }
+.historico-queixa { font-weight: 600; margin: 8px 0 2px; }
+.historico-data { font-size: 0.9rem; margin: 0 0 4px; }
