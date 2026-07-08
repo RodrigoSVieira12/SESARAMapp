@@ -206,20 +206,21 @@ def gerar_pdf(dados: dict) -> bytes:
 
     el: list = []
 
-    # ---- Cabeçalho institucional ----
+    # PDF enxuto e de uma página: só o que um utente leva consigo ou mostra.
+    # Cabeçalho compacto (instituição + data + queixa).
     el.append(Paragraph(T["cabecalho"], ParagraphStyle(
-        "cab", parent=normal, fontSize=10, textColor=colors.HexColor("#0C447C"),
+        "cab", parent=normal, fontSize=9.5, textColor=colors.HexColor("#0C447C"),
         fontName="Helvetica-Bold")))
-    el.append(Paragraph(T["cabecalho_nota"], rotulo_pequeno))
-    el.append(Spacer(1, 4))
     el.append(HRFlowable(width="100%", thickness=1, color=colors.HexColor("#0C447C")))
-    el.append(Spacer(1, 8))
+    el.append(Spacer(1, 5))
     el.append(Paragraph(T["titulo"], titulo))
-    el.append(Paragraph(
-        f"{T['gerado']} {_hora_legivel(dados.get('gerado_em'), lingua)}", suave))
+    linha_data = f"{T['gerado']} {_hora_legivel(dados.get('gerado_em'), lingua)}"
+    if dados.get("queixa"):
+        linha_data += f" &nbsp;·&nbsp; {T['queixa']}: {dados['queixa']}"
+    el.append(Paragraph(linha_data, suave))
     el.append(Spacer(1, 8))
 
-    # ---- Faixa da cor de prioridade ----
+    # Faixa da cor de prioridade (o destaque).
     cor = dados.get("cor")
     if cor:
         cor_hex = _cor_segura(dados.get("cor_hex"))
@@ -239,124 +240,52 @@ def gerar_pdf(dados: dict) -> bytes:
         faixa.setStyle(TableStyle([
             ("BACKGROUND", (0, 0), (-1, -1), cor_hex),
             ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
-            ("TOPPADDING", (0, 0), (-1, -1), 8),
-            ("BOTTOMPADDING", (0, 0), (-1, -1), 8),
+            ("TOPPADDING", (0, 0), (-1, -1), 7),
+            ("BOTTOMPADDING", (0, 0), (-1, -1), 7),
             ("LEFTPADDING", (0, 0), (-1, -1), 10),
             ("RIGHTPADDING", (0, 0), (-1, -1), 10),
         ]))
         el.append(faixa)
-        if dados.get("descricao_cor"):
-            el.append(Spacer(1, 4))
-            el.append(Paragraph(dados["descricao_cor"], normal))
 
-    # ---- Queixa ----
-    if dados.get("queixa"):
-        el.append(Paragraph(T["queixa"], h_sec))
-        el.append(Paragraph(str(dados["queixa"]), normal))
-        if dados.get("motivo"):
-            el.append(Paragraph(str(dados["motivo"]), suave))
-
-    # ---- Respostas ----
-    respostas = dados.get("respostas") or []
-    if respostas:
-        el.append(Paragraph(T["respostas"], h_sec))
-        for r in respostas:
-            if not isinstance(r, dict):
-                continue
-            resp = r.get("resposta")
-            marca = T["sim"] if resp == "sim" else T["nao"] if resp == "nao" else str(resp or "")
-            el.append(Paragraph(
-                f"• {r.get('texto', '')} <b>{marca}</b>", normal))
-
-    # ---- Recomendação ----
+    # Recomendação (o que fazer / para onde ir).
     if dados.get("mensagem"):
         el.append(Paragraph(T["recomendacao"], h_sec))
         el.append(Paragraph(str(dados["mensagem"]), normal))
 
-    # ---- Unidade sugerida ----
+    # Unidade sugerida: nome, morada, telefone, horários. Sem distância nem
+    # tempo de espera (só fazem sentido em direto, ficam desatualizados no
+    # papel).
     unidade = dados.get("unidade")
     if isinstance(unidade, dict) and unidade.get("nome"):
         el.append(Paragraph(T["unidade"], h_sec))
         el.append(Paragraph(f"<b>{unidade['nome']}</b>", normal))
-        linhas = []
         if unidade.get("morada"):
-            linhas.append(f"{T['morada']}: {unidade['morada']}")
+            el.append(Paragraph(f"{T['morada']}: {unidade['morada']}", normal))
         if unidade.get("telefone"):
-            linhas.append(f"{T['telefone']}: {unidade['telefone']}")
-        if unidade.get("distancia_km") is not None:
-            linhas.append(f"{T['distancia']}: {unidade['distancia_km']} {T['km']}")
-        if "aberta_agora" in unidade:
-            estado_txt = T["aberta"] if unidade.get("aberta_agora") else T["fechada"]
-            if not unidade.get("aberta_agora") and unidade.get("proxima_abertura_texto"):
-                estado_txt += f" ({unidade['proxima_abertura_texto']})"
-            linhas.append(f"{T['estado']}: {estado_txt}")
-        espera_txt = _texto_espera(unidade.get("tempo_espera"))
-        if espera_txt:
-            linhas.append(f"{T['espera']}: {espera_txt}")
-        for ln in linhas:
-            el.append(Paragraph(ln, normal))
+            el.append(Paragraph(f"{T['telefone']}: {unidade['telefone']}", normal))
         horarios = unidade.get("horarios") or {}
         if horarios:
-            el.append(Paragraph(T["horarios"] + ":", suave))
-            for serv, texto in horarios.items():
-                el.append(Paragraph(
-                    f"&nbsp;&nbsp;— {serv_labels.get(serv, serv)}: {texto}", normal))
+            partes = [f"{serv_labels.get(k, k)}: {v}" for k, v in horarios.items()]
+            el.append(Paragraph(f"{T['horarios']}: " + "; ".join(partes), normal))
 
-    # ---- Alternativas ----
-    alternativas = dados.get("alternativas") or []
-    alt_validas = [a for a in alternativas if isinstance(a, dict) and a.get("nome")]
-    if alt_validas:
-        el.append(Paragraph(T["alternativas"], h_sec))
-        for a in alt_validas:
-            partes = [a["nome"]]
-            if a.get("concelho"):
-                partes.append(a["concelho"])
-            if a.get("distancia_km") is not None:
-                partes.append(f"{a['distancia_km']} {T['km']}")
-            estado_txt = ""
-            if "aberta_agora" in a:
-                estado_txt = f" — {T['aberta'] if a.get('aberta_agora') else T['fechada']}"
-            el.append(Paragraph(f"• {', '.join(partes)}{estado_txt}", normal))
-
-    # ---- Autocuidado ----
+    # Sinais de alarme: quando procurar ajuda com urgência (o essencial de
+    # segurança). Limitado a quatro para não crescer.
     ac = dados.get("autocuidado")
-    if isinstance(ac, dict):
-        el.append(Paragraph(ac.get("titulo") or T["autocuidado"], h_sec))
-        if ac.get("intro"):
-            el.append(Paragraph(str(ac["intro"]), normal))
-        if ac.get("fazer"):
-            el.append(Paragraph(T["fazer"] + ":", suave))
-            for item in ac["fazer"]:
-                el.append(Paragraph(
-                    f'&nbsp;&nbsp;<font color="#2E7D32">•</font> {item}', normal))
-        if ac.get("evitar"):
-            el.append(Paragraph(T["evitar"] + ":", suave))
-            for item in ac["evitar"]:
-                el.append(Paragraph(
-                    f'&nbsp;&nbsp;<font color="#C62828">•</font> {item}', normal))
-        if ac.get("alerta"):
+    if isinstance(ac, dict) and ac.get("alerta"):
+        el.append(Paragraph((ac.get("alerta_titulo") or "").strip() or T["autocuidado"], h_sec))
+        for item in ac["alerta"][:4]:
             el.append(Paragraph(
-                (ac.get("alerta_titulo") or "").strip() or "—", suave))
-            for item in ac["alerta"]:
-                el.append(Paragraph(
-                    f'&nbsp;&nbsp;<font color="#EF6C00">•</font> {item}', normal))
+                f'&nbsp;&nbsp;<font color="#C62828">•</font> {item}', normal))
 
-    # ---- Contactos ----
-    el.append(Paragraph(T["contactos"], h_sec))
+    # Contactos úteis (uma linha).
     contactos = dados.get("contactos") or {}
     n_112 = ((contactos.get("emergencia") or {}).get("numero")) or "112"
     n_sns = ((contactos.get("sns24") or {}).get("numero")) or "808 24 24 24"
-    el.append(Paragraph(f"{T['emergencia']}: <b>{n_112}</b>", normal))
-    el.append(Paragraph(f"{T['sns']}: <b>{n_sns}</b>", normal))
+    el.append(Paragraph(T["contactos"], h_sec))
+    el.append(Paragraph(
+        f"{T['emergencia']}: <b>{n_112}</b> &nbsp;·&nbsp; {T['sns']}: <b>{n_sns}</b>", normal))
 
-    # ---- Identificação manual opcional ----
-    el.append(Paragraph(T["identificacao"], h_sec))
-    linha = '<font color="#9aa1ab">_____________________________________________</font>'
-    for rot in (T["id_nome"], T["id_nascimento"], T["id_utente"]):
-        el.append(Paragraph(f"{rot}: {linha}", normal))
-        el.append(Spacer(1, 2))
-
-    # ---- Rodapé/aviso ----
+    # Rodapé/aviso.
     el.append(Spacer(1, 10))
     el.append(HRFlowable(width="100%", thickness=0.6, color=colors.HexColor("#c8ccd2")))
     el.append(Spacer(1, 4))

@@ -898,20 +898,32 @@ async function descarregarPdf(dados, botao) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(construirPayloadPdf(dados)),
     });
-    if (!resposta.ok) throw new Error("Erro " + resposta.status);
+    if (!resposta.ok) throw new Error("HTTP " + resposta.status);
     const blob = await resposta.blob();
     const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "orientacao.pdf";
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    URL.revokeObjectURL(url);
+
+    // Abrir numa nova aba torna o resultado VISÍVEL: o utilizador vê o PDF e
+    // pode guardá-lo ou imprimi-lo a partir do próprio visualizador. Se o
+    // browser bloquear a nova aba, recorremos ao descarregamento clássico
+    // (o ficheiro fica na pasta de transferências).
+    const aba = window.open(url, "_blank");
+    if (!aba) {
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "orientacao.pdf";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
+    // Revogar só mais tarde: a aba (ou o descarregamento) ainda usa o URL.
+    setTimeout(() => URL.revokeObjectURL(url), 60000);
+
     botao.textContent = original;
     botao.disabled = false;
-  } catch (_) {
-    // Falha de rede/servidor: avisa no próprio botão e restaura, sem sair do ecrã.
+  } catch (erro) {
+    // Falha de rede/servidor: regista no console e avisa no próprio botão,
+    // sem sair do ecrã.
+    console.error("Falha ao gerar o PDF:", erro);
     botao.textContent = t("pdf_erro");
     setTimeout(() => {
       botao.textContent = original;
@@ -1156,10 +1168,27 @@ function iniciarMapa(dados, utente) {
   mapa.fitBounds(L.latLngBounds(pontos), { padding: [40, 40] });
 }
 
+/* Mostra a versão real do backend no crachá do topo, para nunca ficar
+   desatualizada como aconteceu antes. Se estiver offline, mantém-se o valor
+   que está no HTML. */
+async function mostrarVersao() {
+  const alvo = document.getElementById("app-versao");
+  if (!alvo) return;
+  try {
+    const r = await fetch("/api/saude");
+    if (!r.ok) return;
+    const dados = await r.json();
+    if (dados && dados.versao) alvo.textContent = "v" + dados.versao;
+  } catch (_) {
+    /* offline: fica o valor do HTML */
+  }
+}
+
 /* ---------------------------------------------------------------- boot -- */
 
 estado.lingua = linguaInicial();
 aplicarLinguaEstatica();
+mostrarVersao();
 
 const $btnLingua = document.getElementById("btn-lingua");
 if ($btnLingua) {

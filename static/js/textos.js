@@ -26,7 +26,7 @@ const TEXTOS = {
       '<a href="tel:112">112</a>. Aconselhamento: SNS&nbsp;24, ' +
       '<a href="tel:808242424">808&nbsp;24&nbsp;24&nbsp;24</a>.',
     rodape_nota:
-      "Protótipo académico, versão 0.8. Regras e dados de unidades por validar com o SESARAM.",
+      "Protótipo académico. Regras e dados de unidades por validar com o SESARAM.",
     lingua_aria: "Switch to English",
 
     a_carregar: "A carregar",
@@ -122,8 +122,8 @@ const TEXTOS = {
     contactos_titulo: "Contactos úteis",
     ct_emergencia: "Emergência médica",
     ct_sns: "SNS 24, aconselhamento",
-    imprimir: "Imprimir ou guardar em PDF",
-    pdf_descarregar: "Descarregar PDF",
+    imprimir: "Imprimir",
+    pdf_descarregar: "Abrir PDF",
     pdf_a_gerar: "A gerar PDF…",
     pdf_erro: "Não foi possível gerar o PDF",
     hist_ver: "Ver avaliações anteriores",
@@ -180,7 +180,7 @@ const TEXTOS = {
       '<a href="tel:112">112</a>. Advice line: SNS&nbsp;24, ' +
       '<a href="tel:808242424">808&nbsp;24&nbsp;24&nbsp;24</a>.',
     rodape_nota:
-      "Academic prototype, version 0.8. Rules and unit data pending validation with SESARAM.",
+      "Academic prototype. Rules and unit data pending validation with SESARAM.",
     lingua_aria: "Mudar para português",
 
     a_carregar: "Loading",
@@ -276,8 +276,8 @@ const TEXTOS = {
     contactos_titulo: "Useful contacts",
     ct_emergencia: "Medical emergency",
     ct_sns: "SNS 24, advice line",
-    imprimir: "Print or save as PDF",
-    pdf_descarregar: "Download PDF",
+    imprimir: "Print",
+    pdf_descarregar: "Open PDF",
     pdf_a_gerar: "Generating PDF…",
     pdf_erro: "Could not generate the PDF",
     hist_ver: "View previous assessments",

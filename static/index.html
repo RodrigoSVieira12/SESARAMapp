@@ -20,16 +20,16 @@
   <!-- QR de navegação (gerado localmente, sem chamadas de rede; MIT) -->
   <script defer src="https://unpkg.com/qrcode-generator@1.4.4/qrcode.js"></script>
 
-  <link rel="stylesheet" href="/static/css/style.css?v=11" />
+  <link rel="stylesheet" href="/static/css/style.css?v=12" />
   <!-- textos.js primeiro: define TEXTOS (PT/EN); app.js usa-o -->
-  <script defer src="/static/js/textos.js?v=11"></script>
-  <script defer src="/static/js/app.js?v=11"></script>
+  <script defer src="/static/js/textos.js?v=12"></script>
+  <script defer src="/static/js/app.js?v=12"></script>
 </head>
 <body>
   <header class="topo">
     <div class="topo__conteudo">
       <div>
-        <p class="topo__marca">Onde ir? <span class="versao">v0.8</span></p>
+        <p class="topo__marca">Onde ir? <span class="versao" id="app-versao">v0.10.1</span></p>
         <p class="topo__sub" id="topo-sub">Orientação de utentes na Região Autónoma da Madeira · protótipo</p>
       </div>
       <button class="topo__lingua no-print" id="btn-lingua" type="button" aria-label="Switch to English">EN</button>
@@ -51,7 +51,7 @@
       <a href="tel:112">112</a>. Aconselhamento: SNS&nbsp;24,
       <a href="tel:808242424">808&nbsp;24&nbsp;24&nbsp;24</a>.
     </p>
-    <p class="rodape__nota" id="rodape-nota">Protótipo académico, versão 0.8. Regras e dados de unidades por validar com o SESARAM.</p>
+    <p class="rodape__nota" id="rodape-nota">Protótipo académico. Regras e dados de unidades por validar com o SESARAM.</p>
   </footer>
 </body>
 </html>
