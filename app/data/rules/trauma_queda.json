@@ -1,58 +1,199 @@
 {
   "id": "trauma_queda",
   "nome": "Queda ou pancada",
+  "nome_en": "Fall or impact",
   "descricao": "Quedas, pancadas, torções e feridas.",
+  "descricao_en": "Falls, impacts, sprains and wounds.",
   "fonte": "FLUXO-EXEMPLO para desenvolvimento. Obrigatória validação clínica antes de uso real.",
+  "fonte_en": "EXAMPLE FLOW for development. Clinical validation required before real use.",
   "perguntas": [
-    { "id": "tq_q1", "fase": 1,
+    {
+      "id": "tq_q1",
+      "fase": 1,
       "texto": "A queda ou pancada aconteceu nas últimas 48 horas?",
-      "sim": { "proxima": "tq_q2" }, "nao": { "proxima": "tq_q12" } },
-    { "id": "tq_q2", "fase": 1,
+      "texto_en": "Did the fall or impact happen within the last 48 hours?",
+      "sim": { "proxima": "tq_q2" },
+      "nao": { "proxima": "tq_q12" }
+    },
+    {
+      "id": "tq_q2",
+      "fase": 1,
       "texto": "Foi uma queda de altura considerável, por exemplo mais de 1 metro ou de umas escadas, ou um acidente de viação?",
-      "sim": { "proxima": "tq_q3" }, "nao": { "proxima": "tq_q4" } },
-    { "id": "tq_q3", "fase": 2,
+      "texto_en": "Was it a fall from a considerable height, such as more than 1 meter or from stairs, or a traffic accident?",
+      "sim": { "proxima": "tq_q3" },
+      "nao": { "proxima": "tq_q4" }
+    },
+    {
+      "id": "tq_q3",
+      "fase": 2,
       "texto": "Tem dor forte no pescoço ou nas costas, ou formigueiro ou fraqueza nos braços ou pernas?",
-      "sim": { "resultado": { "cor": "vermelho", "motivo": "Possível lesão da coluna.", "nota": "Não mova a pessoa e ligue 112." } },
-      "nao": { "proxima": "tq_q5" } },
-    { "id": "tq_q4", "fase": 1,
+      "texto_en": "Do you have strong neck or back pain, or tingling or weakness in your arms or legs?",
+      "sim": {
+        "resultado": {
+          "cor": "vermelho",
+          "motivo": "Possível lesão da coluna.",
+          "motivo_en": "Possible spinal injury.",
+          "nota": "Não mova a pessoa e ligue 112.",
+          "nota_en": "Do not move the person and call 112."
+        }
+      },
+      "nao": { "proxima": "tq_q5" }
+    },
+    {
+      "id": "tq_q4",
+      "fase": 1,
       "texto": "Bateu com a cabeça?",
-      "sim": { "proxima": "tq_q5" }, "nao": { "proxima": "tq_q7" } },
-    { "id": "tq_q5", "fase": 2,
+      "texto_en": "Did you hit your head?",
+      "sim": { "proxima": "tq_q5" },
+      "nao": { "proxima": "tq_q7" }
+    },
+    {
+      "id": "tq_q5",
+      "fase": 2,
       "texto": "Perdeu os sentidos, vomitou, ou está confuso ou sonolento desde então?",
-      "sim": { "resultado": { "cor": "laranja", "motivo": "Traumatismo craniano com sinais de alarme." } },
-      "nao": { "proxima": "tq_q6" } },
-    { "id": "tq_q6", "fase": 2,
+      "texto_en": "Have you lost consciousness, vomited, or been confused or unusually drowsy since then?",
+      "sim": {
+        "resultado": {
+          "cor": "laranja",
+          "motivo": "Traumatismo craniano com sinais de alarme.",
+          "motivo_en": "Head trauma with warning signs."
+        }
+      },
+      "nao": { "proxima": "tq_q6" }
+    },
+    {
+      "id": "tq_q6",
+      "fase": 2,
       "texto": "Toma medicamentos anticoagulantes, os que tornam o sangue mais fino?",
-      "sim": { "resultado": { "cor": "amarelo", "motivo": "Pancada na cabeça com anticoagulantes aumenta o risco de hemorragia.", "nota": "Se surgir sonolência anormal, vómitos ou confusão, vá já à urgência." } },
-      "nao": { "proxima": "tq_q7" } },
-    { "id": "tq_q7", "fase": 2,
+      "texto_en": "Do you take anticoagulant medication, the kind that thins the blood?",
+      "sim": {
+        "resultado": {
+          "cor": "amarelo",
+          "motivo": "Pancada na cabeça com anticoagulantes aumenta o risco de hemorragia.",
+          "motivo_en": "Head impact while on anticoagulants increases the risk of bleeding.",
+          "nota": "Se surgir sonolência anormal, vómitos ou confusão, vá já à urgência.",
+          "nota_en": "If unusual drowsiness, vomiting or confusion appear, go to the emergency department immediately."
+        }
+      },
+      "nao": { "proxima": "tq_q7" }
+    },
+    {
+      "id": "tq_q7",
+      "fase": 2,
       "texto": "Há deformidade evidente do membro ou osso exposto?",
-      "sim": { "resultado": { "cor": "laranja", "motivo": "Possível fratura grave.", "nota": "Não tente endireitar o membro. Imobilize como estiver." } },
-      "nao": { "proxima": "tq_q8" } },
-    { "id": "tq_q8", "fase": 2,
+      "texto_en": "Is there obvious limb deformity or exposed bone?",
+      "sim": {
+        "resultado": {
+          "cor": "laranja",
+          "motivo": "Possível fratura grave.",
+          "motivo_en": "Possible severe fracture.",
+          "nota": "Não tente endireitar o membro. Imobilize como estiver.",
+          "nota_en": "Do not attempt to straighten the limb. Immobilize it as it is."
+        }
+      },
+      "nao": { "proxima": "tq_q8" }
+    },
+    {
+      "id": "tq_q8",
+      "fase": 2,
       "texto": "Não consegue apoiar o pé no chão ou mexer normalmente o membro atingido?",
-      "sim": { "resultado": { "cor": "amarelo", "motivo": "Possível fratura ou lesão que deve ser observada hoje." } },
-      "nao": { "proxima": "tq_q9" } },
-    { "id": "tq_q9", "fase": 2,
+      "texto_en": "Are you unable to bear weight on the foot or move the affected limb normally?",
+      "sim": {
+        "resultado": {
+          "cor": "amarelo",
+          "motivo": "Possível fratura ou lesão que deve ser observada hoje.",
+          "motivo_en": "Possible fracture or injury that should be assessed today."
+        }
+      },
+      "nao": { "proxima": "tq_q9" }
+    },
+    {
+      "id": "tq_q9",
+      "fase": 2,
       "texto": "Tem uma ferida aberta que possa precisar de pontos ou que continua a sangrar?",
+      "texto_en": "Do you have an open wound that may need stitches or continues to bleed?",
       "ajuda": "Feridas profundas, com bordos afastados ou que não param de sangrar com pressão ligeira.",
-      "sim": { "resultado": { "cor": "amarelo", "motivo": "Feridas que precisam de sutura devem ser tratadas nas primeiras horas." } },
-      "nao": { "proxima": "tq_q10" } },
-    { "id": "tq_q10", "fase": 3,
+      "ajuda_en": "Deep wounds, with separated edges or that do not stop bleeding with light pressure.",
+      "sim": {
+        "resultado": {
+          "cor": "amarelo",
+          "motivo": "Feridas que precisam de sutura devem ser tratadas nas primeiras horas.",
+          "motivo_en": "Wounds that need suturing should be treated within the first hours."
+        }
+      },
+      "nao": { "proxima": "tq_q10" }
+    },
+    {
+      "id": "tq_q10",
+      "fase": 3,
       "texto": "O local está muito inchado ou com uma nódoa negra grande a crescer?",
-      "sim": { "resultado": { "cor": "amarelo", "motivo": "Inchaço importante deve ser observado hoje." } },
-      "nao": { "proxima": "tq_q11" } },
-    { "id": "tq_q11", "fase": 3,
+      "texto_en": "Is the area very swollen or with a large bruise that is growing?",
+      "sim": {
+        "resultado": {
+          "cor": "amarelo",
+          "motivo": "Inchaço importante deve ser observado hoje.",
+          "motivo_en": "Significant swelling should be assessed today."
+        }
+      },
+      "nao": { "proxima": "tq_q11" }
+    },
+    {
+      "id": "tq_q11",
+      "fase": 3,
       "texto": "A dor é suportável e melhora com repouso e gelo?",
-      "sim": { "resultado": { "cor": "azul", "motivo": "Traumatismo ligeiro sem sinais de alarme.", "nota": "Aplique gelo envolvido num pano e repouse a zona. Se a dor ou o inchaço aumentarem muito, refaça a avaliação." } },
-      "nao": { "resultado": { "cor": "verde", "motivo": "Dor persistente após traumatismo ligeiro, a avaliar sem urgência." } } },
-    { "id": "tq_q12", "fase": 3,
+      "texto_en": "Is the pain tolerable and improving with rest and ice?",
+      "sim": {
+        "resultado": {
+          "cor": "azul",
+          "motivo": "Traumatismo ligeiro sem sinais de alarme.",
+          "motivo_en": "Minor trauma without warning signs.",
+          "nota": "Aplique gelo envolvido num pano e repouse a zona. Se a dor ou o inchaço aumentarem muito, refaça a avaliação.",
+          "nota_en": "Apply ice wrapped in a cloth and rest the area. If pain or swelling increases significantly, redo the assessment."
+        }
+      },
+      "nao": {
+        "resultado": {
+          "cor": "verde",
+          "motivo": "Dor persistente após traumatismo ligeiro, a avaliar sem urgência.",
+          "motivo_en": "Persistent pain after minor trauma, to be assessed without urgency."
+        }
+      }
+    },
+    {
+      "id": "tq_q12",
+      "fase": 3,
       "texto": "Já passaram mais de 48 horas e continua igual ou pior?",
-      "sim": { "resultado": { "cor": "verde", "motivo": "Queixas que não melhoram em 48 horas devem ser avaliadas." } },
-      "nao": { "proxima": "tq_q13" } },
-    { "id": "tq_q13", "fase": 3,
+      "texto_en": "Has it been more than 48 hours and the condition is the same or worse?",
+      "sim": {
+        "resultado": {
+          "cor": "verde",
+          "motivo": "Queixas que não melhoram em 48 horas devem ser avaliadas.",
+          "motivo_en": "Complaints that do not improve within 48 hours should be assessed."
+        }
+      },
+      "nao": { "proxima": "tq_q13" }
+    },
+    {
+      "id": "tq_q13",
+      "fase": 3,
       "texto": "Consegue usar normalmente a zona atingida?",
-      "sim": { "resultado": { "cor": "azul", "motivo": "Traumatismo antigo em recuperação.", "nota": "Se voltar a agravar, refaça a avaliação." } },
-      "nao": { "resultado": { "cor": "verde", "motivo": "Limitação que persiste deve ser avaliada sem urgência." } } }
+      "texto_en": "Are you able to use the affected area normally?",
+      "sim": {
+        "resultado": {
+          "cor": "azul",
+          "motivo": "Traumatismo antigo em recuperação.",
+          "motivo_en": "Old trauma in recovery.",
+          "nota": "Se voltar a agravar, refaça a avaliação.",
+          "nota_en": "If it worsens again, redo the assessment."
+        }
+      },
+      "nao": {
+        "resultado": {
+          "cor": "verde",
+          "motivo": "Limitação que persiste deve ser avaliada sem urgência.",
+          "motivo_en": "Persistent limitation should be assessed without urgency."
+        }
+      }
+    }
   ]
 }

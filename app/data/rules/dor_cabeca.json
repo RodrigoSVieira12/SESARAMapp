@@ -1,56 +1,203 @@
 {
   "id": "dor_cabeca",
   "nome": "Dor de cabeça",
+  "nome_en": "Headache",
   "descricao": "Cefaleia, enxaqueca, pressão na cabeça.",
+  "descricao_en": "Headache, migraine, pressure in the head.",
   "fonte": "FLUXO-EXEMPLO para desenvolvimento. Obrigatória validação clínica antes de uso real.",
+  "fonte_en": "EXAMPLE FLOW for development. Clinical validation required before real use.",
   "perguntas": [
-    { "id": "dc_q1", "fase": 1,
+    {
+      "id": "dc_q1",
+      "fase": 1,
       "texto": "A dor apareceu de repente e atingiu intensidade máxima em segundos, como uma explosão?",
-      "sim": { "resultado": { "cor": "vermelho", "motivo": "Dor de cabeça súbita e muito intensa pode indicar uma situação grave.", "nota": "Ligue 112 já." } },
-      "nao": { "proxima": "dc_q2" } },
-    { "id": "dc_q2", "fase": 1,
+      "texto_en": "Did the pain appear suddenly and reach maximum intensity within seconds, like an explosion?",
+      "sim": {
+        "resultado": {
+          "cor": "vermelho",
+          "motivo": "Dor de cabeça súbita e muito intensa pode indicar uma situação grave.",
+          "motivo_en": "Sudden and very intense headache may indicate a serious condition.",
+          "nota": "Ligue 112 já.",
+          "nota_en": "Call 112 immediately."
+        }
+      },
+      "nao": { "proxima": "dc_q2" }
+    },
+    {
+      "id": "dc_q2",
+      "fase": 1,
       "texto": "A dor surgiu depois de uma pancada na cabeça?",
-      "sim": { "proxima": "dc_q3" }, "nao": { "proxima": "dc_q4" } },
-    { "id": "dc_q3", "fase": 2,
+      "texto_en": "Did the headache start after a blow to the head?",
+      "sim": { "proxima": "dc_q3" },
+      "nao": { "proxima": "dc_q4" }
+    },
+    {
+      "id": "dc_q3",
+      "fase": 2,
       "texto": "Perdeu os sentidos, vomitou repetidamente ou está com sonolência anormal desde a pancada?",
-      "sim": { "resultado": { "cor": "laranja", "motivo": "Traumatismo craniano com sinais de alarme." } },
-      "nao": { "resultado": { "cor": "amarelo", "motivo": "Dor de cabeça após traumatismo deve ser observada hoje.", "nota": "Se surgir vómito repetido, sonolência anormal ou confusão, ligue 112." } } },
-    { "id": "dc_q4", "fase": 1,
+      "texto_en": "Have you lost consciousness, vomited repeatedly, or been unusually drowsy since the impact?",
+      "sim": {
+        "resultado": {
+          "cor": "laranja",
+          "motivo": "Traumatismo craniano com sinais de alarme.",
+          "motivo_en": "Head trauma with warning signs."
+        }
+      },
+      "nao": {
+        "resultado": {
+          "cor": "amarelo",
+          "motivo": "Dor de cabeça após traumatismo deve ser observada hoje.",
+          "motivo_en": "Headache after trauma should be assessed today.",
+          "nota": "Se surgir vómito repetido, sonolência anormal ou confusão, ligue 112.",
+          "nota_en": "If repeated vomiting, unusual drowsiness or confusion appear, call 112."
+        }
+      }
+    },
+    {
+      "id": "dc_q4",
+      "fase": 1,
       "texto": "É a primeira vez que tem uma dor deste tipo?",
-      "sim": { "proxima": "dc_q5" }, "nao": { "proxima": "dc_q10" } },
-    { "id": "dc_q5", "fase": 2,
+      "texto_en": "Is this the first time you have had a headache of this type?",
+      "sim": { "proxima": "dc_q5" },
+      "nao": { "proxima": "dc_q10" }
+    },
+    {
+      "id": "dc_q5",
+      "fase": 2,
       "texto": "Tem febre com rigidez no pescoço, ou a luz incomoda muito os olhos?",
-      "sim": { "resultado": { "cor": "laranja", "motivo": "Sinais que exigem observação urgente." } },
-      "nao": { "proxima": "dc_q6" } },
-    { "id": "dc_q6", "fase": 2,
+      "texto_en": "Do you have fever with neck stiffness, or does light strongly bother your eyes?",
+      "sim": {
+        "resultado": {
+          "cor": "laranja",
+          "motivo": "Sinais que exigem observação urgente.",
+          "motivo_en": "Signs that require urgent assessment."
+        }
+      },
+      "nao": { "proxima": "dc_q6" }
+    },
+    {
+      "id": "dc_q6",
+      "fase": 2,
       "texto": "Tem fraqueza num braço ou perna, fala arrastada ou visão dupla?",
-      "sim": { "resultado": { "cor": "vermelho", "motivo": "Sinais neurológicos súbitos exigem ajuda imediata.", "nota": "Ligue 112 de imediato." } },
-      "nao": { "proxima": "dc_q7" } },
-    { "id": "dc_q7", "fase": 2,
+      "texto_en": "Do you have weakness in an arm or leg, slurred speech, or double vision?",
+      "sim": {
+        "resultado": {
+          "cor": "vermelho",
+          "motivo": "Sinais neurológicos súbitos exigem ajuda imediata.",
+          "motivo_en": "Sudden neurological signs require immediate help.",
+          "nota": "Ligue 112 de imediato.",
+          "nota_en": "Call 112 immediately."
+        }
+      },
+      "nao": { "proxima": "dc_q7" }
+    },
+    {
+      "id": "dc_q7",
+      "fase": 2,
       "texto": "Tem vómitos que não param?",
-      "sim": { "resultado": { "cor": "amarelo", "motivo": "Dor de cabeça com vómitos persistentes deve ser avaliada hoje." } },
-      "nao": { "proxima": "dc_q8" } },
-    { "id": "dc_q8", "fase": 3,
+      "texto_en": "Are you experiencing vomiting that does not stop?",
+      "sim": {
+        "resultado": {
+          "cor": "amarelo",
+          "motivo": "Dor de cabeça com vómitos persistentes deve ser avaliada hoje.",
+          "motivo_en": "Headache with persistent vomiting should be assessed today."
+        }
+      },
+      "nao": { "proxima": "dc_q8" }
+    },
+    {
+      "id": "dc_q8",
+      "fase": 3,
       "texto": "Tem mais de 50 anos e esta dor é nova e persistente?",
-      "sim": { "resultado": { "cor": "amarelo", "motivo": "Dor de cabeça nova e persistente depois dos 50 anos deve ser avaliada." } },
-      "nao": { "proxima": "dc_q9" } },
-    { "id": "dc_q9", "fase": 3,
+      "texto_en": "Are you over 50 and is this a new and persistent headache?",
+      "sim": {
+        "resultado": {
+          "cor": "amarelo",
+          "motivo": "Dor de cabeça nova e persistente depois dos 50 anos deve ser avaliada.",
+          "motivo_en": "A new and persistent headache after age 50 should be assessed."
+        }
+      },
+      "nao": { "proxima": "dc_q9" }
+    },
+    {
+      "id": "dc_q9",
+      "fase": 3,
       "texto": "A dor dura há mais de 3 dias apesar de analgésicos?",
-      "sim": { "resultado": { "cor": "amarelo", "motivo": "Dor prolongada que não cede à medicação deve ser observada." } },
-      "nao": { "resultado": { "cor": "verde", "motivo": "Dor de cabeça sem sinais de alarme.", "nota": "Descanse, hidrate-se e evite ecrãs. Se agravar, refaça a avaliação." } } },
-    { "id": "dc_q10", "fase": 2,
+      "texto_en": "Has the headache lasted more than 3 days despite painkillers?",
+      "sim": {
+        "resultado": {
+          "cor": "amarelo",
+          "motivo": "Dor prolongada que não cede à medicação deve ser observada.",
+          "motivo_en": "Prolonged headache that does not respond to medication should be assessed."
+        }
+      },
+      "nao": {
+        "resultado": {
+          "cor": "verde",
+          "motivo": "Dor de cabeça sem sinais de alarme.",
+          "motivo_en": "Headache without warning signs.",
+          "nota": "Descanse, hidrate-se e evite ecrãs. Se agravar, refaça a avaliação.",
+          "nota_en": "Rest, hydrate and avoid screens. If it worsens, redo the assessment."
+        }
+      }
+    },
+    {
+      "id": "dc_q10",
+      "fase": 2,
       "texto": "É semelhante às suas dores de cabeça ou enxaquecas habituais?",
-      "sim": { "proxima": "dc_q11" }, "nao": { "proxima": "dc_q5" } },
-    { "id": "dc_q11", "fase": 3,
+      "texto_en": "Is it similar to your usual headaches or migraines?",
+      "sim": { "proxima": "dc_q11" },
+      "nao": { "proxima": "dc_q5" }
+    },
+    {
+      "id": "dc_q11",
+      "fase": 3,
       "texto": "A sua medicação habitual costuma aliviar?",
-      "sim": { "proxima": "dc_q12" }, "nao": { "proxima": "dc_q13" } },
-    { "id": "dc_q12", "fase": 3,
+      "texto_en": "Does your usual medication normally relieve it?",
+      "sim": { "proxima": "dc_q12" },
+      "nao": { "proxima": "dc_q13" }
+    },
+    {
+      "id": "dc_q12",
+      "fase": 3,
       "texto": "A dor está a impedir as suas atividades normais do dia?",
-      "sim": { "resultado": { "cor": "verde", "motivo": "Crise mais forte do que o habitual, a avaliar sem urgência." } },
-      "nao": { "resultado": { "cor": "azul", "motivo": "Crise ligeira de um padrão já conhecido.", "nota": "Tome a medicação habitual e descanse num local calmo. Se o padrão mudar, refaça a avaliação." } } },
-    { "id": "dc_q13", "fase": 3,
+      "texto_en": "Is the headache preventing your normal daily activities?",
+      "sim": {
+        "resultado": {
+          "cor": "verde",
+          "motivo": "Crise mais forte do que o habitual, a avaliar sem urgência.",
+          "motivo_en": "Stronger-than-usual migraine episode, to be assessed without urgency."
+        }
+      },
+      "nao": {
+        "resultado": {
+          "cor": "azul",
+          "motivo": "Crise ligeira de um padrão já conhecido.",
+          "motivo_en": "Mild episode of a known pattern.",
+          "nota": "Tome a medicação habitual e descanse num local calmo. Se o padrão mudar, refaça a avaliação.",
+          "nota_en": "Take your usual medication and rest in a calm place. If the pattern changes, redo the assessment."
+        }
+      }
+    },
+    {
+      "id": "dc_q13",
+      "fase": 3,
       "texto": "Esta crise é mais forte ou diferente do habitual?",
-      "sim": { "resultado": { "cor": "amarelo", "motivo": "Mudança do padrão habitual deve ser avaliada." } },
-      "nao": { "resultado": { "cor": "verde", "motivo": "Crise habitual sem alívio com a medicação, a avaliar sem urgência." } } }
+      "texto_en": "Is this episode stronger or different from your usual pattern?",
+      "sim": {
+        "resultado": {
+          "cor": "amarelo",
+          "motivo": "Mudança do padrão habitual deve ser avaliada.",
+          "motivo_en": "A change in the usual pattern should be assessed."
+        }
+      },
+      "nao": {
+        "resultado": {
+          "cor": "verde",
+          "motivo": "Crise habitual sem alívio com a medicação, a avaliar sem urgência.",
+          "motivo_en": "Usual headache without relief from medication, to be assessed without urgency."
+        }
+      }
+    }
   ]
 }

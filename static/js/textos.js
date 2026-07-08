@@ -25,8 +25,9 @@ const TEXTOS = {
       'nem a triagem feita na urgência. Em situação de emergência, ligue ' +
       '<a href="tel:112">112</a>. Aconselhamento: SNS&nbsp;24, ' +
       '<a href="tel:808242424">808&nbsp;24&nbsp;24&nbsp;24</a>.',
+    marca: "Onde ir?",
     rodape_nota:
-      "Protótipo académico. Regras e dados de unidades por validar com o SESARAM.",
+      "Protótipo. Regras e dados de unidades por validar com o SESARAM.",
     lingua_aria: "Switch to English",
 
     a_carregar: "A carregar",
@@ -179,8 +180,9 @@ const TEXTOS = {
       'or the triage done at the emergency department. In an emergency, call ' +
       '<a href="tel:112">112</a>. Advice line: SNS&nbsp;24, ' +
       '<a href="tel:808242424">808&nbsp;24&nbsp;24&nbsp;24</a>.',
+    marca: "Where to go?",
     rodape_nota:
-      "Academic prototype. Rules and unit data pending validation with SESARAM.",
+      "Prototype. Rules and unit data pending validation with SESARAM.",
     lingua_aria: "Mudar para português",
 
     a_carregar: "Loading",

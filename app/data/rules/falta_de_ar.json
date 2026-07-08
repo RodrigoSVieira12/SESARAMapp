@@ -1,54 +1,187 @@
 {
   "id": "falta_de_ar",
   "nome": "Falta de ar",
+  "nome_en": "Shortness of breath",
   "descricao": "Dificuldade em respirar ou cansaço anormal a respirar.",
+  "descricao_en": "Difficulty breathing or unusually tiring breathing.",
   "fonte": "FLUXO-EXEMPLO para desenvolvimento. Obrigatória validação clínica antes de uso real.",
+  "fonte_en": "EXAMPLE FLOW for development. Clinical validation required before real use.",
   "perguntas": [
-    { "id": "fa_q1", "fase": 1,
+    {
+      "id": "fa_q1",
+      "fase": 1,
       "texto": "A falta de ar surgiu de repente, nos últimos minutos ou horas?",
-      "sim": { "proxima": "fa_q2" }, "nao": { "proxima": "fa_q7" } },
-    { "id": "fa_q2", "fase": 1,
+      "texto_en": "Did the shortness of breath appear suddenly, in the last minutes or hours?",
+      "sim": { "proxima": "fa_q2" },
+      "nao": { "proxima": "fa_q7" }
+    },
+    {
+      "id": "fa_q2",
+      "fase": 1,
       "texto": "Tem dificuldade em dizer frases completas sem parar para respirar?",
-      "sim": { "proxima": "fa_q3" }, "nao": { "proxima": "fa_q4" } },
-    { "id": "fa_q3", "fase": 2,
+      "texto_en": "Do you have difficulty speaking full sentences without stopping to breathe?",
+      "sim": { "proxima": "fa_q3" },
+      "nao": { "proxima": "fa_q4" }
+    },
+    {
+      "id": "fa_q3",
+      "fase": 2,
       "texto": "Os lábios ou o rosto estão azulados?",
-      "sim": { "resultado": { "cor": "vermelho", "motivo": "Dificuldade respiratória grave.", "nota": "Ligue 112 de imediato." } },
-      "nao": { "resultado": { "cor": "laranja", "motivo": "Dificuldade respiratória significativa.", "nota": "Se piorar rapidamente, ligue 112." } } },
-    { "id": "fa_q4", "fase": 2,
+      "texto_en": "Are the lips or face bluish?",
+      "sim": {
+        "resultado": {
+          "cor": "vermelho",
+          "motivo": "Dificuldade respiratória grave.",
+          "motivo_en": "Severe breathing difficulty.",
+          "nota": "Ligue 112 de imediato.",
+          "nota_en": "Call 112 immediately."
+        }
+      },
+      "nao": {
+        "resultado": {
+          "cor": "laranja",
+          "motivo": "Dificuldade respiratória significativa.",
+          "motivo_en": "Significant breathing difficulty.",
+          "nota": "Se piorar rapidamente, ligue 112.",
+          "nota_en": "If it worsens quickly, call 112."
+        }
+      }
+    },
+    {
+      "id": "fa_q4",
+      "fase": 2,
       "texto": "Tem também dor no peito ou palpitações?",
-      "sim": { "resultado": { "cor": "laranja", "motivo": "Falta de ar súbita com dor no peito deve ser vista já." } },
-      "nao": { "proxima": "fa_q5" } },
-    { "id": "fa_q5", "fase": 2,
+      "texto_en": "Do you also have chest pain or palpitations?",
+      "sim": {
+        "resultado": {
+          "cor": "laranja",
+          "motivo": "Falta de ar súbita com dor no peito deve ser vista já.",
+          "motivo_en": "Sudden shortness of breath with chest pain should be assessed immediately."
+        }
+      },
+      "nao": { "proxima": "fa_q5" }
+    },
+    {
+      "id": "fa_q5",
+      "fase": 2,
       "texto": "Tem asma ou doença pulmonar crónica e os inaladores habituais não estão a aliviar?",
-      "sim": { "resultado": { "cor": "laranja", "motivo": "Crise respiratória sem resposta à medicação habitual." } },
-      "nao": { "proxima": "fa_q6" } },
-    { "id": "fa_q6", "fase": 2,
+      "texto_en": "Do you have asthma or chronic lung disease and your usual inhalers are not helping?",
+      "sim": {
+        "resultado": {
+          "cor": "laranja",
+          "motivo": "Crise respiratória sem resposta à medicação habitual.",
+          "motivo_en": "Respiratory crisis not responding to usual medication."
+        }
+      },
+      "nao": { "proxima": "fa_q6" }
+    },
+    {
+      "id": "fa_q6",
+      "fase": 2,
       "texto": "Teve recentemente uma cirurgia, uma viagem longa sentado, ou tem uma perna inchada e dorida?",
-      "sim": { "resultado": { "cor": "laranja", "motivo": "Falta de ar súbita nestas circunstâncias obriga a excluir um coágulo no pulmão." } },
-      "nao": { "proxima": "fa_q10" } },
-    { "id": "fa_q7", "fase": 2,
+      "texto_en": "Have you recently had surgery, a long seated trip, or do you have a swollen and painful leg?",
+      "sim": {
+        "resultado": {
+          "cor": "laranja",
+          "motivo": "Falta de ar súbita nestas circunstâncias obriga a excluir um coágulo no pulmão.",
+          "motivo_en": "Sudden shortness of breath in these circumstances requires ruling out a lung clot."
+        }
+      },
+      "nao": { "proxima": "fa_q10" }
+    },
+    {
+      "id": "fa_q7",
+      "fase": 2,
       "texto": "Piora quando está deitado, ou acorda de noite com falta de ar?",
-      "sim": { "resultado": { "cor": "amarelo", "motivo": "Este padrão deve ser avaliado hoje." } },
-      "nao": { "proxima": "fa_q8" } },
-    { "id": "fa_q8", "fase": 2,
+      "texto_en": "Does it worsen when lying down, or do you wake up at night short of breath?",
+      "sim": {
+        "resultado": {
+          "cor": "amarelo",
+          "motivo": "Este padrão deve ser avaliado hoje.",
+          "motivo_en": "This pattern should be assessed today."
+        }
+      },
+      "nao": { "proxima": "fa_q8" }
+    },
+    {
+      "id": "fa_q8",
+      "fase": 2,
       "texto": "Tem tosse com expetoração e febre?",
-      "sim": { "resultado": { "cor": "amarelo", "motivo": "Possível infeção respiratória a avaliar hoje." } },
-      "nao": { "proxima": "fa_q9" } },
-    { "id": "fa_q9", "fase": 2,
+      "texto_en": "Do you have cough with phlegm and fever?",
+      "sim": {
+        "resultado": {
+          "cor": "amarelo",
+          "motivo": "Possível infeção respiratória a avaliar hoje.",
+          "motivo_en": "Possible respiratory infection to be assessed today."
+        }
+      },
+      "nao": { "proxima": "fa_q9" }
+    },
+    {
+      "id": "fa_q9",
+      "fase": 2,
       "texto": "Os tornozelos ou as pernas estão mais inchados do que o costume?",
-      "sim": { "resultado": { "cor": "amarelo", "motivo": "Falta de ar com pernas inchadas deve ser avaliada hoje." } },
-      "nao": { "proxima": "fa_q10" } },
-    { "id": "fa_q10", "fase": 3,
+      "texto_en": "Are your ankles or legs more swollen than usual?",
+      "sim": {
+        "resultado": {
+          "cor": "amarelo",
+          "motivo": "Falta de ar com pernas inchadas deve ser avaliada hoje.",
+          "motivo_en": "Shortness of breath with swollen legs should be assessed today."
+        }
+      },
+      "nao": { "proxima": "fa_q10" }
+    },
+    {
+      "id": "fa_q10",
+      "fase": 3,
       "texto": "A falta de ar aparece apenas com esforços maiores do que os habituais?",
+      "texto_en": "Does the shortness of breath appear only with greater-than-usual exertion?",
       "sim": { "proxima": "fa_q11" },
-      "nao": { "resultado": { "cor": "amarelo", "motivo": "Falta de ar em atividades ligeiras deve ser avaliada hoje." } } },
-    { "id": "fa_q11", "fase": 3,
+      "nao": {
+        "resultado": {
+          "cor": "amarelo",
+          "motivo": "Falta de ar em atividades ligeiras deve ser avaliada hoje.",
+          "motivo_en": "Shortness of breath during light activities should be assessed today."
+        }
+      }
+    },
+    {
+      "id": "fa_q11",
+      "fase": 3,
       "texto": "De resto sente-se bem?",
+      "texto_en": "Otherwise, do you feel well?",
       "sim": { "proxima": "fa_q12" },
-      "nao": { "resultado": { "cor": "verde", "motivo": "Cansaço com mal-estar associado, a avaliar sem urgência." } } },
-    { "id": "fa_q12", "fase": 3,
+      "nao": {
+        "resultado": {
+          "cor": "verde",
+          "motivo": "Cansaço com mal-estar associado, a avaliar sem urgência.",
+          "motivo_en": "Fatigue with associated discomfort, to be assessed without urgency."
+        }
+      }
+    },
+    {
+      "id": "fa_q12",
+      "fase": 3,
       "texto": "Já foi observado por um médico por causa deste cansaço?",
-      "sim": { "resultado": { "cor": "azul", "motivo": "Situação conhecida e estável, sem sinais de agravamento.", "nota": "Mencione na próxima consulta se o cansaço se mantiver ou piorar." } },
-      "nao": { "resultado": { "cor": "verde", "motivo": "Cansaço de esforço ainda não avaliado, sem sinais de alarme.", "nota": "Evite esforços intensos até ser observado. Se agravar, refaça a avaliação." } } }
+      "texto_en": "Have you already been seen by a doctor because of this fatigue?",
+      "sim": {
+        "resultado": {
+          "cor": "azul",
+          "motivo": "Situação conhecida e estável, sem sinais de agravamento.",
+          "motivo_en": "Known and stable situation, without signs of worsening.",
+          "nota": "Mencione na próxima consulta se o cansaço se mantiver ou piorar.",
+          "nota_en": "Mention it at your next appointment if the fatigue persists or worsens."
+        }
+      },
+      "nao": {
+        "resultado": {
+          "cor": "verde",
+          "motivo": "Cansaço de esforço ainda não avaliado, sem sinais de alarme.",
+          "motivo_en": "Exertion-related fatigue not yet assessed, without warning signs.",
+          "nota": "Evite esforços intensos até ser observado. Se agravar, refaça a avaliação.",
+          "nota_en": "Avoid intense exertion until assessed. If it worsens, redo the assessment."
+        }
+      }
+    }
   ]
 }

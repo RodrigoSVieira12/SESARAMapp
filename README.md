@@ -1,117 +1,124 @@
-# Onde ir? Orientação de utentes na RAM (protótipo — SESARAM)
+# Onde ir? Patient guidance for Madeira (RAM) — prototype (SESARAM)
 
-Aplicação web que ajuda um utente a decidir **a que unidade de saúde da
-Região Autónoma da Madeira se deve dirigir**: faz uma triagem simplificada
-por perguntas de sim/não, estima a cor de prioridade (inspirada na Triagem
-de Manchester) e recomenda a unidade adequada mais próxima, tendo em conta
-os horários de funcionamento.
+This repository is a working prototype for a hospital-side application that guides patients to the right point of care in the Autonomous Region of Madeira: it triages symptoms through simple yes/no questions, estimates a Manchester-style priority colour, and recommends the nearest suitable unit given the current time and opening hours. The user-facing text and the code comments are written in Portuguese, because the target users and the health service are Portuguese; even so, the architecture, the data-driven clinical rules and the routing logic make it a solid, reusable base, an excellent prototype to build a real service on.
 
-## Avisos importantes (ler primeiro)
+*("Onde ir?" means "Where to go?". A Portuguese version of this document is available in `README.pt.md`.)*
 
-1. **Validação clínica obrigatória.** Os fluxogramas em `app/data/rules/`
-   e o mapeamento cor → tipo de serviço em `app/core/routing.py` são
-   **exemplos de desenvolvimento**. Antes de qualquer uso com utentes
-   reais, têm de ser revistos e aprovados pela equipa clínica do SESARAM.
-   Nota: os fluxogramas oficiais da Triagem de Manchester são licenciados
-   (Grupo Português de Triagem), esta é uma versão simplificada própria.
-2. **Dados das unidades por confirmar.** Em `app/data/unidades.json`, as
-   coordenadas são aproximadas e as moradas, telefones, serviços e
-   horários estão marcados com `(CONFIRMAR)` e `"dados_confirmados": false`.
-   Tudo deve ser confirmado junto do SESARAM antes de qualquer uso real.
-3. **Privacidade (RGPD).** A aplicação não guarda dados dos utentes: não
-   há base de dados, sessões nem registos de respostas. A localização é
-   usada apenas no momento do cálculo e nunca armazenada. Manter assim.
-4. A ferramenta **não substitui** avaliação clínica nem a triagem oficial
-   feita nas urgências, o disclaimer visível na interface é obrigatório.
+Web application that helps a patient decide **which health unit in the
+Autonomous Region of Madeira (RAM) they should go to**: it runs a
+simplified triage through yes/no questions, estimates a priority colour
+(inspired by the Manchester Triage System) and recommends the most suitable
+nearby unit, taking opening hours into account.
 
-## Como correr
+## Important notices (read first)
 
-Requisitos: Python 3.11 ou superior.
+1. **Clinical validation is mandatory.** The decision flows in
+   `app/data/rules/` and the colour → service-type mapping in
+   `app/core/routing.py` are **development examples**. Before any use with
+   real patients, they must be reviewed and approved by the SESARAM clinical
+   team. Note: the official Manchester Triage flowcharts are licensed
+   (Grupo Português de Triagem); this is a simplified in-house version.
+2. **Unit data to be confirmed.** In `app/data/unidades.json`, coordinates
+   are approximate and addresses, phone numbers, services and opening hours
+   are marked with `(CONFIRMAR)` and `"dados_confirmados": false`.
+   Everything must be confirmed with SESARAM before any real use.
+3. **Privacy (GDPR).** The application does not store any patient data:
+   there is no database, no sessions and no logging of answers. Location is
+   used only at the moment of calculation and never stored. Keep it this way.
+4. The tool **does not replace** clinical assessment or the official triage
+   performed at emergency departments; the disclaimer shown in the interface
+   is mandatory.
 
-Só na primeira vez, instalar as dependências:
+## How to run
+
+Requirements: Python 3.11 or newer.
+
+The first time only, install the dependencies:
 
 ```bash
 python -m pip install -r requirements.txt
 ```
 
-De cada vez que quiseres arrancar o servidor:
+Each time you want to start the server:
 
 ```bash
 python -m uvicorn app.main:app --reload
 ```
 
-Usa-se `python -m uvicorn` (e não `uvicorn` diretamente) para funcionar em
-qualquer sistema, incluindo Windows, sem depender do PATH.
+`python -m uvicorn` is used (rather than `uvicorn` directly) so it works on
+any system, including Windows, without depending on the PATH.
 
-Depois abrir no browser:
+Then open in the browser:
 
-- Aplicação: http://127.0.0.1:8000
-- Documentação interativa da API: http://127.0.0.1:8000/docs
+- Application: http://127.0.0.1:8000
+- Interactive API documentation: http://127.0.0.1:8000/docs
 
-Para **parar** o servidor: Ctrl+C no terminal. Depois de alterar o código,
-faz **Ctrl+F5** no browser (atualização forçada, para não usar a versão em
-cache); a versão em uso pode confirmar-se em http://127.0.0.1:8000/api/saude.
+To **stop** the server: Ctrl+C in the terminal. After changing the code,
+press **Ctrl+F5** in the browser (hard refresh, so it does not use the
+cached version); the running version can be checked at
+http://127.0.0.1:8000/api/saude.
 
-Correr os testes:
+Run the tests:
 
 ```bash
 python -m pytest
 ```
 
-Opcional: para isolar as dependências deste projeto das do resto do
-sistema, podes criar um ambiente virtual antes de instalar, com
-`python -m venv .venv` e depois ativá-lo (Windows: `.venv\Scripts\activate`;
+Optional: to isolate this project's dependencies from the rest of the
+system, you can create a virtual environment before installing, with
+`python -m venv .venv` and then activate it (Windows: `.venv\Scripts\activate`;
 macOS/Linux: `source .venv/bin/activate`).
 
-## Estrutura do projeto
+## Project structure
 
 ```
 onde-ir-sesaram/
 ├── app/
-│   ├── main.py               # aplicação FastAPI (API + frontend estático)
-│   ├── api/routes.py         # endpoints REST
-│   ├── models/schemas.py     # validação dos pedidos (Pydantic)
+│   ├── main.py               # FastAPI application (API + static frontend)
+│   ├── api/routes.py         # REST endpoints
+│   ├── models/schemas.py     # request validation (Pydantic)
 │   ├── core/
-│   │   ├── triage_engine.py  # motor de triagem (lê os JSON de regras)
-│   │   ├── routing.py        # cor + localização + hora → destino
-│   │   ├── horarios.py       # aberto/fechado num dado momento
-│   │   ├── geo.py            # distância de Haversine
-│   │   ├── unidades.py       # repositório das unidades
-│   │   └── cores.py          # cores de Manchester e contactos
+│   │   ├── triage_engine.py  # triage engine (reads the JSON rule files)
+│   │   ├── routing.py        # colour + location + time → destination
+│   │   ├── horarios.py       # open/closed at a given moment
+│   │   ├── feriados.py       # public holidays (national + RAM regional)
+│   │   ├── geo.py            # Haversine distance
+│   │   ├── unidades.py       # unit repository
+│   │   └── cores.py          # Manchester colours and contacts
 │   └── data/
-│       ├── rules/            # 1 ficheiro JSON por queixa + red_flags.json
-│       └── unidades.json     # unidades de saúde da RAM
-├── static/                   # frontend (HTML + CSS + JS puro + Leaflet)
-└── tests/                    # pytest (motor, horários, routing, API)
+│       ├── rules/            # 1 JSON file per complaint + red_flags.json
+│       └── unidades.json     # RAM health units
+├── static/                   # frontend (HTML + CSS + plain JS + Leaflet)
+└── tests/                    # pytest (engine, hours, routing, API)
 ```
 
-## Como funciona (3 blocos)
+## How it works (3 blocks)
 
-1. **Triagem**, o frontend pergunta primeiro pelos sinais de emergência
-   (`red_flags.json`): qualquer um selecionado → vermelho e 112. Caso
-   contrário, o utente escolhe a queixa e responde a perguntas de sim/não.
-   As perguntas estão organizadas em 3 fases visíveis na interface:
-   1 perguntas gerais, 2 perguntas específicas, 3 avaliação da
-   gravidade. O motor é *stateless*: o frontend reenvia todas as
-   respostas em cada pedido e devolve a próxima pergunta ou o resultado.
-2. **Cor**, o resultado tem uma cor (vermelho, laranja, amarelo, verde,
-   azul) com tempo-alvo de observação, mostrada como uma pulseira.
-3. **Encaminhamento**, com a cor, a localização e a hora na Madeira,
-   `routing.py` escolhe a unidade aberta mais próxima com o serviço certo.
-   Exemplo do porquê de a hora importar: um verde às 3 h da manhã não deve
-   ser enviado para um centro de saúde fechado, recebe SNS 24 + urgência
-   como alternativa.
+1. **Triage** — the frontend first asks about emergency signs
+   (`red_flags.json`): if any is selected → red and 112. Otherwise, the
+   patient picks a complaint and answers yes/no questions. Questions are
+   organised into 3 phases visible in the interface: (1) general questions,
+   (2) specific questions, (3) severity assessment. The engine is
+   *stateless*: the frontend resends all answers with each request and gets
+   back the next question or the result.
+2. **Colour** — the result has a colour (red, orange, yellow, green, blue)
+   with a target observation time, shown as a wristband.
+3. **Routing** — given the colour, the location and the time in Madeira,
+   `routing.py` picks the nearest open unit with the right service. Example
+   of why time matters: a green case at 3 a.m. should not be sent to a
+   closed health centre; it gets SNS 24 + an emergency department as a
+   fallback.
 
-## Editar ou adicionar regras de triagem
+## Editing or adding triage rules
 
-Cada queixa é um ficheiro em `app/data/rules/`. Formato mínimo:
+Each complaint is a file in `app/data/rules/`. Minimal format:
 
 ```json
 {
   "id": "dor_garganta",
   "nome": "Dor de garganta",
   "descricao": "Dor ao engolir, garganta inflamada.",
-  "fonte": "Quem validou e quando",
+  "fonte": "Who validated it and when",
   "perguntas": [
     {
       "id": "dg_q1",
@@ -123,20 +130,23 @@ Cada queixa é um ficheiro em `app/data/rules/`. Formato mínimo:
 }
 ```
 
-Regras do formato: cada pergunta tem ramos `sim` e `nao`; cada ramo ou
-aponta para outra pergunta (`{"proxima": "id"}`) ou termina
-(`{"resultado": {"cor": ...}}`). O servidor **valida tudo no arranque**
-(ids únicos, ramos completos, cores válidas, referências existentes) e
-recusa arrancar com regras mal formadas. Depois de mexer nas regras,
-correr `python -m pytest` e acrescentar um teste por cada caminho
-clinicamente importante (ver `tests/test_triage_engine.py`).
+(The content is kept in Portuguese because it is shown to Portuguese-speaking
+patients. `sim`/`nao` mean yes/no, `cor` means colour.)
 
-Em caso de dúvida clínica, errar sempre **por excesso** de urgência.
+Format rules: each question has `sim` and `nao` branches; each branch either
+points to another question (`{"proxima": "id"}`) or ends
+(`{"resultado": {"cor": ...}}`). The server **validates everything at
+startup** (unique ids, complete branches, valid colours, existing
+references) and refuses to start with malformed rules. After changing rules,
+run `python -m pytest` and add a test for each clinically important path
+(see `tests/test_triage_engine.py`).
 
-## Editar unidades e horários
+When in clinical doubt, always err **towards more** urgency.
 
-Em `app/data/unidades.json`, cada unidade tem um dicionário `servicos`
-cujos valores são horários num de dois formatos:
+## Editing units and opening hours
+
+In `app/data/unidades.json`, each unit has a `servicos` (services) dictionary
+whose values are opening hours in one of two formats:
 
 ```json
 { "tipo": "24h", "texto": "Urgência aberta 24 horas" }
@@ -147,239 +157,259 @@ cujos valores são horários num de dois formatos:
              "sex": ["08:00-20:00"], "sab": [], "dom": [] } }
 ```
 
-Serviços reconhecidos pelo encaminhamento: `urgencia_polivalente`,
-`urgencia_basica`, `atendimento_urgente`, `consulta_aberta`. Limitação
-conhecida: as faixas horárias não podem atravessar a meia-noite, para
-"até à meia-noite" usar `"08:00-23:59"`.
+(`tipo` = type, `semanal` = weekly, `horas` = hours; `seg…dom` are the days
+Monday to Sunday.) Services recognised by routing: `urgencia_polivalente`,
+`urgencia_basica`, `atendimento_urgente`, `consulta_aberta`. Known
+limitation: time ranges cannot cross midnight; for "until midnight" use
+`"08:00-23:59"`.
 
-**Feriados (novo na v0.4).** Nos feriados nacionais e nos dois feriados
-regionais da RAM (1 de julho e 26 de dezembro), os serviços com horário
-`"semanal"` contam automaticamente como **fechados** — mesmo que o
-feriado calhe a uma quarta-feira. Se um serviço abrir mesmo num feriado,
-acrescenta a chave `"feriado"` ao dicionário `horas`, por exemplo
-`"feriado": ["09:00-13:00"]`. Os serviços `"24h"` não são afetados.
+**Public holidays (new in v0.4).** On national holidays and the two RAM
+regional holidays (1 July and 26 December), services with a `"semanal"`
+schedule automatically count as **closed** — even if the holiday falls on a
+weekday. If a service does open on a holiday, add the `"feriado"` key to the
+`horas` dictionary, for example `"feriado": ["09:00-13:00"]`. `"24h"`
+services are not affected.
 
-Como são obtidos (em `app/core/feriados.py`): os feriados de **data fixa**
-(Ano Novo, 25 de abril, 1 de julho, Natal, etc.) estão definidos no próprio
-programa; os **móveis**, que dependem da Páscoa (Sexta-feira Santa e Corpo
-de Deus), são **calculados matematicamente** a partir da data da Páscoa de
-cada ano. Não há qualquer ligação a um calendário externo nem à internet:
-funciona para qualquer ano e nunca precisa de atualização manual. O
-calendário resultante pode ser conferido em `GET /api/feriados?ano=2026`.
-Não incluídos, de propósito: feriados municipais (variam por concelho) e
-tolerâncias de ponto (Carnaval, 24 e 31 de dezembro) — confirmar com o
-SESARAM se afetam horários.
+How they are obtained (in `app/core/feriados.py`): **fixed-date** holidays
+(New Year, 25 April, 1 July, Christmas, etc.) are defined in the program
+itself; the **moving** ones that depend on Easter (Good Friday and Corpus
+Christi) are **computed mathematically** from each year's Easter date. There
+is no connection to an external calendar or the internet: it works for any
+year and never needs manual updating. The resulting calendar can be checked
+at `GET /api/feriados?ano=2026`. Deliberately not included: municipal
+holidays (they vary by municipality) and discretionary days off (Carnival,
+24 and 31 December) — confirm with SESARAM whether these affect opening
+hours.
 
-## Ferramentas para quem edita os dados (sem programar)
+## Tools for non-programmers editing the data
 
-Depois de editar qualquer JSON (regras ou unidades), verificar tudo com:
+After editing any JSON (rules or units), check everything with:
 
 ```bash
 python scripts/validar_dados.py
 ```
 
-Aponta erros em linguagem simples (faixas horárias mal escritas,
-coordenadas fora da RAM, cores inválidas, perguntas em círculo…) e lista
-as unidades que ainda têm dados por confirmar, serve de checklist do
-levantamento.
+It reports errors in plain language (malformed time ranges, coordinates
+outside the RAM, invalid colours, questions in a loop…) and lists the units
+that still have data to confirm, serving as a checklist for the data survey.
 
-Para a sessão de validação clínica, gerar o documento imprimível:
+For the clinical validation session, generate the printable document:
 
 ```bash
 python scripts/gerar_validacao_clinica.py
 ```
 
-Cria `docs/validacao_clinica.html`, cada queixa numa página, com as
-perguntas numeradas, os desfechos e um bloco de assinatura/data para o
-profissional que validar. As correções feitas no papel passam-se depois
-para os JSON (atualizando o campo `fonte` com quem validou e quando).
+This creates `docs/validacao_clinica.html`, one complaint per page, with
+numbered questions, the outcomes, and a signature/date block for the
+professional who validates it. Corrections made on paper are then carried
+into the JSON files (updating the `fonte` field with who validated and when).
 
-## API (resumo)
+## API (summary)
 
-- `GET /api/saude`, health check
-- `GET /api/queixas`, queixas disponíveis
-- `GET /api/red-flags`, sinais de emergência
-- `POST /api/triagem`, `{queixa, respostas}` ou `{red_flags}` → pergunta/resultado
-- `GET /api/unidades`, todas as unidades
-- `GET /api/unidades/proxima?lat&lng&servico&n`, mais próximas
-- `POST /api/encaminhamento`, `{cor, lat, lng}` → recomendação completa;
-  aceita opcionalmente `quando` (ISO 8601) para simular a hora do cálculo
-- `GET /api/contactos`, 112 e SNS 24
-- `GET /api/feriados?ano=`, feriados nacionais + regionais considerados
-  nos horários
+- `GET /api/saude` — health check
+- `GET /api/queixas` — available complaints
+- `GET /api/red-flags` — emergency signs
+- `POST /api/triagem` — `{queixa, respostas}` or `{red_flags}` → question/result
+- `GET /api/unidades` — all units
+- `GET /api/unidades/proxima?lat&lng&servico&n` — nearest units
+- `POST /api/encaminhamento` — `{cor, lat, lng}` → full recommendation;
+  optionally accepts `quando` (ISO 8601) to simulate the calculation time
+- `GET /api/contactos` — 112 and SNS 24
+- `GET /api/feriados?ano=` — national + regional holidays used in the
+  opening-hours logic
 
-## Modo de demonstração (hora simulada)
+## Demonstration mode (simulated time)
 
-Para mostrar na apresentação que a hora importa, abrir a aplicação com
-`?hora=...` no endereço, por exemplo:
+To show that time matters during a presentation, open the application with
+`?hora=...` in the URL (`hora` = time), for example:
 
 ```
 http://127.0.0.1:8000/?hora=2026-06-29T03:00:00
 ```
 
-O encaminhamento passa a ser calculado como se fossem 3 h da manhã:
-um verde deixa de ser enviado ao centro de saúde fechado e passa para
-o atendimento urgente 24 h aberto mais próximo. Uma faixa no ecrã
-indica que a hora está simulada.
+Routing is then calculated as if it were 3 a.m.: a green case is no longer
+sent to a closed health centre and is directed to the nearest open 24 h
+urgent-care unit instead. A banner on screen indicates that the time is
+simulated.
 
-Outros dois momentos que rendem na apresentação (novo na v0.4):
+Two other moments that work well in a presentation (new in v0.4):
 
 ```
-http://127.0.0.1:8000/?hora=2026-07-04T15:00:00   (sábado à tarde)
-http://127.0.0.1:8000/?hora=2026-07-01T15:00:00   (feriado: Dia da RAM)
+http://127.0.0.1:8000/?hora=2026-07-04T15:00:00   (Saturday afternoon)
+http://127.0.0.1:8000/?hora=2026-07-01T15:00:00   (holiday: Madeira Day)
 ```
 
-Num verde, a app explica que é sábado/feriado, diz a que horas reabre o
-centro de saúde mais próximo, e apresenta as duas opções: vigiar em casa
-com o apoio do SNS 24 ou ir ao atendimento urgente aberto.
+For a green case, the app explains that it is a Saturday/holiday, states
+when the nearest health centre reopens, and presents the two options: wait
+at home with SNS 24 support, or go to the open urgent-care unit.
 
-## Interface (v0.5): direção "Serviço público"
+## Interface (v0.5): the "public service" direction
 
-O visual segue a linguagem dos portais institucionais portugueses: banda
-azul no topo e no rodapé, superfícies brancas com contornos (sem sombras),
-etiquetas em maiúsculas pequenas e uma única família tipográfica (Public
-Sans). O resultado é apresentado como uma **guia de encaminhamento** — um
-cartão com lombada na cor da triagem, pensado também para impressão — e o
-mapa usa tiles claros (CARTO sobre dados OpenStreetMap) com o marcador da
-unidade recomendada nessa mesma cor. Enquanto os dados carregam, aparecem
-esqueletos animados em vez de "A carregar…" (desligam-se automaticamente
-para quem pediu movimento reduzido no sistema).
+The visual language follows Portuguese institutional portals: a solid blue
+band at the top and bottom, white surfaces with outlines (no shadows),
+small-caps labels and a single type family (Public Sans). The result is
+presented as a **referral slip** — a card with a spine in the triage
+colour, designed to print well — and the map uses light tiles (CARTO over
+OpenStreetMap data) with the recommended unit's marker in that same
+colour. While data loads, animated skeletons replace "Loading…" (they turn
+off automatically for users who request reduced motion).
 
-Os azuis são provisórios de propósito: quando houver cores oficiais do
-SESARAM, basta trocar `--primaria` e `--primaria-escura` no início de
+The blues are deliberately provisional: once official SESARAM colours
+exist, swap `--primaria` and `--primaria-escura` at the top of
 `static/css/style.css`.
 
-## Novidades da v0.6: tradução, pesquisa e cartões de cuidado
+## New in v0.6: translation, search and care cards
 
-**Botão PT/EN.** No canto superior direito troca-se a língua do interface
-a qualquer momento, sem perder as respostas dadas (a escolha fica
-guardada no navegador; também funciona abrir com `?lang=en`). Os
-conteúdos clínicos traduzem-se ficheiro a ficheiro com campos opcionais
-`*_en` ao lado dos portugueses — o fluxo **Febre**
-(`app/data/rules/febre.json`) está completo e serve de modelo; nos
-restantes fluxos, a app mostra o português até os campos serem
-acrescentados. As mensagens longas do encaminhamento continuam em
-português por agora. Os textos do interface (botões, títulos) vivem
-todos em `static/js/textos.js`.
+**PT/EN button.** The top-right corner switches the interface language at
+any moment without losing your answers (the choice is remembered by the
+browser; opening with `?lang=en` also works). Clinical content is
+translated file by file with optional `*_en` fields next to the
+Portuguese ones — the **Fever** flow (`app/data/rules/febre.json`) is
+complete and serves as the model; for the remaining flows the app shows
+Portuguese until the fields are added. The longer routing messages remain
+in Portuguese for now. All interface strings live in
+`static/js/textos.js`.
 
-**Pesquisa da queixa em texto livre.** No ecrã da queixa há agora uma
-caixa "escreva o que sente" — por exemplo "dói-me a barriga" sugere Dor
-abdominal. Sem inteligência artificial: usa o nome dos fluxos e o
-dicionário editável `app/data/sinonimos.json` (acentos e maiúsculas são
-ignorados; aceita termos em português e inglês). O
-`scripts/validar_dados.py` confirma que cada sinónimo aponta para um
-fluxo que existe. Endpoint: `GET /api/queixas/sugerir?q=…`.
+**Free-text complaint search.** The complaint screen now has a "describe
+what you feel" box — for example "my stomach hurts" suggests Abdominal
+pain. No artificial intelligence: it uses the flow names plus the
+editable dictionary `app/data/sinonimos.json` (accents and case are
+ignored; Portuguese and English terms both work).
+`scripts/validar_dados.py` checks every synonym points to an existing
+flow. Endpoint: `GET /api/queixas/sugerir?q=…`.
 
-**Cartões de cuidado (estrutura do NHS, cores nossas).** O bloco de
-autocuidado do verde e do azul passou a dois cartões com faixa de
-cabeçalho — "o que fazer" (lista com vistos ✓), "o que evitar" (cruzes
-✕) e "Procure ajuda se:" — inspirados nos care cards do serviço de
-saúde inglês, mantendo as cinco cores de Manchester intocadas. Os
-textos vivem em `app/data/autocuidado.json`, são verificados pelo
-validador e entram no documento de validação clínica.
+**Care cards (NHS structure, our colours).** The self-care block for
+green and blue became two cards with a coloured heading band — "what to
+do" (tick list ✓), "what to avoid" (crosses ✕) and "Seek help if:" —
+inspired by the English health service's care cards, while keeping the
+five Manchester colours untouched. The texts live in
+`app/data/autocuidado.json`, are checked by the validator and are
+included in the clinical validation document.
 
-## Novidades da v0.7: fluxogramas clínicos e QR de navegação
+## New in v0.7: clinical flowcharts and navigation QR
 
-**Fluxogramas automáticos no documento de validação.** O protocolo de
-Manchester é publicado como fluxogramas — e agora o documento de
-validação clínica fala essa língua: cada queixa inclui a árvore
-desenhada, gerada de `app/data/rules/*.json` por
-`app/core/fluxogramas.py`, com os desfechos pintados nas cinco cores e
-as perguntas numeradas como na lista. Saltos entre perguntas, caminhos
-sem saída ou cores mal atribuídas tornam-se visíveis num relance. O
-desenho acontece no navegador (biblioteca Mermaid via CDN), por isso o
-documento precisa de internet ao abrir; sem ela, as perguntas numeradas
-continuam lá. As fontes de cada diagrama ficam em
-`docs/fluxogramas/*.mmd` e podem abrir-se e editar-se visualmente em
-https://mermaid.live.
+**Automatic flowcharts in the validation document.** The Manchester
+protocol is published as flowcharts — and the clinical validation
+document now speaks that language: every complaint includes the drawn
+tree, generated from `app/data/rules/*.json` by
+`app/core/fluxogramas.py`, with outcomes painted in the five colours and
+questions numbered as in the list. Jumps between questions, dead ends or
+wrongly assigned colours become visible at a glance. Drawing happens in
+the browser (Mermaid library via CDN), so the document needs internet
+when opened; without it, the numbered questions remain. Each diagram's
+source lives in `docs/fluxogramas/*.mmd` and can be opened and edited
+visually at https://mermaid.live.
 
-**QR de navegação no resultado.** O cartão da unidade recomendada
-mostra um código QR com as direções do Google Maps: aponta-se a câmara
-do telemóvel e a navegação abre — útil quando a avaliação é feita num
-computador, e sai também na impressão. O código é gerado localmente
-(biblioteca `qrcode-generator`, MIT), sem enviar nada para lado nenhum;
-se a biblioteca não carregar, o bloco simplesmente não aparece.
+**Navigation QR on the result.** The recommended unit's card shows a QR
+code with Google Maps directions: point your phone's camera and
+navigation opens — useful when the assessment is done on a computer, and
+it also prints. The code is generated locally (`qrcode-generator`
+library, MIT), sending nothing anywhere; if the library fails to load,
+the block simply does not appear.
 
-## Novidades da v0.9: exportação em PDF e endpoint de integração
+## New in v0.8: real-time waiting times
 
-**Botão "Descarregar PDF".** No ecrã de resultado, o utente pode descarregar
-um resumo de orientação em PDF (cor de prioridade, queixa, respostas dadas,
-unidade sugerida com morada/telefone/horário, alternativas, autocuidado e
-contactos). O documento é gerado no servidor com `reportlab` (Python puro,
-instala-se com `pip` em qualquer sistema, incluindo Windows). Traz um espaço
-de identificação de **preenchimento manual** e o mesmo aviso da app: é
-orientação, não substitui avaliação clínica. O botão antigo de imprimir
-continua lá.
+**Where they come from.** SESARAM publishes, in the SEISRAM system, two
+public pages with waiting times — one for Hospital Dr. Nélio Mendonça
+(by clinical area and by the five Manchester classifications) and one
+for the health centres with urgent care. The app reads both pages
+(`app/core/espera.py`), recognises the two formats ("8m", "2h37",
+"1h05 / 3", per-colour tables) and links each row to the project's units
+via `app/data/espera_nomes.json`.
 
-**Preparação para integração.** Três endpoints novos, pensados para consumo
-externo (ver `docs/INTEGRACAO.md`):
-`POST /api/integracao/triagem` (triagem + encaminhamento numa só chamada),
-`POST /api/exportar_pdf` (PDF para download) e
-`POST /api/exportar_pdf_base64` (o mesmo PDF em base64, para anexar).
-`docs/INTEGRACAO.md` descreve, de forma neutra, o que já está pronto, o
-potencial da integração e as questões a apurar com a equipa de informática
-do SESARAM sobre a plataforma interna de destino.
+**What shows in the app.** The recommended unit and the open
+alternatives display the estimated wait; for the hospital it's the wait
+for the **user's colour** (an orange case sees the "Very Urgent" wait,
+not the overall average). Above it: "SESARAM waiting times, updated at
+HH:MM". When there's no data — no internet, site down, or outside the
+covered units — the app says so and decides as before, by distance and
+opening hours only. Endpoint: `GET /api/espera` (`?atualizar=true`
+forces a fresh fetch, respecting the minimum interval).
 
-## Novidades da v0.8: tempos de espera em tempo real
+**Experimental routing rule (pending validation).** For orange and
+yellow, the app may suggest a slightly farther unit if that saves total
+time (estimated travel + current wait). The safeguards are deliberately
+conservative and sit at the top of `espera.py` to be tuned with the
+clinical team: it only switches if it saves **≥ 30 minutes** and the
+detour is **≤ 15 km**; it never switches without data on both sides; and
+it **never** applies to red. When it switches, it explains why in the
+message. This — like the triage rules — is marked as **pending
+validation** and is included in the clinical validation document.
 
-**De onde vêm.** O SESARAM publica, no sistema SEISRAM, duas páginas
-públicas com os tempos de espera — a do Hospital Dr. Nélio Mendonça
-(por área clínica e pelas cinco classificações de Manchester) e a dos
-centros de saúde com atendimento urgente. A app lê essas duas páginas
-(`app/core/espera.py`), reconhece os dois formatos ("8m", "2h37",
-"1h05 / 3", tabelas por cor) e associa cada linha às unidades do
-projeto por `app/data/espera_nomes.json`.
+**Ethics and robustness.** There's a short-lived cache (the site is
+never hammered: at most one request per interval, with an honest
+User-Agent), negative caching (no insisting on a site that's down) and
+reuse of the last valid data when a fetch fails. The site's courtesy
+"NOTE" — which appears **even with data** — is never mistaken for
+unavailability. **In the long run, the robust path is an official
+SESARAM API**: if the institution provides one, swapping the page reader
+for that access is simple and recommended.
 
-**O que aparece na app.** Na unidade recomendada e nas alternativas
-abertas surge o tempo estimado; no hospital é a espera **da cor do
-utente** (um laranja vê a espera dos "Muito Urgentes", não a média
-geral). Por cima aparece "Tempos de espera do SESARAM, atualizados às
-HH:MM". Quando não há dados — sem internet, site em baixo, ou fora das
-unidades cobertas — a app di-lo e decide como antes, só por distância e
-horários. Endpoint: `GET /api/espera` (com `?atualizar=true` força uma
-descarga fresca, respeitando o intervalo mínimo).
+**Install — note.** This version uses two new libraries (`requests` and
+`beautifulsoup4`). After extracting the zip, run
+`python -m pip install -r requirements.txt` once before starting the
+server.
 
-**Regra experimental de encaminhamento (por validar).** Para laranja e
-amarelo, a app pode sugerir uma unidade um pouco mais longe se isso
-poupar tempo total (viagem estimada + espera atual). As salvaguardas
-são propositadamente conservadoras e estão no topo de `espera.py` para
-serem afinadas com a equipa clínica: só troca se poupar **≥ 30 minutos**
-e o desvio for **≤ 15 km**; nunca troca sem dados dos dois lados; e
-**nunca** se aplica ao vermelho. Quando troca, explica porquê na
-mensagem. Isto — como as regras de triagem — está marcado como **por
-validar** e entra no documento de validação clínica.
+**Useful scripts.** `python scripts/testar_espera.py` (on your machine,
+with internet) contacts SESARAM and shows what it read and what's still
+unmapped; `python scripts/simular_espera.py` writes a demonstration
+scenario so you can see the switch rule work without depending on the
+site (ideal for the presentation).
 
-**Ética e robustez.** Há cache com tempo de vida curto (nunca se
-sobrecarrega o site: no máximo um pedido por intervalo, com
-identificação honesta no User-Agent), cache negativa (não se insiste
-num site em baixo) e reutilização dos últimos dados válidos quando a
-descarga falha. A "NOTA" de cortesia do site — que aparece **mesmo com
-dados** — nunca é confundida com indisponibilidade. **A prazo, o
-caminho robusto é uma API oficial do SESARAM**: se a instituição a
-disponibilizar, trocar o leitor de páginas por esse acesso é simples e
-recomendado.
+## New in v0.9: PDF export and integration endpoint
 
-**Instalação — atenção.** Esta versão usa duas bibliotecas novas
-(`requests` e `beautifulsoup4`). Depois de extrair o zip, corre uma vez
-`python -m pip install -r requirements.txt` antes de arrancar o
-servidor.
+**Guidance PDF.** On the result screen the patient can get a one-page
+guidance summary as a PDF (priority colour, complaint, recommendation,
+suggested unit with address/phone/opening hours, warning signs and
+contacts). It is generated on the server with `reportlab` (pure Python,
+installs with `pip` on any system, including Windows). The print button
+remains available.
 
-**Scripts úteis.** `python scripts/testar_espera.py` (na tua máquina,
-com internet) contacta o SESARAM e mostra o que leu e o que ainda falta
-mapear; `python scripts/simular_espera.py` grava um cenário de
-demonstração para veres a regra de troca a funcionar sem depender do
-site (ideal para a apresentação).
+**Integration-ready.** Three endpoints aimed at external consumption (see
+`docs/INTEGRACAO.md`): `POST /api/integracao/triagem` (triage + routing in a
+single call), `POST /api/exportar_pdf` (PDF download) and
+`POST /api/exportar_pdf_base64` (the same PDF in base64, for attaching).
+`docs/INTEGRACAO.md` describes, neutrally, what is ready, the integration
+potential, and the open questions to clarify with SESARAM's IT team about
+the internal target platform.
 
-## Limitações conhecidas
+## New in v0.10: confirmed data, on-device history, and full English
 
-- As distâncias são calculadas **em linha reta** (Haversine), não por
-  estrada. Na Madeira, com a orografia, a distância real de carro pode ser
-  bastante maior; para o protótipo serve para ordenar as unidades por
-  proximidade.
-- Os dados das unidades ainda incluem entradas por confirmar (ver o aviso
-  no início e o campo `"dados_confirmados"`).
-- As regras de triagem e os textos de aconselhamento são exemplos, ainda
-  não validados clinicamente.
-- A localização automática, num computador, é estimada pela ligação à
-  internet e pode ser pouco precisa; o utente pode sempre corrigi-la
-  escolhendo o concelho.
+- **Confirmed unit coordinates.** Several health-centre coordinates were
+  confirmed and marked `dados_confirmados: true`; the remaining ones stay
+  flagged `false`. (v0.10)
+- **On-device history.** Past assessments are saved **only in the browser**
+  (localStorage) — never sent to the server — so the patient can revisit
+  what they answered and when, and delete it at any time. This keeps the
+  "we store nothing" promise on the server side. (v0.10)
+- **Self-correcting version badge.** The version shown in the header is read
+  from the backend (`/api/saude`) at startup, so it can no longer go stale.
+  (v0.10.1)
+- **PDF opens in a visible tab.** The PDF button ("Open PDF") opens the
+  document in a new tab, with a download fallback, so the result is visible
+  instead of a silent download. (v0.10.1)
+- **One-page PDF.** The guidance PDF was trimmed to the essentials (priority,
+  recommendation, unit, warning signs, contacts) and now always fits a
+  single page; the straight-line distance was removed from it. (v0.10.2)
+- **Translation audit.** `python scripts/auditar_traducoes.py` reports any
+  interface or clinical text missing its English version — detection, not
+  machine translation (clinical text must be translated by a person).
+  (v0.10.2)
+- **Full English.** The six remaining clinical flowcharts were translated,
+  and the backend-generated text (routing message, day name, unit opening
+  hours) now has English versions too, so English mode no longer leaks
+  Portuguese. (v0.10.3)
+
+## Known limitations
+
+- Distances are computed **in a straight line** (Haversine), not by road.
+  In Madeira, given the terrain, the real driving distance can be
+  considerably longer; for the prototype this is enough to rank units by
+  proximity.
+- The unit data still includes entries to be confirmed (see the notice at
+  the top and the `"dados_confirmados"` field).
+- The triage rules and advice texts are examples, not yet clinically
+  validated.
+- Automatic location, on a computer, is estimated from the internet
+  connection and may be imprecise; the user can always correct it by
+  choosing the municipality.

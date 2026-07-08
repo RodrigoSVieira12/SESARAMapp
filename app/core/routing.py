@@ -68,6 +68,12 @@ NOTA_TRANSFERENCIA_PORTO_SANTO = (
     "se necessário por via aérea."
 )
 
+NOTA_TRANSFERENCIA_PORTO_SANTO_EN = (
+    " In very serious situations, the transfer to Hospital "
+    "Dr. Nélio Mendonça is arranged by the emergency services, "
+    "by air if necessary."
+)
+
 # Textos fixos mostrados ao utente no verde e no azul. Estão aqui, num
 # só sítio, para poderem ser revistos na sessão de validação clínica
 # (o scripts/gerar_validacao_clinica.py inclui-os no documento).
@@ -137,6 +143,9 @@ def _resumo_unidade(
         "horarios": {
             s: unidade["servicos"][s].get("texto", "") for s in correspondentes
         },
+        "horarios_en": {
+            s: _horario_en(unidade["servicos"][s].get("texto", "")) for s in correspondentes
+        },
     }
 
     # Se está fechada, dizer quando reabre (o mais cedo entre os
@@ -173,6 +182,46 @@ def _texto_proxima_abertura_en(abre: datetime, quando: datetime) -> str:
     if (abre.date() - quando.date()).days == 1:
         return f"opens tomorrow at {hora}"
     return f"opens on {_DIAS_EN[abre.weekday()]} at {hora}"
+
+
+# Tradução dos textos de horário das unidades (que vivem em unidades.json em
+# português). São formulaicos, por isso uma substituição de vocabulário chega,
+# em vez de guardar um texto_en por serviço em dezenas de unidades. As horas
+# (08:00-17:00) mantêm-se. Ordem importa: termos mais longos primeiro.
+_HORARIO_SUBS = [
+    ("Dias úteis", "Weekdays"),
+    ("Segundas-Feiras", "Mondays"),
+    ("Sábados", "Saturdays"),
+    ("Sábado", "Saturday"),
+    ("Segundas", "Mondays"),
+    ("Terças", "Tuesdays"),
+    ("Quartas", "Wednesdays"),
+    ("Quintas", "Thursdays"),
+    ("Sextas", "Fridays"),
+    ("enfermagem, com marcação prévia", "nursing, by prior appointment"),
+    ("com marcação prévia", "by prior appointment"),
+    ("enfermagem", "nursing"),
+    ("Urgência aberta 24 horas", "Open 24 hours"),
+    (" e ", " and "),
+    (" a ", " to "),
+]
+
+
+def _horario_en(texto: str) -> str:
+    """Versão inglesa de um texto de horário (ex.: "Dias úteis, 08:00-20:00")."""
+    resultado = texto
+    for pt, en in _HORARIO_SUBS:
+        resultado = resultado.replace(pt, en)
+    return resultado
+
+
+def _descricao_dia_en(dia) -> str:
+    """Versão inglesa de descricao_do_dia (ex.: "Wednesday", "Saturday, holiday: …")."""
+    nome_semana = _DIAS_EN[dia.weekday()]
+    nome_feriado = feriados.feriado_em(dia)
+    if nome_feriado:
+        return f"{nome_semana}, holiday: {nome_feriado}"
+    return nome_semana
 
 
 def _elegiveis_na_ilha(procurados: list[str], ilha: str) -> list[dict]:
@@ -216,6 +265,19 @@ def _contexto_do_dia(quando: datetime) -> str:
     return "A esta hora, "
 
 
+def _contexto_do_dia_en(quando: datetime) -> str:
+    """Versão inglesa de _contexto_do_dia."""
+    dia = quando.date()
+    tipo = feriados.tipo_de_dia(dia)
+    if tipo == "feriado":
+        return f"Today is a public holiday ({feriados.feriado_em(dia)}) and "
+    if tipo == "sabado":
+        return "It's Saturday and "
+    if tipo == "domingo":
+        return "It's Sunday and "
+    return "At this time, "
+
+
 def decidir_encaminhamento(
     cor: str, lat: float, lng: float, quando: datetime | None = None
 ) -> dict:
@@ -242,6 +304,7 @@ def decidir_encaminhamento(
             "tipo": feriados.tipo_de_dia(dia),
             "feriado": feriados.feriado_em(dia),
             "descricao": feriados.descricao_do_dia(dia),
+            "descricao_en": _descricao_dia_en(dia),
         },
     }
 
@@ -253,11 +316,18 @@ def decidir_encaminhamento(
             "não se desloque pelos próprios meios. A urgência mais próxima "
             "é indicada abaixo apenas como referência."
         )
+        mensagem_en = (
+            "Call 112 now. Follow the operator's instructions and, if "
+            "possible, do not travel by your own means. The nearest "
+            "emergency department is shown below for reference only."
+        )
         if no_porto_santo:
             mensagem += NOTA_TRANSFERENCIA_PORTO_SANTO
+            mensagem_en += NOTA_TRANSFERENCIA_PORTO_SANTO_EN
         return base | {
             "acao": "ligar_112",
             "mensagem": mensagem,
+            "mensagem_en": mensagem_en,
             "unidade": referencia,
             "alternativas": [] if no_porto_santo else abertas[1:3],
         }
@@ -291,6 +361,11 @@ def decidir_encaminhamento(
                 f"({principal['distancia_km']} km). "
                 "Se os sintomas agravarem pelo caminho, ligue 112."
             )
+            mensagem_en = (
+                f"Go to {principal['nome']} "
+                f"({principal['distancia_km']} km). "
+                "If symptoms worsen on the way, call 112."
+            )
             # Regra experimental (por validar): explicar porque é que a
             # unidade sugerida não é simplesmente a mais próxima.
             if troca:
@@ -302,11 +377,21 @@ def decidir_encaminhamento(
                     f"{principal['nome']} — por isso sugerimos esta. Regra "
                     "experimental, por validar."
                 )
+                mensagem_en += (
+                    f" Note: {troca['preterida']['nome']} is closer "
+                    f"({troca['preterida']['distancia_km']} km), but with the "
+                    f"current waiting time we estimate ~{troca['total_preterida_min']} "
+                    f"min there, versus ~{troca['total_escolhida_min']} min at "
+                    f"{principal['nome']} — so we suggest this one. Experimental "
+                    "rule, pending validation."
+                )
             if no_porto_santo and cor == "laranja":
                 mensagem += NOTA_TRANSFERENCIA_PORTO_SANTO
+                mensagem_en += NOTA_TRANSFERENCIA_PORTO_SANTO_EN
             return base | {
                 "acao": "ir_unidade",
                 "mensagem": mensagem,
+                "mensagem_en": mensagem_en,
                 "unidade": principal,
                 "alternativas": alternativas,
                 "reordenado_por_espera": bool(troca),
@@ -317,6 +402,10 @@ def decidir_encaminhamento(
             "mensagem": (
                 "Não foi possível encontrar uma unidade aberta perto de si. "
                 "Ligue 112 para orientação imediata."
+            ),
+            "mensagem_en": (
+                "We could not find an open unit near you. "
+                "Call 112 for immediate guidance."
             ),
             "unidade": candidatas[0] if candidatas else None,
             "alternativas": [],
@@ -350,6 +439,12 @@ def decidir_encaminhamento(
                     "hospitalar liberta-a para os casos graves e poupa-lhe "
                     "horas de espera."
                 ),
+                "mensagem_en": (
+                    f"Go to {principal['nome']} "
+                    f"({principal['distancia_km']} km). Avoiding the hospital "
+                    "emergency department frees it up for serious cases and "
+                    "saves you hours of waiting."
+                ),
                 "unidade": principal,
                 "alternativas": [] if no_porto_santo else abertas[1:3],
                 "centro_saude_proximo": centro_extra,
@@ -366,6 +461,11 @@ def decidir_encaminhamento(
                 if centro_local and centro_local.get("proxima_abertura_texto")
                 else ""
             )
+            reabre_en = (
+                f" (the nearest to you {centro_local['proxima_abertura_texto_en']})"
+                if centro_local and centro_local.get("proxima_abertura_texto_en")
+                else ""
+            )
             mensagem = (
                 _contexto_do_dia(quando)
                 + f"os centros de saúde estão fechados{reabre}. "
@@ -374,9 +474,18 @@ def decidir_encaminhamento(
                 f"observado hoje, dirigir-se a {principal['nome']} "
                 f"({principal['distancia_km']} km), com atendimento aberto."
             )
+            mensagem_en = (
+                _contexto_do_dia_en(quando)
+                + f"the health centres are closed{reabre_en}. "
+                "In a non-urgent situation you have two reasonable options: "
+                "watch and wait at home with SNS 24 support, or, if you prefer "
+                f"to be seen today, go to {principal['nome']} "
+                f"({principal['distancia_km']} km), which has open care."
+            )
             return base | {
                 "acao": "ir_unidade",
                 "mensagem": mensagem,
+                "mensagem_en": mensagem_en,
                 "unidade": principal,
                 "alternativas": [] if no_porto_santo else abertas[1:3],
                 "centro_saude_proximo": centro_local,
@@ -397,6 +506,13 @@ def decidir_encaminhamento(
                 "indicada abaixo. Se os sintomas agravarem, dirija-se à "
                 "urgência."
             ),
+            "mensagem_en": (
+                _contexto_do_dia_en(quando)
+                + "we could not find units open for non-urgent situations "
+                "near you. Call SNS 24 (808 24 24 24) for advice, or wait for "
+                "the unit shown below to open. If symptoms worsen, go to the "
+                "emergency department."
+            ),
             "unidade": candidatas[0] if candidatas else None,
             "alternativas": [urgencia_aberta] if urgencia_aberta else [],
             "centro_saude_proximo": centro_local,
@@ -412,6 +528,11 @@ def decidir_encaminhamento(
                 "A situação não aparenta ser urgente. Vigie os sintomas em "
                 "casa; se precisar de aconselhamento, o SNS 24 e o seu "
                 "centro de saúde (indicado abaixo) são os contactos certos."
+            ),
+            "mensagem_en": (
+                "The situation does not appear to be urgent. Watch your "
+                "symptoms at home; if you need advice, SNS 24 and your health "
+                "centre (shown below) are the right contacts."
             ),
             "unidade": proxima,
             "alternativas": [],

@@ -74,6 +74,8 @@ function linguaInicial() {
 
 function aplicarLinguaEstatica() {
   document.documentElement.lang = estado.lingua;
+  const marca = document.getElementById("marca-texto");
+  if (marca) marca.textContent = t("marca");
   const sub = document.getElementById("topo-sub");
   if (sub) sub.textContent = t("topo_sub");
   const avisoRodape = document.getElementById("rodape-aviso");
@@ -752,7 +754,7 @@ async function obterEncaminhamento() {
 function htmlUnidade(u, comMapa) {
   const rotuloServico = t("un_servico");
   const rotuloTipo = t("un_tipo");
-  const horarios = Object.entries(u.horarios || {})
+  const horarios = Object.entries(campo(u, "horarios") || {})
     .map(([s, texto]) => `<li><strong>${esc(rotuloServico[s] || s)}:</strong> ${esc(texto)}</li>`)
     .join("");
   const reabre = campo(u, "proxima_abertura_texto");
@@ -880,7 +882,7 @@ function construirPayloadPdf(dados) {
       texto: h.texto,
       resposta: h.resposta,
     })),
-    mensagem: (dados && dados.mensagem) || null,
+    mensagem: (dados && campo(dados, "mensagem")) || null,
     unidade: (dados && dados.unidade) || null,
     alternativas: (dados && dados.alternativas) || [],
     autocuidado: autocuidadoLocalizado(dados && dados.autocuidado),
@@ -968,7 +970,7 @@ function ecraEncaminhamento(dados, utente) {
     : "";
 
   const hora = horaLegivel(dados.gerado_em);
-  const diaDescricao = dados.dia && dados.dia.descricao ? dados.dia.descricao : "";
+  const diaDescricao = dados.dia ? campo(dados.dia, "descricao") || "" : "";
 
   // Como foi obtida a localização — e a hipótese de a corrigir. Nos
   // computadores a posição vem da rede e cai muitas vezes no centro do
@@ -983,10 +985,8 @@ function ecraEncaminhamento(dados, utente) {
       ? `<p class="local-aviso">${esc(t("aviso_precisao"))}</p>`
       : "";
 
-  // A mensagem longa do encaminhamento é gerada pelo backend em
-  // português; no modo EN marcamos o parágrafo com lang="pt" para os
-  // leitores de ecrã a pronunciarem bem.
-  const langMensagem = estado.lingua === "en" ? ' lang="pt"' : "";
+  // A mensagem de encaminhamento vem do backend nas duas línguas
+  // (mensagem / mensagem_en); campo() escolhe a certa.
 
   // Linha de estado dos tempos de espera: "atualizados às HH:MM" quando
   // os temos, aviso de indisponível nas cores em que isso importa.
@@ -1009,7 +1009,7 @@ function ecraEncaminhamento(dados, utente) {
     }
     <div class="cartao">
       <h2 class="titulo-ecra" tabindex="-1" data-foco>${esc(t("enc_titulos")[dados.acao] || t("enc_recomendacao"))}</h2>
-      <p${langMensagem}>${esc(dados.mensagem)}</p>
+      <p>${esc(campo(dados, "mensagem"))}</p>
       ${hora ? `<p class="texto-suave">${esc(t("enc_calculo", hora, diaDescricao))}</p>` : ""}
       ${infoEspera}
       <div class="local-linha no-print">

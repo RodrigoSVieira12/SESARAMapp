@@ -1,56 +1,189 @@
 {
   "id": "dor_toracica",
   "nome": "Dor no peito",
+  "nome_en": "Chest pain",
   "descricao": "Dor, aperto ou desconforto na zona do peito.",
+  "descricao_en": "Pain, tightness or discomfort in the chest area.",
   "fonte": "FLUXO-EXEMPLO para desenvolvimento. Obrigatória validação clínica antes de uso real.",
+  "fonte_en": "EXAMPLE FLOW for development. Clinical validation required before real use.",
   "perguntas": [
-    { "id": "dt_q1", "fase": 1,
+    {
+      "id": "dt_q1",
+      "fase": 1,
       "texto": "A dor está presente neste momento?",
-      "sim": { "proxima": "dt_q2" }, "nao": { "proxima": "dt_q11" } },
-    { "id": "dt_q2", "fase": 1,
+      "texto_en": "Is the pain present right now?",
+      "sim": { "proxima": "dt_q2" },
+      "nao": { "proxima": "dt_q11" }
+    },
+    {
+      "id": "dt_q2",
+      "fase": 1,
       "texto": "Começou há menos de uma hora?",
-      "sim": { "proxima": "dt_q4" }, "nao": { "proxima": "dt_q3" } },
-    { "id": "dt_q3", "fase": 1,
+      "texto_en": "Did it start less than an hour ago?",
+      "sim": { "proxima": "dt_q4" },
+      "nao": { "proxima": "dt_q3" }
+    },
+    {
+      "id": "dt_q3",
+      "fase": 1,
       "texto": "A dor é forte?",
-      "sim": { "proxima": "dt_q4" }, "nao": { "proxima": "dt_q5" } },
-    { "id": "dt_q4", "fase": 2,
+      "texto_en": "Is the pain strong?",
+      "sim": { "proxima": "dt_q4" },
+      "nao": { "proxima": "dt_q5" }
+    },
+    {
+      "id": "dt_q4",
+      "fase": 2,
       "texto": "Tem também suores frios, náuseas ou sensação de desmaio?",
-      "sim": { "resultado": { "cor": "vermelho", "motivo": "Dor no peito com suores frios ou náuseas pode indicar um problema cardíaco.", "nota": "Ligue 112 já. Não conduza para o hospital pelos próprios meios." } },
-      "nao": { "proxima": "dt_q5" } },
-    { "id": "dt_q5", "fase": 2,
+      "texto_en": "Do you also have cold sweats, nausea or a feeling of fainting?",
+      "sim": {
+        "resultado": {
+          "cor": "vermelho",
+          "motivo": "Dor no peito com suores frios ou náuseas pode indicar um problema cardíaco.",
+          "motivo_en": "Chest pain with cold sweats or nausea may indicate a cardiac problem.",
+          "nota": "Ligue 112 já. Não conduza para o hospital pelos próprios meios.",
+          "nota_en": "Call 112 now. Do not drive yourself to the hospital."
+        }
+      },
+      "nao": { "proxima": "dt_q5" }
+    },
+    {
+      "id": "dt_q5",
+      "fase": 2,
       "texto": "A dor é em aperto ou peso e espalha-se para o braço, maxilar ou costas?",
-      "sim": { "resultado": { "cor": "laranja", "motivo": "Dor torácica com características de alarme.", "nota": "Se surgirem suores frios ou falta de ar, ligue 112 em vez de se deslocar." } },
-      "nao": { "proxima": "dt_q6" } },
-    { "id": "dt_q6", "fase": 2,
+      "texto_en": "Is the pain a tightness or pressure that spreads to the arm, jaw or back?",
+      "sim": {
+        "resultado": {
+          "cor": "laranja",
+          "motivo": "Dor torácica com características de alarme.",
+          "motivo_en": "Chest pain with warning characteristics.",
+          "nota": "Se surgirem suores frios ou falta de ar, ligue 112 em vez de se deslocar.",
+          "nota_en": "If cold sweats or shortness of breath appear, call 112 instead of travelling."
+        }
+      },
+      "nao": { "proxima": "dt_q6" }
+    },
+    {
+      "id": "dt_q6",
+      "fase": 2,
       "texto": "Tem falta de ar associada à dor?",
-      "sim": { "resultado": { "cor": "laranja", "motivo": "Dor torácica com dificuldade respiratória." } },
-      "nao": { "proxima": "dt_q7" } },
-    { "id": "dt_q7", "fase": 2,
+      "texto_en": "Is there shortness of breath associated with the pain?",
+      "sim": {
+        "resultado": {
+          "cor": "laranja",
+          "motivo": "Dor torácica com dificuldade respiratória.",
+          "motivo_en": "Chest pain with breathing difficulty."
+        }
+      },
+      "nao": { "proxima": "dt_q7" }
+    },
+    {
+      "id": "dt_q7",
+      "fase": 2,
       "texto": "A dor aparece ou piora quando faz esforço, por exemplo subir escadas ou andar depressa?",
-      "sim": { "resultado": { "cor": "amarelo", "motivo": "Dor relacionada com esforço deve ser avaliada hoje." } },
-      "nao": { "proxima": "dt_q8" } },
-    { "id": "dt_q8", "fase": 2,
+      "texto_en": "Does the pain appear or worsen with exertion, such as climbing stairs or walking fast?",
+      "sim": {
+        "resultado": {
+          "cor": "amarelo",
+          "motivo": "Dor relacionada com esforço deve ser avaliada hoje.",
+          "motivo_en": "Pain related to exertion should be assessed today."
+        }
+      },
+      "nao": { "proxima": "dt_q8" }
+    },
+    {
+      "id": "dt_q8",
+      "fase": 2,
       "texto": "A dor piora quando respira fundo, tosse ou pressiona o local com o dedo?",
-      "sim": { "proxima": "dt_q9" }, "nao": { "proxima": "dt_q10" } },
-    { "id": "dt_q9", "fase": 3,
+      "texto_en": "Does the pain worsen when taking a deep breath, coughing or pressing the area with a finger?",
+      "sim": { "proxima": "dt_q9" },
+      "nao": { "proxima": "dt_q10" }
+    },
+    {
+      "id": "dt_q9",
+      "fase": 3,
       "texto": "Fez recentemente algum esforço físico invulgar, teve uma pancada ou tosse prolongada?",
-      "sim": { "resultado": { "cor": "verde", "motivo": "Características sugestivas de dor muscular ou da parede torácica.", "nota": "Se a dor mudar de tipo ou surgirem novos sintomas, refaça a avaliação." } },
-      "nao": { "proxima": "dt_q10" } },
-    { "id": "dt_q10", "fase": 3,
+      "texto_en": "Have you recently done unusual physical effort, had a blow, or had prolonged coughing?",
+      "sim": {
+        "resultado": {
+          "cor": "verde",
+          "motivo": "Características sugestivas de dor muscular ou da parede torácica.",
+          "motivo_en": "Features suggestive of muscular or chest wall pain.",
+          "nota": "Se a dor mudar de tipo ou surgirem novos sintomas, refaça a avaliação.",
+          "nota_en": "If the pain changes type or new symptoms appear, redo the assessment."
+        }
+      },
+      "nao": { "proxima": "dt_q10" }
+    },
+    {
+      "id": "dt_q10",
+      "fase": 3,
       "texto": "A dor dura há mais de 3 dias sem estar a agravar?",
-      "sim": { "resultado": { "cor": "verde", "motivo": "Dor estável há vários dias, sem sinais de alarme." } },
-      "nao": { "resultado": { "cor": "amarelo", "motivo": "Dor recente sem causa evidente deve ser observada hoje." } } },
-    { "id": "dt_q11", "fase": 2,
+      "texto_en": "Has the pain lasted more than 3 days without worsening?",
+      "sim": {
+        "resultado": {
+          "cor": "verde",
+          "motivo": "Dor estável há vários dias, sem sinais de alarme.",
+          "motivo_en": "Stable pain for several days, without warning signs."
+        }
+      },
+      "nao": {
+        "resultado": {
+          "cor": "amarelo",
+          "motivo": "Dor recente sem causa evidente deve ser observada hoje.",
+          "motivo_en": "Recent pain without an evident cause should be assessed today."
+        }
+      }
+    },
+    {
+      "id": "dt_q11",
+      "fase": 2,
       "texto": "Nos episódios anteriores, a dor aparecia com o esforço e aliviava com o repouso?",
-      "sim": { "resultado": { "cor": "amarelo", "motivo": "Episódios de dor com esforço devem ser avaliados brevemente." } },
-      "nao": { "proxima": "dt_q12" } },
-    { "id": "dt_q12", "fase": 3,
+      "texto_en": "In previous episodes, did the pain appear with exertion and improve with rest?",
+      "sim": {
+        "resultado": {
+          "cor": "amarelo",
+          "motivo": "Episódios de dor com esforço devem ser avaliados brevemente.",
+          "motivo_en": "Episodes of exertion-related pain should be assessed soon."
+        }
+      },
+      "nao": { "proxima": "dt_q12" }
+    },
+    {
+      "id": "dt_q12",
+      "fase": 3,
       "texto": "Os episódios duram segundos e mudam com a posição do corpo ou com o toque?",
-      "sim": { "resultado": { "cor": "azul", "motivo": "Padrão sugestivo de dor da parede torácica, sem urgência.", "nota": "Registe quando acontece e fale com o seu centro de saúde na próxima oportunidade." } },
-      "nao": { "proxima": "dt_q13" } },
-    { "id": "dt_q13", "fase": 3,
+      "texto_en": "Do the episodes last seconds and change with body position or touch?",
+      "sim": {
+        "resultado": {
+          "cor": "azul",
+          "motivo": "Padrão sugestivo de dor da parede torácica, sem urgência.",
+          "motivo_en": "Pattern suggestive of chest wall pain, without urgency.",
+          "nota": "Registe quando acontece e fale com o seu centro de saúde na próxima oportunidade.",
+          "nota_en": "Record when it happens and mention it at your next health centre appointment."
+        }
+      },
+      "nao": { "proxima": "dt_q13" }
+    },
+    {
+      "id": "dt_q13",
+      "fase": 3,
       "texto": "Os episódios estão a ficar mais frequentes ou mais fortes?",
-      "sim": { "resultado": { "cor": "amarelo", "motivo": "Padrão em agravamento deve ser avaliado brevemente." } },
-      "nao": { "resultado": { "cor": "verde", "motivo": "Episódios de dor sem padrão de alarme, a avaliar sem urgência." } } }
+      "texto_en": "Are the episodes becoming more frequent or stronger?",
+      "sim": {
+        "resultado": {
+          "cor": "amarelo",
+          "motivo": "Padrão em agravamento deve ser avaliado brevemente.",
+          "motivo_en": "A worsening pattern should be assessed soon."
+        }
+      },
+      "nao": {
+        "resultado": {
+          "cor": "verde",
+          "motivo": "Episódios de dor sem padrão de alarme, a avaliar sem urgência.",
+          "motivo_en": "Pain episodes without warning signs, to be assessed without urgency."
+        }
+      }
+    }
   ]
 }

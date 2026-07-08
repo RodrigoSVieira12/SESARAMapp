@@ -1,55 +1,195 @@
 {
   "id": "dor_abdominal",
   "nome": "Dor de barriga",
+  "nome_en": "Abdominal pain",
   "descricao": "Dor ou desconforto abdominal.",
+  "descricao_en": "Abdominal pain or discomfort.",
   "fonte": "FLUXO-EXEMPLO para desenvolvimento. Obrigatória validação clínica antes de uso real.",
+  "fonte_en": "EXAMPLE FLOW for development. Clinical validation required before real use.",
   "perguntas": [
-    { "id": "da_q1", "fase": 1,
+    {
+      "id": "da_q1",
+      "fase": 1,
       "texto": "A dor começou de repente, de um momento para o outro?",
-      "sim": { "proxima": "da_q2" }, "nao": { "proxima": "da_q4" } },
-    { "id": "da_q2", "fase": 1,
+      "texto_en": "Did the pain start suddenly, from one moment to the next?",
+      "sim": { "proxima": "da_q2" },
+      "nao": { "proxima": "da_q4" }
+    },
+    {
+      "id": "da_q2",
+      "fase": 1,
       "texto": "A dor é muito intensa?",
-      "sim": { "proxima": "da_q3" }, "nao": { "proxima": "da_q4" } },
-    { "id": "da_q3", "fase": 2,
+      "texto_en": "Is the pain very intense?",
+      "sim": { "proxima": "da_q3" },
+      "nao": { "proxima": "da_q4" }
+    },
+    {
+      "id": "da_q3",
+      "fase": 2,
       "texto": "A barriga está dura como uma tábua ou não tolera qualquer toque?",
-      "sim": { "resultado": { "cor": "vermelho", "motivo": "Dor abdominal súbita com barriga rígida pode indicar uma situação grave.", "nota": "Ligue 112 ou dirija-se já à urgência. Não coma nem beba entretanto." } },
-      "nao": { "resultado": { "cor": "laranja", "motivo": "Dor abdominal súbita e intensa deve ser vista com urgência." } } },
-    { "id": "da_q4", "fase": 1,
+      "texto_en": "Is the belly hard like a board or unable to tolerate any touch?",
+      "sim": {
+        "resultado": {
+          "cor": "vermelho",
+          "motivo": "Dor abdominal súbita com barriga rígida pode indicar uma situação grave.",
+          "motivo_en": "Sudden abdominal pain with a rigid abdomen may indicate a serious condition.",
+          "nota": "Ligue 112 ou dirija-se já à urgência. Não coma nem beba entretanto.",
+          "nota_en": "Call 112 or go to the emergency department immediately. Do not eat or drink meanwhile."
+        }
+      },
+      "nao": {
+        "resultado": {
+          "cor": "laranja",
+          "motivo": "Dor abdominal súbita e intensa deve ser vista com urgência.",
+          "motivo_en": "Sudden and intense abdominal pain should be assessed urgently."
+        }
+      }
+    },
+    {
+      "id": "da_q4",
+      "fase": 1,
       "texto": "Está grávida ou existe essa possibilidade?",
-      "sim": { "proxima": "da_q5" }, "nao": { "proxima": "da_q6" } },
-    { "id": "da_q5", "fase": 2,
+      "texto_en": "Are you pregnant or is there a possibility of pregnancy?",
+      "sim": { "proxima": "da_q5" },
+      "nao": { "proxima": "da_q6" }
+    },
+    {
+      "id": "da_q5",
+      "fase": 2,
       "texto": "Tem dor forte ou perda de sangue?",
-      "sim": { "resultado": { "cor": "laranja", "motivo": "Na gravidez, dor forte ou perda de sangue exigem observação urgente." } },
-      "nao": { "resultado": { "cor": "amarelo", "motivo": "Dor abdominal na gravidez deve ser avaliada hoje." } } },
-    { "id": "da_q6", "fase": 2,
+      "texto_en": "Is there strong pain or bleeding?",
+      "sim": {
+        "resultado": {
+          "cor": "laranja",
+          "motivo": "Na gravidez, dor forte ou perda de sangue exigem observação urgente.",
+          "motivo_en": "In pregnancy, strong pain or bleeding requires urgent assessment."
+        }
+      },
+      "nao": {
+        "resultado": {
+          "cor": "amarelo",
+          "motivo": "Dor abdominal na gravidez deve ser avaliada hoje.",
+          "motivo_en": "Abdominal pain during pregnancy should be assessed today."
+        }
+      }
+    },
+    {
+      "id": "da_q6",
+      "fase": 2,
       "texto": "Vomitou sangue ou tem fezes pretas como alcatrão?",
-      "sim": { "resultado": { "cor": "laranja", "motivo": "Possível hemorragia digestiva." } },
-      "nao": { "proxima": "da_q7" } },
-    { "id": "da_q7", "fase": 2,
+      "texto_en": "Have you vomited blood or passed black, tar-like stools?",
+      "sim": {
+        "resultado": {
+          "cor": "laranja",
+          "motivo": "Possível hemorragia digestiva.",
+          "motivo_en": "Possible digestive bleeding."
+        }
+      },
+      "nao": { "proxima": "da_q7" }
+    },
+    {
+      "id": "da_q7",
+      "fase": 2,
       "texto": "Tem febre junto com a dor?",
-      "sim": { "proxima": "da_q8" }, "nao": { "proxima": "da_q9" } },
-    { "id": "da_q8", "fase": 2,
+      "texto_en": "Do you have fever along with the pain?",
+      "sim": { "proxima": "da_q8" },
+      "nao": { "proxima": "da_q9" }
+    },
+    {
+      "id": "da_q8",
+      "fase": 2,
       "texto": "A dor concentra-se na parte inferior direita da barriga?",
-      "sim": { "resultado": { "cor": "laranja", "motivo": "Dor com febre nessa zona obriga a excluir apendicite." } },
-      "nao": { "resultado": { "cor": "amarelo", "motivo": "Dor abdominal com febre deve ser observada hoje." } } },
-    { "id": "da_q9", "fase": 2,
+      "texto_en": "Is the pain concentrated in the lower right part of the abdomen?",
+      "sim": {
+        "resultado": {
+          "cor": "laranja",
+          "motivo": "Dor com febre nessa zona obriga a excluir apendicite.",
+          "motivo_en": "Pain with fever in that area requires ruling out appendicitis."
+        }
+      },
+      "nao": {
+        "resultado": {
+          "cor": "amarelo",
+          "motivo": "Dor abdominal com febre deve ser observada hoje.",
+          "motivo_en": "Abdominal pain with fever should be assessed today."
+        }
+      }
+    },
+    {
+      "id": "da_q9",
+      "fase": 2,
       "texto": "A dor é em cólica, ou seja, vai e vem em ondas?",
-      "sim": { "proxima": "da_q10" }, "nao": { "proxima": "da_q11" } },
-    { "id": "da_q10", "fase": 3,
+      "texto_en": "Is the pain colicky, meaning it comes and goes in waves?",
+      "sim": { "proxima": "da_q10" },
+      "nao": { "proxima": "da_q11" }
+    },
+    {
+      "id": "da_q10",
+      "fase": 3,
       "texto": "Já teve pedras nos rins ou na vesícula?",
-      "sim": { "resultado": { "cor": "amarelo", "motivo": "Cólica em pessoa com historial de cálculos deve ser avaliada hoje." } },
-      "nao": { "proxima": "da_q11" } },
-    { "id": "da_q11", "fase": 3,
+      "texto_en": "Have you had kidney stones or gallstones before?",
+      "sim": {
+        "resultado": {
+          "cor": "amarelo",
+          "motivo": "Cólica em pessoa com historial de cálculos deve ser avaliada hoje.",
+          "motivo_en": "Colicky pain in someone with a history of stones should be assessed today."
+        }
+      },
+      "nao": { "proxima": "da_q11" }
+    },
+    {
+      "id": "da_q11",
+      "fase": 3,
       "texto": "A dor dura há mais de 48 horas sem melhorar?",
-      "sim": { "resultado": { "cor": "amarelo", "motivo": "Dor persistente deve ser observada." } },
-      "nao": { "proxima": "da_q12" } },
-    { "id": "da_q12", "fase": 3,
+      "texto_en": "Has the pain lasted more than 48 hours without improvement?",
+      "sim": {
+        "resultado": {
+          "cor": "amarelo",
+          "motivo": "Dor persistente deve ser observada.",
+          "motivo_en": "Persistent pain should be assessed."
+        }
+      },
+      "nao": { "proxima": "da_q12" }
+    },
+    {
+      "id": "da_q12",
+      "fase": 3,
       "texto": "Apesar da dor, continua a conseguir comer e beber?",
+      "texto_en": "Despite the pain, are you still able to eat and drink?",
       "sim": { "proxima": "da_q13" },
-      "nao": { "resultado": { "cor": "verde", "motivo": "Dor recente com pouca tolerância alimentar, a avaliar sem urgência.", "nota": "Dieta leve e líquidos em pequenas quantidades. Se agravar, refaça a avaliação." } } },
-    { "id": "da_q13", "fase": 3,
+      "nao": {
+        "resultado": {
+          "cor": "verde",
+          "motivo": "Dor recente com pouca tolerância alimentar, a avaliar sem urgência.",
+          "motivo_en": "Recent pain with low food tolerance, to be assessed without urgency.",
+          "nota": "Dieta leve e líquidos em pequenas quantidades. Se agravar, refaça a avaliação.",
+          "nota_en": "Light diet and small amounts of fluids. If it worsens, redo the assessment."
+        }
+      }
+    },
+    {
+      "id": "da_q13",
+      "fase": 3,
       "texto": "A dor é leve e melhora depois de evacuar ou de libertar gases?",
-      "sim": { "resultado": { "cor": "azul", "motivo": "Padrão sugestivo de desconforto intestinal comum.", "nota": "Dieta leve, água e descanso. Se durar mais de 48 horas ou agravar, refaça a avaliação." } },
-      "nao": { "resultado": { "cor": "verde", "motivo": "Dor abdominal recente sem sinais de alarme.", "nota": "Dieta leve e hidratação. Se agravar ou surgirem novos sintomas, refaça a avaliação." } } }
+      "texto_en": "Is the pain mild and does it improve after bowel movements or passing gas?",
+      "sim": {
+        "resultado": {
+          "cor": "azul",
+          "motivo": "Padrão sugestivo de desconforto intestinal comum.",
+          "motivo_en": "Pattern suggestive of common intestinal discomfort.",
+          "nota": "Dieta leve, água e descanso. Se durar mais de 48 horas ou agravar, refaça a avaliação.",
+          "nota_en": "Light diet, water and rest. If it lasts more than 48 hours or worsens, redo the assessment."
+        }
+      },
+      "nao": {
+        "resultado": {
+          "cor": "verde",
+          "motivo": "Dor abdominal recente sem sinais de alarme.",
+          "motivo_en": "Recent abdominal pain without warning signs.",
+          "nota": "Dieta leve e hidratação. Se agravar ou surgirem novos sintomas, refaça a avaliação.",
+          "nota_en": "Light diet and hydration. If it worsens or new symptoms appear, redo the assessment."
+        }
+      }
+    }
   ]
 }

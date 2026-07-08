@@ -1,57 +1,201 @@
 {
   "id": "vomitos_diarreia",
   "nome": "Vómitos ou diarreia",
+  "nome_en": "Vomiting or diarrhea",
   "descricao": "Vómitos, diarreia, suspeita de intoxicação alimentar.",
+  "descricao_en": "Vomiting, diarrhea, suspected food poisoning.",
   "fonte": "FLUXO-EXEMPLO para desenvolvimento. Obrigatória validação clínica antes de uso real.",
+  "fonte_en": "EXAMPLE FLOW for development. Clinical validation required before real use.",
   "perguntas": [
-    { "id": "vd_q1", "fase": 1,
+    {
+      "id": "vd_q1",
+      "fase": 1,
       "texto": "Os sintomas começaram há menos de 48 horas?",
-      "sim": { "proxima": "vd_q2" }, "nao": { "proxima": "vd_q10" } },
-    { "id": "vd_q2", "fase": 1,
+      "texto_en": "Did the symptoms start less than 48 hours ago?",
+      "sim": { "proxima": "vd_q2" },
+      "nao": { "proxima": "vd_q10" }
+    },
+    {
+      "id": "vd_q2",
+      "fase": 1,
       "texto": "Trata-se de um bebé com menos de 1 ano?",
-      "sim": { "proxima": "vd_q3" }, "nao": { "proxima": "vd_q4" } },
-    { "id": "vd_q3", "fase": 2,
+      "texto_en": "Is this a baby under 1 year old?",
+      "sim": { "proxima": "vd_q3" },
+      "nao": { "proxima": "vd_q4" }
+    },
+    {
+      "id": "vd_q3",
+      "fase": 2,
       "texto": "O bebé recusa líquidos, tem a moleirinha funda ou está com as fraldas secas há mais de 6 horas?",
-      "sim": { "resultado": { "cor": "laranja", "motivo": "Sinais de desidratação num bebé exigem observação urgente." } },
-      "nao": { "resultado": { "cor": "amarelo", "motivo": "Bebés desidratam depressa e devem ser avaliados hoje.", "nota": "Ofereça líquidos em pequenas quantidades e com frequência." } } },
-    { "id": "vd_q4", "fase": 1,
+      "texto_en": "Is the baby refusing fluids, has a sunken soft spot, or has had dry diapers for more than 6 hours?",
+      "sim": {
+        "resultado": {
+          "cor": "laranja",
+          "motivo": "Sinais de desidratação num bebé exigem observação urgente.",
+          "motivo_en": "Signs of dehydration in a baby require urgent assessment."
+        }
+      },
+      "nao": {
+        "resultado": {
+          "cor": "amarelo",
+          "motivo": "Bebés desidratam depressa e devem ser avaliados hoje.",
+          "motivo_en": "Babies dehydrate quickly and should be assessed today.",
+          "nota": "Ofereça líquidos em pequenas quantidades e com frequência.",
+          "nota_en": "Offer fluids in small amounts frequently."
+        }
+      }
+    },
+    {
+      "id": "vd_q4",
+      "fase": 1,
       "texto": "É uma pessoa idosa frágil, grávida, ou com doença crónica importante, por exemplo diabetes ou doença do rim ou do coração?",
-      "sim": { "proxima": "vd_q5" }, "nao": { "proxima": "vd_q6" } },
-    { "id": "vd_q5", "fase": 2,
+      "texto_en": "Is the person a frail elderly adult, pregnant, or with a significant chronic illness such as diabetes, kidney or heart disease?",
+      "sim": { "proxima": "vd_q5" },
+      "nao": { "proxima": "vd_q6" }
+    },
+    {
+      "id": "vd_q5",
+      "fase": 2,
       "texto": "Está a conseguir beber e a reter os líquidos?",
-      "sim": { "resultado": { "cor": "amarelo", "motivo": "Pessoas mais vulneráveis à desidratação devem ser avaliadas hoje." } },
-      "nao": { "resultado": { "cor": "laranja", "motivo": "Pessoa vulnerável sem conseguir reter líquidos deve ser vista já." } } },
-    { "id": "vd_q6", "fase": 2,
+      "texto_en": "Is the person able to drink and keep fluids down?",
+      "sim": {
+        "resultado": {
+          "cor": "amarelo",
+          "motivo": "Pessoas mais vulneráveis à desidratação devem ser avaliadas hoje.",
+          "motivo_en": "People more vulnerable to dehydration should be assessed today."
+        }
+      },
+      "nao": {
+        "resultado": {
+          "cor": "laranja",
+          "motivo": "Pessoa vulnerável sem conseguir reter líquidos deve ser vista já.",
+          "motivo_en": "A vulnerable person unable to retain fluids should be seen immediately."
+        }
+      }
+    },
+    {
+      "id": "vd_q6",
+      "fase": 2,
       "texto": "Há sangue no vómito, ou as fezes estão pretas ou com sangue?",
-      "sim": { "resultado": { "cor": "laranja", "motivo": "Possível hemorragia digestiva." } },
-      "nao": { "proxima": "vd_q7" } },
-    { "id": "vd_q7", "fase": 2,
+      "texto_en": "Is there blood in the vomit, or are the stools black or bloody?",
+      "sim": {
+        "resultado": {
+          "cor": "laranja",
+          "motivo": "Possível hemorragia digestiva.",
+          "motivo_en": "Possible digestive bleeding."
+        }
+      },
+      "nao": { "proxima": "vd_q7" }
+    },
+    {
+      "id": "vd_q7",
+      "fase": 2,
       "texto": "A pessoa está muito prostrada, confusa, ou quase a desmaiar quando se levanta?",
-      "sim": { "resultado": { "cor": "laranja", "motivo": "Sinais de desidratação grave ou de mal-estar importante." } },
-      "nao": { "proxima": "vd_q8" } },
-    { "id": "vd_q8", "fase": 2,
+      "texto_en": "Is the person very weak, confused, or almost fainting when standing up?",
+      "sim": {
+        "resultado": {
+          "cor": "laranja",
+          "motivo": "Sinais de desidratação grave ou de mal-estar importante.",
+          "motivo_en": "Signs of severe dehydration or significant illness."
+        }
+      },
+      "nao": { "proxima": "vd_q8" }
+    },
+    {
+      "id": "vd_q8",
+      "fase": 2,
       "texto": "Urina muito pouco, tem a boca muito seca ou tonturas ao levantar-se?",
-      "sim": { "resultado": { "cor": "amarelo", "motivo": "Sinais de desidratação a avaliar hoje." } },
-      "nao": { "proxima": "vd_q9" } },
-    { "id": "vd_q9", "fase": 2,
+      "texto_en": "Is the person urinating very little, has a very dry mouth, or dizziness when standing?",
+      "sim": {
+        "resultado": {
+          "cor": "amarelo",
+          "motivo": "Sinais de desidratação a avaliar hoje.",
+          "motivo_en": "Signs of dehydration should be assessed today."
+        }
+      },
+      "nao": { "proxima": "vd_q9" }
+    },
+    {
+      "id": "vd_q9",
+      "fase": 2,
       "texto": "Tem dor abdominal forte ou febre alta associadas?",
-      "sim": { "resultado": { "cor": "amarelo", "motivo": "Sintomas associados que justificam avaliação hoje." } },
-      "nao": { "proxima": "vd_q11" } },
-    { "id": "vd_q10", "fase": 3,
+      "texto_en": "Is there strong abdominal pain or high fever associated?",
+      "sim": {
+        "resultado": {
+          "cor": "amarelo",
+          "motivo": "Sintomas associados que justificam avaliação hoje.",
+          "motivo_en": "Associated symptoms that justify assessment today."
+        }
+      },
+      "nao": { "proxima": "vd_q11" }
+    },
+    {
+      "id": "vd_q10",
+      "fase": 3,
       "texto": "Os sintomas estão a agravar ou já causaram grande quebra de forças?",
-      "sim": { "resultado": { "cor": "amarelo", "motivo": "Sintomas prolongados em agravamento devem ser observados." } },
-      "nao": { "proxima": "vd_q11" } },
-    { "id": "vd_q11", "fase": 3,
+      "texto_en": "Are the symptoms worsening or already causing significant weakness?",
+      "sim": {
+        "resultado": {
+          "cor": "amarelo",
+          "motivo": "Sintomas prolongados em agravamento devem ser observados.",
+          "motivo_en": "Prolonged worsening symptoms should be assessed."
+        }
+      },
+      "nao": { "proxima": "vd_q11" }
+    },
+    {
+      "id": "vd_q11",
+      "fase": 3,
       "texto": "Começou depois de uma refeição suspeita, e mais alguém que comeu o mesmo está igual?",
-      "sim": { "resultado": { "cor": "verde", "motivo": "Quadro sugestivo de intoxicação alimentar sem sinais de alarme.", "nota": "Hidrate-se com pequenos goles frequentes e dieta leve. Se agravar, refaça a avaliação." } },
-      "nao": { "proxima": "vd_q12" } },
-    { "id": "vd_q12", "fase": 3,
+      "texto_en": "Did it start after a suspicious meal, and is someone else who ate the same also ill?",
+      "sim": {
+        "resultado": {
+          "cor": "verde",
+          "motivo": "Quadro sugestivo de intoxicação alimentar sem sinais de alarme.",
+          "motivo_en": "Pattern suggestive of food poisoning without warning signs.",
+          "nota": "Hidrate-se com pequenos goles frequentes e dieta leve. Se agravar, refaça a avaliação.",
+          "nota_en": "Hydrate with small frequent sips and follow a light diet. If it worsens, redo the assessment."
+        }
+      },
+      "nao": { "proxima": "vd_q12" }
+    },
+    {
+      "id": "vd_q12",
+      "fase": 3,
       "texto": "Consegue beber pequenos goles com frequência sem vomitar tudo?",
+      "texto_en": "Can you drink small sips frequently without vomiting everything?",
       "sim": { "proxima": "vd_q13" },
-      "nao": { "resultado": { "cor": "amarelo", "motivo": "Sem conseguir reter líquidos, o risco de desidratação aumenta." } } },
-    { "id": "vd_q13", "fase": 3,
+      "nao": {
+        "resultado": {
+          "cor": "amarelo",
+          "motivo": "Sem conseguir reter líquidos, o risco de desidratação aumenta.",
+          "motivo_en": "Without being able to retain fluids, the risk of dehydration increases."
+        }
+      }
+    },
+    {
+      "id": "vd_q13",
+      "fase": 3,
       "texto": "Os episódios são poucos e já estão a espaçar-se?",
-      "sim": { "resultado": { "cor": "azul", "motivo": "Quadro ligeiro e em melhoria.", "nota": "Continue a hidratar-se e faça dieta leve. Se voltar a agravar, refaça a avaliação." } },
-      "nao": { "resultado": { "cor": "verde", "motivo": "Quadro recente sem sinais de alarme.", "nota": "Beba líquidos em pequenas quantidades e com frequência. Se agravar, refaça a avaliação." } } }
+      "texto_en": "Are the episodes few and already becoming less frequent?",
+      "sim": {
+        "resultado": {
+          "cor": "azul",
+          "motivo": "Quadro ligeiro e em melhoria.",
+          "motivo_en": "Mild condition that is improving.",
+          "nota": "Continue a hidratar-se e faça dieta leve. Se voltar a agravar, refaça a avaliação.",
+          "nota_en": "Continue hydrating and follow a light diet. If it worsens again, redo the assessment."
+        }
+      },
+      "nao": {
+        "resultado": {
+          "cor": "verde",
+          "motivo": "Quadro recente sem sinais de alarme.",
+          "motivo_en": "Recent condition without warning signs.",
+          "nota": "Beba líquidos em pequenas quantidades e com frequência. Se agravar, refaça a avaliação.",
+          "nota_en": "Drink fluids in small frequent amounts. If it worsens, redo the assessment."
+        }
+      }
+    }
   ]
 }
