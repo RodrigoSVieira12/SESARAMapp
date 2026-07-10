@@ -400,12 +400,58 @@ the internal target platform.
   hours) now has English versions too, so English mode no longer leaks
   Portuguese. (v0.10.3)
 
+## New in v0.11: driving times on a calibrated road network
+
+**Why.** Until v0.10, "nearest" meant straight-line distance, and the
+experimental switch rule added a real waiting time (scraped from
+SEISRAM) to a guessed travel time (straight line ÷ 50 km/h) — a
+measurement plus a guess. In Madeira the straight line genuinely
+misleads: Curral das Freiras has Funchal "next door" on the map with a
+mountain in between, and the road to Câmara de Lobos passes the hospital
+door. v0.11 replaces the guess with a road estimate — **without sending
+anyone's location off the server and without runtime network calls**.
+
+**How (three layers, in `app/core/viagem.py`).**
+The default layer is a **calibrated road network**
+(`app/data/rede_viagem.json`): ~16 reference points joined by the real
+road corridors (VR1, VE3, VE4, ER101, …) with typical minutes, plus
+terrain **barriers** (the Curral ridge, Pico Grande) that short
+straight-line access hops may not cross. The time between any two points
+is the shortest path on that graph (Dijkstra), with short local hops
+estimated by a simple detour-factor model. Like the clinical flowcharts,
+it is **editable data, not code** — anyone who knows the island can fix
+a link's minutes; startup validation catches structural mistakes (also
+run by `python scripts/validar_dados.py`). Optionally, setting the
+`VIAGEM_OSRM_URL` environment variable to an **institution-hosted OSRM**
+server switches to true routing (one `/table` request for all units),
+with a short timeout, cache, failure cooldown and automatic fallback to
+the network. It is **off by default**: using the public demo server
+would send patient coordinates to a third party (GDPR) — a decision that
+belongs to the institution, discussed in `docs/INTEGRACAO.md`.
+
+**What changed in behaviour.**
+Candidates are now ranked by **estimated driving time** (distance as the
+tie-breaker), messages say "8.9 km, ~29 min by car", unit cards and
+alternatives show the minutes, and the switch rule compares *real wait +
+road travel*. Islands never mix: between Madeira and Porto Santo the
+estimate is `None`. The response carries a `viagem_info` block and each
+unit a `tempo_viagem` one (`{"minutos", "metodo": "rede"|"osrm"}`), and
+`GET /api/viagem` exposes the estimator for inspection.
+
+**Honest evaluation.** `python scripts/avaliar_viagem.py` compares both
+methods against 16 reference journeys
+(`app/data/percursos_referencia.json`, typical times, to be confirmed):
+mean absolute error drops from **10.4 min (straight line) to 1.9 min**,
+worst case from **24 to 5 min**. Editing the network's minutes and
+re-running the script is the calibration loop.
+
 ## Known limitations
 
-- Distances are computed **in a straight line** (Haversine), not by road.
-  In Madeira, given the terrain, the real driving distance can be
-  considerably longer; for the prototype this is enough to rank units by
-  proximity.
+- Driving times come from a **simplified, hand-calibrated network** with
+  typical values: no live traffic, no rush hour, and short local hops are
+  approximated. They are estimates for ranking and expectation-setting,
+  not navigation. The reference journeys and the network's minutes are
+  pending confirmation by the team.
 - The unit data still includes entries to be confirmed (see the notice at
   the top and the `"dados_confirmados"` field).
 - The triage rules and advice texts are examples, not yet clinically

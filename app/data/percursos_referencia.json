@@ -1,0 +1,21 @@
+{
+  "nota": "Percursos de referência para avaliar o estimador de viagem (scripts/avaliar_viagem.py). 'minutos_referencia' são tempos típicos de carro, sem trânsito, recolhidos de serviços de mapas / conhecimento local — POR CONFIRMAR pela equipa. Acrescentar percursos aqui melhora a avaliação; não altera o comportamento da app.",
+  "percursos": [
+    { "nome": "Funchal (centro) → Machico",                 "de": [32.6496, -16.9086], "para": [32.7249, -16.7715], "minutos_referencia": 21 },
+    { "nome": "Funchal (centro) → Santana",                 "de": [32.6496, -16.9086], "para": [32.8060, -16.8850], "minutos_referencia": 45 },
+    { "nome": "Funchal (centro) → Calheta (vila)",          "de": [32.6496, -16.9086], "para": [32.7318, -17.1764], "minutos_referencia": 38 },
+    { "nome": "Funchal (centro) → Porto Moniz",             "de": [32.6496, -16.9086], "para": [32.8667, -17.1715], "minutos_referencia": 58 },
+    { "nome": "Curral das Freiras → Hospital (Funchal)",    "de": [32.7206, -16.9663], "para": [32.6485, -16.9244], "minutos_referencia": 27 },
+    { "nome": "Curral das Freiras → Câmara de Lobos",       "de": [32.7206, -16.9663], "para": [32.6514, -16.9799], "minutos_referencia": 33 },
+    { "nome": "Câmara de Lobos → Funchal (centro)",         "de": [32.6514, -16.9799], "para": [32.6496, -16.9086], "minutos_referencia": 13 },
+    { "nome": "Santa Cruz → Funchal (centro)",              "de": [32.6896, -16.7943], "para": [32.6496, -16.9086], "minutos_referencia": 17 },
+    { "nome": "São Vicente → Santana",                      "de": [32.7894, -17.0353], "para": [32.8060, -16.8850], "minutos_referencia": 27 },
+    { "nome": "Ribeira Brava → São Vicente",                "de": [32.6799, -17.0575], "para": [32.7894, -17.0353], "minutos_referencia": 21 },
+    { "nome": "Ponta do Pargo → Porto Moniz",               "de": [32.8119, -17.2482], "para": [32.8667, -17.1715], "minutos_referencia": 21 },
+    { "nome": "Machico → Porto da Cruz",                    "de": [32.7249, -16.7715], "para": [32.7718, -16.8313], "minutos_referencia": 17 },
+    { "nome": "Camacha → Funchal (centro)",                 "de": [32.6795, -16.8442], "para": [32.6496, -16.9086], "minutos_referencia": 20 },
+    { "nome": "Serra de Água → São Vicente",                "de": [32.7275, -17.0260], "para": [32.7894, -17.0353], "minutos_referencia": 15 },
+    { "nome": "Boaventura → Santana",                       "de": [32.8187, -16.9718], "para": [32.8060, -16.8850], "minutos_referencia": 23 },
+    { "nome": "Porto Santo: Vila Baleira → Centro de Saúde","de": [33.0560, -16.3400], "para": [33.0598, -16.3325], "minutos_referencia": 5 }
+  ]
+}

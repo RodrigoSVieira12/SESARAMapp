@@ -754,6 +754,14 @@ async function obterEncaminhamento() {
 function htmlUnidade(u, comMapa) {
   const rotuloServico = t("un_servico");
   const rotuloTipo = t("un_tipo");
+  // v0.11: com estimativa por estrada mostra "km · ~min de carro";
+  // sem ela, mantém o texto antigo "(em linha reta)".
+  const minViagem =
+    u.tempo_viagem && u.tempo_viagem.minutos != null ? u.tempo_viagem.minutos : null;
+  const textoDistancia =
+    minViagem != null
+      ? t("un_km_tempo", { km: u.distancia_km, min: minViagem })
+      : t("un_km", u.distancia_km);
   const horarios = Object.entries(campo(u, "horarios") || {})
     .map(([s, texto]) => `<li><strong>${esc(rotuloServico[s] || s)}:</strong> ${esc(texto)}</li>`)
     .join("");
@@ -765,7 +773,7 @@ function htmlUnidade(u, comMapa) {
         <div>
           <h3 class="unidade__nome">${esc(u.nome)}</h3>
           <p class="unidade__meta">${esc(rotuloTipo[u.tipo] || u.tipo)},
-            ${esc(u.concelho)}, ${esc(t("un_km", u.distancia_km))}</p>
+            ${esc(u.concelho)}, ${esc(textoDistancia)}</p>
         </div>
         <span class="chip ${u.aberta_agora ? "chip--aberto" : "chip--fechado"}">
           ${esc(u.aberta_agora ? t("un_aberta") : t("un_fechada"))}
@@ -945,11 +953,15 @@ function ecraEncaminhamento(dados, utente) {
         a.aberta_agora && a.tempo_espera && a.tempo_espera.minutos != null
           ? `, ~${a.tempo_espera.minutos} min ${t("esp_curto")}`
           : "";
+      const altViagem =
+        a.tempo_viagem && a.tempo_viagem.minutos != null
+          ? ` (${t("alt_viagem", a.tempo_viagem.minutos)})`
+          : "";
       return `
       <div class="alternativa">
         <div>
           <div class="alternativa__nome">${esc(a.nome)}</div>
-          <div class="alternativa__meta">${esc(a.concelho)}, ${esc(a.distancia_km)} km,
+          <div class="alternativa__meta">${esc(a.concelho)}, ${esc(a.distancia_km)} km${esc(altViagem)},
             ${a.aberta_agora
               ? esc(t("alt_aberto"))
               : `${esc(t("alt_fechado"))}${reabre ? `, ${esc(reabre)}` : ""}`}${esc(espMin)}</div>
@@ -1001,6 +1013,13 @@ function ecraEncaminhamento(dados, utente) {
     infoEspera = `<p class="texto-suave espera-estado">${esc(t("esp_indisponivel"))}</p>`;
   }
 
+  // v0.11: transparência sobre a origem dos tempos de viagem (nota curta,
+  // só quando a recomendação inclui uma estimativa por estrada).
+  const infoViagem =
+    dados.unidade && dados.unidade.tempo_viagem && dados.unidade.tempo_viagem.minutos != null
+      ? `<p class="texto-suave espera-estado">${esc(t("viagem_nota"))}</p>`
+      : "";
+
   render(`
     ${
       estado.horaSimulada
@@ -1012,6 +1031,7 @@ function ecraEncaminhamento(dados, utente) {
       <p>${esc(campo(dados, "mensagem"))}</p>
       ${hora ? `<p class="texto-suave">${esc(t("enc_calculo", hora, diaDescricao))}</p>` : ""}
       ${infoEspera}
+      ${infoViagem}
       <div class="local-linha no-print">
         <span class="texto-suave">${esc(t("loc_usada_prefixo"))}${localTexto}.</span>
         <button class="ligacao ligacao--botao" id="btn-alterar-local">${esc(t("alterar_local"))}</button>

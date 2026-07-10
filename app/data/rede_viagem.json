@@ -1,0 +1,67 @@
+{
+  "versao": 1,
+  "nota": "Rede simplificada de estradas da RAM para estimar tempos de viagem de carro. TODOS os minutos são valores típicos (sem trânsito) e estão POR VALIDAR pelo SESARAM — qualquer pessoa que conheça a ilha pode corrigir uma ligação sem tocar em código. Editar este ficheiro e reiniciar o servidor chega; a validação no arranque apanha erros de estrutura.",
+  "nota_en": "Simplified RAM road network used to estimate driving times. ALL minutes are typical values (no traffic) and are PENDING VALIDATION by SESARAM — anyone who knows the island can fix a link without touching code.",
+
+  "nos": [
+    { "id": "funchal",            "nome": "Funchal (centro)",        "lat": 32.6496, "lng": -16.9086, "ilha": "madeira" },
+    { "id": "camara_de_lobos",    "nome": "Câmara de Lobos",         "lat": 32.6514, "lng": -16.9799, "ilha": "madeira" },
+    { "id": "curral_das_freiras", "nome": "Curral das Freiras",      "lat": 32.7206, "lng": -16.9663, "ilha": "madeira" },
+    { "id": "ribeira_brava",      "nome": "Ribeira Brava",           "lat": 32.6799, "lng": -17.0575, "ilha": "madeira" },
+    { "id": "serra_de_agua",      "nome": "Serra de Água",           "lat": 32.7275, "lng": -17.0260, "ilha": "madeira" },
+    { "id": "ponta_do_sol",       "nome": "Ponta do Sol",            "lat": 32.6855, "lng": -17.0994, "ilha": "madeira" },
+    { "id": "calheta",            "nome": "Calheta (vila)",          "lat": 32.7318, "lng": -17.1764, "ilha": "madeira" },
+    { "id": "ponta_do_pargo",     "nome": "Ponta do Pargo",          "lat": 32.8119, "lng": -17.2482, "ilha": "madeira" },
+    { "id": "porto_moniz",        "nome": "Porto Moniz",             "lat": 32.8667, "lng": -17.1715, "ilha": "madeira" },
+    { "id": "sao_vicente",        "nome": "São Vicente",             "lat": 32.7894, "lng": -17.0353, "ilha": "madeira" },
+    { "id": "sao_jorge",          "nome": "São Jorge",               "lat": 32.8147, "lng": -16.8994, "ilha": "madeira" },
+    { "id": "santana",            "nome": "Santana",                 "lat": 32.8060, "lng": -16.8850, "ilha": "madeira" },
+    { "id": "faial",              "nome": "Faial",                   "lat": 32.7690, "lng": -16.8571, "ilha": "madeira" },
+    { "id": "machico",            "nome": "Machico",                 "lat": 32.7249, "lng": -16.7715, "ilha": "madeira" },
+    { "id": "santa_cruz",         "nome": "Santa Cruz",              "lat": 32.6896, "lng": -16.7943, "ilha": "madeira" },
+    { "id": "porto_santo",        "nome": "Porto Santo (Vila Baleira)", "lat": 33.0598, "lng": -16.3325, "ilha": "porto_santo" }
+  ],
+
+  "ligacoes": [
+    { "entre": ["funchal", "camara_de_lobos"],       "minutos": 9,  "via": "VR1" },
+    { "entre": ["camara_de_lobos", "ribeira_brava"], "minutos": 11, "via": "VR1" },
+    { "entre": ["ribeira_brava", "ponta_do_sol"],    "minutos": 7,  "via": "VE3" },
+    { "entre": ["ponta_do_sol", "calheta"],          "minutos": 10, "via": "VE3" },
+    { "entre": ["calheta", "ponta_do_pargo"],        "minutos": 22, "via": "ER101 (oeste)" },
+    { "entre": ["ponta_do_pargo", "porto_moniz"],    "minutos": 15, "via": "ER101 (oeste)" },
+    { "entre": ["ribeira_brava", "serra_de_agua"],   "minutos": 8,  "via": "VE4" },
+    { "entre": ["serra_de_agua", "sao_vicente"],     "minutos": 12, "via": "VE4 (túneis da Encumeada)" },
+    { "entre": ["sao_vicente", "porto_moniz"],       "minutos": 15, "via": "ER101/VE2 (costa norte)" },
+    { "entre": ["sao_vicente", "sao_jorge"],         "minutos": 17, "via": "ER101 (costa norte)" },
+    { "entre": ["sao_jorge", "santana"],             "minutos": 8,  "via": "ER101" },
+    { "entre": ["santana", "faial"],                 "minutos": 7,  "via": "ER101" },
+    { "entre": ["faial", "machico"],                 "minutos": 15, "via": "ER108 / túneis" },
+    { "entre": ["machico", "santa_cruz"],            "minutos": 8,  "via": "VR1" },
+    { "entre": ["santa_cruz", "funchal"],            "minutos": 15, "via": "VR1" },
+    { "entre": ["funchal", "curral_das_freiras"],    "minutos": 22, "via": "ER107 (túnel do Curral)" }
+  ],
+
+  "barreiras": [
+    {
+      "nome": "Crista sul do Curral das Freiras",
+      "nota": "Impede 'atalhos' em linha reta entre o vale do Curral e Câmara de Lobos / Funchal: por estrada, o acesso ao Curral faz-se pela ER107 (ligação acima).",
+      "de":   [32.7035, -17.0100],
+      "para": [32.7060, -16.9450]
+    },
+    {
+      "nome": "Cordilheira Curral ↔ Serra de Água (Pico Grande)",
+      "nota": "Os dois vales estão lado a lado no mapa mas não têm estrada direta entre si.",
+      "de":   [32.6900, -17.0000],
+      "para": [32.7750, -17.0000]
+    }
+  ],
+
+  "modelo_local": {
+    "nota": "Modelo dos acessos curtos (do ponto de origem/destino até aos nós da rede, e trajetos curtos no mesmo vale). Fatores de desvio e velocidades por escalão, editáveis. 'fator_desvio': [até_km_em_linha_reta, fator]; 'velocidade_kmh': [até_km_por_estrada, km/h].",
+    "tempo_arranque_min": 3,
+    "raio_ligacao_km": 9.0,
+    "alcance_direto_km": 7.0,
+    "fator_desvio":   [[5.0, 1.5], [9999, 1.7]],
+    "velocidade_kmh": [[2.0, 24], [5.0, 34], [9999, 40]]
+  }
+}

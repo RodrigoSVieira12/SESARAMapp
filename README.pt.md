@@ -403,12 +403,62 @@ do SESARAM sobre a plataforma interna de destino.
   nome do dia, horários das unidades) passaram a ter versão inglesa, por
   isso o modo inglês deixa de mostrar português. (v0.10.3)
 
+## Novidades na v0.11: tempos de viagem numa rede calibrada de estradas
+
+**Porquê.** Até à v0.10, "mais próxima" era distância em linha reta, e a
+regra experimental de troca somava uma espera real (recolhida do
+SEISRAM) a uma viagem adivinhada (linha reta ÷ 50 km/h) — uma medição
+com um palpite. Na Madeira, a linha reta engana mesmo: o Curral das
+Freiras tem o Funchal "ao lado" no mapa com uma serra pelo meio, e a
+estrada para Câmara de Lobos passa à porta do hospital. A v0.11
+substitui o palpite por uma estimativa por estrada — **sem enviar a
+localização de ninguém para fora do servidor e sem chamadas de rede em
+funcionamento**.
+
+**Como (três camadas, em `app/core/viagem.py`).**
+A camada por omissão é uma **rede calibrada de estradas**
+(`app/data/rede_viagem.json`): ~16 pontos de referência ligados pelos
+troços reais (VR1, VE3, VE4, ER101, …) com minutos típicos, mais
+**barreiras** de relevo (a crista do Curral, o Pico Grande) que os
+acessos curtos em linha reta não podem atravessar. O tempo entre dois
+pontos quaisquer é o caminho mais curto nesse grafo (Dijkstra), com os
+acessos locais estimados por um modelo simples de fator de desvio. Tal
+como os fluxogramas clínicos, é **dado editável, não código** — quem
+conhece a ilha corrige os minutos de uma ligação; a validação no
+arranque apanha erros de estrutura (também corre em
+`python scripts/validar_dados.py`). Opcionalmente, definir a variável de
+ambiente `VIAGEM_OSRM_URL` para um servidor **OSRM alojado pela
+instituição** liga o cálculo de rotas verdadeiro (um pedido `/table`
+para todas as unidades), com tempo limite curto, cache, arrefecimento
+após falha e recuo automático para a rede. Está **desligado por
+omissão**: usar o servidor público de demonstração enviaria coordenadas
+de utentes para terceiros (RGPD) — decisão que pertence à instituição,
+discutida em `docs/INTEGRACAO.md`.
+
+**O que mudou no comportamento.**
+As candidatas passam a ser ordenadas por **tempo de viagem estimado**
+(distância como desempate), as mensagens dizem "8.9 km, ~29 min de
+carro", os cartões e as alternativas mostram os minutos, e a regra de
+troca compara *espera real + viagem por estrada*. As ilhas nunca se
+misturam: entre a Madeira e o Porto Santo a estimativa é `None`. A
+resposta traz um bloco `viagem_info` e cada unidade um `tempo_viagem`
+(`{"minutos", "metodo": "rede"|"osrm"}`), e `GET /api/viagem` expõe o
+estimador para inspeção.
+
+**Avaliação honesta.** `python scripts/avaliar_viagem.py` compara os
+dois métodos com 16 percursos de referência
+(`app/data/percursos_referencia.json`, tempos típicos, por confirmar):
+o erro absoluto médio cai de **10,4 min (linha reta) para 1,9 min**, o
+pior caso de **24 para 5 min**. Editar os minutos da rede e voltar a
+correr o guião é o ciclo de calibração.
+
 ## Limitações conhecidas
 
-- As distâncias são calculadas **em linha reta** (Haversine), não por
-  estrada. Na Madeira, com a orografia, a distância real de carro pode ser
-  bastante maior; para o protótipo serve para ordenar as unidades por
-  proximidade.
+- Os tempos de viagem vêm de uma **rede simplificada, calibrada à mão**,
+  com valores típicos: sem trânsito em tempo real, sem hora de ponta, e
+  com os acessos curtos aproximados. São estimativas para ordenar e
+  gerir expectativas, não para navegação. Os percursos de referência e
+  os minutos da rede estão por confirmar pela equipa.
 - Os dados das unidades ainda incluem entradas por confirmar (ver o aviso
   no início e o campo `"dados_confirmados"`).
 - As regras de triagem e os textos de aconselhamento são exemplos, ainda

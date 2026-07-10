@@ -17,7 +17,12 @@ Decisões desta versão (todas a validar clinicamente com o SESARAM):
    Santo, todas as cores apontam para a unidade local; nas cores mais
    graves acrescenta-se a nota de que a transferência para o hospital,
    se necessária, é organizada pelos serviços de emergência.
-3. No verde, a mensagem depende do dia e da hora:
+3. (v0.11) "Mais próxima" passou a significar mais próxima EM TEMPO DE
+   VIAGEM, não em linha reta: as candidatas são ordenadas pela
+   estimativa por estrada (app/core/viagem.py), com a distância como
+   desempate. Na Madeira isto muda decisões reais — do Curral das
+   Freiras, a unidade "mais perto" no mapa fica do outro lado da serra.
+4. No verde, a mensagem depende do dia e da hora:
    - com consulta aberta num centro de saúde → recomenda-se essa;
    - ao fim de semana, feriado ou à noite (só atendimentos urgentes
      abertos) → apresentam-se DUAS opções razoáveis: vigiar em casa com
@@ -25,14 +30,14 @@ Decisões desta versão (todas a validar clinicamente com o SESARAM):
    - em qualquer caso o verde e o azul incluem um bloco de autocuidado
      (ver TEXTOS_AUTOCUIDADO), porque "esperar em casa" é muitas vezes
      uma opção legítima numa situação pouco urgente.
-4. Em caso de dúvida, o sistema erra por excesso de urgência.
+5. Em caso de dúvida, o sistema erra por excesso de urgência.
 """
 
 from __future__ import annotations
 
 from datetime import datetime
 
-from . import espera, feriados, geo, horarios, unidades
+from . import espera, feriados, geo, horarios, unidades, viagem
 from .cores import CONTACTOS, info_cor
 
 try:
@@ -118,6 +123,7 @@ def _resumo_unidade(
     quando: datetime,
     esperas: dict | None = None,
     cor: str | None = None,
+    tempo_viagem: dict | None = None,
 ) -> dict:
     """Versão da unidade pronta a enviar ao frontend."""
     correspondentes = [s for s in procurados if s in unidade["servicos"]]
@@ -138,6 +144,10 @@ def _resumo_unidade(
         "notas": unidade.get("notas"),
         "dados_confirmados": unidade.get("dados_confirmados", False),
         "distancia_km": unidade["distancia_km"],
+        # Estimativa por estrada (v0.11): {"minutos": int, "metodo": ...}
+        # ou None (ex.: unidade noutra ilha, só possível na rede de
+        # segurança de _elegiveis_na_ilha).
+        "tempo_viagem": tempo_viagem,
         "aberta_agora": bool(abertos),
         "servicos_abertos": abertos,
         "horarios": {
@@ -234,6 +244,16 @@ def _elegiveis_na_ilha(procurados: list[str], ilha: str) -> list[dict]:
     return na_ilha or unidades.com_servicos(procurados)
 
 
+def _chave_ordenacao(resumo: dict) -> tuple:
+    """Ordena por tempo de viagem estimado; sem estimativa, vai para o
+    fim e ordena por distância (mantém determinismo e o comportamento
+    antigo como recuo)."""
+    minutos = (resumo.get("tempo_viagem") or {}).get("minutos")
+    if minutos is None:
+        return (1, 0.0, resumo["distancia_km"])
+    return (0, float(minutos), resumo["distancia_km"])
+
+
 def _candidatas(
     servicos: list[str],
     lat: float,
@@ -245,7 +265,30 @@ def _candidatas(
 ) -> list[dict]:
     elegiveis = _elegiveis_na_ilha(servicos, ilha)
     ordenadas = geo.ordenar_por_distancia(elegiveis, lat, lng)
-    return [_resumo_unidade(u, servicos, quando, esperas, cor) for u in ordenadas]
+    # v0.11: um cálculo de viagem para a lista toda (com OSRM ligado é
+    # um único pedido), e a ordem passa a ser por TEMPO, não por km.
+    tempos = viagem.tempos_para_unidades(lat, lng, ordenadas)
+    resumos = [
+        _resumo_unidade(u, servicos, quando, esperas, cor, tempos.get(u["id"]))
+        for u in ordenadas
+    ]
+    resumos.sort(key=_chave_ordenacao)
+    return resumos
+
+
+def _texto_chegada(u: dict) -> str:
+    """"2.1 km, ~9 min de carro" — ou só os km, sem estimativa."""
+    minutos = (u.get("tempo_viagem") or {}).get("minutos")
+    if minutos is not None:
+        return f"{u['distancia_km']} km, ~{minutos} min de carro"
+    return f"{u['distancia_km']} km"
+
+
+def _texto_chegada_en(u: dict) -> str:
+    minutos = (u.get("tempo_viagem") or {}).get("minutos")
+    if minutos is not None:
+        return f"{u['distancia_km']} km, ~{minutos} min by car"
+    return f"{u['distancia_km']} km"
 
 
 def _primeira_aberta(candidatas: list[dict]) -> dict | None:
@@ -290,6 +333,17 @@ def decidir_encaminhamento(
     candidatas = _candidatas(SERVICOS_POR_COR[cor], lat, lng, quando, ilha, esperas, cor)
     abertas = [c for c in candidatas if c["aberta_agora"]]
 
+    # Que método de viagem foi realmente usado neste pedido (osrm|rede),
+    # para a interface poder ser transparente sobre a estimativa.
+    metodo_viagem = next(
+        (
+            (c.get("tempo_viagem") or {}).get("metodo")
+            for c in candidatas
+            if c.get("tempo_viagem")
+        ),
+        None,
+    )
+
     dia = quando.date()
     base = {
         "cor": cor,
@@ -300,6 +354,7 @@ def decidir_encaminhamento(
         "espera_info": {
             k: esperas.get(k) for k in ("disponivel", "desatualizado", "obtido_em")
         },
+        "viagem_info": viagem.descrever(metodo_viagem),
         "dia": {
             "tipo": feriados.tipo_de_dia(dia),
             "feriado": feriados.feriado_em(dia),
@@ -358,12 +413,12 @@ def decidir_encaminhamento(
 
             mensagem = (
                 f"Dirija-se a {principal['nome']} "
-                f"({principal['distancia_km']} km). "
+                f"({_texto_chegada(principal)}). "
                 "Se os sintomas agravarem pelo caminho, ligue 112."
             )
             mensagem_en = (
                 f"Go to {principal['nome']} "
-                f"({principal['distancia_km']} km). "
+                f"({_texto_chegada_en(principal)}). "
                 "If symptoms worsen on the way, call 112."
             )
             # Regra experimental (por validar): explicar porque é que a
@@ -435,13 +490,13 @@ def decidir_encaminhamento(
                 "acao": "ir_unidade",
                 "mensagem": (
                     f"Dirija-se a {principal['nome']} "
-                    f"({principal['distancia_km']} km). Evitar a urgência "
+                    f"({_texto_chegada(principal)}). Evitar a urgência "
                     "hospitalar liberta-a para os casos graves e poupa-lhe "
                     "horas de espera."
                 ),
                 "mensagem_en": (
                     f"Go to {principal['nome']} "
-                    f"({principal['distancia_km']} km). Avoiding the hospital "
+                    f"({_texto_chegada_en(principal)}). Avoiding the hospital "
                     "emergency department frees it up for serious cases and "
                     "saves you hours of waiting."
                 ),
@@ -472,7 +527,7 @@ def decidir_encaminhamento(
                 "Numa situação pouco urgente tem duas opções razoáveis: "
                 "vigiar em casa com o apoio do SNS 24, ou, se preferir ser "
                 f"observado hoje, dirigir-se a {principal['nome']} "
-                f"({principal['distancia_km']} km), com atendimento aberto."
+                f"({_texto_chegada(principal)}), com atendimento aberto."
             )
             mensagem_en = (
                 _contexto_do_dia_en(quando)
@@ -480,7 +535,7 @@ def decidir_encaminhamento(
                 "In a non-urgent situation you have two reasonable options: "
                 "watch and wait at home with SNS 24 support, or, if you prefer "
                 f"to be seen today, go to {principal['nome']} "
-                f"({principal['distancia_km']} km), which has open care."
+                f"({_texto_chegada_en(principal)}), which has open care."
             )
             return base | {
                 "acao": "ir_unidade",

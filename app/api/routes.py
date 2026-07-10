@@ -9,6 +9,7 @@ Resumo:
   GET  /api/unidades              → todas as unidades de saúde
   GET  /api/unidades/proxima      → unidades mais próximas de um ponto
   GET  /api/espera                → tempos de espera em tempo real (SEISRAM)
+  GET  /api/viagem                → tempo de viagem estimado entre dois pontos
   POST /api/encaminhamento        → para onde ir, dado cor + localização
 """
 
@@ -18,7 +19,7 @@ import base64
 
 from fastapi import APIRouter, HTTPException, Query, Response
 
-from ..core import espera, feriados, geo, horarios, pdf_clinico, routing, sugestoes, unidades
+from ..core import espera, feriados, geo, horarios, pdf_clinico, routing, sugestoes, unidades, viagem
 from ..core.cores import CONTACTOS, info_cor
 from ..core.triage_engine import ErroTriagem, TriageEngine
 from ..models.schemas import (
@@ -129,11 +130,38 @@ def unidades_proximas(
     ordenadas = geo.ordenar_por_distancia(lista, lat, lng)[:n]
 
     agora = routing.agora_na_madeira()
+    tempos = viagem.tempos_para_unidades(lat, lng, ordenadas)
     for u in ordenadas:
         u["aberta_agora"] = any(
             horarios.esta_aberto(h, agora) for h in u.get("servicos", {}).values()
         )
+        u["tempo_viagem"] = tempos.get(u["id"])
     return {"unidades": ordenadas, "consultado_em": agora.isoformat(timespec="minutes")}
+
+
+@router.get("/viagem", tags=["unidades"])
+def tempo_de_viagem(
+    lat: float = Query(ge=-90, le=90, description="Latitude da origem."),
+    lng: float = Query(ge=-180, le=180, description="Longitude da origem."),
+    lat_destino: float = Query(ge=-90, le=90, description="Latitude do destino."),
+    lng_destino: float = Query(ge=-180, le=180, description="Longitude do destino."),
+) -> dict:
+    """Tempo de viagem estimado entre dois pontos (v0.11) — transparência.
+
+    Serve para conferir o estimador (app/core/viagem.py) sem passar pela
+    triagem: devolve a estimativa por estrada e a distância em linha reta,
+    lado a lado. `estimativa` é None entre ilhas diferentes. O método
+    "rede" usa a rede calibrada local (app/data/rede_viagem.json); "osrm"
+    só aparece se a instituição configurar VIAGEM_OSRM_URL.
+    """
+    return {
+        "origem": {"lat": lat, "lng": lng},
+        "destino": {"lat": lat_destino, "lng": lng_destino},
+        "distancia_km_linha_reta": round(geo.haversine_km(lat, lng, lat_destino, lng_destino), 1),
+        "estimativa": viagem.estimar(lat, lng, lat_destino, lng_destino),
+        "nota": viagem.NOTA_VIAGEM,
+        "nota_en": viagem.NOTA_VIAGEM_EN,
+    }
 
 
 @router.post("/encaminhamento", tags=["unidades"])

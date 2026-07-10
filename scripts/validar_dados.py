@@ -275,6 +275,43 @@ def validar_espera_nomes() -> list[str]:
     return erros
 
 
+def validar_rede_viagem() -> tuple[list[str], list[str]]:
+    """app/data/rede_viagem.json: estrutura, ilhas, conetividade — e um
+    aviso de cobertura (unidade longe de qualquer nó da rede indica que
+    falta um ponto de referência nessa zona)."""
+    from app.core import viagem
+    from app.core.geo import haversine_km
+
+    try:
+        dados = json.loads(viagem.FICHEIRO_REDE.read_text(encoding="utf-8"))
+    except Exception as exc:  # noqa: BLE001
+        return [f"rede_viagem.json: não consegui ler o ficheiro ({exc})"], []
+
+    erros = [f"rede_viagem.json: {p}" for p in viagem.validar_rede(dados)]
+    avisos: list[str] = []
+
+    if not erros:
+        unidades = json.loads(CAMINHO_UNIDADES.read_text(encoding="utf-8"))
+        for u in unidades:
+            distancias = [
+                haversine_km(u["lat"], u["lng"], no["lat"], no["lng"])
+                for no in dados["nos"]
+                if no.get("ilha") == u.get("ilha")
+            ]
+            if distancias and min(distancias) > 12:
+                avisos.append(
+                    f"rede_viagem.json: {u.get('nome')} está a mais de 12 km de "
+                    f"qualquer nó da rede na sua ilha — considerar acrescentar "
+                    f"um ponto de referência nessa zona"
+                )
+        print(
+            f"  OK: rede de viagem com {len(dados['nos'])} nós, "
+            f"{len(dados['ligacoes'])} ligações e "
+            f"{len(dados.get('barreiras', []))} barreiras"
+        )
+    return erros, avisos
+
+
 def main() -> int:
     print("A verificar as regras de triagem (app/data/rules/)…")
     erros = validar_regras()
@@ -282,6 +319,11 @@ def main() -> int:
     print("A verificar as unidades (app/data/unidades.json)…")
     erros_unidades, avisos, por_confirmar = validar_unidades()
     erros.extend(erros_unidades)
+
+    print("A verificar a rede de tempos de viagem (app/data/rede_viagem.json)…")
+    erros_rede, avisos_rede = validar_rede_viagem()
+    erros.extend(erros_rede)
+    avisos.extend(avisos_rede)
 
     print("A verificar os textos de autocuidado (app/data/autocuidado.json)…")
     erros.extend(validar_autocuidado())

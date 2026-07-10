@@ -159,10 +159,18 @@ documento.
 3. **Confirmação dos dados das unidades.** Moradas, telefones, horários e
    coordenadas foram sendo confirmados progressivamente; os registos ainda
    por confirmar estão marcados com `dados_confirmados: false`.
-4. **Tempo de viagem real.** A distância usada é em linha reta (Haversine).
-   Para tempo de viagem real (a pé/carro) seria necessário um serviço de
-   rotas externo (por exemplo OSRM, gratuito, ou uma API comercial de matriz
-   de distâncias), com o custo e a dependência de rede associados.
+4. **Tempo de viagem real.** Desde a v0.11, os tempos de viagem vêm de uma
+   rede calibrada de estradas da RAM (`app/data/rede_viagem.json`), local e
+   editável — sem enviar coordenadas de utentes para fora. Para rotas
+   verdadeiras, o protótipo já suporta um servidor OSRM **alojado pela
+   instituição** (definir a variável de ambiente `VIAGEM_OSRM_URL`; recuo
+   automático para a rede calibrada em caso de falha). Usar o servidor
+   público de demonstração do OSRM está fora de questão em produção:
+   implicaria enviar a localização de doentes para terceiros (RGPD) e não
+   tem garantias de disponibilidade. Alojar OSRM internamente é leve (um
+   contentor Docker com o extrato OpenStreetMap da Madeira) mas é uma
+   decisão dos serviços de informática — manutenção e atualização do mapa
+   incluídas. Trânsito em tempo real ficaria, mesmo assim, por cobrir.
 5. **Identidade institucional.** As cores e o logótipo são provisórios (os
    azuis trocam-se numa variável CSS). O texto do *disclaimer* deve seguir a
    redação institucional pretendida.

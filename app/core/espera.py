@@ -51,7 +51,7 @@ TTL_SEGUNDOS = 180               # frescura normal do cache (e cache negativa)
 VALIDADE_MAXIMA_SEGUNDOS = 1800  # com a fonte em baixo, o cache antigo vale 30 min
 
 # Regra de troca (EXPERIMENTAL — por validar clinicamente):
-VELOCIDADE_MEDIA_KMH = 50        # estimativa conservadora de viagem na RAM
+VELOCIDADE_MEDIA_KMH = 50        # RECUO da viagem (v0.11 usa app/core/viagem.py)
 POUPANCA_MINIMA_MIN = 30         # só trocar se poupar pelo menos isto
 DESVIO_MAXIMO_KM = 15            # e sem obrigar a um grande desvio
 
@@ -435,10 +435,19 @@ def para_unidade(esperas: dict, unidade_id: str, cor: str | None = None) -> dict
 
 
 def tempo_total_estimado(resumo: dict) -> float | None:
-    """Viagem estimada (distância / velocidade média) + espera atual."""
+    """Viagem estimada + espera atual.
+
+    v0.11: usa a estimativa POR ESTRADA (resumo["tempo_viagem"], de
+    app/core/viagem.py) quando existe — antes somava-se uma espera real
+    a uma viagem em linha reta a 50 km/h, ou seja, uma medição a um
+    palpite. O cálculo antigo mantém-se como recuo (resumos antigos,
+    testes, unidades sem estimativa)."""
     minutos = (resumo.get("tempo_espera") or {}).get("minutos")
     if minutos is None:
         return None
+    viagem_min = (resumo.get("tempo_viagem") or {}).get("minutos")
+    if viagem_min is not None:
+        return float(viagem_min) + minutos
     viagem = (resumo.get("distancia_km") or 0) / VELOCIDADE_MEDIA_KMH * 60
     return viagem + minutos
 
