@@ -72,7 +72,11 @@ TTL_OSRM_SEGUNDOS = 600          # cache de respostas
 ARREFECIMENTO_OSRM_SEGUNDOS = 120  # após falha, não insistir já a seguir
 
 _cache_osrm: dict[tuple, tuple[float, list]] = {}
-_osrm_falhou_em: float = 0.0
+# "Nunca falhou" tem de ser -infinito, não 0.0: logo após o arranque
+# time.monotonic() pode valer poucos segundos e "monotonic() - 0.0" cairia
+# dentro da janela de arrefecimento, desligando o OSRM sem razão.
+_NUNCA_FALHOU = float("-inf")
+_osrm_falhou_em: float = _NUNCA_FALHOU
 
 
 class ErroRedeViagem(ValueError):
@@ -381,7 +385,7 @@ def _repor_estado_osrm() -> None:
     """Limpa cache e arrefecimento (usado pelos testes)."""
     global _osrm_falhou_em
     _cache_osrm.clear()
-    _osrm_falhou_em = 0.0
+    _osrm_falhou_em = _NUNCA_FALHOU
 
 
 def _tempos_osrm(lat: float, lng: float, destinos: list[tuple[float, float]]) -> list[float | None] | None:

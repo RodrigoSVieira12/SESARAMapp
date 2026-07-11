@@ -312,6 +312,52 @@ def validar_rede_viagem() -> tuple[list[str], list[str]]:
     return erros, avisos
 
 
+def validar_localidades() -> tuple[list[str], list[str]]:
+    """app/data/localidades.json: estrutura, limites por ilha e suspeitas.
+
+    Os erros impedem o arranque (o módulo valida o mesmo no import); os
+    avisos são para olhos humanos: sítios demasiado longe do centro do
+    concelho, quase-duplicados, freguesias por confirmar. Também cruza
+    os nomes de concelho com os das unidades — uma grafia diferente não
+    parte nada, mas denuncia um engano.
+    """
+    from app.core import localidades
+
+    try:
+        dados = json.loads(localidades.FICHEIRO.read_text(encoding="utf-8"))
+    except Exception as exc:  # noqa: BLE001
+        return [f"localidades.json: não consegui ler o ficheiro ({exc})"], []
+
+    erros = [f"localidades.json: {p}" for p in localidades.validar(dados)]
+    avisos: list[str] = []
+
+    if not erros:
+        prep = localidades.carregar(recarregar=True)
+        avisos.extend(f"localidades.json: {a}" for a in localidades.avisos(prep))
+
+        unidades = json.loads(CAMINHO_UNIDADES.read_text(encoding="utf-8"))
+        nomes_localidades = {c["nome"] for c in prep["concelhos"]}
+        nomes_unidades = {u.get("concelho") for u in unidades}
+        for nome in sorted(nomes_unidades - nomes_localidades):
+            avisos.append(
+                f"localidades.json: o concelho '{nome}' aparece em unidades.json "
+                f"mas não nas localidades — grafias diferentes?"
+            )
+        for nome in sorted(nomes_localidades - nomes_unidades):
+            avisos.append(
+                f"localidades.json: o concelho '{nome}' não tem nenhuma unidade "
+                f"em unidades.json — confirmar a grafia"
+            )
+
+        n_freg = sum(len(c["freguesias"]) for c in prep["concelhos"])
+        n_sitios = sum(len(f["sitios"]) for c in prep["concelhos"] for f in c["freguesias"])
+        print(
+            f"  OK: {len(prep['concelhos'])} concelhos, {n_freg} freguesias "
+            f"e {n_sitios} sítios para o modo manual de localização"
+        )
+    return erros, avisos
+
+
 def main() -> int:
     print("A verificar as regras de triagem (app/data/rules/)…")
     erros = validar_regras()
@@ -324,6 +370,11 @@ def main() -> int:
     erros_rede, avisos_rede = validar_rede_viagem()
     erros.extend(erros_rede)
     avisos.extend(avisos_rede)
+
+    print("A verificar as localidades (app/data/localidades.json)…")
+    erros_loc, avisos_loc = validar_localidades()
+    erros.extend(erros_loc)
+    avisos.extend(avisos_loc)
 
     print("A verificar os textos de autocuidado (app/data/autocuidado.json)…")
     erros.extend(validar_autocuidado())

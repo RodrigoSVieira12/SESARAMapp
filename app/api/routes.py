@@ -10,6 +10,7 @@ Resumo:
   GET  /api/unidades/proxima      → unidades mais próximas de um ponto
   GET  /api/espera                → tempos de espera em tempo real (SEISRAM)
   GET  /api/viagem                → tempo de viagem estimado entre dois pontos
+  GET  /api/localidades           → concelhos, freguesias e sítios (modo manual)
   POST /api/encaminhamento        → para onde ir, dado cor + localização
 """
 
@@ -19,7 +20,18 @@ import base64
 
 from fastapi import APIRouter, HTTPException, Query, Response
 
-from ..core import espera, feriados, geo, horarios, pdf_clinico, routing, sugestoes, unidades, viagem
+from ..core import (
+    espera,
+    feriados,
+    geo,
+    horarios,
+    localidades,
+    pdf_clinico,
+    routing,
+    sugestoes,
+    unidades,
+    viagem,
+)
 from ..core.cores import CONTACTOS, info_cor
 from ..core.triage_engine import ErroTriagem, TriageEngine
 from ..models.schemas import (
@@ -162,6 +174,20 @@ def tempo_de_viagem(
         "nota": viagem.NOTA_VIAGEM,
         "nota_en": viagem.NOTA_VIAGEM_EN,
     }
+
+
+@router.get("/localidades", tags=["unidades"])
+def listar_localidades() -> dict:
+    """Concelhos → freguesias → sítios da RAM, para o modo manual (v0.11.1).
+
+    Serve o ecrã "Onde está?" quando o GPS falha ou o utente o quer
+    corrigir: em vez de escolher só o concelho, pode afinar até à
+    freguesia e ao sítio — nomes que qualquer pessoa conhece de cor.
+    Cada nível traz um `centro` {lat, lng}; as listas já vêm ordenadas
+    alfabeticamente (sem acentos contarem). Fonte editável:
+    app/data/localidades.json, validada no arranque.
+    """
+    return localidades.arvore()
 
 
 @router.post("/encaminhamento", tags=["unidades"])

@@ -80,10 +80,14 @@ onde-ir-sesaram/
 │   │   ├── routing.py        # cor + localização + hora → destino
 │   │   ├── horarios.py       # aberto/fechado num dado momento
 │   │   ├── geo.py            # distância de Haversine
+│   │   ├── viagem.py         # estimador de tempos de viagem (rede + OSRM opcional)
+│   │   ├── localidades.py    # concelho → freguesia → sítio (modo manual)
 │   │   ├── unidades.py       # repositório das unidades
 │   │   └── cores.py          # cores de Manchester e contactos
 │   └── data/
 │       ├── rules/            # 1 ficheiro JSON por queixa + red_flags.json
+│       ├── rede_viagem.json  # rede de estradas calibrada (editável)
+│       ├── localidades.json  # freguesias e sítios (editável)
 │       └── unidades.json     # unidades de saúde da RAM
 ├── static/                   # frontend (HTML + CSS + JS puro + Leaflet)
 └── tests/                    # pytest (motor, horários, routing, API)
@@ -206,6 +210,11 @@ para os JSON (atualizando o campo `fonte` com quem validou e quando).
 - `POST /api/triagem`, `{queixa, respostas}` ou `{red_flags}` → pergunta/resultado
 - `GET /api/unidades`, todas as unidades
 - `GET /api/unidades/proxima?lat&lng&servico&n`, mais próximas
+- `GET /api/viagem?lat&lng&lat_destino&lng_destino`, tempo de viagem de
+  carro estimado entre dois pontos (inspeção; v0.11)
+- `GET /api/localidades`, árvore concelho → freguesia → sítio para o ecrã
+  de localização manual (v0.11.1)
+- `GET /api/espera?atualizar=`, tempos de espera em tempo real (cache do SEISRAM)
 - `POST /api/encaminhamento`, `{cor, lat, lng}` → recomendação completa;
   aceita opcionalmente `quando` (ISO 8601) para simular a hora do cálculo
 - `GET /api/contactos`, 112 e SNS 24
@@ -452,6 +461,56 @@ o erro absoluto médio cai de **10,4 min (linha reta) para 1,9 min**, o
 pior caso de **24 para 5 min**. Editar os minutos da rede e voltar a
 correr o guião é o ciclo de calibração.
 
+## Novidades na v0.11.1: localização manual mais fina (freguesia e sítio)
+
+**Porquê.** Quando a localização automática falha ou está errada, a app
+deixava escolher apenas o **concelho** — e emprestava as coordenadas da
+primeira unidade de saúde desse concelho. É grosseiro de mais: quem está
+na Camacha ou no Caniço e escolhe "Santa Cruz" fica com o centro da vila,
+do lado errado do concelho. Com o modelo de estrada da v0.11 isto passou
+a ter um custo visível: da Camacha, o palpite pela vila encaminha para o
+centro de saúde de Santa Cruz (**~19 min**) quando o da Camacha está a
+**~8 min**.
+
+**Como.** Um novo ficheiro de dados editável, `app/data/localidades.json`,
+guarda a RAM como uma árvore **concelho → freguesia → sítio** (11
+concelhos, 53 freguesias, 145 sítios), com coordenadas recolhidas e
+verificadas pelo estagiário; os centros de concelho são as vilas,
+coerentes com `rede_viagem.json`. O ecrã "Onde está?" (`GET
+/api/localidades`) mostra três caixas nativas em cascata: escolhe-se o
+concelho, se quiser a freguesia, se quiser o sítio — nomes que qualquer
+pessoa conhece de cor, sem mapa para apertar, sem GPS. Escolher só o
+concelho continua a funcionar exatamente como antes ("Não sei" nos outros
+dois), por isso nada se perde. Como nos fluxogramas e na rede de estradas,
+é **dado, não código**: `app/core/localidades.py` valida no arranque (ids
+únicos, cada ponto dentro da caixa da ilha certa e coerente com a rede de
+viagem, cada freguesia com forma de ser situada) e emite **avisos brandos**
+para olhos humanos — um sítio a mais de 12 km do centro do concelho,
+quase-duplicados, ou entradas por confirmar. O `python
+scripts/validar_dados.py` corre as mesmas verificações. Cada nível expõe
+um `centro` calculado (uma freguesia sem coordenada própria usa o
+centroide dos seus sítios); o seletor resolve para o nível mais específico
+escolhido e mantém tudo no dispositivo.
+
+**Notas sobre a qualidade dos dados (para validação da equipa).** Algumas
+freguesias surgem atualmente sem sítios associados, uma vez que não foi
+possível obter informação completa e fiável através das fontes públicas
+disponíveis. Não existe uma fonte oficial única que reúna todos os sítios
+de todas as freguesias da Região Autónoma da Madeira, pelo que a informação
+foi compilada a partir dos websites de várias Juntas de Freguesia e de
+outras fontes de referência. Como consequência, é possível que alguns
+sítios ainda não estejam contemplados, embora todos os concelhos e
+freguesias da Região Autónoma da Madeira se encontrem representados. Antes
+de uma eventual implementação pelo SESARAM, recomenda-se a validação e o
+complemento desta informação, de forma a garantir que todos os sítios se
+encontram corretamente identificados. Esta funcionalidade é particularmente
+útil para utilizadores que não autorizem o acesso à localização, uma vez
+que os residentes conseguem frequentemente indicar o local onde se
+encontram através dos nomes dos sítios. Para turistas ou residentes
+recentes que possam não conhecer essas designações, a aplicação
+disponibiliza a opção **"Não sei"** tanto na seleção da freguesia como na
+seleção do sítio.
+
 ## Limitações conhecidas
 
 - Os tempos de viagem vêm de uma **rede simplificada, calibrada à mão**,
@@ -465,4 +524,4 @@ correr o guião é o ciclo de calibração.
   não validados clinicamente.
 - A localização automática, num computador, é estimada pela ligação à
   internet e pode ser pouco precisa; o utente pode sempre corrigi-la
-  escolhendo o concelho.
+  escolhendo o concelho e, se souber, a freguesia e o sítio (v0.11.1).

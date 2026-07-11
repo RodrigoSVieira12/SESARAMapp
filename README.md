@@ -1,6 +1,6 @@
 # Onde ir? Patient guidance for Madeira (RAM) — prototype (SESARAM)
 
-This repository is a working prototype for a hospital-side application that guides patients to the right point of care in the Autonomous Region of Madeira: it triages symptoms through simple yes/no questions, estimates a Manchester-style priority colour, and recommends the nearest suitable unit given the current time and opening hours. The user-facing text and the code comments are written in Portuguese, because the target users and the health service are Portuguese; even so, the architecture, the data-driven clinical rules and the routing logic make it a solid, reusable base, an excellent prototype to build a real service on.
+This repository is a working prototype for a hospital-side application that guides patients to the right point of care in the Autonomous Region of Madeira: it triages symptoms through simple yes/no questions, estimates a Manchester-style priority colour, and recommends the nearest suitable unit given the current time and opening hours. The user-facing text and the code comments are written in Portuguese, because the target users and the health service are Portuguese; even so, the architecture, the data-driven clinical rules and the routing logic make it a solid, reusable base — an excellent prototype to build a real service on.
 
 *("Onde ir?" means "Where to go?". A Portuguese version of this document is available in `README.pt.md`.)*
 
@@ -83,10 +83,14 @@ onde-ir-sesaram/
 │   │   ├── horarios.py       # open/closed at a given moment
 │   │   ├── feriados.py       # public holidays (national + RAM regional)
 │   │   ├── geo.py            # Haversine distance
+│   │   ├── viagem.py         # driving-time estimator (network + optional OSRM)
+│   │   ├── localidades.py    # municipality → parish → locality (manual mode)
 │   │   ├── unidades.py       # unit repository
 │   │   └── cores.py          # Manchester colours and contacts
 │   └── data/
 │       ├── rules/            # 1 JSON file per complaint + red_flags.json
+│       ├── rede_viagem.json  # calibrated road network (editable)
+│       ├── localidades.json  # parishes and localities (editable)
 │       └── unidades.json     # RAM health units
 ├── static/                   # frontend (HTML + CSS + plain JS + Leaflet)
 └── tests/                    # pytest (engine, hours, routing, API)
@@ -212,6 +216,11 @@ into the JSON files (updating the `fonte` field with who validated and when).
 - `POST /api/triagem` — `{queixa, respostas}` or `{red_flags}` → question/result
 - `GET /api/unidades` — all units
 - `GET /api/unidades/proxima?lat&lng&servico&n` — nearest units
+- `GET /api/viagem?lat&lng&lat_destino&lng_destino` — estimated driving
+  time between two points (inspection; v0.11)
+- `GET /api/localidades` — municipality → parish → locality tree for the
+  manual location screen (v0.11.1)
+- `GET /api/espera?atualizar=` — real-time waiting times (SEISRAM cache)
 - `POST /api/encaminhamento` — `{cor, lat, lng}` → full recommendation;
   optionally accepts `quando` (ISO 8601) to simulate the calculation time
 - `GET /api/contactos` — 112 and SNS 24
@@ -445,6 +454,53 @@ mean absolute error drops from **10.4 min (straight line) to 1.9 min**,
 worst case from **24 to 5 min**. Editing the network's minutes and
 re-running the script is the calibration loop.
 
+## New in v0.11.1: a finer manual location (parish and locality)
+
+**Why.** When automatic location fails or is wrong, the app used to let
+the user pick only the **municipality** — and it borrowed the
+coordinates of the first health unit there. That is far too coarse:
+someone in Camacha or Caniço who picks "Santa Cruz" lands on the town
+centre, on the wrong side of the municipality. With the v0.11 road model
+this now has a visible cost: from Camacha, the town-centre guess routes
+to Santa Cruz's health centre (**~19 min**) when the Camacha one is
+**~8 min** away.
+
+**How.** A new editable data file, `app/data/localidades.json`, holds
+the RAM as a tree of **municipality → parish → locality** (11
+municipalities, 53 parishes, 145 localities), with coordinates the
+intern collected and verified; municipality centres are the town
+centres, consistent with `rede_viagem.json`. The "Where are you?" screen
+(`GET /api/localidades`) offers three native dropdowns in cascade: pick
+the municipality, optionally the parish, optionally the locality — names
+people know by heart, no map to pinch, no GPS. Picking just the
+municipality still works exactly as before ("Not sure" on the other
+two), so nothing is lost. As with the flowcharts and the road network,
+it is **data, not code**: `app/core/localidades.py` validates it at
+startup (unique ids, every point inside the right island's box and
+consistent with the travel network, every parish with a way to be
+located) and emits **soft warnings** for human eyes — a locality more
+than 12 km from its municipality centre, near-duplicates, or entries
+still to be confirmed. `python scripts/validar_dados.py` runs the same
+checks. Each level exposes a computed `centro` (a parish with no
+coordinates of its own uses the centroid of its localities); the picker
+resolves to the most specific level chosen and still keeps everything
+on-device.
+
+**Data-quality notes (for the team to confirm).** Some parishes currently
+appear without associated localities because it was not possible to obtain
+complete and reliable information from publicly available sources. There is
+no single official source listing every locality in every parish of Madeira,
+so the current dataset was compiled from parish council websites and other
+available references. As a result, some localities may still be missing,
+although all municipalities and parishes of the Autonomous Region of Madeira
+are represented. Before deployment by SESARAM, the dataset should be
+reviewed and completed to ensure that all localities are correctly
+identified. This information is particularly useful when users do not allow
+access to their location, as local residents can often describe where they
+are using the names of well-known localities. For visitors or recent
+residents who may not know these names, the application provides an
+**"I don't know"** option for both parish and locality selection.
+
 ## Known limitations
 
 - Driving times come from a **simplified, hand-calibrated network** with
@@ -458,4 +514,5 @@ re-running the script is the calibration loop.
   validated.
 - Automatic location, on a computer, is estimated from the internet
   connection and may be imprecise; the user can always correct it by
-  choosing the municipality.
+  choosing the municipality and, if known, the parish and locality
+  (v0.11.1).

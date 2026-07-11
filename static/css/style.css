@@ -580,6 +580,25 @@ body {
   color: inherit;
 }
 
+/* Rótulos visíveis por cima dos selects do modo manual de localização
+   (v0.11.1): mais claros do que aria-label sozinho, sobretudo para quem
+   tem menos à-vontade com formulários. */
+.campo-rotulo {
+  display: block;
+  margin-top: 1.1rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.campo-rotulo + .campo,
+#bloco-sitio .campo {
+  margin-top: 0.35rem;
+}
+
+.loc-dica {
+  margin-top: 0.85rem;
+}
+
 /* --------------------------------------------------------------- rodapé -- */
 
 .rodape {

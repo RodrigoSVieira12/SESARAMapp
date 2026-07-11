@@ -85,12 +85,18 @@ const TEXTOS = {
     loc_permitir: 'Se o navegador pedir permissão, escolha "Permitir".',
     loc_sem_suporte: "O seu dispositivo não suporta localização automática.",
     loc_falhou:
-      "Não conseguimos obter a sua localização. Pode ativá-la nas permissões do navegador (ícone junto ao endereço) e tentar de novo, ou escolher o concelho.",
+      "Não conseguimos obter a sua localização. Pode ativá-la nas permissões do navegador (ícone junto ao endereço) e tentar de novo, ou indicar abaixo a zona onde está.",
     loc_alterar:
-      "Escolha o concelho onde está, ou tente de novo a localização automática.",
-    loc_titulo: "Em que concelho está?",
-    loc_aria_concelho: "Concelho",
-    loc_usar: "Usar este concelho",
+      "Indique a zona onde está — concelho e, se souber, freguesia e sítio — ou tente de novo a localização automática.",
+    loc_titulo: "Onde está?",
+    loc_lbl_concelho: "Concelho",
+    loc_lbl_freguesia: "Freguesia (se souber)",
+    loc_lbl_sitio: "Sítio ou zona (se souber)",
+    loc_nao_sei_freguesia: "Não sei / só o concelho",
+    loc_nao_sei_sitio: "Não sei / só a freguesia",
+    loc_dica:
+      "Quanto mais aproximar, mais fiáveis ficam as distâncias e os tempos de viagem.",
+    loc_usar: "Usar esta localização",
     loc_gps: "Tentar localização de novo",
 
     enc_titulos: {
@@ -104,6 +110,7 @@ const TEXTOS = {
       `Cálculo feito às ${hora}${dia ? ` (${dia})` : ""}. Os estados de aberto ou fechado referem-se a esse momento.`,
     loc_usada_prefixo: "Localização usada: ",
     loc_usada_concelho: (rotulo) => `concelho de ${rotulo} (escolhido por si)`,
+    loc_usada_local: (rotulo) => `${rotulo} (escolhido por si)`,
     loc_usada_auto: (precisao) =>
       `automática${precisao ? `, precisão aprox. ${precisao}` : ""}`,
     alterar_local: "Alterar localização",
@@ -173,6 +180,7 @@ const TEXTOS = {
     mapa_indisponivel: "Mapa indisponível (sem ligação ao serviço de mapas).",
     mapa_voce: "A sua localização",
     mapa_aprox: (rotulo) => `Localização aproximada (concelho de ${rotulo})`,
+    mapa_aprox_local: (rotulo) => `Localização aproximada: ${rotulo}`,
   },
 
   en: {
@@ -243,12 +251,18 @@ const TEXTOS = {
     loc_permitir: 'If the browser asks for permission, choose "Allow".',
     loc_sem_suporte: "Your device does not support automatic location.",
     loc_falhou:
-      "We could not get your location. You can enable it in the browser permissions (icon next to the address) and try again, or choose the municipality.",
+      "We could not get your location. You can enable it in the browser permissions (icon next to the address) and try again, or tell us below where you are.",
     loc_alterar:
-      "Choose the municipality where you are, or try automatic location again.",
-    loc_titulo: "Which municipality are you in?",
-    loc_aria_concelho: "Municipality",
-    loc_usar: "Use this municipality",
+      "Tell us where you are — municipality and, if you know them, parish and locality — or try automatic location again.",
+    loc_titulo: "Where are you?",
+    loc_lbl_concelho: "Municipality",
+    loc_lbl_freguesia: "Parish (if you know it)",
+    loc_lbl_sitio: "Locality or area (if you know it)",
+    loc_nao_sei_freguesia: "Not sure / municipality only",
+    loc_nao_sei_sitio: "Not sure / parish only",
+    loc_dica:
+      "The closer you get, the more reliable distances and travel times become.",
+    loc_usar: "Use this location",
     loc_gps: "Try location again",
 
     enc_titulos: {
@@ -262,6 +276,7 @@ const TEXTOS = {
       `Calculated at ${hora}${dia ? ` (${dia})` : ""}. Open or closed statuses refer to that moment.`,
     loc_usada_prefixo: "Location used: ",
     loc_usada_concelho: (rotulo) => `municipality of ${rotulo} (chosen by you)`,
+    loc_usada_local: (rotulo) => `${rotulo} (chosen by you)`,
     loc_usada_auto: (precisao) =>
       `automatic${precisao ? `, approx. accuracy ${precisao}` : ""}`,
     alterar_local: "Change location",
@@ -331,5 +346,6 @@ const TEXTOS = {
     mapa_indisponivel: "Map unavailable (no connection to the map service).",
     mapa_voce: "Your location",
     mapa_aprox: (rotulo) => `Approximate location (municipality of ${rotulo})`,
+    mapa_aprox_local: (rotulo) => `Approximate location: ${rotulo}`,
   },
 };

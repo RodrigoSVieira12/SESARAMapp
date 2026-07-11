@@ -1,111 +1,111 @@
 {
-  "obtido_em": "2026-07-10T20:07:58",
+  "obtido_em": "2026-07-11T12:53:05",
   "ok": true,
   "erro": null,
   "unidades": {
     "cs_bom_jesus": {
       "tipo_dados": "geral",
-      "em_espera": 13,
-      "tempo_medio_min": 7,
-      "atendidos": 1,
+      "em_espera": 0,
+      "tempo_medio_min": null,
+      "atendidos": null,
       "fonte": "centros_saude",
-      "atualizado_no_site": "2026-07-10 19:04"
+      "atualizado_no_site": "2026-07-11 11:52"
     },
     "cs_camara_lobos": {
       "tipo_dados": "geral",
-      "em_espera": 0,
-      "tempo_medio_min": 14,
-      "atendidos": 7,
+      "em_espera": 4,
+      "tempo_medio_min": 5,
+      "atendidos": 5,
       "fonte": "centros_saude",
-      "atualizado_no_site": "2026-07-10 19:04"
+      "atualizado_no_site": "2026-07-11 11:52"
     },
     "cs_calheta": {
       "tipo_dados": "geral",
-      "em_espera": 2,
-      "tempo_medio_min": null,
-      "atendidos": null,
+      "em_espera": 0,
+      "tempo_medio_min": 11,
+      "atendidos": 4,
       "fonte": "centros_saude",
-      "atualizado_no_site": "2026-07-10 19:04"
+      "atualizado_no_site": "2026-07-11 11:52"
     },
     "cs_machico": {
       "tipo_dados": "geral",
-      "em_espera": 9,
-      "tempo_medio_min": null,
-      "atendidos": null,
+      "em_espera": 0,
+      "tempo_medio_min": 7,
+      "atendidos": 5,
       "fonte": "centros_saude",
-      "atualizado_no_site": "2026-07-10 19:04"
+      "atualizado_no_site": "2026-07-11 11:52"
     },
     "cs_porto_moniz": {
       "tipo_dados": "geral",
       "em_espera": 0,
-      "tempo_medio_min": 4,
+      "tempo_medio_min": 24,
       "atendidos": 1,
       "fonte": "centros_saude",
-      "atualizado_no_site": "2026-07-10 19:04"
+      "atualizado_no_site": "2026-07-11 11:52"
     },
     "cs_porto_santo": {
       "tipo_dados": "geral",
-      "em_espera": 0,
-      "tempo_medio_min": 13,
-      "atendidos": 2,
+      "em_espera": 2,
+      "tempo_medio_min": 10,
+      "atendidos": 7,
       "fonte": "centros_saude",
-      "atualizado_no_site": "2026-07-10 19:04"
+      "atualizado_no_site": "2026-07-11 11:52"
     },
     "cs_ribeira_brava": {
       "tipo_dados": "geral",
       "em_espera": 0,
-      "tempo_medio_min": 9,
-      "atendidos": 5,
+      "tempo_medio_min": 8,
+      "atendidos": 3,
       "fonte": "centros_saude",
-      "atualizado_no_site": "2026-07-10 19:04"
+      "atualizado_no_site": "2026-07-11 11:52"
     },
     "cs_sao_vicente": {
       "tipo_dados": "geral",
       "em_espera": 0,
-      "tempo_medio_min": 25,
-      "atendidos": 1,
+      "tempo_medio_min": 7,
+      "atendidos": 5,
       "fonte": "centros_saude",
-      "atualizado_no_site": "2026-07-10 19:04"
+      "atualizado_no_site": "2026-07-11 11:52"
     },
     "cs_santana": {
       "tipo_dados": "geral",
       "em_espera": 0,
-      "tempo_medio_min": 10,
+      "tempo_medio_min": 2,
       "atendidos": 1,
       "fonte": "centros_saude",
-      "atualizado_no_site": "2026-07-10 19:04"
+      "atualizado_no_site": "2026-07-11 11:52"
     },
     "hnm": {
       "tipo_dados": "por_cor",
       "por_cor": {
         "laranja": {
           "em_espera": 4,
-          "tempo_medio_min": 6,
-          "atendidos": 27
+          "tempo_medio_min": 13,
+          "atendidos": 21
         },
         "amarelo": {
-          "em_espera": 16,
-          "tempo_medio_min": 28,
-          "atendidos": 129
+          "em_espera": 20,
+          "tempo_medio_min": 29,
+          "atendidos": 57
         },
         "verde": {
-          "em_espera": 16,
-          "tempo_medio_min": 47,
-          "atendidos": 114
+          "em_espera": 4,
+          "tempo_medio_min": 43,
+          "atendidos": 60
         },
         "azul": {
           "em_espera": 0,
-          "tempo_medio_min": 187,
+          "tempo_medio_min": 197,
           "atendidos": 3
         }
       },
       "geral": {
-        "em_espera": 36,
-        "tempo_medio_min": 39,
-        "atendidos": 273
+        "em_espera": 28,
+        "tempo_medio_min": 42,
+        "atendidos": 141
       },
       "fonte": "hospital",
-      "atualizado_no_site": "2026-07-10 19:04"
+      "atualizado_no_site": "2026-07-11 11:52"
     }
   },
   "por_mapear": []

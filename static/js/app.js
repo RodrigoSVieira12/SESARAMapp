@@ -32,10 +32,11 @@ const estado = {
   resultado: null,
   encaminhamento: null,   // última resposta de /api/encaminhamento (para o PDF)
   queixasPorId: {},       // {id: queixa}: para obter o nome legível no PDF
-  unidades: null,         // cache para o fallback manual de localização
+  localidades: null,      // cache de /api/localidades (modo manual de localização)
   mapa: null,             // instância Leaflet ativa (destruir ao re-renderizar)
   horaSimulada: new URLSearchParams(location.search).get("hora"),
-  // {lat, lng, precisao (m|null), origem: "auto"|"concelho", rotulo}
+  // {lat, lng, precisao (m|null), origem: "auto"|"concelho",
+  //  nivel: "concelho"|"freguesia"|"sitio" (só no modo manual), rotulo}
   localizacao: null,
   renderAtual: null,      // função que redesenha o ecrã atual (troca de língua)
 };
@@ -686,26 +687,36 @@ function precisaoLegivel(metros) {
 async function ecraLocalManual(motivoChave) {
   estado.renderAtual = () => ecraLocalManual(motivoChave);
   try {
-    if (!estado.unidades) estado.unidades = await api("/api/unidades");
+    if (!estado.localidades) estado.localidades = await api("/api/localidades");
   } catch (erro) {
     return mostrarErro(erro.message, () => ecraLocalManual(motivoChave));
   }
 
-  // Coordenadas aproximadas por concelho = coordenadas da 1.ª unidade dele.
-  const porConcelho = new Map();
-  for (const u of estado.unidades) {
-    if (!porConcelho.has(u.concelho)) porConcelho.set(u.concelho, u);
-  }
-  const opcoes = [...porConcelho.keys()]
-    .sort((a, b) => a.localeCompare(b, "pt"))
-    .map((c) => `<option value="${esc(c)}">${esc(c)}</option>`)
+  // v0.11.1: concelho → freguesia → sítio (app/data/localidades.json).
+  // "Concelho" é grosseiro: alguém na Camacha que escolhia "Santa Cruz"
+  // ficava com as coordenadas da vila, a ~7 km e do lado errado do
+  // concelho. Cada nível a mais aproxima as distâncias e os tempos; e
+  // escolher só o concelho continua a bastar ("Não sei" nos outros dois).
+  // Listas em <select> nativos, por nomes que as pessoas conhecem de cor
+  // — sem mapa para apertar nem GPS: nada sai do dispositivo até aqui.
+  const concelhos = estado.localidades.concelhos;
+  const opcoesConcelho = concelhos
+    .map((c) => `<option value="${esc(c.id)}">${esc(c.nome)}</option>`)
     .join("");
 
   render(`
     <div class="cartao">
       <h2 class="titulo-ecra" tabindex="-1" data-foco>${esc(t("loc_titulo"))}</h2>
       <p class="texto-suave">${esc(t(motivoChave))}</p>
-      <select class="campo" id="sel-concelho" aria-label="${esc(t("loc_aria_concelho"))}">${opcoes}</select>
+      <label class="campo-rotulo" for="sel-concelho">${esc(t("loc_lbl_concelho"))}</label>
+      <select class="campo" id="sel-concelho">${opcoesConcelho}</select>
+      <label class="campo-rotulo" for="sel-freguesia">${esc(t("loc_lbl_freguesia"))}</label>
+      <select class="campo" id="sel-freguesia"></select>
+      <div id="bloco-sitio" hidden>
+        <label class="campo-rotulo" for="sel-sitio">${esc(t("loc_lbl_sitio"))}</label>
+        <select class="campo" id="sel-sitio"></select>
+      </div>
+      <p class="texto-suave loc-dica">${esc(t("loc_dica"))}</p>
       <div class="botoes">
         <button class="botao" id="btn-usar">${esc(t("loc_usar"))}</button>
         <button class="botao botao--secundario" id="btn-gps">${esc(t("loc_gps"))}</button>
@@ -714,17 +725,78 @@ async function ecraLocalManual(motivoChave) {
     </div>
   `);
 
+  const selConcelho = document.getElementById("sel-concelho");
+  const selFreguesia = document.getElementById("sel-freguesia");
+  const selSitio = document.getElementById("sel-sitio");
+  const blocoSitio = document.getElementById("bloco-sitio");
+
+  const concelhoAtual = () => concelhos.find((c) => c.id === selConcelho.value);
+  const freguesiaAtual = () => {
+    const c = concelhoAtual();
+    return c ? c.freguesias.find((f) => f.id === selFreguesia.value) : null;
+  };
+
+  function preencherFreguesias() {
+    const c = concelhoAtual();
+    selFreguesia.innerHTML =
+      `<option value="">${esc(t("loc_nao_sei_freguesia"))}</option>` +
+      c.freguesias
+        .map((f) => `<option value="${esc(f.id)}">${esc(f.nome)}</option>`)
+        .join("");
+    preencherSitios();
+  }
+
+  function preencherSitios() {
+    const f = freguesiaAtual();
+    // O select de sítio só aparece quando ajuda: freguesias com 2+ sítios.
+    // (Com 1 sítio, o centro da freguesia JÁ É esse sítio; com 0, a
+    // freguesia tem coordenada própria no ficheiro.)
+    if (!f || f.sitios.length < 2) {
+      blocoSitio.hidden = true;
+      selSitio.innerHTML = "";
+      return;
+    }
+    blocoSitio.hidden = false;
+    selSitio.innerHTML =
+      `<option value="">${esc(t("loc_nao_sei_sitio"))}</option>` +
+      f.sitios
+        .map((s) => `<option value="${esc(s.id)}">${esc(s.nome)}</option>`)
+        .join("");
+  }
+
+  preencherFreguesias();
+  selConcelho.addEventListener("change", preencherFreguesias);
+  selFreguesia.addEventListener("change", preencherSitios);
+
   document.getElementById("btn-recomecar").addEventListener("click", recomecar);
   document.getElementById("btn-gps").addEventListener("click", pedirLocalizacao);
   document.getElementById("btn-usar").addEventListener("click", () => {
-    const escolhido = document.getElementById("sel-concelho").value;
-    const unidade = porConcelho.get(escolhido);
+    const c = concelhoAtual();
+    const f = freguesiaAtual();
+    const s = f ? f.sitios.find((x) => x.id === selSitio.value) : null;
+    // Resolve para o nível mais específico escolhido. O rótulo guarda só
+    // nomes de terra (neutros de língua); os textos à volta vêm de t(),
+    // por isso mudar de língua depois continua a funcionar.
+    let ponto = c.centro;
+    let rotulo = c.nome;
+    let nivel = "concelho";
+    if (f) {
+      ponto = f.centro;
+      rotulo = `${f.nome}, ${c.nome}`;
+      nivel = "freguesia";
+    }
+    if (s) {
+      ponto = { lat: s.lat, lng: s.lng };
+      rotulo = `${s.nome} (${f.nome}), ${c.nome}`;
+      nivel = "sitio";
+    }
     usarLocalizacao({
-      lat: unidade.lat,
-      lng: unidade.lng,
+      lat: ponto.lat,
+      lng: ponto.lng,
       precisao: null,
       origem: "concelho",
-      rotulo: escolhido,
+      nivel,
+      rotulo,
     });
   });
 }
@@ -990,7 +1062,9 @@ function ecraEncaminhamento(dados, utente) {
   const precisao = utente.origem === "auto" ? utente.precisao : null;
   const localTexto =
     utente.origem === "concelho"
-      ? t("loc_usada_concelho", esc(utente.rotulo))
+      ? utente.nivel && utente.nivel !== "concelho"
+        ? t("loc_usada_local", esc(utente.rotulo))
+        : t("loc_usada_concelho", esc(utente.rotulo))
       : t("loc_usada_auto", precisao ? esc(precisaoLegivel(precisao)) : "");
   const avisoPrecisao =
     utente.origem === "auto" && precisao && precisao > 3000
@@ -1168,7 +1242,11 @@ function iniciarMapa(dados, utente) {
   })
     .addTo(mapa)
     .bindPopup(
-      utente.origem === "concelho" ? t("mapa_aprox", utente.rotulo) : t("mapa_voce")
+      utente.origem !== "concelho"
+        ? t("mapa_voce")
+        : utente.nivel && utente.nivel !== "concelho"
+          ? t("mapa_aprox_local", utente.rotulo)
+          : t("mapa_aprox", utente.rotulo)
     );
   pontos.push([utente.lat, utente.lng]);
 
