@@ -214,6 +214,8 @@ _HORARIO_SUBS = [
     ("Urgência aberta 24 horas", "Open 24 hours"),
     (" e ", " and "),
     (" a ", " to "),
+    ("das ", ""),
+    (" às ", " to "),
 ]
 
 
@@ -429,7 +431,7 @@ def decidir_encaminhamento(
                     f"({troca['preterida']['distancia_km']} km), mas com o tempo "
                     f"de espera atual estimamos ~{troca['total_preterida_min']} min "
                     f"aí, contra ~{troca['total_escolhida_min']} min em "
-                    f"{principal['nome']} — por isso sugerimos esta. Regra "
+                    f"{principal['nome']}. Por isso sugerimos esta. Regra "
                     "experimental, por validar."
                 )
                 mensagem_en += (
@@ -437,7 +439,7 @@ def decidir_encaminhamento(
                     f"({troca['preterida']['distancia_km']} km), but with the "
                     f"current waiting time we estimate ~{troca['total_preterida_min']} "
                     f"min there, versus ~{troca['total_escolhida_min']} min at "
-                    f"{principal['nome']} — so we suggest this one. Experimental "
+                    f"{principal['nome']}. That is why we suggest this one. Experimental "
                     "rule, pending validation."
                 )
             if no_porto_santo and cor == "laranja":

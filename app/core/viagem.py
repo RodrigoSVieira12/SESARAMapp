@@ -472,11 +472,11 @@ def tempos_para_unidades(lat: float, lng: float, lista: list[dict]) -> dict[str,
 
 NOTA_VIAGEM = (
     "Tempos de viagem de carro estimados com uma rede simplificada de "
-    "estradas da RAM (valores típicos, sem trânsito) — por validar."
+    "estradas da RAM (valores típicos, sem trânsito), por validar."
 )
 NOTA_VIAGEM_EN = (
     "Driving times estimated with a simplified RAM road network "
-    "(typical values, no traffic) — pending validation."
+    "(typical values, no traffic), pending validation."
 )
 
 

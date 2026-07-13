@@ -511,6 +511,44 @@ recentes que possam não conhecer essas designações, a aplicação
 disponibiliza a opção **"Não sei"** tanto na seleção da freguesia como na
 seleção do sítio.
 
+## Novidades na v0.11.2: textos mais limpos e chips de distância e tempo
+
+Uma versão de acabamento. A lógica de encaminhamento não mudou; os 170
+testes anteriores continuam a passar e 12 novos guardam as alterações
+abaixo.
+
+- **Sem travessões em nada que o utente veja.** Todos os travessões dos
+  textos da interface foram reescritos com vírgulas, dois pontos ou
+  pontos finais: `textos.js`, os conselhos de autocuidado
+  (`autocuidado.json`), as mensagens de troca do `routing.py`, a nota de
+  tempos de viagem do backend (`viagem.py`) e os títulos do PDF clínico.
+  Um teste de regressão varre o `textos.js`, os ficheiros de dados e uma
+  resposta real do `/api/encaminhamento` (PT e EN) e rebenta se algum
+  travessão voltar a entrar.
+- **Rótulos do modo manual simplificados.** "Freguesia (se souber)"
+  passou a "Freguesia" (e "Sítio ou zona"); a primeira opção de cada
+  lista já é "Não sei", por isso o parêntesis era redundante. A
+  introdução do ecrã "Onde está?" foi reescrita no mesmo espírito.
+- **Horários lidos como prosa.** Os *textos* de horário das unidades
+  passaram de "08:00-20:00" para "das 08:00 às 20:00" (os campos máquina
+  `horas` ficaram intactos). O tradutor `_horario_en` aprendeu a nova
+  redação ("Weekdays, 08:00 to 20:00").
+- **Distância e tempo de carro viraram chips.** No cartão de cada
+  unidade saíram da linha corrida ("Centro de saúde, Santa Cruz, a
+  1.7 km · ~7 min…") e são agora duas pastilhas distintas por baixo do
+  cabeçalho, com pequenos ícones (pin e carro) e um tom azul claro que
+  segue a linguagem do selo aberto/fechado. Sem estimativa por estrada,
+  o chip da distância leva a nota "linha reta".
+- **Caminhos de produção para tempos reais documentados.** O modelo
+  local do protótipo pode ordenar mal duas unidades próximas (da Achada
+  da Rocha prefere por pouco a Camacha em vez de Gaula; quem lá conduz
+  sabe que é ao contrário). O `docs/INTEGRACAO.md` passa a descrever as
+  três vias para resolver isto a sério: OSRM alojado internamente para
+  piloto (já suportado via `VIAGEM_OSRM_URL`), uma **API paga de rotas
+  (Google Routes API ou equivalente) como opção recomendada para
+  produção**, com a avaliação RGPD/EPD obrigatória, e uma tabela de
+  tempos medidos à mão como paliativo.
+
 ## Limitações conhecidas
 
 - Os tempos de viagem vêm de uma **rede simplificada, calibrada à mão**,
@@ -524,4 +562,7 @@ seleção do sítio.
   não validados clinicamente.
 - A localização automática, num computador, é estimada pela ligação à
   internet e pode ser pouco precisa; o utente pode sempre corrigi-la
-  escolhendo o concelho e, se souber, a freguesia e o sítio (v0.11.1).
+  escolhendo o concelho e, se souber, a freguesia e o sítio (v0.11.1). As
+  coordenadas dos sítios são as do estagiário, ainda por confirmar pela
+  equipa (ver os campos `"pendentes"` e `"verificado"` em
+  `app/data/localidades.json`).

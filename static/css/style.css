@@ -509,6 +509,35 @@ body {
 .chip--aberto  { background: #e7f2e8; color: #1d5a23; }
 .chip--fechado { background: #f5e8e8; color: #8c2626; }
 
+/* v0.11.2: linha de chips com distância e tempo de carro no cartão da
+   unidade. Reutiliza a base .chip para manter a mesma linguagem visual
+   do selo aberto/fechado, mas em tom informativo (azul claro). */
+.unidade__trajeto {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.55rem 0 0.15rem;
+}
+
+.chip--dado {
+  background: var(--primaria-clara);
+  color: var(--primaria-escura);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.chip--dado svg {
+  width: 0.85rem;
+  height: 0.85rem;
+  flex: none;
+}
+
+.chip__nota {
+  font-weight: 400;
+  opacity: 0.75;
+}
+
 .unidade__horarios { margin: 0.75rem 0 0; padding-left: 1.2rem; }
 .unidade__horarios li { margin: 0.2rem 0; }
 

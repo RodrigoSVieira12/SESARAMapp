@@ -92,6 +92,16 @@ function aplicarLinguaEstatica() {
 
 /* ------------------------------------------------------------ helpers -- */
 
+/* Ícones mínimos em SVG inline (herdam a cor do chip via currentColor).
+   Só dois, de traço fino, para dar leitura rápida aos chips de trajeto
+   sem introduzir uma biblioteca de ícones. v0.11.2 */
+const ICONES = {
+  pin:
+    '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
+  carro:
+    '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>',
+};
+
 function esc(valor) {
   return String(valor ?? "").replace(/[&<>"']/g, (c) => ({
     "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
@@ -826,14 +836,19 @@ async function obterEncaminhamento() {
 function htmlUnidade(u, comMapa) {
   const rotuloServico = t("un_servico");
   const rotuloTipo = t("un_tipo");
-  // v0.11: com estimativa por estrada mostra "km · ~min de carro";
-  // sem ela, mantém o texto antigo "(em linha reta)".
+  // v0.11.2: a distância e o tempo de carro deixam a linha de texto
+  // corrido e passam a dois CHIPS distintos, na linguagem visual do
+  // selo "Aberto agora". Sem estimativa por estrada, o chip da
+  // distância leva a nota "linha reta" (comportamento antigo).
   const minViagem =
     u.tempo_viagem && u.tempo_viagem.minutos != null ? u.tempo_viagem.minutos : null;
-  const textoDistancia =
+  const chipKm = `<span class="chip chip--dado">${ICONES.pin}${esc(t("chip_km", u.distancia_km))}${
+    minViagem == null ? `<span class="chip__nota">${esc(t("chip_km_nota"))}</span>` : ""
+  }</span>`;
+  const chipViagem =
     minViagem != null
-      ? t("un_km_tempo", { km: u.distancia_km, min: minViagem })
-      : t("un_km", u.distancia_km);
+      ? `<span class="chip chip--dado">${ICONES.carro}${esc(t("chip_viagem", minViagem))}<span class="chip__nota">${esc(t("chip_viagem_nota"))}</span></span>`
+      : "";
   const horarios = Object.entries(campo(u, "horarios") || {})
     .map(([s, texto]) => `<li><strong>${esc(rotuloServico[s] || s)}:</strong> ${esc(texto)}</li>`)
     .join("");
@@ -845,12 +860,13 @@ function htmlUnidade(u, comMapa) {
         <div>
           <h3 class="unidade__nome">${esc(u.nome)}</h3>
           <p class="unidade__meta">${esc(rotuloTipo[u.tipo] || u.tipo)},
-            ${esc(u.concelho)}, ${esc(textoDistancia)}</p>
+            ${esc(u.concelho)}</p>
         </div>
         <span class="chip ${u.aberta_agora ? "chip--aberto" : "chip--fechado"}">
           ${esc(u.aberta_agora ? t("un_aberta") : t("un_fechada"))}
         </span>
       </div>
+      <div class="unidade__trajeto">${chipKm}${chipViagem}</div>
       ${
         u.aberta_agora && u.tempo_espera
           ? `<p class="unidade__espera">${esc(t("esp_linha", u.tempo_espera))}</p>`

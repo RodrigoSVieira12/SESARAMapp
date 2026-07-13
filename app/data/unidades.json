@@ -44,7 +44,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 08:00-20:00",
+        "texto": "Dias úteis, das 08:00 às 20:00",
         "horas": {
           "seg": [
             "08:00-20:00"
@@ -82,7 +82,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 08:00-20:00",
+        "texto": "Dias úteis, das 08:00 às 20:00",
         "horas": {
           "seg": [
             "08:00-20:00"
@@ -120,7 +120,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 08:00-20:00; Sábados 8:30-11:00 (enfermagem)",
+        "texto": "Dias úteis, das 08:00 às 20:00; Sábados das 8:30 às 11:00 (enfermagem)",
         "horas": {
           "seg": [
             "08:00-20:00"
@@ -160,7 +160,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 08:00-20:00; Sábados 8:30-12:30 (enfermagem)",
+        "texto": "Dias úteis, das 08:00 às 20:00; Sábados das 8:30 às 12:30 (enfermagem)",
         "horas": {
           "seg": [
             "08:00-20:00"
@@ -200,7 +200,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 08:00-20:00",
+        "texto": "Dias úteis, das 08:00 às 20:00",
         "horas": {
           "seg": [
             "08:00-20:00"
@@ -242,7 +242,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 08:30-17:00",
+        "texto": "Dias úteis, das 08:30 às 17:00",
         "horas": {
           "seg": [
             "08:30-17:00"
@@ -280,7 +280,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 08:00-20:00",
+        "texto": "Dias úteis, das 08:00 às 20:00",
         "horas": {
           "seg": [
             "08:00-20:00"
@@ -318,7 +318,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 08:30-16:30",
+        "texto": "Dias úteis, das 08:30 às 16:30",
         "horas": {
           "seg": [
             "08:30-16:30"
@@ -356,7 +356,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Segundas-Feiras 08:30-17:00, Terças a Sextas 08:30-16:30",
+        "texto": "Segundas-Feiras das 08:30 às 17:00, Terças a Sextas das 08:30 às 16:30",
         "horas": {
           "seg": [
             "08:30-17:00"
@@ -394,7 +394,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 08:00-18:00",
+        "texto": "Dias úteis, das 08:00 às 18:00",
         "horas": {
           "seg": [
             "08:00-18:00"
@@ -436,7 +436,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 08:00-17:00; Sábados 8:30-12:30 (enfermagem, com marcação prévia)",
+        "texto": "Dias úteis, das 08:00 às 17:00; Sábados das 8:30 às 12:30 (enfermagem, com marcação prévia)",
         "horas": {
           "seg": [
             "08:00-17:00"
@@ -476,7 +476,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 08:30-15:30",
+        "texto": "Dias úteis, das 08:30 às 15:30",
         "horas": {
           "seg": [
             "08:30-15:30"
@@ -514,7 +514,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 08:00-18:00",
+        "texto": "Dias úteis, das 08:00 às 18:00",
         "horas": {
           "seg": [
             "08:00-18:00"
@@ -552,7 +552,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 08:30-17:00",
+        "texto": "Dias úteis, das 08:30 às 17:00",
         "horas": {
           "seg": [
             "08:30-17:00"
@@ -590,7 +590,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Segundas e Quartas 13:00-15:00, Terças 09:00-13:00, Quintas 09:00-12:00, Sextas 11:00-13:00",
+        "texto": "Segundas e Quartas das 13:00 às 15:00, Terças das 09:00 às 13:00, Quintas das 09:00 às 12:00, Sextas das 11:00 às 13:00",
         "horas": {
           "seg": [
             "13:00-15:00"
@@ -628,7 +628,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 08:00-17:30",
+        "texto": "Dias úteis, das 08:00 às 17:30",
         "horas": {
           "seg": [
             "08:00-17:30"
@@ -670,7 +670,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 08:30-17:00",
+        "texto": "Dias úteis, das 08:30 às 17:00",
         "horas": {
           "seg": [
             "08:30-17:00"
@@ -708,7 +708,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 08:30-17:00",
+        "texto": "Dias úteis, das 08:30 às 17:00",
         "horas": {
           "seg": [
             "08:30-17:00"
@@ -746,7 +746,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 08:30-16:30",
+        "texto": "Dias úteis, das 08:30 às 16:30",
         "horas": {
           "seg": [
             "08:30-16:30"
@@ -784,7 +784,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Quartas e Sextas 08:30-12:30",
+        "texto": "Quartas e Sextas das 08:30 às 12:30",
         "horas": {
           "seg": [],
           "ter": [],
@@ -816,7 +816,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 08:30-16:30",
+        "texto": "Dias úteis, das 08:30 às 16:30",
         "horas": {
           "seg": [
             "08:30-16:30"
@@ -854,7 +854,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 08:30-15:30",
+        "texto": "Dias úteis, das 08:30 às 15:30",
         "horas": {
           "seg": [
             "08:30-15:30"
@@ -892,7 +892,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 08:30-16:30",
+        "texto": "Dias úteis, das 08:30 às 16:30",
         "horas": {
           "seg": [
             "08:30-16:30"
@@ -930,7 +930,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 08:30-16:30",
+        "texto": "Dias úteis, das 08:30 às 16:30",
         "horas": {
           "seg": [
             "08:30-16:30"
@@ -972,7 +972,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 14:00-16:00 (Segundas 13:30-16:00)",
+        "texto": "Dias úteis, das 14:00 às 16:00 (Segundas das 13:30 às 16:00)",
         "horas": {
           "seg": [
             "13:30-16:00"
@@ -1010,7 +1010,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 13:00-15:30 (Quintas 09:00-12:30)",
+        "texto": "Dias úteis, das 13:00 às 15:30 (Quintas das 09:00 às 12:30)",
         "horas": {
           "seg": [
             "13:00-15:30"
@@ -1048,7 +1048,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 08:30-16:00",
+        "texto": "Dias úteis, das 08:30 às 16:00",
         "horas": {
           "seg": [
             "08:30-16:00"
@@ -1086,7 +1086,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 08:30-16:00",
+        "texto": "Dias úteis, das 08:30 às 16:00",
         "horas": {
           "seg": [
             "08:30-16:00"
@@ -1124,7 +1124,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 08:00-17:00",
+        "texto": "Dias úteis, das 08:00 às 17:00",
         "horas": {
           "seg": [
             "08:00-17:00"
@@ -1166,7 +1166,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 09:00-16:00",
+        "texto": "Dias úteis, das 09:00 às 16:00",
         "horas": {
           "seg": [
             "09:00-16:00"
@@ -1204,7 +1204,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 09:00-16:00",
+        "texto": "Dias úteis, das 09:00 às 16:00",
         "horas": {
           "seg": [
             "09:00-16:00"
@@ -1242,7 +1242,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 08:00-18:00",
+        "texto": "Dias úteis, das 08:00 às 18:00",
         "horas": {
           "seg": [
             "08:00-18:00"
@@ -1284,7 +1284,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 08:30-16:00",
+        "texto": "Dias úteis, das 08:30 às 16:00",
         "horas": {
           "seg": [
             "08:30-16:00"
@@ -1322,7 +1322,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 08:30-16:30",
+        "texto": "Dias úteis, das 08:30 às 16:30",
         "horas": {
           "seg": [
             "08:30-16:30"
@@ -1360,7 +1360,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 08:30-16:30",
+        "texto": "Dias úteis, das 08:30 às 16:30",
         "horas": {
           "seg": [
             "08:30-16:30"
@@ -1398,7 +1398,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 08:00-20:00",
+        "texto": "Dias úteis, das 08:00 às 20:00",
         "horas": {
           "seg": [
             "08:00-20:00"
@@ -1440,7 +1440,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 08:00-17:30",
+        "texto": "Dias úteis, das 08:00 às 17:30",
         "horas": {
           "seg": [
             "08:00-17:30"
@@ -1478,7 +1478,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 08:30-17:30",
+        "texto": "Dias úteis, das 08:30 às 17:30",
         "horas": {
           "seg": [
             "08:30-17:30"
@@ -1516,7 +1516,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 08:30-18:00",
+        "texto": "Dias úteis, das 08:30 às 18:00",
         "horas": {
           "seg": [
             "08:30-18:00"
@@ -1554,7 +1554,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 08:00-20:00, Sábado 08:30-12:30 (enfermagem)",
+        "texto": "Dias úteis, das 08:00 às 20:00, Sábado das 08:30 às 12:30 (enfermagem)",
         "horas": {
           "seg": [
             "08:00-20:00"
@@ -1594,7 +1594,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 08:00-20:00, Sábado 08:30-12:30 (enfermagem)",
+        "texto": "Dias úteis, das 08:00 às 20:00, Sábado das 08:30 às 12:30 (enfermagem)",
         "horas": {
           "seg": [
             "08:00-20:00"
@@ -1634,7 +1634,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 08:00-20:00, Sábado 08:30-12:30 (enfermagem)",
+        "texto": "Dias úteis, das 08:00 às 20:00, Sábado das 08:30 às 12:30 (enfermagem)",
         "horas": {
           "seg": [
             "08:00-20:00"
@@ -1674,7 +1674,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 08:30-17:30, Sábado 08:30-12:30 (enfermagem)",
+        "texto": "Dias úteis, das 08:30 às 17:30, Sábado das 08:30 às 12:30 (enfermagem)",
         "horas": {
           "seg": [
             "08:30-17:30"
@@ -1714,7 +1714,7 @@
     "servicos": {
       "consulta_aberta": {
         "tipo": "semanal",
-        "texto": "Dias úteis, 08:00-17:30, Sábados 08:00-15:00",
+        "texto": "Dias úteis, das 08:00 às 17:30, Sábados das 08:00 às 15:00",
         "horas": {
           "seg": [
             "08:00-17:30"

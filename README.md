@@ -501,6 +501,41 @@ are using the names of well-known localities. For visitors or recent
 residents who may not know these names, the application provides an
 **"I don't know"** option for both parish and locality selection.
 
+## New in v0.11.2: cleaner copy and distance/time chips
+
+A small polish release. No routing logic changed; the 170 previous tests
+still pass and 12 new ones guard the changes below.
+
+- **No dashes anywhere the patient can see.** Every em/en dash in
+  interface strings was rewritten with commas, colons or full stops:
+  `textos.js`, the self-care advice (`autocuidado.json`), the swap
+  messages in `routing.py`, the backend travel-time note (`viagem.py`)
+  and the clinical PDF titles. A regression test sweeps `textos.js`, the
+  data files and a real `/api/encaminhamento` response (PT and EN) and
+  fails on any dash that sneaks back in.
+- **Simpler manual-location labels.** "Freguesia (se souber)" is now just
+  "Freguesia" (and "Sítio ou zona"); the first option in each list is
+  already "Não sei", so the parenthesis was redundant. The intro text of
+  the "Where are you?" screen was rewritten in the same spirit.
+- **Opening hours read as prose.** Unit schedule *texts* went from
+  "08:00-20:00" to "das 08:00 às 20:00" (the machine-readable `horas`
+  fields are untouched). The English translator `_horario_en` learned the
+  new wording ("Weekdays, 08:00 to 20:00").
+- **Distance and drive time became chips.** On each unit card they left
+  the running meta line ("Health centre, Santa Cruz, 1.7 km · ~7 min…")
+  and are now two distinct pills under the header, with small inline
+  icons (pin and car) and a light blue tone that matches the open/closed
+  badge language. Without a road estimate, the distance chip carries the
+  old "straight line" note.
+- **Production paths for real travel times documented.** The prototype's
+  local model can mis-order two nearby units (from Achada da Rocha it
+  narrowly prefers Camacha over Gaula; drivers know better).
+  `docs/INTEGRACAO.md` now spells out the three ways to fix this for
+  real: self-hosted OSRM for a pilot (already supported via
+  `VIAGEM_OSRM_URL`), a **paid routing API (Google Routes API or
+  equivalent) as the recommended production option**, with the mandatory
+  GDPR/DPO assessment, and a hand-measured time table as a stopgap.
+
 ## Known limitations
 
 - Driving times come from a **simplified, hand-calibrated network** with
@@ -515,4 +550,6 @@ residents who may not know these names, the application provides an
 - Automatic location, on a computer, is estimated from the internet
   connection and may be imprecise; the user can always correct it by
   choosing the municipality and, if known, the parish and locality
-  (v0.11.1).
+  (v0.11.1). The locality coordinates are the intern's, still pending the
+  team's confirmation (see the `"pendentes"` and `"verificado"` fields in
+  `app/data/localidades.json`).

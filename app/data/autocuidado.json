@@ -29,12 +29,12 @@
       "alerta": [
         "Os sintomas piorarem ou surgirem sintomas novos.",
         "Não houver melhoria em 24 a 48 horas.",
-        "Ficar na dúvida — refaça esta avaliação ou ligue ao SNS 24 (808 24 24 24)."
+        "Ficar na dúvida: refaça esta avaliação ou ligue ao SNS 24 (808 24 24 24)."
       ],
       "alerta_en": [
         "Symptoms get worse or new symptoms appear.",
         "There is no improvement within 24 to 48 hours.",
-        "You are unsure — redo this assessment or call SNS 24 (808 24 24 24)."
+        "You are unsure: redo this assessment or call SNS 24 (808 24 24 24)."
       ]
     },
     "azul": {
@@ -60,11 +60,11 @@
       "alerta_titulo_en": "Seek help if:",
       "alerta": [
         "Algo mudar para pior.",
-        "Os sintomas persistirem além de 48 horas — refaça esta avaliação ou procure o seu centro de saúde."
+        "Os sintomas persistirem além de 48 horas: refaça esta avaliação ou procure o seu centro de saúde."
       ],
       "alerta_en": [
         "Anything changes for the worse.",
-        "Symptoms persist beyond 48 hours — redo this assessment or contact your health centre."
+        "Symptoms persist beyond 48 hours: redo this assessment or contact your health centre."
       ]
     }
   }

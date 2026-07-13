@@ -161,16 +161,56 @@ documento.
    por confirmar estão marcados com `dados_confirmados: false`.
 4. **Tempo de viagem real.** Desde a v0.11, os tempos de viagem vêm de uma
    rede calibrada de estradas da RAM (`app/data/rede_viagem.json`), local e
-   editável — sem enviar coordenadas de utentes para fora. Para rotas
-   verdadeiras, o protótipo já suporta um servidor OSRM **alojado pela
-   instituição** (definir a variável de ambiente `VIAGEM_OSRM_URL`; recuo
-   automático para a rede calibrada em caso de falha). Usar o servidor
-   público de demonstração do OSRM está fora de questão em produção:
-   implicaria enviar a localização de doentes para terceiros (RGPD) e não
-   tem garantias de disponibilidade. Alojar OSRM internamente é leve (um
-   contentor Docker com o extrato OpenStreetMap da Madeira) mas é uma
-   decisão dos serviços de informática — manutenção e atualização do mapa
-   incluídas. Trânsito em tempo real ficaria, mesmo assim, por cobrir.
+   editável, sem enviar coordenadas de utentes para fora. É um modelo
+   simplificado e, como tal, tem casos em que ordena mal duas unidades
+   próximas: por exemplo, a partir do sítio da Achada da Rocha (Gaula), o
+   modelo estima o CS da Camacha como ligeiramente mais rápido do que o CS
+   de Gaula, quando na prática é o contrário. A causa é estrutural (o
+   modelo trata os acessos locais por escalões de velocidade em função da
+   distância, e a fronteira entre escalões pode inverter a ordem de dois
+   destinos vizinhos), pelo que afinar troços resolve casos pontuais mas
+   não a classe de erro. Numa implementação a sério há três caminhos, por
+   ordem crescente de fidelidade e de custo:
+
+   1. **OSRM alojado pela instituição** (motor de rotas em código aberto
+      sobre dados OpenStreetMap). O protótipo já o suporta: basta definir
+      a variável de ambiente `VIAGEM_OSRM_URL`, com recuo automático para
+      a rede calibrada em caso de falha. É leve (um contentor Docker com o
+      extrato OSM da Madeira), corre dentro da rede do SESARAM (nenhuma
+      coordenada de utente sai para terceiros) e resolve a classe de erro
+      acima, porque calcula rotas sobre o grafo real de estradas. É a
+      opção recomendada para piloto. Usar o servidor público de
+      demonstração do OSRM está fora de questão em produção: implicaria
+      enviar a localização de doentes para terceiros (RGPD) e não tem
+      garantias de disponibilidade. Alojar internamente é uma decisão dos
+      serviços de informática, com manutenção e atualização periódica do
+      mapa incluídas. Trânsito em tempo real fica, mesmo assim, por
+      cobrir.
+
+   2. **API comercial de rotas, recomendada para produção.** Se o projeto
+      avançar a sério, o ideal é usar a **Google Routes API** (ou a
+      Distance Matrix, da mesma família) ou um serviço equivalente (Azure
+      Maps, Mapbox). São serviços pagos, mas dão tempos de viagem com
+      trânsito real, mapas mantidos profissionalmente e SLA, isto é,
+      exatamente a qualidade que um utente espera quando a aplicação lhe
+      diz "está a 7 minutos de carro". O custo por pedido é baixo e o
+      volume deste caso de uso é modesto (um punhado de pares
+      origem-destino por triagem, com cache agressiva por zona). A
+      contrapartida é que as coordenadas do utente são enviadas a um
+      terceiro, pelo que esta via **exige avaliação prévia de proteção de
+      dados** (RGPD) com o encarregado de proteção de dados da
+      instituição: base legal, contrato de subcontratação, minimização
+      (por exemplo, arredondar coordenadas de origem à zona) e informação
+      ao utente.
+
+   3. **Tabela de tempos medidos, como paliativo.** Sem infraestrutura nem
+      orçamento, pode manter-se a rede calibrada e acrescentar um ficheiro
+      editável com tempos medidos à mão apenas para os pares
+      origem-destino problemáticos (como Achada da Rocha → Gaula/Camacha),
+      consultado antes do modelo. É cirúrgico e barato, mas não escala,
+      depende de quem mede e envelhece à medida que a rede viária muda,
+      pelo que deve ser encarado como remendo temporário e não como
+      solução.
 5. **Identidade institucional.** As cores e o logótipo são provisórios (os
    azuis trocam-se numa variável CSS). O texto do *disclaimer* deve seguir a
    redação institucional pretendida.

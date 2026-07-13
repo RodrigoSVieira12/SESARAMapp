@@ -55,7 +55,7 @@ _TXT = {
     "pt": {
         "cabecalho": "SESARAM · Serviço de Saúde da Região Autónoma da Madeira",
         "cabecalho_nota": "(identificação institucional por confirmar)",
-        "titulo": "Resumo de orientação — Triagem de sintomas",
+        "titulo": "Resumo de orientação: triagem de sintomas",
         "gerado": "Documento gerado em",
         "prioridade": "Nível de prioridade sugerido",
         "queixa": "Queixa principal",
@@ -94,7 +94,7 @@ _TXT = {
     "en": {
         "cabecalho": "SESARAM · Madeira Regional Health Service",
         "cabecalho_nota": "(institutional identification to be confirmed)",
-        "titulo": "Guidance summary — Symptom triage",
+        "titulo": "Guidance summary: symptom triage",
         "gerado": "Document generated on",
         "prioridade": "Suggested priority level",
         "queixa": "Main complaint",
