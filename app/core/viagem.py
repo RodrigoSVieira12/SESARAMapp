@@ -83,6 +83,45 @@ class ErroRedeViagem(ValueError):
     """Rede de viagem inválida (apanhado no arranque, como nos fluxogramas)."""
 
 
+# ---------------------------------------------- tempos medidos (v0.11.3) -- #
+# O módulo tempos_medidos é um PALIATIVO AMOVÍVEL (ver o docstring dele):
+# importa-se de forma preguiçosa e tolerante, para que apagar o ficheiro
+# .py não parta o resto. Prioridade quando existe medição: OSRM (serviço
+# real, se configurado) > medido (valor do Google Maps para a zona) >
+# rede calibrada (modelo). Assim, no dia em que a instituição ligar um
+# serviço de rotas, o remendo é ultrapassado sem mexer em código.
+
+_medidos_mod = None
+_medidos_procurado = False
+
+
+def _modulo_medidos():
+    global _medidos_mod, _medidos_procurado
+    if not _medidos_procurado:
+        _medidos_procurado = True
+        try:
+            from . import tempos_medidos as _tm
+
+            _medidos_mod = _tm
+        except ImportError:  # módulo apagado: funcionalidade desligada
+            _medidos_mod = None
+    return _medidos_mod
+
+
+def _estimativa_medida(lat: float, lng: float, destino_id: str | None) -> dict | None:
+    """{"minutos", "metodo": "medido", "distancia_km"?} ou None."""
+    mod = _modulo_medidos()
+    if mod is None or not destino_id:
+        return None
+    medido = mod.procurar(lat, lng, destino_id)
+    if medido is None:
+        return None
+    saida = {"minutos": _arredondar(medido["minutos"]), "metodo": "medido"}
+    if medido.get("distancia_km") is not None:
+        saida["distancia_km"] = medido["distancia_km"]
+    return saida
+
+
 # ---------------------------------------------------------------- rede --- #
 
 _rede_cache: dict | None = None
@@ -435,15 +474,27 @@ def _arredondar(minutos: float) -> int:
     return max(1, int(minutos + 0.5))
 
 
-def estimar(lat1: float, lng1: float, lat2: float, lng2: float) -> dict | None:
+def estimar(
+    lat1: float,
+    lng1: float,
+    lat2: float,
+    lng2: float,
+    destino_id: str | None = None,
+) -> dict | None:
     """Tempo de viagem estimado entre dois pontos.
 
-    Devolve {"minutos": int, "metodo": "osrm"|"rede"} ou None entre
-    ilhas diferentes (não há tempo de carro que atravesse o mar).
+    Devolve {"minutos": int, "metodo": "osrm"|"medido"|"rede"} ou None
+    entre ilhas diferentes (não há tempo de carro que atravesse o mar).
+    Com destino_id (o id de uma unidade), a tabela local de tempos por
+    estrada pode responder; sem ele, só OSRM e rede. No método "medido" o
+    resultado inclui também "distancia_km" (por estrada), se registada.
     """
     por_osrm = _tempos_osrm(lat1, lng1, [(lat2, lng2)])
     if por_osrm and por_osrm[0] is not None:
         return {"minutos": _arredondar(por_osrm[0]), "metodo": "osrm"}
+    medido = _estimativa_medida(lat1, lng1, destino_id)
+    if medido is not None:
+        return medido
     minutos = _tempo_rede(lat1, lng1, lat2, lng2)
     if minutos is None:
         return None
@@ -462,6 +513,10 @@ def tempos_para_unidades(lat: float, lng: float, lista: list[dict]) -> dict[str,
         minutos_osrm = por_osrm[indice] if por_osrm else None
         if minutos_osrm is not None:
             saida[unidade["id"]] = {"minutos": _arredondar(minutos_osrm), "metodo": "osrm"}
+            continue
+        medido = _estimativa_medida(lat, lng, unidade["id"])
+        if medido is not None:
+            saida[unidade["id"]] = medido
             continue
         minutos = _tempo_rede(lat, lng, unidade["lat"], unidade["lng"])
         saida[unidade["id"]] = (
@@ -488,6 +543,23 @@ def descrever(metodo: str | None) -> dict:
             "metodo": "osrm",
             "descricao": "Tempos de viagem calculados por um servidor de rotas (OSRM) configurado pela instituição.",
             "descricao_en": "Driving times computed by an institution-configured routing server (OSRM).",
+        }
+    if metodo == "medido":
+        return {
+            "disponivel": True,
+            "metodo": "medido",
+            "descricao": (
+                "Tempos por estrada registados numa tabela local da aplicação "
+                "(medições feitas à mão e valores pré-calculados com um motor "
+                "de rotas); sem valor registado, usa-se uma rede simplificada "
+                "de estradas. Sem trânsito em tempo real. Por validar."
+            ),
+            "descricao_en": (
+                "Road travel times from a local table in the app (hand "
+                "measurements and values precomputed with a routing engine); "
+                "when no value is recorded, a simplified road network is "
+                "used. No live traffic. Pending validation."
+            ),
         }
     if metodo == "rede":
         return {

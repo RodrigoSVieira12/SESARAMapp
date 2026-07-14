@@ -81,12 +81,14 @@ onde-ir-sesaram/
 │   │   ├── horarios.py       # aberto/fechado num dado momento
 │   │   ├── geo.py            # distância de Haversine
 │   │   ├── viagem.py         # estimador de tempos de viagem (rede + OSRM opcional)
+│   │   ├── tempos_medidos.py # tabela local de tempos por estrada (amovível; v0.11.3)
 │   │   ├── localidades.py    # concelho → freguesia → sítio (modo manual)
 │   │   ├── unidades.py       # repositório das unidades
 │   │   └── cores.py          # cores de Manchester e contactos
 │   └── data/
 │       ├── rules/            # 1 ficheiro JSON por queixa + red_flags.json
 │       ├── rede_viagem.json  # rede de estradas calibrada (editável)
+│       ├── tempos_medidos.json # tempos por estrada registados (editável; v0.11.3)
 │       ├── localidades.json  # freguesias e sítios (editável)
 │       └── unidades.json     # unidades de saúde da RAM
 ├── static/                   # frontend (HTML + CSS + JS puro + Leaflet)
@@ -211,7 +213,9 @@ para os JSON (atualizando o campo `fonte` com quem validou e quando).
 - `GET /api/unidades`, todas as unidades
 - `GET /api/unidades/proxima?lat&lng&servico&n`, mais próximas
 - `GET /api/viagem?lat&lng&lat_destino&lng_destino`, tempo de viagem de
-  carro estimado entre dois pontos (inspeção; v0.11)
+  carro estimado entre dois pontos (inspeção; v0.11); com `&unidade=<id>`
+  em vez das coordenadas de destino, a tabela local de tempos por
+  estrada pode responder (método "medido"; v0.11.3)
 - `GET /api/localidades`, árvore concelho → freguesia → sítio para o ecrã
   de localização manual (v0.11.1)
 - `GET /api/espera?atualizar=`, tempos de espera em tempo real (cache do SEISRAM)
@@ -451,7 +455,8 @@ carro", os cartões e as alternativas mostram os minutos, e a regra de
 troca compara *espera real + viagem por estrada*. As ilhas nunca se
 misturam: entre a Madeira e o Porto Santo a estimativa é `None`. A
 resposta traz um bloco `viagem_info` e cada unidade um `tempo_viagem`
-(`{"minutos", "metodo": "rede"|"osrm"}`), e `GET /api/viagem` expõe o
+(`{"minutos", "metodo": "rede"|"medido"|"osrm"}`; no método "medido"
+também `distancia_km`, por estrada), e `GET /api/viagem` expõe o
 estimador para inspeção.
 
 **Avaliação honesta.** `python scripts/avaliar_viagem.py` compara os
@@ -547,11 +552,74 @@ abaixo.
   piloto (já suportado via `VIAGEM_OSRM_URL`), uma **API paga de rotas
   (Google Routes API ou equivalente) como opção recomendada para
   produção**, com a avaliação RGPD/EPD obrigatória, e uma tabela de
-  tempos medidos à mão como paliativo.
+  tempos por estrada como paliativo (implementada na v0.11.3).
+
+## Novidades na v0.11.3: tempos por estrada numa tabela local e chips de espera
+
+O caso motivador vem da v0.11.2: da Achada da Rocha (Gaula), o modelo
+local ordenava mal a Camacha e Gaula. Esta versão ataca-o com um
+paliativo assumido e amovível, e aproveita para arrumar o cartão de
+resultados.
+
+- **Uma tabela local de tempos por estrada (módulo amovível).**
+  `app/data/tempos_medidos.json` guarda, por sítio e por freguesia, o
+  tempo e a distância de carro até às unidades relevantes (o hospital e
+  os centros de saúde mais próximos). Quando o utente está a menos de
+  `raio_ancoragem_km` (3 km) de uma zona registada, sem barreira de
+  relevo pelo meio, a app usa esse valor, ajustado pelo desvio até à
+  âncora; caso contrário recua para a rede calibrada. A prioridade é:
+  OSRM ao vivo (se configurado) > tabela > rede.
+- **Dois caminhos para preencher a tabela, que podem coexistir.** O
+  recomendado é automático: `python scripts/calcular_tempos_medidos.py
+  --motor ors --chave A_TUA_CHAVE` pede as rotas em lotes a um motor de
+  rotas (OpenRouteService, com chave gratuita, ou um servidor OSRM
+  próprio com `--motor osrm`) e preenche os 598 pares em cerca de um
+  minuto, marcando `fonte` e `calculado_em` em cada par. Grava depois de
+  cada lote: interromper e retomar é seguro, e o que já está preenchido
+  não volta a ser pedido. O caminho manual continua:
+  `python scripts/tempos_medidos_relatorio.py --links` gera os links do
+  Google Maps prontos a abrir, úteis para conferir ou corrigir pares
+  suspeitos, e `--divergencias` lista onde a tabela e a rede mais
+  discordam. `python scripts/atualizar_tempos_medidos.py` refaz o
+  esqueleto depois de editar as localidades, sem perder o que está
+  preenchido; com `--todos`, os destinos passam a ser todas as unidades
+  da ilha (mais pares, pensado para o preenchimento automático).
+- **Como remover o paliativo:** apagar `app/data/tempos_medidos.json`
+  (ou definir `VIAGEM_TEMPOS_MEDIDOS=0`) e a app volta sozinha à rede
+  calibrada; pode apagar-se também `app/core/tempos_medidos.py` e os
+  três scripts, que nada mais depende deles. Em produção, o caminho
+  certo continua a ser um serviço de rotas (ver `docs/INTEGRACAO.md`).
+- **Honestidade sobre a qualidade.** O OpenRouteService e o OSRM usam o
+  OpenStreetMap com perfis de velocidade genéricos, sem trânsito: na
+  Madeira dão tempos muito melhores do que o modelo local, mas abaixo do
+  Google Maps. Por isso a nota de transparência no ecrã muda quando o
+  método é "medido", cada par guarda a `fonte`, e o
+  `GET /api/viagem?unidade=<id>` expõe o método para inspeção.
+- **Chips de espera no cartão.** A frase "Espera para a sua cor: ~35
+  min · 12 pessoas em espera" deu lugar a dois chips âmbar (relógio e
+  pessoas) na linha dos chips de distância e tempo; quando a espera é da
+  cor do utente, o chip leva a nota "na sua cor".
+- **Distância por estrada no chip.** Quando a tabela responde, o chip da
+  distância mostra os quilómetros por estrada (nota "por estrada") em
+  vez da linha reta, e o chip do tempo troca "estim." por "registado".
+- **Alternativas com mini chips.** Cada alternativa mostra o concelho e
+  uma fila de mini pastilhas (distância, tempo de carro, aberto ou
+  fechado, espera), mais legível do que a frase corrida e um degrau
+  visual abaixo do cartão principal; a reabertura fica numa linha
+  discreta.
+- **"Alterar localização" virou um mini botão** tipo pílula, mais óbvio
+  como ação do que a antiga ligação sublinhada.
+
+33 testes novos guardam o ficheiro de dados e o gerador do esqueleto, a
+procura com âncoras (raio, desvio, barreiras, interruptores para
+desligar), a prioridade OSRM > tabela > rede, o encaminhamento e o
+`/api/viagem`, e o script de cálculo com o motor simulado (os testes não
+fazem pedidos à rede). Total: 215.
 
 ## Limitações conhecidas
 
-- Os tempos de viagem vêm de uma **rede simplificada, calibrada à mão**,
+- Fora das zonas cobertas pela tabela local (v0.11.3), os tempos de
+  viagem vêm de uma **rede simplificada, calibrada à mão**,
   com valores típicos: sem trânsito em tempo real, sem hora de ponta, e
   com os acessos curtos aproximados. São estimativas para ordenar e
   gerir expectativas, não para navegação. Os percursos de referência e

@@ -155,22 +155,39 @@ def unidades_proximas(
 def tempo_de_viagem(
     lat: float = Query(ge=-90, le=90, description="Latitude da origem."),
     lng: float = Query(ge=-180, le=180, description="Longitude da origem."),
-    lat_destino: float = Query(ge=-90, le=90, description="Latitude do destino."),
-    lng_destino: float = Query(ge=-180, le=180, description="Longitude do destino."),
+    lat_destino: float | None = Query(None, ge=-90, le=90, description="Latitude do destino."),
+    lng_destino: float | None = Query(None, ge=-180, le=180, description="Longitude do destino."),
+    unidade: str | None = Query(
+        None, description="Id de uma unidade como destino (permite usar tempos medidos)."
+    ),
 ) -> dict:
     """Tempo de viagem estimado entre dois pontos (v0.11) — transparência.
 
     Serve para conferir o estimador (app/core/viagem.py) sem passar pela
     triagem: devolve a estimativa por estrada e a distância em linha reta,
-    lado a lado. `estimativa` é None entre ilhas diferentes. O método
-    "rede" usa a rede calibrada local (app/data/rede_viagem.json); "osrm"
-    só aparece se a instituição configurar VIAGEM_OSRM_URL.
+    lado a lado. `estimativa` é None entre ilhas diferentes. Métodos:
+    "rede" usa a rede calibrada local (app/data/rede_viagem.json); "medido"
+    (v0.11.3) usa a tabela local de tempos por estrada quando o destino é uma
+    `unidade` com medição para a zona; "osrm" só aparece se a instituição
+    configurar VIAGEM_OSRM_URL.
     """
+    destino_id = None
+    if unidade is not None:
+        alvo = next((u for u in unidades.todas() if u["id"] == unidade), None)
+        if alvo is None:
+            raise HTTPException(status_code=404, detail=f"Unidade desconhecida: {unidade}")
+        destino_id = alvo["id"]
+        lat_destino, lng_destino = alvo["lat"], alvo["lng"]
+    elif lat_destino is None or lng_destino is None:
+        raise HTTPException(
+            status_code=422,
+            detail="Indique lat_destino e lng_destino, ou o id de uma 'unidade'.",
+        )
     return {
         "origem": {"lat": lat, "lng": lng},
-        "destino": {"lat": lat_destino, "lng": lng_destino},
+        "destino": {"lat": lat_destino, "lng": lng_destino, "unidade": destino_id},
         "distancia_km_linha_reta": round(geo.haversine_km(lat, lng, lat_destino, lng_destino), 1),
-        "estimativa": viagem.estimar(lat, lng, lat_destino, lng_destino),
+        "estimativa": viagem.estimar(lat, lng, lat_destino, lng_destino, destino_id=destino_id),
         "nota": viagem.NOTA_VIAGEM,
         "nota_en": viagem.NOTA_VIAGEM_EN,
     }

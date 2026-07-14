@@ -66,13 +66,16 @@ def _sitio(prep, cid, fid, sid):
 # --------------------------------------------------------------------- #
 
 def test_carrega_e_conta_os_niveis():
+    """Os concelhos são divisão administrativa (11, estável); freguesias
+    e sítios são dados EDITÁVEIS que crescem e encolhem com a curadoria,
+    por isso o teste só garante pisos razoáveis, não contagens exatas."""
     prep = _prep()
     concelhos = prep["concelhos"]
     n_freg = sum(len(c["freguesias"]) for c in concelhos)
     n_sitios = sum(len(f["sitios"]) for c in concelhos for f in c["freguesias"])
     assert len(concelhos) == 11
-    assert n_freg == 53
-    assert n_sitios == 145
+    assert n_freg >= 53
+    assert n_sitios >= 100
 
 
 def test_todos_os_niveis_tem_centro():
@@ -211,10 +214,19 @@ def test_aviso_sitio_longe_do_centro():
 
 
 def test_avisos_listam_freguesias_por_confirmar():
-    """As 3 freguesias acrescentadas pelo protótipo (verificado=false)
-    têm de aparecer nos avisos, para o orientador as validar."""
-    avisos = localidades.avisos(_prep())
-    for nome in ("Santa Luzia", "Caniçal", "Prazeres"):
+    """Toda a freguesia com verificado=false tem de aparecer nos avisos
+    (para o orientador as validar). Dirigido pelos dados: os nomes
+    concretos mudam à medida que a curadoria confirma freguesias."""
+    prep = _prep()
+    avisos = localidades.avisos(prep)
+    por_confirmar = [
+        f["nome"]
+        for c in prep["concelhos"]
+        for f in c["freguesias"]
+        if not f.get("verificado", True)
+    ]
+    assert por_confirmar, "esperava pelo menos uma freguesia por confirmar nos dados"
+    for nome in por_confirmar:
         assert any(nome in a and "confirmar" in a for a in avisos)
 
 

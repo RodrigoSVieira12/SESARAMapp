@@ -146,16 +146,8 @@ const TEXTOS = {
     nova_avaliacao: "Fazer nova avaliação",
     qr_titulo: "Navegar no telemóvel",
     qr_dica: "Aponte a câmara do telemóvel ao código para abrir as direções no Google Maps.",
-    esp_linha: (te) => {
-      const rotulo =
-        te.ambito === "cor" ? "Espera para a sua cor" : "Tempo de espera agora";
-      const partes = [];
-      if (te.minutos != null) partes.push(`~${te.minutos} min`);
-      if (te.em_espera != null)
-        partes.push(`${te.em_espera} ${te.em_espera === 1 ? "pessoa" : "pessoas"} em espera`);
-      return `${rotulo}: ${partes.join(" · ") || "sem dados"}`;
-    },
-    esp_curto: "de espera",
+    // v0.11.3: a frase de espera do cartão deu lugar aos chips
+    // chip_espera / chip_pessoas (mais abaixo, junto dos chips de trajeto).
     esp_atualizado: (hora) => `Tempos de espera do SESARAM, atualizados às ${hora}`,
     esp_desatualizado: "(podem estar desatualizados)",
     esp_indisponivel: "Tempo de espera do SESARAM indisponível neste momento.",
@@ -171,10 +163,15 @@ const TEXTOS = {
     un_fechada: "Fechado agora",
     chip_km: (km) => `${km} km`,
     chip_km_nota: "linha reta",
+    chip_km_nota_estrada: "por estrada",
     chip_viagem: (min) => `~${min} min de carro`,
     chip_viagem_nota: "estim.",
-    alt_viagem: (min) => `~${min} min de carro`,
+    chip_viagem_nota_medido: "registado",
+    chip_espera: (min) => `~${min} min de espera`,
+    chip_espera_nota_cor: "na sua cor",
+    chip_pessoas: (n) => `${n} em espera`,
     viagem_nota: "Tempos de viagem estimados com uma rede simplificada de estradas da RAM (valores típicos, sem trânsito), ainda por validar.",
+    viagem_nota_medido: "Tempos de viagem por estrada registados numa tabela local da aplicação (medições e cálculos guardados); sem valor registado, usa-se uma rede simplificada. Sem trânsito em tempo real, ainda por validar.",
     un_reconfirmar: "Dados por reconfirmar (ver nota acima).",
     un_ligar: (tel) => `Ligar ${tel}`,
     un_gmaps: "Abrir direções no Google Maps",
@@ -314,16 +311,8 @@ const TEXTOS = {
     nova_avaliacao: "New assessment",
     qr_titulo: "Navigate on your phone",
     qr_dica: "Point your phone's camera at the code to open directions in Google Maps.",
-    esp_linha: (te) => {
-      const rotulo =
-        te.ambito === "cor" ? "Wait for your colour" : "Current waiting time";
-      const partes = [];
-      if (te.minutos != null) partes.push(`~${te.minutos} min`);
-      if (te.em_espera != null)
-        partes.push(`${te.em_espera} ${te.em_espera === 1 ? "person" : "people"} waiting`);
-      return `${rotulo}: ${partes.join(" · ") || "no data"}`;
-    },
-    esp_curto: "wait",
+    // v0.11.3: the card's waiting sentence gave way to the
+    // chip_espera / chip_pessoas chips (below, next to the route chips).
     esp_atualizado: (hora) => `SESARAM waiting times, updated at ${hora}`,
     esp_desatualizado: "(may be out of date)",
     esp_indisponivel: "SESARAM waiting time unavailable right now.",
@@ -339,10 +328,15 @@ const TEXTOS = {
     un_fechada: "Closed now",
     chip_km: (km) => `${km} km`,
     chip_km_nota: "straight line",
+    chip_km_nota_estrada: "by road",
     chip_viagem: (min) => `~${min} min by car`,
     chip_viagem_nota: "est.",
-    alt_viagem: (min) => `~${min} min by car`,
+    chip_viagem_nota_medido: "recorded",
+    chip_espera: (min) => `~${min} min wait`,
+    chip_espera_nota_cor: "your colour",
+    chip_pessoas: (n) => `${n} waiting`,
     viagem_nota: "Travel times estimated with a simplified RAM road network (typical values, no traffic), still pending validation.",
+    viagem_nota_medido: "Road travel times from a local table in the app (stored measurements and calculations); when no value is recorded, a simplified network is used. No live traffic, still pending validation.",
     un_reconfirmar: "Data pending reconfirmation (see note above).",
     un_ligar: (tel) => `Call ${tel}`,
     un_gmaps: "Open directions in Google Maps",

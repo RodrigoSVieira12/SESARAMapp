@@ -1,0 +1,5593 @@
+{
+  "versao": "1.0",
+  "descricao": [
+    "Tempos de viagem por estrada, por zona da RAM, guardados",
+    "localmente. Paliativo de protótipo: útil enquanto não há um",
+    "serviço de rotas em produção (ver docs/INTEGRACAO.md).",
+    "Cada entrada é um sítio ou uma freguesia de localidades.json;",
+    "os destinos são o hospital e os centros de saúde mais próximos",
+    "(ou todas as unidades da ilha, se gerado com --todos)."
+  ],
+  "como_preencher": [
+    "AUTOMÁTICO (recomendado):",
+    "  python scripts/calcular_tempos_medidos.py --motor ors --chave X",
+    "  (chave gratuita em openrouteservice.org) ou --motor osrm com",
+    "  um servidor local. Preenche tempo, distância e a fonte.",
+    "MANUAL (para conferir ou corrigir pares):",
+    "  python scripts/tempos_medidos_relatorio.py --links, abrir o",
+    "  link no Google Maps (modo carro) e escrever tempo_min",
+    "  (minutos, inteiro) e distancia_km (1 casa decimal).",
+    "Deixar a null o que não estiver preenchido: a app recua para a",
+    "rede calibrada. Validar no fim: python scripts/validar_dados.py"
+  ],
+  "como_remover": [
+    "Apagar este ficheiro desativa a funcionalidade (sem erros).",
+    "VIAGEM_TEMPOS_MEDIDOS=0 desliga sem apagar nada.",
+    "app/core/tempos_medidos.py também pode ser apagado: o viagem.py",
+    "importa-o de forma tolerante (módulo amovível por desenho)."
+  ],
+  "parametros": {
+    "raio_ancoragem_km": 3.0,
+    "nota": "Raio máximo entre a posição do utente e a zona registada mais próxima para a medição ser usada; fora dele, rede calibrada. O pequeno desvio até à âncora é somado ao tempo."
+  },
+  "medicoes": [
+    {
+      "origem": "calheta/arco_da_calheta",
+      "nome": "Arco da Calheta (Calheta)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.717531,
+      "lng": -17.15062,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 42,
+          "distancia_km": 29.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_arco_da_calheta": {
+          "tempo_min": 3,
+          "distancia_km": 1.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_madalena_do_mar": {
+          "tempo_min": 7,
+          "distancia_km": 3.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "calheta/arco_da_calheta/faja_do_mar",
+      "nome": "Fajã do Mar, Arco da Calheta (Calheta)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.707373,
+      "lng": -17.147206,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 39,
+          "distancia_km": 28.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_arco_da_calheta": {
+          "tempo_min": 5,
+          "distancia_km": 2.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_madalena_do_mar": {
+          "tempo_min": 5,
+          "distancia_km": 3.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "calheta/arco_da_calheta/igreja",
+      "nome": "Igreja, Arco da Calheta (Calheta)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.713493,
+      "lng": -17.14767,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 40,
+          "distancia_km": 28.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_arco_da_calheta": {
+          "tempo_min": 1,
+          "distancia_km": 0.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_madalena_do_mar": {
+          "tempo_min": 6,
+          "distancia_km": 3.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "calheta/arco_da_calheta/ledo",
+      "nome": "Ledo, Arco da Calheta (Calheta)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.715521,
+      "lng": -17.153022,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 40,
+          "distancia_km": 28.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_arco_da_calheta": {
+          "tempo_min": 5,
+          "distancia_km": 2.0,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_madalena_do_mar": {
+          "tempo_min": 6,
+          "distancia_km": 3.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "calheta/arco_da_calheta/loreto",
+      "nome": "Loreto, Arco da Calheta (Calheta)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.721431,
+      "lng": -17.155491,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 44,
+          "distancia_km": 30.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_arco_da_calheta": {
+          "tempo_min": 4,
+          "distancia_km": 1.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_calheta": {
+          "tempo_min": 11,
+          "distancia_km": 6.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "calheta/arco_da_calheta/vargem",
+      "nome": "Vargem, Arco da Calheta (Calheta)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.729836,
+      "lng": -17.149712,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 46,
+          "distancia_km": 32.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_arco_da_calheta": {
+          "tempo_min": 5,
+          "distancia_km": 3.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_calheta": {
+          "tempo_min": 8,
+          "distancia_km": 5.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "calheta/calheta",
+      "nome": "Calheta (Calheta)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.72608,
+      "lng": -17.172906,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 42,
+          "distancia_km": 30.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_calheta": {
+          "tempo_min": 5,
+          "distancia_km": 2.0,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_estreito_da_calheta": {
+          "tempo_min": 5,
+          "distancia_km": 3.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "calheta/calheta/estrela",
+      "nome": "Estrela, Calheta (Calheta)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.730164,
+      "lng": -17.177969,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 45,
+          "distancia_km": 32.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_calheta": {
+          "tempo_min": 1,
+          "distancia_km": 0.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_estreito_da_calheta": {
+          "tempo_min": 4,
+          "distancia_km": 3.0,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "calheta/calheta/lombo_do_doutor",
+      "nome": "Lombo do Doutor, Calheta (Calheta)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.727984,
+      "lng": -17.164697,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 49,
+          "distancia_km": 32.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_calheta": {
+          "tempo_min": 5,
+          "distancia_km": 2.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_arco_da_calheta": {
+          "tempo_min": 10,
+          "distancia_km": 6.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "calheta/calheta/praia_da_calheta",
+      "nome": "Praia da Calheta, Calheta (Calheta)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.720091,
+      "lng": -17.176051,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 42,
+          "distancia_km": 30.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_calheta": {
+          "tempo_min": 7,
+          "distancia_km": 3.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_estreito_da_calheta": {
+          "tempo_min": 7,
+          "distancia_km": 4.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "calheta/estreito_da_calheta",
+      "nome": "Estreito da Calheta (Calheta)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.744769,
+      "lng": -17.160826,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 51,
+          "distancia_km": 35.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_calheta": {
+          "tempo_min": 6,
+          "distancia_km": 3.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_estreito_da_calheta": {
+          "tempo_min": 10,
+          "distancia_km": 6.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "calheta/estreito_da_calheta/igreja_do_estreito",
+      "nome": "Igreja do Estreito, Estreito da Calheta (Calheta)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.73611,
+      "lng": -17.188979,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 46,
+          "distancia_km": 33.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_estreito_da_calheta": {
+          "tempo_min": 1,
+          "distancia_km": 0.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_calheta": {
+          "tempo_min": 5,
+          "distancia_km": 3.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "calheta/estreito_da_calheta/rabacal",
+      "nome": "Rabaçal, Estreito da Calheta (Calheta)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.753428,
+      "lng": -17.132674,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 53,
+          "distancia_km": 37.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_arco_da_calheta": {
+          "tempo_min": 12,
+          "distancia_km": 8.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_calheta": {
+          "tempo_min": 11,
+          "distancia_km": 7.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "calheta/faja_da_ovelha",
+      "nome": "Fajã da Ovelha (Calheta)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.774902,
+      "lng": -17.234745,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 58,
+          "distancia_km": 43.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_faja_da_ovelha": {
+          "tempo_min": 4,
+          "distancia_km": 2.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_paul_do_mar": {
+          "tempo_min": 9,
+          "distancia_km": 5.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "calheta/jardim_do_mar",
+      "nome": "Jardim do Mar (Calheta)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.737877,
+      "lng": -17.210859,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 50,
+          "distancia_km": 35.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_jardim_do_mar": {
+          "tempo_min": 1,
+          "distancia_km": 0.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_prazeres": {
+          "tempo_min": 12,
+          "distancia_km": 7.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "calheta/paul_do_mar",
+      "nome": "Paul do Mar (Calheta)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.758615,
+      "lng": -17.231223,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 54,
+          "distancia_km": 39.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_paul_do_mar": {
+          "tempo_min": 1,
+          "distancia_km": 0.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_faja_da_ovelha": {
+          "tempo_min": 12,
+          "distancia_km": 8.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "calheta/ponta_do_pargo",
+      "nome": "Ponta do Pargo (Calheta)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.811763,
+      "lng": -17.247631,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 66,
+          "distancia_km": 45.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_ponta_do_pargo": {
+          "tempo_min": 1,
+          "distancia_km": 0.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_faja_da_ovelha": {
+          "tempo_min": 10,
+          "distancia_km": 6.0,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "calheta/prazeres",
+      "nome": "Prazeres (Calheta)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.747301,
+      "lng": -17.205313,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 54,
+          "distancia_km": 37.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_prazeres": {
+          "tempo_min": 2,
+          "distancia_km": 0.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_jardim_do_mar": {
+          "tempo_min": 15,
+          "distancia_km": 7.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/camara_de_lobos",
+      "nome": "Câmara de Lobos (Câmara de Lobos)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.657087,
+      "lng": -16.984389,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 15,
+          "distancia_km": 8.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_camara_lobos": {
+          "tempo_min": 3,
+          "distancia_km": 1.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_estreito_camara_de_lobos": {
+          "tempo_min": 9,
+          "distancia_km": 6.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/camara_de_lobos/baia_centro",
+      "nome": "Baía (centro), Câmara de Lobos (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.648195,
+      "lng": -16.974952,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 15,
+          "distancia_km": 7.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_camara_lobos": {
+          "tempo_min": 2,
+          "distancia_km": 0.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_estreito_camara_de_lobos": {
+          "tempo_min": 8,
+          "distancia_km": 5.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/camara_de_lobos/caldeira",
+      "nome": "Caldeira, Câmara de Lobos (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.657791,
+      "lng": -16.997173,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 18,
+          "distancia_km": 10.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_quinta_grande": {
+          "tempo_min": 9,
+          "distancia_km": 5.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_camara_lobos": {
+          "tempo_min": 5,
+          "distancia_km": 3.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/camara_de_lobos/caminho_grande_e_preces",
+      "nome": "Caminho Grande e Preces, Câmara de Lobos (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.660361,
+      "lng": -16.984712,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 15,
+          "distancia_km": 8.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_camara_lobos": {
+          "tempo_min": 5,
+          "distancia_km": 1.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_estreito_camara_de_lobos": {
+          "tempo_min": 9,
+          "distancia_km": 6.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/camara_de_lobos/caminho_grande_e_ribeiro_da_alforra",
+      "nome": "Caminho Grande e Ribeiro da Alforra, Câmara de Lobos (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.656832,
+      "lng": -16.981066,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 15,
+          "distancia_km": 8.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_camara_lobos": {
+          "tempo_min": 3,
+          "distancia_km": 1.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_estreito_camara_de_lobos": {
+          "tempo_min": 9,
+          "distancia_km": 6.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/camara_de_lobos/cruz_da_caldeira",
+      "nome": "Cruz da Caldeira, Câmara de Lobos (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.663175,
+      "lng": -17.003108,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 19,
+          "distancia_km": 13.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_quinta_grande": {
+          "tempo_min": 4,
+          "distancia_km": 1.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_camara_lobos": {
+          "tempo_min": 10,
+          "distancia_km": 8.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/camara_de_lobos/espirito_santo",
+      "nome": "Espírito Santo, Câmara de Lobos (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.647783,
+      "lng": -16.971392,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 13,
+          "distancia_km": 6.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_camara_lobos": {
+          "tempo_min": 3,
+          "distancia_km": 1.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_rui_adriano_de_freitas": {
+          "tempo_min": 10,
+          "distancia_km": 5.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_estreito_camara_de_lobos": {
+          "tempo_min": 7,
+          "distancia_km": 4.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/camara_de_lobos/facho",
+      "nome": "Facho, Câmara de Lobos (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.658942,
+      "lng": -17.002457,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 20,
+          "distancia_km": 13.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_quinta_grande": {
+          "tempo_min": 4,
+          "distancia_km": 2.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_camara_lobos": {
+          "tempo_min": 11,
+          "distancia_km": 6.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/camara_de_lobos/faja",
+      "nome": "Fajã, Câmara de Lobos (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.669816,
+      "lng": -16.961201,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 16,
+          "distancia_km": 7.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_estreito_camara_de_lobos": {
+          "tempo_min": 9,
+          "distancia_km": 5.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santo_antonio": {
+          "tempo_min": 13,
+          "distancia_km": 6.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/camara_de_lobos/loucerinha",
+      "nome": "Loucerinha, Câmara de Lobos (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.65642,
+      "lng": -16.969971,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 12,
+          "distancia_km": 6.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_camara_lobos": {
+          "tempo_min": 3,
+          "distancia_km": 1.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_estreito_camara_de_lobos": {
+          "tempo_min": 6,
+          "distancia_km": 4.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/camara_de_lobos/nogueira",
+      "nome": "Nogueira, Câmara de Lobos (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.667717,
+      "lng": -16.995203,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 19,
+          "distancia_km": 11.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_quinta_grande": {
+          "tempo_min": 8,
+          "distancia_km": 3.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_estreito_camara_de_lobos": {
+          "tempo_min": 7,
+          "distancia_km": 3.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/camara_de_lobos/palmeira",
+      "nome": "Palmeira, Câmara de Lobos (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.659344,
+      "lng": -16.997816,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 18,
+          "distancia_km": 10.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_quinta_grande": {
+          "tempo_min": 9,
+          "distancia_km": 5.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_camara_lobos": {
+          "tempo_min": 6,
+          "distancia_km": 3.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/camara_de_lobos/panasqueira",
+      "nome": "Panasqueira, Câmara de Lobos (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.659337,
+      "lng": -16.997811,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 18,
+          "distancia_km": 10.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_quinta_grande": {
+          "tempo_min": 9,
+          "distancia_km": 5.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_camara_lobos": {
+          "tempo_min": 6,
+          "distancia_km": 3.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/camara_de_lobos/pe_de_pico",
+      "nome": "Pé-de-Pico, Câmara de Lobos (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.649107,
+      "lng": -16.973712,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 13,
+          "distancia_km": 7.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_camara_lobos": {
+          "tempo_min": 2,
+          "distancia_km": 0.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_estreito_camara_de_lobos": {
+          "tempo_min": 7,
+          "distancia_km": 5.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/camara_de_lobos/pedregal",
+      "nome": "Pedregal, Câmara de Lobos (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.660848,
+      "lng": -16.991264,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 17,
+          "distancia_km": 8.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_camara_lobos": {
+          "tempo_min": 7,
+          "distancia_km": 3.0,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_quinta_grande": {
+          "tempo_min": 9,
+          "distancia_km": 4.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/camara_de_lobos/quinta_do_leme",
+      "nome": "Quinta do Leme, Câmara de Lobos (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.658515,
+      "lng": -16.975067,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 13,
+          "distancia_km": 6.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_camara_lobos": {
+          "tempo_min": 5,
+          "distancia_km": 2.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_estreito_camara_de_lobos": {
+          "tempo_min": 5,
+          "distancia_km": 3.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/camara_de_lobos/rancho",
+      "nome": "Rancho, Câmara de Lobos (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.654963,
+      "lng": -16.994182,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 21,
+          "distancia_km": 10.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_camara_lobos": {
+          "tempo_min": 10,
+          "distancia_km": 4.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_quinta_grande": {
+          "tempo_min": 12,
+          "distancia_km": 5.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/camara_de_lobos/ribeiro_de_alforra",
+      "nome": "Ribeiro de Alforra, Câmara de Lobos (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.653937,
+      "lng": -16.983328,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 16,
+          "distancia_km": 8.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_camara_lobos": {
+          "tempo_min": 4,
+          "distancia_km": 1.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_estreito_camara_de_lobos": {
+          "tempo_min": 10,
+          "distancia_km": 6.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/camara_de_lobos/saraiva",
+      "nome": "Saraiva, Câmara de Lobos (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.655775,
+      "lng": -16.973042,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 13,
+          "distancia_km": 6.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_camara_lobos": {
+          "tempo_min": 4,
+          "distancia_km": 2.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_estreito_camara_de_lobos": {
+          "tempo_min": 7,
+          "distancia_km": 4.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/camara_de_lobos/serrado_da_adega",
+      "nome": "Serrado da Adega, Câmara de Lobos (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.651552,
+      "lng": -16.977813,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 14,
+          "distancia_km": 7.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_camara_lobos": {
+          "tempo_min": 3,
+          "distancia_km": 1.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_estreito_camara_de_lobos": {
+          "tempo_min": 8,
+          "distancia_km": 5.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/camara_de_lobos/serrado_do_mar",
+      "nome": "Serrado do Mar, Câmara de Lobos (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.651331,
+      "lng": -16.9825,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 16,
+          "distancia_km": 8.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_camara_lobos": {
+          "tempo_min": 3,
+          "distancia_km": 1.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_estreito_camara_de_lobos": {
+          "tempo_min": 10,
+          "distancia_km": 6.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/curral_das_freiras",
+      "nome": "Curral das Freiras (Câmara de Lobos)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.728792,
+      "lng": -16.969529,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 31,
+          "distancia_km": 17.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_curral_das_freiras": {
+          "tempo_min": 6,
+          "distancia_km": 2.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_bom_jesus": {
+          "tempo_min": 34,
+          "distancia_km": 17.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_serra_de_agua": {
+          "tempo_min": 48,
+          "distancia_km": 31.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/curral_das_freiras/achada",
+      "nome": "Achada, Curral das Freiras (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.735872,
+      "lng": -16.969917,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 29,
+          "distancia_km": 16.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_curral_das_freiras": {
+          "tempo_min": 4,
+          "distancia_km": 2.0,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_bom_jesus": {
+          "tempo_min": 32,
+          "distancia_km": 17.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_serra_de_agua": {
+          "tempo_min": 46,
+          "distancia_km": 31.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/curral_das_freiras/capela",
+      "nome": "Capela, Curral das Freiras (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.72048,
+      "lng": -16.966122,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 27,
+          "distancia_km": 14.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_curral_das_freiras": {
+          "tempo_min": 4,
+          "distancia_km": 1.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_bom_jesus": {
+          "tempo_min": 30,
+          "distancia_km": 15.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_jardim_da_serra": {
+          "tempo_min": 32,
+          "distancia_km": 19.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/curral_das_freiras/colmeal",
+      "nome": "Colmeal, Curral das Freiras (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.732474,
+      "lng": -16.968419,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 28,
+          "distancia_km": 16.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_curral_das_freiras": {
+          "tempo_min": 3,
+          "distancia_km": 1.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_bom_jesus": {
+          "tempo_min": 31,
+          "distancia_km": 16.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_serra_de_agua": {
+          "tempo_min": 45,
+          "distancia_km": 30.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/curral_das_freiras/faja_dos_cardos",
+      "nome": "Fajã dos Cardos, Curral das Freiras (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.737686,
+      "lng": -16.968169,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 30,
+          "distancia_km": 16.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_curral_das_freiras": {
+          "tempo_min": 5,
+          "distancia_km": 2.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_bom_jesus": {
+          "tempo_min": 32,
+          "distancia_km": 17.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_serra_de_agua": {
+          "tempo_min": 46,
+          "distancia_km": 31.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/curral_das_freiras/faja_escura",
+      "nome": "Fajã Escura, Curral das Freiras (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.732947,
+      "lng": -16.97088,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 30,
+          "distancia_km": 16.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_curral_das_freiras": {
+          "tempo_min": 5,
+          "distancia_km": 2.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_bom_jesus": {
+          "tempo_min": 33,
+          "distancia_km": 17.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_serra_de_agua": {
+          "tempo_min": 47,
+          "distancia_km": 31.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/curral_das_freiras/lombo_chao",
+      "nome": "Lombo Chão, Curral das Freiras (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.707317,
+      "lng": -16.975396,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 43,
+          "distancia_km": 18.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_curral_das_freiras": {
+          "tempo_min": 19,
+          "distancia_km": 5.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_bom_jesus": {
+          "tempo_min": 45,
+          "distancia_km": 19.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_jardim_da_serra": {
+          "tempo_min": 47,
+          "distancia_km": 23.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/curral_das_freiras/pico_do_furao",
+      "nome": "Pico do Furão, Curral das Freiras (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.745767,
+      "lng": -16.963453,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 35,
+          "distancia_km": 17.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_curral_das_freiras": {
+          "tempo_min": 10,
+          "distancia_km": 3.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_bom_jesus": {
+          "tempo_min": 37,
+          "distancia_km": 18.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_serra_de_agua": {
+          "tempo_min": 51,
+          "distancia_km": 32.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/curral_das_freiras/terra_cha",
+      "nome": "Terra Chã, Curral das Freiras (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.717795,
+      "lng": -16.973873,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 42,
+          "distancia_km": 19.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_curral_das_freiras": {
+          "tempo_min": 19,
+          "distancia_km": 5.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_bom_jesus": {
+          "tempo_min": 45,
+          "distancia_km": 19.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_jardim_da_serra": {
+          "tempo_min": 46,
+          "distancia_km": 23.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/estreito_de_camara_de_lobos",
+      "nome": "Estreito de Câmara de Lobos (Câmara de Lobos)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.67438,
+      "lng": -16.978961,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 15,
+          "distancia_km": 9.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_estreito_camara_de_lobos": {
+          "tempo_min": 1,
+          "distancia_km": 0.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_jardim_da_serra": {
+          "tempo_min": 5,
+          "distancia_km": 2.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/estreito_de_camara_de_lobos/barreiros",
+      "nome": "Barreiros, Estreito de Câmara de Lobos (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.674619,
+      "lng": -16.972943,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 14,
+          "distancia_km": 8.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_estreito_camara_de_lobos": {
+          "tempo_min": 2,
+          "distancia_km": 0.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_jardim_da_serra": {
+          "tempo_min": 5,
+          "distancia_km": 2.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/estreito_de_camara_de_lobos/cabo_do_podao",
+      "nome": "Cabo do Podão, Estreito de Câmara de Lobos (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.679028,
+      "lng": -16.981167,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 16,
+          "distancia_km": 10.0,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_estreito_camara_de_lobos": {
+          "tempo_min": 3,
+          "distancia_km": 0.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_jardim_da_serra": {
+          "tempo_min": 3,
+          "distancia_km": 1.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/estreito_de_camara_de_lobos/covao",
+      "nome": "Covão, Estreito de Câmara de Lobos (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.669981,
+      "lng": -16.966753,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 16,
+          "distancia_km": 9.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_estreito_camara_de_lobos": {
+          "tempo_min": 4,
+          "distancia_km": 2.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_camara_lobos": {
+          "tempo_min": 8,
+          "distancia_km": 5.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/estreito_de_camara_de_lobos/fontes",
+      "nome": "Fontes, Estreito de Câmara de Lobos (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.679189,
+      "lng": -16.977276,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 18,
+          "distancia_km": 10.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_estreito_camara_de_lobos": {
+          "tempo_min": 4,
+          "distancia_km": 1.0,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_jardim_da_serra": {
+          "tempo_min": 5,
+          "distancia_km": 1.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/estreito_de_camara_de_lobos/garachico",
+      "nome": "Garachico, Estreito de Câmara de Lobos (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.671487,
+      "lng": -16.989295,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 20,
+          "distancia_km": 11.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_jardim_da_serra": {
+          "tempo_min": 11,
+          "distancia_km": 6.0,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_estreito_camara_de_lobos": {
+          "tempo_min": 8,
+          "distancia_km": 3.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/estreito_de_camara_de_lobos/marinheira",
+      "nome": "Marinheira, Estreito de Câmara de Lobos (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.676903,
+      "lng": -16.965521,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 19,
+          "distancia_km": 8.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_estreito_camara_de_lobos": {
+          "tempo_min": 7,
+          "distancia_km": 3.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_jardim_da_serra": {
+          "tempo_min": 11,
+          "distancia_km": 4.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/estreito_de_camara_de_lobos/pico_e_saloes",
+      "nome": "Pico e Salões, Estreito de Câmara de Lobos (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.674917,
+      "lng": -16.965084,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 18,
+          "distancia_km": 8.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_estreito_camara_de_lobos": {
+          "tempo_min": 7,
+          "distancia_km": 3.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_jardim_da_serra": {
+          "tempo_min": 10,
+          "distancia_km": 4.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/estreito_de_camara_de_lobos/ribeira_da_caixa",
+      "nome": "Ribeira da Caixa, Estreito de Câmara de Lobos (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.66781,
+      "lng": -16.986285,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 18,
+          "distancia_km": 11.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_estreito_camara_de_lobos": {
+          "tempo_min": 6,
+          "distancia_km": 3.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_jardim_da_serra": {
+          "tempo_min": 9,
+          "distancia_km": 5.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/estreito_de_camara_de_lobos/ribeira_fernanda",
+      "nome": "Ribeira Fernanda, Estreito de Câmara de Lobos (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.669114,
+      "lng": -16.995491,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 19,
+          "distancia_km": 13.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_quinta_grande": {
+          "tempo_min": 6,
+          "distancia_km": 3.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_estreito_camara_de_lobos": {
+          "tempo_min": 8,
+          "distancia_km": 5.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/estreito_de_camara_de_lobos/romeira",
+      "nome": "Romeira, Estreito de Câmara de Lobos (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.680751,
+      "lng": -16.989791,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 16,
+          "distancia_km": 10.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_jardim_da_serra": {
+          "tempo_min": 2,
+          "distancia_km": 0.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_estreito_camara_de_lobos": {
+          "tempo_min": 4,
+          "distancia_km": 2.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/jardim_da_serra",
+      "nome": "Jardim da Serra (Câmara de Lobos)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.686238,
+      "lng": -16.986646,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 19,
+          "distancia_km": 11.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_jardim_da_serra": {
+          "tempo_min": 2,
+          "distancia_km": 0.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_estreito_camara_de_lobos": {
+          "tempo_min": 7,
+          "distancia_km": 2.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/jardim_da_serra/boca_dos_namorados",
+      "nome": "Boca dos Namorados, Jardim da Serra (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.686193,
+      "lng": -16.983717,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 19,
+          "distancia_km": 11.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_jardim_da_serra": {
+          "tempo_min": 2,
+          "distancia_km": 0.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_estreito_camara_de_lobos": {
+          "tempo_min": 6,
+          "distancia_km": 2.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/jardim_da_serra/igreja_do_jardim_da_serra",
+      "nome": "Igreja do Jardim da Serra, Jardim da Serra (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.686282,
+      "lng": -16.989576,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 19,
+          "distancia_km": 11.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_jardim_da_serra": {
+          "tempo_min": 1,
+          "distancia_km": 0.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_estreito_camara_de_lobos": {
+          "tempo_min": 7,
+          "distancia_km": 4.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/quinta_grande",
+      "nome": "Quinta Grande (Câmara de Lobos)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.658741,
+      "lng": -17.016734,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 22,
+          "distancia_km": 15.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_quinta_grande": {
+          "tempo_min": 9,
+          "distancia_km": 6.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_campanario": {
+          "tempo_min": 5,
+          "distancia_km": 3.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/quinta_grande/faja_dos_padres",
+      "nome": "Fajã dos Padres, Quinta Grande (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.655062,
+      "lng": -17.021946,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 18,
+          "distancia_km": 11.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_quinta_grande": {
+          "tempo_min": 4,
+          "distancia_km": 2.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_campanario": {
+          "tempo_min": 7,
+          "distancia_km": 4.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "camara_de_lobos/quinta_grande/igreja_da_quinta_grande",
+      "nome": "Igreja da Quinta Grande, Quinta Grande (Câmara de Lobos)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.662419,
+      "lng": -17.011521,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 18,
+          "distancia_km": 11.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_quinta_grande": {
+          "tempo_min": 2,
+          "distancia_km": 1.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_campanario": {
+          "tempo_min": 7,
+          "distancia_km": 4.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/imaculado_coracao_de_maria",
+      "nome": "Imaculado Coração de Maria (Funchal)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.661609,
+      "lng": -16.915137,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 8,
+          "distancia_km": 3.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_bom_jesus": {
+          "tempo_min": 6,
+          "distancia_km": 2.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque": {
+          "tempo_min": 8,
+          "distancia_km": 4.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/monte",
+      "nome": "Monte (Funchal)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.678632,
+      "lng": -16.899935,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 17,
+          "distancia_km": 7.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque": {
+          "tempo_min": 14,
+          "distancia_km": 6.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_bom_jesus": {
+          "tempo_min": 14,
+          "distancia_km": 6.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/monte/babosas",
+      "nome": "Babosas, Monte (Funchal)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.673015,
+      "lng": -16.90099,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 15,
+          "distancia_km": 6.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_bom_jesus": {
+          "tempo_min": 9,
+          "distancia_km": 4.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque": {
+          "tempo_min": 12,
+          "distancia_km": 6.0,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/monte/terreiro_da_luta",
+      "nome": "Terreiro da Luta, Monte (Funchal)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.68425,
+      "lng": -16.898879,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 19,
+          "distancia_km": 9.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_bom_jesus": {
+          "tempo_min": 16,
+          "distancia_km": 8.0,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque": {
+          "tempo_min": 15,
+          "distancia_km": 8.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/santa_luzia",
+      "nome": "Santa Luzia (Funchal)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.656562,
+      "lng": -16.906067,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 8,
+          "distancia_km": 2.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_bom_jesus": {
+          "tempo_min": 3,
+          "distancia_km": 1.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque": {
+          "tempo_min": 11,
+          "distancia_km": 4.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/santa_maria_maior",
+      "nome": "Santa Maria Maior (Funchal)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.650374,
+      "lng": -16.898903,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 10,
+          "distancia_km": 3.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_bom_jesus": {
+          "tempo_min": 3,
+          "distancia_km": 0.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_rui_adriano_de_freitas": {
+          "tempo_min": 13,
+          "distancia_km": 4.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/santa_maria_maior/igreja_de_santa_maria_maior",
+      "nome": "Igreja de Santa Maria Maior, Santa Maria Maior (Funchal)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.646944,
+      "lng": -16.897957,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 11,
+          "distancia_km": 3.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_bom_jesus": {
+          "tempo_min": 5,
+          "distancia_km": 1.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_rui_adriano_de_freitas": {
+          "tempo_min": 14,
+          "distancia_km": 5.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/santa_maria_maior/rochinha",
+      "nome": "Rochinha, Santa Maria Maior (Funchal)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.653803,
+      "lng": -16.899849,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 10,
+          "distancia_km": 3.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_bom_jesus": {
+          "tempo_min": 3,
+          "distancia_km": 0.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_rui_adriano_de_freitas": {
+          "tempo_min": 13,
+          "distancia_km": 5.0,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque": {
+          "tempo_min": 13,
+          "distancia_km": 5.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/santo_antonio",
+      "nome": "Santo António (Funchal)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.670183,
+      "lng": -16.934847,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 9,
+          "distancia_km": 4.0,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque": {
+          "tempo_min": 3,
+          "distancia_km": 1.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santo_antonio": {
+          "tempo_min": 3,
+          "distancia_km": 1.0,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/santo_antonio/lombo_dos_aguiares",
+      "nome": "Lombo dos Aguiares, Santo António (Funchal)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.676112,
+      "lng": -16.938396,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 14,
+          "distancia_km": 6.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santo_antonio": {
+          "tempo_min": 6,
+          "distancia_km": 2.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque": {
+          "tempo_min": 7,
+          "distancia_km": 2.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/santo_antonio/madalenas",
+      "nome": "Madalenas, Santo António (Funchal)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.660811,
+      "lng": -16.930856,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 7,
+          "distancia_km": 2.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santo_antonio": {
+          "tempo_min": 2,
+          "distancia_km": 0.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque": {
+          "tempo_min": 6,
+          "distancia_km": 2.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/santo_antonio/ribeira_grande",
+      "nome": "Ribeira Grande, Santo António (Funchal)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.673626,
+      "lng": -16.93529,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 11,
+          "distancia_km": 4.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque": {
+          "tempo_min": 3,
+          "distancia_km": 1.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santo_antonio": {
+          "tempo_min": 3,
+          "distancia_km": 1.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/sao_goncalo",
+      "nome": "São Gonçalo (Funchal)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.650649,
+      "lng": -16.872992,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 18,
+          "distancia_km": 7.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_canico": {
+          "tempo_min": 7,
+          "distancia_km": 3.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_bom_jesus": {
+          "tempo_min": 11,
+          "distancia_km": 4.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/sao_goncalo/neves",
+      "nome": "Neves, São Gonçalo (Funchal)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.64845,
+      "lng": -16.873508,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 16,
+          "distancia_km": 7.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_canico": {
+          "tempo_min": 7,
+          "distancia_km": 3.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_bom_jesus": {
+          "tempo_min": 9,
+          "distancia_km": 4.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/sao_goncalo/palheiro_ferreiro",
+      "nome": "Palheiro Ferreiro, São Gonçalo (Funchal)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.652848,
+      "lng": -16.872476,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 22,
+          "distancia_km": 8.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_canico": {
+          "tempo_min": 14,
+          "distancia_km": 6.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_bom_jesus": {
+          "tempo_min": 15,
+          "distancia_km": 5.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/sao_martinho",
+      "nome": "São Martinho (Funchal)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.643098,
+      "lng": -16.938464,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 9,
+          "distancia_km": 3.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_rui_adriano_de_freitas": {
+          "tempo_min": 3,
+          "distancia_km": 1.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santo_antonio": {
+          "tempo_min": 8,
+          "distancia_km": 3.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/sao_martinho/ajuda",
+      "nome": "Ajuda, São Martinho (Funchal)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.639065,
+      "lng": -16.942489,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 7,
+          "distancia_km": 2.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_rui_adriano_de_freitas": {
+          "tempo_min": 5,
+          "distancia_km": 1.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santo_antonio": {
+          "tempo_min": 9,
+          "distancia_km": 3.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/sao_martinho/amparo",
+      "nome": "Amparo, São Martinho (Funchal)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.640837,
+      "lng": -16.948452,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 9,
+          "distancia_km": 3.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_rui_adriano_de_freitas": {
+          "tempo_min": 5,
+          "distancia_km": 2.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santo_antonio": {
+          "tempo_min": 9,
+          "distancia_km": 3.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/sao_martinho/nazare",
+      "nome": "Nazaré, São Martinho (Funchal)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.644422,
+      "lng": -16.932758,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 6,
+          "distancia_km": 2.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_rui_adriano_de_freitas": {
+          "tempo_min": 1,
+          "distancia_km": 0.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santo_antonio": {
+          "tempo_min": 6,
+          "distancia_km": 2.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/sao_martinho/virtudes",
+      "nome": "Virtudes, São Martinho (Funchal)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.648069,
+      "lng": -16.930157,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 4,
+          "distancia_km": 1.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_rui_adriano_de_freitas": {
+          "tempo_min": 2,
+          "distancia_km": 0.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santo_antonio": {
+          "tempo_min": 5,
+          "distancia_km": 2.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/sao_pedro",
+      "nome": "São Pedro (Funchal)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.655036,
+      "lng": -16.91586,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 6,
+          "distancia_km": 2.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_bom_jesus": {
+          "tempo_min": 4,
+          "distancia_km": 1.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque": {
+          "tempo_min": 8,
+          "distancia_km": 3.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/sao_pedro/pena",
+      "nome": "Pena, São Pedro (Funchal)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.657509,
+      "lng": -16.903783,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 8,
+          "distancia_km": 2.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_bom_jesus": {
+          "tempo_min": 3,
+          "distancia_km": 1.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque": {
+          "tempo_min": 11,
+          "distancia_km": 4.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/sao_pedro/pilar",
+      "nome": "Pilar, São Pedro (Funchal)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.652564,
+      "lng": -16.927937,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 4,
+          "distancia_km": 1.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santo_antonio": {
+          "tempo_min": 5,
+          "distancia_km": 2.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_rui_adriano_de_freitas": {
+          "tempo_min": 4,
+          "distancia_km": 1.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/sao_roque",
+      "nome": "São Roque (Funchal)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.668632,
+      "lng": -16.925735,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 10,
+          "distancia_km": 3.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque": {
+          "tempo_min": 3,
+          "distancia_km": 1.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santo_antonio": {
+          "tempo_min": 5,
+          "distancia_km": 1.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/sao_roque/achada",
+      "nome": "Achada, São Roque (Funchal)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.658515,
+      "lng": -16.922629,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 9,
+          "distancia_km": 3.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque": {
+          "tempo_min": 6,
+          "distancia_km": 2.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santo_antonio": {
+          "tempo_min": 7,
+          "distancia_km": 2.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/sao_roque/agua_de_mel",
+      "nome": "Água de Mel, São Roque (Funchal)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.66828,
+      "lng": -16.927017,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 9,
+          "distancia_km": 3.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque": {
+          "tempo_min": 1,
+          "distancia_km": 0.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santo_antonio": {
+          "tempo_min": 4,
+          "distancia_km": 1.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/sao_roque/alegria",
+      "nome": "Alegria, São Roque (Funchal)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.676355,
+      "lng": -16.921203,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 12,
+          "distancia_km": 4.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque": {
+          "tempo_min": 4,
+          "distancia_km": 1.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santo_antonio": {
+          "tempo_min": 7,
+          "distancia_km": 3.0,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/sao_roque/barreiros",
+      "nome": "Barreiros, São Roque (Funchal)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.647353,
+      "lng": -16.930129,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 5,
+          "distancia_km": 1.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_rui_adriano_de_freitas": {
+          "tempo_min": 3,
+          "distancia_km": 0.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santo_antonio": {
+          "tempo_min": 6,
+          "distancia_km": 2.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/sao_roque/bugiaria",
+      "nome": "Bugiaria, São Roque (Funchal)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.676556,
+      "lng": -16.925463,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 12,
+          "distancia_km": 4.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque": {
+          "tempo_min": 3,
+          "distancia_km": 1.0,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santo_antonio": {
+          "tempo_min": 6,
+          "distancia_km": 2.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/sao_roque/calhau",
+      "nome": "Calhau, São Roque (Funchal)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.667214,
+      "lng": -16.924774,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 10,
+          "distancia_km": 3.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque": {
+          "tempo_min": 4,
+          "distancia_km": 1.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santo_antonio": {
+          "tempo_min": 5,
+          "distancia_km": 2.0,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/sao_roque/cova",
+      "nome": "Cova, São Roque (Funchal)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.674878,
+      "lng": -16.924732,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 11,
+          "distancia_km": 4.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque": {
+          "tempo_min": 2,
+          "distancia_km": 0.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santo_antonio": {
+          "tempo_min": 6,
+          "distancia_km": 2.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/sao_roque/galeao",
+      "nome": "Galeão, São Roque (Funchal)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.676559,
+      "lng": -16.929743,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 12,
+          "distancia_km": 4.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque": {
+          "tempo_min": 3,
+          "distancia_km": 1.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santo_antonio": {
+          "tempo_min": 6,
+          "distancia_km": 2.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/sao_roque/igreja_velha",
+      "nome": "Igreja Velha, São Roque (Funchal)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.672433,
+      "lng": -16.921671,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 11,
+          "distancia_km": 4.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque": {
+          "tempo_min": 3,
+          "distancia_km": 1.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santo_antonio": {
+          "tempo_min": 6,
+          "distancia_km": 2.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/sao_roque/lombo_jamboeiro",
+      "nome": "Lombo Jamboeiro, São Roque (Funchal)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.672879,
+      "lng": -16.932666,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 11,
+          "distancia_km": 4.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque": {
+          "tempo_min": 3,
+          "distancia_km": 1.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santo_antonio": {
+          "tempo_min": 4,
+          "distancia_km": 1.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/sao_roque/lombo_segundo",
+      "nome": "Lombo Segundo, São Roque (Funchal)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.671876,
+      "lng": -16.923079,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 10,
+          "distancia_km": 4.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque": {
+          "tempo_min": 2,
+          "distancia_km": 0.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santo_antonio": {
+          "tempo_min": 5,
+          "distancia_km": 2.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/sao_roque/muro_da_coelha",
+      "nome": "Muro da Coelha, São Roque (Funchal)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.659933,
+      "lng": -16.92284,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 8,
+          "distancia_km": 3.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque": {
+          "tempo_min": 4,
+          "distancia_km": 1.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_bom_jesus": {
+          "tempo_min": 7,
+          "distancia_km": 2.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santo_antonio": {
+          "tempo_min": 4,
+          "distancia_km": 1.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/sao_roque/olival",
+      "nome": "Olival, São Roque (Funchal)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.665993,
+      "lng": -16.93008,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 9,
+          "distancia_km": 3.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque": {
+          "tempo_min": 2,
+          "distancia_km": 0.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santo_antonio": {
+          "tempo_min": 2,
+          "distancia_km": 0.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/sao_roque/quinta",
+      "nome": "Quinta, São Roque (Funchal)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.664482,
+      "lng": -16.925769,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 9,
+          "distancia_km": 3.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque": {
+          "tempo_min": 3,
+          "distancia_km": 1.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santo_antonio": {
+          "tempo_min": 4,
+          "distancia_km": 1.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/sao_roque/santana",
+      "nome": "Santana, São Roque (Funchal)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.669586,
+      "lng": -16.929433,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 10,
+          "distancia_km": 3.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque": {
+          "tempo_min": 2,
+          "distancia_km": 1.0,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santo_antonio": {
+          "tempo_min": 3,
+          "distancia_km": 1.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/sao_roque/terca",
+      "nome": "Terça, São Roque (Funchal)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.675222,
+      "lng": -16.920528,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 12,
+          "distancia_km": 4.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque": {
+          "tempo_min": 3,
+          "distancia_km": 1.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santo_antonio": {
+          "tempo_min": 6,
+          "distancia_km": 2.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/se",
+      "nome": "Sé (Funchal)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.647564,
+      "lng": -16.906843,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 7,
+          "distancia_km": 2.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_bom_jesus": {
+          "tempo_min": 5,
+          "distancia_km": 1.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_rui_adriano_de_freitas": {
+          "tempo_min": 10,
+          "distancia_km": 3.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/se/avenida_do_mar",
+      "nome": "Avenida do Mar, Sé (Funchal)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.646344,
+      "lng": -16.91148,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 6,
+          "distancia_km": 1.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_bom_jesus": {
+          "tempo_min": 5,
+          "distancia_km": 1.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_rui_adriano_de_freitas": {
+          "tempo_min": 9,
+          "distancia_km": 3.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/se/catedral_da_se",
+      "nome": "Catedral da Sé, Sé (Funchal)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.648191,
+      "lng": -16.908282,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 8,
+          "distancia_km": 2.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_bom_jesus": {
+          "tempo_min": 2,
+          "distancia_km": 0.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_rui_adriano_de_freitas": {
+          "tempo_min": 11,
+          "distancia_km": 4.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "funchal/se/zona_velha",
+      "nome": "Zona Velha, Sé (Funchal)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.648156,
+      "lng": -16.900768,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 10,
+          "distancia_km": 3.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_bom_jesus": {
+          "tempo_min": 3,
+          "distancia_km": 0.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque": {
+          "tempo_min": 13,
+          "distancia_km": 5.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_rui_adriano_de_freitas": {
+          "tempo_min": 13,
+          "distancia_km": 4.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "machico/agua_de_pena",
+      "nome": "Água de Pena (Machico)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.70857,
+      "lng": -16.773848,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 34,
+          "distancia_km": 22.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_machico": {
+          "tempo_min": 10,
+          "distancia_km": 4.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santa_cruz": {
+          "tempo_min": 11,
+          "distancia_km": 5.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "machico/canical",
+      "nome": "Caniçal (Machico)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.738502,
+      "lng": -16.736659,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 39,
+          "distancia_km": 30.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_canical": {
+          "tempo_min": 2,
+          "distancia_km": 0.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_machico": {
+          "tempo_min": 9,
+          "distancia_km": 7.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "machico/machico",
+      "nome": "Machico (Machico)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.720925,
+      "lng": -16.765675,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 35,
+          "distancia_km": 23.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_machico": {
+          "tempo_min": 3,
+          "distancia_km": 1.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_canical": {
+          "tempo_min": 10,
+          "distancia_km": 7.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "machico/machico/banda_d_alem",
+      "nome": "Banda d'Além, Machico (Machico)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.723365,
+      "lng": -16.769224,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 36,
+          "distancia_km": 24.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_machico": {
+          "tempo_min": 2,
+          "distancia_km": 0.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_canical": {
+          "tempo_min": 10,
+          "distancia_km": 4.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "machico/machico/praia",
+      "nome": "Praia, Machico (Machico)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.718486,
+      "lng": -16.762126,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 35,
+          "distancia_km": 23.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_machico": {
+          "tempo_min": 3,
+          "distancia_km": 1.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_canical": {
+          "tempo_min": 9,
+          "distancia_km": 7.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "machico/porto_da_cruz",
+      "nome": "Porto da Cruz (Machico)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.761834,
+      "lng": -16.827309,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 46,
+          "distancia_km": 32.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_porto_da_cruz": {
+          "tempo_min": 5,
+          "distancia_km": 2.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque_do_faial": {
+          "tempo_min": 9,
+          "distancia_km": 6.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "machico/porto_da_cruz/cruz",
+      "nome": "Cruz, Porto da Cruz (Machico)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.754092,
+      "lng": -16.830764,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 46,
+          "distancia_km": 33.0,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_porto_da_cruz": {
+          "tempo_min": 6,
+          "distancia_km": 3.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque_do_faial": {
+          "tempo_min": 10,
+          "distancia_km": 7.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "machico/porto_da_cruz/larano",
+      "nome": "Larano, Porto da Cruz (Machico)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.764198,
+      "lng": -16.828249,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 46,
+          "distancia_km": 32.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_porto_da_cruz": {
+          "tempo_min": 4,
+          "distancia_km": 1.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque_do_faial": {
+          "tempo_min": 10,
+          "distancia_km": 6.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "machico/porto_da_cruz/maiata",
+      "nome": "Maiata, Porto da Cruz (Machico)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.767631,
+      "lng": -16.820842,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 45,
+          "distancia_km": 32.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_porto_da_cruz": {
+          "tempo_min": 6,
+          "distancia_km": 2.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque_do_faial": {
+          "tempo_min": 13,
+          "distancia_km": 7.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "machico/porto_da_cruz/serrado",
+      "nome": "Serrado, Porto da Cruz (Machico)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.761416,
+      "lng": -16.82938,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 44,
+          "distancia_km": 31.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_porto_da_cruz": {
+          "tempo_min": 3,
+          "distancia_km": 1.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque_do_faial": {
+          "tempo_min": 8,
+          "distancia_km": 5.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "machico/santo_antonio_da_serra",
+      "nome": "Santo António da Serra (Machico)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.714112,
+      "lng": -16.811582,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 40,
+          "distancia_km": 23.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santo_da_serra": {
+          "tempo_min": 3,
+          "distancia_km": 1.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santa_cruz": {
+          "tempo_min": 15,
+          "distancia_km": 5.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "machico/santo_antonio_da_serra/achada_do_poiso",
+      "nome": "Achada do Poiso, Santo António da Serra (Machico)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.714112,
+      "lng": -16.811582,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 40,
+          "distancia_km": 23.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santo_da_serra": {
+          "tempo_min": 3,
+          "distancia_km": 1.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santa_cruz": {
+          "tempo_min": 15,
+          "distancia_km": 5.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "ponta_do_sol/canhas",
+      "nome": "Canhas (Ponta do Sol)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.696853,
+      "lng": -17.104392,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 36,
+          "distancia_km": 25.0,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_ponta_sol": {
+          "tempo_min": 5,
+          "distancia_km": 3.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_canhas": {
+          "tempo_min": 5,
+          "distancia_km": 3.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "ponta_do_sol/madalena_do_mar",
+      "nome": "Madalena do Mar (Ponta do Sol)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.70179,
+      "lng": -17.133968,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 36,
+          "distancia_km": 25.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_madalena_do_mar": {
+          "tempo_min": 1,
+          "distancia_km": 0.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_canhas": {
+          "tempo_min": 9,
+          "distancia_km": 5.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "ponta_do_sol/ponta_do_sol",
+      "nome": "Ponta do Sol (Ponta do Sol)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.687962,
+      "lng": -17.087109,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 33,
+          "distancia_km": 23.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_ponta_sol": {
+          "tempo_min": 5,
+          "distancia_km": 3.0,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_ribeira_brava": {
+          "tempo_min": 11,
+          "distancia_km": 6.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "ponta_do_sol/ponta_do_sol/jangao",
+      "nome": "Jangão, Ponta do Sol (Ponta do Sol)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.695351,
+      "lng": -17.082614,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 37,
+          "distancia_km": 24.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_ponta_sol": {
+          "tempo_min": 8,
+          "distancia_km": 4.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_ribeira_brava": {
+          "tempo_min": 14,
+          "distancia_km": 8.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "ponta_do_sol/ponta_do_sol/lombada",
+      "nome": "Lombada, Ponta do Sol (Ponta do Sol)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.688968,
+      "lng": -17.090221,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 33,
+          "distancia_km": 23.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_ponta_sol": {
+          "tempo_min": 4,
+          "distancia_km": 2.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_canhas": {
+          "tempo_min": 11,
+          "distancia_km": 7.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "ponta_do_sol/ponta_do_sol/lugar_de_baixo",
+      "nome": "Lugar de Baixo, Ponta do Sol (Ponta do Sol)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.679566,
+      "lng": -17.088491,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 28,
+          "distancia_km": 20.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_ponta_sol": {
+          "tempo_min": 5,
+          "distancia_km": 2.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_ribeira_brava": {
+          "tempo_min": 5,
+          "distancia_km": 3.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "porto_moniz/achadas_da_cruz",
+      "nome": "Achadas da Cruz (Porto Moniz)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.841378,
+      "lng": -17.209462,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 66,
+          "distancia_km": 54.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_achadas_da_cruz": {
+          "tempo_min": 1,
+          "distancia_km": 0.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santa": {
+          "tempo_min": 8,
+          "distancia_km": 5.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "porto_moniz/porto_moniz",
+      "nome": "Porto Moniz (Porto Moniz)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.857778,
+      "lng": -17.177547,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 69,
+          "distancia_km": 57.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santa": {
+          "tempo_min": 1,
+          "distancia_km": 0.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_porto_moniz": {
+          "tempo_min": 7,
+          "distancia_km": 4.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "porto_moniz/porto_moniz/batalhao",
+      "nome": "Batalhão, Porto Moniz (Porto Moniz)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.855125,
+      "lng": -17.180648,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 68,
+          "distancia_km": 57.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santa": {
+          "tempo_min": 2,
+          "distancia_km": 0.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_porto_moniz": {
+          "tempo_min": 8,
+          "distancia_km": 4.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "porto_moniz/porto_moniz/junqueira",
+      "nome": "Junqueira, Porto Moniz (Porto Moniz)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.855127,
+      "lng": -17.176286,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 69,
+          "distancia_km": 57.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santa": {
+          "tempo_min": 2,
+          "distancia_km": 0.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_porto_moniz": {
+          "tempo_min": 8,
+          "distancia_km": 4.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "porto_moniz/porto_moniz/lamaceiros",
+      "nome": "Lamaceiros, Porto Moniz (Porto Moniz)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.859427,
+      "lng": -17.172886,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 71,
+          "distancia_km": 58.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_porto_moniz": {
+          "tempo_min": 5,
+          "distancia_km": 3.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santa": {
+          "tempo_min": 2,
+          "distancia_km": 1.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "porto_moniz/porto_moniz/levada_grande",
+      "nome": "Levada Grande, Porto Moniz (Porto Moniz)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.858018,
+      "lng": -17.177827,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 69,
+          "distancia_km": 57.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santa": {
+          "tempo_min": 1,
+          "distancia_km": 0.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_porto_moniz": {
+          "tempo_min": 7,
+          "distancia_km": 4.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "porto_moniz/porto_moniz/pico_alto",
+      "nome": "Pico Alto, Porto Moniz (Porto Moniz)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.851576,
+      "lng": -17.18791,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 66,
+          "distancia_km": 56.0,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santa": {
+          "tempo_min": 3,
+          "distancia_km": 1.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_achadas_da_cruz": {
+          "tempo_min": 4,
+          "distancia_km": 4.0,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "porto_moniz/porto_moniz/vila",
+      "nome": "Vila, Porto Moniz (Porto Moniz)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.867395,
+      "lng": -17.169724,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 69,
+          "distancia_km": 47.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_porto_moniz": {
+          "tempo_min": 2,
+          "distancia_km": 0.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santa": {
+          "tempo_min": 8,
+          "distancia_km": 4.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "porto_moniz/ribeira_da_janela",
+      "nome": "Ribeira da Janela (Porto Moniz)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.846878,
+      "lng": -17.155301,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 68,
+          "distancia_km": 54.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_ribeira_da_janela": {
+          "tempo_min": 2,
+          "distancia_km": 0.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_porto_moniz": {
+          "tempo_min": 12,
+          "distancia_km": 5.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "porto_moniz/seixal",
+      "nome": "Seixal (Porto Moniz)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.824587,
+      "lng": -17.106846,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 58,
+          "distancia_km": 39.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_seixal": {
+          "tempo_min": 2,
+          "distancia_km": 0.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_ribeira_da_janela": {
+          "tempo_min": 13,
+          "distancia_km": 8.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "porto_santo/porto_santo",
+      "nome": "Porto Santo (Porto Santo)",
+      "nivel": "freguesia",
+      "ilha": "porto_santo",
+      "lat": 33.055471,
+      "lng": -16.353079,
+      "destinos": {
+        "cs_porto_santo": {
+          "tempo_min": 5,
+          "distancia_km": 2.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "porto_santo/porto_santo/calheta",
+      "nome": "Calheta, Porto Santo (Porto Santo)",
+      "nivel": "sitio",
+      "ilha": "porto_santo",
+      "lat": 33.025453,
+      "lng": -16.380031,
+      "destinos": {
+        "cs_porto_santo": {
+          "tempo_min": 14,
+          "distancia_km": 6.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "porto_santo/porto_santo/camacha",
+      "nome": "Camacha, Porto Santo (Porto Santo)",
+      "nivel": "sitio",
+      "ilha": "porto_santo",
+      "lat": 33.086501,
+      "lng": -16.343074,
+      "destinos": {
+        "cs_porto_santo": {
+          "tempo_min": 8,
+          "distancia_km": 4.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "porto_santo/porto_santo/campo_de_baixo",
+      "nome": "Campo de Baixo, Porto Santo (Porto Santo)",
+      "nivel": "sitio",
+      "ilha": "porto_santo",
+      "lat": 33.047132,
+      "lng": -16.354878,
+      "destinos": {
+        "cs_porto_santo": {
+          "tempo_min": 6,
+          "distancia_km": 2.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "porto_santo/porto_santo/campo_de_cima",
+      "nome": "Campo de Cima, Porto Santo (Porto Santo)",
+      "nivel": "sitio",
+      "ilha": "porto_santo",
+      "lat": 33.059078,
+      "lng": -16.35367,
+      "destinos": {
+        "cs_porto_santo": {
+          "tempo_min": 6,
+          "distancia_km": 2.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "porto_santo/porto_santo/vila_baleira",
+      "nome": "Vila Baleira, Porto Santo (Porto Santo)",
+      "nivel": "sitio",
+      "ilha": "porto_santo",
+      "lat": 33.059193,
+      "lng": -16.333744,
+      "destinos": {
+        "cs_porto_santo": {
+          "tempo_min": 1,
+          "distancia_km": 0.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "ribeira_brava/campanario",
+      "nome": "Campanário (Ribeira Brava)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.670099,
+      "lng": -17.033469,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 23,
+          "distancia_km": 14.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_campanario": {
+          "tempo_min": 3,
+          "distancia_km": 0.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_quinta_grande": {
+          "tempo_min": 10,
+          "distancia_km": 5.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "ribeira_brava/ribeira_brava",
+      "nome": "Ribeira Brava (Ribeira Brava)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.690398,
+      "lng": -17.042941,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 31,
+          "distancia_km": 21.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_ribeira_brava": {
+          "tempo_min": 17,
+          "distancia_km": 12.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_campanario": {
+          "tempo_min": 11,
+          "distancia_km": 8.0,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "ribeira_brava/ribeira_brava/boa_morte",
+      "nome": "Boa Morte, Ribeira Brava (Ribeira Brava)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.681291,
+      "lng": -17.043895,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 25,
+          "distancia_km": 17.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_campanario": {
+          "tempo_min": 5,
+          "distancia_km": 3.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_ribeira_brava": {
+          "tempo_min": 10,
+          "distancia_km": 6.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "ribeira_brava/ribeira_brava/meia_legua",
+      "nome": "Meia Légua, Ribeira Brava (Ribeira Brava)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.699504,
+      "lng": -17.041987,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 25,
+          "distancia_km": 18.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_ribeira_brava": {
+          "tempo_min": 6,
+          "distancia_km": 2.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_serra_de_agua": {
+          "tempo_min": 6,
+          "distancia_km": 3.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "ribeira_brava/serra_de_agua",
+      "nome": "Serra de Água (Ribeira Brava)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.727247,
+      "lng": -17.027536,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 30,
+          "distancia_km": 21.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_serra_de_agua": {
+          "tempo_min": 1,
+          "distancia_km": 0.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_ribeira_brava": {
+          "tempo_min": 11,
+          "distancia_km": 6.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_curral_das_freiras": {
+          "tempo_min": 42,
+          "distancia_km": 29.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "ribeira_brava/tabua",
+      "nome": "Tabua (Ribeira Brava)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.677654,
+      "lng": -17.067593,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 28,
+          "distancia_km": 19.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_ribeira_brava": {
+          "tempo_min": 5,
+          "distancia_km": 3.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_ponta_sol": {
+          "tempo_min": 9,
+          "distancia_km": 6.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santa_cruz/camacha",
+      "nome": "Camacha (Santa Cruz)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.676756,
+      "lng": -16.857686,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 23,
+          "distancia_km": 11.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_camacha": {
+          "tempo_min": 5,
+          "distancia_km": 2.0,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_canico": {
+          "tempo_min": 11,
+          "distancia_km": 6.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santa_cruz/camacha/achadinha",
+      "nome": "Achadinha, Camacha (Santa Cruz)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.686998,
+      "lng": -16.865989,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 28,
+          "distancia_km": 14.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_camacha": {
+          "tempo_min": 10,
+          "distancia_km": 2.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_canico": {
+          "tempo_min": 16,
+          "distancia_km": 8.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santa_cruz/camacha/nogueira",
+      "nome": "Nogueira, Camacha (Santa Cruz)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.670115,
+      "lng": -16.853337,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 28,
+          "distancia_km": 12.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_camacha": {
+          "tempo_min": 7,
+          "distancia_km": 2.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_canico": {
+          "tempo_min": 12,
+          "distancia_km": 5.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santa_cruz/camacha/rochinha",
+      "nome": "Rochinha, Camacha (Santa Cruz)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.675911,
+      "lng": -16.854798,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 26,
+          "distancia_km": 12.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_camacha": {
+          "tempo_min": 5,
+          "distancia_km": 1.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_canico": {
+          "tempo_min": 11,
+          "distancia_km": 6.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santa_cruz/camacha/vale_paraiso",
+      "nome": "Vale Paraíso, Camacha (Santa Cruz)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.674,
+      "lng": -16.85662,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 24,
+          "distancia_km": 11.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_camacha": {
+          "tempo_min": 4,
+          "distancia_km": 1.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_canico": {
+          "tempo_min": 10,
+          "distancia_km": 6.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santa_cruz/canico",
+      "nome": "Caniço (Santa Cruz)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.650457,
+      "lng": -16.834579,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 20,
+          "distancia_km": 11.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_canico": {
+          "tempo_min": 4,
+          "distancia_km": 2.0,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_camacha": {
+          "tempo_min": 11,
+          "distancia_km": 7.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_gaula": {
+          "tempo_min": 10,
+          "distancia_km": 7.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santa_cruz/canico/assomada",
+      "nome": "Assomada, Caniço (Santa Cruz)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.658525,
+      "lng": -16.821181,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 24,
+          "distancia_km": 14.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_gaula": {
+          "tempo_min": 9,
+          "distancia_km": 5.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_canico": {
+          "tempo_min": 7,
+          "distancia_km": 3.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santa_cruz/canico/atalaia",
+      "nome": "Atalaia, Caniço (Santa Cruz)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.643049,
+      "lng": -16.832112,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 22,
+          "distancia_km": 12.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_canico": {
+          "tempo_min": 6,
+          "distancia_km": 3.0,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_gaula": {
+          "tempo_min": 10,
+          "distancia_km": 7.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santa_cruz/canico/canico_centro",
+      "nome": "Caniço Centro, Caniço (Santa Cruz)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.653546,
+      "lng": -16.841637,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 22,
+          "distancia_km": 12.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_canico": {
+          "tempo_min": 1,
+          "distancia_km": 0.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_camacha": {
+          "tempo_min": 12,
+          "distancia_km": 6.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santa_cruz/canico/garajau",
+      "nome": "Garajau, Caniço (Santa Cruz)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.641207,
+      "lng": -16.85039,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 21,
+          "distancia_km": 10.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_canico": {
+          "tempo_min": 5,
+          "distancia_km": 2.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_camacha": {
+          "tempo_min": 12,
+          "distancia_km": 6.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santa_cruz/canico/mae_de_deus",
+      "nome": "Mãe de Deus, Caniço (Santa Cruz)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.655958,
+      "lng": -16.827576,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 26,
+          "distancia_km": 15.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_canico": {
+          "tempo_min": 6,
+          "distancia_km": 2.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_gaula": {
+          "tempo_min": 11,
+          "distancia_km": 6.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santa_cruz/gaula",
+      "nome": "Gaula (Santa Cruz)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.675596,
+      "lng": -16.819452,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 28,
+          "distancia_km": 19.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_gaula": {
+          "tempo_min": 1,
+          "distancia_km": 1.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_camacha": {
+          "tempo_min": 11,
+          "distancia_km": 8.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santa_cruz/gaula/achada_da_rocha",
+      "nome": "Achada da Rocha, Gaula (Santa Cruz)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.675634,
+      "lng": -16.827081,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 31,
+          "distancia_km": 20.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_camacha": {
+          "tempo_min": 13,
+          "distancia_km": 8.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_gaula": {
+          "tempo_min": 5,
+          "distancia_km": 2.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santa_cruz/gaula/achada_de_baixo",
+      "nome": "Achada de Baixo, Gaula (Santa Cruz)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.674627,
+      "lng": -16.822072,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 28,
+          "distancia_km": 19.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_gaula": {
+          "tempo_min": 2,
+          "distancia_km": 1.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_camacha": {
+          "tempo_min": 11,
+          "distancia_km": 8.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santa_cruz/gaula/achada_de_cima",
+      "nome": "Achada de Cima, Gaula (Santa Cruz)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.677253,
+      "lng": -16.825229,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 29,
+          "distancia_km": 20.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_gaula": {
+          "tempo_min": 2,
+          "distancia_km": 2.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_camacha": {
+          "tempo_min": 10,
+          "distancia_km": 7.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santa_cruz/gaula/contenda",
+      "nome": "Contenda, Gaula (Santa Cruz)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.67422,
+      "lng": -16.818182,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 27,
+          "distancia_km": 19.0,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_gaula": {
+          "tempo_min": 1,
+          "distancia_km": 1.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_camacha": {
+          "tempo_min": 11,
+          "distancia_km": 8.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santa_cruz/gaula/farrobo",
+      "nome": "Farrobo, Gaula (Santa Cruz)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.672331,
+      "lng": -16.816748,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 27,
+          "distancia_km": 18.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_gaula": {
+          "tempo_min": 1,
+          "distancia_km": 0.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_camacha": {
+          "tempo_min": 13,
+          "distancia_km": 9.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santa_cruz/gaula/fonte",
+      "nome": "Fonte, Gaula (Santa Cruz)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.676137,
+      "lng": -16.81581,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 28,
+          "distancia_km": 17.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_gaula": {
+          "tempo_min": 4,
+          "distancia_km": 1.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santa_cruz": {
+          "tempo_min": 10,
+          "distancia_km": 4.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santa_cruz/gaula/lombadinha",
+      "nome": "Lombadinha, Gaula (Santa Cruz)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.670914,
+      "lng": -16.804961,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 23,
+          "distancia_km": 15.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_gaula": {
+          "tempo_min": 3,
+          "distancia_km": 2.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santa_cruz": {
+          "tempo_min": 6,
+          "distancia_km": 3.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santa_cruz/gaula/pico_norte",
+      "nome": "Pico Norte, Gaula (Santa Cruz)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.686796,
+      "lng": -16.828639,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 30,
+          "distancia_km": 21.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_camacha": {
+          "tempo_min": 9,
+          "distancia_km": 6.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_gaula": {
+          "tempo_min": 4,
+          "distancia_km": 3.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santa_cruz/gaula/pico_sul",
+      "nome": "Pico Sul, Gaula (Santa Cruz)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.680248,
+      "lng": -16.831256,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 31,
+          "distancia_km": 21.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_camacha": {
+          "tempo_min": 12,
+          "distancia_km": 7.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_gaula": {
+          "tempo_min": 5,
+          "distancia_km": 3.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santa_cruz/gaula/porto_novo",
+      "nome": "Porto Novo, Gaula (Santa Cruz)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.667795,
+      "lng": -16.804538,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 22,
+          "distancia_km": 15.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_gaula": {
+          "tempo_min": 4,
+          "distancia_km": 2.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santa_cruz": {
+          "tempo_min": 5,
+          "distancia_km": 3.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santa_cruz/santa_cruz",
+      "nome": "Santa Cruz (Santa Cruz)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.69149,
+      "lng": -16.797027,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 30,
+          "distancia_km": 19.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santa_cruz": {
+          "tempo_min": 2,
+          "distancia_km": 0.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_gaula": {
+          "tempo_min": 10,
+          "distancia_km": 5.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santa_cruz/santa_cruz/lombada",
+      "nome": "Lombada, Santa Cruz (Santa Cruz)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.683683,
+      "lng": -16.800688,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 26,
+          "distancia_km": 17.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santa_cruz": {
+          "tempo_min": 4,
+          "distancia_km": 1.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_gaula": {
+          "tempo_min": 6,
+          "distancia_km": 3.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santa_cruz/santa_cruz/mercado_centro",
+      "nome": "Mercado (centro), Santa Cruz (Santa Cruz)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.687646,
+      "lng": -16.790959,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 29,
+          "distancia_km": 19.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santa_cruz": {
+          "tempo_min": 4,
+          "distancia_km": 0.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_gaula": {
+          "tempo_min": 10,
+          "distancia_km": 5.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santa_cruz/santa_cruz/remedios",
+      "nome": "Remédios, Santa Cruz (Santa Cruz)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.70314,
+      "lng": -16.799433,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 33,
+          "distancia_km": 21.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santa_cruz": {
+          "tempo_min": 8,
+          "distancia_km": 3.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santo_da_serra": {
+          "tempo_min": 11,
+          "distancia_km": 6.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santa_cruz/santo_antonio_da_serra",
+      "nome": "Santo António da Serra (Santa Cruz)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.705375,
+      "lng": -16.823894,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 35,
+          "distancia_km": 23.0,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santo_da_serra": {
+          "tempo_min": 8,
+          "distancia_km": 5.0,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_camacha": {
+          "tempo_min": 13,
+          "distancia_km": 8.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santa_cruz": {
+          "tempo_min": 8,
+          "distancia_km": 5.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santa_cruz/santo_antonio_da_serra/fundo_do_vale",
+      "nome": "Fundo do Vale, Santo António da Serra (Santa Cruz)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.701149,
+      "lng": -16.821475,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 33,
+          "distancia_km": 22.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santo_da_serra": {
+          "tempo_min": 8,
+          "distancia_km": 5.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santa_cruz": {
+          "tempo_min": 7,
+          "distancia_km": 4.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santa_cruz/santo_antonio_da_serra/ribeira_de_joao_goncalves",
+      "nome": "Ribeira de João Gonçalves, Santo António da Serra (Santa Cruz)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.709601,
+      "lng": -16.826313,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 38,
+          "distancia_km": 24.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santo_da_serra": {
+          "tempo_min": 9,
+          "distancia_km": 4.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santa_cruz": {
+          "tempo_min": 12,
+          "distancia_km": 6.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santana/arco_de_sao_jorge",
+      "nome": "Arco de São Jorge (Santana)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.825882,
+      "lng": -16.956158,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 64,
+          "distancia_km": 46.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_arco_de_sao_jorge": {
+          "tempo_min": 2,
+          "distancia_km": 1.0,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_boaventura": {
+          "tempo_min": 8,
+          "distancia_km": 6.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santana/faial",
+      "nome": "Faial (Santana)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.772956,
+      "lng": -16.857648,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 46,
+          "distancia_km": 27.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque_do_faial": {
+          "tempo_min": 3,
+          "distancia_km": 1.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_porto_da_cruz": {
+          "tempo_min": 9,
+          "distancia_km": 5.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santana/faial/faja_grande",
+      "nome": "Fajã Grande, Faial (Santana)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.760392,
+      "lng": -16.873551,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 47,
+          "distancia_km": 27.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque_do_faial": {
+          "tempo_min": 9,
+          "distancia_km": 4.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_porto_da_cruz": {
+          "tempo_min": 18,
+          "distancia_km": 10.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santana/faial/lombo_lourenco",
+      "nome": "Lombo Lourenço, Faial (Santana)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.787479,
+      "lng": -16.855701,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 52,
+          "distancia_km": 31.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque_do_faial": {
+          "tempo_min": 9,
+          "distancia_km": 5.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_porto_da_cruz": {
+          "tempo_min": 11,
+          "distancia_km": 5.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santana/faial/penha_de_aguia",
+      "nome": "Penha de Águia, Faial (Santana)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.770996,
+      "lng": -16.843693,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 48,
+          "distancia_km": 34.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_porto_da_cruz": {
+          "tempo_min": 4,
+          "distancia_km": 2.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque_do_faial": {
+          "tempo_min": 5,
+          "distancia_km": 4.0,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santana/ilha",
+      "nome": "Ilha (Santana)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.812093,
+      "lng": -16.904216,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 63,
+          "distancia_km": 38.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_jorge": {
+          "tempo_min": 2,
+          "distancia_km": 1.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santana": {
+          "tempo_min": 7,
+          "distancia_km": 4.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santana/santana",
+      "nome": "Santana (Santana)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.808459,
+      "lng": -16.880777,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 58,
+          "distancia_km": 35.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santana": {
+          "tempo_min": 3,
+          "distancia_km": 1.0,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_jorge": {
+          "tempo_min": 7,
+          "distancia_km": 3.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santana/santana/igreja_de_santana",
+      "nome": "Igreja de Santana, Santana (Santana)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.806368,
+      "lng": -16.88063,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 58,
+          "distancia_km": 35.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santana": {
+          "tempo_min": 2,
+          "distancia_km": 0.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_jorge": {
+          "tempo_min": 7,
+          "distancia_km": 3.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santana/santana/sitio_da_rocha",
+      "nome": "Sítio da Rocha, Santana (Santana)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.813848,
+      "lng": -16.879048,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 59,
+          "distancia_km": 35.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santana": {
+          "tempo_min": 4,
+          "distancia_km": 1.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_jorge": {
+          "tempo_min": 8,
+          "distancia_km": 3.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santana/santana/sitio_do_serrado",
+      "nome": "Sítio do Serrado, Santana (Santana)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.80516,
+      "lng": -16.882653,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 57,
+          "distancia_km": 35.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santana": {
+          "tempo_min": 1,
+          "distancia_km": 0.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_jorge": {
+          "tempo_min": 6,
+          "distancia_km": 3.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santana/sao_jorge",
+      "nome": "São Jorge (Santana)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.828048,
+      "lng": -16.909146,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 67,
+          "distancia_km": 40.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_jorge": {
+          "tempo_min": 6,
+          "distancia_km": 2.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_arco_de_sao_jorge": {
+          "tempo_min": 9,
+          "distancia_km": 5.0,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_santana": {
+          "tempo_min": 12,
+          "distancia_km": 6.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "santana/sao_roque_do_faial",
+      "nome": "São Roque do Faial (Santana)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.740032,
+      "lng": -16.88573,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 35,
+          "distancia_km": 20.2,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_roque_do_faial": {
+          "tempo_min": 9,
+          "distancia_km": 6.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_porto_da_cruz": {
+          "tempo_min": 17,
+          "distancia_km": 12.0,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "sao_vicente/boaventura",
+      "nome": "Boaventura (São Vicente)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.802026,
+      "lng": -16.966026,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 59,
+          "distancia_km": 42.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_boaventura": {
+          "tempo_min": 3,
+          "distancia_km": 2.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_arco_de_sao_jorge": {
+          "tempo_min": 7,
+          "distancia_km": 5.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "sao_vicente/boaventura/faja_do_penedo",
+      "nome": "Fajã do Penedo, Boaventura (São Vicente)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.804285,
+      "lng": -16.964922,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 60,
+          "distancia_km": 43.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_boaventura": {
+          "tempo_min": 4,
+          "distancia_km": 2.9,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_arco_de_sao_jorge": {
+          "tempo_min": 7,
+          "distancia_km": 5.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "sao_vicente/boaventura/lombo_do_urzal",
+      "nome": "Lombo do Urzal, Boaventura (São Vicente)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.799768,
+      "lng": -16.967129,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 59,
+          "distancia_km": 42.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_boaventura": {
+          "tempo_min": 3,
+          "distancia_km": 2.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_ponta_delgada": {
+          "tempo_min": 7,
+          "distancia_km": 5.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_arco_de_sao_jorge": {
+          "tempo_min": 7,
+          "distancia_km": 5.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "sao_vicente/ponta_delgada",
+      "nome": "Ponta Delgada (São Vicente)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.822319,
+      "lng": -16.991598,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 53,
+          "distancia_km": 37.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_ponta_delgada": {
+          "tempo_min": 1,
+          "distancia_km": 0.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_boaventura": {
+          "tempo_min": 5,
+          "distancia_km": 2.8,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "sao_vicente/sao_vicente",
+      "nome": "São Vicente (São Vicente)",
+      "nivel": "freguesia",
+      "ilha": "madeira",
+      "lat": 32.792963,
+      "lng": -17.039032,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 42,
+          "distancia_km": 30.0,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_vicente": {
+          "tempo_min": 1,
+          "distancia_km": 0.6,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_serra_de_agua": {
+          "tempo_min": 13,
+          "distancia_km": 8.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_ponta_delgada": {
+          "tempo_min": 12,
+          "distancia_km": 8.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "sao_vicente/sao_vicente/lameiros",
+      "nome": "Lameiros, São Vicente (São Vicente)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.782315,
+      "lng": -17.030783,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 40,
+          "distancia_km": 28.7,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_vicente": {
+          "tempo_min": 4,
+          "distancia_km": 2.3,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_serra_de_agua": {
+          "tempo_min": 11,
+          "distancia_km": 7.4,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    },
+    {
+      "origem": "sao_vicente/sao_vicente/largo_da_igreja",
+      "nome": "Largo da Igreja, São Vicente (São Vicente)",
+      "nivel": "sitio",
+      "ilha": "madeira",
+      "lat": 32.803612,
+      "lng": -17.047281,
+      "destinos": {
+        "hnm": {
+          "tempo_min": 47,
+          "distancia_km": 32.5,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_sao_vicente": {
+          "tempo_min": 6,
+          "distancia_km": 3.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        },
+        "cs_ponta_delgada": {
+          "tempo_min": 10,
+          "distancia_km": 7.1,
+          "fonte": "ors",
+          "calculado_em": "2026-07-12"
+        }
+      }
+    }
+  ]
+}

@@ -279,18 +279,27 @@ def _candidatas(
 
 
 def _texto_chegada(u: dict) -> str:
-    """"2.1 km, ~9 min de carro" — ou só os km, sem estimativa."""
-    minutos = (u.get("tempo_viagem") or {}).get("minutos")
-    if minutos is not None:
-        return f"{u['distancia_km']} km, ~{minutos} min de carro"
-    return f"{u['distancia_km']} km"
+    """"2.1 km, ~9 min de carro" — ou só os km, sem estimativa. Com uma
+    medição (v0.11.3) há distância POR ESTRADA, e é essa que se mostra."""
+    tv = u.get("tempo_viagem") or {}
+    minutos = tv.get("minutos")
+    if minutos is None:
+        return f"{u['distancia_km']} km"
+    km_estrada = tv.get("distancia_km")
+    if km_estrada is not None:
+        return f"{km_estrada} km por estrada, ~{minutos} min de carro"
+    return f"{u['distancia_km']} km, ~{minutos} min de carro"
 
 
 def _texto_chegada_en(u: dict) -> str:
-    minutos = (u.get("tempo_viagem") or {}).get("minutos")
-    if minutos is not None:
-        return f"{u['distancia_km']} km, ~{minutos} min by car"
-    return f"{u['distancia_km']} km"
+    tv = u.get("tempo_viagem") or {}
+    minutos = tv.get("minutos")
+    if minutos is None:
+        return f"{u['distancia_km']} km"
+    km_estrada = tv.get("distancia_km")
+    if km_estrada is not None:
+        return f"{km_estrada} km by road, ~{minutos} min by car"
+    return f"{u['distancia_km']} km, ~{minutos} min by car"
 
 
 def _primeira_aberta(candidatas: list[dict]) -> dict | None:

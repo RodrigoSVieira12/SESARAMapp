@@ -87,14 +87,18 @@ def _assert_sem_travessoes(texto: str, origem: str):
 
 # ---------------------------------------------------------------- versão --
 
-def test_versao_0_11_2():
-    assert versao.VERSAO == "0.11.2"
+def test_versao_no_minimo_0_11_2():
+    """O pino exato da versão corrente vive no ficheiro de testes dessa
+    versão (ver test_v11_3.py); aqui só se garante que não andámos para
+    trás face à v0.11.2."""
+    partes = tuple(int(x) for x in versao.VERSAO.split("."))
+    assert partes >= (0, 11, 2)
 
 
 def test_api_saude_reporta_versao():
     resposta = cliente.get("/api/saude")
     assert resposta.status_code == 200
-    assert resposta.json()["versao"] == "0.11.2"
+    assert resposta.json()["versao"] == versao.VERSAO
 
 
 # ------------------------------------------------- textos.js sem dashes --

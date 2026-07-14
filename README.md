@@ -84,12 +84,14 @@ onde-ir-sesaram/
 │   │   ├── feriados.py       # public holidays (national + RAM regional)
 │   │   ├── geo.py            # Haversine distance
 │   │   ├── viagem.py         # driving-time estimator (network + optional OSRM)
+│   │   ├── tempos_medidos.py # local road-time table (removable; v0.11.3)
 │   │   ├── localidades.py    # municipality → parish → locality (manual mode)
 │   │   ├── unidades.py       # unit repository
 │   │   └── cores.py          # Manchester colours and contacts
 │   └── data/
 │       ├── rules/            # 1 JSON file per complaint + red_flags.json
 │       ├── rede_viagem.json  # calibrated road network (editable)
+│       ├── tempos_medidos.json # recorded road times (editable; v0.11.3)
 │       ├── localidades.json  # parishes and localities (editable)
 │       └── unidades.json     # RAM health units
 ├── static/                   # frontend (HTML + CSS + plain JS + Leaflet)
@@ -217,7 +219,9 @@ into the JSON files (updating the `fonte` field with who validated and when).
 - `GET /api/unidades` — all units
 - `GET /api/unidades/proxima?lat&lng&servico&n` — nearest units
 - `GET /api/viagem?lat&lng&lat_destino&lng_destino` — estimated driving
-  time between two points (inspection; v0.11)
+  time between two points (inspection; v0.11); with `&unidade=<id>`
+  instead of destination coordinates, the local road-time table can
+  answer (method "medido"; v0.11.3)
 - `GET /api/localidades` — municipality → parish → locality tree for the
   manual location screen (v0.11.1)
 - `GET /api/espera?atualizar=` — real-time waiting times (SEISRAM cache)
@@ -444,7 +448,8 @@ tie-breaker), messages say "8.9 km, ~29 min by car", unit cards and
 alternatives show the minutes, and the switch rule compares *real wait +
 road travel*. Islands never mix: between Madeira and Porto Santo the
 estimate is `None`. The response carries a `viagem_info` block and each
-unit a `tempo_viagem` one (`{"minutos", "metodo": "rede"|"osrm"}`), and
+unit a `tempo_viagem` one (`{"minutos", "metodo": "rede"|"medido"|"osrm"}`; the "medido" method
+also carries `distancia_km`, by road), and
 `GET /api/viagem` exposes the estimator for inspection.
 
 **Honest evaluation.** `python scripts/avaliar_viagem.py` compares both
@@ -534,11 +539,76 @@ still pass and 12 new ones guard the changes below.
   real: self-hosted OSRM for a pilot (already supported via
   `VIAGEM_OSRM_URL`), a **paid routing API (Google Routes API or
   equivalent) as the recommended production option**, with the mandatory
-  GDPR/DPO assessment, and a hand-measured time table as a stopgap.
+  GDPR/DPO assessment, and a local road-time table as a stopgap (implemented in v0.11.3).
+
+## New in v0.11.3: road times in a local table and waiting chips
+
+The motivating case comes from v0.11.2: from Achada da Rocha (Gaula),
+the local model misordered Camacha and Gaula. This version tackles it
+with an explicit, removable stopgap, and tidies the results card along
+the way.
+
+- **A local road-time table (removable module).**
+  `app/data/tempos_medidos.json` stores, per locality and per parish,
+  the driving time and distance to the relevant units (the hospital and
+  the nearest health centres). When the patient is within
+  `raio_ancoragem_km` (3 km) of a registered area, with no terrain
+  barrier in between, the app uses that value, adjusted for the offset
+  to the anchor; otherwise it falls back to the calibrated network.
+  Priority: live OSRM (if configured) > table > network.
+- **Two ways to fill the table, and they can coexist.** The recommended
+  one is automatic: `python scripts/calcular_tempos_medidos.py --motor
+  ors --chave YOUR_KEY` requests routes in batches from a routing
+  engine (OpenRouteService, free key, or your own OSRM server with
+  `--motor osrm`) and fills all 598 pairs in about a minute, stamping
+  `fonte` and `calculado_em` on each pair. It saves after every batch:
+  interrupting and resuming is safe, and filled pairs are never
+  re-requested. The manual path remains:
+  `python scripts/tempos_medidos_relatorio.py --links` produces
+  ready-to-open Google Maps links, useful to double-check or correct
+  suspicious pairs, and `--divergencias` lists where the table and the
+  network disagree most. `python scripts/atualizar_tempos_medidos.py`
+  rebuilds the scaffold after editing the localities without losing
+  filled values; with `--todos`, destinations become every unit on the
+  island (more pairs, meant for automatic filling).
+- **How to remove the stopgap:** delete `app/data/tempos_medidos.json`
+  (or set `VIAGEM_TEMPOS_MEDIDOS=0`) and the app falls back to the
+  calibrated network on its own; `app/core/tempos_medidos.py` and the
+  three scripts can be deleted too, nothing else depends on them. In
+  production, the right path is still a routing service (see
+  `docs/INTEGRACAO.md`).
+- **Honesty about quality.** OpenRouteService and OSRM use
+  OpenStreetMap with generic speed profiles and no traffic: for Madeira
+  they give far better times than the local model, but below Google
+  Maps. That is why the on-screen transparency note changes when the
+  method is "medido", each pair records its `fonte`, and
+  `GET /api/viagem?unidade=<id>` exposes the method for inspection.
+- **Waiting chips on the card.** The sentence "Wait for your colour:
+  ~35 min · 12 people waiting" gave way to two amber chips (clock and
+  people) on the same row as the distance and time chips; when the wait
+  is for the patient's own colour, the chip carries a "your colour"
+  note.
+- **Road distance on the chip.** When the table answers, the distance
+  chip shows kilometres by road (note "by road") instead of the
+  straight line, and the time chip swaps "est." for "recorded".
+- **Alternatives with mini chips.** Each alternative shows the
+  municipality and a row of mini chips (distance, driving time, open or
+  closed, wait), more readable than the running sentence and one visual
+  step below the main card; the reopening time sits on its own discreet
+  line.
+- **"Change location" became a mini button** — a pill, more obviously an
+  action than the old underlined link.
+
+33 new tests cover the data file and the scaffold generator, the
+anchor-based lookup (radius, offset, barriers, kill switches), the
+OSRM > table > network priority, the routing flow and `/api/viagem`,
+and the filler script against a simulated engine (tests make no network
+requests). Total: 215.
 
 ## Known limitations
 
-- Driving times come from a **simplified, hand-calibrated network** with
+- Outside the areas covered by the local table (v0.11.3), driving
+  times come from a **simplified, hand-calibrated network** with
   typical values: no live traffic, no rush hour, and short local hops are
   approximated. They are estimates for ranking and expectation-setting,
   not navigation. The reference journeys and the network's minutes are

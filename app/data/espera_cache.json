@@ -1,7 +1,112 @@
 {
-  "obtido_em": "2026-07-13T12:01:18",
-  "ok": false,
-  "erro": "centros_saude: HTTPSConnectionPool(host='web.sesaram.pt', port=443): Max retries exceeded with url: /SEISRAM_WBE_WEB/PT/TEMPO-ESPERA-CSP.awp (Caused by NameResolutionError(\"<urllib3.connection.HTTPSConnection object at 0x000001D451532050>: Failed to resolve 'web.sesaram.pt' ([Errno 11001] getaddrinfo failed)\")); hospital: HTTPSConnectionPool(host='web.sesaram.pt', port=443): Max retries exceeded with url: /SEISRAM_WBE_WEB/PT/TEMPO-ESPERA.awp?t=1 (Caused by NameResolutionError(\"<urllib3.connection.HTTPSConnection object at 0x000001D4515E74D0>: Failed to resolve 'web.sesaram.pt' ([Errno 11001] getaddrinfo failed)\"))",
-  "unidades": {},
+  "obtido_em": "2026-07-12T04:13:03",
+  "ok": true,
+  "erro": null,
+  "unidades": {
+    "cs_bom_jesus": {
+      "tipo_dados": "geral",
+      "em_espera": 0,
+      "tempo_medio_min": null,
+      "atendidos": null,
+      "fonte": "centros_saude",
+      "atualizado_no_site": "2026-07-12 03:12"
+    },
+    "cs_camara_lobos": {
+      "tipo_dados": "geral",
+      "em_espera": 0,
+      "tempo_medio_min": 3,
+      "atendidos": 1,
+      "fonte": "centros_saude",
+      "atualizado_no_site": "2026-07-12 03:12"
+    },
+    "cs_calheta": {
+      "tipo_dados": "geral",
+      "em_espera": 0,
+      "tempo_medio_min": null,
+      "atendidos": null,
+      "fonte": "centros_saude",
+      "atualizado_no_site": "2026-07-12 03:12"
+    },
+    "cs_machico": {
+      "tipo_dados": "geral",
+      "em_espera": 0,
+      "tempo_medio_min": 11,
+      "atendidos": 1,
+      "fonte": "centros_saude",
+      "atualizado_no_site": "2026-07-12 03:12"
+    },
+    "cs_porto_moniz": {
+      "tipo_dados": "geral",
+      "em_espera": 0,
+      "tempo_medio_min": null,
+      "atendidos": null,
+      "fonte": "centros_saude",
+      "atualizado_no_site": "2026-07-12 03:12"
+    },
+    "cs_porto_santo": {
+      "tipo_dados": "geral",
+      "em_espera": 0,
+      "tempo_medio_min": null,
+      "atendidos": null,
+      "fonte": "centros_saude",
+      "atualizado_no_site": "2026-07-12 03:12"
+    },
+    "cs_ribeira_brava": {
+      "tipo_dados": "geral",
+      "em_espera": 0,
+      "tempo_medio_min": null,
+      "atendidos": null,
+      "fonte": "centros_saude",
+      "atualizado_no_site": "2026-07-12 03:12"
+    },
+    "cs_sao_vicente": {
+      "tipo_dados": "geral",
+      "em_espera": 0,
+      "tempo_medio_min": null,
+      "atendidos": null,
+      "fonte": "centros_saude",
+      "atualizado_no_site": "2026-07-12 03:12"
+    },
+    "cs_santana": {
+      "tipo_dados": "geral",
+      "em_espera": 0,
+      "tempo_medio_min": null,
+      "atendidos": null,
+      "fonte": "centros_saude",
+      "atualizado_no_site": "2026-07-12 03:12"
+    },
+    "hnm": {
+      "tipo_dados": "por_cor",
+      "por_cor": {
+        "laranja": {
+          "em_espera": 0,
+          "tempo_medio_min": 10,
+          "atendidos": null
+        },
+        "amarelo": {
+          "em_espera": 0,
+          "tempo_medio_min": 60,
+          "atendidos": null
+        },
+        "verde": {
+          "em_espera": 0,
+          "tempo_medio_min": 120,
+          "atendidos": null
+        },
+        "azul": {
+          "em_espera": 0,
+          "tempo_medio_min": 240,
+          "atendidos": null
+        }
+      },
+      "geral": {
+        "em_espera": 0,
+        "tempo_medio_min": 108,
+        "atendidos": null
+      },
+      "fonte": "hospital",
+      "atualizado_no_site": null
+    }
+  },
   "por_mapear": []
 }

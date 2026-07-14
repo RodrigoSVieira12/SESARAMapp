@@ -203,14 +203,21 @@ documento.
       (por exemplo, arredondar coordenadas de origem à zona) e informação
       ao utente.
 
-   3. **Tabela de tempos medidos, como paliativo.** Sem infraestrutura nem
-      orçamento, pode manter-se a rede calibrada e acrescentar um ficheiro
-      editável com tempos medidos à mão apenas para os pares
-      origem-destino problemáticos (como Achada da Rocha → Gaula/Camacha),
-      consultado antes do modelo. É cirúrgico e barato, mas não escala,
-      depende de quem mede e envelhece à medida que a rede viária muda,
-      pelo que deve ser encarado como remendo temporário e não como
-      solução.
+   3. **Tabela de tempos por estrada, como paliativo (implementada na
+      v0.11.3).** Sem infraestrutura nem orçamento, a rede calibrada
+      mantém-se e um ficheiro editável (`app/data/tempos_medidos.json`)
+      guarda tempos por estrada consultados antes do modelo, por zona e
+      com âncoras num raio curto. Preenche-se automaticamente com um
+      motor de rotas de dados abertos
+      (`scripts/calcular_tempos_medidos.py`, OpenRouteService ou OSRM)
+      ou à mão no Google Maps para conferir pares suspeitos
+      (`scripts/tempos_medidos_relatorio.py --links` e
+      `--divergencias`). Resolve casos como Achada da Rocha →
+      Gaula/Camacha, mas envelhece à medida que a rede viária muda e a
+      qualidade fica abaixo de um serviço com trânsito, pelo que deve
+      ser encarado como remendo temporário e não como solução: remove-se
+      apagando o ficheiro (ou com `VIAGEM_TEMPOS_MEDIDOS=0`), e a
+      aplicação volta sozinha à rede calibrada.
 5. **Identidade institucional.** As cores e o logótipo são provisórios (os
    azuis trocam-se numa variável CSS). O texto do *disclaimer* deve seguir a
    redação institucional pretendida.

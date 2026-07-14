@@ -358,6 +358,41 @@ def validar_localidades() -> tuple[list[str], list[str]]:
     return erros, avisos
 
 
+def validar_tempos_medidos() -> tuple[list[str], list[str]]:
+    """app/data/tempos_medidos.json: a tabela AMOVÍVEL de tempos por estrada.
+
+    Ficheiro ausente não é erro (o módulo é um paliativo que se remove
+    apagando o ficheiro); presente, valida-se com o próprio módulo:
+    origens únicas, destinos existentes e na mesma ilha, valores dentro
+    de limites de sanidade. Os avisos incluem o progresso do
+    preenchimento e os pares com distância mas sem tempo.
+    """
+    from app.core import tempos_medidos
+
+    if not tempos_medidos.FICHEIRO.exists():
+        print(
+            "  OK: sem tempos_medidos.json (funcionalidade desligada; para a "
+            "criar, correr scripts/atualizar_tempos_medidos.py)"
+        )
+        return [], []
+    try:
+        dados = json.loads(tempos_medidos.FICHEIRO.read_text(encoding="utf-8"))
+    except Exception as exc:  # noqa: BLE001
+        return [f"tempos_medidos.json: não consegui ler o ficheiro ({exc})"], []
+
+    erros = [f"tempos_medidos.json: {p}" for p in tempos_medidos.validar(dados)]
+    avisos: list[str] = []
+    if not erros:
+        avisos = [f"tempos_medidos.json: {a}" for a in tempos_medidos.avisos(dados)]
+        n_origens = len(dados.get("medicoes", []))
+        n_pares = sum(len(m.get("destinos") or {}) for m in dados.get("medicoes", []))
+        print(
+            f"  OK: tempos por estrada com {n_origens} origens e "
+            f"{n_pares} pares origem/destino"
+        )
+    return erros, avisos
+
+
 def main() -> int:
     print("A verificar as regras de triagem (app/data/rules/)…")
     erros = validar_regras()
@@ -375,6 +410,11 @@ def main() -> int:
     erros_loc, avisos_loc = validar_localidades()
     erros.extend(erros_loc)
     avisos.extend(avisos_loc)
+
+    print("A verificar os tempos por estrada (app/data/tempos_medidos.json)…")
+    erros_tm, avisos_tm = validar_tempos_medidos()
+    erros.extend(erros_tm)
+    avisos.extend(avisos_tm)
 
     print("A verificar os textos de autocuidado (app/data/autocuidado.json)…")
     erros.extend(validar_autocuidado())

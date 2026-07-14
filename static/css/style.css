@@ -509,6 +509,22 @@ body {
 .chip--aberto  { background: #e7f2e8; color: #1d5a23; }
 .chip--fechado { background: #f5e8e8; color: #8c2626; }
 
+/* v0.11.3: espera em tom âmbar, entre o verde (aberto) e o vermelho
+   (fechado): é informação de pressão, não de estado. */
+.chip--espera {
+  background: #fbf1de;
+  color: #8c5a11;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.chip--espera svg {
+  width: 0.85rem;
+  height: 0.85rem;
+  flex: none;
+}
+
 /* v0.11.2: linha de chips com distância e tempo de carro no cartão da
    unidade. Reutiliza a base .chip para manter a mesma linguagem visual
    do selo aberto/fechado, mas em tom informativo (azul claro). */
@@ -538,6 +554,18 @@ body {
   opacity: 0.75;
 }
 
+/* v0.11.3: variante compacta para as alternativas, um degrau abaixo do
+   cartão principal para não competir com ele. */
+.chip--mini {
+  padding: 0.16rem 0.55rem;
+  font-size: 0.78rem;
+}
+
+.chip--mini svg {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
 .unidade__horarios { margin: 0.75rem 0 0; padding-left: 1.2rem; }
 .unidade__horarios li { margin: 0.2rem 0; }
 
@@ -563,8 +591,24 @@ body {
   background: var(--superficie);
 }
 
+.alternativa__corpo { min-width: 0; }
 .alternativa__nome { font-weight: 600; }
 .alternativa__meta { font-size: 0.88rem; color: var(--tinta-suave); }
+
+/* v0.11.3: mini chips por baixo do nome, e a reabertura numa linha
+   discreta própria (antes ia tudo numa frase corrida). */
+.alternativa__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.35rem;
+}
+
+.alternativa__reabre {
+  margin-top: 0.3rem;
+  font-size: 0.82rem;
+  color: var(--tinta-suave);
+}
 
 /* ----------------------------------------------------------- contactos -- */
 
@@ -705,19 +749,22 @@ body {
   margin-top: 0.5rem;
 }
 
-.ligacao--botao {
-  border: 0;
-  padding: 0;
-  background: none;
-  font: inherit;
-  font-weight: 600;
+/* v0.11.3: o "Alterar localização" passa de ligação sublinhada a um
+   mini botão tipo pílula: mais óbvio como ação, sem o peso de um botão
+   primário. */
+.botao--mini {
+  border: 1px solid var(--primaria);
+  background: var(--superficie);
   color: var(--primaria);
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
   cursor: pointer;
 }
 
-.ligacao--botao:hover { color: var(--primaria-escura); }
+.botao--mini:hover { background: var(--primaria-clara); }
 
 .local-aviso {
   margin: 0.6rem 0 0;
@@ -888,13 +935,6 @@ body {
   color: var(--tinta-suave);
 }
 
-.unidade__espera {
-  margin: 0.5rem 0 0;
-  font-weight: 600;
-  color: var(--primaria-escura);
-  font-size: 0.95rem;
-}
-
 .espera-estado { margin-top: 0.35rem; }
 
 /* ------------------------------------------------- QR de navegação ----- */
@@ -957,7 +997,7 @@ body {
   .botoes,
   .botao,
   .botao--fantasma,
-  .ligacao--botao,
+  .botao--mini,
   .faixa-demo,
   .respostas { display: none !important; }
   a { text-decoration: none; color: inherit; }

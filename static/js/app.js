@@ -93,13 +93,18 @@ function aplicarLinguaEstatica() {
 /* ------------------------------------------------------------ helpers -- */
 
 /* Ícones mínimos em SVG inline (herdam a cor do chip via currentColor).
-   Só dois, de traço fino, para dar leitura rápida aos chips de trajeto
-   sem introduzir uma biblioteca de ícones. v0.11.2 */
+   Traço fino, para dar leitura rápida aos chips sem introduzir uma
+   biblioteca de ícones. Pin e carro desde a v0.11.2; relógio e pessoas
+   (chips de espera) na v0.11.3. */
 const ICONES = {
   pin:
     '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
   carro:
     '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>',
+  relogio:
+    '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+  pessoas:
+    '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M3.5 20c.5-3.4 2.7-5.2 5.5-5.2s5 1.8 5.5 5.2"/><path d="M16 5.6a3.4 3.4 0 0 1 0 5.8"/><path d="M17.6 15.2c1.9.7 3 2.3 3.4 4.8"/></svg>',
 };
 
 function esc(valor) {
@@ -840,14 +845,40 @@ function htmlUnidade(u, comMapa) {
   // corrido e passam a dois CHIPS distintos, na linguagem visual do
   // selo "Aberto agora". Sem estimativa por estrada, o chip da
   // distância leva a nota "linha reta" (comportamento antigo).
-  const minViagem =
-    u.tempo_viagem && u.tempo_viagem.minutos != null ? u.tempo_viagem.minutos : null;
-  const chipKm = `<span class="chip chip--dado">${ICONES.pin}${esc(t("chip_km", u.distancia_km))}${
-    minViagem == null ? `<span class="chip__nota">${esc(t("chip_km_nota"))}</span>` : ""
+  // v0.11.3: com um valor registado na tabela local (metodo "medido"),
+  // a distância passa a ser POR ESTRADA e o tempo troca "estim." por
+  // "registado"; a espera e as pessoas em espera ganham chips próprios
+  // (âmbar) na mesma linha, em vez da frase corrida.
+  const tv = u.tempo_viagem || null;
+  const minViagem = tv && tv.minutos != null ? tv.minutos : null;
+  const kmEstrada = tv && tv.distancia_km != null ? tv.distancia_km : null;
+  const chipKm = `<span class="chip chip--dado">${ICONES.pin}${esc(
+    t("chip_km", kmEstrada != null ? kmEstrada : u.distancia_km)
+  )}${
+    kmEstrada != null
+      ? `<span class="chip__nota">${esc(t("chip_km_nota_estrada"))}</span>`
+      : minViagem == null
+        ? `<span class="chip__nota">${esc(t("chip_km_nota"))}</span>`
+        : ""
   }</span>`;
   const chipViagem =
     minViagem != null
-      ? `<span class="chip chip--dado">${ICONES.carro}${esc(t("chip_viagem", minViagem))}<span class="chip__nota">${esc(t("chip_viagem_nota"))}</span></span>`
+      ? `<span class="chip chip--dado">${ICONES.carro}${esc(t("chip_viagem", minViagem))}<span class="chip__nota">${esc(
+          t(tv.metodo === "medido" ? "chip_viagem_nota_medido" : "chip_viagem_nota")
+        )}</span></span>`
+      : "";
+  const espera = u.aberta_agora ? u.tempo_espera : null;
+  const chipEspera =
+    espera && espera.minutos != null
+      ? `<span class="chip chip--espera">${ICONES.relogio}${esc(t("chip_espera", espera.minutos))}${
+          espera.ambito === "cor"
+            ? `<span class="chip__nota">${esc(t("chip_espera_nota_cor"))}</span>`
+            : ""
+        }</span>`
+      : "";
+  const chipPessoas =
+    espera && espera.em_espera != null
+      ? `<span class="chip chip--espera">${ICONES.pessoas}${esc(t("chip_pessoas", espera.em_espera))}</span>`
       : "";
   const horarios = Object.entries(campo(u, "horarios") || {})
     .map(([s, texto]) => `<li><strong>${esc(rotuloServico[s] || s)}:</strong> ${esc(texto)}</li>`)
@@ -866,12 +897,7 @@ function htmlUnidade(u, comMapa) {
           ${esc(u.aberta_agora ? t("un_aberta") : t("un_fechada"))}
         </span>
       </div>
-      <div class="unidade__trajeto">${chipKm}${chipViagem}</div>
-      ${
-        u.aberta_agora && u.tempo_espera
-          ? `<p class="unidade__espera">${esc(t("esp_linha", u.tempo_espera))}</p>`
-          : ""
-      }
+      <div class="unidade__trajeto">${chipKm}${chipViagem}${chipEspera}${chipPessoas}</div>
       ${
         !u.aberta_agora && reabre
           ? `<p class="unidade__reabre">${esc(capitalizar(reabre))}.</p>`
@@ -1036,23 +1062,43 @@ function ecraEncaminhamento(dados, utente) {
 
   const alternativas = (dados.alternativas || [])
     .map((a) => {
+      // v0.11.3: a meta em frase corrida dá lugar a MINI CHIPS, a mesma
+      // linguagem visual do cartão principal num tamanho abaixo (mais
+      // legível do que o texto, sem competir com a recomendação):
+      // distância (por estrada quando registada), tempo de carro,
+      // estado e espera; a reabertura fica numa linha discreta.
       const reabre = campo(a, "proxima_abertura_texto");
-      const espMin =
-        a.aberta_agora && a.tempo_espera && a.tempo_espera.minutos != null
-          ? `, ~${a.tempo_espera.minutos} min ${t("esp_curto")}`
-          : "";
-      const altViagem =
-        a.tempo_viagem && a.tempo_viagem.minutos != null
-          ? ` (${t("alt_viagem", a.tempo_viagem.minutos)})`
-          : "";
+      const tvAlt = a.tempo_viagem || null;
+      const kmAlt = tvAlt && tvAlt.distancia_km != null ? tvAlt.distancia_km : a.distancia_km;
+      const chips = [
+        `<span class="chip chip--dado chip--mini">${ICONES.pin}${esc(t("chip_km", kmAlt))}</span>`,
+      ];
+      if (tvAlt && tvAlt.minutos != null) {
+        chips.push(
+          `<span class="chip chip--dado chip--mini">${ICONES.carro}${esc(t("chip_viagem", tvAlt.minutos))}</span>`
+        );
+      }
+      chips.push(
+        `<span class="chip chip--mini ${a.aberta_agora ? "chip--aberto" : "chip--fechado"}">${esc(
+          capitalizar(a.aberta_agora ? t("alt_aberto") : t("alt_fechado"))
+        )}</span>`
+      );
+      if (a.aberta_agora && a.tempo_espera && a.tempo_espera.minutos != null) {
+        chips.push(
+          `<span class="chip chip--espera chip--mini">${ICONES.relogio}${esc(t("chip_espera", a.tempo_espera.minutos))}</span>`
+        );
+      }
       return `
       <div class="alternativa">
-        <div>
+        <div class="alternativa__corpo">
           <div class="alternativa__nome">${esc(a.nome)}</div>
-          <div class="alternativa__meta">${esc(a.concelho)}, ${esc(a.distancia_km)} km${esc(altViagem)},
-            ${a.aberta_agora
-              ? esc(t("alt_aberto"))
-              : `${esc(t("alt_fechado"))}${reabre ? `, ${esc(reabre)}` : ""}`}${esc(espMin)}</div>
+          <div class="alternativa__meta">${esc(a.concelho)}</div>
+          <div class="alternativa__chips">${chips.join("")}</div>
+          ${
+            !a.aberta_agora && reabre
+              ? `<div class="alternativa__reabre">${esc(capitalizar(reabre))}.</div>`
+              : ""
+          }
         </div>
         <a class="ligacao" target="_blank" rel="noopener"
            href="https://www.google.com/maps/dir/?api=1&destination=${a.lat},${a.lng}">${esc(t("direcoes"))}</a>
@@ -1104,10 +1150,17 @@ function ecraEncaminhamento(dados, utente) {
   }
 
   // v0.11: transparência sobre a origem dos tempos de viagem (nota curta,
-  // só quando a recomendação inclui uma estimativa por estrada).
+  // só quando a recomendação inclui uma estimativa por estrada). v0.11.3:
+  // quando os tempos vêm da tabela local (metodo "medido"), a nota
+  // explica essa origem em vez da rede simplificada.
+  const tvPrincipal =
+    dados.unidade && dados.unidade.tempo_viagem ? dados.unidade.tempo_viagem : null;
+  const metodoMedido =
+    (dados.viagem_info && dados.viagem_info.metodo === "medido") ||
+    (tvPrincipal && tvPrincipal.metodo === "medido");
   const infoViagem =
-    dados.unidade && dados.unidade.tempo_viagem && dados.unidade.tempo_viagem.minutos != null
-      ? `<p class="texto-suave espera-estado">${esc(t("viagem_nota"))}</p>`
+    tvPrincipal && tvPrincipal.minutos != null
+      ? `<p class="texto-suave espera-estado">${esc(t(metodoMedido ? "viagem_nota_medido" : "viagem_nota"))}</p>`
       : "";
 
   render(`
@@ -1124,7 +1177,7 @@ function ecraEncaminhamento(dados, utente) {
       ${infoViagem}
       <div class="local-linha no-print">
         <span class="texto-suave">${esc(t("loc_usada_prefixo"))}${localTexto}.</span>
-        <button class="ligacao ligacao--botao" id="btn-alterar-local">${esc(t("alterar_local"))}</button>
+        <button class="botao--mini" id="btn-alterar-local">${esc(t("alterar_local"))}</button>
       </div>
       ${avisoPrecisao}
       ${
