@@ -41,9 +41,13 @@ DADOS_FICHEIRO = json.loads(
 
 
 def test_versao_0_11_3():
+    # Piso, não igualdade: o teste garante que as novidades da v0.11.3
+    # existem, não que o tempo parou nela. (Mesma lição dos testes
+    # frágeis corrigidos nesta versão: pisos em vez de valores exatos.)
     from app import versao
 
-    assert versao.VERSAO == "0.11.3"
+    partes = tuple(int(x) for x in versao.VERSAO.split("."))
+    assert partes >= (0, 11, 3)
 
 
 def _carregar_script(nome: str):

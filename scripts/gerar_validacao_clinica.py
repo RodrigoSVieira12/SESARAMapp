@@ -6,13 +6,24 @@ Uso, a partir da pasta do projeto:
     python scripts/gerar_validacao_clinica.py
 
 Cria docs/validacao_clinica.html, abre no navegador e imprime (Ctrl+P).
-Cada queixa fica numa página própria, com as perguntas numeradas, os
-desfechos de cada resposta, espaço para correções manuscritas e um bloco
-de assinatura/data para o profissional que validar.
+Cada queixa fica numa página própria, com o fluxograma desenhado, as
+perguntas numeradas, os desfechos de cada resposta, espaço para correções
+manuscritas e um bloco de assinatura/data para o profissional que validar.
+
+O documento é AUTOSSUFICIENTE (v0.12): a biblioteca de desenho (mermaid,
+MIT) vai embutida no próprio ficheiro HTML, por isso os fluxogramas
+desenham-se offline e o ficheiro pode ser enviado por email como está.
+Até à v0.11 o desenho dependia de um CDN externo (unpkg.com) — quando o
+CDN falhava, os fluxogramas desapareciam em silêncio. Se algum diagrama
+não puder ser desenhado (por exemplo, depois de uma edição às regras),
+o documento mostra agora o erro por extenso no lugar do desenho.
 
 A ideia: o clínico corrige NO PAPEL; tu passas as correções para os JSON
 em app/data/rules/, atualizas o campo "fonte" com quem validou e quando,
-e voltas a correr `python scripts/validar_dados.py` e `python -m pytest`.
+e voltas a correr `python scripts/gerar_validacao_clinica.py` (o documento
+e os .mmd regeneram-se) + `python scripts/validar_dados.py` + `python -m
+pytest`. Para ver as árvores a mudar em direto enquanto editas, usa a
+pré-visualização viva: http://127.0.0.1:8000/fluxogramas
 """
 
 from __future__ import annotations
@@ -31,6 +42,11 @@ from app.core.routing import TEXTOS_AUTOCUIDADO  # noqa: E402
 from app.core.triage_engine import TriageEngine  # noqa: E402
 
 SAIDA = RAIZ / "docs" / "validacao_clinica.html"
+
+# Biblioteca de desenho embutida no documento (ver static/vendor/).
+# Manter VERSAO_MERMAID em sintonia com o ficheiro — há um teste que confirma.
+VENDOR_MERMAID = RAIZ / "static" / "vendor" / "mermaid.min.js"
+VERSAO_MERMAID = "11.16.0"
 
 ESTILO = """
   body { font-family: Georgia, "Times New Roman", serif; color: #1c1c1c;
@@ -60,8 +76,61 @@ ESTILO = """
   .diagrama { margin: 1rem 0; break-inside: avoid; }
   .diagrama svg { max-width: 100%; height: auto; }
   pre.mermaid { background: none; border: 0; padding: 0; }
+  .erro-diagrama { border: 2px solid #b00; background: #fff5f5; padding: 0.6rem 0.9rem;
+         font-family: Arial, Helvetica, sans-serif; font-size: 0.9rem; margin: 0.6rem 0; }
+  .rodape-tec { color: #777; font-size: 0.8rem; margin-top: 2rem;
+         border-top: 1px solid #ccc; padding-top: 0.5rem; }
   @media print { body { margin: 0.5rem auto; } .no-print { display: none; } }
 """
+
+# Arranque do desenho, com FALHAS VISÍVEIS: cada diagrama é desenhado por
+# si; se um falhar, aparece o erro por extenso nesse lugar e os restantes
+# continuam. (r-string: os \n e \u chegam intactos ao JavaScript.)
+_ARRANQUE_MERMAID = r"""
+(function () {
+  function aviso(el, mensagem) {
+    var caixa = document.createElement("div");
+    caixa.className = "erro-diagrama";
+    caixa.textContent = "\u26A0 N\u00E3o foi poss\u00EDvel desenhar este fluxograma: " +
+      mensagem + " \u2014 o texto-fonte fica abaixo e as perguntas numeradas continuam v\u00E1lidas.";
+    el.parentNode.insertBefore(caixa, el);
+  }
+  function arrancar() {
+    var blocos = Array.prototype.slice.call(document.querySelectorAll("pre.mermaid"));
+    if (!window.mermaid) {
+      blocos.forEach(function (el) { aviso(el, "a biblioteca embutida n\u00E3o carregou"); });
+      return;
+    }
+    mermaid.initialize({ startOnLoad: false, theme: "neutral", flowchart: { useMaxWidth: true } });
+    var fila = Promise.resolve();
+    blocos.forEach(function (el) {
+      fila = fila.then(function () {
+        return mermaid.run({ nodes: [el], suppressErrors: false }).catch(function (e) {
+          var motivo = e && e.message ? String(e.message).split("\n")[0] : String(e);
+          aviso(el, motivo);
+        });
+      });
+    });
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", arrancar);
+  } else {
+    arrancar();
+  }
+})();
+"""
+
+
+def _biblioteca_mermaid() -> str:
+    """Código da biblioteca, pronto a embutir numa tag <script>.
+
+    Dentro de literais JavaScript, "<\\/script>" é o mesmo texto que
+    "</script>" — a troca garante que nada fecha a tag <script> do
+    documento por engano. (No bundle atual nem sequer ocorre; fica a
+    salvaguarda para futuras atualizações da biblioteca.)
+    """
+    codigo = VENDOR_MERMAID.read_text(encoding="utf-8")
+    return codigo.replace("</script>", "<\\/script>")
 
 
 def descrever_ramo(ramo: dict, numeros: dict[str, int]) -> str:
@@ -108,8 +177,9 @@ def seccao_queixa(fluxo: dict) -> str:
       <h3>Fluxograma</h3>
       <p class="meta">Desenhado automaticamente a partir do ficheiro de regras —
       é a mesma informação das perguntas numeradas abaixo, no formato dos
-      protocolos de triagem. (O desenho precisa de ligação à internet ao abrir
-      este documento; sem ela, valem as perguntas numeradas.)</p>
+      protocolos de triagem. (A biblioteca de desenho vai embutida neste
+      ficheiro: o documento abre e desenha os fluxogramas sem internet, e
+      pode ser partilhado como um único ficheiro.)</p>
       <pre class="mermaid diagrama">{html.escape(fluxogramas.mermaid_do_fluxo(fluxo))}</pre>
       <h3>Perguntas</h3>
       {''.join(blocos)}
@@ -124,9 +194,12 @@ def seccao_queixa(fluxo: dict) -> str:
     </section>"""
 
 
-def main() -> int:
-    motor = TriageEngine()
+def construir_documento(motor: TriageEngine) -> str:
+    """HTML completo do documento de validação (autossuficiente).
 
+    Separado do main() para os testes poderem construir o documento em
+    memória sem escrever em docs/.
+    """
     linhas_cores = "".join(
         f"""<tr><td><span class="amostra" style="background:{c['hex']}"></span>
         {c['nome']}</td><td>{c['classificacao']}</td><td>{c['tempo_alvo']}</td></tr>"""
@@ -185,7 +258,7 @@ def main() -> int:
     </section>"""
     seccoes += seccao_textos
 
-    documento = f"""<!DOCTYPE html>
+    return f"""<!DOCTYPE html>
 <html lang="pt">
 <head>
 <meta charset="utf-8" />
@@ -222,17 +295,24 @@ def main() -> int:
     <p class="no-print"><em>Para imprimir: Ctrl+P (cada queixa sai numa página própria).</em></p>
   </div>
   {seccoes}
-  <script src="https://unpkg.com/mermaid@10.9.1/dist/mermaid.min.js"></script>
-  <script>
-    if (window.mermaid) {{
-      mermaid.initialize({{ startOnLoad: true, theme: "neutral", flowchart: {{ useMaxWidth: true }} }});
-    }}
-  </script>
+  <p class="rodape-tec">Documento autossuficiente: a biblioteca de desenho
+  (mermaid v{VERSAO_MERMAID}, licença MIT) vai embutida neste ficheiro — os
+  fluxogramas desenham-se sem ligação à internet. As fontes de cada árvore
+  estão em docs/fluxogramas/*.mmd (editáveis em mermaid.live). Depois de
+  alterar regras em app/data/rules/, regenerar com:
+  python scripts/gerar_validacao_clinica.py — ou acompanhar em direto em
+  http://127.0.0.1:8000/fluxogramas</p>
+  <script>{_biblioteca_mermaid()}</script>
+  <script>{_ARRANQUE_MERMAID}</script>
 </body>
 </html>"""
 
+
+def main() -> int:
+    motor = TriageEngine()
+
     SAIDA.parent.mkdir(parents=True, exist_ok=True)
-    SAIDA.write_text(documento, encoding="utf-8")
+    SAIDA.write_text(construir_documento(motor), encoding="utf-8")
 
     # Fontes Mermaid em ficheiros próprios: abrem-se em https://mermaid.live
     # para ver e editar cada árvore, e ficam com histórico legível no Git.
@@ -241,9 +321,10 @@ def main() -> int:
     for fid, texto in fluxogramas.gerar_todos(motor.fluxos).items():
         (pasta_mmd / f"{fid}.mmd").write_text(texto + "\n", encoding="utf-8")
 
-    print(f"Documento criado: {SAIDA.relative_to(RAIZ)}")
+    print(f"Documento criado: {SAIDA.relative_to(RAIZ)} (autossuficiente, desenha offline)")
     print(f"Fluxogramas Mermaid: {pasta_mmd.relative_to(RAIZ)}/*.mmd (editáveis em mermaid.live)")
     print("Abre-o no navegador e imprime com Ctrl+P.")
+    print("Pré-visualização viva enquanto editas regras: http://127.0.0.1:8000/fluxogramas")
     return 0
 
 

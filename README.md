@@ -79,6 +79,7 @@ onde-ir-sesaram/
 │   ├── models/schemas.py     # request validation (Pydantic)
 │   ├── core/
 │   │   ├── triage_engine.py  # triage engine (reads the JSON rule files)
+│   │   ├── fluxogramas.py    # rules → Mermaid flowcharts (PT/EN; v0.12)
 │   │   ├── routing.py        # colour + location + time → destination
 │   │   ├── horarios.py       # open/closed at a given moment
 │   │   ├── feriados.py       # public holidays (national + RAM regional)
@@ -94,7 +95,9 @@ onde-ir-sesaram/
 │       ├── tempos_medidos.json # recorded road times (editable; v0.11.3)
 │       ├── localidades.json  # parishes and localities (editable)
 │       └── unidades.json     # RAM health units
-├── static/                   # frontend (HTML + CSS + plain JS + Leaflet)
+├── static/                   # frontend (HTML + CSS + plain JS)
+│   ├── vendor/               # Mermaid, Leaflet, QR generator — no CDN (v0.12)
+│   └── fluxogramas.html      # live flowchart preview (internal tool; v0.12)
 └── tests/                    # pytest (engine, hours, routing, API)
 ```
 
@@ -215,6 +218,9 @@ into the JSON files (updating the `fonte` field with who validated and when).
 - `GET /api/saude` — health check
 - `GET /api/queixas` — available complaints
 - `GET /api/red-flags` — emergency signs
+- `GET /api/fluxogramas?idioma=pt|en` — Mermaid flowcharts for the
+  current rules, re-read from disk on each request (v0.12; backs the
+  `/fluxogramas` live preview)
 - `POST /api/triagem` — `{queixa, respostas}` or `{red_flags}` → question/result
 - `GET /api/unidades` — all units
 - `GET /api/unidades/proxima?lat&lng&servico&n` — nearest units
@@ -308,8 +314,10 @@ tree, generated from `app/data/rules/*.json` by
 `app/core/fluxogramas.py`, with outcomes painted in the five colours and
 questions numbered as in the list. Jumps between questions, dead ends or
 wrongly assigned colours become visible at a glance. Drawing happens in
-the browser (Mermaid library via CDN), so the document needs internet
-when opened; without it, the numbered questions remain. Each diagram's
+the browser with the Mermaid library **embedded in the document itself**,
+so it renders offline and can be emailed as a single file (this was
+originally loaded from a CDN, which turned out to be unreliable and made
+the flowcharts vanish silently — see *New in v0.12*). Each diagram's
 source lives in `docs/fluxogramas/*.mmd` and can be opened and edited
 visually at https://mermaid.live.
 
@@ -604,6 +612,60 @@ anchor-based lookup (radius, offset, barriers, kill switches), the
 OSRM > table > network priority, the routing flow and `/api/viagem`,
 and the filler script against a simulated engine (tests make no network
 requests). Total: 215.
+
+## New in v0.12: offline flowcharts everywhere, and a live preview
+
+The trigger was a regression: the flowcharts had stopped appearing in
+`docs/validacao_clinica.html`. The cause was the drawing library being
+fetched from a public CDN (`unpkg.com`) at open time, behind a silent
+`if (window.mermaid)` guard — when the CDN was slow or down (it was
+repeatedly, through 2025–2026), the library never loaded and the trees
+simply vanished, with no error to explain why. This version removes that
+dependency, makes any failure visible, and adds a way to watch the trees
+update as you edit the rules.
+
+- **Self-contained validation document.** The Mermaid library (MIT) is
+  now **embedded in the generated HTML** (`static/vendor/mermaid.min.js`,
+  vendored). `docs/validacao_clinica.html` draws its flowcharts offline
+  and can be emailed as a single file — no network, no CDN. If a diagram
+  can't be drawn (say, after a rule edit introduces an error), the
+  document now prints the error in place, with the Mermaid source right
+  below, instead of hiding it.
+- **A live preview at `/fluxogramas`.** A new internal page (not linked
+  from the patient interface — it's a tool for whoever edits and
+  validates rules) shows every flowchart drawn from the current
+  `app/data/rules/*.json`. Edit a rule, save, and the tree redraws:
+  `GET /api/fluxogramas` **re-reads and re-validates the rules from disk
+  on every request**, so there's no server restart. It auto-refreshes
+  every 5 s (toggleable), offers a PT/EN switch, has a "copy Mermaid
+  source" button per tree (paste into mermaid.live to edit visually),
+  and if a rule file is invalid it shows the validation message verbatim
+  while keeping the last valid trees on screen.
+- **Bilingual flowcharts.** The trees now render in English too, from
+  the `*_en` fields already in the rules, with a deliberate fall-back to
+  Portuguese where a translation is missing (a half-translated tree is
+  useful and flags the gap; a tree full of holes isn't). Outcome boxes
+  use the colour's English name (RED, ORANGE…); the internal style
+  classes stay in Portuguese.
+- **No CDN in the app either.** Leaflet (the map) and the QR generator
+  were also loading from `unpkg.com`; both are now vendored under
+  `static/vendor/` and served locally. At runtime the app makes no
+  third-party script requests at all. The only external resources that
+  remain are the map tiles (CARTO) and Google Fonts, both with graceful
+  degradation if unavailable — the app stays usable offline, just with
+  system fonts and no basemap.
+- **Updating the vendored libraries.** They're plain files under
+  `static/vendor/`; to bump a version, replace the file (e.g.
+  `npm pack mermaid@<version>` and copy `dist/mermaid.min.js`), keep the
+  matching `LICENSE`, and update `VERSAO_MERMAID` in
+  `scripts/gerar_validacao_clinica.py` (a test checks the two agree).
+
+19 new tests cover the vendored libraries (self-contained bundle, no CDN
+in `index.html`), the document embedding the library and one drawable
+block per flowchart, the disk-backed `.mmd` files matching the current
+rules, the English translation and its Portuguese fall-back, and the
+live-preview API (all flows, EN, invalid-language 422, fresh read per
+request, readable validation error) and page. Total: 234.
 
 ## Known limitations
 

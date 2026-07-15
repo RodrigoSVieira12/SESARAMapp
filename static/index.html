@@ -13,12 +13,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
 
-  <!-- Leaflet (mapa) -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- Leaflet (mapa) — embutido no projeto (static/vendor), sem CDN em runtime (v0.12) -->
+  <link rel="stylesheet" href="/static/vendor/leaflet/leaflet.css" />
+  <script defer src="/static/vendor/leaflet/leaflet.js"></script>
 
-  <!-- QR de navegação (gerado localmente, sem chamadas de rede; MIT) -->
-  <script defer src="https://unpkg.com/qrcode-generator@1.4.4/qrcode.js"></script>
+  <!-- QR de navegação (gerado localmente, sem chamadas de rede; MIT) — embutido (v0.12) -->
+  <script defer src="/static/vendor/qrcode-generator/qrcode.js"></script>
 
   <link rel="stylesheet" href="/static/css/style.css?v=16" />
   <!-- textos.js primeiro: define TEXTOS (PT/EN); app.js usa-o -->

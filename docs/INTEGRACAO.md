@@ -94,6 +94,7 @@ A API é *stateless*.
 | GET  | `/api/queixas` | Queixas disponíveis. |
 | GET  | `/api/queixas/sugerir?q=` | Sugestões a partir de texto livre (sinónimos). |
 | GET  | `/api/red-flags` | Sinais de emergência (avaliados primeiro). |
+| GET  | `/api/fluxogramas?idioma=pt\|en` | Fluxogramas Mermaid das regras atuais, relidos do disco (v0.12). |
 | POST | `/api/triagem` | Próxima pergunta ou resultado (cor). |
 | GET  | `/api/unidades` | Todas as unidades. |
 | GET  | `/api/unidades/proxima?lat=&lng=` | Unidades mais próximas de um ponto. |
@@ -146,6 +147,17 @@ documento.
   anexado a um processo, passa a existir tratamento de dados de saúde
   (categoria especial), com as exigências associadas (base legal, HTTPS,
   autenticação, controlo de acessos), a definir do lado da integração.
+- **Sem scripts de terceiros em execução (desde a v0.12).** As
+  bibliotecas de frontend (Mermaid, Leaflet, gerador de QR) estão
+  vendorizadas em `static/vendor/` e servidas pelo próprio serviço — a
+  app não vai buscar código a CDNs externos ao abrir. Isto é relevante
+  numa rede hospitalar, onde o acesso a domínios externos é
+  frequentemente bloqueado: a app funciona sem essas exceções. Os únicos
+  pedidos externos que restam são os tiles do mapa (CARTO) e as Google
+  Fonts, ambos com degradação graciosa; se a política de rede os
+  bloquear, a app mantém-se utilizável (tipos de letra do sistema, sem
+  mapa de fundo), e podem ser igualmente alojados internamente se for
+  requisito.
 
 ## Problemas técnicos em aberto
 

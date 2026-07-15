@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fluxogramas de triagem — pré-visualização (Onde ir?)</title>
+  <meta name="robots" content="noindex" />
+  <!-- Ferramenta INTERNA de edição/validação de regras. Não é para utentes:
+       serve para quem edita app/data/rules/*.json ver as árvores redesenhadas
+       ao guardar, com erros de validação legíveis. As regras são relidas do
+       disco a cada pedido (GET /api/fluxogramas). Biblioteca de desenho
+       embutida no projeto: /static/vendor/mermaid.min.js (sem CDN). -->
+  <style>
+    :root {
+      --fundo: #f5f7fa; --superficie: #ffffff; --tinta: #1c2b36;
+      --tinta-suave: #51606c; --primaria: #185fa5; --primaria-escura: #0c447c;
+      --primaria-clara: #eaf2fa; --linha: #d4dbe3; --perigo: #b00020;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--fundo); color: var(--tinta);
+           font-family: "Public Sans", "Segoe UI", system-ui, -apple-system, Arial, sans-serif; }
+    header { background: var(--primaria-escura); color: #fff; padding: 0.8rem 1.2rem; }
+    header .titulo { font-weight: 700; font-size: 1.05rem; }
+    header .sub { font-size: 0.85rem; opacity: 0.85; }
+    main { max-width: 960px; margin: 0 auto; padding: 1rem 1.2rem 3rem; }
+    .barra { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center;
+             background: var(--superficie); border: 1px solid var(--linha);
+             border-radius: 10px; padding: 0.7rem 0.9rem; margin: 1rem 0; }
+    .barra .estado { color: var(--tinta-suave); font-size: 0.85rem; margin-left: auto; }
+    button, label.opcao { font: inherit; }
+    button { background: var(--primaria); color: #fff; border: 0; border-radius: 8px;
+             padding: 0.45rem 0.9rem; cursor: pointer; }
+    button.secundario { background: var(--primaria-clara); color: var(--primaria-escura); }
+    button:disabled { opacity: 0.6; cursor: default; }
+    label.opcao { display: inline-flex; align-items: center; gap: 0.35rem;
+                  color: var(--tinta-suave); font-size: 0.9rem; }
+    .idiomas { display: inline-flex; border: 1px solid var(--linha); border-radius: 8px; overflow: hidden; }
+    .idiomas button { border-radius: 0; background: var(--superficie); color: var(--tinta); }
+    .idiomas button.ativo { background: var(--primaria-escura); color: #fff; }
+    .erro-motor { border: 2px solid var(--perigo); background: #fff5f5; border-radius: 10px;
+                  padding: 0.8rem 1rem; margin: 1rem 0; white-space: pre-wrap; display: none; }
+    .erro-motor strong { color: var(--perigo); }
+    .cartao { background: var(--superficie); border: 1px solid var(--linha); border-radius: 12px;
+              padding: 1rem 1.1rem; margin: 1.1rem 0; }
+    .cartao h2 { margin: 0 0 0.2rem; font-size: 1.1rem; color: var(--primaria-escura); }
+    .cartao .id { color: var(--tinta-suave); font-size: 0.82rem; font-family: ui-monospace, Consolas, monospace; }
+    .desenho { overflow-x: auto; margin-top: 0.6rem; }
+    .desenho svg { max-width: 100%; height: auto; }
+    .erro-diagrama { border: 2px solid var(--perigo); background: #fff5f5; border-radius: 8px;
+                     padding: 0.6rem 0.8rem; font-size: 0.9rem; margin: 0.5rem 0; }
+    .acoes { margin-top: 0.6rem; display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
+    .acoes .nota { color: var(--tinta-suave); font-size: 0.82rem; }
+    .rodape { color: var(--tinta-suave); font-size: 0.85rem; margin-top: 2rem;
+              border-top: 1px solid var(--linha); padding-top: 0.8rem; }
+    a { color: var(--primaria); }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="titulo">Onde ir? — Fluxogramas de triagem <span id="versao"></span></div>
+    <div class="sub">Pré-visualização viva das regras em app/data/rules/ (ferramenta interna — não é a interface do utente)</div>
+  </header>
+  <main>
+    <p>Edita um ficheiro de regras, <strong>guarda</strong>, e a árvore aparece
+    aqui redesenhada — as regras são relidas do disco a cada atualização. Se um
+    JSON ficar inválido, a mensagem de validação aparece por extenso em vez de
+    uma página em branco.</p>
+
+    <div class="barra">
+      <button id="atualizar">Atualizar agora</button>
+      <label class="opcao"><input type="checkbox" id="auto" checked /> atualizar automaticamente (5 s)</label>
+      <span class="idiomas">
+        <button id="btn-pt" class="ativo" title="Árvores em português">PT</button>
+        <button id="btn-en" title="Árvores em inglês (campos *_en; sem tradução, mostra PT)">EN</button>
+      </span>
+      <span class="estado" id="estado">a carregar…</span>
+    </div>
+
+    <div class="erro-motor" id="erro-motor"></div>
+    <div id="fluxos"></div>
+
+    <p class="rodape">Para editar uma árvore visualmente: «Copiar código» e colar
+    em <a href="https://mermaid.live" target="_blank" rel="noopener">mermaid.live</a> —
+    depois passa as alterações para o JSON correspondente (a fonte da verdade são
+    as regras, não o desenho). Documento imprimível para validação clínica:
+    <code>python scripts/gerar_validacao_clinica.py</code>.</p>
+  </main>
+
+  <script src="/static/vendor/mermaid.min.js"></script>
+  <script>
+    (function () {
+      "use strict";
+      var estadoEl = document.getElementById("estado");
+      var erroMotorEl = document.getElementById("erro-motor");
+      var fluxosEl = document.getElementById("fluxos");
+      var autoEl = document.getElementById("auto");
+      var btnAtualizar = document.getElementById("atualizar");
+      var btnPt = document.getElementById("btn-pt");
+      var btnEn = document.getElementById("btn-en");
+
+      var idioma = "pt";
+      var ultimaResposta = "";   // para só redesenhar quando algo mudou
+      var contadorRender = 0;    // ids únicos exigidos pelo mermaid.render
+      var temporizador = null;
+      var aBuscar = false;
+
+      if (!window.mermaid) {
+        estadoEl.textContent = "erro: a biblioteca de desenho não carregou (/static/vendor/mermaid.min.js)";
+        return;
+      }
+      mermaid.initialize({ startOnLoad: false, theme: "neutral", flowchart: { useMaxWidth: true } });
+
+      function agora() {
+        return new Date().toLocaleTimeString("pt-PT");
+      }
+
+      function copiar(texto, botao) {
+        function feito() {
+          var original = botao.textContent;
+          botao.textContent = "Copiado ✓";
+          setTimeout(function () { botao.textContent = original; }, 1500);
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(texto).then(feito, function () { recurso(); });
+        } else {
+          recurso();
+        }
+        function recurso() {
+          var area = document.createElement("textarea");
+          area.value = texto;
+          document.body.appendChild(area);
+          area.select();
+          try { document.execCommand("copy"); feito(); } catch (e) { /* paciência */ }
+          document.body.removeChild(area);
+        }
+      }
+
+      function desenhar(dados) {
+        fluxosEl.textContent = "";
+        dados.fluxos.forEach(function (fluxo) {
+          var cartao = document.createElement("section");
+          cartao.className = "cartao";
+
+          var h2 = document.createElement("h2");
+          h2.textContent = fluxo.nome + " ";
+          var id = document.createElement("span");
+          id.className = "id";
+          id.textContent = "(" + fluxo.id + ".json)";
+          h2.appendChild(id);
+          cartao.appendChild(h2);
+
+          var alvo = document.createElement("div");
+          alvo.className = "desenho";
+          cartao.appendChild(alvo);
+
+          var acoes = document.createElement("div");
+          acoes.className = "acoes";
+          var btnCopiar = document.createElement("button");
+          btnCopiar.className = "secundario";
+          btnCopiar.textContent = "Copiar código Mermaid";
+          btnCopiar.addEventListener("click", function () { copiar(fluxo.mermaid, btnCopiar); });
+          acoes.appendChild(btnCopiar);
+          var nota = document.createElement("span");
+          nota.className = "nota";
+          nota.textContent = "cola em mermaid.live para editar visualmente";
+          acoes.appendChild(nota);
+          cartao.appendChild(acoes);
+
+          fluxosEl.appendChild(cartao);
+
+          contadorRender += 1;
+          mermaid.render("flx_" + fluxo.id + "_" + contadorRender, fluxo.mermaid)
+            .then(function (resultado) {
+              alvo.innerHTML = resultado.svg;
+            })
+            .catch(function (e) {
+              var caixa = document.createElement("div");
+              caixa.className = "erro-diagrama";
+              var motivo = e && e.message ? String(e.message).split("\n")[0] : String(e);
+              caixa.textContent = "⚠ Não foi possível desenhar esta árvore: " + motivo;
+              alvo.appendChild(caixa);
+              var fonte = document.createElement("pre");
+              fonte.textContent = fluxo.mermaid;
+              alvo.appendChild(fonte);
+            });
+        });
+      }
+
+      function atualizar(forcar) {
+        if (aBuscar) { return; }
+        aBuscar = true;
+        btnAtualizar.disabled = true;
+        fetch("/api/fluxogramas?idioma=" + idioma, { cache: "no-store" })
+          .then(function (r) { return r.json(); })
+          .then(function (dados) {
+            document.getElementById("versao").textContent = dados.versao ? "v" + dados.versao : "";
+            if (dados.erro) {
+              erroMotorEl.style.display = "block";
+              erroMotorEl.innerHTML = "";
+              var titulo = document.createElement("strong");
+              titulo.textContent = "As regras em app/data/rules/ estão inválidas — corrige e guarda:";
+              erroMotorEl.appendChild(titulo);
+              erroMotorEl.appendChild(document.createTextNode("\n" + dados.erro));
+              estadoEl.textContent = "regras inválidas às " + agora() + " — a mostrar a última versão válida";
+              return; // mantém as árvores anteriores no ecrã
+            }
+            erroMotorEl.style.display = "none";
+            var assinatura = idioma + "\u0000" + JSON.stringify(dados.fluxos);
+            if (!forcar && assinatura === ultimaResposta) {
+              estadoEl.textContent = "sem alterações — verificado às " + agora();
+              return;
+            }
+            ultimaResposta = assinatura;
+            desenhar(dados);
+            estadoEl.textContent = dados.fluxos.length + " fluxogramas — atualizado às " + agora();
+          })
+          .catch(function () {
+            estadoEl.textContent = "sem ligação ao servidor às " + agora() + " (uvicorn está a correr?)";
+          })
+          .finally(function () {
+            aBuscar = false;
+            btnAtualizar.disabled = false;
+          });
+      }
+
+      function programar() {
+        if (temporizador) { clearInterval(temporizador); temporizador = null; }
+        if (autoEl.checked) {
+          temporizador = setInterval(function () { atualizar(false); }, 5000);
+        }
+      }
+
+      function escolherIdioma(novo) {
+        if (idioma === novo) { return; }
+        idioma = novo;
+        btnPt.classList.toggle("ativo", novo === "pt");
+        btnEn.classList.toggle("ativo", novo === "en");
+        atualizar(true);
+      }
+
+      btnAtualizar.addEventListener("click", function () { atualizar(true); });
+      autoEl.addEventListener("change", programar);
+      btnPt.addEventListener("click", function () { escolherIdioma("pt"); });
+      btnEn.addEventListener("click", function () { escolherIdioma("en"); });
+
+      atualizar(true);
+      programar();
+    })();
+  </script>
+</body>
+</html>

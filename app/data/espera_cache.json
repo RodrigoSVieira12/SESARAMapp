@@ -1,5 +1,5 @@
 {
-  "obtido_em": "2026-07-12T04:13:03",
+  "obtido_em": "2026-07-15T11:02:49",
   "ok": true,
   "erro": null,
   "unidades": {
@@ -9,103 +9,103 @@
       "tempo_medio_min": null,
       "atendidos": null,
       "fonte": "centros_saude",
-      "atualizado_no_site": "2026-07-12 03:12"
+      "atualizado_no_site": "2026-07-15 09:59"
     },
     "cs_camara_lobos": {
       "tipo_dados": "geral",
-      "em_espera": 0,
-      "tempo_medio_min": 3,
-      "atendidos": 1,
+      "em_espera": 1,
+      "tempo_medio_min": 5,
+      "atendidos": 5,
       "fonte": "centros_saude",
-      "atualizado_no_site": "2026-07-12 03:12"
+      "atualizado_no_site": "2026-07-15 09:59"
     },
     "cs_calheta": {
       "tipo_dados": "geral",
-      "em_espera": 0,
-      "tempo_medio_min": null,
-      "atendidos": null,
+      "em_espera": 1,
+      "tempo_medio_min": 20,
+      "atendidos": 4,
       "fonte": "centros_saude",
-      "atualizado_no_site": "2026-07-12 03:12"
+      "atualizado_no_site": "2026-07-15 09:59"
     },
     "cs_machico": {
       "tipo_dados": "geral",
-      "em_espera": 0,
-      "tempo_medio_min": 11,
-      "atendidos": 1,
+      "em_espera": 2,
+      "tempo_medio_min": 30,
+      "atendidos": 3,
       "fonte": "centros_saude",
-      "atualizado_no_site": "2026-07-12 03:12"
+      "atualizado_no_site": "2026-07-15 09:59"
     },
     "cs_porto_moniz": {
       "tipo_dados": "geral",
       "em_espera": 0,
-      "tempo_medio_min": null,
-      "atendidos": null,
+      "tempo_medio_min": 12,
+      "atendidos": 2,
       "fonte": "centros_saude",
-      "atualizado_no_site": "2026-07-12 03:12"
+      "atualizado_no_site": "2026-07-15 09:59"
     },
     "cs_porto_santo": {
       "tipo_dados": "geral",
       "em_espera": 0,
-      "tempo_medio_min": null,
-      "atendidos": null,
+      "tempo_medio_min": 7,
+      "atendidos": 6,
       "fonte": "centros_saude",
-      "atualizado_no_site": "2026-07-12 03:12"
+      "atualizado_no_site": "2026-07-15 09:59"
     },
     "cs_ribeira_brava": {
       "tipo_dados": "geral",
-      "em_espera": 0,
-      "tempo_medio_min": null,
-      "atendidos": null,
+      "em_espera": 5,
+      "tempo_medio_min": 16,
+      "atendidos": 7,
       "fonte": "centros_saude",
-      "atualizado_no_site": "2026-07-12 03:12"
+      "atualizado_no_site": "2026-07-15 09:59"
     },
     "cs_sao_vicente": {
       "tipo_dados": "geral",
-      "em_espera": 0,
+      "em_espera": 1,
       "tempo_medio_min": null,
       "atendidos": null,
       "fonte": "centros_saude",
-      "atualizado_no_site": "2026-07-12 03:12"
+      "atualizado_no_site": "2026-07-15 09:59"
     },
     "cs_santana": {
       "tipo_dados": "geral",
       "em_espera": 0,
-      "tempo_medio_min": null,
-      "atendidos": null,
+      "tempo_medio_min": 15,
+      "atendidos": 1,
       "fonte": "centros_saude",
-      "atualizado_no_site": "2026-07-12 03:12"
+      "atualizado_no_site": "2026-07-15 09:59"
     },
     "hnm": {
       "tipo_dados": "por_cor",
       "por_cor": {
         "laranja": {
           "em_espera": 0,
-          "tempo_medio_min": 10,
-          "atendidos": null
+          "tempo_medio_min": 8,
+          "atendidos": 9
         },
         "amarelo": {
-          "em_espera": 0,
-          "tempo_medio_min": 60,
-          "atendidos": null
+          "em_espera": 24,
+          "tempo_medio_min": 23,
+          "atendidos": 45
         },
         "verde": {
-          "em_espera": 0,
-          "tempo_medio_min": 120,
-          "atendidos": null
+          "em_espera": 20,
+          "tempo_medio_min": 76,
+          "atendidos": 24
         },
         "azul": {
           "em_espera": 0,
-          "tempo_medio_min": 240,
-          "atendidos": null
+          "tempo_medio_min": 185,
+          "atendidos": 3
         }
       },
       "geral": {
-        "em_espera": 0,
-        "tempo_medio_min": 108,
-        "atendidos": null
+        "em_espera": 44,
+        "tempo_medio_min": 51,
+        "atendidos": 81
       },
       "fonte": "hospital",
-      "atualizado_no_site": null
+      "atualizado_no_site": "2026-07-15 09:59"
     }
   },
   "por_mapear": []

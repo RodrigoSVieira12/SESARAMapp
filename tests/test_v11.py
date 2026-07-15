@@ -166,9 +166,15 @@ def test_tempos_para_unidades_cobre_a_lista():
 def test_resumo_da_unidade_tem_tempo_viagem(sem_esperas):
     saida = routing.decidir_encaminhamento("laranja", *FUNCHAL, quando=SEGUNDA_10H)
     tv = saida["unidade"]["tempo_viagem"]
-    assert tv and tv["metodo"] == "rede" and tv["minutos"] >= 1
+    # O contrato é "o resumo traz um tempo de viagem utilizável", não
+    # "veio deste método específico": desde a v0.11.3, quando a tabela
+    # medida está preenchida (fonte ors/manual), ela tem prioridade
+    # sobre a rede calibrada — e é isso que este cenário passa a dar
+    # assim que alguém corre calcular_tempos_medidos.py.
+    assert tv and tv["minutos"] >= 1
+    assert tv["metodo"] in ("medido", "rede")
     assert saida["viagem_info"]["disponivel"] is True
-    assert saida["viagem_info"]["metodo"] == "rede"
+    assert saida["viagem_info"]["metodo"] == tv["metodo"]
 
 
 def test_do_curral_o_amarelo_vai_ao_hospital_e_nao_a_cml(sem_esperas):

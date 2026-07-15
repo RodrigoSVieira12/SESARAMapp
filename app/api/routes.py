@@ -5,6 +5,7 @@ Resumo:
   GET  /api/queixas               → lista de queixas disponíveis
   GET  /api/queixas/sugerir       → sugestões a partir de texto livre
   GET  /api/red-flags             → sinais de emergência (avaliados primeiro)
+  GET  /api/fluxogramas           → árvores Mermaid das regras atuais (relidas do disco)
   POST /api/triagem               → próxima pergunta OU resultado (cor)
   GET  /api/unidades              → todas as unidades de saúde
   GET  /api/unidades/proxima      → unidades mais próximas de um ponto
@@ -23,6 +24,7 @@ from fastapi import APIRouter, HTTPException, Query, Response
 from ..core import (
     espera,
     feriados,
+    fluxogramas,
     geo,
     horarios,
     localidades,
@@ -87,6 +89,49 @@ def sugerir_queixas(
 @router.get("/red-flags", tags=["triagem"])
 def listar_red_flags() -> list[dict]:
     return engine.listar_red_flags()
+
+
+@router.get("/fluxogramas", tags=["triagem"])
+def fluxogramas_atuais(
+    idioma: str = Query(
+        "pt",
+        pattern="^(pt|en)$",
+        description="Idioma dos rótulos e textos das árvores (pt ou en).",
+    ),
+) -> dict:
+    """Fluxogramas Mermaid das regras ATUAIS em app/data/rules/.
+
+    Ao contrário do resto da API (que usa o motor carregado no arranque),
+    aqui as regras são RELIDAS E REVALIDADAS DO DISCO a cada pedido: é a
+    peça que permite editar um JSON, guardar, e ver a árvore redesenhada
+    no navegador (/fluxogramas) sem reiniciar o servidor. Se alguma regra
+    estiver inválida, devolve a mensagem de validação por extenso em
+    "erro" — em vez de uma página em branco, vê-se o que corrigir.
+
+    Devolve apenas TEXTO Mermaid; o desenho acontece no cliente com a
+    biblioteca embutida em /static/vendor/mermaid.min.js.
+    """
+    try:
+        motor_fresco = TriageEngine()
+    except RuntimeError as erro:
+        return {"versao": VERSAO, "idioma": idioma, "erro": str(erro), "fluxos": []}
+    return {
+        "versao": VERSAO,
+        "idioma": idioma,
+        "erro": None,
+        "fluxos": [
+            {
+                "id": fid,
+                "nome": (
+                    f.get("nome_en")
+                    if idioma == "en" and f.get("nome_en")
+                    else f["nome"]
+                ),
+                "mermaid": fluxogramas.mermaid_do_fluxo(f, idioma),
+            }
+            for fid, f in motor_fresco.fluxos.items()
+        ],
+    }
 
 
 @router.post("/triagem", tags=["triagem"])

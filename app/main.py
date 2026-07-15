@@ -66,6 +66,20 @@ def pagina_principal() -> FileResponse:
     )
 
 
+@app.get("/fluxogramas", include_in_schema=False)
+def pagina_fluxogramas() -> FileResponse:
+    """Pré-visualização viva dos fluxogramas de triagem (ferramenta interna).
+
+    Edita-se um JSON em app/data/rules/, guarda-se, e a árvore aparece
+    redesenhada aqui (as regras são relidas do disco a cada pedido em
+    /api/fluxogramas). Não está ligada à interface do utente de propósito:
+    destina-se a quem edita/valida regras, não ao público.
+    """
+    return FileResponse(
+        PASTA_STATIC / "fluxogramas.html", media_type="text/html; charset=utf-8"
+    )
+
+
 if __name__ == "__main__":  # permite `python -m app.main`
     import uvicorn
 

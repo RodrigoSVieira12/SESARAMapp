@@ -77,6 +77,7 @@ onde-ir-sesaram/
 │   ├── models/schemas.py     # validação dos pedidos (Pydantic)
 │   ├── core/
 │   │   ├── triage_engine.py  # motor de triagem (lê os JSON de regras)
+│   │   ├── fluxogramas.py    # regras → fluxogramas Mermaid (PT/EN; v0.12)
 │   │   ├── routing.py        # cor + localização + hora → destino
 │   │   ├── horarios.py       # aberto/fechado num dado momento
 │   │   ├── geo.py            # distância de Haversine
@@ -91,7 +92,9 @@ onde-ir-sesaram/
 │       ├── tempos_medidos.json # tempos por estrada registados (editável; v0.11.3)
 │       ├── localidades.json  # freguesias e sítios (editável)
 │       └── unidades.json     # unidades de saúde da RAM
-├── static/                   # frontend (HTML + CSS + JS puro + Leaflet)
+├── static/                   # frontend (HTML + CSS + JS puro)
+│   ├── vendor/               # Mermaid, Leaflet, gerador de QR — sem CDN (v0.12)
+│   └── fluxogramas.html      # pré-visualização viva dos fluxogramas (interna; v0.12)
 └── tests/                    # pytest (motor, horários, routing, API)
 ```
 
@@ -209,6 +212,9 @@ para os JSON (atualizando o campo `fonte` com quem validou e quando).
 - `GET /api/saude`, health check
 - `GET /api/queixas`, queixas disponíveis
 - `GET /api/red-flags`, sinais de emergência
+- `GET /api/fluxogramas?idioma=pt|en`, fluxogramas Mermaid das regras
+  atuais, relidos do disco a cada pedido (v0.12; suporta a
+  pré-visualização viva em `/fluxogramas`)
 - `POST /api/triagem`, `{queixa, respostas}` ou `{red_flags}` → pergunta/resultado
 - `GET /api/unidades`, todas as unidades
 - `GET /api/unidades/proxima?lat&lng&servico&n`, mais próximas
@@ -304,8 +310,12 @@ desenhada, gerada de `app/data/rules/*.json` por
 `app/core/fluxogramas.py`, com os desfechos pintados nas cinco cores e
 as perguntas numeradas como na lista. Saltos entre perguntas, caminhos
 sem saída ou cores mal atribuídas tornam-se visíveis num relance. O
-desenho acontece no navegador (biblioteca Mermaid via CDN), por isso o
-documento precisa de internet ao abrir; sem ela, as perguntas numeradas
+desenho acontece no navegador com a biblioteca Mermaid **embutida no
+próprio documento**, por isso desenha offline e pode ser enviado por
+email como um único ficheiro (isto era originalmente carregado de um
+CDN, que se revelou instável e fazia os fluxogramas desaparecerem em
+silêncio — ver *Novidades da v0.12*); mesmo sem desenho, as perguntas
+numeradas
 continuam lá. As fontes de cada diagrama ficam em
 `docs/fluxogramas/*.mmd` e podem abrir-se e editar-se visualmente em
 https://mermaid.live.
@@ -615,6 +625,65 @@ procura com âncoras (raio, desvio, barreiras, interruptores para
 desligar), a prioridade OSRM > tabela > rede, o encaminhamento e o
 `/api/viagem`, e o script de cálculo com o motor simulado (os testes não
 fazem pedidos à rede). Total: 215.
+
+## Novidades da v0.12: fluxogramas offline em todo o lado, e pré-visualização viva
+
+O ponto de partida foi uma regressão: os fluxogramas tinham deixado de
+aparecer no `docs/validacao_clinica.html`. A causa era a biblioteca de
+desenho ser ida buscar a um CDN público (`unpkg.com`) no momento de
+abrir, atrás de um `if (window.mermaid)` silencioso — quando o CDN
+estava lento ou em baixo (esteve, repetidamente, ao longo de 2025–2026),
+a biblioteca não carregava e as árvores simplesmente desapareciam, sem
+um erro que explicasse porquê. Esta versão remove essa dependência, torna
+qualquer falha visível, e acrescenta uma forma de ver as árvores a
+atualizarem-se enquanto se editam as regras.
+
+- **Documento de validação autossuficiente.** A biblioteca Mermaid
+  (MIT) passa a estar **embutida no HTML gerado**
+  (`static/vendor/mermaid.min.js`, vendorizada). O
+  `docs/validacao_clinica.html` desenha os fluxogramas offline e pode ser
+  enviado por email como um único ficheiro — sem rede, sem CDN. Se um
+  diagrama não puder ser desenhado (por exemplo, quando uma edição às
+  regras introduz um erro), o documento passa a imprimir o erro no lugar,
+  com a fonte Mermaid logo abaixo, em vez de o esconder.
+- **Pré-visualização viva em `/fluxogramas`.** Uma página interna nova
+  (não ligada à interface do utente — é uma ferramenta para quem edita e
+  valida regras) mostra cada fluxograma desenhado a partir das regras
+  atuais em `app/data/rules/*.json`. Edita-se uma regra, guarda-se, e a
+  árvore redesenha: o `GET /api/fluxogramas` **relê e revalida as regras
+  do disco a cada pedido**, por isso não é preciso reiniciar o servidor.
+  Atualiza-se sozinha a cada 5 s (com interruptor), tem um seletor PT/EN,
+  um botão "copiar código Mermaid" por árvore (para colar em mermaid.live
+  e editar visualmente), e se um ficheiro de regras estiver inválido
+  mostra a mensagem de validação tal e qual, mantendo no ecrã as últimas
+  árvores válidas.
+- **Fluxogramas bilingues.** As árvores passam a desenhar-se também em
+  inglês, a partir dos campos `*_en` já existentes nas regras, com um
+  recuo deliberado para português onde falte tradução (uma árvore meio
+  traduzida é útil e denuncia a falha; uma árvore cheia de buracos não
+  é). As caixas de desfecho usam o nome inglês da cor (RED, ORANGE…); as
+  classes de estilo internas ficam em português.
+- **Também sem CDN na app.** O Leaflet (o mapa) e o gerador de QR
+  carregavam igualmente do `unpkg.com`; ambos passam a estar
+  vendorizados em `static/vendor/` e servidos localmente. Em execução, a
+  app não faz qualquer pedido de scripts a terceiros. Os únicos recursos
+  externos que restam são os tiles do mapa (CARTO) e as Google Fonts,
+  ambos com degradação graciosa se faltarem — a app continua utilizável
+  offline, apenas com tipos de letra do sistema e sem mapa de fundo.
+- **Como atualizar as bibliotecas vendorizadas.** São ficheiros simples
+  em `static/vendor/`; para subir de versão, substitui-se o ficheiro (por
+  exemplo `npm pack mermaid@<versão>` e copiar `dist/mermaid.min.js`),
+  mantém-se o `LICENSE` correspondente, e atualiza-se `VERSAO_MERMAID` em
+  `scripts/gerar_validacao_clinica.py` (há um teste que confirma que os
+  dois coincidem).
+
+19 testes novos cobrem as bibliotecas vendorizadas (bundle
+autossuficiente, sem CDN no `index.html`), o documento a embutir a
+biblioteca e um bloco desenhável por fluxograma, os ficheiros `.mmd` em
+disco a corresponderem às regras atuais, a tradução inglesa e o seu recuo
+para português, e a API da pré-visualização viva (todos os fluxos, EN,
+idioma inválido 422, releitura do disco a cada pedido, erro de validação
+legível) e a página. Total: 234.
 
 ## Limitações conhecidas
 
