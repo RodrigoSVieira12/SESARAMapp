@@ -830,6 +830,9 @@ async function obterEncaminhamento() {
   }
   try {
     const corpo = { cor: estado.resultado.cor, lat: loc.lat, lng: loc.lng };
+    // v0.12.1: se o desfecho do fluxograma declarar um "destino"
+    // (amarelos que podem ir ao atendimento urgente), segue no pedido.
+    if (estado.resultado.destino) corpo.destino = estado.resultado.destino;
     if (estado.horaSimulada) corpo.quando = estado.horaSimulada;
     const dados = await api("/api/encaminhamento", corpo);
     ecraEncaminhamento(dados, loc);

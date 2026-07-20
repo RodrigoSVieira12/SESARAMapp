@@ -31,6 +31,10 @@ PASTA_REGRAS = Path(__file__).resolve().parent.parent / "data" / "rules"
 
 CORES_VALIDAS = {"vermelho", "laranja", "amarelo", "verde", "azul"}
 
+# Valores aceites no campo opcional "destino" de um desfecho (v0.12.1;
+# só permitido em desfechos amarelos, ver _validar_fluxo).
+DESTINOS_RESULTADO = ("hospital", "atendimento_urgente")
+
 
 class ErroTriagem(ValueError):
     """Erro de utilização do motor (queixa inexistente, resposta inválida...)."""
@@ -92,6 +96,23 @@ class TriageEngine:
                         raise RuntimeError(
                             f"{origem}: cor inválida {cor!r} em {pergunta['id']!r}"
                         )
+                    # Campo opcional "destino" (v0.12.1): permite marcar um
+                    # desfecho AMARELO como podendo ir ao atendimento
+                    # urgente mais próximo, em vez do hospital direto.
+                    destino = ramo["resultado"].get("destino")
+                    if destino is not None:
+                        if destino not in DESTINOS_RESULTADO:
+                            raise RuntimeError(
+                                f"{origem}: destino inválido {destino!r} em "
+                                f"{pergunta['id']!r} (usar "
+                                f"{' ou '.join(repr(d) for d in DESTINOS_RESULTADO)})"
+                            )
+                        if cor != "amarelo":
+                            raise RuntimeError(
+                                f"{origem}: 'destino' só é permitido em "
+                                f"desfechos amarelos, mas {pergunta['id']!r} "
+                                f"({nome_ramo}) é {cor!r}"
+                            )
                 elif ramo.get("proxima") in conhecidos:
                     destinos[pergunta["id"]].append(ramo["proxima"])
                 else:

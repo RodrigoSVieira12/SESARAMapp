@@ -46,6 +46,15 @@ class EncaminhamentoRequest(BaseModel):
     cor: Cor = Field(description="Cor atribuída pela triagem.")
     lat: float = Field(ge=-90, le=90, description="Latitude do utente.")
     lng: float = Field(ge=-180, le=180, description="Longitude do utente.")
+    destino: Literal["hospital", "atendimento_urgente"] | None = Field(
+        default=None,
+        description=(
+            "Opcional; só considerado no amarelo. Vem do campo 'destino' do "
+            "desfecho do fluxograma (app/data/rules/*.json) e permite que "
+            "certos amarelos sejam encaminhados para o atendimento urgente "
+            "aberto mais próximo em vez do hospital (v0.12.1)."
+        ),
+    )
     quando: datetime | None = Field(
         default=None,
         description=(

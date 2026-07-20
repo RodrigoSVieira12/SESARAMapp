@@ -8,11 +8,17 @@ Separar isto do motor de triagem é deliberado:
   onde o utente está).
 
 Decisões desta versão (todas a validar clinicamente com o SESARAM):
-1. Vermelho, laranja e amarelo consideram QUALQUER urgência aberta
-   (hospitalar ou atendimento urgente 24h dos centros de saúde). Assim,
-   um laranja na Calheta é orientado para a urgência aberta da Calheta
-   em vez de atravessar a ilha. Para laranja, o hospital aparece sempre
-   também (como principal ou como alternativa).
+1. (v0.12.1, indicação da reunião de acompanhamento) Vermelho, laranja
+   e amarelo são encaminhados DIRETAMENTE para a urgência do hospital
+   de referência — por omissão o Hospital Dr. Nélio Mendonça. A
+   política vive em app/data/encaminhamento.json e é editável sem
+   tocar em código: retirar uma cor da lista repõe, para essa cor, o
+   comportamento por proximidade (qualquer urgência aberta, hospitalar
+   ou atendimento urgente dos centros de saúde). Válvula para o
+   futuro: um desfecho AMARELO pode declarar "destino":
+   "atendimento_urgente" no próprio ficheiro de regras e passa a valer
+   a urgência aberta mais próxima para esse desfecho. No vermelho a
+   ação continua a ser ligar 112; o hospital aparece como referência.
 2. Regra da ilha: as recomendações nunca atravessam o mar. No Porto
    Santo, todas as cores apontam para a unidade local; nas cores mais
    graves acrescenta-se a nota de que a transferência para o hospital,
@@ -54,8 +60,12 @@ def agora_na_madeira() -> datetime:
     return datetime.now()
 
 
-# Que tipos de serviço servem cada cor. NOTA CLÍNICA: mapeamento a
-# validar pela equipa do SESARAM (ver docstring, ponto 1).
+# Que tipos de serviço servem cada cor NO COMPORTAMENTO POR PROXIMIDADE.
+# Desde a v0.12.1 este mapa só decide o encaminhamento de vermelho /
+# laranja / amarelo quando a política de hospital direto NÃO se aplica:
+# amarelos excecionados por "destino", Porto Santo (regra da ilha), cor
+# retirada de encaminhamento.json, ou recuo por erro de dados. NOTA
+# CLÍNICA: mapeamento a validar pela equipa do SESARAM (docstring, 1).
 SERVICOS_POR_COR: dict[str, list[str]] = {
     "vermelho": ["urgencia_polivalente", "urgencia_basica", "atendimento_urgente"],
     "laranja": ["urgencia_polivalente", "urgencia_basica", "atendimento_urgente"],
@@ -94,6 +104,30 @@ _FICHEIRO_AUTOCUIDADO = _Path(__file__).resolve().parents[1] / "data" / "autocui
 TEXTOS_AUTOCUIDADO: dict[str, dict] = _json.loads(
     _FICHEIRO_AUTOCUIDADO.read_text(encoding="utf-8")
 )["cores"]
+
+# Política de destino por cor (v0.12.1): que cores vão DIRETAMENTE para
+# a urgência do hospital de referência. Vive em app/data/encaminhamento.json
+# para a equipa clínica poder ajustar sem tocar em Python (tal como as
+# regras de triagem). Sem ficheiro, o recuo seguro é a política atual.
+_FICHEIRO_POLITICA = _Path(__file__).resolve().parents[1] / "data" / "encaminhamento.json"
+
+DESTINOS_VALIDOS = ("hospital", "atendimento_urgente")
+
+
+def _carregar_politica() -> dict:
+    try:
+        dados = _json.loads(_FICHEIRO_POLITICA.read_text(encoding="utf-8"))
+    except FileNotFoundError:  # pragma: no cover - recuo defensivo
+        dados = {}
+    return {
+        "hospital_id": dados.get("hospital_id", "hnm"),
+        "direto_para_hospital": list(
+            dados.get("direto_para_hospital", ["vermelho", "laranja", "amarelo"])
+        ),
+    }
+
+
+POLITICA = _carregar_politica()
 
 
 def _ilha_do_utente(lat: float, lng: float) -> str:
@@ -332,10 +366,54 @@ def _contexto_do_dia_en(quando: datetime) -> str:
     return "At this time, "
 
 
+def _resumo_hospital(
+    lat: float, lng: float, quando: datetime, esperas: dict | None, cor: str
+) -> dict | None:
+    """Resumo do hospital de referência da política, com distância,
+    tempo de viagem e espera da cor. Devolve None se o id configurado
+    não existir nos dados (o chamador recua para a proximidade)."""
+    hospital = unidades.por_id(POLITICA["hospital_id"])
+    if hospital is None:
+        return None
+    com_distancia = geo.ordenar_por_distancia([hospital], lat, lng)[0]
+    tempos = viagem.tempos_para_unidades(lat, lng, [com_distancia])
+    return _resumo_unidade(
+        com_distancia,
+        SERVICOS_HOSPITALARES,
+        quando,
+        esperas,
+        cor,
+        tempos.get(com_distancia["id"]),
+    )
+
+
+def _destino_efetivo(cor: str, destino: str | None) -> tuple[str, str]:
+    """Resolve (destino, fonte) para vermelho/laranja/amarelo.
+
+    O campo `destino` (vindo do desfecho do fluxograma via API) só é
+    honrado no AMARELO — é a válvula prevista para certos amarelos
+    poderem voltar ao atendimento urgente mais próximo sem mexer em
+    código. No vermelho e no laranja a política vem só da configuração.
+    """
+    if cor == "amarelo" and destino in DESTINOS_VALIDOS:
+        return destino, "fluxograma"
+    if cor in POLITICA["direto_para_hospital"]:
+        return "hospital", "configuracao"
+    return "atendimento_urgente", "predefinicao"
+
+
 def decidir_encaminhamento(
-    cor: str, lat: float, lng: float, quando: datetime | None = None
+    cor: str,
+    lat: float,
+    lng: float,
+    quando: datetime | None = None,
+    destino: str | None = None,
 ) -> dict:
-    """Devolve a recomendação completa de encaminhamento."""
+    """Devolve a recomendação completa de encaminhamento.
+
+    `destino` é o campo opcional do desfecho do fluxograma (só tem
+    efeito no amarelo; ver _destino_efetivo).
+    """
     quando = quando or agora_na_madeira()
     esperas = espera.do_cache()
     ilha = _ilha_do_utente(lat, lng)
@@ -376,16 +454,42 @@ def decidir_encaminhamento(
 
     # ---------------------------------------------------------------- #
     if cor == "vermelho":
-        referencia = abertas[0] if abertas else (candidatas[0] if candidatas else None)
+        # A ação é sempre ligar 112. A unidade abaixo é só referência:
+        # com a política de hospital direto (v0.12.1), essa referência
+        # é o hospital — é para lá que a emergência transporta.
+        destino_ref, fonte = _destino_efetivo(cor, None)
+        referencia = None
+        aplicada = False
+        if destino_ref == "hospital" and not no_porto_santo:
+            referencia = _resumo_hospital(lat, lng, quando, esperas, cor)
+            aplicada = referencia is not None
+        if referencia is not None:
+            frase_ref = (
+                "O hospital de referência é indicado abaixo apenas como "
+                "referência."
+            )
+            frase_ref_en = (
+                "The reference hospital is shown below for reference only."
+            )
+            alternativas = []
+        else:
+            referencia = abertas[0] if abertas else (candidatas[0] if candidatas else None)
+            frase_ref = (
+                "A urgência mais próxima é indicada abaixo apenas como "
+                "referência."
+            )
+            frase_ref_en = (
+                "The nearest emergency department is shown below for "
+                "reference only."
+            )
+            alternativas = [] if no_porto_santo else abertas[1:3]
         mensagem = (
             "Ligue já o 112. Siga as instruções do operador e, se possível, "
-            "não se desloque pelos próprios meios. A urgência mais próxima "
-            "é indicada abaixo apenas como referência."
+            "não se desloque pelos próprios meios. " + frase_ref
         )
         mensagem_en = (
             "Call 112 now. Follow the operator's instructions and, if "
-            "possible, do not travel by your own means. The nearest "
-            "emergency department is shown below for reference only."
+            "possible, do not travel by your own means. " + frase_ref_en
         )
         if no_porto_santo:
             mensagem += NOTA_TRANSFERENCIA_PORTO_SANTO
@@ -395,11 +499,48 @@ def decidir_encaminhamento(
             "mensagem": mensagem,
             "mensagem_en": mensagem_en,
             "unidade": referencia,
-            "alternativas": [] if no_porto_santo else abertas[1:3],
+            "alternativas": alternativas,
+            "politica": {"destino": destino_ref, "fonte": fonte, "aplicada": aplicada},
         }
 
     # ---------------------------------------------------------------- #
     if cor in ("laranja", "amarelo"):
+        destino_final, fonte = _destino_efetivo(cor, destino)
+        politica_info = {"destino": destino_final, "fonte": fonte, "aplicada": False}
+
+        if destino_final == "hospital" and not no_porto_santo:
+            hospital = _resumo_hospital(lat, lng, quando, esperas, cor)
+            if hospital is not None and hospital["aberta_agora"]:
+                nome_cor_en = str(info_cor(cor).get("nome_en", cor)).lower()
+                mensagem = (
+                    f"Dirija-se a {hospital['nome']} "
+                    f"({_texto_chegada(hospital)}). Nos casos classificados "
+                    f"como {cor}, o encaminhamento é feito diretamente para "
+                    "a urgência do hospital. Se os sintomas agravarem pelo "
+                    "caminho, ligue 112."
+                )
+                mensagem_en = (
+                    f"Go to {hospital['nome']} "
+                    f"({_texto_chegada_en(hospital)}). Cases classified as "
+                    f"{nome_cor_en} are referred directly to the hospital "
+                    "emergency department. If symptoms worsen on the way, "
+                    "call 112."
+                )
+                return base | {
+                    "acao": "ir_unidade",
+                    "mensagem": mensagem,
+                    "mensagem_en": mensagem_en,
+                    "unidade": hospital,
+                    "alternativas": [],
+                    "reordenado_por_espera": False,
+                    "politica": politica_info | {"aplicada": True},
+                }
+            # Hospital configurado sem urgência aberta nos dados (id
+            # trocado ou erro de horários): recuo seguro para o
+            # comportamento por proximidade, em vez de mandar alguém
+            # para uma porta que os dados dizem estar fechada.
+            politica_info = politica_info | {"recuo": True}
+
         if abertas:
             principal, restantes, troca = espera.escolher_principal(abertas)
             alternativas = [] if no_porto_santo else restantes[:2]
@@ -461,6 +602,7 @@ def decidir_encaminhamento(
                 "unidade": principal,
                 "alternativas": alternativas,
                 "reordenado_por_espera": bool(troca),
+                "politica": politica_info,
             }
         # Sem nada aberto (não deve acontecer: há urgências 24h). Segurança:
         return base | {
@@ -475,6 +617,7 @@ def decidir_encaminhamento(
             ),
             "unidade": candidatas[0] if candidatas else None,
             "alternativas": [],
+            "politica": politica_info,
         }
 
     # ---------------------------------------------------------------- #

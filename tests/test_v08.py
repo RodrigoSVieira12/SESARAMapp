@@ -240,13 +240,16 @@ def mock_esperas(monkeypatch):
     monkeypatch.setattr(espera, "do_cache", lambda: MOCK_CACHE)
 
 
-def test_laranja_troca_para_hospital(mock_esperas):
+def test_laranja_vai_ao_hospital_com_espera_da_cor(mock_esperas):
+    """Na v0.8 este cenário testava a regra de troca por espera; desde a
+    v0.12.1 o laranja vai DIRETO ao hospital por política, sem troca. O
+    que se mantém: o hospital mostra a espera DA COR do utente."""
     saida = routing.decidir_encaminhamento("laranja", *PERTO_CAMARA_LOBOS, quando=SABADO_15H)
     assert saida["unidade"]["id"] == "hnm"
-    assert saida["reordenado_por_espera"] is True
-    assert "mais perto" in saida["mensagem"]
-    # A unidade preterida aparece nas alternativas.
-    assert any(a["id"] == "cs_camara_lobos" for a in saida["alternativas"])
+    assert saida["reordenado_por_espera"] is False
+    assert saida["politica"] == {
+        "destino": "hospital", "fonte": "configuracao", "aplicada": True
+    }
     # O hospital mostra a espera DA COR (laranja = 8 min).
     te = saida["unidade"]["tempo_espera"]
     assert te["minutos"] == 8 and te["ambito"] == "cor"
@@ -260,10 +263,11 @@ def test_verde_mostra_espera_sem_reordenar(mock_esperas):
 
 
 def test_vermelho_ignora_reordenacao(mock_esperas):
-    # Vermelho manda para a mais próxima como referência; não reordena.
+    # Vermelho manda ligar 112; a referência mostrada é o hospital
+    # (v0.12.1), nunca reordenada por espera.
     saida = routing.decidir_encaminhamento("vermelho", *PERTO_CAMARA_LOBOS, quando=SABADO_15H)
     assert saida["acao"] == "ligar_112"
-    assert saida["unidade"]["id"] == "cs_camara_lobos"
+    assert saida["unidade"]["id"] == "hnm"
 
 
 def test_espera_info_na_resposta(mock_esperas):

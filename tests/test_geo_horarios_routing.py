@@ -80,13 +80,15 @@ def test_laranja_no_funchal_vai_ao_hospital():
     assert saida["unidade"]["aberta_agora"] is True
 
 
-def test_laranja_na_calheta_usa_urgencia_local_e_mostra_hospital():
+def test_laranja_na_calheta_vai_direto_ao_hospital():
+    """v0.12.1 (indicação do SESARAM): laranja vai DIRETO ao hospital,
+    mesmo havendo atendimento urgente aberto na Calheta. Antes, a app
+    orientava para a urgência local; a política mudou e vive em
+    app/data/encaminhamento.json."""
     saida = routing.decidir_encaminhamento("laranja", *CALHETA, quando=SEGUNDA_10H)
-    assert saida["unidade"]["concelho"] == "Calheta"
-    mostradas = [saida["unidade"], *saida["alternativas"]]
-    assert any("urgencia_polivalente" in u["horarios"] for u in mostradas), (
-        "O hospital deve aparecer sempre como opção num laranja."
-    )
+    assert saida["unidade"]["id"] == "hnm"
+    assert "urgencia_polivalente" in saida["unidade"]["horarios"]
+    assert saida["politica"]["aplicada"] is True
 
 
 def test_verde_de_dia_vai_a_unidade_aberta():

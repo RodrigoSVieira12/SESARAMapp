@@ -41,8 +41,20 @@ _LARGURA = 34  # caracteres por linha dentro de cada caixa
 
 # Rótulos fixos do desenho por idioma (os textos clínicos vêm das regras).
 _ROTULOS = {
-    "pt": {"inicio": "Início", "sim": "Sim", "nao": "Não"},
-    "en": {"inicio": "Start", "sim": "Yes", "nao": "No"},
+    "pt": {
+        "inicio": "Início",
+        "sim": "Sim",
+        "nao": "Não",
+        # Marca dos amarelos com "destino": "atendimento_urgente" (v0.12.1):
+        # visível na árvore para a validação clínica apanhar a exceção.
+        "atendimento": "pode ir ao atendimento urgente",
+    },
+    "en": {
+        "inicio": "Start",
+        "sim": "Yes",
+        "nao": "No",
+        "atendimento": "may go to urgent care",
+    },
 }
 
 
@@ -125,6 +137,8 @@ def mermaid_do_fluxo(fluxo: dict, idioma: str = "pt") -> str:
                 motivo = _t(r, "motivo", idioma)
                 if motivo:
                     texto += f"<br/>{_quebrar(motivo)}"
+                if r.get("destino") == "atendimento_urgente":
+                    texto += f"<br/>({rot['atendimento']})"
                 linhas.append(f'  {no_id}(["{texto}"]):::{cor}')
                 linhas.append(f'  {p["id"]} -->|{rotulo}| {no_id}')
 

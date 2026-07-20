@@ -1,0 +1,5 @@
+{
+  "comentario": "Política de destino por cor de triagem (v0.12.1), editável pela equipa clínica sem tocar em código. As cores em 'direto_para_hospital' são encaminhadas diretamente para a urgência do hospital indicado em 'hospital_id' (na ilha da Madeira; no Porto Santo mantém-se a regra da ilha, com a nota de transferência). Para deixar de aplicar a regra a uma cor, basta retirá-la da lista. Para permitir que um desfecho AMARELO específico vá ao atendimento urgente aberto mais próximo, acrescente \"destino\": \"atendimento_urgente\" a esse resultado no ficheiro de regras (app/data/rules/*.json) — o validador do arranque garante que o campo só é aceite em desfechos amarelos.",
+  "hospital_id": "hnm",
+  "direto_para_hospital": ["vermelho", "laranja", "amarelo"]
+}

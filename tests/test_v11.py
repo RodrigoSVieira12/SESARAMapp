@@ -178,13 +178,14 @@ def test_resumo_da_unidade_tem_tempo_viagem(sem_esperas):
 
 
 def test_do_curral_o_amarelo_vai_ao_hospital_e_nao_a_cml(sem_esperas):
-    """Antes da v0.11 a ordenação em linha reta mandava o utente do
-    Curral para Câmara de Lobos; por tempo de estrada, o hospital vem
-    primeiro (o caminho para CML passa-lhe à porta)."""
+    """Desde a v0.12.1 o amarelo vai ao hospital por política. A
+    rationale original desta v0.11 (ordenação por tempo de estrada, não
+    em linha reta) continua testada no caminho por proximidade em
+    tests/test_v12_1.py, com a exceção 'destino: atendimento_urgente'."""
     saida = routing.decidir_encaminhamento("amarelo", *CURRAL, quando=SEGUNDA_10H)
     assert saida["unidade"]["id"] == "hnm"
-    ids_alternativas = [a["id"] for a in saida["alternativas"]]
-    assert "cs_camara_lobos" in ids_alternativas
+    assert saida["alternativas"] == []
+    assert saida["politica"]["fonte"] == "configuracao"
 
 
 def test_candidatas_ordenadas_por_tempo(sem_esperas):

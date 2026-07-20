@@ -99,7 +99,7 @@ A API é *stateless*.
 | GET  | `/api/unidades` | Todas as unidades. |
 | GET  | `/api/unidades/proxima?lat=&lng=` | Unidades mais próximas de um ponto. |
 | GET  | `/api/espera` | Tempos de espera das urgências. |
-| POST | `/api/encaminhamento` | Destino recomendado, dada cor + localização. |
+| POST | `/api/encaminhamento` | Destino recomendado, dada cor + localização; aceita `destino` opcional do desfecho (v0.12.1). |
 | GET  | `/api/contactos` | 112 e SNS 24. |
 | GET  | `/api/feriados?ano=` | Feriados considerados nos horários. |
 
@@ -127,6 +127,15 @@ Resposta (faltam respostas):
 ```json
 { "tipo": "pergunta", "queixa": "dor_abdominal", "pergunta": {} }
 ```
+
+Nota (v0.12.1): o `resultado` pode incluir um campo opcional `destino`
+(ex.: `"atendimento_urgente"`, permitido apenas em desfechos amarelos),
+declarado no próprio fluxograma. O `/api/integracao/triagem` já o aplica ao
+bloco `encaminhamento`; um sistema que chame `/api/encaminhamento`
+diretamente deve reenviar esse campo. A política por cor (vermelho, laranja
+e amarelo diretos ao hospital) é editável em `app/data/encaminhamento.json`
+sem alterações de código, e cada resposta de encaminhamento inclui um bloco
+`politica` com a decisão aplicada.
 
 **`POST /api/exportar_pdf`** — resumo de orientação em PDF
 (`application/pdf`). O corpo é o que o utente viu; o servidor desenha o

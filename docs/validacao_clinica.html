@@ -53,10 +53,21 @@
     o <strong>fluxograma desenhado</strong> — a mesma árvore em formato visual,
     com os desfechos nas cinco cores e os números a cruzar com a lista. Em caso
     de dúvida, a regra do projeto é errar por excesso de urgência.</p>
-    <p><strong>Tempos de espera:</strong> o encaminhamento pode ainda considerar
-    os tempos de espera em tempo real do SESARAM (regra experimental com
-    salvaguardas: só troca a unidade mais próxima se poupar ≥30 min e o desvio
-    for ≤15 km) — igualmente por validar.</p>
+    <p><strong>Encaminhamento por cor (v0.12.1):</strong> por indicação do
+    SESARAM, vermelho, laranja e amarelo são encaminhados diretamente para o
+    Hospital Dr. Nélio Mendonça (no vermelho a ação continua a ser ligar 112,
+    com o hospital como referência). A política é editável em
+    app/data/encaminhamento.json, e um desfecho AMARELO pode declarar
+    "destino": "atendimento_urgente" para voltar à urgência aberta mais
+    próxima — esses desfechos aparecem marcados nas árvores abaixo com
+    "(pode ir ao atendimento urgente)". No Porto Santo mantém-se a regra da
+    ilha. Verde e azul não mudam.</p>
+    <p><strong>Tempos de espera:</strong> nos desfechos que sigam pelo caminho
+    por proximidade (por exemplo, amarelos com a exceção acima), o
+    encaminhamento pode ainda considerar os tempos de espera em tempo real do
+    SESARAM (regra experimental com salvaguardas: só troca a unidade mais
+    próxima se poupar ≥30 min e o desvio for ≤15 km) — igualmente por
+    validar.</p>
     <table class="cores">
       <tr><th>Cor</th><th>Classificação</th><th>Tempo-alvo de observação</th></tr>
       <tr><td><span class="amostra" style="background:#D32F2F"></span>
@@ -1292,6 +1303,13 @@
         opções razoáveis: vigiar em casa com o apoio do SNS 24, ou, se
         preferir ser observado hoje, dirigir-se a [unidade] ([X] km), com
         atendimento aberto."</p>
+      </div>
+      <div class="pergunta">
+        <p class="meta">Mensagem do encaminhamento direto ao hospital, laranja e amarelo (modelo; v0.12.1)</p>
+        <p>"Dirija-se a Hospital Dr. Nélio Mendonça ([X] km por estrada, ~[Y]
+        min de carro). Nos casos classificados como [cor], o encaminhamento é
+        feito diretamente para a urgência do hospital. Se os sintomas
+        agravarem pelo caminho, ligue 112."</p>
       </div>
       <div class="caixa-validacao">
         <strong>Validação clínica destes textos</strong>

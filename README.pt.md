@@ -1,6 +1,6 @@
 # Onde ir? Orientação de utentes na RAM (protótipo — SESARAM)
 
-Este repositório é um protótipo funcional para uma aplicação, do lado hospitalar, que orienta os utentes para o ponto de atendimento certo na Região Autónoma da Madeira: faz triagem de sintomas por perguntas simples de sim/não, estima uma cor de prioridade inspirada em Manchester, e recomenda a unidade adequada mais próxima tendo em conta a hora e os horários. Os textos para o utente e os comentários do código estão em português, porque os utentes e o serviço de saúde são portugueses; ainda assim, a arquitetura, as regras clínicas guiadas por dados e a lógica de encaminhamento tornam-no uma base sólida e reutilizável — um excelente protótipo para construir um serviço real.
+Este repositório é um protótipo funcional para uma aplicação, do lado hospitalar, que orienta os utentes para o ponto de atendimento certo na Região Autónoma da Madeira: faz triagem de sintomas por perguntas simples de sim/não, estima uma cor de prioridade inspirada em Manchester, e recomenda para onde ir — diretamente ao hospital de referência nas cores mais urgentes (vermelho, laranja e amarelo, por indicação do SESARAM; v0.12.1), ou a unidade adequada aberta mais próxima tendo em conta a hora e os horários. Os textos para o utente e os comentários do código estão em português, porque os utentes e o serviço de saúde são portugueses; ainda assim, a arquitetura, as regras clínicas guiadas por dados e a lógica de encaminhamento tornam-no uma base sólida e reutilizável — um excelente protótipo para construir um serviço real.
 
 *(Uma versão em inglês deste documento está em `README.md`.)*
 
@@ -51,6 +51,8 @@ Depois abrir no browser:
 
 - Aplicação: http://127.0.0.1:8000
 - Documentação interativa da API: http://127.0.0.1:8000/docs
+- Pré-visualização viva dos fluxogramas de triagem (ferramenta interna):
+  http://127.0.0.1:8000/fluxogramas
 
 Para **parar** o servidor: Ctrl+C no terminal. Depois de alterar o código,
 faz **Ctrl+F5** no browser (atualização forçada, para não usar a versão em
@@ -88,6 +90,7 @@ onde-ir-sesaram/
 │   │   └── cores.py          # cores de Manchester e contactos
 │   └── data/
 │       ├── rules/            # 1 ficheiro JSON por queixa + red_flags.json
+│       ├── encaminhamento.json # política de destino por cor (editável; v0.12.1)
 │       ├── rede_viagem.json  # rede de estradas calibrada (editável)
 │       ├── tempos_medidos.json # tempos por estrada registados (editável; v0.11.3)
 │       ├── localidades.json  # freguesias e sítios (editável)
@@ -110,7 +113,10 @@ onde-ir-sesaram/
 2. **Cor**, o resultado tem uma cor (vermelho, laranja, amarelo, verde,
    azul) com tempo-alvo de observação, mostrada como uma pulseira.
 3. **Encaminhamento**, com a cor, a localização e a hora na Madeira,
-   `routing.py` escolhe a unidade aberta mais próxima com o serviço certo.
+   `routing.py` decide para onde enviar o utente. Vermelho, laranja e
+   amarelo vão **diretamente ao hospital de referência** (política em
+   `app/data/encaminhamento.json`; ver *Novidades da v0.12.1*); verde e
+   azul recebem a unidade aberta mais próxima com o serviço certo.
    Exemplo do porquê de a hora importar: um verde às 3 h da manhã não deve
    ser enviado para um centro de saúde fechado, recebe SNS 24 + urgência
    como alternativa.
@@ -225,8 +231,10 @@ para os JSON (atualizando o campo `fonte` com quem validou e quando).
 - `GET /api/localidades`, árvore concelho → freguesia → sítio para o ecrã
   de localização manual (v0.11.1)
 - `GET /api/espera?atualizar=`, tempos de espera em tempo real (cache do SEISRAM)
-- `POST /api/encaminhamento`, `{cor, lat, lng}` → recomendação completa;
-  aceita opcionalmente `quando` (ISO 8601) para simular a hora do cálculo
+- `POST /api/encaminhamento`, `{cor, lat, lng}` → recomendação completa
+  (com o bloco `politica` aplicado); aceita opcionalmente `quando`
+  (ISO 8601) para simular a hora do cálculo e `destino` (v0.12.1, só
+  amarelo), vindo do desfecho do fluxograma
 - `GET /api/contactos`, 112 e SNS 24
 - `GET /api/feriados?ano=`, feriados nacionais + regionais considerados
   nos horários
@@ -646,7 +654,8 @@ atualizarem-se enquanto se editam as regras.
   diagrama não puder ser desenhado (por exemplo, quando uma edição às
   regras introduz um erro), o documento passa a imprimir o erro no lugar,
   com a fonte Mermaid logo abaixo, em vez de o esconder.
-- **Pré-visualização viva em `/fluxogramas`.** Uma página interna nova
+- **Pré-visualização viva em `/fluxogramas`** (com o servidor a correr,
+  abrir http://127.0.0.1:8000/fluxogramas). Uma página interna nova
   (não ligada à interface do utente — é uma ferramenta para quem edita e
   valida regras) mostra cada fluxograma desenhado a partir das regras
   atuais em `app/data/rules/*.json`. Edita-se uma regra, guarda-se, e a
@@ -684,6 +693,54 @@ disco a corresponderem às regras atuais, a tradução inglesa e o seu recuo
 para português, e a API da pré-visualização viva (todos os fluxos, EN,
 idioma inválido 422, releitura do disco a cada pedido, erro de validação
 legível) e a página. Total: 234.
+
+## Novidades da v0.12.1: vermelho, laranja e amarelo diretos ao hospital
+
+A mudança veio da reunião de acompanhamento: a indicação do SESARAM é que
+todos os vermelhos e laranjas, e (por agora) todos os amarelos, sejam
+encaminhados diretamente para o Hospital Dr. Nélio Mendonça — e não para
+o ponto de urgência aberto mais próximo. Até esta versão, essas cores
+consideravam qualquer urgência aberta (hospitalar ou o atendimento
+urgente 24 h dos centros de saúde).
+
+- **Uma política de destino, guardada em dados.** A regra vive em
+  `app/data/encaminhamento.json` (`hospital_id` mais a lista de cores em
+  `direto_para_hospital`), editável pela equipa clínica como tudo o
+  resto — sem tocar em código. Retirar uma cor da lista repõe, para essa
+  cor, o comportamento por proximidade (urgência aberta mais próxima,
+  ordenada por tempo de estrada). Cada resposta de encaminhamento passa
+  a trazer um bloco `politica` (`destino`, `fonte`, `aplicada`) para as
+  interfaces e integrações poderem explicar a decisão.
+- **O vermelho mantém o 112 primeiro.** A ação no vermelho continua a
+  ser "ligar 112"; o que muda é a unidade mostrada por baixo, que passa
+  a ser o hospital de referência (é para lá que a emergência transporta)
+  em vez da urgência mais próxima.
+- **A válvula para "certos amarelos", pronta a usar.** Um desfecho
+  amarelo em `app/data/rules/*.json` pode declarar `"destino":
+  "atendimento_urgente"`, e esse desfecho específico volta ao ponto de
+  atendimento urgente aberto mais próximo (com a ordenação por tempo de
+  estrada da v0.11 e a regra experimental de troca por espera). O
+  validador do arranque só aceita o campo em desfechos amarelos e só com
+  valores válidos, portanto um erro de escrita não muda o encaminhamento
+  em silêncio; os fluxogramas desenhados (documento de validação e
+  pré-visualização `/fluxogramas`) marcam estes desfechos com "(pode ir
+  ao atendimento urgente)". Nenhuma regra em produção o usa ainda — está
+  lá para quando a equipa clínica disser quais os amarelos que
+  qualificam.
+- **Regra da ilha intocada.** No Porto Santo nada atravessa o mar: todas
+  as cores continuam a apontar para a unidade local, com a nota de
+  transferência nas mais graves.
+- **Recuo seguro.** Se o id do hospital configurado não existir nos
+  dados ou não tiver urgência aberta (um erro de dados), a app recua
+  para a urgência aberta mais próxima em vez de mandar alguém para uma
+  porta fechada, e assinala-o (`politica.recuo`).
+
+27 testes novos cobrem a política a partir de vários concelhos, o bloco
+`politica`, a espera da cor no hospital, o Porto Santo, a exceção
+amarela (incluindo o caso do tempo de estrada do Curral das Freiras), a
+validação do arranque, a viagem completa na API (`destino` aceite pelo
+`/api/encaminhamento` e propagado pelo `/api/integracao/triagem`), a
+marca nos fluxogramas, e estes links do README. Total: 261.
 
 ## Limitações conhecidas
 

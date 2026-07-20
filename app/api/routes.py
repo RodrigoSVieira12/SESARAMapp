@@ -255,7 +255,8 @@ def listar_localidades() -> dict:
 @router.post("/encaminhamento", tags=["unidades"])
 def encaminhamento(pedido: EncaminhamentoRequest) -> dict:
     return routing.decidir_encaminhamento(
-        pedido.cor, pedido.lat, pedido.lng, quando=pedido.quando
+        pedido.cor, pedido.lat, pedido.lng, quando=pedido.quando,
+        destino=pedido.destino,
     )
 
 
@@ -332,7 +333,8 @@ def integracao_triagem(pedido: IntegracaoTriagemRequest) -> dict:
         }
         if pedido.lat is not None and pedido.lng is not None:
             resposta["encaminhamento"] = routing.decidir_encaminhamento(
-                resultado["cor"], pedido.lat, pedido.lng, quando=pedido.quando
+                resultado["cor"], pedido.lat, pedido.lng, quando=pedido.quando,
+                destino=resultado.get("destino"),
             )
         return resposta
     except ErroTriagem as erro:

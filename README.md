@@ -1,6 +1,6 @@
 # Onde ir? Patient guidance for Madeira (RAM) — prototype (SESARAM)
 
-This repository is a working prototype for a hospital-side application that guides patients to the right point of care in the Autonomous Region of Madeira: it triages symptoms through simple yes/no questions, estimates a Manchester-style priority colour, and recommends the nearest suitable unit given the current time and opening hours. The user-facing text and the code comments are written in Portuguese, because the target users and the health service are Portuguese; even so, the architecture, the data-driven clinical rules and the routing logic make it a solid, reusable base — an excellent prototype to build a real service on.
+This repository is a working prototype for a hospital-side application that guides patients to the right point of care in the Autonomous Region of Madeira: it triages symptoms through simple yes/no questions, estimates a Manchester-style priority colour, and recommends where to go — directly to the reference hospital for the most urgent colours (red, orange and yellow, per SESARAM guidance; v0.12.1), or the nearest suitable open unit given the current time and opening hours. The user-facing text and the code comments are written in Portuguese, because the target users and the health service are Portuguese; even so, the architecture, the data-driven clinical rules and the routing logic make it a solid, reusable base — an excellent prototype to build a real service on.
 
 *("Onde ir?" means "Where to go?". A Portuguese version of this document is available in `README.pt.md`.)*
 
@@ -52,6 +52,8 @@ Then open in the browser:
 
 - Application: http://127.0.0.1:8000
 - Interactive API documentation: http://127.0.0.1:8000/docs
+- Live flowchart preview of the triage rules (internal tool):
+  http://127.0.0.1:8000/fluxogramas
 
 To **stop** the server: Ctrl+C in the terminal. After changing the code,
 press **Ctrl+F5** in the browser (hard refresh, so it does not use the
@@ -91,6 +93,7 @@ onde-ir-sesaram/
 │   │   └── cores.py          # Manchester colours and contacts
 │   └── data/
 │       ├── rules/            # 1 JSON file per complaint + red_flags.json
+│       ├── encaminhamento.json # destination policy per colour (editable; v0.12.1)
 │       ├── rede_viagem.json  # calibrated road network (editable)
 │       ├── tempos_medidos.json # recorded road times (editable; v0.11.3)
 │       ├── localidades.json  # parishes and localities (editable)
@@ -113,10 +116,12 @@ onde-ir-sesaram/
 2. **Colour** — the result has a colour (red, orange, yellow, green, blue)
    with a target observation time, shown as a wristband.
 3. **Routing** — given the colour, the location and the time in Madeira,
-   `routing.py` picks the nearest open unit with the right service. Example
-   of why time matters: a green case at 3 a.m. should not be sent to a
-   closed health centre; it gets SNS 24 + an emergency department as a
-   fallback.
+   `routing.py` decides where to send the patient. Red, orange and yellow
+   go **directly to the reference hospital** (policy in
+   `app/data/encaminhamento.json`; see *New in v0.12.1*); green and blue
+   get the nearest open unit with the right service. Example of why time
+   matters: a green case at 3 a.m. should not be sent to a closed health
+   centre; it gets SNS 24 + an emergency department as a fallback.
 
 ## Editing or adding triage rules
 
@@ -231,8 +236,10 @@ into the JSON files (updating the `fonte` field with who validated and when).
 - `GET /api/localidades` — municipality → parish → locality tree for the
   manual location screen (v0.11.1)
 - `GET /api/espera?atualizar=` — real-time waiting times (SEISRAM cache)
-- `POST /api/encaminhamento` — `{cor, lat, lng}` → full recommendation;
-  optionally accepts `quando` (ISO 8601) to simulate the calculation time
+- `POST /api/encaminhamento` — `{cor, lat, lng}` → full recommendation
+  (with the applied `politica` block); optionally accepts `quando`
+  (ISO 8601) to simulate the calculation time and `destino` (v0.12.1,
+  yellow only), coming from the flowchart outcome
 - `GET /api/contactos` — 112 and SNS 24
 - `GET /api/feriados?ano=` — national + regional holidays used in the
   opening-hours logic
@@ -631,7 +638,8 @@ update as you edit the rules.
   can't be drawn (say, after a rule edit introduces an error), the
   document now prints the error in place, with the Mermaid source right
   below, instead of hiding it.
-- **A live preview at `/fluxogramas`.** A new internal page (not linked
+- **A live preview at `/fluxogramas`** (with the server running, open
+  http://127.0.0.1:8000/fluxogramas). A new internal page (not linked
   from the patient interface — it's a tool for whoever edits and
   validates rules) shows every flowchart drawn from the current
   `app/data/rules/*.json`. Edit a rule, save, and the tree redraws:
@@ -666,6 +674,51 @@ block per flowchart, the disk-backed `.mmd` files matching the current
 rules, the English translation and its Portuguese fall-back, and the
 live-preview API (all flows, EN, invalid-language 422, fresh read per
 request, readable validation error) and page. Total: 234.
+
+## New in v0.12.1: red, orange and yellow go straight to the hospital
+
+The change came from the supervision meeting: SESARAM's guidance is that
+every red and orange case, and (for now) every yellow, should be referred
+directly to Hospital Dr. Nélio Mendonça — not to the nearest open
+emergency point. Until this version, those colours considered any open
+urgência (hospital or a health centre's 24 h urgent care).
+
+- **A destination policy, kept in data.** The rule lives in
+  `app/data/encaminhamento.json` (`hospital_id` plus the list of colours
+  in `direto_para_hospital`), editable by the clinical team like
+  everything else — no code changes. Removing a colour from the list
+  restores the proximity behaviour (nearest open urgência, ordered by
+  road time) for that colour. Every routing response now carries a
+  `politica` block (`destino`, `fonte`, `aplicada`) so interfaces and
+  integrations can explain the decision.
+- **Red keeps 112 first.** The action for red is still "call 112"; what
+  changes is the unit shown underneath, now the reference hospital (that
+  is where the emergency services transport to) instead of the nearest
+  urgência.
+- **The valve for "certain yellows", ready to use.** A yellow outcome in
+  `app/data/rules/*.json` may declare `"destino": "atendimento_urgente"`,
+  and that specific outcome goes back to the nearest open urgent-care
+  point (with the v0.11 road-time ordering and the experimental
+  wait-time swap rule). The start-up validator only accepts the field on
+  yellow outcomes and only with valid values, so a typo cannot silently
+  change routing; the drawn flowcharts (validation document and the
+  `/fluxogramas` preview) mark these outcomes with "(may go to urgent
+  care)". No production rule uses it yet — it is there for when the
+  clinical team says which yellows qualify.
+- **Island rule untouched.** On Porto Santo nothing crosses the sea: all
+  colours still point to the local unit, with the transfer note for the
+  serious ones.
+- **Safe fallback.** If the configured hospital id does not exist in the
+  data or has no open emergency service (a data error), the app falls
+  back to the nearest open urgência instead of sending anyone to a
+  closed door, and flags it (`politica.recuo`).
+
+27 new tests cover the policy from several concelhos, the `politica`
+block, the colour-specific waiting time at the hospital, Porto Santo,
+the yellow exception (including the Curral das Freiras road-time case),
+the start-up validation, the API round trip (`destino` accepted by
+`/api/encaminhamento` and propagated by `/api/integracao/triagem`), the
+flowchart marker, and these README links. Total: 261.
 
 ## Known limitations
 
