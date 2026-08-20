@@ -1,0 +1,105 @@
+flowchart TD
+  inicio(["Início: Recém-nascido que não está<br/>bem (< 28 dias)"])
+  rn_que_nao_esta_bem_28_dias_p1_1876["1. [P1] Compromisso da via aérea?"]
+  rn_que_nao_esta_bem_28_dias_p1_2147["2. [P1] Respiração ineficaz?"]
+  rn_que_nao_esta_bem_28_dias_p1_2760["3. [P1] Sinais de choque?"]
+  rn_que_nao_esta_bem_28_dias_p1_2772["4. [P1] Não reativo?"]
+  rn_que_nao_esta_bem_28_dias_p1_3038["5. [P1] Convulsão atual?"]
+  rn_que_nao_esta_bem_28_dias_p2_3039["6. [P2] Sinais de desidratação?"]
+  rn_que_nao_esta_bem_28_dias_p2_3040["7. [P2] Alteração do estado de<br/>consciência?"]
+  rn_que_nao_esta_bem_28_dias_p2_3041["8. [P2] Sem reação ao estímulo dos<br/>pais?"]
+  rn_que_nao_esta_bem_28_dias_p2_3042["9. [P2] Muito quente?"]
+  rn_que_nao_esta_bem_28_dias_p2_3043["10. [P2] Possível sépsis?"]
+  rn_que_nao_esta_bem_28_dias_p2_3044["11. [P2] Sinais de meningismo?"]
+  rn_que_nao_esta_bem_28_dias_p2_3045["12. [P2] Erupção cutânea desconhecida?"]
+  rn_que_nao_esta_bem_28_dias_p2_3046["13. [P2] História de risco especial de<br/>infeção?"]
+  rn_que_nao_esta_bem_28_dias_p2_3047["14. [P2] Dor severa?"]
+  rn_que_nao_esta_bem_28_dias_p3_3048["15. [P3] Não se alimenta?"]
+  rn_que_nao_esta_bem_28_dias_p3_3049["16. [P3] Não urina?"]
+  rn_que_nao_esta_bem_28_dias_p3_3050["17. [P3] Quente?"]
+  rn_que_nao_esta_bem_28_dias_p3_3051["18. [P3] Icterícia?"]
+  rn_que_nao_esta_bem_28_dias_p3_3052["19. [P3] História Inapropriada?"]
+  rn_que_nao_esta_bem_28_dias_p3_3053["20. [P3] História hematológica ou<br/>metabólica significativa?"]
+  rn_que_nao_esta_bem_28_dias_p3_3054["21. [P3] Dor moderada?"]
+  rn_que_nao_esta_bem_28_dias_p4_3055["22. [P4] História de viagens ao<br/>estrangeiro?"]
+  rn_que_nao_esta_bem_28_dias_p4_3056["23. [P4] Dor persistente?"]
+  rn_que_nao_esta_bem_28_dias_p4_3060["24. [P4] Problema recente?"]
+  inicio --> rn_que_nao_esta_bem_28_dias_p1_1876
+  rn_que_nao_esta_bem_28_dias_p1_1876_sim(["VERMELHO"]):::vermelho
+  rn_que_nao_esta_bem_28_dias_p1_1876 -->|Sim| rn_que_nao_esta_bem_28_dias_p1_1876_sim
+  rn_que_nao_esta_bem_28_dias_p1_1876 -->|Não| rn_que_nao_esta_bem_28_dias_p1_2147
+  rn_que_nao_esta_bem_28_dias_p1_2147_sim(["VERMELHO"]):::vermelho
+  rn_que_nao_esta_bem_28_dias_p1_2147 -->|Sim| rn_que_nao_esta_bem_28_dias_p1_2147_sim
+  rn_que_nao_esta_bem_28_dias_p1_2147 -->|Não| rn_que_nao_esta_bem_28_dias_p1_2760
+  rn_que_nao_esta_bem_28_dias_p1_2760_sim(["VERMELHO"]):::vermelho
+  rn_que_nao_esta_bem_28_dias_p1_2760 -->|Sim| rn_que_nao_esta_bem_28_dias_p1_2760_sim
+  rn_que_nao_esta_bem_28_dias_p1_2760 -->|Não| rn_que_nao_esta_bem_28_dias_p1_2772
+  rn_que_nao_esta_bem_28_dias_p1_2772_sim(["VERMELHO"]):::vermelho
+  rn_que_nao_esta_bem_28_dias_p1_2772 -->|Sim| rn_que_nao_esta_bem_28_dias_p1_2772_sim
+  rn_que_nao_esta_bem_28_dias_p1_2772 -->|Não| rn_que_nao_esta_bem_28_dias_p1_3038
+  rn_que_nao_esta_bem_28_dias_p1_3038_sim(["VERMELHO"]):::vermelho
+  rn_que_nao_esta_bem_28_dias_p1_3038 -->|Sim| rn_que_nao_esta_bem_28_dias_p1_3038_sim
+  rn_que_nao_esta_bem_28_dias_p1_3038 -->|Não| rn_que_nao_esta_bem_28_dias_p2_3039
+  rn_que_nao_esta_bem_28_dias_p2_3039_sim(["LARANJA"]):::laranja
+  rn_que_nao_esta_bem_28_dias_p2_3039 -->|Sim| rn_que_nao_esta_bem_28_dias_p2_3039_sim
+  rn_que_nao_esta_bem_28_dias_p2_3039 -->|Não| rn_que_nao_esta_bem_28_dias_p2_3040
+  rn_que_nao_esta_bem_28_dias_p2_3040_sim(["LARANJA"]):::laranja
+  rn_que_nao_esta_bem_28_dias_p2_3040 -->|Sim| rn_que_nao_esta_bem_28_dias_p2_3040_sim
+  rn_que_nao_esta_bem_28_dias_p2_3040 -->|Não| rn_que_nao_esta_bem_28_dias_p2_3041
+  rn_que_nao_esta_bem_28_dias_p2_3041_sim(["LARANJA"]):::laranja
+  rn_que_nao_esta_bem_28_dias_p2_3041 -->|Sim| rn_que_nao_esta_bem_28_dias_p2_3041_sim
+  rn_que_nao_esta_bem_28_dias_p2_3041 -->|Não| rn_que_nao_esta_bem_28_dias_p2_3042
+  rn_que_nao_esta_bem_28_dias_p2_3042_sim(["LARANJA"]):::laranja
+  rn_que_nao_esta_bem_28_dias_p2_3042 -->|Sim| rn_que_nao_esta_bem_28_dias_p2_3042_sim
+  rn_que_nao_esta_bem_28_dias_p2_3042 -->|Não| rn_que_nao_esta_bem_28_dias_p2_3043
+  rn_que_nao_esta_bem_28_dias_p2_3043_sim(["LARANJA"]):::laranja
+  rn_que_nao_esta_bem_28_dias_p2_3043 -->|Sim| rn_que_nao_esta_bem_28_dias_p2_3043_sim
+  rn_que_nao_esta_bem_28_dias_p2_3043 -->|Não| rn_que_nao_esta_bem_28_dias_p2_3044
+  rn_que_nao_esta_bem_28_dias_p2_3044_sim(["LARANJA"]):::laranja
+  rn_que_nao_esta_bem_28_dias_p2_3044 -->|Sim| rn_que_nao_esta_bem_28_dias_p2_3044_sim
+  rn_que_nao_esta_bem_28_dias_p2_3044 -->|Não| rn_que_nao_esta_bem_28_dias_p2_3045
+  rn_que_nao_esta_bem_28_dias_p2_3045_sim(["LARANJA"]):::laranja
+  rn_que_nao_esta_bem_28_dias_p2_3045 -->|Sim| rn_que_nao_esta_bem_28_dias_p2_3045_sim
+  rn_que_nao_esta_bem_28_dias_p2_3045 -->|Não| rn_que_nao_esta_bem_28_dias_p2_3046
+  rn_que_nao_esta_bem_28_dias_p2_3046_sim(["LARANJA"]):::laranja
+  rn_que_nao_esta_bem_28_dias_p2_3046 -->|Sim| rn_que_nao_esta_bem_28_dias_p2_3046_sim
+  rn_que_nao_esta_bem_28_dias_p2_3046 -->|Não| rn_que_nao_esta_bem_28_dias_p2_3047
+  rn_que_nao_esta_bem_28_dias_p2_3047_sim(["LARANJA"]):::laranja
+  rn_que_nao_esta_bem_28_dias_p2_3047 -->|Sim| rn_que_nao_esta_bem_28_dias_p2_3047_sim
+  rn_que_nao_esta_bem_28_dias_p2_3047 -->|Não| rn_que_nao_esta_bem_28_dias_p3_3048
+  rn_que_nao_esta_bem_28_dias_p3_3048_sim(["AMARELO"]):::amarelo
+  rn_que_nao_esta_bem_28_dias_p3_3048 -->|Sim| rn_que_nao_esta_bem_28_dias_p3_3048_sim
+  rn_que_nao_esta_bem_28_dias_p3_3048 -->|Não| rn_que_nao_esta_bem_28_dias_p3_3049
+  rn_que_nao_esta_bem_28_dias_p3_3049_sim(["AMARELO"]):::amarelo
+  rn_que_nao_esta_bem_28_dias_p3_3049 -->|Sim| rn_que_nao_esta_bem_28_dias_p3_3049_sim
+  rn_que_nao_esta_bem_28_dias_p3_3049 -->|Não| rn_que_nao_esta_bem_28_dias_p3_3050
+  rn_que_nao_esta_bem_28_dias_p3_3050_sim(["AMARELO"]):::amarelo
+  rn_que_nao_esta_bem_28_dias_p3_3050 -->|Sim| rn_que_nao_esta_bem_28_dias_p3_3050_sim
+  rn_que_nao_esta_bem_28_dias_p3_3050 -->|Não| rn_que_nao_esta_bem_28_dias_p3_3051
+  rn_que_nao_esta_bem_28_dias_p3_3051_sim(["AMARELO"]):::amarelo
+  rn_que_nao_esta_bem_28_dias_p3_3051 -->|Sim| rn_que_nao_esta_bem_28_dias_p3_3051_sim
+  rn_que_nao_esta_bem_28_dias_p3_3051 -->|Não| rn_que_nao_esta_bem_28_dias_p3_3052
+  rn_que_nao_esta_bem_28_dias_p3_3052_sim(["AMARELO"]):::amarelo
+  rn_que_nao_esta_bem_28_dias_p3_3052 -->|Sim| rn_que_nao_esta_bem_28_dias_p3_3052_sim
+  rn_que_nao_esta_bem_28_dias_p3_3052 -->|Não| rn_que_nao_esta_bem_28_dias_p3_3053
+  rn_que_nao_esta_bem_28_dias_p3_3053_sim(["AMARELO"]):::amarelo
+  rn_que_nao_esta_bem_28_dias_p3_3053 -->|Sim| rn_que_nao_esta_bem_28_dias_p3_3053_sim
+  rn_que_nao_esta_bem_28_dias_p3_3053 -->|Não| rn_que_nao_esta_bem_28_dias_p3_3054
+  rn_que_nao_esta_bem_28_dias_p3_3054_sim(["AMARELO"]):::amarelo
+  rn_que_nao_esta_bem_28_dias_p3_3054 -->|Sim| rn_que_nao_esta_bem_28_dias_p3_3054_sim
+  rn_que_nao_esta_bem_28_dias_p3_3054 -->|Não| rn_que_nao_esta_bem_28_dias_p4_3055
+  rn_que_nao_esta_bem_28_dias_p4_3055_sim(["VERDE"]):::verde
+  rn_que_nao_esta_bem_28_dias_p4_3055 -->|Sim| rn_que_nao_esta_bem_28_dias_p4_3055_sim
+  rn_que_nao_esta_bem_28_dias_p4_3055 -->|Não| rn_que_nao_esta_bem_28_dias_p4_3056
+  rn_que_nao_esta_bem_28_dias_p4_3056_sim(["VERDE"]):::verde
+  rn_que_nao_esta_bem_28_dias_p4_3056 -->|Sim| rn_que_nao_esta_bem_28_dias_p4_3056_sim
+  rn_que_nao_esta_bem_28_dias_p4_3056 -->|Não| rn_que_nao_esta_bem_28_dias_p4_3060
+  rn_que_nao_esta_bem_28_dias_p4_3060_sim(["VERDE"]):::verde
+  rn_que_nao_esta_bem_28_dias_p4_3060 -->|Sim| rn_que_nao_esta_bem_28_dias_p4_3060_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  rn_que_nao_esta_bem_28_dias_p4_3060 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

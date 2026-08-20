@@ -1,0 +1,97 @@
+flowchart TD
+  inicio(["Início: Criança irritável"])
+  crianca_irritavel_p1_1838["1. [P1] Compromisso da via aérea?"]
+  crianca_irritavel_p1_2065["2. [P1] Respiração ineficaz?"]
+  crianca_irritavel_p1_2066["3. [P1] Sinais de choque?"]
+  crianca_irritavel_p1_2067["4. [P1] Não reativo?"]
+  crianca_irritavel_p2_2068["5. [P2] Alteração do estado de<br/>consciência?"]
+  crianca_irritavel_p2_3263["6. [P2] Prostrado?"]
+  crianca_irritavel_p2_3264["7. [P2] Muito quente?"]
+  crianca_irritavel_p2_3265["8. [P2] Possível sépsis?"]
+  crianca_irritavel_p2_3266["9. [P2] Sinais de meningismo?"]
+  crianca_irritavel_p2_3267["10. [P2] Erupção cutânea desconhecida?"]
+  crianca_irritavel_p2_3268["11. [P2] História de sobredosagem ou<br/>envenenamento?"]
+  crianca_irritavel_p2_3269["12. [P2] Dor severa?"]
+  crianca_irritavel_p3_2075["13. [P3] Não se alimenta?"]
+  crianca_irritavel_p3_2076["14. [P3] Quente?"]
+  crianca_irritavel_p3_2077["15. [P3] Inconsolável pelos pais?"]
+  crianca_irritavel_p3_2078["16. [P3] Choro prolongado ou<br/>ininterrupto?"]
+  crianca_irritavel_p3_2079["17. [P3] História Inapropriada?"]
+  crianca_irritavel_p3_2080["18. [P3] Dor moderada?"]
+  crianca_irritavel_p4_2081["19. [P4] Febre persistente?"]
+  crianca_irritavel_p4_2084["20. [P4] Comportamento estranho na<br/>criança?"]
+  crianca_irritavel_p4_2085["21. [P4] Dor persistente?"]
+  crianca_irritavel_p4_2088["22. [P4] Problema recente?"]
+  inicio --> crianca_irritavel_p1_1838
+  crianca_irritavel_p1_1838_sim(["VERMELHO"]):::vermelho
+  crianca_irritavel_p1_1838 -->|Sim| crianca_irritavel_p1_1838_sim
+  crianca_irritavel_p1_1838 -->|Não| crianca_irritavel_p1_2065
+  crianca_irritavel_p1_2065_sim(["VERMELHO"]):::vermelho
+  crianca_irritavel_p1_2065 -->|Sim| crianca_irritavel_p1_2065_sim
+  crianca_irritavel_p1_2065 -->|Não| crianca_irritavel_p1_2066
+  crianca_irritavel_p1_2066_sim(["VERMELHO"]):::vermelho
+  crianca_irritavel_p1_2066 -->|Sim| crianca_irritavel_p1_2066_sim
+  crianca_irritavel_p1_2066 -->|Não| crianca_irritavel_p1_2067
+  crianca_irritavel_p1_2067_sim(["VERMELHO"]):::vermelho
+  crianca_irritavel_p1_2067 -->|Sim| crianca_irritavel_p1_2067_sim
+  crianca_irritavel_p1_2067 -->|Não| crianca_irritavel_p2_2068
+  crianca_irritavel_p2_2068_sim(["LARANJA"]):::laranja
+  crianca_irritavel_p2_2068 -->|Sim| crianca_irritavel_p2_2068_sim
+  crianca_irritavel_p2_2068 -->|Não| crianca_irritavel_p2_3263
+  crianca_irritavel_p2_3263_sim(["LARANJA"]):::laranja
+  crianca_irritavel_p2_3263 -->|Sim| crianca_irritavel_p2_3263_sim
+  crianca_irritavel_p2_3263 -->|Não| crianca_irritavel_p2_3264
+  crianca_irritavel_p2_3264_sim(["LARANJA"]):::laranja
+  crianca_irritavel_p2_3264 -->|Sim| crianca_irritavel_p2_3264_sim
+  crianca_irritavel_p2_3264 -->|Não| crianca_irritavel_p2_3265
+  crianca_irritavel_p2_3265_sim(["LARANJA"]):::laranja
+  crianca_irritavel_p2_3265 -->|Sim| crianca_irritavel_p2_3265_sim
+  crianca_irritavel_p2_3265 -->|Não| crianca_irritavel_p2_3266
+  crianca_irritavel_p2_3266_sim(["LARANJA"]):::laranja
+  crianca_irritavel_p2_3266 -->|Sim| crianca_irritavel_p2_3266_sim
+  crianca_irritavel_p2_3266 -->|Não| crianca_irritavel_p2_3267
+  crianca_irritavel_p2_3267_sim(["LARANJA"]):::laranja
+  crianca_irritavel_p2_3267 -->|Sim| crianca_irritavel_p2_3267_sim
+  crianca_irritavel_p2_3267 -->|Não| crianca_irritavel_p2_3268
+  crianca_irritavel_p2_3268_sim(["LARANJA"]):::laranja
+  crianca_irritavel_p2_3268 -->|Sim| crianca_irritavel_p2_3268_sim
+  crianca_irritavel_p2_3268 -->|Não| crianca_irritavel_p2_3269
+  crianca_irritavel_p2_3269_sim(["LARANJA"]):::laranja
+  crianca_irritavel_p2_3269 -->|Sim| crianca_irritavel_p2_3269_sim
+  crianca_irritavel_p2_3269 -->|Não| crianca_irritavel_p3_2075
+  crianca_irritavel_p3_2075_sim(["AMARELO"]):::amarelo
+  crianca_irritavel_p3_2075 -->|Sim| crianca_irritavel_p3_2075_sim
+  crianca_irritavel_p3_2075 -->|Não| crianca_irritavel_p3_2076
+  crianca_irritavel_p3_2076_sim(["AMARELO"]):::amarelo
+  crianca_irritavel_p3_2076 -->|Sim| crianca_irritavel_p3_2076_sim
+  crianca_irritavel_p3_2076 -->|Não| crianca_irritavel_p3_2077
+  crianca_irritavel_p3_2077_sim(["AMARELO"]):::amarelo
+  crianca_irritavel_p3_2077 -->|Sim| crianca_irritavel_p3_2077_sim
+  crianca_irritavel_p3_2077 -->|Não| crianca_irritavel_p3_2078
+  crianca_irritavel_p3_2078_sim(["AMARELO"]):::amarelo
+  crianca_irritavel_p3_2078 -->|Sim| crianca_irritavel_p3_2078_sim
+  crianca_irritavel_p3_2078 -->|Não| crianca_irritavel_p3_2079
+  crianca_irritavel_p3_2079_sim(["AMARELO"]):::amarelo
+  crianca_irritavel_p3_2079 -->|Sim| crianca_irritavel_p3_2079_sim
+  crianca_irritavel_p3_2079 -->|Não| crianca_irritavel_p3_2080
+  crianca_irritavel_p3_2080_sim(["AMARELO"]):::amarelo
+  crianca_irritavel_p3_2080 -->|Sim| crianca_irritavel_p3_2080_sim
+  crianca_irritavel_p3_2080 -->|Não| crianca_irritavel_p4_2081
+  crianca_irritavel_p4_2081_sim(["VERDE"]):::verde
+  crianca_irritavel_p4_2081 -->|Sim| crianca_irritavel_p4_2081_sim
+  crianca_irritavel_p4_2081 -->|Não| crianca_irritavel_p4_2084
+  crianca_irritavel_p4_2084_sim(["VERDE"]):::verde
+  crianca_irritavel_p4_2084 -->|Sim| crianca_irritavel_p4_2084_sim
+  crianca_irritavel_p4_2084 -->|Não| crianca_irritavel_p4_2085
+  crianca_irritavel_p4_2085_sim(["VERDE"]):::verde
+  crianca_irritavel_p4_2085 -->|Sim| crianca_irritavel_p4_2085_sim
+  crianca_irritavel_p4_2085 -->|Não| crianca_irritavel_p4_2088
+  crianca_irritavel_p4_2088_sim(["VERDE"]):::verde
+  crianca_irritavel_p4_2088 -->|Sim| crianca_irritavel_p4_2088_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  crianca_irritavel_p4_2088 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

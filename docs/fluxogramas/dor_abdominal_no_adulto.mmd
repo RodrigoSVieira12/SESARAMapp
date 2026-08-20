@@ -1,0 +1,101 @@
+flowchart TD
+  inicio(["Início: Dor abdominal no adulto"])
+  dor_abdominal_no_adulto_p1_1845["1. [P1] Compromisso da via aérea?"]
+  dor_abdominal_no_adulto_p1_2116["2. [P1] Respiração ineficaz?"]
+  dor_abdominal_no_adulto_p1_2273["3. [P1] Sinais de choque?"]
+  dor_abdominal_no_adulto_p1_2274["4. [P1] Não reativo?"]
+  dor_abdominal_no_adulto_p2_2275["5. [P2] Hematemeses?"]
+  dor_abdominal_no_adulto_p2_2276["6. [P2] Hematoquésias, melenas ou<br/>retorragias?"]
+  dor_abdominal_no_adulto_p2_2277["7. [P2] Hemorragia vaginal em<br/>gestação superior a 20 semanas?"]
+  dor_abdominal_no_adulto_p2_2278["8. [P2] História de aneurisma<br/>abdominal ou aórtico?"]
+  dor_abdominal_no_adulto_p2_2279["9. [P2] Muito quente?"]
+  dor_abdominal_no_adulto_p2_2280["10. [P2] Possível sépsis?"]
+  dor_abdominal_no_adulto_p2_2281["11. [P2] Dor aórtica?"]
+  dor_abdominal_no_adulto_p2_2282["12. [P2] Dor severa?"]
+  dor_abdominal_no_adulto_p3_2283["13. [P3] Vómitos incoercíveis?"]
+  dor_abdominal_no_adulto_p3_2284["14. [P3] Fezes pretas ou raiadas de<br/>sangue?"]
+  dor_abdominal_no_adulto_p3_2285["15. [P3] Quente?"]
+  dor_abdominal_no_adulto_p3_2286["16. [P3] História de hematemeses?"]
+  dor_abdominal_no_adulto_p3_2287["17. [P3] Possível gravidez?"]
+  dor_abdominal_no_adulto_p3_2288["18. [P3] Dor que irradia para o ombro?"]
+  dor_abdominal_no_adulto_p3_2289["19. [P3] Dor moderada?"]
+  dor_abdominal_no_adulto_p4_2290["20. [P4] Vómitos persistentes?"]
+  dor_abdominal_no_adulto_p4_2293["21. [P4] Febre persistente?"]
+  dor_abdominal_no_adulto_p4_2294["22. [P4] Dor persistente?"]
+  dor_abdominal_no_adulto_p4_2297["23. [P4] Problema recente?"]
+  inicio --> dor_abdominal_no_adulto_p1_1845
+  dor_abdominal_no_adulto_p1_1845_sim(["VERMELHO"]):::vermelho
+  dor_abdominal_no_adulto_p1_1845 -->|Sim| dor_abdominal_no_adulto_p1_1845_sim
+  dor_abdominal_no_adulto_p1_1845 -->|Não| dor_abdominal_no_adulto_p1_2116
+  dor_abdominal_no_adulto_p1_2116_sim(["VERMELHO"]):::vermelho
+  dor_abdominal_no_adulto_p1_2116 -->|Sim| dor_abdominal_no_adulto_p1_2116_sim
+  dor_abdominal_no_adulto_p1_2116 -->|Não| dor_abdominal_no_adulto_p1_2273
+  dor_abdominal_no_adulto_p1_2273_sim(["VERMELHO"]):::vermelho
+  dor_abdominal_no_adulto_p1_2273 -->|Sim| dor_abdominal_no_adulto_p1_2273_sim
+  dor_abdominal_no_adulto_p1_2273 -->|Não| dor_abdominal_no_adulto_p1_2274
+  dor_abdominal_no_adulto_p1_2274_sim(["VERMELHO"]):::vermelho
+  dor_abdominal_no_adulto_p1_2274 -->|Sim| dor_abdominal_no_adulto_p1_2274_sim
+  dor_abdominal_no_adulto_p1_2274 -->|Não| dor_abdominal_no_adulto_p2_2275
+  dor_abdominal_no_adulto_p2_2275_sim(["LARANJA"]):::laranja
+  dor_abdominal_no_adulto_p2_2275 -->|Sim| dor_abdominal_no_adulto_p2_2275_sim
+  dor_abdominal_no_adulto_p2_2275 -->|Não| dor_abdominal_no_adulto_p2_2276
+  dor_abdominal_no_adulto_p2_2276_sim(["LARANJA"]):::laranja
+  dor_abdominal_no_adulto_p2_2276 -->|Sim| dor_abdominal_no_adulto_p2_2276_sim
+  dor_abdominal_no_adulto_p2_2276 -->|Não| dor_abdominal_no_adulto_p2_2277
+  dor_abdominal_no_adulto_p2_2277_sim(["LARANJA"]):::laranja
+  dor_abdominal_no_adulto_p2_2277 -->|Sim| dor_abdominal_no_adulto_p2_2277_sim
+  dor_abdominal_no_adulto_p2_2277 -->|Não| dor_abdominal_no_adulto_p2_2278
+  dor_abdominal_no_adulto_p2_2278_sim(["LARANJA"]):::laranja
+  dor_abdominal_no_adulto_p2_2278 -->|Sim| dor_abdominal_no_adulto_p2_2278_sim
+  dor_abdominal_no_adulto_p2_2278 -->|Não| dor_abdominal_no_adulto_p2_2279
+  dor_abdominal_no_adulto_p2_2279_sim(["LARANJA"]):::laranja
+  dor_abdominal_no_adulto_p2_2279 -->|Sim| dor_abdominal_no_adulto_p2_2279_sim
+  dor_abdominal_no_adulto_p2_2279 -->|Não| dor_abdominal_no_adulto_p2_2280
+  dor_abdominal_no_adulto_p2_2280_sim(["LARANJA"]):::laranja
+  dor_abdominal_no_adulto_p2_2280 -->|Sim| dor_abdominal_no_adulto_p2_2280_sim
+  dor_abdominal_no_adulto_p2_2280 -->|Não| dor_abdominal_no_adulto_p2_2281
+  dor_abdominal_no_adulto_p2_2281_sim(["LARANJA"]):::laranja
+  dor_abdominal_no_adulto_p2_2281 -->|Sim| dor_abdominal_no_adulto_p2_2281_sim
+  dor_abdominal_no_adulto_p2_2281 -->|Não| dor_abdominal_no_adulto_p2_2282
+  dor_abdominal_no_adulto_p2_2282_sim(["LARANJA"]):::laranja
+  dor_abdominal_no_adulto_p2_2282 -->|Sim| dor_abdominal_no_adulto_p2_2282_sim
+  dor_abdominal_no_adulto_p2_2282 -->|Não| dor_abdominal_no_adulto_p3_2283
+  dor_abdominal_no_adulto_p3_2283_sim(["AMARELO"]):::amarelo
+  dor_abdominal_no_adulto_p3_2283 -->|Sim| dor_abdominal_no_adulto_p3_2283_sim
+  dor_abdominal_no_adulto_p3_2283 -->|Não| dor_abdominal_no_adulto_p3_2284
+  dor_abdominal_no_adulto_p3_2284_sim(["AMARELO"]):::amarelo
+  dor_abdominal_no_adulto_p3_2284 -->|Sim| dor_abdominal_no_adulto_p3_2284_sim
+  dor_abdominal_no_adulto_p3_2284 -->|Não| dor_abdominal_no_adulto_p3_2285
+  dor_abdominal_no_adulto_p3_2285_sim(["AMARELO"]):::amarelo
+  dor_abdominal_no_adulto_p3_2285 -->|Sim| dor_abdominal_no_adulto_p3_2285_sim
+  dor_abdominal_no_adulto_p3_2285 -->|Não| dor_abdominal_no_adulto_p3_2286
+  dor_abdominal_no_adulto_p3_2286_sim(["AMARELO"]):::amarelo
+  dor_abdominal_no_adulto_p3_2286 -->|Sim| dor_abdominal_no_adulto_p3_2286_sim
+  dor_abdominal_no_adulto_p3_2286 -->|Não| dor_abdominal_no_adulto_p3_2287
+  dor_abdominal_no_adulto_p3_2287_sim(["AMARELO"]):::amarelo
+  dor_abdominal_no_adulto_p3_2287 -->|Sim| dor_abdominal_no_adulto_p3_2287_sim
+  dor_abdominal_no_adulto_p3_2287 -->|Não| dor_abdominal_no_adulto_p3_2288
+  dor_abdominal_no_adulto_p3_2288_sim(["AMARELO"]):::amarelo
+  dor_abdominal_no_adulto_p3_2288 -->|Sim| dor_abdominal_no_adulto_p3_2288_sim
+  dor_abdominal_no_adulto_p3_2288 -->|Não| dor_abdominal_no_adulto_p3_2289
+  dor_abdominal_no_adulto_p3_2289_sim(["AMARELO"]):::amarelo
+  dor_abdominal_no_adulto_p3_2289 -->|Sim| dor_abdominal_no_adulto_p3_2289_sim
+  dor_abdominal_no_adulto_p3_2289 -->|Não| dor_abdominal_no_adulto_p4_2290
+  dor_abdominal_no_adulto_p4_2290_sim(["VERDE"]):::verde
+  dor_abdominal_no_adulto_p4_2290 -->|Sim| dor_abdominal_no_adulto_p4_2290_sim
+  dor_abdominal_no_adulto_p4_2290 -->|Não| dor_abdominal_no_adulto_p4_2293
+  dor_abdominal_no_adulto_p4_2293_sim(["VERDE"]):::verde
+  dor_abdominal_no_adulto_p4_2293 -->|Sim| dor_abdominal_no_adulto_p4_2293_sim
+  dor_abdominal_no_adulto_p4_2293 -->|Não| dor_abdominal_no_adulto_p4_2294
+  dor_abdominal_no_adulto_p4_2294_sim(["VERDE"]):::verde
+  dor_abdominal_no_adulto_p4_2294 -->|Sim| dor_abdominal_no_adulto_p4_2294_sim
+  dor_abdominal_no_adulto_p4_2294 -->|Não| dor_abdominal_no_adulto_p4_2297
+  dor_abdominal_no_adulto_p4_2297_sim(["VERDE"]):::verde
+  dor_abdominal_no_adulto_p4_2297 -->|Sim| dor_abdominal_no_adulto_p4_2297_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  dor_abdominal_no_adulto_p4_2297 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

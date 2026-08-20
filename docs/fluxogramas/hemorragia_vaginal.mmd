@@ -1,0 +1,85 @@
+flowchart TD
+  inicio(["Início: Hemorragia vaginal"])
+  hemorragia_vaginal_p1_1860["1. [P1] Compromisso da via aérea?"]
+  hemorragia_vaginal_p1_2131["2. [P1] Respiração ineficaz?"]
+  hemorragia_vaginal_p1_2551["3. [P1] Hemorragia catastrófica?"]
+  hemorragia_vaginal_p1_2554["4. [P1] Sinais de choque?"]
+  hemorragia_vaginal_p1_2555["5. [P1] Não reativo?"]
+  hemorragia_vaginal_p2_2625["6. [P2] Hemorragia vaginal intensa?"]
+  hemorragia_vaginal_p2_2626["7. [P2] Hemorragia vaginal em<br/>gestação superior a 20 semanas?"]
+  hemorragia_vaginal_p2_2627["8. [P2] Alteração do estado de<br/>consciência?"]
+  hemorragia_vaginal_p2_2628["9. [P2] Muito quente?"]
+  hemorragia_vaginal_p2_2629["10. [P2] Dor severa?"]
+  hemorragia_vaginal_p3_2630["11. [P3] Quente?"]
+  hemorragia_vaginal_p3_2631["12. [P3] Traumatismo vaginal?"]
+  hemorragia_vaginal_p3_2632["13. [P3] História Inapropriada?"]
+  hemorragia_vaginal_p3_2633["14. [P3] Possível gravidez?"]
+  hemorragia_vaginal_p3_2634["15. [P3] Dor abdominal?"]
+  hemorragia_vaginal_p3_2635["16. [P3] Dor que irradia para o ombro?"]
+  hemorragia_vaginal_p3_2636["17. [P3] Dor moderada?"]
+  hemorragia_vaginal_p4_2637["18. [P4] Dor persistente?"]
+  hemorragia_vaginal_p4_2640["19. [P4] Problema recente?"]
+  inicio --> hemorragia_vaginal_p1_1860
+  hemorragia_vaginal_p1_1860_sim(["VERMELHO"]):::vermelho
+  hemorragia_vaginal_p1_1860 -->|Sim| hemorragia_vaginal_p1_1860_sim
+  hemorragia_vaginal_p1_1860 -->|Não| hemorragia_vaginal_p1_2131
+  hemorragia_vaginal_p1_2131_sim(["VERMELHO"]):::vermelho
+  hemorragia_vaginal_p1_2131 -->|Sim| hemorragia_vaginal_p1_2131_sim
+  hemorragia_vaginal_p1_2131 -->|Não| hemorragia_vaginal_p1_2551
+  hemorragia_vaginal_p1_2551_sim(["VERMELHO"]):::vermelho
+  hemorragia_vaginal_p1_2551 -->|Sim| hemorragia_vaginal_p1_2551_sim
+  hemorragia_vaginal_p1_2551 -->|Não| hemorragia_vaginal_p1_2554
+  hemorragia_vaginal_p1_2554_sim(["VERMELHO"]):::vermelho
+  hemorragia_vaginal_p1_2554 -->|Sim| hemorragia_vaginal_p1_2554_sim
+  hemorragia_vaginal_p1_2554 -->|Não| hemorragia_vaginal_p1_2555
+  hemorragia_vaginal_p1_2555_sim(["VERMELHO"]):::vermelho
+  hemorragia_vaginal_p1_2555 -->|Sim| hemorragia_vaginal_p1_2555_sim
+  hemorragia_vaginal_p1_2555 -->|Não| hemorragia_vaginal_p2_2625
+  hemorragia_vaginal_p2_2625_sim(["LARANJA"]):::laranja
+  hemorragia_vaginal_p2_2625 -->|Sim| hemorragia_vaginal_p2_2625_sim
+  hemorragia_vaginal_p2_2625 -->|Não| hemorragia_vaginal_p2_2626
+  hemorragia_vaginal_p2_2626_sim(["LARANJA"]):::laranja
+  hemorragia_vaginal_p2_2626 -->|Sim| hemorragia_vaginal_p2_2626_sim
+  hemorragia_vaginal_p2_2626 -->|Não| hemorragia_vaginal_p2_2627
+  hemorragia_vaginal_p2_2627_sim(["LARANJA"]):::laranja
+  hemorragia_vaginal_p2_2627 -->|Sim| hemorragia_vaginal_p2_2627_sim
+  hemorragia_vaginal_p2_2627 -->|Não| hemorragia_vaginal_p2_2628
+  hemorragia_vaginal_p2_2628_sim(["LARANJA"]):::laranja
+  hemorragia_vaginal_p2_2628 -->|Sim| hemorragia_vaginal_p2_2628_sim
+  hemorragia_vaginal_p2_2628 -->|Não| hemorragia_vaginal_p2_2629
+  hemorragia_vaginal_p2_2629_sim(["LARANJA"]):::laranja
+  hemorragia_vaginal_p2_2629 -->|Sim| hemorragia_vaginal_p2_2629_sim
+  hemorragia_vaginal_p2_2629 -->|Não| hemorragia_vaginal_p3_2630
+  hemorragia_vaginal_p3_2630_sim(["AMARELO"]):::amarelo
+  hemorragia_vaginal_p3_2630 -->|Sim| hemorragia_vaginal_p3_2630_sim
+  hemorragia_vaginal_p3_2630 -->|Não| hemorragia_vaginal_p3_2631
+  hemorragia_vaginal_p3_2631_sim(["AMARELO"]):::amarelo
+  hemorragia_vaginal_p3_2631 -->|Sim| hemorragia_vaginal_p3_2631_sim
+  hemorragia_vaginal_p3_2631 -->|Não| hemorragia_vaginal_p3_2632
+  hemorragia_vaginal_p3_2632_sim(["AMARELO"]):::amarelo
+  hemorragia_vaginal_p3_2632 -->|Sim| hemorragia_vaginal_p3_2632_sim
+  hemorragia_vaginal_p3_2632 -->|Não| hemorragia_vaginal_p3_2633
+  hemorragia_vaginal_p3_2633_sim(["AMARELO"]):::amarelo
+  hemorragia_vaginal_p3_2633 -->|Sim| hemorragia_vaginal_p3_2633_sim
+  hemorragia_vaginal_p3_2633 -->|Não| hemorragia_vaginal_p3_2634
+  hemorragia_vaginal_p3_2634_sim(["AMARELO"]):::amarelo
+  hemorragia_vaginal_p3_2634 -->|Sim| hemorragia_vaginal_p3_2634_sim
+  hemorragia_vaginal_p3_2634 -->|Não| hemorragia_vaginal_p3_2635
+  hemorragia_vaginal_p3_2635_sim(["AMARELO"]):::amarelo
+  hemorragia_vaginal_p3_2635 -->|Sim| hemorragia_vaginal_p3_2635_sim
+  hemorragia_vaginal_p3_2635 -->|Não| hemorragia_vaginal_p3_2636
+  hemorragia_vaginal_p3_2636_sim(["AMARELO"]):::amarelo
+  hemorragia_vaginal_p3_2636 -->|Sim| hemorragia_vaginal_p3_2636_sim
+  hemorragia_vaginal_p3_2636 -->|Não| hemorragia_vaginal_p4_2637
+  hemorragia_vaginal_p4_2637_sim(["VERDE"]):::verde
+  hemorragia_vaginal_p4_2637 -->|Sim| hemorragia_vaginal_p4_2637_sim
+  hemorragia_vaginal_p4_2637 -->|Não| hemorragia_vaginal_p4_2640
+  hemorragia_vaginal_p4_2640_sim(["VERDE"]):::verde
+  hemorragia_vaginal_p4_2640 -->|Sim| hemorragia_vaginal_p4_2640_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  hemorragia_vaginal_p4_2640 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

@@ -9,7 +9,7 @@ Resumo:
   POST /api/triagem               → próxima pergunta OU resultado (cor)
   GET  /api/unidades              → todas as unidades de saúde
   GET  /api/unidades/proxima      → unidades mais próximas de um ponto
-  GET  /api/espera                → tempos de espera em tempo real (SEISRAM)
+  GET  /api/espera                → tempos de espera em tempo real (SESARAM)
   GET  /api/viagem                → tempo de viagem estimado entre dois pontos
   GET  /api/localidades           → concelhos, freguesias e sítios (modo manual)
   POST /api/encaminhamento        → para onde ir, dado cor + localização
@@ -36,6 +36,11 @@ from ..core import (
 )
 from ..core.cores import CONTACTOS, info_cor
 from ..core.triage_engine import ErroTriagem, TriageEngine
+from ..models.respostas import (
+    EncaminhamentoResponse,
+    IntegracaoTriagemResponse,
+    TriagemResponse,
+)
 from ..models.schemas import (
     EncaminhamentoRequest,
     IntegracaoTriagemRequest,
@@ -54,6 +59,7 @@ engine = TriageEngine()
 # Infraestrutura                                                          #
 # --------------------------------------------------------------------- #
 
+
 @router.get("/saude", tags=["infra"])
 def saude() -> dict:
     return {
@@ -68,6 +74,7 @@ def saude() -> dict:
 # Triagem                                                                 #
 # --------------------------------------------------------------------- #
 
+
 @router.get("/queixas", tags=["triagem"])
 def listar_queixas() -> list[dict]:
     return engine.listar_queixas()
@@ -75,7 +82,9 @@ def listar_queixas() -> list[dict]:
 
 @router.get("/queixas/sugerir", tags=["triagem"])
 def sugerir_queixas(
-    q: str = Query(min_length=1, max_length=120, description="Texto livre do utente, ex.: 'dói-me a barriga'."),
+    q: str = Query(
+        min_length=1, max_length=120, description="Texto livre do utente, ex.: 'dói-me a barriga'."
+    ),
 ) -> dict:
     """Sugere queixas a partir de texto livre (sinónimos em app/data/sinonimos.json).
 
@@ -122,11 +131,7 @@ def fluxogramas_atuais(
         "fluxos": [
             {
                 "id": fid,
-                "nome": (
-                    f.get("nome_en")
-                    if idioma == "en" and f.get("nome_en")
-                    else f["nome"]
-                ),
+                "nome": (f.get("nome_en") if idioma == "en" and f.get("nome_en") else f["nome"]),
                 "mermaid": fluxogramas.mermaid_do_fluxo(f, idioma),
             }
             for fid, f in motor_fresco.fluxos.items()
@@ -134,7 +139,216 @@ def fluxogramas_atuais(
     }
 
 
-@router.post("/triagem", tags=["triagem"])
+@router.get("/aconselhamento/revisao", tags=["triagem"])
+def aconselhamento_revisao() -> dict:
+    """Vista de REVISÃO do aconselhamento — ferramenta interna (/revisao).
+
+    Quem revê o ecrã do utente não via o que o filtro de segurança esconde
+    (os itens só-clínicos, sem `texto_utente`), por isso não conseguia
+    confirmar facilmente que o filtro acerta. Este endpoint devolve TUDO,
+    lado a lado: o texto clínico, a reescrita PT/EN quando existe, o estado
+    de validação por item e a marca `mostrado_ao_utente`.
+
+    Tal como /api/fluxogramas, RELÊ o ficheiro do disco a cada pedido: quem
+    edita as reescritas e corre o aplicar vê o efeito com um refresh, sem
+    reiniciar o servidor. E, de propósito, NÃO passa pelo motor: o portão
+    ONDE_IR_APENAS_VALIDADO esconde itens ao utente, mas o revisor precisa
+    de ver exatamente o que está escondido e porquê.
+    """
+    import json as _json
+
+    from ..core.triage_engine import FICHEIRO_ACONSELHAMENTO
+
+    if not FICHEIRO_ACONSELHAMENTO.exists():
+        return {
+            "versao": VERSAO,
+            "erro": "aconselhamento.json não encontrado",
+            "fonte": None,
+            "totais": None,
+            "fluxos": [],
+        }
+    try:
+        dados = _json.loads(FICHEIRO_ACONSELHAMENTO.read_text(encoding="utf-8"))
+        fluxos_acons = dados.get("fluxos") or {}
+    except (ValueError, OSError) as exc:
+        return {
+            "versao": VERSAO,
+            "erro": f"aconselhamento.json ilegível: {exc}",
+            "fonte": None,
+            "totais": None,
+            "fluxos": [],
+        }
+
+    ordem_cores = ["vermelho", "laranja", "amarelo", "verde", "azul"]
+    saida = []
+    total = mostrados = validados = 0
+    for fid, blocos in fluxos_acons.items():
+        cores = []
+        for cor in ordem_cores:
+            bloco = blocos.get(cor)
+            if not bloco or not bloco.get("itens"):
+                continue
+            itens = []
+            for it in bloco["itens"]:
+                mostrado = bool(it.get("texto_utente"))
+                total += 1
+                mostrados += 1 if mostrado else 0
+                validados += 1 if it.get("validado") else 0
+                itens.append(
+                    {
+                        "texto": it.get("texto"),
+                        "texto_utente": it.get("texto_utente"),
+                        "texto_utente_en": it.get("texto_utente_en"),
+                        "mostrado_ao_utente": mostrado,
+                        "validado": bool(it.get("validado", False)),
+                        "validado_por": it.get("validado_por"),
+                        "validado_em": it.get("validado_em"),
+                    }
+                )
+            cores.append({"cor": cor, "itens": itens})
+        nome = (engine.fluxos.get(fid) or {}).get("nome") or fid
+        saida.append({"id": fid, "nome": nome, "cores": cores})
+    saida.sort(key=lambda f: f["nome"].lower())
+    return {
+        "versao": VERSAO,
+        "erro": None,
+        "fonte": dados.get("fonte"),
+        "totais": {
+            "itens": total,
+            "mostrados_ao_utente": mostrados,
+            "ocultos": total - mostrados,
+            "validados": validados,
+        },
+        "fluxos": saida,
+    }
+
+
+@router.get("/perguntas/revisao", tags=["triagem"])
+def perguntas_revisao() -> dict:
+    """Vista de REVISÃO das perguntas — ferramenta interna (/revisao).
+
+    O par do /api/aconselhamento/revisao para a outra metade do conteúdo
+    leigo (v0.15.3): por fluxo, cada discriminador com a pergunta CLÍNICA
+    oficial lado a lado com a reescrita PT/EN que o utente lê, a cor e a
+    prioridade (o contexto de que o revisor precisa) e o estado de
+    validação por item — que vive em app/data/perguntas_utente.json, a
+    única fonte (as regras não o duplicam).
+
+    Tal como os fluxogramas, RELÊ os ficheiros do disco a cada pedido:
+    quem edita as reescritas (e corre o aplicar) ou marca um item como
+    validado (não precisa de aplicar nada) vê o efeito com um refresh, sem
+    reiniciar o servidor. E, de propósito, NÃO passa pelo motor: com
+    ONDE_IR_APENAS_VALIDADO=1 o motor reverte as reescritas por validar
+    para a pergunta clínica, mas o revisor precisa de ver a proposta.
+    """
+    import hashlib as _hashlib
+    import json as _json
+
+    from ..core.triage_engine import (
+        FICHEIRO_PERGUNTAS_UTENTE,
+        PASTA_REGRAS,
+    )
+
+    def _norm(s) -> str:
+        # A forma canónica das chaves (scripts/_manchester_comum.normalizar):
+        # espaços colapsados num só.
+        return " ".join(str(s or "").split())
+
+    registo: dict[str, dict] = {}
+    fonte = None
+    if FICHEIRO_PERGUNTAS_UTENTE.exists():
+        try:
+            bruto = FICHEIRO_PERGUNTAS_UTENTE.read_bytes()
+            itens = (_json.loads(bruto.decode("utf-8")) or {}).get("itens") or {}
+            registo = {_norm(c): i for c, i in itens.items() if isinstance(i, dict)}
+            fonte = {
+                "reescritas": {
+                    "ficheiro": "app/data/perguntas_utente.json",
+                    "sha256": _hashlib.sha256(bruto).hexdigest(),
+                }
+            }
+        except (ValueError, OSError) as exc:
+            return {
+                "versao": VERSAO,
+                "erro": f"perguntas_utente.json ilegível: {exc}",
+                "fonte": None,
+                "totais": None,
+                "fluxos": [],
+            }
+
+    saida = []
+    total = com_reescrita = validados = 0
+    try:
+        caminhos = sorted(PASTA_REGRAS.glob("*.json"))
+    except OSError as exc:
+        return {
+            "versao": VERSAO,
+            "erro": f"regras ilegíveis: {exc}",
+            "fonte": fonte,
+            "totais": None,
+            "fluxos": [],
+        }
+    for caminho in caminhos:
+        try:
+            dados = _json.loads(caminho.read_text(encoding="utf-8"))
+        except (ValueError, OSError) as exc:
+            return {
+                "versao": VERSAO,
+                "erro": f"{caminho.name} ilegível: {exc}",
+                "fonte": fonte,
+                "totais": None,
+                "fluxos": [],
+            }
+        if dados.get("id") == "red_flags":
+            continue
+        perguntas = []
+        for disc in dados.get("perguntas", []):
+            entrada = registo.get(_norm(disc.get("texto"))) or {}
+            total += 1
+            com_reescrita += 1 if disc.get("texto_utente") else 0
+            validados += 1 if entrada.get("validado") else 0
+            perguntas.append(
+                {
+                    "cor": disc.get("cor"),
+                    "prioridade": disc.get("prioridade"),
+                    "texto": disc.get("texto"),
+                    "texto_utente": disc.get("texto_utente"),
+                    "texto_utente_en": disc.get("texto_utente_en"),
+                    "sem_entrada": not entrada,
+                    "validado": bool(entrada.get("validado", False)),
+                    "validado_por": entrada.get("validado_por"),
+                    "validado_em": entrada.get("validado_em"),
+                }
+            )
+        saida.append(
+            {"id": dados["id"], "nome": dados.get("nome") or dados["id"], "perguntas": perguntas}
+        )
+    saida.sort(key=lambda f: f["nome"].lower())
+    return {
+        "versao": VERSAO,
+        "erro": None,
+        "fonte": fonte,
+        "totais": {
+            "fluxos": len(saida),
+            "discriminadores": total,
+            "com_reescrita": com_reescrita,
+            "reescritas": len(registo),
+            "validados": validados,
+        },
+        "fluxos": saida,
+    }
+
+
+# response_model (v0.16.2): documenta o formato da resposta em /docs e
+# valida o que sai. exclude_unset preserva o formato exato no fio: as
+# chaves que o motor/routing não puseram continuam AUSENTES (não "null")
+# — ver o cabeçalho de app/models/respostas.py.
+@router.post(
+    "/triagem",
+    tags=["triagem"],
+    response_model=TriagemResponse,
+    response_model_exclude_unset=True,
+)
 def triagem(pedido: TriagemRequest) -> dict:
     try:
         # 1) Sinais de emergência ganham a tudo o resto.
@@ -165,6 +379,7 @@ def triagem(pedido: TriagemRequest) -> dict:
 # Unidades e encaminhamento                                               #
 # --------------------------------------------------------------------- #
 
+
 @router.get("/unidades", tags=["unidades"])
 def listar_unidades() -> list[dict]:
     return unidades.todas()
@@ -190,7 +405,8 @@ def unidades_proximas(
     tempos = viagem.tempos_para_unidades(lat, lng, ordenadas)
     for u in ordenadas:
         u["aberta_agora"] = any(
-            horarios.esta_aberto(h, agora) for h in u.get("servicos", {}).values()
+            horarios.esta_aberto(h, agora, u.get("concelho"))
+            for h in u.get("servicos", {}).values()
         )
         u["tempo_viagem"] = tempos.get(u["id"])
     return {"unidades": ordenadas, "consultado_em": agora.isoformat(timespec="minutes")}
@@ -252,10 +468,18 @@ def listar_localidades() -> dict:
     return localidades.arvore()
 
 
-@router.post("/encaminhamento", tags=["unidades"])
+@router.post(
+    "/encaminhamento",
+    tags=["unidades"],
+    response_model=EncaminhamentoResponse,
+    response_model_exclude_unset=True,
+)
 def encaminhamento(pedido: EncaminhamentoRequest) -> dict:
     return routing.decidir_encaminhamento(
-        pedido.cor, pedido.lat, pedido.lng, quando=pedido.quando,
+        pedido.cor,
+        pedido.lat,
+        pedido.lng,
+        quando=pedido.quando,
         destino=pedido.destino,
     )
 
@@ -272,7 +496,7 @@ def tempos_de_espera(
         description="Se True, tenta ir buscar dados frescos ao site do SESARAM.",
     ),
 ) -> dict:
-    """Tempos de espera em tempo real do SESARAM (sistema SEISRAM).
+    """Tempos de espera em tempo real do SESARAM (sistema SESARAM).
 
     Sem parâmetro, devolve o cache (rápido, sem rede). Com ?atualizar=true
     tenta uma descarga fresca — respeitando o TTL para não sobrecarregar o
@@ -285,6 +509,7 @@ def tempos_de_espera(
 # --------------------------------------------------------------------- #
 # Integração (para consumo por sistemas externos)                         #
 # --------------------------------------------------------------------- #
+
 
 def _resultado_para(pedido) -> dict | None:
     """Corre a triagem e devolve o resultado final, OU None se ainda faltam
@@ -304,7 +529,12 @@ def _resultado_para(pedido) -> dict | None:
     return saida["resultado"]
 
 
-@router.post("/integracao/triagem", tags=["integracao"])
+@router.post(
+    "/integracao/triagem",
+    tags=["integracao"],
+    response_model=IntegracaoTriagemResponse,
+    response_model_exclude_unset=True,
+)
 def integracao_triagem(pedido: IntegracaoTriagemRequest) -> dict:
     """Triagem + encaminhamento numa só chamada (stateless).
 
@@ -333,7 +563,10 @@ def integracao_triagem(pedido: IntegracaoTriagemRequest) -> dict:
         }
         if pedido.lat is not None and pedido.lng is not None:
             resposta["encaminhamento"] = routing.decidir_encaminhamento(
-                resultado["cor"], pedido.lat, pedido.lng, quando=pedido.quando,
+                resultado["cor"],
+                pedido.lat,
+                pedido.lng,
+                quando=pedido.quando,
                 destino=resultado.get("destino"),
             )
         return resposta
@@ -390,7 +623,9 @@ def listar_feriados(
 
     Útil para conferir o calendário e para demonstrações: num feriado,
     os serviços com horário "semanal" contam como fechados, salvo se
-    tiverem a chave "feriado" definida em unidades.json.
+    tiverem a chave "feriado" definida em unidades.json. Os feriados
+    MUNICIPAIS vêm à parte (`feriados_municipais`): aplicam-se só às
+    unidades do respetivo concelho (v0.14.2).
     """
     ano = ano or routing.agora_na_madeira().year
     return {
@@ -398,5 +633,13 @@ def listar_feriados(
         "feriados": [
             {"data": dia.isoformat(), "nome": nome}
             for dia, nome in sorted(feriados.feriados(ano).items())
+        ],
+        "feriados_municipais": [
+            {
+                "concelho": concelho,
+                "data": f"{ano:04d}-{mes:02d}-{dia:02d}",
+                "nome": nome,
+            }
+            for concelho, (mes, dia, nome) in sorted(feriados.FERIADOS_MUNICIPAIS.items())
         ],
     }

@@ -1,0 +1,232 @@
+{
+  "id": "autoagressao",
+  "nome": "Autoagressão",
+  "nome_en": "Self-harm",
+  "descricao": "Comportamento de autoagressão ou pensamentos de se magoar.",
+  "descricao_en": "Self-harm or thoughts of hurting yourself.",
+  "pediatrico": false,
+  "fonte": "Discriminadores do Sistema de Triagem de Manchester, organizados por prioridade clínica (P1-P5). Importados da tabela de referência; sujeitos a validação clínica antes de uso real.",
+  "fonte_en": "Manchester Triage System discriminators, organised by clinical priority (P1-P5). Imported from the reference table; subject to clinical validation before real use.",
+  "perguntas": [
+    {
+      "id": "autoagressao_p1_1805",
+      "disc_id": 1805,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Compromisso da via aérea?",
+      "texto_utente": "A respiração está muito difícil ou ruidosa, como se o ar não passasse bem pela garganta (a roncar ou a gorgolejar)?",
+      "texto_en": "Airway compromise?",
+      "texto_utente_en": "Is breathing very difficult or noisy, as if air can't pass properly through the throat (snoring or gurgling)?",
+      "descricao": "A via aérea poderá estar comprometida, por não se conseguir manter aberta, ou porque os reflexos protetores da via respiratória (que evitam a aspiração) se perderam. A incapacidade de manter a via aérea aberta, poderá resultar numa obstrução total ou parcial, intermitente ou não. Isto manifestar-se-á por sons como o ressonar ou o gorgolejar durante a respiração."
+    },
+    {
+      "id": "autoagressao_p1_1806",
+      "disc_id": 1806,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Respiração ineficaz?",
+      "texto_utente": "A respiração está tão fraca ou cansada que parece não entrar ar suficiente (respiração aos arrancos ou muito a custo)?",
+      "texto_en": "Ineffective breathing?",
+      "texto_utente_en": "Is breathing so weak or laboured that not enough air seems to get in (gasping or a real struggle)?",
+      "descricao": "Doentes que não conseguem respirar suficientemente bem para manter uma oxigenação adequada e com falência respiratória, sofrem de respiração ineficaz. Poderá resultar num esforço acrescentado para respirar, ou em exaustão, incluindo uma respiração tipo “gasping”."
+    },
+    {
+      "id": "autoagressao_p1_1807",
+      "disc_id": 1807,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Hemorragia catastrófica?",
+      "texto_utente": "Está a sangrar muitíssimo, com sangue a jorrar, e não consegue parar?",
+      "texto_en": "Catastrophic haemorrhage?",
+      "texto_utente_en": "Is there massive bleeding, with blood spurting out, that you cannot stop?",
+      "descricao": "Hemorragia arterial em quantidade e velocidade catastróficas que, se não for controlada rapidamente, provocará a morte da vítima."
+    },
+    {
+      "id": "autoagressao_p1_1808",
+      "disc_id": 1808,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Sinais de choque?",
+      "texto_utente": "Tem suores frios, pele muito pálida ou acinzentada, o coração a bater depressa e uma grande fraqueza?",
+      "texto_en": "Signs of shock?",
+      "texto_utente_en": "Are there cold sweats, very pale or greyish skin, a fast heartbeat and severe weakness?",
+      "descricao": "O choque é uma entrega inadequada de oxigénio aos tecidos. Os sinais clássicos incluem suores, palidez, taquicardia, hipotensão e nível de consciência reduzido."
+    },
+    {
+      "id": "autoagressao_p1_1809",
+      "disc_id": 1809,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Não reativo?",
+      "texto_utente": "Está sem reagir a nada, nem quando lhe falam, lhe tocam ou lhe fazem doer?",
+      "texto_en": "Unresponsive?",
+      "texto_utente_en": "Is the person not reacting at all, even to voice, touch or pain?",
+      "descricao": "Não responde a um estímulo doloroso."
+    },
+    {
+      "id": "autoagressao_p2_1810",
+      "disc_id": 1810,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Dispneia aguda?",
+      "texto_utente": "Ficou de repente com falta de ar (ou uma falta de ar que já tinha piorou muito de um momento para o outro)?",
+      "texto_en": "Acute shortness of breath?",
+      "texto_utente_en": "Did shortness of breath come on suddenly (or did a breathlessness you already had suddenly get much worse)?",
+      "descricao": "Dificuldade respiratória que se desenvolve subitamente ou uma repentina exacerbação de dispneia crónica."
+    },
+    {
+      "id": "autoagressao_p2_1811",
+      "disc_id": 1811,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Grande Hemorragia incontrolável?",
+      "texto_utente": "Está a sangrar muito e não pára mesmo fazendo pressão, encharcando os panos depressa?",
+      "texto_en": "Major uncontrollable haemorrhage?",
+      "texto_utente_en": "Is there heavy bleeding that won't stop even with firm pressure, soaking through cloths quickly?",
+      "descricao": "Hemorragia que não é rapidamente controlada pela aplicação de pressão direta sustentada e que continua a sangrar muito ou a encharcar rapidamente os panos ou pensos."
+    },
+    {
+      "id": "autoagressao_p2_1812",
+      "disc_id": 1812,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Alteração do estado de consciência?",
+      "texto_utente": "Está sonolento ou baralhado, só reagindo quando lhe falam ou lhe tocam (não está bem desperto)?",
+      "texto_en": "Altered level of consciousness?",
+      "texto_utente_en": "Is the person drowsy or muddled, responding only to voice or touch (not fully alert)?",
+      "descricao": "Não está totalmente alerta. Só responde à voz, à dor"
+    },
+    {
+      "id": "autoagressao_p2_1813",
+      "disc_id": 1813,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Agressividade ou agitação severa?",
+      "texto_utente": "Está tão agitado ou agressivo que é preciso segurá-lo já, para não se magoar nem magoar ninguém?",
+      "texto_en": "Severe aggression or agitation?",
+      "texto_utente_en": "Is the person so agitated or aggressive that they must be held back right now, to stop harm to themselves or others?",
+      "descricao": "Agressão e agitação de tal grau que seja necessária contenção imediata para gerir o risco de agressão ao próprio ou a terceiros."
+    },
+    {
+      "id": "autoagressao_p2_1814",
+      "disc_id": 1814,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Risco elevado de abandono sem avaliação?",
+      "texto_utente": "Há um risco real de sair da urgência antes de ser observado?",
+      "texto_en": "High risk of leaving before assessment?",
+      "texto_utente_en": "Is there a real risk of leaving before being seen?",
+      "descricao": "Ameaças ativas e credíveis de abandono antes da chegada dos meios ao local representam risco elevado."
+    },
+    {
+      "id": "autoagressao_p2_1815",
+      "disc_id": 1815,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Risco elevado de auto-agressão?",
+      "texto_utente": "Há um risco grande, aqui e agora, de se magoar a si próprio?",
+      "texto_en": "High risk of self-harm?",
+      "texto_utente_en": "Is there a high, immediate risk of harming yourself?",
+      "descricao": "Confirmação do Risco elevado de autoagressão, deve ter em conta nomeadamente, uma história significativa prévia de autoagressão, doentes que activamente tentam auto-mutilação ou que tentam sair do serviço de urgência com esse intuito."
+    },
+    {
+      "id": "autoagressao_p2_1816",
+      "disc_id": 1816,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Risco elevado de agressão a terceiros?",
+      "texto_utente": "Há um risco grande, aqui e agora, de magoar outra pessoa?",
+      "texto_en": "High risk of harm to others?",
+      "texto_utente_en": "Is there a high, immediate risk of harming someone else?",
+      "descricao": "A possibilidade de um doente tentar agredir outros. Esta situação pode ser avaliada tendo em conta o estado mental, a postura corporal e o comportamento. Quando em dúvida, presumir alto risco. O Risco elevado deve ser assumido se o doente tiver acesso a armas ou potenciais vítimas ou se constatar perda do auto-controlo."
+    },
+    {
+      "id": "autoagressao_p2_1817",
+      "disc_id": 1817,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Mecanismo significativo de lesão?",
+      "texto_utente": "A lesão foi num acidente grave (queda de um sítio alto, choque a grande velocidade, tiro, facada ou explosão)?",
+      "texto_en": "Significant mechanism of injury?",
+      "texto_utente_en": "Did the injury happen in a serious accident (a fall from height, a high-speed crash, a gunshot, a stabbing or an explosion)?",
+      "descricao": "São significativas as lesões penetrantes (facadas ou tiros) e as lesões com elevada transferência de energia, tais como quedas de altura, acidentes de tráfego a alta velocidade (velocidade superior a 60 km/h), ejecção de um veículo, morte de ocupantes e deformação significativa de um veículo. Pode ser especialmente significativa uma história de saltar de um edifício em chamas ou de exposição a uma explosão."
+    },
+    {
+      "id": "autoagressao_p2_1818",
+      "disc_id": 1818,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Dor severa?",
+      "texto_utente": "Tem dores muito fortes, quase a não aguentar (das piores que alguma vez sentiu)?",
+      "texto_en": "Severe pain?",
+      "texto_utente_en": "Do you have very severe pain, almost unbearable (some of the worst you've ever felt)?",
+      "descricao": "Dor significativa e insuportável, frequentemente referida como a pior de sempre. Alterações na expressão facial, de comportamento e nas atividades diárias permitem avaliar o nível de dor, especialmente nos doentes não comunicativos (por exemplo nas crianças e bebés), ou quando existem barreiras de comunicação pelo idioma ou por demência."
+    },
+    {
+      "id": "autoagressao_p3_1819",
+      "disc_id": 1819,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Pequena hemorragia incontrolável?",
+      "texto_utente": "Tem uma pequena ferida que continua a sangrar e não pára, mesmo fazendo pressão?",
+      "texto_en": "Minor uncontrollable haemorrhage?",
+      "texto_utente_en": "Is there a small wound that keeps bleeding and won't stop, even with pressure?",
+      "descricao": "Quando é impossível controlar uma hemorragia rapidamente através da aplicação de pressão direta sustentada, continuando a sangrar levemente ou a escorrer sangue."
+    },
+    {
+      "id": "autoagressao_p3_1820",
+      "disc_id": 1820,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Angústia marcada?",
+      "texto_utente": "Está muito aflito ou em grande sofrimento, físico ou emocional?",
+      "texto_en": "Marked distress?",
+      "texto_utente_en": "Are you very distressed or in great physical or emotional suffering?",
+      "descricao": "Os doentes que apresentam perturbações físicas ou emocionais acentuadas preenchem este critério."
+    },
+    {
+      "id": "autoagressao_p3_1821",
+      "disc_id": 1821,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Risco moderado de auto-agressão?",
+      "texto_utente": "Existe algum risco de se magoar a si próprio, ainda que não pareça ser já?",
+      "texto_en": "Moderate risk of self-harm?",
+      "texto_utente_en": "Is there some risk of harming yourself, even if it doesn't seem immediate?",
+      "descricao": "Uma visão inicial do risco de autoagressão poderá ser formada tendo em conta o comportamento do doente. Os doentes que não apresentem uma história significativa de autoagressão, que não tentam ativamente auto-agredir-se, que não tentam sair do local com a intenção de se auto-agredir, são doentes de risco moderado de autoagressão. Em caso de dúvida, presumir alto risco"
+    },
+    {
+      "id": "autoagressao_p3_1822",
+      "disc_id": 1822,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "História Inapropriada?",
+      "texto_utente": "A explicação que foi dada para as lesões não bate certo com aquilo que se vê?",
+      "texto_en": "Inappropriate history?",
+      "texto_utente_en": "Does the explanation given for the injuries not match what can be seen?",
+      "descricao": "Quando a história fornecida não explica as alterações físicas, então é inapropriada. Isto é importante pois é um sinal de perigo para a salvaguarda de adultos e crianças."
+    },
+    {
+      "id": "autoagressao_p3_1823",
+      "disc_id": 1823,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "História psiquiátrica significativa?",
+      "texto_utente": "Tem uma doença psiquiátrica importante já conhecida?",
+      "texto_en": "Significant psychiatric history?",
+      "texto_utente_en": "Do you have a significant known psychiatric illness?",
+      "descricao": "História de doença ou evento psiquiátrico importante."
+    },
+    {
+      "id": "autoagressao_p3_1824",
+      "disc_id": 1824,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Dor moderada?",
+      "texto_utente": "Tem dores a sério, que o impedem de fazer algumas coisas do dia a dia?",
+      "texto_en": "Moderate pain?",
+      "texto_utente_en": "Do you have noticeable pain that stops you doing some everyday things?",
+      "descricao": "Dor significativa que incapacita para algumas atividades diárias. Alterações na expressão facial, de comportamento e nas atividades diárias permitem avaliar o nível de dor, especialmente nos doentes não comunicativos (por exemplo nas crianças e bebés), ou quando existem barreiras de comunicação pelo idioma ou por demência."
+    }
+  ]
+}

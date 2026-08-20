@@ -1,0 +1,97 @@
+flowchart TD
+  inicio(["Início: Criança com dificuldade de<br/>locomoção"])
+  crianca_com_dificuldade_de_locomocao_p1_1836["1. [P1] Compromisso da via aérea?"]
+  crianca_com_dificuldade_de_locomocao_p1_2011["2. [P1] Respiração ineficaz?"]
+  crianca_com_dificuldade_de_locomocao_p1_2012["3. [P1] Sinais de choque?"]
+  crianca_com_dificuldade_de_locomocao_p1_2013["4. [P1] Não reativo?"]
+  crianca_com_dificuldade_de_locomocao_p2_2014["5. [P2] Compromisso vascular distal?"]
+  crianca_com_dificuldade_de_locomocao_p2_2015["6. [P2] Alteração do estado de<br/>consciência?"]
+  crianca_com_dificuldade_de_locomocao_p2_3253["7. [P2] Prostrado?"]
+  crianca_com_dificuldade_de_locomocao_p2_3254["8. [P2] Muito quente?"]
+  crianca_com_dificuldade_de_locomocao_p2_3255["9. [P2] Possível sépsis?"]
+  crianca_com_dificuldade_de_locomocao_p2_3256["10. [P2] Eritema não branqueável?"]
+  crianca_com_dificuldade_de_locomocao_p2_3257["11. [P2] Dor severa?"]
+  crianca_com_dificuldade_de_locomocao_p3_2020["12. [P3] Quente?"]
+  crianca_com_dificuldade_de_locomocao_p3_2021["13. [P3] Articulação quente?"]
+  crianca_com_dificuldade_de_locomocao_p3_2022["14. [P3] Alteração da coagulação?"]
+  crianca_com_dificuldade_de_locomocao_p3_2023["15. [P3] Deformação?"]
+  crianca_com_dificuldade_de_locomocao_p3_2024["16. [P3] História Inapropriada?"]
+  crianca_com_dificuldade_de_locomocao_p3_2025["17. [P3] Dor à mobilização das<br/>articulações?"]
+  crianca_com_dificuldade_de_locomocao_p3_2026["18. [P3] Dor moderada?"]
+  crianca_com_dificuldade_de_locomocao_p4_2027["19. [P4] Febre persistente?"]
+  crianca_com_dificuldade_de_locomocao_p4_2028["20. [P4] Edema?"]
+  crianca_com_dificuldade_de_locomocao_p4_2029["21. [P4] Dor persistente?"]
+  crianca_com_dificuldade_de_locomocao_p4_2030["22. [P4] Problema recente?"]
+  inicio --> crianca_com_dificuldade_de_locomocao_p1_1836
+  crianca_com_dificuldade_de_locomocao_p1_1836_sim(["VERMELHO"]):::vermelho
+  crianca_com_dificuldade_de_locomocao_p1_1836 -->|Sim| crianca_com_dificuldade_de_locomocao_p1_1836_sim
+  crianca_com_dificuldade_de_locomocao_p1_1836 -->|Não| crianca_com_dificuldade_de_locomocao_p1_2011
+  crianca_com_dificuldade_de_locomocao_p1_2011_sim(["VERMELHO"]):::vermelho
+  crianca_com_dificuldade_de_locomocao_p1_2011 -->|Sim| crianca_com_dificuldade_de_locomocao_p1_2011_sim
+  crianca_com_dificuldade_de_locomocao_p1_2011 -->|Não| crianca_com_dificuldade_de_locomocao_p1_2012
+  crianca_com_dificuldade_de_locomocao_p1_2012_sim(["VERMELHO"]):::vermelho
+  crianca_com_dificuldade_de_locomocao_p1_2012 -->|Sim| crianca_com_dificuldade_de_locomocao_p1_2012_sim
+  crianca_com_dificuldade_de_locomocao_p1_2012 -->|Não| crianca_com_dificuldade_de_locomocao_p1_2013
+  crianca_com_dificuldade_de_locomocao_p1_2013_sim(["VERMELHO"]):::vermelho
+  crianca_com_dificuldade_de_locomocao_p1_2013 -->|Sim| crianca_com_dificuldade_de_locomocao_p1_2013_sim
+  crianca_com_dificuldade_de_locomocao_p1_2013 -->|Não| crianca_com_dificuldade_de_locomocao_p2_2014
+  crianca_com_dificuldade_de_locomocao_p2_2014_sim(["LARANJA"]):::laranja
+  crianca_com_dificuldade_de_locomocao_p2_2014 -->|Sim| crianca_com_dificuldade_de_locomocao_p2_2014_sim
+  crianca_com_dificuldade_de_locomocao_p2_2014 -->|Não| crianca_com_dificuldade_de_locomocao_p2_2015
+  crianca_com_dificuldade_de_locomocao_p2_2015_sim(["LARANJA"]):::laranja
+  crianca_com_dificuldade_de_locomocao_p2_2015 -->|Sim| crianca_com_dificuldade_de_locomocao_p2_2015_sim
+  crianca_com_dificuldade_de_locomocao_p2_2015 -->|Não| crianca_com_dificuldade_de_locomocao_p2_3253
+  crianca_com_dificuldade_de_locomocao_p2_3253_sim(["LARANJA"]):::laranja
+  crianca_com_dificuldade_de_locomocao_p2_3253 -->|Sim| crianca_com_dificuldade_de_locomocao_p2_3253_sim
+  crianca_com_dificuldade_de_locomocao_p2_3253 -->|Não| crianca_com_dificuldade_de_locomocao_p2_3254
+  crianca_com_dificuldade_de_locomocao_p2_3254_sim(["LARANJA"]):::laranja
+  crianca_com_dificuldade_de_locomocao_p2_3254 -->|Sim| crianca_com_dificuldade_de_locomocao_p2_3254_sim
+  crianca_com_dificuldade_de_locomocao_p2_3254 -->|Não| crianca_com_dificuldade_de_locomocao_p2_3255
+  crianca_com_dificuldade_de_locomocao_p2_3255_sim(["LARANJA"]):::laranja
+  crianca_com_dificuldade_de_locomocao_p2_3255 -->|Sim| crianca_com_dificuldade_de_locomocao_p2_3255_sim
+  crianca_com_dificuldade_de_locomocao_p2_3255 -->|Não| crianca_com_dificuldade_de_locomocao_p2_3256
+  crianca_com_dificuldade_de_locomocao_p2_3256_sim(["LARANJA"]):::laranja
+  crianca_com_dificuldade_de_locomocao_p2_3256 -->|Sim| crianca_com_dificuldade_de_locomocao_p2_3256_sim
+  crianca_com_dificuldade_de_locomocao_p2_3256 -->|Não| crianca_com_dificuldade_de_locomocao_p2_3257
+  crianca_com_dificuldade_de_locomocao_p2_3257_sim(["LARANJA"]):::laranja
+  crianca_com_dificuldade_de_locomocao_p2_3257 -->|Sim| crianca_com_dificuldade_de_locomocao_p2_3257_sim
+  crianca_com_dificuldade_de_locomocao_p2_3257 -->|Não| crianca_com_dificuldade_de_locomocao_p3_2020
+  crianca_com_dificuldade_de_locomocao_p3_2020_sim(["AMARELO"]):::amarelo
+  crianca_com_dificuldade_de_locomocao_p3_2020 -->|Sim| crianca_com_dificuldade_de_locomocao_p3_2020_sim
+  crianca_com_dificuldade_de_locomocao_p3_2020 -->|Não| crianca_com_dificuldade_de_locomocao_p3_2021
+  crianca_com_dificuldade_de_locomocao_p3_2021_sim(["AMARELO"]):::amarelo
+  crianca_com_dificuldade_de_locomocao_p3_2021 -->|Sim| crianca_com_dificuldade_de_locomocao_p3_2021_sim
+  crianca_com_dificuldade_de_locomocao_p3_2021 -->|Não| crianca_com_dificuldade_de_locomocao_p3_2022
+  crianca_com_dificuldade_de_locomocao_p3_2022_sim(["AMARELO"]):::amarelo
+  crianca_com_dificuldade_de_locomocao_p3_2022 -->|Sim| crianca_com_dificuldade_de_locomocao_p3_2022_sim
+  crianca_com_dificuldade_de_locomocao_p3_2022 -->|Não| crianca_com_dificuldade_de_locomocao_p3_2023
+  crianca_com_dificuldade_de_locomocao_p3_2023_sim(["AMARELO"]):::amarelo
+  crianca_com_dificuldade_de_locomocao_p3_2023 -->|Sim| crianca_com_dificuldade_de_locomocao_p3_2023_sim
+  crianca_com_dificuldade_de_locomocao_p3_2023 -->|Não| crianca_com_dificuldade_de_locomocao_p3_2024
+  crianca_com_dificuldade_de_locomocao_p3_2024_sim(["AMARELO"]):::amarelo
+  crianca_com_dificuldade_de_locomocao_p3_2024 -->|Sim| crianca_com_dificuldade_de_locomocao_p3_2024_sim
+  crianca_com_dificuldade_de_locomocao_p3_2024 -->|Não| crianca_com_dificuldade_de_locomocao_p3_2025
+  crianca_com_dificuldade_de_locomocao_p3_2025_sim(["AMARELO"]):::amarelo
+  crianca_com_dificuldade_de_locomocao_p3_2025 -->|Sim| crianca_com_dificuldade_de_locomocao_p3_2025_sim
+  crianca_com_dificuldade_de_locomocao_p3_2025 -->|Não| crianca_com_dificuldade_de_locomocao_p3_2026
+  crianca_com_dificuldade_de_locomocao_p3_2026_sim(["AMARELO"]):::amarelo
+  crianca_com_dificuldade_de_locomocao_p3_2026 -->|Sim| crianca_com_dificuldade_de_locomocao_p3_2026_sim
+  crianca_com_dificuldade_de_locomocao_p3_2026 -->|Não| crianca_com_dificuldade_de_locomocao_p4_2027
+  crianca_com_dificuldade_de_locomocao_p4_2027_sim(["VERDE"]):::verde
+  crianca_com_dificuldade_de_locomocao_p4_2027 -->|Sim| crianca_com_dificuldade_de_locomocao_p4_2027_sim
+  crianca_com_dificuldade_de_locomocao_p4_2027 -->|Não| crianca_com_dificuldade_de_locomocao_p4_2028
+  crianca_com_dificuldade_de_locomocao_p4_2028_sim(["VERDE"]):::verde
+  crianca_com_dificuldade_de_locomocao_p4_2028 -->|Sim| crianca_com_dificuldade_de_locomocao_p4_2028_sim
+  crianca_com_dificuldade_de_locomocao_p4_2028 -->|Não| crianca_com_dificuldade_de_locomocao_p4_2029
+  crianca_com_dificuldade_de_locomocao_p4_2029_sim(["VERDE"]):::verde
+  crianca_com_dificuldade_de_locomocao_p4_2029 -->|Sim| crianca_com_dificuldade_de_locomocao_p4_2029_sim
+  crianca_com_dificuldade_de_locomocao_p4_2029 -->|Não| crianca_com_dificuldade_de_locomocao_p4_2030
+  crianca_com_dificuldade_de_locomocao_p4_2030_sim(["VERDE"]):::verde
+  crianca_com_dificuldade_de_locomocao_p4_2030 -->|Sim| crianca_com_dificuldade_de_locomocao_p4_2030_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  crianca_com_dificuldade_de_locomocao_p4_2030 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

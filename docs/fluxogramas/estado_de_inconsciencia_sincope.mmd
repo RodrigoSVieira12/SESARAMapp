@@ -1,0 +1,109 @@
+flowchart TD
+  inicio(["Início: Estado de inconsciência /<br/>síncope"])
+  estado_de_inconsciencia_sincope_p1_1854["1. [P1] Compromisso da via aérea?"]
+  estado_de_inconsciencia_sincope_p1_2125["2. [P1] Respiração ineficaz?"]
+  estado_de_inconsciencia_sincope_p1_2370["3. [P1] Sinais de choque?"]
+  estado_de_inconsciencia_sincope_p1_2373["4. [P1] Não reativo?"]
+  estado_de_inconsciencia_sincope_p1_2476["5. [P1] Convulsão atual?"]
+  estado_de_inconsciencia_sincope_p2_2477["6. [P2] Dispneia aguda?"]
+  estado_de_inconsciencia_sincope_p2_2478["7. [P2] Alteração do estado de<br/>consciência?"]
+  estado_de_inconsciencia_sincope_p2_2479["8. [P2] Défice neurológico agudo?<br/><24h"]
+  estado_de_inconsciencia_sincope_p2_2480["9. [P2] Muito quente?"]
+  estado_de_inconsciencia_sincope_p2_2481["10. [P2] Possível sépsis?"]
+  estado_de_inconsciencia_sincope_p2_2482["11. [P2] Erupção cutânea desconhecida?"]
+  estado_de_inconsciencia_sincope_p2_2483["12. [P2] História significativa de<br/>alergia?"]
+  estado_de_inconsciencia_sincope_p2_2484["13. [P2] Dor aórtica?"]
+  estado_de_inconsciencia_sincope_p2_2485["14. [P2] Dor précordial?"]
+  estado_de_inconsciencia_sincope_p2_2486["15. [P2] Dor severa?"]
+  estado_de_inconsciencia_sincope_p3_2487["16. [P3] Novos sinais e/ou sintomas<br/>neurológicos?"]
+  estado_de_inconsciencia_sincope_p3_2488["17. [P3] Quente?"]
+  estado_de_inconsciencia_sincope_p3_2489["18. [P3] História de perda de<br/>consciência?"]
+  estado_de_inconsciencia_sincope_p3_2490["19. [P3] Deformação?"]
+  estado_de_inconsciencia_sincope_p3_2491["20. [P3] História Inapropriada?"]
+  estado_de_inconsciencia_sincope_p3_2492["21. [P3] Dor moderada?"]
+  estado_de_inconsciencia_sincope_p4_2493["22. [P4] Febre persistente?"]
+  estado_de_inconsciencia_sincope_p4_2496["23. [P4] Edema?"]
+  estado_de_inconsciencia_sincope_p4_2497["24. [P4] Dor persistente?"]
+  estado_de_inconsciencia_sincope_p4_2500["25. [P4] Problema recente?"]
+  inicio --> estado_de_inconsciencia_sincope_p1_1854
+  estado_de_inconsciencia_sincope_p1_1854_sim(["VERMELHO"]):::vermelho
+  estado_de_inconsciencia_sincope_p1_1854 -->|Sim| estado_de_inconsciencia_sincope_p1_1854_sim
+  estado_de_inconsciencia_sincope_p1_1854 -->|Não| estado_de_inconsciencia_sincope_p1_2125
+  estado_de_inconsciencia_sincope_p1_2125_sim(["VERMELHO"]):::vermelho
+  estado_de_inconsciencia_sincope_p1_2125 -->|Sim| estado_de_inconsciencia_sincope_p1_2125_sim
+  estado_de_inconsciencia_sincope_p1_2125 -->|Não| estado_de_inconsciencia_sincope_p1_2370
+  estado_de_inconsciencia_sincope_p1_2370_sim(["VERMELHO"]):::vermelho
+  estado_de_inconsciencia_sincope_p1_2370 -->|Sim| estado_de_inconsciencia_sincope_p1_2370_sim
+  estado_de_inconsciencia_sincope_p1_2370 -->|Não| estado_de_inconsciencia_sincope_p1_2373
+  estado_de_inconsciencia_sincope_p1_2373_sim(["VERMELHO"]):::vermelho
+  estado_de_inconsciencia_sincope_p1_2373 -->|Sim| estado_de_inconsciencia_sincope_p1_2373_sim
+  estado_de_inconsciencia_sincope_p1_2373 -->|Não| estado_de_inconsciencia_sincope_p1_2476
+  estado_de_inconsciencia_sincope_p1_2476_sim(["VERMELHO"]):::vermelho
+  estado_de_inconsciencia_sincope_p1_2476 -->|Sim| estado_de_inconsciencia_sincope_p1_2476_sim
+  estado_de_inconsciencia_sincope_p1_2476 -->|Não| estado_de_inconsciencia_sincope_p2_2477
+  estado_de_inconsciencia_sincope_p2_2477_sim(["LARANJA"]):::laranja
+  estado_de_inconsciencia_sincope_p2_2477 -->|Sim| estado_de_inconsciencia_sincope_p2_2477_sim
+  estado_de_inconsciencia_sincope_p2_2477 -->|Não| estado_de_inconsciencia_sincope_p2_2478
+  estado_de_inconsciencia_sincope_p2_2478_sim(["LARANJA"]):::laranja
+  estado_de_inconsciencia_sincope_p2_2478 -->|Sim| estado_de_inconsciencia_sincope_p2_2478_sim
+  estado_de_inconsciencia_sincope_p2_2478 -->|Não| estado_de_inconsciencia_sincope_p2_2479
+  estado_de_inconsciencia_sincope_p2_2479_sim(["LARANJA"]):::laranja
+  estado_de_inconsciencia_sincope_p2_2479 -->|Sim| estado_de_inconsciencia_sincope_p2_2479_sim
+  estado_de_inconsciencia_sincope_p2_2479 -->|Não| estado_de_inconsciencia_sincope_p2_2480
+  estado_de_inconsciencia_sincope_p2_2480_sim(["LARANJA"]):::laranja
+  estado_de_inconsciencia_sincope_p2_2480 -->|Sim| estado_de_inconsciencia_sincope_p2_2480_sim
+  estado_de_inconsciencia_sincope_p2_2480 -->|Não| estado_de_inconsciencia_sincope_p2_2481
+  estado_de_inconsciencia_sincope_p2_2481_sim(["LARANJA"]):::laranja
+  estado_de_inconsciencia_sincope_p2_2481 -->|Sim| estado_de_inconsciencia_sincope_p2_2481_sim
+  estado_de_inconsciencia_sincope_p2_2481 -->|Não| estado_de_inconsciencia_sincope_p2_2482
+  estado_de_inconsciencia_sincope_p2_2482_sim(["LARANJA"]):::laranja
+  estado_de_inconsciencia_sincope_p2_2482 -->|Sim| estado_de_inconsciencia_sincope_p2_2482_sim
+  estado_de_inconsciencia_sincope_p2_2482 -->|Não| estado_de_inconsciencia_sincope_p2_2483
+  estado_de_inconsciencia_sincope_p2_2483_sim(["LARANJA"]):::laranja
+  estado_de_inconsciencia_sincope_p2_2483 -->|Sim| estado_de_inconsciencia_sincope_p2_2483_sim
+  estado_de_inconsciencia_sincope_p2_2483 -->|Não| estado_de_inconsciencia_sincope_p2_2484
+  estado_de_inconsciencia_sincope_p2_2484_sim(["LARANJA"]):::laranja
+  estado_de_inconsciencia_sincope_p2_2484 -->|Sim| estado_de_inconsciencia_sincope_p2_2484_sim
+  estado_de_inconsciencia_sincope_p2_2484 -->|Não| estado_de_inconsciencia_sincope_p2_2485
+  estado_de_inconsciencia_sincope_p2_2485_sim(["LARANJA"]):::laranja
+  estado_de_inconsciencia_sincope_p2_2485 -->|Sim| estado_de_inconsciencia_sincope_p2_2485_sim
+  estado_de_inconsciencia_sincope_p2_2485 -->|Não| estado_de_inconsciencia_sincope_p2_2486
+  estado_de_inconsciencia_sincope_p2_2486_sim(["LARANJA"]):::laranja
+  estado_de_inconsciencia_sincope_p2_2486 -->|Sim| estado_de_inconsciencia_sincope_p2_2486_sim
+  estado_de_inconsciencia_sincope_p2_2486 -->|Não| estado_de_inconsciencia_sincope_p3_2487
+  estado_de_inconsciencia_sincope_p3_2487_sim(["AMARELO"]):::amarelo
+  estado_de_inconsciencia_sincope_p3_2487 -->|Sim| estado_de_inconsciencia_sincope_p3_2487_sim
+  estado_de_inconsciencia_sincope_p3_2487 -->|Não| estado_de_inconsciencia_sincope_p3_2488
+  estado_de_inconsciencia_sincope_p3_2488_sim(["AMARELO"]):::amarelo
+  estado_de_inconsciencia_sincope_p3_2488 -->|Sim| estado_de_inconsciencia_sincope_p3_2488_sim
+  estado_de_inconsciencia_sincope_p3_2488 -->|Não| estado_de_inconsciencia_sincope_p3_2489
+  estado_de_inconsciencia_sincope_p3_2489_sim(["AMARELO"]):::amarelo
+  estado_de_inconsciencia_sincope_p3_2489 -->|Sim| estado_de_inconsciencia_sincope_p3_2489_sim
+  estado_de_inconsciencia_sincope_p3_2489 -->|Não| estado_de_inconsciencia_sincope_p3_2490
+  estado_de_inconsciencia_sincope_p3_2490_sim(["AMARELO"]):::amarelo
+  estado_de_inconsciencia_sincope_p3_2490 -->|Sim| estado_de_inconsciencia_sincope_p3_2490_sim
+  estado_de_inconsciencia_sincope_p3_2490 -->|Não| estado_de_inconsciencia_sincope_p3_2491
+  estado_de_inconsciencia_sincope_p3_2491_sim(["AMARELO"]):::amarelo
+  estado_de_inconsciencia_sincope_p3_2491 -->|Sim| estado_de_inconsciencia_sincope_p3_2491_sim
+  estado_de_inconsciencia_sincope_p3_2491 -->|Não| estado_de_inconsciencia_sincope_p3_2492
+  estado_de_inconsciencia_sincope_p3_2492_sim(["AMARELO"]):::amarelo
+  estado_de_inconsciencia_sincope_p3_2492 -->|Sim| estado_de_inconsciencia_sincope_p3_2492_sim
+  estado_de_inconsciencia_sincope_p3_2492 -->|Não| estado_de_inconsciencia_sincope_p4_2493
+  estado_de_inconsciencia_sincope_p4_2493_sim(["VERDE"]):::verde
+  estado_de_inconsciencia_sincope_p4_2493 -->|Sim| estado_de_inconsciencia_sincope_p4_2493_sim
+  estado_de_inconsciencia_sincope_p4_2493 -->|Não| estado_de_inconsciencia_sincope_p4_2496
+  estado_de_inconsciencia_sincope_p4_2496_sim(["VERDE"]):::verde
+  estado_de_inconsciencia_sincope_p4_2496 -->|Sim| estado_de_inconsciencia_sincope_p4_2496_sim
+  estado_de_inconsciencia_sincope_p4_2496 -->|Não| estado_de_inconsciencia_sincope_p4_2497
+  estado_de_inconsciencia_sincope_p4_2497_sim(["VERDE"]):::verde
+  estado_de_inconsciencia_sincope_p4_2497 -->|Sim| estado_de_inconsciencia_sincope_p4_2497_sim
+  estado_de_inconsciencia_sincope_p4_2497 -->|Não| estado_de_inconsciencia_sincope_p4_2500
+  estado_de_inconsciencia_sincope_p4_2500_sim(["VERDE"]):::verde
+  estado_de_inconsciencia_sincope_p4_2500 -->|Sim| estado_de_inconsciencia_sincope_p4_2500_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  estado_de_inconsciencia_sincope_p4_2500 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

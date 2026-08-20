@@ -1,0 +1,69 @@
+flowchart TD
+  inicio(["Início: Sensação de batimentos<br/>cardíacos rápidos ou<br/>irregulares"])
+  palpitacoes_p1_1866["1. [P1] Compromisso da via aérea?"]
+  palpitacoes_p1_2137["2. [P1] Respiração ineficaz?"]
+  palpitacoes_p1_2744["3. [P1] Sinais de choque?"]
+  palpitacoes_p1_2763["4. [P1] Não reativo?"]
+  palpitacoes_p2_2804["5. [P2] Dispneia aguda?"]
+  palpitacoes_p2_2805["6. [P2] Alteração do estado de<br/>consciência?"]
+  palpitacoes_p2_2806["7. [P2] Com Palpitações?"]
+  palpitacoes_p2_2807["8. [P2] Muito quente?"]
+  palpitacoes_p2_2808["9. [P2] História de sobredosagem ou<br/>envenenamento?"]
+  palpitacoes_p2_2809["10. [P2] Dor précordial?"]
+  palpitacoes_p3_2810["11. [P3] Quente?"]
+  palpitacoes_p3_2811["12. [P3] História de perda de<br/>consciência?"]
+  palpitacoes_p3_2812["13. [P3] História cardíaca<br/>significativa?"]
+  palpitacoes_p4_2813["14. [P4] Febre persistente?"]
+  palpitacoes_p4_2816["15. [P4] Problema recente?"]
+  inicio --> palpitacoes_p1_1866
+  palpitacoes_p1_1866_sim(["VERMELHO"]):::vermelho
+  palpitacoes_p1_1866 -->|Sim| palpitacoes_p1_1866_sim
+  palpitacoes_p1_1866 -->|Não| palpitacoes_p1_2137
+  palpitacoes_p1_2137_sim(["VERMELHO"]):::vermelho
+  palpitacoes_p1_2137 -->|Sim| palpitacoes_p1_2137_sim
+  palpitacoes_p1_2137 -->|Não| palpitacoes_p1_2744
+  palpitacoes_p1_2744_sim(["VERMELHO"]):::vermelho
+  palpitacoes_p1_2744 -->|Sim| palpitacoes_p1_2744_sim
+  palpitacoes_p1_2744 -->|Não| palpitacoes_p1_2763
+  palpitacoes_p1_2763_sim(["VERMELHO"]):::vermelho
+  palpitacoes_p1_2763 -->|Sim| palpitacoes_p1_2763_sim
+  palpitacoes_p1_2763 -->|Não| palpitacoes_p2_2804
+  palpitacoes_p2_2804_sim(["LARANJA"]):::laranja
+  palpitacoes_p2_2804 -->|Sim| palpitacoes_p2_2804_sim
+  palpitacoes_p2_2804 -->|Não| palpitacoes_p2_2805
+  palpitacoes_p2_2805_sim(["LARANJA"]):::laranja
+  palpitacoes_p2_2805 -->|Sim| palpitacoes_p2_2805_sim
+  palpitacoes_p2_2805 -->|Não| palpitacoes_p2_2806
+  palpitacoes_p2_2806_sim(["LARANJA"]):::laranja
+  palpitacoes_p2_2806 -->|Sim| palpitacoes_p2_2806_sim
+  palpitacoes_p2_2806 -->|Não| palpitacoes_p2_2807
+  palpitacoes_p2_2807_sim(["LARANJA"]):::laranja
+  palpitacoes_p2_2807 -->|Sim| palpitacoes_p2_2807_sim
+  palpitacoes_p2_2807 -->|Não| palpitacoes_p2_2808
+  palpitacoes_p2_2808_sim(["LARANJA"]):::laranja
+  palpitacoes_p2_2808 -->|Sim| palpitacoes_p2_2808_sim
+  palpitacoes_p2_2808 -->|Não| palpitacoes_p2_2809
+  palpitacoes_p2_2809_sim(["LARANJA"]):::laranja
+  palpitacoes_p2_2809 -->|Sim| palpitacoes_p2_2809_sim
+  palpitacoes_p2_2809 -->|Não| palpitacoes_p3_2810
+  palpitacoes_p3_2810_sim(["AMARELO"]):::amarelo
+  palpitacoes_p3_2810 -->|Sim| palpitacoes_p3_2810_sim
+  palpitacoes_p3_2810 -->|Não| palpitacoes_p3_2811
+  palpitacoes_p3_2811_sim(["AMARELO"]):::amarelo
+  palpitacoes_p3_2811 -->|Sim| palpitacoes_p3_2811_sim
+  palpitacoes_p3_2811 -->|Não| palpitacoes_p3_2812
+  palpitacoes_p3_2812_sim(["AMARELO"]):::amarelo
+  palpitacoes_p3_2812 -->|Sim| palpitacoes_p3_2812_sim
+  palpitacoes_p3_2812 -->|Não| palpitacoes_p4_2813
+  palpitacoes_p4_2813_sim(["VERDE"]):::verde
+  palpitacoes_p4_2813 -->|Sim| palpitacoes_p4_2813_sim
+  palpitacoes_p4_2813 -->|Não| palpitacoes_p4_2816
+  palpitacoes_p4_2816_sim(["VERDE"]):::verde
+  palpitacoes_p4_2816 -->|Sim| palpitacoes_p4_2816_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  palpitacoes_p4_2816 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

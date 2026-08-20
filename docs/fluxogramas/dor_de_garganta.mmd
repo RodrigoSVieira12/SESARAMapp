@@ -1,0 +1,85 @@
+flowchart TD
+  inicio(["Início: Dor de garganta"])
+  dor_de_garganta_p1_1848["1. [P1] Compromisso da via aérea?"]
+  dor_de_garganta_p1_2119["2. [P1] Respiração ineficaz?"]
+  dor_de_garganta_p1_2344["3. [P1] Estridor?"]
+  dor_de_garganta_p1_2345["4. [P1] Baba-se?"]
+  dor_de_garganta_p1_2346["5. [P1] Sinais de choque?"]
+  dor_de_garganta_p1_2347["6. [P1] Não reativo?"]
+  dor_de_garganta_p2_2348["7. [P2] Alteração do estado de<br/>consciência?"]
+  dor_de_garganta_p2_2349["8. [P2] Muito quente?"]
+  dor_de_garganta_p2_2350["9. [P2] Possível sépsis?"]
+  dor_de_garganta_p2_2351["10. [P2] Alteração da imunidade<br/>conhecida?"]
+  dor_de_garganta_p2_2352["11. [P2] História de risco especial de<br/>infeção?"]
+  dor_de_garganta_p2_2353["12. [P2] Dor severa?"]
+  dor_de_garganta_p3_2354["13. [P3] Quente?"]
+  dor_de_garganta_p3_3300["14. [P3] História recente de viagem ao<br/>estrangeiro"]
+  dor_de_garganta_p3_3301["15. [P3] Instalação súbita? (início <<br/>12h)"]
+  dor_de_garganta_p3_3302["16. [P3] Dor moderada?"]
+  dor_de_garganta_p4_2357["17. [P4] Febre persistente?"]
+  dor_de_garganta_p4_2361["18. [P4] Dor persistente?"]
+  dor_de_garganta_p4_2364["19. [P4] Problema recente?"]
+  inicio --> dor_de_garganta_p1_1848
+  dor_de_garganta_p1_1848_sim(["VERMELHO"]):::vermelho
+  dor_de_garganta_p1_1848 -->|Sim| dor_de_garganta_p1_1848_sim
+  dor_de_garganta_p1_1848 -->|Não| dor_de_garganta_p1_2119
+  dor_de_garganta_p1_2119_sim(["VERMELHO"]):::vermelho
+  dor_de_garganta_p1_2119 -->|Sim| dor_de_garganta_p1_2119_sim
+  dor_de_garganta_p1_2119 -->|Não| dor_de_garganta_p1_2344
+  dor_de_garganta_p1_2344_sim(["VERMELHO"]):::vermelho
+  dor_de_garganta_p1_2344 -->|Sim| dor_de_garganta_p1_2344_sim
+  dor_de_garganta_p1_2344 -->|Não| dor_de_garganta_p1_2345
+  dor_de_garganta_p1_2345_sim(["VERMELHO"]):::vermelho
+  dor_de_garganta_p1_2345 -->|Sim| dor_de_garganta_p1_2345_sim
+  dor_de_garganta_p1_2345 -->|Não| dor_de_garganta_p1_2346
+  dor_de_garganta_p1_2346_sim(["VERMELHO"]):::vermelho
+  dor_de_garganta_p1_2346 -->|Sim| dor_de_garganta_p1_2346_sim
+  dor_de_garganta_p1_2346 -->|Não| dor_de_garganta_p1_2347
+  dor_de_garganta_p1_2347_sim(["VERMELHO"]):::vermelho
+  dor_de_garganta_p1_2347 -->|Sim| dor_de_garganta_p1_2347_sim
+  dor_de_garganta_p1_2347 -->|Não| dor_de_garganta_p2_2348
+  dor_de_garganta_p2_2348_sim(["LARANJA"]):::laranja
+  dor_de_garganta_p2_2348 -->|Sim| dor_de_garganta_p2_2348_sim
+  dor_de_garganta_p2_2348 -->|Não| dor_de_garganta_p2_2349
+  dor_de_garganta_p2_2349_sim(["LARANJA"]):::laranja
+  dor_de_garganta_p2_2349 -->|Sim| dor_de_garganta_p2_2349_sim
+  dor_de_garganta_p2_2349 -->|Não| dor_de_garganta_p2_2350
+  dor_de_garganta_p2_2350_sim(["LARANJA"]):::laranja
+  dor_de_garganta_p2_2350 -->|Sim| dor_de_garganta_p2_2350_sim
+  dor_de_garganta_p2_2350 -->|Não| dor_de_garganta_p2_2351
+  dor_de_garganta_p2_2351_sim(["LARANJA"]):::laranja
+  dor_de_garganta_p2_2351 -->|Sim| dor_de_garganta_p2_2351_sim
+  dor_de_garganta_p2_2351 -->|Não| dor_de_garganta_p2_2352
+  dor_de_garganta_p2_2352_sim(["LARANJA"]):::laranja
+  dor_de_garganta_p2_2352 -->|Sim| dor_de_garganta_p2_2352_sim
+  dor_de_garganta_p2_2352 -->|Não| dor_de_garganta_p2_2353
+  dor_de_garganta_p2_2353_sim(["LARANJA"]):::laranja
+  dor_de_garganta_p2_2353 -->|Sim| dor_de_garganta_p2_2353_sim
+  dor_de_garganta_p2_2353 -->|Não| dor_de_garganta_p3_2354
+  dor_de_garganta_p3_2354_sim(["AMARELO"]):::amarelo
+  dor_de_garganta_p3_2354 -->|Sim| dor_de_garganta_p3_2354_sim
+  dor_de_garganta_p3_2354 -->|Não| dor_de_garganta_p3_3300
+  dor_de_garganta_p3_3300_sim(["AMARELO"]):::amarelo
+  dor_de_garganta_p3_3300 -->|Sim| dor_de_garganta_p3_3300_sim
+  dor_de_garganta_p3_3300 -->|Não| dor_de_garganta_p3_3301
+  dor_de_garganta_p3_3301_sim(["AMARELO"]):::amarelo
+  dor_de_garganta_p3_3301 -->|Sim| dor_de_garganta_p3_3301_sim
+  dor_de_garganta_p3_3301 -->|Não| dor_de_garganta_p3_3302
+  dor_de_garganta_p3_3302_sim(["AMARELO"]):::amarelo
+  dor_de_garganta_p3_3302 -->|Sim| dor_de_garganta_p3_3302_sim
+  dor_de_garganta_p3_3302 -->|Não| dor_de_garganta_p4_2357
+  dor_de_garganta_p4_2357_sim(["VERDE"]):::verde
+  dor_de_garganta_p4_2357 -->|Sim| dor_de_garganta_p4_2357_sim
+  dor_de_garganta_p4_2357 -->|Não| dor_de_garganta_p4_2361
+  dor_de_garganta_p4_2361_sim(["VERDE"]):::verde
+  dor_de_garganta_p4_2361 -->|Sim| dor_de_garganta_p4_2361_sim
+  dor_de_garganta_p4_2361 -->|Não| dor_de_garganta_p4_2364
+  dor_de_garganta_p4_2364_sim(["VERDE"]):::verde
+  dor_de_garganta_p4_2364 -->|Sim| dor_de_garganta_p4_2364_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  dor_de_garganta_p4_2364 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

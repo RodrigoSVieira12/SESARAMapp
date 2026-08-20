@@ -1,0 +1,33 @@
+# Configuração das ferramentas de qualidade de código (v0.16.1).
+#
+# O CI corre `ruff check .` e `black --check .` (ver .github/workflows/ci.yml);
+# esta é a configuração única de ambos. Localmente:
+#
+#     python -m ruff check .          # lint (imports não usados, redefinições, ...)
+#     python -m black .               # formatar
+#
+# As versões exatas estão em requirements-dev.txt, para que "passa em CI"
+# signifique "passa na minha máquina" também no lint.
+
+[tool.black]
+line-length = 100
+target-version = ["py311", "py312"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+# E/W (estilo pycodestyle), F (erros pyflakes: imports não usados, nomes
+# redefinidos como o F811 que apanharia a _primeira_aberta duplicada), e
+# I (ordenação de imports).
+select = ["E", "F", "W", "I"]
+# O comprimento das linhas de CÓDIGO é responsabilidade do black; o E501
+# restante seria só comentários e strings longas, onde partir à força
+# piora a leitura.
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+# Os scripts autónomos fazem sys.path.insert(...) antes dos imports dos
+# módulos irmãos (_manchester_comum, etc.) — é deliberado e não muda.
+"scripts/*" = ["E402"]

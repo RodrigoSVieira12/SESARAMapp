@@ -1,0 +1,177 @@
+{
+  "id": "palpitacoes",
+  "nome": "Sensação de batimentos cardíacos rápidos ou irregulares",
+  "nome_en": "A feeling of fast or irregular heartbeats",
+  "descricao": "Palpitações.",
+  "descricao_en": "Palpitations.",
+  "pediatrico": false,
+  "fonte": "Discriminadores do Sistema de Triagem de Manchester, organizados por prioridade clínica (P1-P5). Importados da tabela de referência; sujeitos a validação clínica antes de uso real.",
+  "fonte_en": "Manchester Triage System discriminators, organised by clinical priority (P1-P5). Imported from the reference table; subject to clinical validation before real use.",
+  "perguntas": [
+    {
+      "id": "palpitacoes_p1_1866",
+      "disc_id": 1866,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Compromisso da via aérea?",
+      "texto_utente": "A respiração está muito difícil ou ruidosa, como se o ar não passasse bem pela garganta (a roncar ou a gorgolejar)?",
+      "texto_en": "Airway compromise?",
+      "texto_utente_en": "Is breathing very difficult or noisy, as if air can't pass properly through the throat (snoring or gurgling)?",
+      "descricao": "A via aérea poderá estar comprometida, por não se conseguir manter aberta, ou porque os reflexos protetores da via respiratória (que evitam a aspiração) se perderam. A incapacidade de manter a via aérea aberta, poderá resultar numa obstrução total ou parcial, intermitente ou não. Isto manifestar-se-á por sons como o ressonar ou o gorgolejar durante a respiração."
+    },
+    {
+      "id": "palpitacoes_p1_2137",
+      "disc_id": 2137,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Respiração ineficaz?",
+      "texto_utente": "A respiração está tão fraca ou cansada que parece não entrar ar suficiente (respiração aos arrancos ou muito a custo)?",
+      "texto_en": "Ineffective breathing?",
+      "texto_utente_en": "Is breathing so weak or laboured that not enough air seems to get in (gasping or a real struggle)?",
+      "descricao": "Doentes que não conseguem respirar suficientemente bem para manter uma oxigenação adequada e com falência respiratória, sofrem de respiração ineficaz. Poderá resultar num esforço acrescentado para respirar, ou em exaustão, incluindo uma respiração tipo “gasping”."
+    },
+    {
+      "id": "palpitacoes_p1_2744",
+      "disc_id": 2744,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Sinais de choque?",
+      "texto_utente": "Tem suores frios, pele muito pálida ou acinzentada, o coração a bater depressa e uma grande fraqueza?",
+      "texto_en": "Signs of shock?",
+      "texto_utente_en": "Are there cold sweats, very pale or greyish skin, a fast heartbeat and severe weakness?",
+      "descricao": "O choque é uma entrega inadequada de oxigénio aos tecidos. Os sinais clássicos incluem suores, palidez, taquicardia, hipotensão e nível de consciência reduzido."
+    },
+    {
+      "id": "palpitacoes_p1_2763",
+      "disc_id": 2763,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Não reativo?",
+      "texto_utente": "Está sem reagir a nada, nem quando lhe falam, lhe tocam ou lhe fazem doer?",
+      "texto_en": "Unresponsive?",
+      "texto_utente_en": "Is the person not reacting at all, even to voice, touch or pain?",
+      "descricao": "Não responde a um estímulo doloroso."
+    },
+    {
+      "id": "palpitacoes_p2_2804",
+      "disc_id": 2804,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Dispneia aguda?",
+      "texto_utente": "Ficou de repente com falta de ar (ou uma falta de ar que já tinha piorou muito de um momento para o outro)?",
+      "texto_en": "Acute shortness of breath?",
+      "texto_utente_en": "Did shortness of breath come on suddenly (or did a breathlessness you already had suddenly get much worse)?",
+      "descricao": "Dificuldade respiratória que se desenvolve subitamente ou uma repentina exacerbação de dispneia crónica."
+    },
+    {
+      "id": "palpitacoes_p2_2805",
+      "disc_id": 2805,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Alteração do estado de consciência?",
+      "texto_utente": "Está sonolento ou baralhado, só reagindo quando lhe falam ou lhe tocam (não está bem desperto)?",
+      "texto_en": "Altered level of consciousness?",
+      "texto_utente_en": "Is the person drowsy or muddled, responding only to voice or touch (not fully alert)?",
+      "descricao": "Não está totalmente alerta. Só responde à voz, à dor"
+    },
+    {
+      "id": "palpitacoes_p2_2806",
+      "disc_id": 2806,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Com Palpitações?",
+      "texto_utente": "Sente o coração a bater com força, muito depressa ou aos saltos (palpitações)?",
+      "texto_en": "Palpitations?",
+      "texto_utente_en": "Can you feel your heart pounding, racing or skipping (palpitations)?",
+      "descricao": "Doente que refere na triagem sentir palpitações"
+    },
+    {
+      "id": "palpitacoes_p2_2807",
+      "disc_id": 2807,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Muito quente?",
+      "texto_utente": "Tem febre muito alta? (num adulto, 41°C ou mais; num bebé com menos de 12 meses, 38,5°C ou mais)",
+      "texto_en": "Very hot (high temperature)?",
+      "texto_utente_en": "Do you have a very high fever? (in an adult, 41°C or more; in a baby under 12 months, 38.5°C or more)",
+      "descricao": "No Adulto temperatura igual ou superior a 41ºC; Crianças com menos de 12 meses a temperatura é igual ou superior a 38.5ºC"
+    },
+    {
+      "id": "palpitacoes_p2_2808",
+      "disc_id": 2808,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "História de sobredosagem ou envenenamento?",
+      "texto_utente": "Há a possibilidade de ter tomado comprimidos a mais ou algo tóxico (por exemplo, caixas de comprimidos vazias por perto)?",
+      "texto_en": "History of overdose or poisoning?",
+      "texto_utente_en": "Could there have been too many tablets or something poisonous taken (for example empty tablet packets nearby)?",
+      "descricao": "Esta informação poderá ser prestada por terceiros ou poderá ser deduzida na presença de caixas de substâncias perigosas vazias."
+    },
+    {
+      "id": "palpitacoes_p2_2809",
+      "disc_id": 2809,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Dor précordial?",
+      "texto_utente": "Tem uma dor ou um aperto no meio do peito, que pode subir ao pescoço ou descer pelo braço esquerdo (às vezes com suores ou enjoo)?",
+      "texto_en": "Precordial (central chest) pain?",
+      "texto_utente_en": "Do you have pain or tightness in the centre of the chest, which may go up to the neck or down the left arm (sometimes with sweating or nausea)?",
+      "descricao": "Classicamente, uma dor constritiva ou pesada no centro do peito, podendo irradiar para o braço esquerdo ou para o pescoço. Poderá estar associada a suores, náuseas, sensação de lipotimia e/ou dor epigástrica."
+    },
+    {
+      "id": "palpitacoes_p3_2810",
+      "disc_id": 2810,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Quente?",
+      "texto_utente": "Tem febre? (num adulto, acima de 38,5°C; numa criança, 38,5°C a 39,8°C; num recém-nascido com menos de 28 dias, 37,5°C a 38,4°C)",
+      "texto_en": "Hot (raised temperature)?",
+      "texto_utente_en": "Do you have a fever? (in an adult, above 38.5°C; in a child, 38.5°C to 39.8°C; in a newborn under 28 days, 37.5°C to 38.4°C)",
+      "descricao": "No adulto, uma temperatura > 38.5-40.9ºC; Na criança é 38.5-39.8ºC; No recém-nascido com menos de 28 dias é 37.5-38.4ºC."
+    },
+    {
+      "id": "palpitacoes_p3_2811",
+      "disc_id": 2811,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "História de perda de consciência?",
+      "texto_utente": "Chegou a desmaiar ou a perder os sentidos (nem que fosse só por instantes)?",
+      "texto_en": "History of loss of consciousness?",
+      "texto_utente_en": "Did you faint or black out at any point (even for just a moment)?",
+      "descricao": "Pode haver uma testemunha fiável que possa dizer se o doente esteve inconsciente (e durante quanto tempo). Caso contrário, se o doente não se recorda do incidente deve-se presumir que esteve inconsciente."
+    },
+    {
+      "id": "palpitacoes_p3_2812",
+      "disc_id": 2812,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "História cardíaca significativa?",
+      "texto_utente": "Tem uma doença do coração importante já conhecida (por exemplo, das artérias do coração ou uma arritmia)?",
+      "texto_en": "Significant cardiac history?",
+      "texto_utente_en": "Do you have a known significant heart condition (for example coronary artery disease or an arrhythmia)?",
+      "descricao": "Antecedentes de doença cardíaca com risco significativo de vida (doença coronária ou disritmia)."
+    },
+    {
+      "id": "palpitacoes_p4_2813",
+      "disc_id": 2813,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Febre persistente?",
+      "texto_utente": "A febre não cede, mesmo alternando os medicamentos para baixar a febre (paracetamol e ibuprofeno)?",
+      "texto_en": "Persistent fever?",
+      "texto_utente_en": "Does the fever not come down, even alternating the fever medicines (paracetamol and ibuprofen)?",
+      "descricao": "Febre que não cede à toma intercalada de antipiréticos (paracetamol e ibuprofeno)"
+    },
+    {
+      "id": "palpitacoes_p4_2816",
+      "disc_id": 2816,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Problema recente?",
+      "texto_utente": "Este problema começou na última semana?",
+      "texto_en": "Recent problem?",
+      "texto_utente_en": "Did this problem start within the last week?",
+      "descricao": "Um problema que aparece no decorrer da última semana."
+    }
+  ]
+}

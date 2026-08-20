@@ -1,0 +1,97 @@
+flowchart TD
+  inicio(["Início: Pancada ou traumatismo na<br/>cabeça"])
+  t_c_e_trauma_cranio_encefalico_p1_1875["1. [P1] Compromisso da via aérea?"]
+  t_c_e_trauma_cranio_encefalico_p1_2146["2. [P1] Respiração ineficaz?"]
+  t_c_e_trauma_cranio_encefalico_p1_2752["3. [P1] Hemorragia catastrófica?"]
+  t_c_e_trauma_cranio_encefalico_p1_2759["4. [P1] Sinais de choque?"]
+  t_c_e_trauma_cranio_encefalico_p1_2771["5. [P1] Não reativo?"]
+  t_c_e_trauma_cranio_encefalico_p1_3017["6. [P1] Convulsão atual?"]
+  t_c_e_trauma_cranio_encefalico_p2_3018["7. [P2] Grande Hemorragia<br/>incontrolável?"]
+  t_c_e_trauma_cranio_encefalico_p2_3019["8. [P2] Alteração do estado de<br/>consciência?"]
+  t_c_e_trauma_cranio_encefalico_p2_3020["9. [P2] Défice neurológico agudo?<br/><24h"]
+  t_c_e_trauma_cranio_encefalico_p2_3021["10. [P2] Mecanismo significativo de<br/>lesão?"]
+  t_c_e_trauma_cranio_encefalico_p2_3022["11. [P2] Dor severa?"]
+  t_c_e_trauma_cranio_encefalico_p3_3023["12. [P3] Pequena hemorragia<br/>incontrolável?"]
+  t_c_e_trauma_cranio_encefalico_p3_3024["13. [P3] Vómitos incoercíveis?"]
+  t_c_e_trauma_cranio_encefalico_p3_3025["14. [P3] Novos sinais e/ou sintomas<br/>neurológicos?"]
+  t_c_e_trauma_cranio_encefalico_p3_3026["15. [P3] Alteração da coagulação?"]
+  t_c_e_trauma_cranio_encefalico_p3_3027["16. [P3] História de perda de<br/>consciência?"]
+  t_c_e_trauma_cranio_encefalico_p3_3028["17. [P3] História Inapropriada?"]
+  t_c_e_trauma_cranio_encefalico_p3_3029["18. [P3] Dor moderada?"]
+  t_c_e_trauma_cranio_encefalico_p4_3030["19. [P4] Vómitos persistentes?"]
+  t_c_e_trauma_cranio_encefalico_p4_3033["20. [P4] Hematoma no couro cabeludo?"]
+  t_c_e_trauma_cranio_encefalico_p4_3034["21. [P4] Dor persistente?"]
+  t_c_e_trauma_cranio_encefalico_p4_3037["22. [P4] Problema recente?"]
+  inicio --> t_c_e_trauma_cranio_encefalico_p1_1875
+  t_c_e_trauma_cranio_encefalico_p1_1875_sim(["VERMELHO"]):::vermelho
+  t_c_e_trauma_cranio_encefalico_p1_1875 -->|Sim| t_c_e_trauma_cranio_encefalico_p1_1875_sim
+  t_c_e_trauma_cranio_encefalico_p1_1875 -->|Não| t_c_e_trauma_cranio_encefalico_p1_2146
+  t_c_e_trauma_cranio_encefalico_p1_2146_sim(["VERMELHO"]):::vermelho
+  t_c_e_trauma_cranio_encefalico_p1_2146 -->|Sim| t_c_e_trauma_cranio_encefalico_p1_2146_sim
+  t_c_e_trauma_cranio_encefalico_p1_2146 -->|Não| t_c_e_trauma_cranio_encefalico_p1_2752
+  t_c_e_trauma_cranio_encefalico_p1_2752_sim(["VERMELHO"]):::vermelho
+  t_c_e_trauma_cranio_encefalico_p1_2752 -->|Sim| t_c_e_trauma_cranio_encefalico_p1_2752_sim
+  t_c_e_trauma_cranio_encefalico_p1_2752 -->|Não| t_c_e_trauma_cranio_encefalico_p1_2759
+  t_c_e_trauma_cranio_encefalico_p1_2759_sim(["VERMELHO"]):::vermelho
+  t_c_e_trauma_cranio_encefalico_p1_2759 -->|Sim| t_c_e_trauma_cranio_encefalico_p1_2759_sim
+  t_c_e_trauma_cranio_encefalico_p1_2759 -->|Não| t_c_e_trauma_cranio_encefalico_p1_2771
+  t_c_e_trauma_cranio_encefalico_p1_2771_sim(["VERMELHO"]):::vermelho
+  t_c_e_trauma_cranio_encefalico_p1_2771 -->|Sim| t_c_e_trauma_cranio_encefalico_p1_2771_sim
+  t_c_e_trauma_cranio_encefalico_p1_2771 -->|Não| t_c_e_trauma_cranio_encefalico_p1_3017
+  t_c_e_trauma_cranio_encefalico_p1_3017_sim(["VERMELHO"]):::vermelho
+  t_c_e_trauma_cranio_encefalico_p1_3017 -->|Sim| t_c_e_trauma_cranio_encefalico_p1_3017_sim
+  t_c_e_trauma_cranio_encefalico_p1_3017 -->|Não| t_c_e_trauma_cranio_encefalico_p2_3018
+  t_c_e_trauma_cranio_encefalico_p2_3018_sim(["LARANJA"]):::laranja
+  t_c_e_trauma_cranio_encefalico_p2_3018 -->|Sim| t_c_e_trauma_cranio_encefalico_p2_3018_sim
+  t_c_e_trauma_cranio_encefalico_p2_3018 -->|Não| t_c_e_trauma_cranio_encefalico_p2_3019
+  t_c_e_trauma_cranio_encefalico_p2_3019_sim(["LARANJA"]):::laranja
+  t_c_e_trauma_cranio_encefalico_p2_3019 -->|Sim| t_c_e_trauma_cranio_encefalico_p2_3019_sim
+  t_c_e_trauma_cranio_encefalico_p2_3019 -->|Não| t_c_e_trauma_cranio_encefalico_p2_3020
+  t_c_e_trauma_cranio_encefalico_p2_3020_sim(["LARANJA"]):::laranja
+  t_c_e_trauma_cranio_encefalico_p2_3020 -->|Sim| t_c_e_trauma_cranio_encefalico_p2_3020_sim
+  t_c_e_trauma_cranio_encefalico_p2_3020 -->|Não| t_c_e_trauma_cranio_encefalico_p2_3021
+  t_c_e_trauma_cranio_encefalico_p2_3021_sim(["LARANJA"]):::laranja
+  t_c_e_trauma_cranio_encefalico_p2_3021 -->|Sim| t_c_e_trauma_cranio_encefalico_p2_3021_sim
+  t_c_e_trauma_cranio_encefalico_p2_3021 -->|Não| t_c_e_trauma_cranio_encefalico_p2_3022
+  t_c_e_trauma_cranio_encefalico_p2_3022_sim(["LARANJA"]):::laranja
+  t_c_e_trauma_cranio_encefalico_p2_3022 -->|Sim| t_c_e_trauma_cranio_encefalico_p2_3022_sim
+  t_c_e_trauma_cranio_encefalico_p2_3022 -->|Não| t_c_e_trauma_cranio_encefalico_p3_3023
+  t_c_e_trauma_cranio_encefalico_p3_3023_sim(["AMARELO"]):::amarelo
+  t_c_e_trauma_cranio_encefalico_p3_3023 -->|Sim| t_c_e_trauma_cranio_encefalico_p3_3023_sim
+  t_c_e_trauma_cranio_encefalico_p3_3023 -->|Não| t_c_e_trauma_cranio_encefalico_p3_3024
+  t_c_e_trauma_cranio_encefalico_p3_3024_sim(["AMARELO"]):::amarelo
+  t_c_e_trauma_cranio_encefalico_p3_3024 -->|Sim| t_c_e_trauma_cranio_encefalico_p3_3024_sim
+  t_c_e_trauma_cranio_encefalico_p3_3024 -->|Não| t_c_e_trauma_cranio_encefalico_p3_3025
+  t_c_e_trauma_cranio_encefalico_p3_3025_sim(["AMARELO"]):::amarelo
+  t_c_e_trauma_cranio_encefalico_p3_3025 -->|Sim| t_c_e_trauma_cranio_encefalico_p3_3025_sim
+  t_c_e_trauma_cranio_encefalico_p3_3025 -->|Não| t_c_e_trauma_cranio_encefalico_p3_3026
+  t_c_e_trauma_cranio_encefalico_p3_3026_sim(["AMARELO"]):::amarelo
+  t_c_e_trauma_cranio_encefalico_p3_3026 -->|Sim| t_c_e_trauma_cranio_encefalico_p3_3026_sim
+  t_c_e_trauma_cranio_encefalico_p3_3026 -->|Não| t_c_e_trauma_cranio_encefalico_p3_3027
+  t_c_e_trauma_cranio_encefalico_p3_3027_sim(["AMARELO"]):::amarelo
+  t_c_e_trauma_cranio_encefalico_p3_3027 -->|Sim| t_c_e_trauma_cranio_encefalico_p3_3027_sim
+  t_c_e_trauma_cranio_encefalico_p3_3027 -->|Não| t_c_e_trauma_cranio_encefalico_p3_3028
+  t_c_e_trauma_cranio_encefalico_p3_3028_sim(["AMARELO"]):::amarelo
+  t_c_e_trauma_cranio_encefalico_p3_3028 -->|Sim| t_c_e_trauma_cranio_encefalico_p3_3028_sim
+  t_c_e_trauma_cranio_encefalico_p3_3028 -->|Não| t_c_e_trauma_cranio_encefalico_p3_3029
+  t_c_e_trauma_cranio_encefalico_p3_3029_sim(["AMARELO"]):::amarelo
+  t_c_e_trauma_cranio_encefalico_p3_3029 -->|Sim| t_c_e_trauma_cranio_encefalico_p3_3029_sim
+  t_c_e_trauma_cranio_encefalico_p3_3029 -->|Não| t_c_e_trauma_cranio_encefalico_p4_3030
+  t_c_e_trauma_cranio_encefalico_p4_3030_sim(["VERDE"]):::verde
+  t_c_e_trauma_cranio_encefalico_p4_3030 -->|Sim| t_c_e_trauma_cranio_encefalico_p4_3030_sim
+  t_c_e_trauma_cranio_encefalico_p4_3030 -->|Não| t_c_e_trauma_cranio_encefalico_p4_3033
+  t_c_e_trauma_cranio_encefalico_p4_3033_sim(["VERDE"]):::verde
+  t_c_e_trauma_cranio_encefalico_p4_3033 -->|Sim| t_c_e_trauma_cranio_encefalico_p4_3033_sim
+  t_c_e_trauma_cranio_encefalico_p4_3033 -->|Não| t_c_e_trauma_cranio_encefalico_p4_3034
+  t_c_e_trauma_cranio_encefalico_p4_3034_sim(["VERDE"]):::verde
+  t_c_e_trauma_cranio_encefalico_p4_3034 -->|Sim| t_c_e_trauma_cranio_encefalico_p4_3034_sim
+  t_c_e_trauma_cranio_encefalico_p4_3034 -->|Não| t_c_e_trauma_cranio_encefalico_p4_3037
+  t_c_e_trauma_cranio_encefalico_p4_3037_sim(["VERDE"]):::verde
+  t_c_e_trauma_cranio_encefalico_p4_3037 -->|Sim| t_c_e_trauma_cranio_encefalico_p4_3037_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  t_c_e_trauma_cranio_encefalico_p4_3037 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

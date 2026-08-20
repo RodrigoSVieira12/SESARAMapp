@@ -1,0 +1,101 @@
+flowchart TD
+  inicio(["Início: Convulsões"])
+  convulsoes_p1_1834["1. [P1] Compromisso da via aérea?"]
+  convulsoes_p1_1960["2. [P1] Respiração ineficaz?"]
+  convulsoes_p1_1961["3. [P1] Sinais de choque?"]
+  convulsoes_p1_1962["4. [P1] Não reativo?"]
+  convulsoes_p1_1963["5. [P1] Convulsão atual?"]
+  convulsoes_p2_3235["6. [P2] Alteração do estado de<br/>consciência?"]
+  convulsoes_p2_3236["7. [P2] Défice neurológico agudo?<br/><24h"]
+  convulsoes_p2_3237["8. [P2] Bebé quente?"]
+  convulsoes_p2_3238["9. [P2] Muito quente?"]
+  convulsoes_p2_3239["10. [P2] Possível sépsis?"]
+  convulsoes_p2_3240["11. [P2] Sinais de meningismo?"]
+  convulsoes_p2_3241["12. [P2] Eritema não branqueável?"]
+  convulsoes_p2_3248["13. [P2] Vertigem persistente de novo?"]
+  convulsoes_p2_3249["14. [P2] História de sobredosagem ou<br/>envenenamento?"]
+  convulsoes_p3_1972["15. [P3] Novos sinais e/ou sintomas<br/>neurológicos?"]
+  convulsoes_p3_1973["16. [P3] Quente?"]
+  convulsoes_p3_1974["17. [P3] História de TCE?"]
+  convulsoes_p3_1975["18. [P3] História Inapropriada?"]
+  convulsoes_p3_1976["19. [P3] Sem medicação disponível?"]
+  convulsoes_p4_1977["20. [P4] Febre persistente?"]
+  convulsoes_p4_1979["21. [P4] Cefaleia persistente?"]
+  convulsoes_p4_1982["22. [P4] Dor persistente?"]
+  convulsoes_p4_1983["23. [P4] Problema recente?"]
+  inicio --> convulsoes_p1_1834
+  convulsoes_p1_1834_sim(["VERMELHO"]):::vermelho
+  convulsoes_p1_1834 -->|Sim| convulsoes_p1_1834_sim
+  convulsoes_p1_1834 -->|Não| convulsoes_p1_1960
+  convulsoes_p1_1960_sim(["VERMELHO"]):::vermelho
+  convulsoes_p1_1960 -->|Sim| convulsoes_p1_1960_sim
+  convulsoes_p1_1960 -->|Não| convulsoes_p1_1961
+  convulsoes_p1_1961_sim(["VERMELHO"]):::vermelho
+  convulsoes_p1_1961 -->|Sim| convulsoes_p1_1961_sim
+  convulsoes_p1_1961 -->|Não| convulsoes_p1_1962
+  convulsoes_p1_1962_sim(["VERMELHO"]):::vermelho
+  convulsoes_p1_1962 -->|Sim| convulsoes_p1_1962_sim
+  convulsoes_p1_1962 -->|Não| convulsoes_p1_1963
+  convulsoes_p1_1963_sim(["VERMELHO"]):::vermelho
+  convulsoes_p1_1963 -->|Sim| convulsoes_p1_1963_sim
+  convulsoes_p1_1963 -->|Não| convulsoes_p2_3235
+  convulsoes_p2_3235_sim(["LARANJA"]):::laranja
+  convulsoes_p2_3235 -->|Sim| convulsoes_p2_3235_sim
+  convulsoes_p2_3235 -->|Não| convulsoes_p2_3236
+  convulsoes_p2_3236_sim(["LARANJA"]):::laranja
+  convulsoes_p2_3236 -->|Sim| convulsoes_p2_3236_sim
+  convulsoes_p2_3236 -->|Não| convulsoes_p2_3237
+  convulsoes_p2_3237_sim(["LARANJA"]):::laranja
+  convulsoes_p2_3237 -->|Sim| convulsoes_p2_3237_sim
+  convulsoes_p2_3237 -->|Não| convulsoes_p2_3238
+  convulsoes_p2_3238_sim(["LARANJA"]):::laranja
+  convulsoes_p2_3238 -->|Sim| convulsoes_p2_3238_sim
+  convulsoes_p2_3238 -->|Não| convulsoes_p2_3239
+  convulsoes_p2_3239_sim(["LARANJA"]):::laranja
+  convulsoes_p2_3239 -->|Sim| convulsoes_p2_3239_sim
+  convulsoes_p2_3239 -->|Não| convulsoes_p2_3240
+  convulsoes_p2_3240_sim(["LARANJA"]):::laranja
+  convulsoes_p2_3240 -->|Sim| convulsoes_p2_3240_sim
+  convulsoes_p2_3240 -->|Não| convulsoes_p2_3241
+  convulsoes_p2_3241_sim(["LARANJA"]):::laranja
+  convulsoes_p2_3241 -->|Sim| convulsoes_p2_3241_sim
+  convulsoes_p2_3241 -->|Não| convulsoes_p2_3248
+  convulsoes_p2_3248_sim(["LARANJA"]):::laranja
+  convulsoes_p2_3248 -->|Sim| convulsoes_p2_3248_sim
+  convulsoes_p2_3248 -->|Não| convulsoes_p2_3249
+  convulsoes_p2_3249_sim(["LARANJA"]):::laranja
+  convulsoes_p2_3249 -->|Sim| convulsoes_p2_3249_sim
+  convulsoes_p2_3249 -->|Não| convulsoes_p3_1972
+  convulsoes_p3_1972_sim(["AMARELO"]):::amarelo
+  convulsoes_p3_1972 -->|Sim| convulsoes_p3_1972_sim
+  convulsoes_p3_1972 -->|Não| convulsoes_p3_1973
+  convulsoes_p3_1973_sim(["AMARELO"]):::amarelo
+  convulsoes_p3_1973 -->|Sim| convulsoes_p3_1973_sim
+  convulsoes_p3_1973 -->|Não| convulsoes_p3_1974
+  convulsoes_p3_1974_sim(["AMARELO"]):::amarelo
+  convulsoes_p3_1974 -->|Sim| convulsoes_p3_1974_sim
+  convulsoes_p3_1974 -->|Não| convulsoes_p3_1975
+  convulsoes_p3_1975_sim(["AMARELO"]):::amarelo
+  convulsoes_p3_1975 -->|Sim| convulsoes_p3_1975_sim
+  convulsoes_p3_1975 -->|Não| convulsoes_p3_1976
+  convulsoes_p3_1976_sim(["AMARELO"]):::amarelo
+  convulsoes_p3_1976 -->|Sim| convulsoes_p3_1976_sim
+  convulsoes_p3_1976 -->|Não| convulsoes_p4_1977
+  convulsoes_p4_1977_sim(["VERDE"]):::verde
+  convulsoes_p4_1977 -->|Sim| convulsoes_p4_1977_sim
+  convulsoes_p4_1977 -->|Não| convulsoes_p4_1979
+  convulsoes_p4_1979_sim(["VERDE"]):::verde
+  convulsoes_p4_1979 -->|Sim| convulsoes_p4_1979_sim
+  convulsoes_p4_1979 -->|Não| convulsoes_p4_1982
+  convulsoes_p4_1982_sim(["VERDE"]):::verde
+  convulsoes_p4_1982 -->|Sim| convulsoes_p4_1982_sim
+  convulsoes_p4_1982 -->|Não| convulsoes_p4_1983
+  convulsoes_p4_1983_sim(["VERDE"]):::verde
+  convulsoes_p4_1983 -->|Sim| convulsoes_p4_1983_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  convulsoes_p4_1983 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

@@ -1,56 +1,71 @@
 flowchart TD
-  inicio(["Início: Dor no peito"])
-  dt_q1["1. A dor está presente neste momento?"]
-  dt_q2["2. Começou há menos de uma hora?"]
-  dt_q3["3. A dor é forte?"]
-  dt_q4["4. Tem também suores frios, náuseas<br/>ou sensação de desmaio?"]
-  dt_q5["5. A dor é em aperto ou peso e<br/>espalha-se para o braço, maxilar<br/>ou costas?"]
-  dt_q6["6. Tem falta de ar associada à dor?"]
-  dt_q7["7. A dor aparece ou piora quando faz<br/>esforço, por exemplo subir escadas<br/>ou andar depressa?"]
-  dt_q8["8. A dor piora quando respira fundo,<br/>tosse ou pressiona o local com o<br/>dedo?"]
-  dt_q9["9. Fez recentemente algum esforço<br/>físico invulgar, teve uma pancada<br/>ou tosse prolongada?"]
-  dt_q10["10. A dor dura há mais de 3 dias sem<br/>estar a agravar?"]
-  dt_q11["11. Nos episódios anteriores, a dor<br/>aparecia com o esforço e aliviava<br/>com o repouso?"]
-  dt_q12["12. Os episódios duram segundos e<br/>mudam com a posição do corpo ou<br/>com o toque?"]
-  dt_q13["13. Os episódios estão a ficar mais<br/>frequentes ou mais fortes?"]
-  inicio --> dt_q1
-  dt_q1 -->|Sim| dt_q2
-  dt_q1 -->|Não| dt_q11
-  dt_q2 -->|Sim| dt_q4
-  dt_q2 -->|Não| dt_q3
-  dt_q3 -->|Sim| dt_q4
-  dt_q3 -->|Não| dt_q5
-  dt_q4_sim(["VERMELHO<br/>Dor no peito com suores frios ou<br/>náuseas pode indicar um problema<br/>cardíaco."]):::vermelho
-  dt_q4 -->|Sim| dt_q4_sim
-  dt_q4 -->|Não| dt_q5
-  dt_q5_sim(["LARANJA<br/>Dor torácica com características<br/>de alarme."]):::laranja
-  dt_q5 -->|Sim| dt_q5_sim
-  dt_q5 -->|Não| dt_q6
-  dt_q6_sim(["LARANJA<br/>Dor torácica com dificuldade<br/>respiratória."]):::laranja
-  dt_q6 -->|Sim| dt_q6_sim
-  dt_q6 -->|Não| dt_q7
-  dt_q7_sim(["AMARELO<br/>Dor relacionada com esforço deve<br/>ser avaliada hoje."]):::amarelo
-  dt_q7 -->|Sim| dt_q7_sim
-  dt_q7 -->|Não| dt_q8
-  dt_q8 -->|Sim| dt_q9
-  dt_q8 -->|Não| dt_q10
-  dt_q9_sim(["VERDE<br/>Características sugestivas de dor<br/>muscular ou da parede torácica."]):::verde
-  dt_q9 -->|Sim| dt_q9_sim
-  dt_q9 -->|Não| dt_q10
-  dt_q10_sim(["VERDE<br/>Dor estável há vários dias, sem<br/>sinais de alarme."]):::verde
-  dt_q10 -->|Sim| dt_q10_sim
-  dt_q10_nao(["AMARELO<br/>Dor recente sem causa evidente<br/>deve ser observada hoje."]):::amarelo
-  dt_q10 -->|Não| dt_q10_nao
-  dt_q11_sim(["AMARELO<br/>Episódios de dor com esforço devem<br/>ser avaliados brevemente."]):::amarelo
-  dt_q11 -->|Sim| dt_q11_sim
-  dt_q11 -->|Não| dt_q12
-  dt_q12_sim(["AZUL<br/>Padrão sugestivo de dor da parede<br/>torácica, sem urgência."]):::azul
-  dt_q12 -->|Sim| dt_q12_sim
-  dt_q12 -->|Não| dt_q13
-  dt_q13_sim(["AMARELO<br/>Padrão em agravamento deve ser<br/>avaliado brevemente."]):::amarelo
-  dt_q13 -->|Sim| dt_q13_sim
-  dt_q13_nao(["VERDE<br/>Episódios de dor sem padrão de<br/>alarme, a avaliar sem urgência."]):::verde
-  dt_q13 -->|Não| dt_q13_nao
+  inicio(["Início: Dor torácica"])
+  dor_toracica_p1_1851["1. [P1] Compromisso da via aérea?"]
+  dor_toracica_p1_2122["2. [P1] Respiração ineficaz?"]
+  dor_toracica_p1_2367["3. [P1] Sinais de choque?"]
+  dor_toracica_p1_2376["4. [P1] Não reativo?"]
+  dor_toracica_p2_2415["5. [P2] Dispneia aguda?"]
+  dor_toracica_p2_2416["6. [P2] Alteração do estado de<br/>consciência?"]
+  dor_toracica_p2_2417["7. [P2] Dor aórtica?"]
+  dor_toracica_p2_2418["8. [P2] Dor précordial?"]
+  dor_toracica_p2_2419["9. [P2] Dor severa?"]
+  dor_toracica_p3_2420["10. [P3] Vómitos incoercíveis?"]
+  dor_toracica_p3_2421["11. [P3] História cardíaca<br/>significativa?"]
+  dor_toracica_p3_2422["12. [P3] Dor pleurítica?"]
+  dor_toracica_p3_2423["13. [P3] Dor moderada?"]
+  dor_toracica_p4_2424["14. [P4] Vómitos persistentes?"]
+  dor_toracica_p4_2427["15. [P4] Dor persistente?"]
+  dor_toracica_p4_2428["16. [P4] Problema recente?"]
+  inicio --> dor_toracica_p1_1851
+  dor_toracica_p1_1851_sim(["VERMELHO"]):::vermelho
+  dor_toracica_p1_1851 -->|Sim| dor_toracica_p1_1851_sim
+  dor_toracica_p1_1851 -->|Não| dor_toracica_p1_2122
+  dor_toracica_p1_2122_sim(["VERMELHO"]):::vermelho
+  dor_toracica_p1_2122 -->|Sim| dor_toracica_p1_2122_sim
+  dor_toracica_p1_2122 -->|Não| dor_toracica_p1_2367
+  dor_toracica_p1_2367_sim(["VERMELHO"]):::vermelho
+  dor_toracica_p1_2367 -->|Sim| dor_toracica_p1_2367_sim
+  dor_toracica_p1_2367 -->|Não| dor_toracica_p1_2376
+  dor_toracica_p1_2376_sim(["VERMELHO"]):::vermelho
+  dor_toracica_p1_2376 -->|Sim| dor_toracica_p1_2376_sim
+  dor_toracica_p1_2376 -->|Não| dor_toracica_p2_2415
+  dor_toracica_p2_2415_sim(["LARANJA"]):::laranja
+  dor_toracica_p2_2415 -->|Sim| dor_toracica_p2_2415_sim
+  dor_toracica_p2_2415 -->|Não| dor_toracica_p2_2416
+  dor_toracica_p2_2416_sim(["LARANJA"]):::laranja
+  dor_toracica_p2_2416 -->|Sim| dor_toracica_p2_2416_sim
+  dor_toracica_p2_2416 -->|Não| dor_toracica_p2_2417
+  dor_toracica_p2_2417_sim(["LARANJA"]):::laranja
+  dor_toracica_p2_2417 -->|Sim| dor_toracica_p2_2417_sim
+  dor_toracica_p2_2417 -->|Não| dor_toracica_p2_2418
+  dor_toracica_p2_2418_sim(["LARANJA"]):::laranja
+  dor_toracica_p2_2418 -->|Sim| dor_toracica_p2_2418_sim
+  dor_toracica_p2_2418 -->|Não| dor_toracica_p2_2419
+  dor_toracica_p2_2419_sim(["LARANJA"]):::laranja
+  dor_toracica_p2_2419 -->|Sim| dor_toracica_p2_2419_sim
+  dor_toracica_p2_2419 -->|Não| dor_toracica_p3_2420
+  dor_toracica_p3_2420_sim(["AMARELO"]):::amarelo
+  dor_toracica_p3_2420 -->|Sim| dor_toracica_p3_2420_sim
+  dor_toracica_p3_2420 -->|Não| dor_toracica_p3_2421
+  dor_toracica_p3_2421_sim(["AMARELO"]):::amarelo
+  dor_toracica_p3_2421 -->|Sim| dor_toracica_p3_2421_sim
+  dor_toracica_p3_2421 -->|Não| dor_toracica_p3_2422
+  dor_toracica_p3_2422_sim(["AMARELO"]):::amarelo
+  dor_toracica_p3_2422 -->|Sim| dor_toracica_p3_2422_sim
+  dor_toracica_p3_2422 -->|Não| dor_toracica_p3_2423
+  dor_toracica_p3_2423_sim(["AMARELO"]):::amarelo
+  dor_toracica_p3_2423 -->|Sim| dor_toracica_p3_2423_sim
+  dor_toracica_p3_2423 -->|Não| dor_toracica_p4_2424
+  dor_toracica_p4_2424_sim(["VERDE"]):::verde
+  dor_toracica_p4_2424 -->|Sim| dor_toracica_p4_2424_sim
+  dor_toracica_p4_2424 -->|Não| dor_toracica_p4_2427
+  dor_toracica_p4_2427_sim(["VERDE"]):::verde
+  dor_toracica_p4_2427 -->|Sim| dor_toracica_p4_2427_sim
+  dor_toracica_p4_2427 -->|Não| dor_toracica_p4_2428
+  dor_toracica_p4_2428_sim(["VERDE"]):::verde
+  dor_toracica_p4_2428 -->|Sim| dor_toracica_p4_2428_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  dor_toracica_p4_2428 -->|Não| sem_positivo
   classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
   classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
   classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;

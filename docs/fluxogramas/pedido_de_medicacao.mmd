@@ -1,0 +1,23 @@
+flowchart TD
+  inicio(["Início: Pedido de medicação"])
+  pedido_de_medicacao_p3_3353["1. [P3] Falta de medicação c/<br/>consequências graves e imediata?"]
+  pedido_de_medicacao_p3_3354["2. [P3] Pedido de pilula do dia<br/>seguinte e sexo desprotegido 66/72<br/>horas?"]
+  pedido_de_medicacao_p4_3122["3. [P4] Falta de medicação c/<br/>consequências graves e imediata?"]
+  pedido_de_medicacao_p4_3123["4. [P4] Pedido de pilula do dia<br/>seguinte e sexo desprotegido 66/72<br/>horas?"]
+  inicio --> pedido_de_medicacao_p3_3353
+  pedido_de_medicacao_p3_3353_sim(["AMARELO"]):::amarelo
+  pedido_de_medicacao_p3_3353 -->|Sim| pedido_de_medicacao_p3_3353_sim
+  pedido_de_medicacao_p3_3353 -->|Não| pedido_de_medicacao_p3_3354
+  pedido_de_medicacao_p3_3354_sim(["AMARELO"]):::amarelo
+  pedido_de_medicacao_p3_3354 -->|Sim| pedido_de_medicacao_p3_3354_sim
+  pedido_de_medicacao_p3_3354 -->|Não| pedido_de_medicacao_p4_3122
+  pedido_de_medicacao_p4_3122_sim(["VERDE"]):::verde
+  pedido_de_medicacao_p4_3122 -->|Sim| pedido_de_medicacao_p4_3122_sim
+  pedido_de_medicacao_p4_3122 -->|Não| pedido_de_medicacao_p4_3123
+  pedido_de_medicacao_p4_3123_sim(["VERDE"]):::verde
+  pedido_de_medicacao_p4_3123 -->|Sim| pedido_de_medicacao_p4_3123_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  pedido_de_medicacao_p4_3123 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;

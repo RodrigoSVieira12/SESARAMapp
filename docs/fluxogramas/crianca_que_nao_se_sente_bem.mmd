@@ -1,0 +1,113 @@
+flowchart TD
+  inicio(["Início: Criança que não se sente<br/>bem"])
+  crianca_que_nao_se_sente_bem_p1_1837["1. [P1] Compromisso da via aérea?"]
+  crianca_que_nao_se_sente_bem_p1_2035["2. [P1] Respiração ineficaz?"]
+  crianca_que_nao_se_sente_bem_p1_2036["3. [P1] Sinais de choque?"]
+  crianca_que_nao_se_sente_bem_p1_2037["4. [P1] Não reativo?"]
+  crianca_que_nao_se_sente_bem_p1_2038["5. [P1] Convulsão atual?"]
+  crianca_que_nao_se_sente_bem_p2_2039["6. [P2] Alteração do estado de<br/>consciência?"]
+  crianca_que_nao_se_sente_bem_p2_2040["7. [P2] Sem reação ao estímulo dos<br/>pais?"]
+  crianca_que_nao_se_sente_bem_p2_2041["8. [P2] Muito quente?"]
+  crianca_que_nao_se_sente_bem_p2_2042["9. [P2] Possível sépsis?"]
+  crianca_que_nao_se_sente_bem_p2_2043["10. [P2] Sinais de meningismo?"]
+  crianca_que_nao_se_sente_bem_p2_2044["11. [P2] Erupção cutânea desconhecida?"]
+  crianca_que_nao_se_sente_bem_p2_2045["12. [P2] Alteração da imunidade<br/>conhecida?"]
+  crianca_que_nao_se_sente_bem_p2_2046["13. [P2] História de risco especial de<br/>infeção?"]
+  crianca_que_nao_se_sente_bem_p2_2047["14. [P2] Dor severa?"]
+  crianca_que_nao_se_sente_bem_p3_2048["15. [P3] Sinais de desidratação?"]
+  crianca_que_nao_se_sente_bem_p3_2049["16. [P3] Não se alimenta?"]
+  crianca_que_nao_se_sente_bem_p3_2050["17. [P3] Não urina?"]
+  crianca_que_nao_se_sente_bem_p3_2051["18. [P3] Quente?"]
+  crianca_que_nao_se_sente_bem_p3_3258["19. [P3] História de viagens ao<br/>estrangeiro?"]
+  crianca_que_nao_se_sente_bem_p3_3259["20. [P3] História Inapropriada?"]
+  crianca_que_nao_se_sente_bem_p3_3260["21. [P3] História hematológica ou<br/>metabólica significativa?"]
+  crianca_que_nao_se_sente_bem_p3_3261["22. [P3] Dor moderada?"]
+  crianca_que_nao_se_sente_bem_p4_2055["23. [P4] Febre persistente?"]
+  crianca_que_nao_se_sente_bem_p4_2058["24. [P4] Comportamento estranho na<br/>criança?"]
+  crianca_que_nao_se_sente_bem_p4_2062["25. [P4] Dor persistente?"]
+  crianca_que_nao_se_sente_bem_p4_2063["26. [P4] Problema recente?"]
+  inicio --> crianca_que_nao_se_sente_bem_p1_1837
+  crianca_que_nao_se_sente_bem_p1_1837_sim(["VERMELHO"]):::vermelho
+  crianca_que_nao_se_sente_bem_p1_1837 -->|Sim| crianca_que_nao_se_sente_bem_p1_1837_sim
+  crianca_que_nao_se_sente_bem_p1_1837 -->|Não| crianca_que_nao_se_sente_bem_p1_2035
+  crianca_que_nao_se_sente_bem_p1_2035_sim(["VERMELHO"]):::vermelho
+  crianca_que_nao_se_sente_bem_p1_2035 -->|Sim| crianca_que_nao_se_sente_bem_p1_2035_sim
+  crianca_que_nao_se_sente_bem_p1_2035 -->|Não| crianca_que_nao_se_sente_bem_p1_2036
+  crianca_que_nao_se_sente_bem_p1_2036_sim(["VERMELHO"]):::vermelho
+  crianca_que_nao_se_sente_bem_p1_2036 -->|Sim| crianca_que_nao_se_sente_bem_p1_2036_sim
+  crianca_que_nao_se_sente_bem_p1_2036 -->|Não| crianca_que_nao_se_sente_bem_p1_2037
+  crianca_que_nao_se_sente_bem_p1_2037_sim(["VERMELHO"]):::vermelho
+  crianca_que_nao_se_sente_bem_p1_2037 -->|Sim| crianca_que_nao_se_sente_bem_p1_2037_sim
+  crianca_que_nao_se_sente_bem_p1_2037 -->|Não| crianca_que_nao_se_sente_bem_p1_2038
+  crianca_que_nao_se_sente_bem_p1_2038_sim(["VERMELHO"]):::vermelho
+  crianca_que_nao_se_sente_bem_p1_2038 -->|Sim| crianca_que_nao_se_sente_bem_p1_2038_sim
+  crianca_que_nao_se_sente_bem_p1_2038 -->|Não| crianca_que_nao_se_sente_bem_p2_2039
+  crianca_que_nao_se_sente_bem_p2_2039_sim(["LARANJA"]):::laranja
+  crianca_que_nao_se_sente_bem_p2_2039 -->|Sim| crianca_que_nao_se_sente_bem_p2_2039_sim
+  crianca_que_nao_se_sente_bem_p2_2039 -->|Não| crianca_que_nao_se_sente_bem_p2_2040
+  crianca_que_nao_se_sente_bem_p2_2040_sim(["LARANJA"]):::laranja
+  crianca_que_nao_se_sente_bem_p2_2040 -->|Sim| crianca_que_nao_se_sente_bem_p2_2040_sim
+  crianca_que_nao_se_sente_bem_p2_2040 -->|Não| crianca_que_nao_se_sente_bem_p2_2041
+  crianca_que_nao_se_sente_bem_p2_2041_sim(["LARANJA"]):::laranja
+  crianca_que_nao_se_sente_bem_p2_2041 -->|Sim| crianca_que_nao_se_sente_bem_p2_2041_sim
+  crianca_que_nao_se_sente_bem_p2_2041 -->|Não| crianca_que_nao_se_sente_bem_p2_2042
+  crianca_que_nao_se_sente_bem_p2_2042_sim(["LARANJA"]):::laranja
+  crianca_que_nao_se_sente_bem_p2_2042 -->|Sim| crianca_que_nao_se_sente_bem_p2_2042_sim
+  crianca_que_nao_se_sente_bem_p2_2042 -->|Não| crianca_que_nao_se_sente_bem_p2_2043
+  crianca_que_nao_se_sente_bem_p2_2043_sim(["LARANJA"]):::laranja
+  crianca_que_nao_se_sente_bem_p2_2043 -->|Sim| crianca_que_nao_se_sente_bem_p2_2043_sim
+  crianca_que_nao_se_sente_bem_p2_2043 -->|Não| crianca_que_nao_se_sente_bem_p2_2044
+  crianca_que_nao_se_sente_bem_p2_2044_sim(["LARANJA"]):::laranja
+  crianca_que_nao_se_sente_bem_p2_2044 -->|Sim| crianca_que_nao_se_sente_bem_p2_2044_sim
+  crianca_que_nao_se_sente_bem_p2_2044 -->|Não| crianca_que_nao_se_sente_bem_p2_2045
+  crianca_que_nao_se_sente_bem_p2_2045_sim(["LARANJA"]):::laranja
+  crianca_que_nao_se_sente_bem_p2_2045 -->|Sim| crianca_que_nao_se_sente_bem_p2_2045_sim
+  crianca_que_nao_se_sente_bem_p2_2045 -->|Não| crianca_que_nao_se_sente_bem_p2_2046
+  crianca_que_nao_se_sente_bem_p2_2046_sim(["LARANJA"]):::laranja
+  crianca_que_nao_se_sente_bem_p2_2046 -->|Sim| crianca_que_nao_se_sente_bem_p2_2046_sim
+  crianca_que_nao_se_sente_bem_p2_2046 -->|Não| crianca_que_nao_se_sente_bem_p2_2047
+  crianca_que_nao_se_sente_bem_p2_2047_sim(["LARANJA"]):::laranja
+  crianca_que_nao_se_sente_bem_p2_2047 -->|Sim| crianca_que_nao_se_sente_bem_p2_2047_sim
+  crianca_que_nao_se_sente_bem_p2_2047 -->|Não| crianca_que_nao_se_sente_bem_p3_2048
+  crianca_que_nao_se_sente_bem_p3_2048_sim(["AMARELO"]):::amarelo
+  crianca_que_nao_se_sente_bem_p3_2048 -->|Sim| crianca_que_nao_se_sente_bem_p3_2048_sim
+  crianca_que_nao_se_sente_bem_p3_2048 -->|Não| crianca_que_nao_se_sente_bem_p3_2049
+  crianca_que_nao_se_sente_bem_p3_2049_sim(["AMARELO"]):::amarelo
+  crianca_que_nao_se_sente_bem_p3_2049 -->|Sim| crianca_que_nao_se_sente_bem_p3_2049_sim
+  crianca_que_nao_se_sente_bem_p3_2049 -->|Não| crianca_que_nao_se_sente_bem_p3_2050
+  crianca_que_nao_se_sente_bem_p3_2050_sim(["AMARELO"]):::amarelo
+  crianca_que_nao_se_sente_bem_p3_2050 -->|Sim| crianca_que_nao_se_sente_bem_p3_2050_sim
+  crianca_que_nao_se_sente_bem_p3_2050 -->|Não| crianca_que_nao_se_sente_bem_p3_2051
+  crianca_que_nao_se_sente_bem_p3_2051_sim(["AMARELO"]):::amarelo
+  crianca_que_nao_se_sente_bem_p3_2051 -->|Sim| crianca_que_nao_se_sente_bem_p3_2051_sim
+  crianca_que_nao_se_sente_bem_p3_2051 -->|Não| crianca_que_nao_se_sente_bem_p3_3258
+  crianca_que_nao_se_sente_bem_p3_3258_sim(["AMARELO"]):::amarelo
+  crianca_que_nao_se_sente_bem_p3_3258 -->|Sim| crianca_que_nao_se_sente_bem_p3_3258_sim
+  crianca_que_nao_se_sente_bem_p3_3258 -->|Não| crianca_que_nao_se_sente_bem_p3_3259
+  crianca_que_nao_se_sente_bem_p3_3259_sim(["AMARELO"]):::amarelo
+  crianca_que_nao_se_sente_bem_p3_3259 -->|Sim| crianca_que_nao_se_sente_bem_p3_3259_sim
+  crianca_que_nao_se_sente_bem_p3_3259 -->|Não| crianca_que_nao_se_sente_bem_p3_3260
+  crianca_que_nao_se_sente_bem_p3_3260_sim(["AMARELO"]):::amarelo
+  crianca_que_nao_se_sente_bem_p3_3260 -->|Sim| crianca_que_nao_se_sente_bem_p3_3260_sim
+  crianca_que_nao_se_sente_bem_p3_3260 -->|Não| crianca_que_nao_se_sente_bem_p3_3261
+  crianca_que_nao_se_sente_bem_p3_3261_sim(["AMARELO"]):::amarelo
+  crianca_que_nao_se_sente_bem_p3_3261 -->|Sim| crianca_que_nao_se_sente_bem_p3_3261_sim
+  crianca_que_nao_se_sente_bem_p3_3261 -->|Não| crianca_que_nao_se_sente_bem_p4_2055
+  crianca_que_nao_se_sente_bem_p4_2055_sim(["VERDE"]):::verde
+  crianca_que_nao_se_sente_bem_p4_2055 -->|Sim| crianca_que_nao_se_sente_bem_p4_2055_sim
+  crianca_que_nao_se_sente_bem_p4_2055 -->|Não| crianca_que_nao_se_sente_bem_p4_2058
+  crianca_que_nao_se_sente_bem_p4_2058_sim(["VERDE"]):::verde
+  crianca_que_nao_se_sente_bem_p4_2058 -->|Sim| crianca_que_nao_se_sente_bem_p4_2058_sim
+  crianca_que_nao_se_sente_bem_p4_2058 -->|Não| crianca_que_nao_se_sente_bem_p4_2062
+  crianca_que_nao_se_sente_bem_p4_2062_sim(["VERDE"]):::verde
+  crianca_que_nao_se_sente_bem_p4_2062 -->|Sim| crianca_que_nao_se_sente_bem_p4_2062_sim
+  crianca_que_nao_se_sente_bem_p4_2062 -->|Não| crianca_que_nao_se_sente_bem_p4_2063
+  crianca_que_nao_se_sente_bem_p4_2063_sim(["VERDE"]):::verde
+  crianca_que_nao_se_sente_bem_p4_2063 -->|Sim| crianca_que_nao_se_sente_bem_p4_2063_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  crianca_que_nao_se_sente_bem_p4_2063 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

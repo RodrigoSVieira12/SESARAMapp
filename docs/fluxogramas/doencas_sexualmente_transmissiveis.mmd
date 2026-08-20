@@ -1,0 +1,89 @@
+flowchart TD
+  inicio(["Início: Doenças sexualmente<br/>transmissíveis"])
+  doencas_sexualmente_transmissiveis_p1_1844["1. [P1] Compromisso da via aérea?"]
+  doencas_sexualmente_transmissiveis_p1_2115["2. [P1] Respiração ineficaz?"]
+  doencas_sexualmente_transmissiveis_p1_2250["3. [P1] Sinais de choque?"]
+  doencas_sexualmente_transmissiveis_p1_2251["4. [P1] Não reativo?"]
+  doencas_sexualmente_transmissiveis_p2_2252["5. [P2] Alteração do estado de<br/>consciência?"]
+  doencas_sexualmente_transmissiveis_p2_2253["6. [P2] Muito quente?"]
+  doencas_sexualmente_transmissiveis_p2_2254["7. [P2] Possível sépsis?"]
+  doencas_sexualmente_transmissiveis_p2_2255["8. [P2] Erupção cutânea desconhecida?"]
+  doencas_sexualmente_transmissiveis_p2_2256["9. [P2] Alteração da imunidade<br/>conhecida?"]
+  doencas_sexualmente_transmissiveis_p2_2257["10. [P2] Dor severa?"]
+  doencas_sexualmente_transmissiveis_p3_2258["11. [P3] Quente?"]
+  doencas_sexualmente_transmissiveis_p3_2259["12. [P3] Articulação quente?"]
+  doencas_sexualmente_transmissiveis_p3_2260["13. [P3] Exantema eritematoso ou<br/>bolhoso?"]
+  doencas_sexualmente_transmissiveis_p3_2261["14. [P3] Dor à mobilização das<br/>articulações?"]
+  doencas_sexualmente_transmissiveis_p3_2262["15. [P3] Dor moderada?"]
+  doencas_sexualmente_transmissiveis_p4_2263["16. [P4] Febre persistente?"]
+  doencas_sexualmente_transmissiveis_p4_2266["17. [P4] Corrimento?"]
+  doencas_sexualmente_transmissiveis_p4_3287["18. [P4] Eritema/rash persistente"]
+  doencas_sexualmente_transmissiveis_p4_3288["19. [P4] Dor persistente?"]
+  doencas_sexualmente_transmissiveis_p4_3289["20. [P4] Problema recente?"]
+  inicio --> doencas_sexualmente_transmissiveis_p1_1844
+  doencas_sexualmente_transmissiveis_p1_1844_sim(["VERMELHO"]):::vermelho
+  doencas_sexualmente_transmissiveis_p1_1844 -->|Sim| doencas_sexualmente_transmissiveis_p1_1844_sim
+  doencas_sexualmente_transmissiveis_p1_1844 -->|Não| doencas_sexualmente_transmissiveis_p1_2115
+  doencas_sexualmente_transmissiveis_p1_2115_sim(["VERMELHO"]):::vermelho
+  doencas_sexualmente_transmissiveis_p1_2115 -->|Sim| doencas_sexualmente_transmissiveis_p1_2115_sim
+  doencas_sexualmente_transmissiveis_p1_2115 -->|Não| doencas_sexualmente_transmissiveis_p1_2250
+  doencas_sexualmente_transmissiveis_p1_2250_sim(["VERMELHO"]):::vermelho
+  doencas_sexualmente_transmissiveis_p1_2250 -->|Sim| doencas_sexualmente_transmissiveis_p1_2250_sim
+  doencas_sexualmente_transmissiveis_p1_2250 -->|Não| doencas_sexualmente_transmissiveis_p1_2251
+  doencas_sexualmente_transmissiveis_p1_2251_sim(["VERMELHO"]):::vermelho
+  doencas_sexualmente_transmissiveis_p1_2251 -->|Sim| doencas_sexualmente_transmissiveis_p1_2251_sim
+  doencas_sexualmente_transmissiveis_p1_2251 -->|Não| doencas_sexualmente_transmissiveis_p2_2252
+  doencas_sexualmente_transmissiveis_p2_2252_sim(["LARANJA"]):::laranja
+  doencas_sexualmente_transmissiveis_p2_2252 -->|Sim| doencas_sexualmente_transmissiveis_p2_2252_sim
+  doencas_sexualmente_transmissiveis_p2_2252 -->|Não| doencas_sexualmente_transmissiveis_p2_2253
+  doencas_sexualmente_transmissiveis_p2_2253_sim(["LARANJA"]):::laranja
+  doencas_sexualmente_transmissiveis_p2_2253 -->|Sim| doencas_sexualmente_transmissiveis_p2_2253_sim
+  doencas_sexualmente_transmissiveis_p2_2253 -->|Não| doencas_sexualmente_transmissiveis_p2_2254
+  doencas_sexualmente_transmissiveis_p2_2254_sim(["LARANJA"]):::laranja
+  doencas_sexualmente_transmissiveis_p2_2254 -->|Sim| doencas_sexualmente_transmissiveis_p2_2254_sim
+  doencas_sexualmente_transmissiveis_p2_2254 -->|Não| doencas_sexualmente_transmissiveis_p2_2255
+  doencas_sexualmente_transmissiveis_p2_2255_sim(["LARANJA"]):::laranja
+  doencas_sexualmente_transmissiveis_p2_2255 -->|Sim| doencas_sexualmente_transmissiveis_p2_2255_sim
+  doencas_sexualmente_transmissiveis_p2_2255 -->|Não| doencas_sexualmente_transmissiveis_p2_2256
+  doencas_sexualmente_transmissiveis_p2_2256_sim(["LARANJA"]):::laranja
+  doencas_sexualmente_transmissiveis_p2_2256 -->|Sim| doencas_sexualmente_transmissiveis_p2_2256_sim
+  doencas_sexualmente_transmissiveis_p2_2256 -->|Não| doencas_sexualmente_transmissiveis_p2_2257
+  doencas_sexualmente_transmissiveis_p2_2257_sim(["LARANJA"]):::laranja
+  doencas_sexualmente_transmissiveis_p2_2257 -->|Sim| doencas_sexualmente_transmissiveis_p2_2257_sim
+  doencas_sexualmente_transmissiveis_p2_2257 -->|Não| doencas_sexualmente_transmissiveis_p3_2258
+  doencas_sexualmente_transmissiveis_p3_2258_sim(["AMARELO"]):::amarelo
+  doencas_sexualmente_transmissiveis_p3_2258 -->|Sim| doencas_sexualmente_transmissiveis_p3_2258_sim
+  doencas_sexualmente_transmissiveis_p3_2258 -->|Não| doencas_sexualmente_transmissiveis_p3_2259
+  doencas_sexualmente_transmissiveis_p3_2259_sim(["AMARELO"]):::amarelo
+  doencas_sexualmente_transmissiveis_p3_2259 -->|Sim| doencas_sexualmente_transmissiveis_p3_2259_sim
+  doencas_sexualmente_transmissiveis_p3_2259 -->|Não| doencas_sexualmente_transmissiveis_p3_2260
+  doencas_sexualmente_transmissiveis_p3_2260_sim(["AMARELO"]):::amarelo
+  doencas_sexualmente_transmissiveis_p3_2260 -->|Sim| doencas_sexualmente_transmissiveis_p3_2260_sim
+  doencas_sexualmente_transmissiveis_p3_2260 -->|Não| doencas_sexualmente_transmissiveis_p3_2261
+  doencas_sexualmente_transmissiveis_p3_2261_sim(["AMARELO"]):::amarelo
+  doencas_sexualmente_transmissiveis_p3_2261 -->|Sim| doencas_sexualmente_transmissiveis_p3_2261_sim
+  doencas_sexualmente_transmissiveis_p3_2261 -->|Não| doencas_sexualmente_transmissiveis_p3_2262
+  doencas_sexualmente_transmissiveis_p3_2262_sim(["AMARELO"]):::amarelo
+  doencas_sexualmente_transmissiveis_p3_2262 -->|Sim| doencas_sexualmente_transmissiveis_p3_2262_sim
+  doencas_sexualmente_transmissiveis_p3_2262 -->|Não| doencas_sexualmente_transmissiveis_p4_2263
+  doencas_sexualmente_transmissiveis_p4_2263_sim(["VERDE"]):::verde
+  doencas_sexualmente_transmissiveis_p4_2263 -->|Sim| doencas_sexualmente_transmissiveis_p4_2263_sim
+  doencas_sexualmente_transmissiveis_p4_2263 -->|Não| doencas_sexualmente_transmissiveis_p4_2266
+  doencas_sexualmente_transmissiveis_p4_2266_sim(["VERDE"]):::verde
+  doencas_sexualmente_transmissiveis_p4_2266 -->|Sim| doencas_sexualmente_transmissiveis_p4_2266_sim
+  doencas_sexualmente_transmissiveis_p4_2266 -->|Não| doencas_sexualmente_transmissiveis_p4_3287
+  doencas_sexualmente_transmissiveis_p4_3287_sim(["VERDE"]):::verde
+  doencas_sexualmente_transmissiveis_p4_3287 -->|Sim| doencas_sexualmente_transmissiveis_p4_3287_sim
+  doencas_sexualmente_transmissiveis_p4_3287 -->|Não| doencas_sexualmente_transmissiveis_p4_3288
+  doencas_sexualmente_transmissiveis_p4_3288_sim(["VERDE"]):::verde
+  doencas_sexualmente_transmissiveis_p4_3288 -->|Sim| doencas_sexualmente_transmissiveis_p4_3288_sim
+  doencas_sexualmente_transmissiveis_p4_3288 -->|Não| doencas_sexualmente_transmissiveis_p4_3289
+  doencas_sexualmente_transmissiveis_p4_3289_sim(["VERDE"]):::verde
+  doencas_sexualmente_transmissiveis_p4_3289 -->|Sim| doencas_sexualmente_transmissiveis_p4_3289_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  doencas_sexualmente_transmissiveis_p4_3289 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

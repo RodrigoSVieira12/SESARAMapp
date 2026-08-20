@@ -19,19 +19,25 @@ cliente = TestClient(app)
 FUNCHAL = (32.6496, -16.9086)
 
 SABADO_15H = datetime(2026, 7, 4, 15, 0)
-FERIADO_RAM_15H = datetime(2026, 7, 1, 15, 0)   # quarta-feira
+FERIADO_RAM_15H = datetime(2026, 7, 1, 15, 0)  # quarta-feira
 SEGUNDA_10H = datetime(2026, 7, 6, 10, 0)
 
 HORARIO_DIAS_UTEIS = {
     "tipo": "semanal",
     "horas": {
-        "seg": ["08:00-20:00"], "ter": ["08:00-20:00"], "qua": ["08:00-20:00"],
-        "qui": ["08:00-20:00"], "sex": ["08:00-20:00"], "sab": [], "dom": [],
+        "seg": ["08:00-20:00"],
+        "ter": ["08:00-20:00"],
+        "qua": ["08:00-20:00"],
+        "qui": ["08:00-20:00"],
+        "sex": ["08:00-20:00"],
+        "sab": [],
+        "dom": [],
     },
 }
 
 
 # ------------------------------------------------------------ feriados --
+
 
 def test_pascoa_em_datas_conhecidas():
     assert feriados.pascoa(2024) == date(2024, 3, 31)
@@ -66,6 +72,7 @@ def test_descricao_do_dia_inclui_o_nome_do_feriado():
 
 
 # ---------------------------------------------- horários com feriados --
+
 
 def test_feriado_a_meio_da_semana_conta_como_fechado():
     # Era este o bug: 1 de julho (quarta) aparecia aberto como um dia útil.
@@ -103,6 +110,7 @@ def test_proxima_abertura_de_24h_e_none():
 
 
 # ------------------------------------------------- routing: verde/azul --
+
 
 def test_verde_ao_sabado_explica_o_dia_e_oferece_esperar_em_casa():
     saida = routing.decidir_encaminhamento("verde", *FUNCHAL, quando=SABADO_15H)
@@ -142,6 +150,7 @@ def test_azul_tem_bloco_de_autocuidado_e_reabertura():
 
 # ---------------------------------------------------------------- API --
 
+
 def test_api_feriados_inclui_o_dia_da_madeira():
     resposta = cliente.get("/api/feriados", params={"ano": 2026})
     assert resposta.status_code == 200
@@ -150,10 +159,15 @@ def test_api_feriados_inclui_o_dia_da_madeira():
 
 
 def test_api_encaminhamento_devolve_dia_e_autocuidado():
-    resposta = cliente.post("/api/encaminhamento", json={
-        "cor": "verde", "lat": FUNCHAL[0], "lng": FUNCHAL[1],
-        "quando": "2026-07-04T15:00:00",
-    })
+    resposta = cliente.post(
+        "/api/encaminhamento",
+        json={
+            "cor": "verde",
+            "lat": FUNCHAL[0],
+            "lng": FUNCHAL[1],
+            "quando": "2026-07-04T15:00:00",
+        },
+    )
     corpo = resposta.json()
     assert resposta.status_code == 200
     assert corpo["dia"]["tipo"] == "sabado"

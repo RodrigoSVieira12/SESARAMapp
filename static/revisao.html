@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Conteúdo ao utente — revisão (Onde ir?)</title>
+  <meta name="robots" content="noindex" />
+  <!-- Ferramenta INTERNA de revisão clínica (v0.15.2; perguntas na v0.15.3).
+       Não é para utentes: mostra, lado a lado, o texto CLÍNICO da tabela e a
+       reescrita leiga (PT/EN) com o estado de validação por item, nas duas
+       metades do conteúdo mostrado ao utente:
+         - Aconselhamento (cartão "O que pode fazer"), por fluxo e cor,
+           incluindo o que o filtro de segurança ESCONDE ao utente
+           (GET /api/aconselhamento/revisao);
+         - Perguntas de triagem, por fluxo e prioridade
+           (GET /api/perguntas/revisao).
+       Dados relidos do disco a cada pedido; editar os ficheiros em
+       app/data/, correr o aplicar respetivo (só para mudar frases; marcar
+       como validado não precisa) e fazer refresh chega. -->
+  <style>
+    :root {
+      --fundo: #f5f7fa; --superficie: #ffffff; --tinta: #1c2b36;
+      --tinta-suave: #51606c; --primaria: #185fa5; --primaria-escura: #0c447c;
+      --primaria-clara: #eaf2fa; --linha: #74828f; --perigo: #b00020;
+      --ok: #2e7d32; --pendente: #8f6400;
+      --vermelho: #d32f2f; --laranja: #ef6c00; --amarelo: #f9a825;
+      --verde: #2e7d32; --azul: #1565c0;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--fundo); color: var(--tinta);
+           font-family: "Public Sans", "Segoe UI", system-ui, -apple-system, Arial, sans-serif; }
+    header { background: var(--primaria-escura); color: #fff; padding: 0.8rem 1.2rem; }
+    header .titulo { font-weight: 700; font-size: 1.05rem; }
+    header .sub { font-size: 0.85rem; opacity: 0.9; }
+    main { max-width: 1080px; margin: 0 auto; padding: 1rem 1.2rem 3rem; }
+    .barra { display: flex; flex-wrap: wrap; gap: 0.7rem; align-items: center;
+             background: var(--superficie); border: 1px solid var(--linha);
+             border-radius: 10px; padding: 0.7rem 0.9rem; margin: 1rem 0;
+             position: sticky; top: 0; z-index: 5; }
+    .barra label { display: inline-flex; align-items: center; gap: 0.35rem;
+                   color: var(--tinta-suave); font-size: 0.9rem; }
+    select, input[type="search"] { font: inherit; padding: 0.35rem 0.5rem;
+                   border: 1px solid var(--linha); border-radius: 8px;
+                   background: var(--superficie); color: var(--tinta); }
+    input[type="search"] { min-width: 14rem; }
+    .estado-barra { color: var(--tinta-suave); font-size: 0.85rem; margin-left: auto; }
+    .aviso-topo { border: 1px solid var(--pendente); background: #fff8e6;
+                  border-radius: 10px; padding: 0.7rem 0.9rem; margin: 1rem 0;
+                  font-size: 0.92rem; }
+    .erro-motor { border: 2px solid var(--perigo); background: #fff5f5;
+                  border-radius: 10px; padding: 0.8rem 1rem; margin: 1rem 0;
+                  white-space: pre-wrap; display: none; }
+    .fonte { color: var(--tinta-suave); font-size: 0.82rem; margin: 0.4rem 0 0; }
+    .fonte code { font-size: 0.8rem; }
+    .cartao { background: var(--superficie); border: 1px solid var(--linha);
+              border-radius: 12px; padding: 1rem 1.1rem; margin: 1.1rem 0; }
+    .cartao h2 { margin: 0 0 0.6rem; font-size: 1.1rem; color: var(--primaria-escura); }
+    .bloco-cor { margin: 0.8rem 0 0; }
+    .bloco-cor h3 { margin: 0 0 0.4rem; font-size: 0.85rem; letter-spacing: 0.04em;
+                    text-transform: uppercase; display: flex; align-items: center; gap: 0.45rem; }
+    .ponto { width: 0.75rem; height: 0.75rem; border-radius: 50%; display: inline-block;
+             border: 1px solid rgba(0,0,0,0.25); flex: none; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+    th, td { text-align: left; vertical-align: top; padding: 0.45rem 0.55rem;
+             border-top: 1px solid var(--linha); }
+    th { color: var(--tinta-suave); font-size: 0.78rem; letter-spacing: 0.03em;
+         text-transform: uppercase; border-top: 0; }
+    td.clinico { width: 34%; }
+    td.leigo { width: 44%; }
+    td.cor-prio { white-space: nowrap; width: 6.5rem; }
+    td.cor-prio .ponto { vertical-align: -0.1rem; margin-right: 0.35rem; }
+    .en { color: var(--tinta-suave); display: block; margin-top: 0.25rem; }
+    .en::before { content: "EN · "; font-weight: 700; font-size: 0.75rem; }
+    tr.oculto td { background: #f2f4f7; }
+    tr.oculto td.clinico { text-decoration: none; }
+    .etiqueta { display: inline-block; font-size: 0.72rem; font-weight: 700;
+                letter-spacing: 0.04em; text-transform: uppercase;
+                border-radius: 999px; padding: 0.15rem 0.55rem; white-space: nowrap; }
+    .etiqueta--oculto { background: #e2e6ea; color: #3c4a56; border: 1px solid #aab4bd; }
+    .etiqueta--pendente { background: #fff3d6; color: var(--pendente); border: 1px solid #d9b23a; }
+    .etiqueta--validado { background: #e4f2e5; color: var(--ok); border: 1px solid #7fb984; }
+    .quem { display: block; color: var(--tinta-suave); font-size: 0.78rem; margin-top: 0.2rem; }
+    .vazio { color: var(--tinta-suave); font-style: italic; }
+    .esqueleto { color: var(--tinta-suave); }
+    footer { max-width: 1080px; margin: 0 auto; padding: 0 1.2rem 2rem;
+             color: var(--tinta-suave); font-size: 0.82rem; }
+    @media print {
+      .barra { display: none; }
+      body { background: #fff; }
+      .cartao { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="titulo">Conteúdo ao utente — revisão clínica</div>
+    <div class="sub">Ferramenta interna · texto clínico ↔ reescrita leiga (PT/EN) · estado de validação · aconselhamento e perguntas</div>
+  </header>
+  <main>
+    <div class="aviso-topo">
+      <strong>Como ler:</strong> o utente só lê as frases da coluna «O que o
+      utente vê/lê». No <em>aconselhamento</em>, as linhas a cinzento
+      (<span class="etiqueta etiqueta--oculto">oculto ao utente</span>) são
+      conselhos só-profissionais que o filtro de segurança esconde de
+      propósito; nas <em>perguntas</em> nada é escondido — sem reescrita, o
+      utente vê a pergunta clínica oficial. Para corrigir uma frase, editar
+      <code>app/data/aconselhamento_utente.json</code> ou
+      <code>app/data/perguntas_utente.json</code> e correr o
+      <code>aplicar_*</code> respetivo; para marcar itens como validados há o
+      <code>python scripts/marcar_validado.py</code>. Um refresh desta página
+      mostra o resultado.
+    </div>
+    <div class="barra">
+      <label>Secção
+        <select id="sel-seccao">
+          <option value="aconselhamento">Aconselhamento</option>
+          <option value="perguntas">Perguntas</option>
+        </select>
+      </label>
+      <label>Fluxo
+        <select id="sel-fluxo"><option value="">Todos</option></select>
+      </label>
+      <label id="lab-ocultos"><input type="checkbox" id="chk-ocultos" /> só ocultos ao utente</label>
+      <label><input type="checkbox" id="chk-pendentes" /> só por validar</label>
+      <label>Procurar
+        <input type="search" id="inp-procurar" placeholder="texto clínico ou leigo…" />
+      </label>
+      <span class="estado-barra" id="estado">a carregar…</span>
+    </div>
+    <div class="erro-motor" id="erro"></div>
+    <p class="fonte" id="fonte"></p>
+    <div id="lista"><p class="esqueleto">A carregar…</p></div>
+  </main>
+  <footer>
+    Todos os textos (clínicos e leigos, PT e EN) estão sujeitos a validação
+    clínica antes de uso real. O estado por item vive em
+    <code>app/data/aconselhamento_utente.json</code> e
+    <code>app/data/perguntas_utente.json</code>; em produção, o portão
+    <code>ONDE_IR_APENAS_VALIDADO=1</code> esconde ao utente os conselhos por
+    validar e reverte as perguntas por validar para a redação clínica oficial.
+  </footer>
+  <script>
+    "use strict";
+    const CORES = { vermelho: "#d32f2f", laranja: "#ef6c00", amarelo: "#f9a825",
+                    verde: "#2e7d32", azul: "#1565c0" };
+    let DADOS = null;            // aconselhamento (GET /api/aconselhamento/revisao)
+    let DADOS_PERGUNTAS = null;  // perguntas      (GET /api/perguntas/revisao)
+
+    const $ = (id) => document.getElementById(id);
+    const esc = (s) => String(s ?? "").replace(/[&<>"']/g,
+      (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+    function seccao() { return $("sel-seccao").value; }
+
+    function etiquetas(item) {
+      if (item.mostrado_ao_utente === false)
+        return '<span class="etiqueta etiqueta--oculto">oculto ao utente</span>';
+      if (item.sem_entrada)
+        return '<span class="etiqueta etiqueta--oculto">sem reescrita</span>';
+      if (item.validado) {
+        const quem = esc(item.validado_por || "?");
+        const quando = esc(item.validado_em || "?");
+        return `<span class="etiqueta etiqueta--validado">validado</span>` +
+               `<span class="quem">${quem} · ${quando}</span>`;
+      }
+      return '<span class="etiqueta etiqueta--pendente">por validar</span>';
+    }
+
+    function desenharAconselhamento() {
+      const fluxoEscolhido = $("sel-fluxo").value;
+      const soOcultos = $("chk-ocultos").checked;
+      const soPendentes = $("chk-pendentes").checked;
+      const termo = $("inp-procurar").value.trim().toLowerCase();
+      let visiveis = 0;
+      const blocos = [];
+
+      for (const fluxo of DADOS.fluxos) {
+        if (fluxoEscolhido && fluxo.id !== fluxoEscolhido) continue;
+        const cores = [];
+        for (const bloco of fluxo.cores) {
+          const linhas = [];
+          for (const it of bloco.itens) {
+            if (soOcultos && it.mostrado_ao_utente) continue;
+            if (soPendentes && (!it.mostrado_ao_utente || it.validado)) continue;
+            if (termo) {
+              const palheiro = [it.texto, it.texto_utente, it.texto_utente_en]
+                .filter(Boolean).join(" ").toLowerCase();
+              if (!palheiro.includes(termo)) continue;
+            }
+            visiveis += 1;
+            const leigo = it.mostrado_ao_utente
+              ? `${esc(it.texto_utente)}<span class="en">${esc(it.texto_utente_en || "—")}</span>`
+              : '<span class="vazio">— nada é mostrado ao utente —</span>';
+            linhas.push(
+              `<tr class="${it.mostrado_ao_utente ? "" : "oculto"}">
+                 <td class="clinico">${esc(it.texto)}</td>
+                 <td class="leigo">${leigo}</td>
+                 <td>${etiquetas(it)}</td>
+               </tr>`);
+          }
+          if (linhas.length) {
+            cores.push(
+              `<div class="bloco-cor">
+                 <h3><span class="ponto" style="background:${CORES[bloco.cor] || "#999"}"></span>${esc(bloco.cor)}</h3>
+                 <table>
+                   <thead><tr><th>Conselho clínico (tabela)</th><th>O que o utente vê (PT · EN)</th><th>Estado</th></tr></thead>
+                   <tbody>${linhas.join("")}</tbody>
+                 </table>
+               </div>`);
+          }
+        }
+        if (cores.length) {
+          blocos.push(`<section class="cartao"><h2>${esc(fluxo.nome)}</h2>${cores.join("")}</section>`);
+        }
+      }
+
+      $("lista").innerHTML = blocos.join("") ||
+        '<p class="esqueleto">Nada corresponde aos filtros escolhidos.</p>';
+      const t = DADOS.totais;
+      $("estado").textContent =
+        `${visiveis} item(ns) no ecrã · no total: ${t.itens} ` +
+        `(${t.mostrados_ao_utente} mostrados, ${t.ocultos} ocultos, ` +
+        `${t.validados} validados)`;
+    }
+
+    function desenharPerguntas() {
+      const fluxoEscolhido = $("sel-fluxo").value;
+      const soPendentes = $("chk-pendentes").checked;
+      const termo = $("inp-procurar").value.trim().toLowerCase();
+      let visiveis = 0;
+      const blocos = [];
+
+      for (const fluxo of DADOS_PERGUNTAS.fluxos) {
+        if (fluxoEscolhido && fluxo.id !== fluxoEscolhido) continue;
+        const linhas = [];
+        for (const p of fluxo.perguntas) {
+          if (soPendentes && p.validado) continue;
+          if (termo) {
+            const palheiro = [p.texto, p.texto_utente, p.texto_utente_en]
+              .filter(Boolean).join(" ").toLowerCase();
+            if (!palheiro.includes(termo)) continue;
+          }
+          visiveis += 1;
+          const leigo = p.texto_utente
+            ? `${esc(p.texto_utente)}<span class="en">${esc(p.texto_utente_en || "—")}</span>`
+            : '<span class="vazio">— o utente vê a pergunta clínica —</span>';
+          linhas.push(
+            `<tr>
+               <td class="cor-prio"><span class="ponto" style="background:${CORES[p.cor] || "#999"}"></span>${esc(p.prioridade || "")}</td>
+               <td class="clinico">${esc(p.texto)}</td>
+               <td class="leigo">${leigo}</td>
+               <td>${etiquetas(p)}</td>
+             </tr>`);
+        }
+        if (linhas.length) {
+          blocos.push(
+            `<section class="cartao"><h2>${esc(fluxo.nome)}</h2>
+               <table>
+                 <thead><tr><th>Cor</th><th>Pergunta clínica (tabela)</th><th>O que o utente lê (PT · EN)</th><th>Estado</th></tr></thead>
+                 <tbody>${linhas.join("")}</tbody>
+               </table>
+             </section>`);
+        }
+      }
+
+      $("lista").innerHTML = blocos.join("") ||
+        '<p class="esqueleto">Nada corresponde aos filtros escolhidos.</p>';
+      const t = DADOS_PERGUNTAS.totais;
+      $("estado").textContent =
+        `${visiveis} pergunta(s) no ecrã · no total: ${t.discriminadores} ` +
+        `discriminadores em ${t.fluxos} fluxos (${t.reescritas} reescritas, ` +
+        `${t.validados} validadas)`;
+    }
+
+    function fonteHtml() {
+      if (seccao() === "perguntas") {
+        const f = (DADOS_PERGUNTAS && DADOS_PERGUNTAS.fonte) || {};
+        const r = f.reescritas
+          ? `reescritas: <code>${esc(f.reescritas.ficheiro)}</code> (sha256 ` +
+            `<code>${esc(String(f.reescritas.sha256).slice(0, 12))}…</code>)`
+          : "reescritas por registar";
+        return `Proveniência — ${r}. Versão da app: ${esc(DADOS_PERGUNTAS.versao)}.`;
+      }
+      const fonte = (DADOS && DADOS.fonte) || {};
+      const tabela = fonte.tabela
+        ? `tabela: <code>${esc(fonte.tabela.ficheiro)}</code> (sha256 ` +
+          `<code>${esc(String(fonte.tabela.sha256).slice(0, 12))}…</code>, ` +
+          `importada em ${esc(fonte.tabela.importado_em)})`
+        : "tabela de origem por registar (será gravada na próxima importação com o Excel)";
+      const reescritas = fonte.reescritas
+        ? ` · reescritas: <code>${esc(fonte.reescritas.ficheiro)}</code> (sha256 ` +
+          `<code>${esc(String(fonte.reescritas.sha256).slice(0, 12))}…</code>)`
+        : "";
+      return `Proveniência — ${tabela}${reescritas}. Versão da app: ${esc(DADOS.versao)}.`;
+    }
+
+    function desenhar() {
+      const s = seccao();
+      $("lab-ocultos").style.display = s === "perguntas" ? "none" : "";
+      const dados = s === "perguntas" ? DADOS_PERGUNTAS : DADOS;
+      if (!dados) return;
+      if (dados.erro) {
+        const e = $("erro");
+        e.style.display = "block";
+        e.innerHTML = "<strong>Erro:</strong> " + esc(dados.erro);
+        $("lista").innerHTML = "";
+        $("estado").textContent = "—";
+        $("fonte").innerHTML = "";
+        return;
+      }
+      $("erro").style.display = "none";
+      $("fonte").innerHTML = fonteHtml();
+      if (s === "perguntas") desenharPerguntas(); else desenharAconselhamento();
+    }
+
+    async function carregar() {
+      try {
+        const resp = await fetch("/api/aconselhamento/revisao");
+        DADOS = await resp.json();
+      } catch (_) {
+        DADOS = { erro: "Não consegui contactar a API (/api/aconselhamento/revisao)." };
+      }
+      try {
+        const resp = await fetch("/api/perguntas/revisao");
+        DADOS_PERGUNTAS = await resp.json();
+      } catch (_) {
+        DADOS_PERGUNTAS = { erro: "Não consegui contactar a API (/api/perguntas/revisao)." };
+      }
+      // O seletor de fluxo serve as duas secções (os ids e os nomes são os
+      // mesmos); preenche-se a partir das perguntas, que trazem sempre os
+      // 56 fluxos, com recuo para o aconselhamento.
+      const fluxos = (DADOS_PERGUNTAS && !DADOS_PERGUNTAS.erro && DADOS_PERGUNTAS.fluxos.length)
+        ? DADOS_PERGUNTAS.fluxos
+        : ((DADOS && !DADOS.erro && DADOS.fluxos) || []);
+      const sel = $("sel-fluxo");
+      for (const f of fluxos) {
+        const op = document.createElement("option");
+        op.value = f.id;
+        op.textContent = f.nome;
+        sel.appendChild(op);
+      }
+      desenhar();
+    }
+
+    for (const id of ["sel-seccao", "sel-fluxo", "chk-ocultos", "chk-pendentes"])
+      $(id).addEventListener("change", desenhar);
+    $("inp-procurar").addEventListener("input", desenhar);
+    carregar();
+  </script>
+</body>
+</html>

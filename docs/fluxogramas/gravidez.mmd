@@ -1,0 +1,125 @@
+flowchart TD
+  inicio(["Início: Gravidez"])
+  gravidez_p1_1858["1. [P1] Compromisso da via aérea?"]
+  gravidez_p1_2129["2. [P1] Respiração ineficaz?"]
+  gravidez_p1_2549["3. [P1] Hemorragia catastrófica?"]
+  gravidez_p1_2552["4. [P1] Sinais de choque?"]
+  gravidez_p1_2580["5. [P1] Não reativo?"]
+  gravidez_p1_2581["6. [P1] Convulsão atual?"]
+  gravidez_p1_2582["7. [P1] Apresentação de segmentos<br/>fetais?"]
+  gravidez_p1_3312["8. [P1] Prolapso do cordão umbilical"]
+  gravidez_p2_2583["9. [P2] Hemorragia vaginal intensa?"]
+  gravidez_p2_2584["10. [P2] Hemorragia vaginal em<br/>gestação superior a 20 semanas?"]
+  gravidez_p2_2585["11. [P2] Alteração do estado de<br/>consciência?"]
+  gravidez_p2_2586["12. [P2] Muito quente?"]
+  gravidez_p2_2587["13. [P2] Possível sépsis?"]
+  gravidez_p2_2588["14. [P2] Trabalho de parto?"]
+  gravidez_p2_2589["15. [P2] Movimentos fetais reduzidos<br/>em gestação superior a 20 semanas?"]
+  gravidez_p2_2590["16. [P2] História de convulsão?"]
+  gravidez_p2_2591["17. [P2] Dor severa?"]
+  gravidez_p3_2592["18. [P3] Vómitos incoercíveis?"]
+  gravidez_p3_2593["19. [P3] Hemorragia vaginal ligeira?"]
+  gravidez_p3_2594["20. [P3] Pressão arterial elevada?"]
+  gravidez_p3_2595["21. [P3] Quente?"]
+  gravidez_p3_2596["22. [P3] História Inapropriada?"]
+  gravidez_p3_2597["23. [P3] História de traumatismo?"]
+  gravidez_p3_2598["24. [P3] Dor que irradia para o ombro?"]
+  gravidez_p3_2599["25. [P3] Dor moderada?"]
+  gravidez_p4_2600["26. [P4] Febre persistente?"]
+  gravidez_p4_2603["27. [P4] Dor persistente?"]
+  gravidez_p4_2604["28. [P4] Vómitos persistentes?"]
+  gravidez_p4_2607["29. [P4] Problema recente?"]
+  inicio --> gravidez_p1_1858
+  gravidez_p1_1858_sim(["VERMELHO"]):::vermelho
+  gravidez_p1_1858 -->|Sim| gravidez_p1_1858_sim
+  gravidez_p1_1858 -->|Não| gravidez_p1_2129
+  gravidez_p1_2129_sim(["VERMELHO"]):::vermelho
+  gravidez_p1_2129 -->|Sim| gravidez_p1_2129_sim
+  gravidez_p1_2129 -->|Não| gravidez_p1_2549
+  gravidez_p1_2549_sim(["VERMELHO"]):::vermelho
+  gravidez_p1_2549 -->|Sim| gravidez_p1_2549_sim
+  gravidez_p1_2549 -->|Não| gravidez_p1_2552
+  gravidez_p1_2552_sim(["VERMELHO"]):::vermelho
+  gravidez_p1_2552 -->|Sim| gravidez_p1_2552_sim
+  gravidez_p1_2552 -->|Não| gravidez_p1_2580
+  gravidez_p1_2580_sim(["VERMELHO"]):::vermelho
+  gravidez_p1_2580 -->|Sim| gravidez_p1_2580_sim
+  gravidez_p1_2580 -->|Não| gravidez_p1_2581
+  gravidez_p1_2581_sim(["VERMELHO"]):::vermelho
+  gravidez_p1_2581 -->|Sim| gravidez_p1_2581_sim
+  gravidez_p1_2581 -->|Não| gravidez_p1_2582
+  gravidez_p1_2582_sim(["VERMELHO"]):::vermelho
+  gravidez_p1_2582 -->|Sim| gravidez_p1_2582_sim
+  gravidez_p1_2582 -->|Não| gravidez_p1_3312
+  gravidez_p1_3312_sim(["VERMELHO"]):::vermelho
+  gravidez_p1_3312 -->|Sim| gravidez_p1_3312_sim
+  gravidez_p1_3312 -->|Não| gravidez_p2_2583
+  gravidez_p2_2583_sim(["LARANJA"]):::laranja
+  gravidez_p2_2583 -->|Sim| gravidez_p2_2583_sim
+  gravidez_p2_2583 -->|Não| gravidez_p2_2584
+  gravidez_p2_2584_sim(["LARANJA"]):::laranja
+  gravidez_p2_2584 -->|Sim| gravidez_p2_2584_sim
+  gravidez_p2_2584 -->|Não| gravidez_p2_2585
+  gravidez_p2_2585_sim(["LARANJA"]):::laranja
+  gravidez_p2_2585 -->|Sim| gravidez_p2_2585_sim
+  gravidez_p2_2585 -->|Não| gravidez_p2_2586
+  gravidez_p2_2586_sim(["LARANJA"]):::laranja
+  gravidez_p2_2586 -->|Sim| gravidez_p2_2586_sim
+  gravidez_p2_2586 -->|Não| gravidez_p2_2587
+  gravidez_p2_2587_sim(["LARANJA"]):::laranja
+  gravidez_p2_2587 -->|Sim| gravidez_p2_2587_sim
+  gravidez_p2_2587 -->|Não| gravidez_p2_2588
+  gravidez_p2_2588_sim(["LARANJA"]):::laranja
+  gravidez_p2_2588 -->|Sim| gravidez_p2_2588_sim
+  gravidez_p2_2588 -->|Não| gravidez_p2_2589
+  gravidez_p2_2589_sim(["LARANJA"]):::laranja
+  gravidez_p2_2589 -->|Sim| gravidez_p2_2589_sim
+  gravidez_p2_2589 -->|Não| gravidez_p2_2590
+  gravidez_p2_2590_sim(["LARANJA"]):::laranja
+  gravidez_p2_2590 -->|Sim| gravidez_p2_2590_sim
+  gravidez_p2_2590 -->|Não| gravidez_p2_2591
+  gravidez_p2_2591_sim(["LARANJA"]):::laranja
+  gravidez_p2_2591 -->|Sim| gravidez_p2_2591_sim
+  gravidez_p2_2591 -->|Não| gravidez_p3_2592
+  gravidez_p3_2592_sim(["AMARELO"]):::amarelo
+  gravidez_p3_2592 -->|Sim| gravidez_p3_2592_sim
+  gravidez_p3_2592 -->|Não| gravidez_p3_2593
+  gravidez_p3_2593_sim(["AMARELO"]):::amarelo
+  gravidez_p3_2593 -->|Sim| gravidez_p3_2593_sim
+  gravidez_p3_2593 -->|Não| gravidez_p3_2594
+  gravidez_p3_2594_sim(["AMARELO"]):::amarelo
+  gravidez_p3_2594 -->|Sim| gravidez_p3_2594_sim
+  gravidez_p3_2594 -->|Não| gravidez_p3_2595
+  gravidez_p3_2595_sim(["AMARELO"]):::amarelo
+  gravidez_p3_2595 -->|Sim| gravidez_p3_2595_sim
+  gravidez_p3_2595 -->|Não| gravidez_p3_2596
+  gravidez_p3_2596_sim(["AMARELO"]):::amarelo
+  gravidez_p3_2596 -->|Sim| gravidez_p3_2596_sim
+  gravidez_p3_2596 -->|Não| gravidez_p3_2597
+  gravidez_p3_2597_sim(["AMARELO"]):::amarelo
+  gravidez_p3_2597 -->|Sim| gravidez_p3_2597_sim
+  gravidez_p3_2597 -->|Não| gravidez_p3_2598
+  gravidez_p3_2598_sim(["AMARELO"]):::amarelo
+  gravidez_p3_2598 -->|Sim| gravidez_p3_2598_sim
+  gravidez_p3_2598 -->|Não| gravidez_p3_2599
+  gravidez_p3_2599_sim(["AMARELO"]):::amarelo
+  gravidez_p3_2599 -->|Sim| gravidez_p3_2599_sim
+  gravidez_p3_2599 -->|Não| gravidez_p4_2600
+  gravidez_p4_2600_sim(["VERDE"]):::verde
+  gravidez_p4_2600 -->|Sim| gravidez_p4_2600_sim
+  gravidez_p4_2600 -->|Não| gravidez_p4_2603
+  gravidez_p4_2603_sim(["VERDE"]):::verde
+  gravidez_p4_2603 -->|Sim| gravidez_p4_2603_sim
+  gravidez_p4_2603 -->|Não| gravidez_p4_2604
+  gravidez_p4_2604_sim(["VERDE"]):::verde
+  gravidez_p4_2604 -->|Sim| gravidez_p4_2604_sim
+  gravidez_p4_2604 -->|Não| gravidez_p4_2607
+  gravidez_p4_2607_sim(["VERDE"]):::verde
+  gravidez_p4_2607 -->|Sim| gravidez_p4_2607_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  gravidez_p4_2607 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

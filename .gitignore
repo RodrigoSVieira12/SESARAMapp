@@ -4,3 +4,7 @@ __pycache__/
 .venv/
 venv/
 .DS_Store
+
+# artefactos de cobertura (scripts/cobertura_testes.py)
+.coverage
+htmlcov/

@@ -102,9 +102,9 @@ def _destinos_para(origem: dict, unidades_ilha: dict, todos: bool) -> list[str]:
         candidatas = list(unidades_ilha["todas"])
     else:
         centros = unidades_ilha["centros"]
-        por_linha_reta = sorted(
-            centros, key=lambda u: haversine_km(lat, lng, u["lat"], u["lng"])
-        )[:N_MAIS_PROXIMOS]
+        por_linha_reta = sorted(centros, key=lambda u: haversine_km(lat, lng, u["lat"], u["lng"]))[
+            :N_MAIS_PROXIMOS
+        ]
         por_rede = sorted(centros, key=_tempo)[:N_MAIS_PROXIMOS]
         candidatas = list({x["id"]: x for x in por_rede + por_linha_reta}.values())
 
@@ -220,16 +220,16 @@ def main() -> int:
     if FICHEIRO.exists():
         existente = json.loads(FICHEIRO.read_text(encoding="utf-8"))
     dados, resumo = gerar(existente, todos=argumentos.todos)
-    FICHEIRO.write_text(
-        json.dumps(dados, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
-    )
+    FICHEIRO.write_text(json.dumps(dados, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Escrito: {FICHEIRO}")
     print(
         f"  {resumo['origens']} origens (freguesias + sítios), "
         f"{resumo['pares']} pares origem/destino, "
         f"{resumo['preservados']} medições preservadas."
     )
-    print("Próximo passo (automático): python scripts/calcular_tempos_medidos.py --motor ors --chave X")
+    print(
+        "Próximo passo (automático): python scripts/calcular_tempos_medidos.py --motor ors --chave X"
+    )
     print("            (ou manual):    python scripts/tempos_medidos_relatorio.py --links")
     return 0
 

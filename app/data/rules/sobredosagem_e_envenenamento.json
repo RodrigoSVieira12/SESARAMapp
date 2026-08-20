@@ -1,0 +1,221 @@
+{
+  "id": "sobredosagem_e_envenenamento",
+  "nome": "Sobredosagem e envenenamento",
+  "nome_en": "Overdose and poisoning",
+  "descricao": "Ingestão de excesso de medicação ou de uma substância tóxica.",
+  "descricao_en": "Taking too much medication or a poisonous substance.",
+  "pediatrico": false,
+  "fonte": "Discriminadores do Sistema de Triagem de Manchester, organizados por prioridade clínica (P1-P5). Importados da tabela de referência; sujeitos a validação clínica antes de uso real.",
+  "fonte_en": "Manchester Triage System discriminators, organised by clinical priority (P1-P5). Imported from the reference table; subject to clinical validation before real use.",
+  "perguntas": [
+    {
+      "id": "sobredosagem_e_envenenamento_p1_1874",
+      "disc_id": 1874,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Compromisso da via aérea?",
+      "texto_utente": "A respiração está muito difícil ou ruidosa, como se o ar não passasse bem pela garganta (a roncar ou a gorgolejar)?",
+      "texto_en": "Airway compromise?",
+      "texto_utente_en": "Is breathing very difficult or noisy, as if air can't pass properly through the throat (snoring or gurgling)?",
+      "descricao": "A via aérea poderá estar comprometida, por não se conseguir manter aberta, ou porque os reflexos protetores da via respiratória (que evitam a aspiração) se perderam. A incapacidade de manter a via aérea aberta, poderá resultar numa obstrução total ou parcial, intermitente ou não. Isto manifestar-se-á por sons como o ressonar ou o gorgolejar durante a respiração."
+    },
+    {
+      "id": "sobredosagem_e_envenenamento_p1_2145",
+      "disc_id": 2145,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Respiração ineficaz?",
+      "texto_utente": "A respiração está tão fraca ou cansada que parece não entrar ar suficiente (respiração aos arrancos ou muito a custo)?",
+      "texto_en": "Ineffective breathing?",
+      "texto_utente_en": "Is breathing so weak or laboured that not enough air seems to get in (gasping or a real struggle)?",
+      "descricao": "Doentes que não conseguem respirar suficientemente bem para manter uma oxigenação adequada e com falência respiratória, sofrem de respiração ineficaz. Poderá resultar num esforço acrescentado para respirar, ou em exaustão, incluindo uma respiração tipo “gasping”."
+    },
+    {
+      "id": "sobredosagem_e_envenenamento_p1_2758",
+      "disc_id": 2758,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Sinais de choque?",
+      "texto_utente": "Tem suores frios, pele muito pálida ou acinzentada, o coração a bater depressa e uma grande fraqueza?",
+      "texto_en": "Signs of shock?",
+      "texto_utente_en": "Are there cold sweats, very pale or greyish skin, a fast heartbeat and severe weakness?",
+      "descricao": "O choque é uma entrega inadequada de oxigénio aos tecidos. Os sinais clássicos incluem suores, palidez, taquicardia, hipotensão e nível de consciência reduzido."
+    },
+    {
+      "id": "sobredosagem_e_envenenamento_p1_2770",
+      "disc_id": 2770,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Não reativo?",
+      "texto_utente": "Está sem reagir a nada, nem quando lhe falam, lhe tocam ou lhe fazem doer?",
+      "texto_en": "Unresponsive?",
+      "texto_utente_en": "Is the person not reacting at all, even to voice, touch or pain?",
+      "descricao": "Não responde a um estímulo doloroso."
+    },
+    {
+      "id": "sobredosagem_e_envenenamento_p1_3002",
+      "disc_id": 3002,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Convulsão atual?",
+      "texto_utente": "Está a ter uma convulsão neste momento (um ataque, com o corpo a tremer ou a ficar rígido)?",
+      "texto_en": "Current seizure?",
+      "texto_utente_en": "Is a seizure happening right now (a fit, with the body shaking or going stiff)?",
+      "descricao": "Doentes que se encontram atualmente sofrendo de convulsões (na fase tónica, clónica ou com outra manifestação relevante) preenchem este critério."
+    },
+    {
+      "id": "sobredosagem_e_envenenamento_p2_3003",
+      "disc_id": 3003,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Alteração do estado de consciência?",
+      "texto_utente": "Está sonolento ou baralhado, só reagindo quando lhe falam ou lhe tocam (não está bem desperto)?",
+      "texto_en": "Altered level of consciousness?",
+      "texto_utente_en": "Is the person drowsy or muddled, responding only to voice or touch (not fully alert)?",
+      "descricao": "Não está totalmente alerta. Só responde à voz, à dor"
+    },
+    {
+      "id": "sobredosagem_e_envenenamento_p2_3004",
+      "disc_id": 3004,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Agressividade ou agitação severa?",
+      "texto_utente": "Está tão agitado ou agressivo que é preciso segurá-lo já, para não se magoar nem magoar ninguém?",
+      "texto_en": "Severe aggression or agitation?",
+      "texto_utente_en": "Is the person so agitated or aggressive that they must be held back right now, to stop harm to themselves or others?",
+      "descricao": "Agressão e agitação de tal grau que seja necessária contenção imediata para gerir o risco de agressão ao próprio ou a terceiros."
+    },
+    {
+      "id": "sobredosagem_e_envenenamento_p2_3005",
+      "disc_id": 3005,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Risco elevado de auto-agressão?",
+      "texto_utente": "Há um risco grande, aqui e agora, de se magoar a si próprio?",
+      "texto_en": "High risk of self-harm?",
+      "texto_utente_en": "Is there a high, immediate risk of harming yourself?",
+      "descricao": "Confirmação do Risco elevado de autoagressão, deve ter em conta nomeadamente, uma história significativa prévia de autoagressão, doentes que activamente tentam auto-mutilação ou que tentam sair do serviço de urgência com esse intuito."
+    },
+    {
+      "id": "sobredosagem_e_envenenamento_p2_3006",
+      "disc_id": 3006,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Risco elevado de agressão a terceiros?",
+      "texto_utente": "Há um risco grande, aqui e agora, de magoar outra pessoa?",
+      "texto_en": "High risk of harm to others?",
+      "texto_utente_en": "Is there a high, immediate risk of harming someone else?",
+      "descricao": "A possibilidade de um doente tentar agredir outros. Esta situação pode ser avaliada tendo em conta o estado mental, a postura corporal e o comportamento. Quando em dúvida, presumir alto risco. O Risco elevado deve ser assumido se o doente tiver acesso a armas ou potenciais vítimas ou se constatar perda do auto-controlo."
+    },
+    {
+      "id": "sobredosagem_e_envenenamento_p2_3007",
+      "disc_id": 3007,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Alta mortalidade?",
+      "texto_utente": "A substância envolvida é das que podem causar doença grave ou até a morte (na dúvida, responda sim)?",
+      "texto_en": "High mortality?",
+      "texto_utente_en": "Is the substance involved one that can cause serious illness or even death (if in doubt, answer yes)?",
+      "descricao": "Probabilidade alta da substância ingerida ou a que a vítima foi exposta causar doença grave ou morte. Poderá ser necessário pedir aconselhamento ao centro de informação antivenenos para esclarecer o nível de risco do doente. Em caso de dúvida, presumir alto risco."
+    },
+    {
+      "id": "sobredosagem_e_envenenamento_p3_3008",
+      "disc_id": 3008,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Angústia marcada?",
+      "texto_utente": "Está muito aflito ou em grande sofrimento, físico ou emocional?",
+      "texto_en": "Marked distress?",
+      "texto_utente_en": "Are you very distressed or in great physical or emotional suffering?",
+      "descricao": "Os doentes que apresentam perturbações físicas ou emocionais acentuadas preenchem este critério."
+    },
+    {
+      "id": "sobredosagem_e_envenenamento_p3_3009",
+      "disc_id": 3009,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Risco moderado de auto-agressão?",
+      "texto_utente": "Existe algum risco de se magoar a si próprio, ainda que não pareça ser já?",
+      "texto_en": "Moderate risk of self-harm?",
+      "texto_utente_en": "Is there some risk of harming yourself, even if it doesn't seem immediate?",
+      "descricao": "Uma visão inicial do risco de autoagressão poderá ser formada tendo em conta o comportamento do doente. Os doentes que não apresentem uma história significativa de autoagressão, que não tentam ativamente auto-agredir-se, que não tentam sair do local com a intenção de se auto-agredir, são doentes de risco moderado de autoagressão. Em caso de dúvida, presumir alto risco"
+    },
+    {
+      "id": "sobredosagem_e_envenenamento_p3_3010",
+      "disc_id": 3010,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "História de perda de consciência?",
+      "texto_utente": "Chegou a desmaiar ou a perder os sentidos (nem que fosse só por instantes)?",
+      "texto_en": "History of loss of consciousness?",
+      "texto_utente_en": "Did you faint or black out at any point (even for just a moment)?",
+      "descricao": "Pode haver uma testemunha fiável que possa dizer se o doente esteve inconsciente (e durante quanto tempo). Caso contrário, se o doente não se recorda do incidente deve-se presumir que esteve inconsciente."
+    },
+    {
+      "id": "sobredosagem_e_envenenamento_p3_3011",
+      "disc_id": 3011,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Mortalidade moderada?",
+      "texto_utente": "A substância envolvida tem um risco médio de causar doença grave (na dúvida, responda sim)?",
+      "texto_en": "Moderate mortality?",
+      "texto_utente_en": "Does the substance involved carry a moderate risk of serious illness (if in doubt, answer yes)?",
+      "descricao": "Probabilidade moderada de substância ingerida ou que a vítima foi exposta causar doença grave ou morte. Poderá ser necessário recorrer ao aconselhamento do centro de informações antivenenos para esclarecer o nível de risco do doente. Em caso de dúvida, presumir alto risco."
+    },
+    {
+      "id": "sobredosagem_e_envenenamento_p3_3012",
+      "disc_id": 3012,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "História psiquiátrica significativa?",
+      "texto_utente": "Tem uma doença psiquiátrica importante já conhecida?",
+      "texto_en": "Significant psychiatric history?",
+      "texto_utente_en": "Do you have a significant known psychiatric illness?",
+      "descricao": "História de doença ou evento psiquiátrico importante."
+    },
+    {
+      "id": "sobredosagem_e_envenenamento_p4_3013",
+      "disc_id": 3013,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Alta de serviço de saúde mental nos últimos 15 dias?",
+      "texto_utente": "Teve alta de um serviço de saúde mental nos últimos 15 dias?",
+      "texto_en": "Discharge from a mental health service in the last 15 days?",
+      "texto_utente_en": "Were you discharged from a mental health service in the last 15 days?",
+      "descricao": "Qualquer doente que tenha tido alta de cuidados de saúde mental (hospitalar ou na comunidade) nos últimos 15 dias."
+    },
+    {
+      "id": "sobredosagem_e_envenenamento_p4_3014",
+      "disc_id": 3014,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Novos sintomas de doença mental significativa?",
+      "texto_utente": "Apareceram sintomas novos de doença mental que ainda não foram vistos por ninguém?",
+      "texto_en": "New symptoms of significant mental illness?",
+      "texto_utente_en": "Have new symptoms of mental illness appeared that no one has assessed yet?",
+      "descricao": "Qualquer novo sintoma psiquiátrico que ainda não tenha sido considerado."
+    },
+    {
+      "id": "sobredosagem_e_envenenamento_p4_3015",
+      "disc_id": 3015,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Preocupação com a salvaguarda do doente?",
+      "texto_utente": "Há preocupação com a segurança da pessoa, por estar numa situação frágil ou desprotegida?",
+      "texto_en": "Concern for the patient's safeguarding?",
+      "texto_utente_en": "Is there concern for the person's safety, because they are in a vulnerable or unprotected situation?",
+      "descricao": "Qualquer preocupação com a salvaguarda do doente, devido à sua vulnerabilidade."
+    },
+    {
+      "id": "sobredosagem_e_envenenamento_p4_3016",
+      "disc_id": 3016,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Auto-agressão sem antecedentes psiquiátricos?",
+      "texto_utente": "Magoou-se a si próprio, mas nunca teve uma doença psiquiátrica diagnosticada?",
+      "texto_en": "Self-harm without psychiatric history?",
+      "texto_utente_en": "Have you harmed yourself, but never had a diagnosed psychiatric illness?",
+      "descricao": "Autoagressão, pela primeira vez ou episódio subsequente, em doente que não tem diagnóstico de doença psiquiátrica."
+    }
+  ]
+}

@@ -14,7 +14,7 @@ def test_saude():
     assert resposta.status_code == 200
     assert corpo["estado"] == "ok"
     assert corpo["versao"] == VERSAO
-    assert corpo["perguntas_total"] == 90
+    assert corpo["perguntas_total"] == 1187
 
 
 def test_pagina_principal_serve_html():
@@ -26,7 +26,7 @@ def test_pagina_principal_serve_html():
 def test_listar_queixas():
     resposta = cliente.get("/api/queixas")
     assert resposta.status_code == 200
-    assert any(q["id"] == "febre" for q in resposta.json())
+    assert any(q["id"] == "agressao" for q in resposta.json())
 
 
 def test_listar_red_flags():
@@ -36,19 +36,22 @@ def test_listar_red_flags():
 
 
 def test_triagem_devolve_primeira_pergunta():
-    resposta = cliente.post(
-        "/api/triagem", json={"queixa": "dor_toracica", "respostas": {}}
-    )
+    resposta = cliente.post("/api/triagem", json={"queixa": "agressao", "respostas": {}})
     corpo = resposta.json()
     assert resposta.status_code == 200
     assert corpo["tipo"] == "pergunta"
-    assert corpo["pergunta"]["id"] == "dt_q1"
+    # v0.14.1: a cor e a prioridade não seguem para o frontend durante as
+    # perguntas (a cor só aparece no resultado final).
+    assert "cor" not in corpo["pergunta"]
+    assert "prioridade" not in corpo["pergunta"]
+    assert corpo["pergunta"]["texto"]  # texto (linguagem do utente) presente
 
 
 def test_triagem_completa_devolve_resultado_com_cor_info():
+    # 1.º discriminador (P1) positivo -> vermelho.
     resposta = cliente.post(
         "/api/triagem",
-        json={"queixa": "dor_cabeca", "respostas": {"dc_q1": "sim"}},
+        json={"queixa": "agressao", "respostas": {"agressao_p1_1738": "sim"}},
     )
     corpo = resposta.json()
     assert corpo["tipo"] == "resultado"
@@ -73,9 +76,7 @@ def test_triagem_queixa_desconhecida_da_422():
 
 
 def test_unidades_proximas():
-    resposta = cliente.get(
-        "/api/unidades/proxima", params={"lat": 32.65, "lng": -16.91, "n": 3}
-    )
+    resposta = cliente.get("/api/unidades/proxima", params={"lat": 32.65, "lng": -16.91, "n": 3})
     corpo = resposta.json()
     assert resposta.status_code == 200
     assert len(corpo["unidades"]) == 3

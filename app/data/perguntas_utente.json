@@ -1,0 +1,1315 @@
+{
+  "descricao": "Reescritas das perguntas de triagem em linguagem do utente, nas duas linguas, com o estado de validacao clinica por item (v0.15.3). E ESTE o ficheiro que a equipa clinica edita: a chave de cada item e o texto clinico EXATO do discriminador de Manchester (espacos colapsados num so), 'pt' e 'en' sao a pergunta reescrita mostrada ao utente em cada lingua, e 'validado'/'validado_por'/'validado_em' registam a aprovacao clinica. Depois de editar as frases, correr: python scripts/aplicar_perguntas_utente.py (nao precisa do Excel). Marcar itens como validados nao precisa de aplicar nada: o estado vive so aqui e o motor le-o no arranque. Regras de escrita: docs/GUIA_DOS_DADOS.md, seccao 'Fluxogramas de triagem'.",
+  "politica": [
+    "Ao contrario do aconselhamento, aqui o recuo para o texto clinico E SEGURO: a pergunta oficial de Manchester e a fonte validada. A reescrita e uma camada de legibilidade, nunca de logica - a prioridade e a cor vem sempre do discriminador oficial.",
+    "Falar diretamente com quem responde ('Sente...?', 'Tem...?', 'Esta...?') e terminar sempre numa pergunta de sim/nao.",
+    "Sem jargao: escalas (NEWS, PERC...), niveis de transporte e termos tecnicos traduzem-se para o que a pessoa nota.",
+    "A descricao clinica (antiga coluna H) integra-se NA PROPRIA pergunta, com valores e exemplos entre parenteses, para nao ser preciso texto de ajuda a parte.",
+    "Sem travessoes nem meios-travessoes (so virgulas, parenteses e hifen simples), para acompanhar o estilo do resto da interface.",
+    "'validado': true so depois de revisao clinica formal, preenchendo tambem 'validado_por' e 'validado_em' (AAAA-MM-DD). Enquanto false, o item conta como proposta; em producao (ONDE_IR_APENAS_VALIDADO=1) o utente ve a pergunta clinica oficial em vez da proposta."
+  ],
+  "itens": {
+    "Compromisso da via aérea?": {
+      "pt": "A respiração está muito difícil ou ruidosa, como se o ar não passasse bem pela garganta (a roncar ou a gorgolejar)?",
+      "en": "Is breathing very difficult or noisy, as if air can't pass properly through the throat (snoring or gurgling)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Respiração ineficaz?": {
+      "pt": "A respiração está tão fraca ou cansada que parece não entrar ar suficiente (respiração aos arrancos ou muito a custo)?",
+      "en": "Is breathing so weak or laboured that not enough air seems to get in (gasping or a real struggle)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Hemorragia catastrófica?": {
+      "pt": "Está a sangrar muitíssimo, com sangue a jorrar, e não consegue parar?",
+      "en": "Is there massive bleeding, with blood spurting out, that you cannot stop?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "História recente de viagem ao estrangeiro": {
+      "pt": "Viajou para fora do país nas últimas semanas?",
+      "en": "Have you travelled abroad in the last few weeks?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Não reativo?": {
+      "pt": "Está sem reagir a nada, nem quando lhe falam, lhe tocam ou lhe fazem doer?",
+      "en": "Is the person not reacting at all, even to voice, touch or pain?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Sinais de choque?": {
+      "pt": "Tem suores frios, pele muito pálida ou acinzentada, o coração a bater depressa e uma grande fraqueza?",
+      "en": "Are there cold sweats, very pale or greyish skin, a fast heartbeat and severe weakness?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Dispneia aguda?": {
+      "pt": "Ficou de repente com falta de ar (ou uma falta de ar que já tinha piorou muito de um momento para o outro)?",
+      "en": "Did shortness of breath come on suddenly (or did a breathlessness you already had suddenly get much worse)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Grande Hemorragia incontrolável?": {
+      "pt": "Está a sangrar muito e não pára mesmo fazendo pressão, encharcando os panos depressa?",
+      "en": "Is there heavy bleeding that won't stop even with firm pressure, soaking through cloths quickly?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Alteração do estado de consciência?": {
+      "pt": "Está sonolento ou baralhado, só reagindo quando lhe falam ou lhe tocam (não está bem desperto)?",
+      "en": "Is the person drowsy or muddled, responding only to voice or touch (not fully alert)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Défice neurológico agudo? <24h": {
+      "pt": "Nas últimas 24 horas, perdeu de repente a força, a sensibilidade ou os movimentos (por exemplo, num braço, numa perna ou na fala)?",
+      "en": "In the last 24 hours, did you suddenly lose strength, feeling or movement (for example in an arm, a leg or your speech)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Mecanismo significativo de lesão?": {
+      "pt": "A lesão foi num acidente grave (queda de um sítio alto, choque a grande velocidade, tiro, facada ou explosão)?",
+      "en": "Did the injury happen in a serious accident (a fall from height, a high-speed crash, a gunshot, a stabbing or an explosion)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Dor severa?": {
+      "pt": "Tem dores muito fortes, quase a não aguentar (das piores que alguma vez sentiu)?",
+      "en": "Do you have very severe pain, almost unbearable (some of the worst you've ever felt)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Pequena hemorragia incontrolável?": {
+      "pt": "Tem uma pequena ferida que continua a sangrar e não pára, mesmo fazendo pressão?",
+      "en": "Is there a small wound that keeps bleeding and won't stop, even with pressure?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Novos sinais e/ou sintomas neurológicos?": {
+      "pt": "Há mais de 24 horas, notou algo de novo, como perder força ou sensibilidade, ou dificuldade em controlar a urina ou as fezes?",
+      "en": "More than 24 hours ago, did you notice something new, such as losing strength or feeling, or trouble controlling your bladder or bowel?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "História de perda de consciência?": {
+      "pt": "Chegou a desmaiar ou a perder os sentidos (nem que fosse só por instantes)?",
+      "en": "Did you faint or black out at any point (even for just a moment)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "História Inapropriada?": {
+      "pt": "A explicação que foi dada para as lesões não bate certo com aquilo que se vê?",
+      "en": "Does the explanation given for the injuries not match what can be seen?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Deformação?": {
+      "pt": "Há alguma parte do corpo com um aspeto torto, deformado ou fora do sítio?",
+      "en": "Is any part of the body crooked, deformed or out of place?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Dor moderada?": {
+      "pt": "Tem dores a sério, que o impedem de fazer algumas coisas do dia a dia?",
+      "en": "Do you have noticeable pain that stops you doing some everyday things?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Edema?": {
+      "pt": "Há alguma zona inchada ou mais volumosa do que é habitual?",
+      "en": "Is there any area that is swollen or bigger than usual?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Dor persistente?": {
+      "pt": "A dor continua sem passar, mesmo depois de esperar ou de tomar um analgésico?",
+      "en": "Does the pain carry on without easing, even after waiting or taking a painkiller?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Problema recente?": {
+      "pt": "Este problema começou na última semana?",
+      "en": "Did this problem start within the last week?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Estridor?": {
+      "pt": "A respiração faz um som agudo e áspero ao inspirar, que se ouve melhor de boca aberta?",
+      "en": "Does breathing make a harsh, high-pitched sound when breathing in, heard best with the mouth open?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Baba-se?": {
+      "pt": "Está a babar-se porque já nem consegue engolir a saliva?",
+      "en": "Is saliva dribbling out because you can no longer swallow it?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Edema da língua?": {
+      "pt": "A língua está inchada?",
+      "en": "Is the tongue swollen?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Edema da face?": {
+      "pt": "A cara está a inchar (muitas vezes começa pelos lábios)?",
+      "en": "Is the face swelling up (often starting with the lips)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Incapacidade de articular frases completas?": {
+      "pt": "A falta de ar é tanta que não consegue dizer uma frase inteira sem parar para respirar?",
+      "en": "Is the breathlessness so bad that you can't say a whole sentence without stopping for breath?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "História significativa de alergia?": {
+      "pt": "Já teve uma reação alérgica grave a alguma coisa (por exemplo, a frutos secos ou a uma picada de abelha)?",
+      "en": "Have you ever had a serious allergic reaction to something (for example nuts or a bee sting)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Prurido severo?": {
+      "pt": "Tem uma comichão que mal se aguenta (das piores de sempre)?",
+      "en": "Do you have itching that is almost unbearable (some of the worst ever)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Broncoespasmo?": {
+      "pt": "A respiração está a assobiar ou a chiar (pieira), como acontece num ataque de asma?",
+      "en": "Is breathing whistling or wheezing, like in an asthma attack?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Exantema eritematoso ou bolhoso?": {
+      "pt": "Tem borbulhas com bolhas ou vermelhidão a cobrir uma grande parte do corpo?",
+      "en": "Do you have a rash with blisters or redness covering a large part of the body?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Prurido moderado?": {
+      "pt": "Tem uma comichão forte, mas ainda a aguentar?",
+      "en": "Do you have strong itching that is still bearable?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Inflamação local?": {
+      "pt": "Há um ponto do corpo com dor, inchaço e vermelhidão juntos, mas só naquele sítio?",
+      "en": "Is there one spot with pain, swelling and redness together, but only in that place?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Prurido persistente?": {
+      "pt": "A comichão continua sem passar, apesar de ter esperado ou tomado algum medicamento?",
+      "en": "Does the itching carry on without easing, despite waiting or taking medication?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Eritema persistente?": {
+      "pt": "A vermelhidão na pele continua sem passar, apesar do tempo ou dos medicamentos?",
+      "en": "Does the redness on the skin carry on without fading, despite time or medication?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Muito quente?": {
+      "pt": "Tem febre muito alta? (num adulto, 41°C ou mais; num bebé com menos de 12 meses, 38,5°C ou mais)",
+      "en": "Do you have a very high fever? (in an adult, 41°C or more; in a baby under 12 months, 38.5°C or more)",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Possível sépsis?": {
+      "pt": "Tem sinais de uma infeção a alastrar depressa, como confusão, respiração muito acelerada ou uma fraqueza que se instala de repente?",
+      "en": "Are there signs of a fast-spreading infection, such as confusion, very rapid breathing or weakness that comes on suddenly?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "História significativa de doença respiratória?": {
+      "pt": "Tem uma doença dos pulmões conhecida e grave (por exemplo, já teve crises perigosas ou usa oxigénio em casa)?",
+      "en": "Do you have a known serious lung condition (for example past dangerous flare-ups or home oxygen)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Asma sem melhoria com tratamento habitual?": {
+      "pt": "Tem asma e esta crise não melhorou com as bombas ou os medicamentos que costuma usar?",
+      "en": "Do you have asthma and this attack hasn't improved with your usual inhalers or medication?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Quente?": {
+      "pt": "Tem febre? (num adulto, acima de 38,5°C; numa criança, 38,5°C a 39,8°C; num recém-nascido com menos de 28 dias, 37,5°C a 38,4°C)",
+      "en": "Do you have a fever? (in an adult, above 38.5°C; in a child, 38.5°C to 39.8°C; in a newborn under 28 days, 37.5°C to 38.4°C)",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Tosse produtiva?": {
+      "pt": "Tem tosse com expetoração (a deitar catarro), seja de que cor for?",
+      "en": "Do you have a cough that brings up phlegm, of any colour?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Agressividade ou agitação severa?": {
+      "pt": "Está tão agitado ou agressivo que é preciso segurá-lo já, para não se magoar nem magoar ninguém?",
+      "en": "Is the person so agitated or aggressive that they must be held back right now, to stop harm to themselves or others?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Risco elevado de abandono sem avaliação?": {
+      "pt": "Há um risco real de sair da urgência antes de ser observado?",
+      "en": "Is there a real risk of leaving before being seen?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Risco elevado de auto-agressão?": {
+      "pt": "Há um risco grande, aqui e agora, de se magoar a si próprio?",
+      "en": "Is there a high, immediate risk of harming yourself?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Risco elevado de agressão a terceiros?": {
+      "pt": "Há um risco grande, aqui e agora, de magoar outra pessoa?",
+      "en": "Is there a high, immediate risk of harming someone else?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Angústia marcada?": {
+      "pt": "Está muito aflito ou em grande sofrimento, físico ou emocional?",
+      "en": "Are you very distressed or in great physical or emotional suffering?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Risco moderado de auto-agressão?": {
+      "pt": "Existe algum risco de se magoar a si próprio, ainda que não pareça ser já?",
+      "en": "Is there some risk of harming yourself, even if it doesn't seem immediate?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "História psiquiátrica significativa?": {
+      "pt": "Tem uma doença psiquiátrica importante já conhecida?",
+      "en": "Do you have a significant known psychiatric illness?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Prostrado?": {
+      "pt": "Está muito abatido e sem forças (numa criança, pode estar molinha ou muito apática)?",
+      "en": "Are you very weak and drained (in a child, they may be floppy or very listless)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Erupção cutânea desconhecida?": {
+      "pt": "Apareceu-lhe uma erupção na pele sem se saber porquê?",
+      "en": "Has a rash appeared on the skin with no known cause?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Não se alimenta?": {
+      "pt": "A criança não está a comer nem a beber como costuma (ou vomita logo a seguir)?",
+      "en": "Is the child not eating or drinking as usual (or vomiting straight afterwards)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Inconsolável pelos pais?": {
+      "pt": "A criança não se acalma, por mais que os pais a tentem confortar?",
+      "en": "Can the child not be settled, no matter how the parents try to comfort them?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Choro prolongado ou ininterrupto?": {
+      "pt": "A criança chora sem parar há duas horas ou mais?",
+      "en": "Has the child been crying non-stop for two hours or more?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Febre persistente?": {
+      "pt": "A febre não cede, mesmo alternando os medicamentos para baixar a febre (paracetamol e ibuprofeno)?",
+      "en": "Does the fever not come down, even alternating the fever medicines (paracetamol and ibuprofen)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Comportamento estranho na criança?": {
+      "pt": "A criança está diferente do costume (muito rabugenta, queixosa ou indisposta)?",
+      "en": "Is the child not their usual self (very fretful, whiny or out of sorts)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Convulsão atual?": {
+      "pt": "Está a ter uma convulsão neste momento (um ataque, com o corpo a tremer ou a ficar rígido)?",
+      "en": "Is a seizure happening right now (a fit, with the body shaking or going stiff)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Sem reação ao estímulo dos pais?": {
+      "pt": "A criança não reage à voz nem à cara dos pais e parece não os reconhecer?",
+      "en": "Does the child not react to the parents' voice or face and seem not to recognise them?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Sinais de meningismo?": {
+      "pt": "Tem o pescoço rígido, com dor de cabeça e incómodo com a luz?",
+      "en": "Is there a stiff neck, with a headache and discomfort in bright light?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Alteração da imunidade conhecida?": {
+      "pt": "Tem as defesas em baixo (por uma doença ou por tomar remédios que baixam a imunidade, como a quimioterapia)?",
+      "en": "Are your defences low (from an illness or from taking medicines that lower immunity, such as chemotherapy)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "História de risco especial de infeção?": {
+      "pt": "Esteve num sítio com risco especial de infeção (por exemplo, um laboratório ou uma zona com um surto)?",
+      "en": "Have you been somewhere with a special infection risk (for example a laboratory or an area with an outbreak)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Sinais de desidratação?": {
+      "pt": "Tem sinais de estar desidratado, como a boca e a língua secas, os olhos encovados ou urinar muito pouco?",
+      "en": "Are there signs of dehydration, such as a dry mouth and tongue, sunken eyes or passing very little urine?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Não urina?": {
+      "pt": "Deixou de fazer xixi (numa criança, nota-se pela fralda que fica seca)?",
+      "en": "Have you stopped passing urine (in a child, you may notice the nappy staying dry)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "História hematológica ou metabólica significativa?": {
+      "pt": "Tem uma doença do sangue ou do metabolismo que pode piorar depressa?",
+      "en": "Do you have a blood or metabolic condition that can get worse quickly?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "História de viagens ao estrangeiro?": {
+      "pt": "Viajou para o estrangeiro nas últimas duas semanas?",
+      "en": "Have you travelled abroad in the last two weeks?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Perda súbita de visão?": {
+      "pt": "Perdeu a vista de repente, num olho ou nos dois (já há mais de 24 horas)?",
+      "en": "Did you suddenly lose your sight in one or both eyes (already more than 24 hours ago)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Vertigem persistente de novo?": {
+      "pt": "Nas últimas 24 horas, começou a sentir tudo a andar à roda, sem passar?",
+      "en": "In the last 24 hours, did everything start spinning and not settle?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Início repentino?": {
+      "pt": "Começou de repente, em segundos ou minutos (a ponto de o acordar, se estivesse a dormir)?",
+      "en": "Did it start suddenly, over seconds or minutes (enough to wake you if you were asleep)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Vómitos incoercíveis?": {
+      "pt": "Está a vomitar sem parar, sem conseguir suster?",
+      "en": "Are you vomiting non-stop and unable to hold it back?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Recente redução da acuidade visual?": {
+      "pt": "A vista piorou nos últimos 7 dias?",
+      "en": "Has your eyesight got worse in the last 7 days?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Dor à palpação da região temporal?": {
+      "pt": "Dói ao tocar na têmpora (o lado da cabeça, junto ao olho)?",
+      "en": "Does it hurt to touch the temple (the side of the head, next to the eye)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Vómitos persistentes?": {
+      "pt": "Continua a vomitar, mesmo depois de esperar ou de tomar algum medicamento?",
+      "en": "Do you keep vomiting, even after waiting or taking medication?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Alucinação aparente?": {
+      "pt": "Parece estar a ver ou a ouvir coisas que mais ninguém vê nem ouve?",
+      "en": "Does the person seem to see or hear things that no one else can?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Novos sinais/sintomas de psicose?": {
+      "pt": "Apareceram, de novo, ideias muito estranhas, grandes desconfianças, ou o ver e ouvir coisas que não existem?",
+      "en": "Have very strange beliefs, deep suspicion, or seeing and hearing things that aren't there newly appeared?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "História de sobredosagem ou envenenamento?": {
+      "pt": "Há a possibilidade de ter tomado comprimidos a mais ou algo tóxico (por exemplo, caixas de comprimidos vazias por perto)?",
+      "en": "Could there have been too many tablets or something poisonous taken (for example empty tablet packets nearby)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Agressividade ou agitação moderada?": {
+      "pt": "Está agitado ou agressivo, mas ainda é possível acalmá-lo só a falar?",
+      "en": "Is the person agitated or aggressive, but can still be calmed just by talking?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Risco moderado de agressão a terceiros?": {
+      "pt": "Existe algum risco de magoar outra pessoa, ainda que não pareça ser já?",
+      "en": "Is there some risk of harming someone else, even if it doesn't seem immediate?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Risco moderado de abandono do local s/ avaliação?": {
+      "pt": "Está a ameaçar ir embora antes de ser observado, mas ainda não tentou fazê-lo?",
+      "en": "Are you threatening to leave before being seen, but haven't actually tried yet?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Parto recente?": {
+      "pt": "Teve um bebé nos últimos 3 meses?",
+      "en": "Have you had a baby in the last 3 months?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Alta de serviço de saúde mental nos últimos 15 dias?": {
+      "pt": "Teve alta de um serviço de saúde mental nos últimos 15 dias?",
+      "en": "Were you discharged from a mental health service in the last 15 days?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Novos sintomas de doença mental significativa?": {
+      "pt": "Apareceram sintomas novos de doença mental que ainda não foram vistos por ninguém?",
+      "en": "Have new symptoms of mental illness appeared that no one has assessed yet?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Preocupação com a salvaguarda do doente?": {
+      "pt": "Há preocupação com a segurança da pessoa, por estar numa situação frágil ou desprotegida?",
+      "en": "Is there concern for the person's safety, because they are in a vulnerable or unprotected situation?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Auto-agressão sem antecedentes psiquiátricos?": {
+      "pt": "Magoou-se a si próprio, mas nunca teve uma doença psiquiátrica diagnosticada?",
+      "en": "Have you harmed yourself, but never had a diagnosed psychiatric illness?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Bebé quente?": {
+      "pt": "O bebé tem febre (mais de 38,5°C)?",
+      "en": "Does the baby have a fever (over 38.5°C)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Eritema não branqueável?": {
+      "pt": "Tem manchas na pele que NÃO desaparecem quando se carrega em cima com um copo transparente?",
+      "en": "Are there marks on the skin that do NOT fade when pressed with a clear glass?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "História de TCE?": {
+      "pt": "Levou há pouco uma pancada ou uma queda com pancada na cabeça?",
+      "en": "Have you recently had a blow or a fall with a knock to the head?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Sem medicação disponível?": {
+      "pt": "Ficou sem a medicação que costuma tomar?",
+      "en": "Have you run out of the medication you usually take?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Cefaleia persistente?": {
+      "pt": "A dor de cabeça continua sem passar, mesmo depois de esperar ou de tomar algum medicamento?",
+      "en": "Does the headache carry on without easing, even after waiting or taking medication?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Traumatismo ocular penetrante?": {
+      "pt": "Espetou ou furou o olho com alguma coisa?",
+      "en": "Has something pierced or gone into the eye?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Ingestão de objeto perigoso?": {
+      "pt": "Engoliu um objeto perigoso (por exemplo, uma pilha de botão, ímanes ou uma lâmina)?",
+      "en": "Have you swallowed a dangerous object (for example a button battery, magnets or a blade)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Infeção local?": {
+      "pt": "Há um sítio com sinais de infeção (dor, inchaço e vermelhidão, com ou sem pus)?",
+      "en": "Is there a spot with signs of infection (pain, swelling and redness, with or without pus)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Olho vermelho?": {
+      "pt": "Tem o olho vermelho (com ou sem dor)?",
+      "en": "Is the eye red (with or without pain)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Compromisso vascular distal?": {
+      "pt": "A parte do braço ou da perna a seguir à lesão está pálida, fria, dormente ou sem pulso?",
+      "en": "Beyond the injury, is the arm or leg pale, cold, numb or without a pulse?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Articulação quente?": {
+      "pt": "Tem uma articulação quente ao toque (muitas vezes também vermelha)?",
+      "en": "Is a joint hot to the touch (often red as well)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Alteração da coagulação?": {
+      "pt": "Tem um problema de coagulação do sangue ou toma medicamentos para o sangue não coalhar (por exemplo, varfarina)?",
+      "en": "Do you have a blood-clotting problem or take blood-thinning medicines (for example warfarin)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Dor à mobilização das articulações?": {
+      "pt": "Dói ao mexer a articulação (ao movê-la você mesmo ou quando lha mexem)?",
+      "en": "Does it hurt to move the joint (moving it yourself or when someone moves it)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Hipoglicémia?": {
+      "pt": "Tem o açúcar no sangue baixo (abaixo de 55 mg/dl)?",
+      "en": "Is your blood sugar low (below 55 mg/dl)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Hiperglicémia c/ cetose?": {
+      "pt": "Tem o açúcar no sangue muito alto e cetonas positivas (no teste da urina ou do sangue)?",
+      "en": "Is your blood sugar very high with positive ketones (on a urine or blood test)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Hiperglicémia?": {
+      "pt": "Tem o açúcar no sangue muito alto (acima de 300 mg/dl)?",
+      "en": "Is your blood sugar very high (above 300 mg/dl)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Perda do controle da glicémia?": {
+      "pt": "O açúcar no sangue está fora dos valores que costuma ter?",
+      "en": "Is your blood sugar outside your usual range?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Hematemeses?": {
+      "pt": "Vomitou sangue (vermelho-vivo ou escuro, parecido com borras de café)?",
+      "en": "Have you vomited blood (bright red or dark, like coffee grounds)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Hematoquésias, melenas ou retorragias?": {
+      "pt": "Saiu sangue pelo rabo ou nas fezes (vermelho-vivo ou muito escuro)?",
+      "en": "Has blood come from the back passage or in the stool (bright red or very dark)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Fezes pretas ou raiadas de sangue?": {
+      "pt": "As fezes estão pretas (como alcatrão) ou com fios de sangue?",
+      "en": "Are the stools black (like tar) or streaked with blood?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "História de hematemeses?": {
+      "pt": "Vomitou sangue há pouco tempo (vermelho ou escuro, parecido com borras de café)?",
+      "en": "Have you recently vomited blood (red or dark, like coffee grounds)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Lesão por inalação?": {
+      "pt": "Respirou fumo ou produtos químicos (por exemplo, esteve fechado num sítio cheio de fumo, ou está rouco e com fuligem no nariz ou na boca)?",
+      "en": "Have you breathed in smoke or chemicals (for example, shut in a smoke-filled space, or hoarse with soot around the nose or mouth)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Exaustão?": {
+      "pt": "Está tão esgotado que já quase não faz força nenhuma para respirar?",
+      "en": "Are you so exhausted that you are barely making any effort to breathe?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Início agudo pós-traumático?": {
+      "pt": "Os sintomas começaram logo a seguir a uma lesão ou pancada?",
+      "en": "Did the symptoms start right after an injury or a blow?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Inalação de fumo?": {
+      "pt": "Esteve num sítio cheio de fumo e pode ter respirado fumo?",
+      "en": "Were you in a smoke-filled place and may have breathed in smoke?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "História de traumatismo torácico?": {
+      "pt": "Levou há pouco uma pancada ou uma lesão no peito?",
+      "en": "Have you recently had a blow or an injury to the chest?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Dor pleurítica?": {
+      "pt": "Tem uma dor no peito que piora quando respira fundo, tosse ou espirra?",
+      "en": "Do you have chest pain that gets worse when you breathe in deeply, cough or sneeze?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Dor précordial?": {
+      "pt": "Tem uma dor ou um aperto no meio do peito, que pode subir ao pescoço ou descer pelo braço esquerdo (às vezes com suores ou enjoo)?",
+      "en": "Do you have pain or tightness in the centre of the chest, which may go up to the neck or down the left arm (sometimes with sweating or nausea)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Internamento compulsivo provável?": {
+      "pt": "É provável que precise de ficar internado num serviço de psiquiatria mesmo contra a sua vontade?",
+      "en": "Is it likely that psychiatric admission will be needed even against the person's will?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Corrimento?": {
+      "pt": "Tem um corrimento fora do normal pelo pénis ou pela vagina?",
+      "en": "Is there an abnormal discharge from the penis or the vagina?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Eritema/rash persistente": {
+      "pt": "A vermelhidão ou a erupção na pele continua sem passar?",
+      "en": "Does the redness or rash on the skin carry on without fading?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Hemorragia vaginal em gestação superior a 20 semanas?": {
+      "pt": "Está grávida de mais de 20 semanas e está a perder sangue pela vagina?",
+      "en": "Are you more than 20 weeks pregnant and losing blood from the vagina?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Dor testicular?": {
+      "pt": "Tem dor nos testículos?",
+      "en": "Do you have pain in the testicles?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Massa abdominal visível?": {
+      "pt": "Nota um alto ou um volume na barriga que se vê?",
+      "en": "Is there a lump or bulge on the abdomen that you can see?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Possível gravidez?": {
+      "pt": "É possível que esteja grávida (por exemplo, atraso na menstruação ou relações sem proteção)?",
+      "en": "Could you be pregnant (for example a late period or unprotected sex)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "História de aneurisma abdominal ou aórtico?": {
+      "pt": "Já lhe disseram que tem um aneurisma na artéria principal (aorta) ou na barriga?",
+      "en": "Have you been told you have an aneurysm in the main artery (aorta) or in the abdomen?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Dor aórtica?": {
+      "pt": "Tem uma dor forte e súbita no peito ou na barriga, como se rasgasse por dentro, que pode passar para as costas?",
+      "en": "Do you have sudden, severe pain in the chest or abdomen, like a tearing inside, that may move to the back?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Dor que irradia para o ombro?": {
+      "pt": "A dor sobe ou espalha-se até à ponta do ombro?",
+      "en": "Does the pain spread up to the tip of the shoulder?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Traumatismo direto da região cervical?": {
+      "pt": "Levou uma pancada ou uma lesão diretamente no pescoço?",
+      "en": "Did you take a blow or an injury directly to the neck?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Instalação súbita? (início < 12h)": {
+      "pt": "Começou de repente, nas últimas 12 horas?",
+      "en": "Did it start suddenly, within the last 12 hours?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Traumatismo direto da região lombar?": {
+      "pt": "Levou uma pancada ou uma lesão diretamente na zona de baixo das costas (zona lombar)?",
+      "en": "Did you take a blow or an injury directly to the lower back?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Incapacidade de andar?": {
+      "pt": "Está mesmo sem conseguir andar (não é só por doer, é mesmo não conseguir)?",
+      "en": "Are you genuinely unable to walk (not just because it hurts, but actually cannot)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Gangrena escrotal?": {
+      "pt": "A pele à volta dos testículos ou da virilha está escura ou com aspeto de pele morta?",
+      "en": "Is the skin around the testicles or groin dark or looking like dead skin?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Idade inferior a 25 anos?": {
+      "pt": "Tem menos de 25 anos?",
+      "en": "Are you under 25 years old?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Celulite escrotal?": {
+      "pt": "Tem vermelhidão e inchaço à volta dos testículos?",
+      "en": "Is there redness and swelling around the testicles?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Cólica?": {
+      "pt": "A dor vem e vai por vagas, como cólicas?",
+      "en": "Does the pain come and go in waves, like colic?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Trauma escrotal?": {
+      "pt": "Levou há pouco uma pancada ou uma lesão nos testículos?",
+      "en": "Have you recently had a blow or an injury to the testicles?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "História cardíaca significativa?": {
+      "pt": "Tem uma doença do coração importante já conhecida (por exemplo, das artérias do coração ou uma arritmia)?",
+      "en": "Do you have a known significant heart condition (for example coronary artery disease or an arrhythmia)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Idade inferior a 16 anos?": {
+      "pt": "Tem menos de 16 anos?",
+      "en": "Are you under 16 years old?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Lesão ocular química?": {
+      "pt": "Entrou-lhe algum produto químico no olho (que arde, queima ou faz ver pior)?",
+      "en": "Has a chemical got into the eye (stinging, burning or making vision worse)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Alta mortalidade?": {
+      "pt": "A substância envolvida é das que podem causar doença grave ou até a morte (na dúvida, responda sim)?",
+      "en": "Is the substance involved one that can cause serious illness or even death (if in doubt, answer yes)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Risco de contaminação?": {
+      "pt": "Há o risco de aquilo o contaminar a si ou a outras pessoas à volta?",
+      "en": "Is there a risk of it contaminating you or other people around?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Mortalidade moderada?": {
+      "pt": "A substância envolvida tem um risco médio de causar doença grave (na dúvida, responda sim)?",
+      "en": "Does the substance involved carry a moderate risk of serious illness (if in doubt, answer yes)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Traumatismo vaginal?": {
+      "pt": "Sofreu uma lesão ou uma pancada diretamente na vagina?",
+      "en": "Have you had an injury or a direct blow to the vagina?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "História clinica significativa?": {
+      "pt": "Tem uma doença de fundo importante que obriga a medicação sempre ou a cuidados especiais?",
+      "en": "Do you have a significant underlying condition that requires constant medication or special care?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Apresentação de segmentos fetais?": {
+      "pt": "Está em trabalho de parto e já se veem partes do bebé na vagina?",
+      "en": "Are you in labour with parts of the baby already showing at the vagina?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Prolapso do cordão umbilical": {
+      "pt": "Está grávida e o cordão umbilical saiu pela vagina?",
+      "en": "Are you pregnant and the umbilical cord has come out of the vagina?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Hemorragia vaginal intensa?": {
+      "pt": "Está a perder muito sangue pela vagina (grandes coágulos ou a ensopar muitos pensos)?",
+      "en": "Are you losing a lot of blood from the vagina (large clots or soaking through many pads)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Trabalho de parto?": {
+      "pt": "Está com contrações dolorosas, seguidas e certinhas (trabalho de parto)?",
+      "en": "Are you having painful, frequent, regular contractions (in labour)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Movimentos fetais reduzidos em gestação superior a 20 semanas?": {
+      "pt": "Está grávida de mais de 20 semanas e sente o bebé mexer menos, ou nada, nas últimas 12 horas?",
+      "en": "Are you more than 20 weeks pregnant and feeling the baby move less, or not at all, in the last 12 hours?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "História de convulsão?": {
+      "pt": "Teve uma convulsão (um ataque) há pouco tempo?",
+      "en": "Have you had a seizure (a fit) recently?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Hemorragia vaginal ligeira?": {
+      "pt": "Está a perder um pouco de sangue pela vagina, fora da altura da menstruação?",
+      "en": "Are you losing a little blood from the vagina, outside your period?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Pressão arterial elevada?": {
+      "pt": "Tem a tensão arterial alta (agora ou habitualmente)?",
+      "en": "Is your blood pressure high (now or usually)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "História de traumatismo?": {
+      "pt": "Sofreu há pouco alguma lesão ou pancada?",
+      "en": "Have you recently had an injury or a blow?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "História significativa de hemorragia gastrointestinal?": {
+      "pt": "Já teve hemorragias graves no aparelho digestivo (por exemplo, por uma úlcera ou por varizes no esófago)?",
+      "en": "Have you had serious bleeding in the digestive tract before (for example from an ulcer or from oesophageal varices)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Dor abdominal?": {
+      "pt": "Tem dor na barriga?",
+      "en": "Do you have tummy (abdominal) pain?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Confusão mental de novo?": {
+      "pt": "Está baralhado ou desorientado de uma forma que não é o costume?",
+      "en": "Are you confused or disoriented in a way that isn't usual for you?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Evisceração de orgãos?": {
+      "pt": "Há órgãos de dentro do corpo à mostra, para fora, por causa de uma ferida?",
+      "en": "Are internal organs showing outside the body through a wound?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Com Palpitações?": {
+      "pt": "Sente o coração a bater com força, muito depressa ou aos saltos (palpitações)?",
+      "en": "Can you feel your heart pounding, racing or skipping (palpitations)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Paragem cardiorespiratória / VVPCR": {
+      "pt": "Está sem respirar ou sem pulso?",
+      "en": "Is the person not breathing or without a pulse?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Dor precordial / VVC": {
+      "pt": "Sente dor ou um aperto no meio do peito, que pode ser do coração?",
+      "en": "Do you feel pain or tightness in the centre of the chest that could be from the heart?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "NEWS igual ou superior a 7?": {
+      "pt": "Sente-se muito mal ou quase a desmaiar?",
+      "en": "Do you feel very unwell or close to fainting?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Mecanismo significativo de lesão / VTT": {
+      "pt": "O acidente ou o impacto foi muito forte?",
+      "en": "Was the accident or impact very strong?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Défice neurológico agudo / VVAVC": {
+      "pt": "Sentiu de repente fraqueza num lado do corpo, a cara descaída ou dificuldade em falar?",
+      "en": "Did you suddenly get weakness on one side, a drooping face or trouble speaking?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Possível sépsis / VVS": {
+      "pt": "Tem sinais de uma infeção grave a alastrar, como febre alta com tremores, confusão ou muita fraqueza?",
+      "en": "Are there signs of a serious spreading infection, such as high fever with shivering, confusion or great weakness?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Profissional de saúde preocupado?": {
+      "pt": "Algum profissional de saúde que o esteja a acompanhar está preocupado com o seu estado?",
+      "en": "Is a health professional looking after you worried about your condition?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Transporte AEROMÉDICO nível B": {
+      "pt": "Precisa de ser levado de helicóptero, com cuidados médicos durante a viagem?",
+      "en": "Do you need to be taken by helicopter, with medical care during the journey?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Transporte AEROMÉDICO nível C": {
+      "pt": "Precisa de ser levado de helicóptero, com cuidados médicos avançados durante a viagem?",
+      "en": "Do you need to be taken by helicopter, with advanced medical care during the journey?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Transporte secundário NÍVEL A": {
+      "pt": "Precisa de ser transferido para outro hospital, com cuidados básicos durante a viagem?",
+      "en": "Do you need to be transferred to another hospital, with basic care during the journey?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Transporte secundário NÍVEL B": {
+      "pt": "Precisa de ser transferido para outro hospital, com cuidados médicos durante a viagem?",
+      "en": "Do you need to be transferred to another hospital, with medical care during the journey?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Transporte secundário NÍVEL C": {
+      "pt": "Precisa de ser transferido para outro hospital, com cuidados médicos avançados durante a viagem?",
+      "en": "Do you need to be transferred to another hospital, with advanced medical care during the journey?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "NEWS com um parâmetro de nivel 3?": {
+      "pt": "Está mais fraco, mais tonto ou a respirar pior do que há pouco?",
+      "en": "Are you weaker, dizzier or breathing worse than a short while ago?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "NEWS de 5 a 6?": {
+      "pt": "Está a sentir-se pior do que estava há pouco?",
+      "en": "Are you feeling worse than you were a short while ago?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Falta de medicação c/ consequências graves e imediata?": {
+      "pt": "Ficou sem um medicamento que não pode falhar (por exemplo, a insulina) e pode piorar depressa sem ele?",
+      "en": "Have you run out of a medicine you can't miss (for example insulin) and could get worse quickly without it?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Pedido de pilula do dia seguinte e sexo desprotegido 66/72 horas?": {
+      "pt": "Quer a pílula do dia seguinte depois de ter tido relações sem proteção há menos de 3 dias?",
+      "en": "Do you want the morning-after pill after having unprotected sex less than 3 days ago?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Possivel paragem cardiorespiratória?": {
+      "pt": "A pessoa parece não estar a respirar nem a mexer-se?",
+      "en": "Does the person appear not to be breathing or moving?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Impossivel confirmar se vitima fala?": {
+      "pt": "Não consegue confirmar se a pessoa fala ou responde?",
+      "en": "Are you unable to confirm whether the person can speak or respond?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Impossivel confirmar se vitima está em pé?": {
+      "pt": "Não consegue confirmar se a pessoa se aguenta de pé?",
+      "en": "Are you unable to confirm whether the person can stand up?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Alarme automático?": {
+      "pt": "O aviso veio de um alarme automático, sem informação sobre a pessoa?",
+      "en": "Did the alert come from an automatic alarm, with no information about the person?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Hematoma do pavilhão auricular?": {
+      "pt": "Tem a orelha inchada com sangue acumulado por baixo da pele, normalmente depois de uma pancada?",
+      "en": "Is the outer ear swollen with blood collected under the skin, usually after a blow?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Vertigens?": {
+      "pt": "Sente tonturas ou tudo a andar à roda (às vezes com enjoo)?",
+      "en": "Do you feel dizzy or as if everything is spinning (sometimes with nausea)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Perda recente de audição?": {
+      "pt": "Ouve pior de um ouvido ou dos dois nos últimos 7 dias?",
+      "en": "Have you been hearing worse in one or both ears in the last 7 days?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Avulsão dentária recente?": {
+      "pt": "Perdeu um dente (partido, arrancado ou caído) nos últimos 7 dias?",
+      "en": "Have you lost a tooth (broken, knocked out or fallen out) in the last 7 days?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Deformação grosseira?": {
+      "pt": "Há uma parte do corpo claramente torta ou muito deformada?",
+      "en": "Is a part of the body clearly crooked or badly deformed?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Diplopia?": {
+      "pt": "Está a ver a dobrar (visão a dobrar que desaparece ao tapar um olho)?",
+      "en": "Are you seeing double (double vision that goes away when you cover one eye)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Alteração da sensibilidade da face?": {
+      "pt": "Sente a cara diferente (formigueiro ou dormência)?",
+      "en": "Does your face feel different (tingling or numbness)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Fratura exposta?": {
+      "pt": "Há um osso partido com uma ferida por cima (talvez com o osso à vista)?",
+      "en": "Is there a broken bone with a wound over it (perhaps with the bone showing)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Tensão cutânea?": {
+      "pt": "A pele por cima de uma fratura está branca e muito esticada, como se o osso fizesse pressão por dentro?",
+      "en": "Is the skin over a fracture white and very tight, as if the bone is pressing from inside?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Sensação de corpo estranho?": {
+      "pt": "Sente como se tivesse alguma coisa dentro do olho (com o olho a lacrimejar e vermelho)?",
+      "en": "Does it feel as if there is something in the eye (with the eye watering and red)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Priapismo?": {
+      "pt": "Tem uma ereção que não passa há bastante tempo?",
+      "en": "Do you have an erection that won't go down after a long time?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Hematúria clinicamente evidente?": {
+      "pt": "A urina está com sangue que se vê a olho nu?",
+      "en": "Is there blood in the urine that you can see with the naked eye?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Disúria?": {
+      "pt": "Dói ou custa a fazer xixi?",
+      "en": "Does it hurt or is it difficult to pass urine?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Lesão elétrica?": {
+      "pt": "Apanhou um choque ou uma descarga elétrica (da corrente ou de um raio)?",
+      "en": "Have you had an electric shock or discharge (from mains electricity or lightning)?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Icterícia?": {
+      "pt": "A pele ou o branco dos olhos estão amarelados?",
+      "en": "Is the skin or the white of the eyes turning yellow?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Hematoma no couro cabeludo?": {
+      "pt": "Tem um alto ou uma pisadura na cabeça, na zona com cabelo?",
+      "en": "Is there a lump or a bruise on the head, on the hair-covered part?",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    }
+  }
+}

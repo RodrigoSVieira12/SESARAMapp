@@ -1,0 +1,199 @@
+{
+  "id": "problemas_oftalmologicos",
+  "nome": "Problema nos olhos ou na visão",
+  "nome_en": "A problem with the eyes or vision",
+  "descricao": "Problemas oftalmológicos.",
+  "descricao_en": "Eye problems.",
+  "pediatrico": false,
+  "fonte": "Discriminadores do Sistema de Triagem de Manchester, organizados por prioridade clínica (P1-P5). Importados da tabela de referência; sujeitos a validação clínica antes de uso real.",
+  "fonte_en": "Manchester Triage System discriminators, organised by clinical priority (P1-P5). Imported from the reference table; subject to clinical validation before real use.",
+  "perguntas": [
+    {
+      "id": "problemas_oftalmologicos_p1_2890",
+      "disc_id": 2890,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Lesão ocular química?",
+      "texto_utente": "Entrou-lhe algum produto químico no olho (que arde, queima ou faz ver pior)?",
+      "texto_en": "Chemical eye injury?",
+      "texto_utente_en": "Has a chemical got into the eye (stinging, burning or making vision worse)?",
+      "descricao": "Qualquer substância que salpique ou seja colocada nos olhos, que venha a causar sensação de picadas, queimadura ou que reduza a visão, deve presumir-se capaz de causar lesão química"
+    },
+    {
+      "id": "problemas_oftalmologicos_p2_2891",
+      "disc_id": 2891,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Alteração do estado de consciência?",
+      "texto_utente": "Está sonolento ou baralhado, só reagindo quando lhe falam ou lhe tocam (não está bem desperto)?",
+      "texto_en": "Altered level of consciousness?",
+      "texto_utente_en": "Is the person drowsy or muddled, responding only to voice or touch (not fully alert)?",
+      "descricao": "Não está totalmente alerta. Só responde à voz, à dor"
+    },
+    {
+      "id": "problemas_oftalmologicos_p2_2892",
+      "disc_id": 2892,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Muito quente?",
+      "texto_utente": "Tem febre muito alta? (num adulto, 41°C ou mais; num bebé com menos de 12 meses, 38,5°C ou mais)",
+      "texto_en": "Very hot (high temperature)?",
+      "texto_utente_en": "Do you have a very high fever? (in an adult, 41°C or more; in a baby under 12 months, 38.5°C or more)",
+      "descricao": "No Adulto temperatura igual ou superior a 41ºC; Crianças com menos de 12 meses a temperatura é igual ou superior a 38.5ºC"
+    },
+    {
+      "id": "problemas_oftalmologicos_p2_2893",
+      "disc_id": 2893,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Possível sépsis?",
+      "texto_utente": "Tem sinais de uma infeção a alastrar depressa, como confusão, respiração muito acelerada ou uma fraqueza que se instala de repente?",
+      "texto_en": "Possible sepsis?",
+      "texto_utente_en": "Are there signs of a fast-spreading infection, such as confusion, very rapid breathing or weakness that comes on suddenly?",
+      "descricao": "Suspeitar de sépsis em vítimas que apresentem alteração do estado de consciência, hipotensão (sistólica inferior a 100mmHg), ou aumento da frequência respiratória (frequência superior a 22 cpm). Nas crianças deve ser determinada a possibilidade de sépsis pelas tabelas de parâmetros vitais ajustados à idade."
+    },
+    {
+      "id": "problemas_oftalmologicos_p2_2894",
+      "disc_id": 2894,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Traumatismo ocular penetrante?",
+      "texto_utente": "Espetou ou furou o olho com alguma coisa?",
+      "texto_en": "Penetrating eye injury?",
+      "texto_utente_en": "Has something pierced or gone into the eye?",
+      "descricao": "Um evento recente fisicamente traumático com a penetração do globo ocular"
+    },
+    {
+      "id": "problemas_oftalmologicos_p2_2895",
+      "disc_id": 2895,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Perda súbita de visão?",
+      "texto_utente": "Perdeu a vista de repente, num olho ou nos dois (já há mais de 24 horas)?",
+      "texto_en": "Sudden loss of vision?",
+      "texto_utente_en": "Did you suddenly lose your sight in one or both eyes (already more than 24 hours ago)?",
+      "descricao": "Perda de visão num ou nos dois olhos durante mais de 24 horas."
+    },
+    {
+      "id": "problemas_oftalmologicos_p2_2896",
+      "disc_id": 2896,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Dor severa?",
+      "texto_utente": "Tem dores muito fortes, quase a não aguentar (das piores que alguma vez sentiu)?",
+      "texto_en": "Severe pain?",
+      "texto_utente_en": "Do you have very severe pain, almost unbearable (some of the worst you've ever felt)?",
+      "descricao": "Dor significativa e insuportável, frequentemente referida como a pior de sempre. Alterações na expressão facial, de comportamento e nas atividades diárias permitem avaliar o nível de dor, especialmente nos doentes não comunicativos (por exemplo nas crianças e bebés), ou quando existem barreiras de comunicação pelo idioma ou por demência."
+    },
+    {
+      "id": "problemas_oftalmologicos_p3_2897",
+      "disc_id": 2897,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Quente?",
+      "texto_utente": "Tem febre? (num adulto, acima de 38,5°C; numa criança, 38,5°C a 39,8°C; num recém-nascido com menos de 28 dias, 37,5°C a 38,4°C)",
+      "texto_en": "Hot (raised temperature)?",
+      "texto_utente_en": "Do you have a fever? (in an adult, above 38.5°C; in a child, 38.5°C to 39.8°C; in a newborn under 28 days, 37.5°C to 38.4°C)",
+      "descricao": "No adulto, uma temperatura > 38.5-40.9ºC; Na criança é 38.5-39.8ºC; No recém-nascido com menos de 28 dias é 37.5-38.4ºC."
+    },
+    {
+      "id": "problemas_oftalmologicos_p3_2898",
+      "disc_id": 2898,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "História Inapropriada?",
+      "texto_utente": "A explicação que foi dada para as lesões não bate certo com aquilo que se vê?",
+      "texto_en": "Inappropriate history?",
+      "texto_utente_en": "Does the explanation given for the injuries not match what can be seen?",
+      "descricao": "Quando a história fornecida não explica as alterações físicas, então é inapropriada. Isto é importante pois é um sinal de perigo para a salvaguarda de adultos e crianças."
+    },
+    {
+      "id": "problemas_oftalmologicos_p3_2899",
+      "disc_id": 2899,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Recente redução da acuidade visual?",
+      "texto_utente": "A vista piorou nos últimos 7 dias?",
+      "texto_en": "Recent reduction in visual acuity?",
+      "texto_utente_en": "Has your eyesight got worse in the last 7 days?",
+      "descricao": "Qualquer redução da acuidade visual (corrigida) nos últimos 7 dias."
+    },
+    {
+      "id": "problemas_oftalmologicos_p3_2900",
+      "disc_id": 2900,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Diplopia?",
+      "texto_utente": "Está a ver a dobrar (visão a dobrar que desaparece ao tapar um olho)?",
+      "texto_en": "Diplopia (double vision)?",
+      "texto_utente_en": "Are you seeing double (double vision that goes away when you cover one eye)?",
+      "descricao": "Imagem dupla que desaparece com a oclusão de um dos globos oculares"
+    },
+    {
+      "id": "problemas_oftalmologicos_p3_2901",
+      "disc_id": 2901,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Dor moderada?",
+      "texto_utente": "Tem dores a sério, que o impedem de fazer algumas coisas do dia a dia?",
+      "texto_en": "Moderate pain?",
+      "texto_utente_en": "Do you have noticeable pain that stops you doing some everyday things?",
+      "descricao": "Dor significativa que incapacita para algumas atividades diárias. Alterações na expressão facial, de comportamento e nas atividades diárias permitem avaliar o nível de dor, especialmente nos doentes não comunicativos (por exemplo nas crianças e bebés), ou quando existem barreiras de comunicação pelo idioma ou por demência."
+    },
+    {
+      "id": "problemas_oftalmologicos_p4_2902",
+      "disc_id": 2902,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Febre persistente?",
+      "texto_utente": "A febre não cede, mesmo alternando os medicamentos para baixar a febre (paracetamol e ibuprofeno)?",
+      "texto_en": "Persistent fever?",
+      "texto_utente_en": "Does the fever not come down, even alternating the fever medicines (paracetamol and ibuprofen)?",
+      "descricao": "Febre que não cede à toma intercalada de antipiréticos (paracetamol e ibuprofeno)"
+    },
+    {
+      "id": "problemas_oftalmologicos_p4_2905",
+      "disc_id": 2905,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Sensação de corpo estranho?",
+      "texto_utente": "Sente como se tivesse alguma coisa dentro do olho (com o olho a lacrimejar e vermelho)?",
+      "texto_en": "Foreign body sensation?",
+      "texto_utente_en": "Does it feel as if there is something in the eye (with the eye watering and red)?",
+      "descricao": "Aumento da sensibilidade acompanhada de lacrimejo e eritema do globo ocular."
+    },
+    {
+      "id": "problemas_oftalmologicos_p4_2906",
+      "disc_id": 2906,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Olho vermelho?",
+      "texto_utente": "Tem o olho vermelho (com ou sem dor)?",
+      "texto_en": "Red eye?",
+      "texto_utente_en": "Is the eye red (with or without pain)?",
+      "descricao": "Olhos que se apresentam vermelhos. Um olho vermelho pode ser doloroso, ou não, e poderá ser total ou parcialmente afetado"
+    },
+    {
+      "id": "problemas_oftalmologicos_p4_2909",
+      "disc_id": 2909,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Dor persistente?",
+      "texto_utente": "A dor continua sem passar, mesmo depois de esperar ou de tomar um analgésico?",
+      "texto_en": "Persistent pain?",
+      "texto_utente_en": "Does the pain carry on without easing, even after waiting or taking a painkiller?",
+      "descricao": "Dor que não desaparece após algum tempo ou após tomar a medicação apropriada. Mudanças nas expressões faciais, comportamento e interrupção da atividade permitirão avaliar os níveis de dor, especialmente em pacientes não comunicativos, como por exemplo crianças muito pequenas e bebés, ou onde existam barreiras à comunicação devido ao idioma ou a demência."
+    },
+    {
+      "id": "problemas_oftalmologicos_p4_2910",
+      "disc_id": 2910,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Problema recente?",
+      "texto_utente": "Este problema começou na última semana?",
+      "texto_en": "Recent problem?",
+      "texto_utente_en": "Did this problem start within the last week?",
+      "descricao": "Um problema que aparece no decorrer da última semana."
+    }
+  ]
+}

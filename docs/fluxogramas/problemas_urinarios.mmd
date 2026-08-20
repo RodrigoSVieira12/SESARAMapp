@@ -1,0 +1,89 @@
+flowchart TD
+  inicio(["Início: Problemas urinários"])
+  problemas_urinarios_p1_1871["1. [P1] Compromisso da via aérea?"]
+  problemas_urinarios_p1_2142["2. [P1] Respiração ineficaz?"]
+  problemas_urinarios_p1_2755["3. [P1] Sinais de choque?"]
+  problemas_urinarios_p2_2935["4. [P2] Alteração do estado de<br/>consciência?"]
+  problemas_urinarios_p2_2937["5. [P2] Muito quente?"]
+  problemas_urinarios_p2_2938["6. [P2] Possível sépsis?"]
+  problemas_urinarios_p2_2939["7. [P2] Priapismo?"]
+  problemas_urinarios_p2_2940["8. [P2] Alteração da imunidade<br/>conhecida?"]
+  problemas_urinarios_p2_2941["9. [P2] Dor severa?"]
+  problemas_urinarios_p3_3339["10. [P3] Vómitos persistentes?"]
+  problemas_urinarios_p3_3340["11. [P3] Não urina?"]
+  problemas_urinarios_p3_3341["12. [P3] Hematúria clinicamente<br/>evidente?"]
+  problemas_urinarios_p3_3342["13. [P3] Quente?"]
+  problemas_urinarios_p3_3343["14. [P3] Cólica?"]
+  problemas_urinarios_p3_3344["15. [P3] Dor moderada?"]
+  problemas_urinarios_p4_2948["16. [P4] Vómitos persistentes?"]
+  problemas_urinarios_p4_2951["17. [P4] Febre persistente?"]
+  problemas_urinarios_p4_2952["18. [P4] Disúria?"]
+  problemas_urinarios_p4_2955["19. [P4] Dor persistente?"]
+  problemas_urinarios_p4_2956["20. [P4] Problema recente?"]
+  inicio --> problemas_urinarios_p1_1871
+  problemas_urinarios_p1_1871_sim(["VERMELHO"]):::vermelho
+  problemas_urinarios_p1_1871 -->|Sim| problemas_urinarios_p1_1871_sim
+  problemas_urinarios_p1_1871 -->|Não| problemas_urinarios_p1_2142
+  problemas_urinarios_p1_2142_sim(["VERMELHO"]):::vermelho
+  problemas_urinarios_p1_2142 -->|Sim| problemas_urinarios_p1_2142_sim
+  problemas_urinarios_p1_2142 -->|Não| problemas_urinarios_p1_2755
+  problemas_urinarios_p1_2755_sim(["VERMELHO"]):::vermelho
+  problemas_urinarios_p1_2755 -->|Sim| problemas_urinarios_p1_2755_sim
+  problemas_urinarios_p1_2755 -->|Não| problemas_urinarios_p2_2935
+  problemas_urinarios_p2_2935_sim(["LARANJA"]):::laranja
+  problemas_urinarios_p2_2935 -->|Sim| problemas_urinarios_p2_2935_sim
+  problemas_urinarios_p2_2935 -->|Não| problemas_urinarios_p2_2937
+  problemas_urinarios_p2_2937_sim(["LARANJA"]):::laranja
+  problemas_urinarios_p2_2937 -->|Sim| problemas_urinarios_p2_2937_sim
+  problemas_urinarios_p2_2937 -->|Não| problemas_urinarios_p2_2938
+  problemas_urinarios_p2_2938_sim(["LARANJA"]):::laranja
+  problemas_urinarios_p2_2938 -->|Sim| problemas_urinarios_p2_2938_sim
+  problemas_urinarios_p2_2938 -->|Não| problemas_urinarios_p2_2939
+  problemas_urinarios_p2_2939_sim(["LARANJA"]):::laranja
+  problemas_urinarios_p2_2939 -->|Sim| problemas_urinarios_p2_2939_sim
+  problemas_urinarios_p2_2939 -->|Não| problemas_urinarios_p2_2940
+  problemas_urinarios_p2_2940_sim(["LARANJA"]):::laranja
+  problemas_urinarios_p2_2940 -->|Sim| problemas_urinarios_p2_2940_sim
+  problemas_urinarios_p2_2940 -->|Não| problemas_urinarios_p2_2941
+  problemas_urinarios_p2_2941_sim(["LARANJA"]):::laranja
+  problemas_urinarios_p2_2941 -->|Sim| problemas_urinarios_p2_2941_sim
+  problemas_urinarios_p2_2941 -->|Não| problemas_urinarios_p3_3339
+  problemas_urinarios_p3_3339_sim(["AMARELO"]):::amarelo
+  problemas_urinarios_p3_3339 -->|Sim| problemas_urinarios_p3_3339_sim
+  problemas_urinarios_p3_3339 -->|Não| problemas_urinarios_p3_3340
+  problemas_urinarios_p3_3340_sim(["AMARELO"]):::amarelo
+  problemas_urinarios_p3_3340 -->|Sim| problemas_urinarios_p3_3340_sim
+  problemas_urinarios_p3_3340 -->|Não| problemas_urinarios_p3_3341
+  problemas_urinarios_p3_3341_sim(["AMARELO"]):::amarelo
+  problemas_urinarios_p3_3341 -->|Sim| problemas_urinarios_p3_3341_sim
+  problemas_urinarios_p3_3341 -->|Não| problemas_urinarios_p3_3342
+  problemas_urinarios_p3_3342_sim(["AMARELO"]):::amarelo
+  problemas_urinarios_p3_3342 -->|Sim| problemas_urinarios_p3_3342_sim
+  problemas_urinarios_p3_3342 -->|Não| problemas_urinarios_p3_3343
+  problemas_urinarios_p3_3343_sim(["AMARELO"]):::amarelo
+  problemas_urinarios_p3_3343 -->|Sim| problemas_urinarios_p3_3343_sim
+  problemas_urinarios_p3_3343 -->|Não| problemas_urinarios_p3_3344
+  problemas_urinarios_p3_3344_sim(["AMARELO"]):::amarelo
+  problemas_urinarios_p3_3344 -->|Sim| problemas_urinarios_p3_3344_sim
+  problemas_urinarios_p3_3344 -->|Não| problemas_urinarios_p4_2948
+  problemas_urinarios_p4_2948_sim(["VERDE"]):::verde
+  problemas_urinarios_p4_2948 -->|Sim| problemas_urinarios_p4_2948_sim
+  problemas_urinarios_p4_2948 -->|Não| problemas_urinarios_p4_2951
+  problemas_urinarios_p4_2951_sim(["VERDE"]):::verde
+  problemas_urinarios_p4_2951 -->|Sim| problemas_urinarios_p4_2951_sim
+  problemas_urinarios_p4_2951 -->|Não| problemas_urinarios_p4_2952
+  problemas_urinarios_p4_2952_sim(["VERDE"]):::verde
+  problemas_urinarios_p4_2952 -->|Sim| problemas_urinarios_p4_2952_sim
+  problemas_urinarios_p4_2952 -->|Não| problemas_urinarios_p4_2955
+  problemas_urinarios_p4_2955_sim(["VERDE"]):::verde
+  problemas_urinarios_p4_2955 -->|Sim| problemas_urinarios_p4_2955_sim
+  problemas_urinarios_p4_2955 -->|Não| problemas_urinarios_p4_2956
+  problemas_urinarios_p4_2956_sim(["VERDE"]):::verde
+  problemas_urinarios_p4_2956 -->|Sim| problemas_urinarios_p4_2956_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  problemas_urinarios_p4_2956 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

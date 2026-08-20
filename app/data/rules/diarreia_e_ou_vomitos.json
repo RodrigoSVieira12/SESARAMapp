@@ -1,0 +1,243 @@
+{
+  "id": "diarreia_e_ou_vomitos",
+  "nome": "Diarreia e/ou vómitos",
+  "nome_en": "Diarrhoea and/or vomiting",
+  "descricao": "Diarreia, vómitos ou ambos.",
+  "descricao_en": "Diarrhoea, vomiting or both.",
+  "pediatrico": false,
+  "fonte": "Discriminadores do Sistema de Triagem de Manchester, organizados por prioridade clínica (P1-P5). Importados da tabela de referência; sujeitos a validação clínica antes de uso real.",
+  "fonte_en": "Manchester Triage System discriminators, organised by clinical priority (P1-P5). Imported from the reference table; subject to clinical validation before real use.",
+  "perguntas": [
+    {
+      "id": "diarreia_e_ou_vomitos_p1_1840",
+      "disc_id": 1840,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Compromisso da via aérea?",
+      "texto_utente": "A respiração está muito difícil ou ruidosa, como se o ar não passasse bem pela garganta (a roncar ou a gorgolejar)?",
+      "texto_en": "Airway compromise?",
+      "texto_utente_en": "Is breathing very difficult or noisy, as if air can't pass properly through the throat (snoring or gurgling)?",
+      "descricao": "A via aérea poderá estar comprometida, por não se conseguir manter aberta, ou porque os reflexos protetores da via respiratória (que evitam a aspiração) se perderam. A incapacidade de manter a via aérea aberta, poderá resultar numa obstrução total ou parcial, intermitente ou não. Isto manifestar-se-á por sons como o ressonar ou o gorgolejar durante a respiração."
+    },
+    {
+      "id": "diarreia_e_ou_vomitos_p1_2111",
+      "disc_id": 2111,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Respiração ineficaz?",
+      "texto_utente": "A respiração está tão fraca ou cansada que parece não entrar ar suficiente (respiração aos arrancos ou muito a custo)?",
+      "texto_en": "Ineffective breathing?",
+      "texto_utente_en": "Is breathing so weak or laboured that not enough air seems to get in (gasping or a real struggle)?",
+      "descricao": "Doentes que não conseguem respirar suficientemente bem para manter uma oxigenação adequada e com falência respiratória, sofrem de respiração ineficaz. Poderá resultar num esforço acrescentado para respirar, ou em exaustão, incluindo uma respiração tipo “gasping”."
+    },
+    {
+      "id": "diarreia_e_ou_vomitos_p1_2151",
+      "disc_id": 2151,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Sinais de choque?",
+      "texto_utente": "Tem suores frios, pele muito pálida ou acinzentada, o coração a bater depressa e uma grande fraqueza?",
+      "texto_en": "Signs of shock?",
+      "texto_utente_en": "Are there cold sweats, very pale or greyish skin, a fast heartbeat and severe weakness?",
+      "descricao": "O choque é uma entrega inadequada de oxigénio aos tecidos. Os sinais clássicos incluem suores, palidez, taquicardia, hipotensão e nível de consciência reduzido."
+    },
+    {
+      "id": "diarreia_e_ou_vomitos_p1_2152",
+      "disc_id": 2152,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Não reativo?",
+      "texto_utente": "Está sem reagir a nada, nem quando lhe falam, lhe tocam ou lhe fazem doer?",
+      "texto_en": "Unresponsive?",
+      "texto_utente_en": "Is the person not reacting at all, even to voice, touch or pain?",
+      "descricao": "Não responde a um estímulo doloroso."
+    },
+    {
+      "id": "diarreia_e_ou_vomitos_p2_2153",
+      "disc_id": 2153,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Hematemeses?",
+      "texto_utente": "Vomitou sangue (vermelho-vivo ou escuro, parecido com borras de café)?",
+      "texto_en": "Vomiting blood (haematemesis)?",
+      "texto_utente_en": "Have you vomited blood (bright red or dark, like coffee grounds)?",
+      "descricao": "O sangue expelido no vómito poderá ser fresco (vermelho-vivo) ou escuro, ou com aparência de borras de café."
+    },
+    {
+      "id": "diarreia_e_ou_vomitos_p2_2154",
+      "disc_id": 2154,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Hematoquésias, melenas ou retorragias?",
+      "texto_utente": "Saiu sangue pelo rabo ou nas fezes (vermelho-vivo ou muito escuro)?",
+      "texto_en": "Blood in the stool or rectal bleeding?",
+      "texto_utente_en": "Has blood come from the back passage or in the stool (bright red or very dark)?",
+      "descricao": "Numa hemorragia gastrointestinal maciça e ativa, o sangue vermelho-escuro é expelido pelo reto. À medida que aumenta o tempo de trânsito gastrointestinal o sangue torna-se mais escuro – vindo a tornar-se em melenas."
+    },
+    {
+      "id": "diarreia_e_ou_vomitos_p2_2155",
+      "disc_id": 2155,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Alteração do estado de consciência?",
+      "texto_utente": "Está sonolento ou baralhado, só reagindo quando lhe falam ou lhe tocam (não está bem desperto)?",
+      "texto_en": "Altered level of consciousness?",
+      "texto_utente_en": "Is the person drowsy or muddled, responding only to voice or touch (not fully alert)?",
+      "descricao": "Não está totalmente alerta. Só responde à voz, à dor"
+    },
+    {
+      "id": "diarreia_e_ou_vomitos_p2_2156",
+      "disc_id": 2156,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Prostrado?",
+      "texto_utente": "Está muito abatido e sem forças (numa criança, pode estar molinha ou muito apática)?",
+      "texto_en": "Prostrate (extreme weakness)?",
+      "texto_utente_en": "Are you very weak and drained (in a child, they may be floppy or very listless)?",
+      "descricao": "Os pais poderão descrever os seus filhos como apáticos, pouco reativos ou “molengões”. O tónus é em geral reduzido – o sinal mais notável é o movimento da cabeça."
+    },
+    {
+      "id": "diarreia_e_ou_vomitos_p2_2158",
+      "disc_id": 2158,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Muito quente?",
+      "texto_utente": "Tem febre muito alta? (num adulto, 41°C ou mais; num bebé com menos de 12 meses, 38,5°C ou mais)",
+      "texto_en": "Very hot (high temperature)?",
+      "texto_utente_en": "Do you have a very high fever? (in an adult, 41°C or more; in a baby under 12 months, 38.5°C or more)",
+      "descricao": "No Adulto temperatura igual ou superior a 41ºC; Crianças com menos de 12 meses a temperatura é igual ou superior a 38.5ºC"
+    },
+    {
+      "id": "diarreia_e_ou_vomitos_p2_2159",
+      "disc_id": 2159,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Possível sépsis?",
+      "texto_utente": "Tem sinais de uma infeção a alastrar depressa, como confusão, respiração muito acelerada ou uma fraqueza que se instala de repente?",
+      "texto_en": "Possible sepsis?",
+      "texto_utente_en": "Are there signs of a fast-spreading infection, such as confusion, very rapid breathing or weakness that comes on suddenly?",
+      "descricao": "Suspeitar de sépsis em vítimas que apresentem alteração do estado de consciência, hipotensão (sistólica inferior a 100mmHg), ou aumento da frequência respiratória (frequência superior a 22 cpm). Nas crianças deve ser determinada a possibilidade de sépsis pelas tabelas de parâmetros vitais ajustados à idade."
+    },
+    {
+      "id": "diarreia_e_ou_vomitos_p2_2160",
+      "disc_id": 2160,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Dor severa?",
+      "texto_utente": "Tem dores muito fortes, quase a não aguentar (das piores que alguma vez sentiu)?",
+      "texto_en": "Severe pain?",
+      "texto_utente_en": "Do you have very severe pain, almost unbearable (some of the worst you've ever felt)?",
+      "descricao": "Dor significativa e insuportável, frequentemente referida como a pior de sempre. Alterações na expressão facial, de comportamento e nas atividades diárias permitem avaliar o nível de dor, especialmente nos doentes não comunicativos (por exemplo nas crianças e bebés), ou quando existem barreiras de comunicação pelo idioma ou por demência."
+    },
+    {
+      "id": "diarreia_e_ou_vomitos_p3_2161",
+      "disc_id": 2161,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Vómitos incoercíveis?",
+      "texto_utente": "Está a vomitar sem parar, sem conseguir suster?",
+      "texto_en": "Uncontrollable vomiting?",
+      "texto_utente_en": "Are you vomiting non-stop and unable to hold it back?",
+      "descricao": "Vómitos constantes e/ou frequentes, podendo ser acompanhados de náuseas."
+    },
+    {
+      "id": "diarreia_e_ou_vomitos_p3_2162",
+      "disc_id": 2162,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Sinais de desidratação?",
+      "texto_utente": "Tem sinais de estar desidratado, como a boca e a língua secas, os olhos encovados ou urinar muito pouco?",
+      "texto_en": "Signs of dehydration?",
+      "texto_utente_en": "Are there signs of dehydration, such as a dry mouth and tongue, sunken eyes or passing very little urine?",
+      "descricao": "Incluindo secura da língua, olhos afundados, turgir cutâneo aumentado e, em bebés, uma fontanela anterior afundada. Habitualmente, associada a uma diminuição do débito urinário."
+    },
+    {
+      "id": "diarreia_e_ou_vomitos_p3_2163",
+      "disc_id": 2163,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Fezes pretas ou raiadas de sangue?",
+      "texto_utente": "As fezes estão pretas (como alcatrão) ou com fios de sangue?",
+      "texto_en": "Black or blood-streaked stools?",
+      "texto_utente_en": "Are the stools black (like tar) or streaked with blood?",
+      "descricao": "As fezes aparecem com cor vermelho-escura. A ausência periódica ou temporária deste tipo de manifestação, não exclui o diagnóstico. Qualquer sinal de apresentação de fezes pretas, constitui um alerta."
+    },
+    {
+      "id": "diarreia_e_ou_vomitos_p3_2164",
+      "disc_id": 2164,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Quente?",
+      "texto_utente": "Tem febre? (num adulto, acima de 38,5°C; numa criança, 38,5°C a 39,8°C; num recém-nascido com menos de 28 dias, 37,5°C a 38,4°C)",
+      "texto_en": "Hot (raised temperature)?",
+      "texto_utente_en": "Do you have a fever? (in an adult, above 38.5°C; in a child, 38.5°C to 39.8°C; in a newborn under 28 days, 37.5°C to 38.4°C)",
+      "descricao": "No adulto, uma temperatura > 38.5-40.9ºC; Na criança é 38.5-39.8ºC; No recém-nascido com menos de 28 dias é 37.5-38.4ºC."
+    },
+    {
+      "id": "diarreia_e_ou_vomitos_p3_2165",
+      "disc_id": 2165,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "História de hematemeses?",
+      "texto_utente": "Vomitou sangue há pouco tempo (vermelho ou escuro, parecido com borras de café)?",
+      "texto_en": "History of vomiting blood?",
+      "texto_utente_en": "Have you recently vomited blood (red or dark, like coffee grounds)?",
+      "descricao": "Hematemese recente e clinicamente evidente, vómitos de sangue alterado (borras de café) ou de sangue misturado com vómito."
+    },
+    {
+      "id": "diarreia_e_ou_vomitos_p3_2166",
+      "disc_id": 2166,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Dor moderada?",
+      "texto_utente": "Tem dores a sério, que o impedem de fazer algumas coisas do dia a dia?",
+      "texto_en": "Moderate pain?",
+      "texto_utente_en": "Do you have noticeable pain that stops you doing some everyday things?",
+      "descricao": "Dor significativa que incapacita para algumas atividades diárias. Alterações na expressão facial, de comportamento e nas atividades diárias permitem avaliar o nível de dor, especialmente nos doentes não comunicativos (por exemplo nas crianças e bebés), ou quando existem barreiras de comunicação pelo idioma ou por demência."
+    },
+    {
+      "id": "diarreia_e_ou_vomitos_p4_2167",
+      "disc_id": 2167,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Vómitos persistentes?",
+      "texto_utente": "Continua a vomitar, mesmo depois de esperar ou de tomar algum medicamento?",
+      "texto_en": "Persistent vomiting?",
+      "texto_utente_en": "Do you keep vomiting, even after waiting or taking medication?",
+      "descricao": "Vómitos que não passaram, apesar da espera ou da medicação que tomou."
+    },
+    {
+      "id": "diarreia_e_ou_vomitos_p4_2169",
+      "disc_id": 2169,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Febre persistente?",
+      "texto_utente": "A febre não cede, mesmo alternando os medicamentos para baixar a febre (paracetamol e ibuprofeno)?",
+      "texto_en": "Persistent fever?",
+      "texto_utente_en": "Does the fever not come down, even alternating the fever medicines (paracetamol and ibuprofen)?",
+      "descricao": "Febre que não cede à toma intercalada de antipiréticos (paracetamol e ibuprofeno)"
+    },
+    {
+      "id": "diarreia_e_ou_vomitos_p4_2172",
+      "disc_id": 2172,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Dor persistente?",
+      "texto_utente": "A dor continua sem passar, mesmo depois de esperar ou de tomar um analgésico?",
+      "texto_en": "Persistent pain?",
+      "texto_utente_en": "Does the pain carry on without easing, even after waiting or taking a painkiller?",
+      "descricao": "Dor que não desaparece após algum tempo ou após tomar a medicação apropriada. Mudanças nas expressões faciais, comportamento e interrupção da atividade permitirão avaliar os níveis de dor, especialmente em pacientes não comunicativos, como por exemplo crianças muito pequenas e bebés, ou onde existam barreiras à comunicação devido ao idioma ou a demência."
+    },
+    {
+      "id": "diarreia_e_ou_vomitos_p4_2173",
+      "disc_id": 2173,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Problema recente?",
+      "texto_utente": "Este problema começou na última semana?",
+      "texto_en": "Recent problem?",
+      "texto_utente_en": "Did this problem start within the last week?",
+      "descricao": "Um problema que aparece no decorrer da última semana."
+    }
+  ]
+}

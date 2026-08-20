@@ -47,7 +47,7 @@ _LIMITES = {
 }
 
 # Avisos brandos (não impedem o arranque):
-_LIMIAR_SUSPEITO_KM = 12.0        # sítio demasiado longe do centro do concelho
+_LIMIAR_SUSPEITO_KM = 12.0  # sítio demasiado longe do centro do concelho
 _LIMIAR_QUASE_DUPLICADO_KM = 0.1  # dois sítios praticamente no mesmo ponto
 
 
@@ -65,14 +65,13 @@ def carregar(recarregar: bool = False) -> dict:
         dados = json.loads(FICHEIRO.read_text(encoding="utf-8"))
         problemas = validar(dados)
         if problemas:
-            raise ErroLocalidades(
-                "localidades.json inválido:\n- " + "\n- ".join(problemas)
-            )
+            raise ErroLocalidades("localidades.json inválido:\n- " + "\n- ".join(problemas))
         _cache = _preparar(dados)
     return _cache
 
 
 # ------------------------------------------------------------ validação -- #
+
 
 def _coordenada(valor) -> bool:
     return isinstance(valor, (int, float)) and not isinstance(valor, bool)
@@ -172,6 +171,7 @@ def _validar_ponto(onde: str, ilha: str, lat: float, lng: float) -> list[str]:
 
 # ----------------------------------------------------------- preparação -- #
 
+
 def _chave_alfabetica(nome: str) -> str:
     """Ordena ignorando acentos e maiúsculas ('Água de Pena' fica no A)."""
     plano = unicodedata.normalize("NFKD", nome).encode("ascii", "ignore").decode()
@@ -205,6 +205,7 @@ def arvore() -> dict:
 
 # --------------------------------------------------------------- avisos -- #
 
+
 def avisos(prep: dict | None = None) -> list[str]:
     """Suspeitas que merecem olhos humanos (não impedem o arranque).
 
@@ -236,8 +237,11 @@ def avisos(prep: dict | None = None) -> list[str]:
                         f"{c['nome']} / {f['nome']} / {s['nome']}: a {d_s:.1f} km do "
                         f"centro do concelho — confirmar coordenadas"
                     )
-                for outro in f["sitios"][indice + 1:]:
-                    if haversine_km(s["lat"], s["lng"], outro["lat"], outro["lng"]) < _LIMIAR_QUASE_DUPLICADO_KM:
+                for outro in f["sitios"][indice + 1 :]:
+                    if (
+                        haversine_km(s["lat"], s["lng"], outro["lat"], outro["lng"])
+                        < _LIMIAR_QUASE_DUPLICADO_KM
+                    ):
                         saida.append(
                             f"{c['nome']} / {f['nome']}: '{s['nome']}' e '{outro['nome']}' "
                             f"estão praticamente no mesmo ponto — confirmar"

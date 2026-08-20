@@ -29,8 +29,17 @@ AUTOCUIDADO = RAIZ / "app" / "data" / "autocuidado.json"
 # 'descricao' fica de fora de propósito: em alguns ficheiros é uma nota
 # interna de desenvolvimento, não texto para o utente.
 CAMPOS_TRADUZIVEIS = {
-    "nome", "texto", "ajuda", "titulo", "intro", "alerta_titulo",
-    "fazer", "evitar", "alerta", "mensagem",
+    "nome",
+    "texto",
+    "texto_utente",
+    "ajuda",
+    "titulo",
+    "intro",
+    "alerta_titulo",
+    "fazer",
+    "evitar",
+    "alerta",
+    "mensagem",
 }
 
 
@@ -50,7 +59,7 @@ def auditar_interface() -> list[str]:
             bloco = None
             continue
         if bloco:
-            m = re.match(r'^    (\w+)\s*:\s*(.*)$', linha)
+            m = re.match(r"^    (\w+)\s*:\s*(.*)$", linha)
             if m:
                 chave, resto = m.group(1), m.group(2)
                 chaves[bloco].add(chave)
@@ -63,8 +72,10 @@ def auditar_interface() -> list[str]:
     for chave in faltam:
         problemas.append(f"[interface] chave sem versão EN: {chave}")
     iguais = sorted(
-        k for k in chaves["pt"] & chaves["en"]
-        if k in valores["pt"] and k in valores["en"]
+        k
+        for k in chaves["pt"] & chaves["en"]
+        if k in valores["pt"]
+        and k in valores["en"]
         and valores["pt"][k] == valores["en"][k]
         and valores["pt"][k].strip()  # ignora strings vazias
     )

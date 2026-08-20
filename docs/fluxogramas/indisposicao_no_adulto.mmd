@@ -1,0 +1,109 @@
+flowchart TD
+  inicio(["Início: Indisposição no adulto"])
+  indisposicao_no_adulto_p1_1861["1. [P1] Compromisso da via aérea?"]
+  indisposicao_no_adulto_p1_2132["2. [P1] Respiração ineficaz?"]
+  indisposicao_no_adulto_p1_2641["3. [P1] Sinais de choque?"]
+  indisposicao_no_adulto_p1_2642["4. [P1] Não reativo?"]
+  indisposicao_no_adulto_p1_2643["5. [P1] Convulsão atual?"]
+  indisposicao_no_adulto_p2_2644["6. [P2] Alteração do estado de<br/>consciência?"]
+  indisposicao_no_adulto_p2_2645["7. [P2] Défice neurológico agudo?<br/><24h"]
+  indisposicao_no_adulto_p2_2646["8. [P2] Muito quente?"]
+  indisposicao_no_adulto_p2_2647["9. [P2] Possível sépsis?"]
+  indisposicao_no_adulto_p2_2648["10. [P2] Sinais de meningismo?"]
+  indisposicao_no_adulto_p2_2649["11. [P2] Erupção cutânea desconhecida?"]
+  indisposicao_no_adulto_p2_2650["12. [P2] Alteração da imunidade<br/>conhecida?"]
+  indisposicao_no_adulto_p2_2651["13. [P2] História de risco especial de<br/>infeção?"]
+  indisposicao_no_adulto_p2_2652["14. [P2] Dor severa?"]
+  indisposicao_no_adulto_p3_2653["15. [P3] Novos sinais e/ou sintomas<br/>neurológicos?"]
+  indisposicao_no_adulto_p3_2654["16. [P3] Quente?"]
+  indisposicao_no_adulto_p3_2655["17. [P3] Exantema eritematoso ou<br/>bolhoso?"]
+  indisposicao_no_adulto_p3_3316["18. [P3] História recente de viagem ao<br/>estrangeiro"]
+  indisposicao_no_adulto_p3_3317["19. [P3] Confusão mental de novo?"]
+  indisposicao_no_adulto_p3_3318["20. [P3] Instalação súbita? (início <<br/>12h)"]
+  indisposicao_no_adulto_p3_3319["21. [P3] História hematológica ou<br/>metabólica significativa?"]
+  indisposicao_no_adulto_p3_3320["22. [P3] Dor moderada?"]
+  indisposicao_no_adulto_p4_2660["23. [P4] Febre persistente?"]
+  indisposicao_no_adulto_p4_2664["24. [P4] Dor persistente?"]
+  indisposicao_no_adulto_p4_2667["25. [P4] Problema recente?"]
+  inicio --> indisposicao_no_adulto_p1_1861
+  indisposicao_no_adulto_p1_1861_sim(["VERMELHO"]):::vermelho
+  indisposicao_no_adulto_p1_1861 -->|Sim| indisposicao_no_adulto_p1_1861_sim
+  indisposicao_no_adulto_p1_1861 -->|Não| indisposicao_no_adulto_p1_2132
+  indisposicao_no_adulto_p1_2132_sim(["VERMELHO"]):::vermelho
+  indisposicao_no_adulto_p1_2132 -->|Sim| indisposicao_no_adulto_p1_2132_sim
+  indisposicao_no_adulto_p1_2132 -->|Não| indisposicao_no_adulto_p1_2641
+  indisposicao_no_adulto_p1_2641_sim(["VERMELHO"]):::vermelho
+  indisposicao_no_adulto_p1_2641 -->|Sim| indisposicao_no_adulto_p1_2641_sim
+  indisposicao_no_adulto_p1_2641 -->|Não| indisposicao_no_adulto_p1_2642
+  indisposicao_no_adulto_p1_2642_sim(["VERMELHO"]):::vermelho
+  indisposicao_no_adulto_p1_2642 -->|Sim| indisposicao_no_adulto_p1_2642_sim
+  indisposicao_no_adulto_p1_2642 -->|Não| indisposicao_no_adulto_p1_2643
+  indisposicao_no_adulto_p1_2643_sim(["VERMELHO"]):::vermelho
+  indisposicao_no_adulto_p1_2643 -->|Sim| indisposicao_no_adulto_p1_2643_sim
+  indisposicao_no_adulto_p1_2643 -->|Não| indisposicao_no_adulto_p2_2644
+  indisposicao_no_adulto_p2_2644_sim(["LARANJA"]):::laranja
+  indisposicao_no_adulto_p2_2644 -->|Sim| indisposicao_no_adulto_p2_2644_sim
+  indisposicao_no_adulto_p2_2644 -->|Não| indisposicao_no_adulto_p2_2645
+  indisposicao_no_adulto_p2_2645_sim(["LARANJA"]):::laranja
+  indisposicao_no_adulto_p2_2645 -->|Sim| indisposicao_no_adulto_p2_2645_sim
+  indisposicao_no_adulto_p2_2645 -->|Não| indisposicao_no_adulto_p2_2646
+  indisposicao_no_adulto_p2_2646_sim(["LARANJA"]):::laranja
+  indisposicao_no_adulto_p2_2646 -->|Sim| indisposicao_no_adulto_p2_2646_sim
+  indisposicao_no_adulto_p2_2646 -->|Não| indisposicao_no_adulto_p2_2647
+  indisposicao_no_adulto_p2_2647_sim(["LARANJA"]):::laranja
+  indisposicao_no_adulto_p2_2647 -->|Sim| indisposicao_no_adulto_p2_2647_sim
+  indisposicao_no_adulto_p2_2647 -->|Não| indisposicao_no_adulto_p2_2648
+  indisposicao_no_adulto_p2_2648_sim(["LARANJA"]):::laranja
+  indisposicao_no_adulto_p2_2648 -->|Sim| indisposicao_no_adulto_p2_2648_sim
+  indisposicao_no_adulto_p2_2648 -->|Não| indisposicao_no_adulto_p2_2649
+  indisposicao_no_adulto_p2_2649_sim(["LARANJA"]):::laranja
+  indisposicao_no_adulto_p2_2649 -->|Sim| indisposicao_no_adulto_p2_2649_sim
+  indisposicao_no_adulto_p2_2649 -->|Não| indisposicao_no_adulto_p2_2650
+  indisposicao_no_adulto_p2_2650_sim(["LARANJA"]):::laranja
+  indisposicao_no_adulto_p2_2650 -->|Sim| indisposicao_no_adulto_p2_2650_sim
+  indisposicao_no_adulto_p2_2650 -->|Não| indisposicao_no_adulto_p2_2651
+  indisposicao_no_adulto_p2_2651_sim(["LARANJA"]):::laranja
+  indisposicao_no_adulto_p2_2651 -->|Sim| indisposicao_no_adulto_p2_2651_sim
+  indisposicao_no_adulto_p2_2651 -->|Não| indisposicao_no_adulto_p2_2652
+  indisposicao_no_adulto_p2_2652_sim(["LARANJA"]):::laranja
+  indisposicao_no_adulto_p2_2652 -->|Sim| indisposicao_no_adulto_p2_2652_sim
+  indisposicao_no_adulto_p2_2652 -->|Não| indisposicao_no_adulto_p3_2653
+  indisposicao_no_adulto_p3_2653_sim(["AMARELO"]):::amarelo
+  indisposicao_no_adulto_p3_2653 -->|Sim| indisposicao_no_adulto_p3_2653_sim
+  indisposicao_no_adulto_p3_2653 -->|Não| indisposicao_no_adulto_p3_2654
+  indisposicao_no_adulto_p3_2654_sim(["AMARELO"]):::amarelo
+  indisposicao_no_adulto_p3_2654 -->|Sim| indisposicao_no_adulto_p3_2654_sim
+  indisposicao_no_adulto_p3_2654 -->|Não| indisposicao_no_adulto_p3_2655
+  indisposicao_no_adulto_p3_2655_sim(["AMARELO"]):::amarelo
+  indisposicao_no_adulto_p3_2655 -->|Sim| indisposicao_no_adulto_p3_2655_sim
+  indisposicao_no_adulto_p3_2655 -->|Não| indisposicao_no_adulto_p3_3316
+  indisposicao_no_adulto_p3_3316_sim(["AMARELO"]):::amarelo
+  indisposicao_no_adulto_p3_3316 -->|Sim| indisposicao_no_adulto_p3_3316_sim
+  indisposicao_no_adulto_p3_3316 -->|Não| indisposicao_no_adulto_p3_3317
+  indisposicao_no_adulto_p3_3317_sim(["AMARELO"]):::amarelo
+  indisposicao_no_adulto_p3_3317 -->|Sim| indisposicao_no_adulto_p3_3317_sim
+  indisposicao_no_adulto_p3_3317 -->|Não| indisposicao_no_adulto_p3_3318
+  indisposicao_no_adulto_p3_3318_sim(["AMARELO"]):::amarelo
+  indisposicao_no_adulto_p3_3318 -->|Sim| indisposicao_no_adulto_p3_3318_sim
+  indisposicao_no_adulto_p3_3318 -->|Não| indisposicao_no_adulto_p3_3319
+  indisposicao_no_adulto_p3_3319_sim(["AMARELO"]):::amarelo
+  indisposicao_no_adulto_p3_3319 -->|Sim| indisposicao_no_adulto_p3_3319_sim
+  indisposicao_no_adulto_p3_3319 -->|Não| indisposicao_no_adulto_p3_3320
+  indisposicao_no_adulto_p3_3320_sim(["AMARELO"]):::amarelo
+  indisposicao_no_adulto_p3_3320 -->|Sim| indisposicao_no_adulto_p3_3320_sim
+  indisposicao_no_adulto_p3_3320 -->|Não| indisposicao_no_adulto_p4_2660
+  indisposicao_no_adulto_p4_2660_sim(["VERDE"]):::verde
+  indisposicao_no_adulto_p4_2660 -->|Sim| indisposicao_no_adulto_p4_2660_sim
+  indisposicao_no_adulto_p4_2660 -->|Não| indisposicao_no_adulto_p4_2664
+  indisposicao_no_adulto_p4_2664_sim(["VERDE"]):::verde
+  indisposicao_no_adulto_p4_2664 -->|Sim| indisposicao_no_adulto_p4_2664_sim
+  indisposicao_no_adulto_p4_2664 -->|Não| indisposicao_no_adulto_p4_2667
+  indisposicao_no_adulto_p4_2667_sim(["VERDE"]):::verde
+  indisposicao_no_adulto_p4_2667 -->|Sim| indisposicao_no_adulto_p4_2667_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  indisposicao_no_adulto_p4_2667 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

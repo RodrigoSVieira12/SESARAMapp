@@ -1,0 +1,113 @@
+flowchart TD
+  inicio(["Início: Dispneia na criança"])
+  dispneia_na_crianca_p1_1842["1. [P1] Compromisso da via aérea?"]
+  dispneia_na_crianca_p1_2113["2. [P1] Respiração ineficaz?"]
+  dispneia_na_crianca_p1_2200["3. [P1] Estridor?"]
+  dispneia_na_crianca_p1_2201["4. [P1] Baba-se?"]
+  dispneia_na_crianca_p1_2202["5. [P1] Sinais de choque?"]
+  dispneia_na_crianca_p1_2203["6. [P1] Não reativo?"]
+  dispneia_na_crianca_p2_2204["7. [P2] Lesão por inalação?"]
+  dispneia_na_crianca_p2_2205["8. [P2] Incapacidade de articular<br/>frases completas?"]
+  dispneia_na_crianca_p2_2206["9. [P2] Exaustão?"]
+  dispneia_na_crianca_p2_3277["10. [P2] Grande Hemorragia<br/>incontrolável?"]
+  dispneia_na_crianca_p2_3278["11. [P2] Alteração do estado de<br/>consciência?"]
+  dispneia_na_crianca_p2_3279["12. [P2] Prostrado?"]
+  dispneia_na_crianca_p2_3280["13. [P2] Muito quente?"]
+  dispneia_na_crianca_p2_3281["14. [P2] Possível sépsis?"]
+  dispneia_na_crianca_p2_3282["15. [P2] Início agudo pós-traumático?"]
+  dispneia_na_crianca_p2_3283["16. [P2] História significativa de<br/>doença respiratória?"]
+  dispneia_na_crianca_p3_2212["17. [P3] Inalação de fumo?"]
+  dispneia_na_crianca_p3_2213["18. [P3] Broncoespasmo?"]
+  dispneia_na_crianca_p3_2214["19. [P3] História de traumatismo<br/>torácico?"]
+  dispneia_na_crianca_p3_2215["20. [P3] Quente?"]
+  dispneia_na_crianca_p3_2216["21. [P3] História Inapropriada?"]
+  dispneia_na_crianca_p3_2217["22. [P3] Dor pleurítica?"]
+  dispneia_na_crianca_p3_2218["23. [P3] Não se alimenta?"]
+  dispneia_na_crianca_p4_2219["24. [P4] Febre persistente?"]
+  dispneia_na_crianca_p4_2222["25. [P4] Tosse produtiva?"]
+  dispneia_na_crianca_p4_2223["26. [P4] Problema recente?"]
+  inicio --> dispneia_na_crianca_p1_1842
+  dispneia_na_crianca_p1_1842_sim(["VERMELHO"]):::vermelho
+  dispneia_na_crianca_p1_1842 -->|Sim| dispneia_na_crianca_p1_1842_sim
+  dispneia_na_crianca_p1_1842 -->|Não| dispneia_na_crianca_p1_2113
+  dispneia_na_crianca_p1_2113_sim(["VERMELHO"]):::vermelho
+  dispneia_na_crianca_p1_2113 -->|Sim| dispneia_na_crianca_p1_2113_sim
+  dispneia_na_crianca_p1_2113 -->|Não| dispneia_na_crianca_p1_2200
+  dispneia_na_crianca_p1_2200_sim(["VERMELHO"]):::vermelho
+  dispneia_na_crianca_p1_2200 -->|Sim| dispneia_na_crianca_p1_2200_sim
+  dispneia_na_crianca_p1_2200 -->|Não| dispneia_na_crianca_p1_2201
+  dispneia_na_crianca_p1_2201_sim(["VERMELHO"]):::vermelho
+  dispneia_na_crianca_p1_2201 -->|Sim| dispneia_na_crianca_p1_2201_sim
+  dispneia_na_crianca_p1_2201 -->|Não| dispneia_na_crianca_p1_2202
+  dispneia_na_crianca_p1_2202_sim(["VERMELHO"]):::vermelho
+  dispneia_na_crianca_p1_2202 -->|Sim| dispneia_na_crianca_p1_2202_sim
+  dispneia_na_crianca_p1_2202 -->|Não| dispneia_na_crianca_p1_2203
+  dispneia_na_crianca_p1_2203_sim(["VERMELHO"]):::vermelho
+  dispneia_na_crianca_p1_2203 -->|Sim| dispneia_na_crianca_p1_2203_sim
+  dispneia_na_crianca_p1_2203 -->|Não| dispneia_na_crianca_p2_2204
+  dispneia_na_crianca_p2_2204_sim(["LARANJA"]):::laranja
+  dispneia_na_crianca_p2_2204 -->|Sim| dispneia_na_crianca_p2_2204_sim
+  dispneia_na_crianca_p2_2204 -->|Não| dispneia_na_crianca_p2_2205
+  dispneia_na_crianca_p2_2205_sim(["LARANJA"]):::laranja
+  dispneia_na_crianca_p2_2205 -->|Sim| dispneia_na_crianca_p2_2205_sim
+  dispneia_na_crianca_p2_2205 -->|Não| dispneia_na_crianca_p2_2206
+  dispneia_na_crianca_p2_2206_sim(["LARANJA"]):::laranja
+  dispneia_na_crianca_p2_2206 -->|Sim| dispneia_na_crianca_p2_2206_sim
+  dispneia_na_crianca_p2_2206 -->|Não| dispneia_na_crianca_p2_3277
+  dispneia_na_crianca_p2_3277_sim(["LARANJA"]):::laranja
+  dispneia_na_crianca_p2_3277 -->|Sim| dispneia_na_crianca_p2_3277_sim
+  dispneia_na_crianca_p2_3277 -->|Não| dispneia_na_crianca_p2_3278
+  dispneia_na_crianca_p2_3278_sim(["LARANJA"]):::laranja
+  dispneia_na_crianca_p2_3278 -->|Sim| dispneia_na_crianca_p2_3278_sim
+  dispneia_na_crianca_p2_3278 -->|Não| dispneia_na_crianca_p2_3279
+  dispneia_na_crianca_p2_3279_sim(["LARANJA"]):::laranja
+  dispneia_na_crianca_p2_3279 -->|Sim| dispneia_na_crianca_p2_3279_sim
+  dispneia_na_crianca_p2_3279 -->|Não| dispneia_na_crianca_p2_3280
+  dispneia_na_crianca_p2_3280_sim(["LARANJA"]):::laranja
+  dispneia_na_crianca_p2_3280 -->|Sim| dispneia_na_crianca_p2_3280_sim
+  dispneia_na_crianca_p2_3280 -->|Não| dispneia_na_crianca_p2_3281
+  dispneia_na_crianca_p2_3281_sim(["LARANJA"]):::laranja
+  dispneia_na_crianca_p2_3281 -->|Sim| dispneia_na_crianca_p2_3281_sim
+  dispneia_na_crianca_p2_3281 -->|Não| dispneia_na_crianca_p2_3282
+  dispneia_na_crianca_p2_3282_sim(["LARANJA"]):::laranja
+  dispneia_na_crianca_p2_3282 -->|Sim| dispneia_na_crianca_p2_3282_sim
+  dispneia_na_crianca_p2_3282 -->|Não| dispneia_na_crianca_p2_3283
+  dispneia_na_crianca_p2_3283_sim(["LARANJA"]):::laranja
+  dispneia_na_crianca_p2_3283 -->|Sim| dispneia_na_crianca_p2_3283_sim
+  dispneia_na_crianca_p2_3283 -->|Não| dispneia_na_crianca_p3_2212
+  dispneia_na_crianca_p3_2212_sim(["AMARELO"]):::amarelo
+  dispneia_na_crianca_p3_2212 -->|Sim| dispneia_na_crianca_p3_2212_sim
+  dispneia_na_crianca_p3_2212 -->|Não| dispneia_na_crianca_p3_2213
+  dispneia_na_crianca_p3_2213_sim(["AMARELO"]):::amarelo
+  dispneia_na_crianca_p3_2213 -->|Sim| dispneia_na_crianca_p3_2213_sim
+  dispneia_na_crianca_p3_2213 -->|Não| dispneia_na_crianca_p3_2214
+  dispneia_na_crianca_p3_2214_sim(["AMARELO"]):::amarelo
+  dispneia_na_crianca_p3_2214 -->|Sim| dispneia_na_crianca_p3_2214_sim
+  dispneia_na_crianca_p3_2214 -->|Não| dispneia_na_crianca_p3_2215
+  dispneia_na_crianca_p3_2215_sim(["AMARELO"]):::amarelo
+  dispneia_na_crianca_p3_2215 -->|Sim| dispneia_na_crianca_p3_2215_sim
+  dispneia_na_crianca_p3_2215 -->|Não| dispneia_na_crianca_p3_2216
+  dispneia_na_crianca_p3_2216_sim(["AMARELO"]):::amarelo
+  dispneia_na_crianca_p3_2216 -->|Sim| dispneia_na_crianca_p3_2216_sim
+  dispneia_na_crianca_p3_2216 -->|Não| dispneia_na_crianca_p3_2217
+  dispneia_na_crianca_p3_2217_sim(["AMARELO"]):::amarelo
+  dispneia_na_crianca_p3_2217 -->|Sim| dispneia_na_crianca_p3_2217_sim
+  dispneia_na_crianca_p3_2217 -->|Não| dispneia_na_crianca_p3_2218
+  dispneia_na_crianca_p3_2218_sim(["AMARELO"]):::amarelo
+  dispneia_na_crianca_p3_2218 -->|Sim| dispneia_na_crianca_p3_2218_sim
+  dispneia_na_crianca_p3_2218 -->|Não| dispneia_na_crianca_p4_2219
+  dispneia_na_crianca_p4_2219_sim(["VERDE"]):::verde
+  dispneia_na_crianca_p4_2219 -->|Sim| dispneia_na_crianca_p4_2219_sim
+  dispneia_na_crianca_p4_2219 -->|Não| dispneia_na_crianca_p4_2222
+  dispneia_na_crianca_p4_2222_sim(["VERDE"]):::verde
+  dispneia_na_crianca_p4_2222 -->|Sim| dispneia_na_crianca_p4_2222_sim
+  dispneia_na_crianca_p4_2222 -->|Não| dispneia_na_crianca_p4_2223
+  dispneia_na_crianca_p4_2223_sim(["VERDE"]):::verde
+  dispneia_na_crianca_p4_2223 -->|Sim| dispneia_na_crianca_p4_2223_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  dispneia_na_crianca_p4_2223 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

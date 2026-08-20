@@ -1,0 +1,93 @@
+flowchart TD
+  inicio(["Início: Queimaduras profundas e<br/>superficiais"])
+  queimaduras_profundas_e_superficiais_p1_1873["1. [P1] Compromisso da via aérea?"]
+  queimaduras_profundas_e_superficiais_p1_2144["2. [P1] Respiração ineficaz?"]
+  queimaduras_profundas_e_superficiais_p1_2757["3. [P1] Sinais de choque?"]
+  queimaduras_profundas_e_superficiais_p1_2769["4. [P1] Não reativo?"]
+  queimaduras_profundas_e_superficiais_p1_2981["5. [P1] Estridor?"]
+  queimaduras_profundas_e_superficiais_p2_2982["6. [P2] Edema?"]
+  queimaduras_profundas_e_superficiais_p2_2983["7. [P2] Lesão por inalação?"]
+  queimaduras_profundas_e_superficiais_p2_2984["8. [P2] Dispneia aguda?"]
+  queimaduras_profundas_e_superficiais_p2_2985["9. [P2] Alteração do estado de<br/>consciência?"]
+  queimaduras_profundas_e_superficiais_p2_2986["10. [P2] Alta mortalidade?"]
+  queimaduras_profundas_e_superficiais_p2_2987["11. [P2] Mecanismo significativo de<br/>lesão?"]
+  queimaduras_profundas_e_superficiais_p2_2988["12. [P2] Dor severa?"]
+  queimaduras_profundas_e_superficiais_p3_2989["13. [P3] Inalação de fumo?"]
+  queimaduras_profundas_e_superficiais_p3_2990["14. [P3] Lesão elétrica?"]
+  queimaduras_profundas_e_superficiais_p3_2991["15. [P3] História Inapropriada?"]
+  queimaduras_profundas_e_superficiais_p3_2992["16. [P3] Mortalidade moderada?"]
+  queimaduras_profundas_e_superficiais_p3_2993["17. [P3] Dor moderada?"]
+  queimaduras_profundas_e_superficiais_p4_2994["18. [P4] Infeção local?"]
+  queimaduras_profundas_e_superficiais_p4_2997["19. [P4] Inflamação local?"]
+  queimaduras_profundas_e_superficiais_p4_2998["20. [P4] Dor persistente?"]
+  queimaduras_profundas_e_superficiais_p4_3001["21. [P4] Problema recente?"]
+  inicio --> queimaduras_profundas_e_superficiais_p1_1873
+  queimaduras_profundas_e_superficiais_p1_1873_sim(["VERMELHO"]):::vermelho
+  queimaduras_profundas_e_superficiais_p1_1873 -->|Sim| queimaduras_profundas_e_superficiais_p1_1873_sim
+  queimaduras_profundas_e_superficiais_p1_1873 -->|Não| queimaduras_profundas_e_superficiais_p1_2144
+  queimaduras_profundas_e_superficiais_p1_2144_sim(["VERMELHO"]):::vermelho
+  queimaduras_profundas_e_superficiais_p1_2144 -->|Sim| queimaduras_profundas_e_superficiais_p1_2144_sim
+  queimaduras_profundas_e_superficiais_p1_2144 -->|Não| queimaduras_profundas_e_superficiais_p1_2757
+  queimaduras_profundas_e_superficiais_p1_2757_sim(["VERMELHO"]):::vermelho
+  queimaduras_profundas_e_superficiais_p1_2757 -->|Sim| queimaduras_profundas_e_superficiais_p1_2757_sim
+  queimaduras_profundas_e_superficiais_p1_2757 -->|Não| queimaduras_profundas_e_superficiais_p1_2769
+  queimaduras_profundas_e_superficiais_p1_2769_sim(["VERMELHO"]):::vermelho
+  queimaduras_profundas_e_superficiais_p1_2769 -->|Sim| queimaduras_profundas_e_superficiais_p1_2769_sim
+  queimaduras_profundas_e_superficiais_p1_2769 -->|Não| queimaduras_profundas_e_superficiais_p1_2981
+  queimaduras_profundas_e_superficiais_p1_2981_sim(["VERMELHO"]):::vermelho
+  queimaduras_profundas_e_superficiais_p1_2981 -->|Sim| queimaduras_profundas_e_superficiais_p1_2981_sim
+  queimaduras_profundas_e_superficiais_p1_2981 -->|Não| queimaduras_profundas_e_superficiais_p2_2982
+  queimaduras_profundas_e_superficiais_p2_2982_sim(["LARANJA"]):::laranja
+  queimaduras_profundas_e_superficiais_p2_2982 -->|Sim| queimaduras_profundas_e_superficiais_p2_2982_sim
+  queimaduras_profundas_e_superficiais_p2_2982 -->|Não| queimaduras_profundas_e_superficiais_p2_2983
+  queimaduras_profundas_e_superficiais_p2_2983_sim(["LARANJA"]):::laranja
+  queimaduras_profundas_e_superficiais_p2_2983 -->|Sim| queimaduras_profundas_e_superficiais_p2_2983_sim
+  queimaduras_profundas_e_superficiais_p2_2983 -->|Não| queimaduras_profundas_e_superficiais_p2_2984
+  queimaduras_profundas_e_superficiais_p2_2984_sim(["LARANJA"]):::laranja
+  queimaduras_profundas_e_superficiais_p2_2984 -->|Sim| queimaduras_profundas_e_superficiais_p2_2984_sim
+  queimaduras_profundas_e_superficiais_p2_2984 -->|Não| queimaduras_profundas_e_superficiais_p2_2985
+  queimaduras_profundas_e_superficiais_p2_2985_sim(["LARANJA"]):::laranja
+  queimaduras_profundas_e_superficiais_p2_2985 -->|Sim| queimaduras_profundas_e_superficiais_p2_2985_sim
+  queimaduras_profundas_e_superficiais_p2_2985 -->|Não| queimaduras_profundas_e_superficiais_p2_2986
+  queimaduras_profundas_e_superficiais_p2_2986_sim(["LARANJA"]):::laranja
+  queimaduras_profundas_e_superficiais_p2_2986 -->|Sim| queimaduras_profundas_e_superficiais_p2_2986_sim
+  queimaduras_profundas_e_superficiais_p2_2986 -->|Não| queimaduras_profundas_e_superficiais_p2_2987
+  queimaduras_profundas_e_superficiais_p2_2987_sim(["LARANJA"]):::laranja
+  queimaduras_profundas_e_superficiais_p2_2987 -->|Sim| queimaduras_profundas_e_superficiais_p2_2987_sim
+  queimaduras_profundas_e_superficiais_p2_2987 -->|Não| queimaduras_profundas_e_superficiais_p2_2988
+  queimaduras_profundas_e_superficiais_p2_2988_sim(["LARANJA"]):::laranja
+  queimaduras_profundas_e_superficiais_p2_2988 -->|Sim| queimaduras_profundas_e_superficiais_p2_2988_sim
+  queimaduras_profundas_e_superficiais_p2_2988 -->|Não| queimaduras_profundas_e_superficiais_p3_2989
+  queimaduras_profundas_e_superficiais_p3_2989_sim(["AMARELO"]):::amarelo
+  queimaduras_profundas_e_superficiais_p3_2989 -->|Sim| queimaduras_profundas_e_superficiais_p3_2989_sim
+  queimaduras_profundas_e_superficiais_p3_2989 -->|Não| queimaduras_profundas_e_superficiais_p3_2990
+  queimaduras_profundas_e_superficiais_p3_2990_sim(["AMARELO"]):::amarelo
+  queimaduras_profundas_e_superficiais_p3_2990 -->|Sim| queimaduras_profundas_e_superficiais_p3_2990_sim
+  queimaduras_profundas_e_superficiais_p3_2990 -->|Não| queimaduras_profundas_e_superficiais_p3_2991
+  queimaduras_profundas_e_superficiais_p3_2991_sim(["AMARELO"]):::amarelo
+  queimaduras_profundas_e_superficiais_p3_2991 -->|Sim| queimaduras_profundas_e_superficiais_p3_2991_sim
+  queimaduras_profundas_e_superficiais_p3_2991 -->|Não| queimaduras_profundas_e_superficiais_p3_2992
+  queimaduras_profundas_e_superficiais_p3_2992_sim(["AMARELO"]):::amarelo
+  queimaduras_profundas_e_superficiais_p3_2992 -->|Sim| queimaduras_profundas_e_superficiais_p3_2992_sim
+  queimaduras_profundas_e_superficiais_p3_2992 -->|Não| queimaduras_profundas_e_superficiais_p3_2993
+  queimaduras_profundas_e_superficiais_p3_2993_sim(["AMARELO"]):::amarelo
+  queimaduras_profundas_e_superficiais_p3_2993 -->|Sim| queimaduras_profundas_e_superficiais_p3_2993_sim
+  queimaduras_profundas_e_superficiais_p3_2993 -->|Não| queimaduras_profundas_e_superficiais_p4_2994
+  queimaduras_profundas_e_superficiais_p4_2994_sim(["VERDE"]):::verde
+  queimaduras_profundas_e_superficiais_p4_2994 -->|Sim| queimaduras_profundas_e_superficiais_p4_2994_sim
+  queimaduras_profundas_e_superficiais_p4_2994 -->|Não| queimaduras_profundas_e_superficiais_p4_2997
+  queimaduras_profundas_e_superficiais_p4_2997_sim(["VERDE"]):::verde
+  queimaduras_profundas_e_superficiais_p4_2997 -->|Sim| queimaduras_profundas_e_superficiais_p4_2997_sim
+  queimaduras_profundas_e_superficiais_p4_2997 -->|Não| queimaduras_profundas_e_superficiais_p4_2998
+  queimaduras_profundas_e_superficiais_p4_2998_sim(["VERDE"]):::verde
+  queimaduras_profundas_e_superficiais_p4_2998 -->|Sim| queimaduras_profundas_e_superficiais_p4_2998_sim
+  queimaduras_profundas_e_superficiais_p4_2998 -->|Não| queimaduras_profundas_e_superficiais_p4_3001
+  queimaduras_profundas_e_superficiais_p4_3001_sim(["VERDE"]):::verde
+  queimaduras_profundas_e_superficiais_p4_3001 -->|Sim| queimaduras_profundas_e_superficiais_p4_3001_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  queimaduras_profundas_e_superficiais_p4_3001 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

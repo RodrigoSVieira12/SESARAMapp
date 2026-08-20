@@ -1,0 +1,6 @@
+# Ferramentas de desenvolvimento (lint e formato, v0.16.1). Fixadas pela
+# mesma razão do requirements.txt: o ruff e o black mudam de regras entre
+# versões, e "passa em CI" tem de significar "passa na minha máquina".
+# Configuração de ambos: pyproject.toml.
+ruff==0.15.22
+black==26.5.1

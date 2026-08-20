@@ -2,8 +2,8 @@
    Onde ir? Frontend (vanilla JS, sem frameworks). Versão 0.6.
 
    Fluxo de ecrãs:
-     início > sinais de emergência (um toque) > escolha da queixa
-     (lista OU pesquisa em texto livre) > perguntas em 3 fases >
+     início > escolha da queixa (lista OU pesquisa em texto livre) >
+     perguntas (uma a uma, em linguagem do utente) >
      resultado (guia) > localização > encaminhamento (mapa)
 
    O backend é stateless: acumulamos as respostas em `estado.respostas`
@@ -38,6 +38,7 @@ const estado = {
   // {lat, lng, precisao (m|null), origem: "auto"|"concelho",
   //  nivel: "concelho"|"freguesia"|"sitio" (só no modo manual), rotulo}
   localizacao: null,
+  mapaVisivel: true,      // v0.16: o mapa do encaminhamento abre por defeito
   renderAtual: null,      // função que redesenha o ecrã atual (troca de língua)
 };
 
@@ -51,11 +52,11 @@ function t(chave, ...args) {
 }
 
 /* Conteúdo clínico vindo da API: usa o campo *_en quando a língua é
-   inglês e ele existe; caso contrário, o português (a omissão segura). */
+   inglês e ele existe; caso contrário, o português (a omissão segura).
+   Desde a v0.15.3 a regra vive em nucleo.js (Nucleo.textoNaLingua), com
+   testes em Node — aqui só se injeta a língua ativa. */
 function campo(obj, nome) {
-  if (!obj) return "";
-  if (estado.lingua === "en" && obj[nome + "_en"]) return obj[nome + "_en"];
-  return obj[nome] ?? "";
+  return Nucleo.textoNaLingua(obj, nome, estado.lingua);
 }
 
 function campoLista(obj, nome) {
@@ -93,9 +94,10 @@ function aplicarLinguaEstatica() {
 /* ------------------------------------------------------------ helpers -- */
 
 /* Ícones mínimos em SVG inline (herdam a cor do chip via currentColor).
-   Traço fino, para dar leitura rápida aos chips sem introduzir uma
-   biblioteca de ícones. Pin e carro desde a v0.11.2; relógio e pessoas
-   (chips de espera) na v0.11.3. */
+   Traço fino, para dar leitura rápida sem introduzir uma biblioteca de
+   ícones. Pin e carro desde a v0.11.2; relógio e pessoas na v0.11.3;
+   som na v0.15.1; visto, cruz, telefone, mapa e escudo na v0.16 (para os
+   botões de resposta, atalhos, contactos e o acordeão do mapa). */
 const ICONES = {
   pin:
     '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
@@ -105,6 +107,19 @@ const ICONES = {
     '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
   pessoas:
     '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M3.5 20c.5-3.4 2.7-5.2 5.5-5.2s5 1.8 5.5 5.2"/><path d="M16 5.6a3.4 3.4 0 0 1 0 5.8"/><path d="M17.6 15.2c1.9.7 3 2.3 3.4 4.8"/></svg>',
+  // Altifalante (ler em voz alta, v0.15.1). Herda a cor via currentColor.
+  som:
+    '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4Z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/><path d="M19 6a8 8 0 0 1 0 12"/></svg>',
+  visto:
+    '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5.5 5.5L20 6.5"/></svg>',
+  cruz:
+    '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg>',
+  telefone:
+    '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 17.5v3a1.9 1.9 0 0 1-2.1 1.9 19.4 19.4 0 0 1-8.5-3 19 19 0 0 1-5.9-5.9 19.4 19.4 0 0 1-3-8.5A1.9 1.9 0 0 1 3.9 3h3a1.9 1.9 0 0 1 1.9 1.7c.1.9.3 1.8.7 2.7.2.6.1 1.2-.4 1.7L7.8 10.4a15.3 15.3 0 0 0 5.9 5.9l1.3-1.3c.5-.5 1.1-.6 1.7-.4.9.4 1.8.6 2.7.7a1.9 1.9 0 0 1 1.7 2.2Z"/></svg>',
+  mapa:
+    '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4 3.5 6v14L9 18l6 2 5.5-2V4L15 6 9 4Z"/><path d="M9 4v14"/><path d="M15 6v14"/></svg>',
+  escudo:
+    '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-3.5 8-10V5.5L12 2 4 5.5V12c0 6.5 8 10 8 10Z"/><path d="m8.5 11.5 2.5 2.5 4.5-4.5"/></svg>',
 };
 
 function esc(valor) {
@@ -112,6 +127,14 @@ function esc(valor) {
     "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
   })[c]);
 }
+
+/* v0.16: as microinterações (confirmação do Sim/Não, transições) só
+   acontecem se o utente não pediu movimento reduzido ao sistema. */
+const MOVIMENTO_OK = !(
+  typeof window !== "undefined" &&
+  window.matchMedia &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches
+);
 
 async function api(caminho, corpo) {
   const opcoes = corpo
@@ -136,6 +159,7 @@ async function api(caminho, corpo) {
 }
 
 function render(html) {
+  pararLeitura(); // v0.15.1: se o cartão estava a ser lido, parar ao trocar de ecrã
   if (estado.mapa) {
     estado.mapa.remove(); // limpar o mapa anterior antes de trocar de ecrã
     estado.mapa = null;
@@ -279,16 +303,22 @@ function dataLegivel(iso) {
 function concluirTriagem(resultado) {
   const q = estado.queixasPorId[estado.queixa];
   const info = resultado.cor_info || {};
+  // Guardamos as duas línguas (não o texto já resolvido) para que o
+  // histórico acompanhe a troca de língua ao ser reaberto. v0.14.3
   historicoGuardar({
     id: "av_" + Date.now(),
     data: new Date().toISOString(),
     queixa: estado.queixa || null,
-    queixaNome: q ? campo(q, "nome") : null,
+    queixaNome: q ? q.nome || null : null,
+    queixaNome_en: q ? q.nome_en || null : null,
     cor: resultado.cor,
-    classificacao: campo(info, "classificacao") || null,
+    classificacao: info.classificacao || null,
+    classificacao_en: info.classificacao_en || null,
     corHex: info.hex || null,
     respostas: (estado.historico || []).map((h) => ({
-      texto: h.texto,
+      id: h.id || null,
+      texto: h.texto || "",
+      texto_en: h.texto_en || "",
       resposta: h.resposta,
     })),
   });
@@ -302,7 +332,7 @@ function htmlEntradaHistorico(e) {
          <ul>${e.respostas
            .map(
              (r) =>
-               `<li>${esc(r.texto)}: <strong>${esc(
+               `<li>${esc(campo(r, "texto"))}: <strong>${esc(
                  r.resposta === "sim" ? t("sim") : t("nao")
                )}</strong></li>`
            )
@@ -313,11 +343,11 @@ function htmlEntradaHistorico(e) {
   return `
     <div class="historico-item">
       <div class="historico-item__topo">
-        <span class="historico-cor" ${estilo}>${esc(e.classificacao || e.cor || "")}</span>
+        <span class="historico-cor" ${estilo}>${esc(campo(e, "classificacao") || e.cor || "")}</span>
         <button class="historico-apagar" data-apagar="${esc(e.id)}"
                 aria-label="${esc(t("hist_apagar_um"))}" title="${esc(t("hist_apagar_um"))}">&times;</button>
       </div>
-      <p class="historico-queixa">${esc(e.queixaNome || t("hist_red_flag"))}</p>
+      <p class="historico-queixa">${esc(campo(e, "queixaNome") || t("hist_red_flag"))}</p>
       <p class="texto-suave historico-data">${esc(dataLegivel(e.data))}</p>
       ${respostas}
     </div>`;
@@ -365,80 +395,52 @@ function ecraHistorico() {
 function ecraInicio() {
   estado.renderAtual = ecraInicio;
   const nHist = historicoLer().length;
+  // v0.16: a página inicial responde a UMA pergunta ("estou doente, o que
+  // faço?"): título de capa, um botão enorme, e o resto em segundo plano.
+  // Os atalhos 112/SNS 24 repetem os contactos do rodapé porque quem chega
+  // em pânico não devia ter de fazer scroll; os três passos recolhem-se em
+  // "Como funciona?" para não competirem com a ação principal.
   render(`
     <div class="cartao">
-      <h2 class="titulo-ecra" tabindex="-1" data-foco>${esc(t("inicio_titulo"))}</h2>
-      <p>${esc(t("inicio_lead"))}</p>
-      <ol class="passos">
-        <li><div><strong>${esc(t("passo1_t"))}</strong>
-          <span class="passos__desc">${esc(t("passo1_d"))}</span></div></li>
-        <li><div><strong>${esc(t("passo2_t"))}</strong>
-          <span class="passos__desc">${esc(t("passo2_d"))}</span></div></li>
-        <li><div><strong>${esc(t("passo3_t"))}</strong>
-          <span class="passos__desc">${esc(t("passo3_d"))}</span></div></li>
-      </ol>
+      <h2 class="titulo-ecra titulo-ecra--hero" tabindex="-1" data-foco>${esc(t("inicio_titulo"))}</h2>
+      <p class="inicio-lead">${esc(t("inicio_lead"))}</p>
       <div class="botoes">
         <button class="botao" id="btn-comecar">${esc(t("comecar"))}</button>
-        ${
-          nHist
-            ? `<button class="botao--fantasma" id="btn-historico">${esc(t("hist_ver"))} (${nHist})</button>`
-            : ""
-        }
       </div>
-      <p class="selo-privacidade">${esc(t("selo_privacidade"))}</p>
+      <div class="atalhos no-print">
+        <a class="atalho atalho--112" href="tel:112" aria-label="${esc(t("atalho_112_aria"))}">
+          <span class="atalho__icone">${ICONES.telefone}</span>
+          <span><span class="atalho__num">112</span>
+          <span class="atalho__desc">${esc(t("atalho_112_desc"))}</span></span>
+        </a>
+        <a class="atalho" href="tel:808242424" aria-label="${esc(t("atalho_sns_aria"))}">
+          <span class="atalho__icone">${ICONES.telefone}</span>
+          <span><span class="atalho__num">SNS 24</span>
+          <span class="atalho__desc">${esc(t("atalho_sns_desc"))}</span></span>
+        </a>
+      </div>
+      <details class="como">
+        <summary>${esc(t("inicio_como"))}</summary>
+        <ol class="passos">
+          <li><div><strong>${esc(t("passo1_t"))}</strong>
+            <span class="passos__desc">${esc(t("passo1_d"))}</span></div></li>
+          <li><div><strong>${esc(t("passo2_t"))}</strong>
+            <span class="passos__desc">${esc(t("passo2_d"))}</span></div></li>
+          <li><div><strong>${esc(t("passo3_t"))}</strong>
+            <span class="passos__desc">${esc(t("passo3_d"))}</span></div></li>
+        </ol>
+      </details>
+      ${
+        nHist
+          ? `<div class="botoes"><button class="botao--fantasma" id="btn-historico">${esc(t("hist_ver"))} (${nHist})</button></div>`
+          : ""
+      }
+      <p class="selo-privacidade">${ICONES.escudo}<span>${esc(t("selo_privacidade"))}</span></p>
     </div>
   `);
-  document.getElementById("btn-comecar").addEventListener("click", ecraRedFlags);
+  document.getElementById("btn-comecar").addEventListener("click", ecraQueixas);
   const btnHist = document.getElementById("btn-historico");
   if (btnHist) btnHist.addEventListener("click", ecraHistorico);
-}
-
-/* ------------------------------------- ecrã: sinais de emergência ------ */
-
-async function ecraRedFlags() {
-  estado.renderAtual = ecraRedFlags;
-  render(esqueleto());
-  let sinais;
-  try {
-    sinais = await api("/api/red-flags");
-  } catch (erro) {
-    return mostrarErro(erro.message, ecraRedFlags);
-  }
-
-  const botoesSinais = sinais
-    .map(
-      (s) => `
-      <button class="sinal-botao" data-id="${esc(s.id)}">${esc(campo(s, "texto"))}</button>`
-    )
-    .join("");
-
-  render(`
-    <div class="cartao">
-      <h2 class="titulo-ecra" tabindex="-1" data-foco>${esc(t("rf_titulo"))}</h2>
-      <p class="texto-suave">${esc(t("rf_sub"))}</p>
-      <div class="botoes">
-        <button class="botao" id="btn-nenhuma">${esc(t("rf_nenhuma"))}</button>
-      </div>
-      <p class="separador-sinais">${esc(t("rf_toque"))}</p>
-      <div class="lista-sinais">${botoesSinais}</div>
-      <div class="botoes">
-        <button class="botao--fantasma" id="btn-recomecar">${esc(t("recomecar"))}</button>
-      </div>
-    </div>
-  `);
-
-  document.getElementById("btn-nenhuma").addEventListener("click", ecraQueixas);
-  document.getElementById("btn-recomecar").addEventListener("click", recomecar);
-  $app.querySelectorAll(".sinal-botao").forEach((botao) =>
-    botao.addEventListener("click", async () => {
-      try {
-        const saida = await api("/api/triagem", { red_flags: [botao.dataset.id] });
-        concluirTriagem(saida.resultado);
-      } catch (erro) {
-        mostrarErro(erro.message, ecraRedFlags);
-      }
-    })
-  );
 }
 
 /* ------------------------------------------------ ecrã: escolher queixa -- */
@@ -472,6 +474,18 @@ async function ecraQueixas() {
   }
   queixas.forEach((q) => (estado.queixasPorId[q.id] = q));
 
+  // v0.16: a lista deixa de ser um bloco único de 56 cartões. Divide-se em
+  // dois grupos pela flag `pediatrico` da API: quem procura por um filho
+  // salta direto para o grupo certo. A pesquisa continua acima de tudo,
+  // porque escrever "dói-me a barriga" é o caminho mais rápido.
+  const gerais = queixas.filter((q) => !q.pediatrico);
+  const pediatricas = queixas.filter((q) => q.pediatrico);
+  const grupo = (titulo, lista) =>
+    lista.length
+      ? `<h3 class="qx-grupo-titulo">${esc(titulo)}</h3>
+         <div class="grelha-queixas">${lista.map((q) => htmlQueixa(q, false)).join("")}</div>`
+      : "";
+
   render(`
     <div class="cartao">
       <h2 class="titulo-ecra" tabindex="-1" data-foco>${esc(t("qx_titulo"))}</h2>
@@ -482,7 +496,8 @@ async function ecraQueixas() {
                placeholder="${esc(t("qx_pesquisa_placeholder"))}" autocomplete="off" />
         <div id="sugestoes" class="sugestoes" role="status" aria-live="polite"></div>
       </div>
-      <div class="grelha-queixas">${queixas.map((q) => htmlQueixa(q, false)).join("")}</div>
+      ${grupo(t("qx_grupo_geral"), gerais)}
+      ${grupo(t("qx_grupo_ped"), pediatricas)}
       <div class="botoes">
         <button class="botao--fantasma" id="btn-recomecar">${esc(t("recomecar"))}</button>
       </div>
@@ -528,7 +543,7 @@ async function ecraQueixas() {
   });
 }
 
-/* --------------------------------------------- ecrã: perguntas em fases -- */
+/* ------------------------------------------------ ecrã: perguntas -- */
 
 async function avancarTriagem() {
   try {
@@ -553,32 +568,51 @@ function ecraPergunta(saida) {
   estado.renderAtual = () => ecraPergunta(saida);
   const { pergunta, progresso } = saida;
   const numero = progresso.respondidas + 1;
-  const fase = pergunta.fase || 2;
+  const maximo = progresso.maximo || numero;
   const podeVoltar = estado.historico.length > 0;
 
-  const passos = [1, 2, 3]
-    .map(
-      (n) =>
-        `<span class="fases__passo ${n <= fase ? "fases__passo--ativo" : ""}"></span>`
-    )
-    .join("");
+  // v0.16: volta a haver noção de progresso, mas HONESTA. O total exato é
+  // impossível de prometer (a avaliação pode terminar mais cedo consoante
+  // as respostas), por isso mostra-se o número da pergunta e o MÁXIMO do
+  // fluxo, e a barra enche até esse máximo. A mecânica de fim antecipado
+  // não se explica ao utente, para não enviesar respostas. A cor de
+  // Manchester continua fora deste ecrã (decisão da v0.14.1).
+  const pct = Math.round((progresso.respondidas / maximo) * 100);
+  const indicador = `
+    <div class="progresso" role="progressbar" aria-valuemin="0"
+         aria-valuemax="${maximo}" aria-valuenow="${numero}"
+         aria-label="${esc(t("progresso_aria", numero, maximo))}">
+      <div class="progresso__cima">
+        <span class="progresso__num">${esc(t("pergunta_n", numero))}</span>
+        <span class="progresso__max">${esc(t("pergunta_max", maximo))}</span>
+      </div>
+      <div class="progresso__barra"><div class="progresso__preenchimento" style="width:${pct}%"></div></div>
+    </div>`;
 
-  const ajuda = campo(pergunta, "ajuda");
+  // Ouvir a pergunta (v0.16): mesma Web Speech API dos conselhos, local e
+  // sem rede. O botão só aparece se o browser suportar SpeechSynthesis.
+  const suportaVoz =
+    typeof window !== "undefined" && "speechSynthesis" in window;
+  const botaoOuvir = suportaVoz
+    ? `<button type="button" class="btn-ler btn-ler--pergunta no-print"
+               aria-label="${esc(t("ler_pergunta_aria"))}">
+         <span class="btn-ler__icone">${ICONES.som}</span>
+         <span class="btn-ler__txt">${esc(t("ler"))}</span>
+       </button>`
+    : "";
 
   render(`
     <div class="cartao">
-      <div class="progresso">
-        <div class="fases" aria-hidden="true">${passos}</div>
-        <p class="progresso__fase">${esc(t("fase_de", fase, t("fases")[fase]))}</p>
-        <p class="progresso__texto">${esc(t("pergunta_n", numero))}</p>
+      ${indicador}
+      <div class="pergunta__cabecalho">
+        <p class="pergunta__texto" tabindex="-1" data-foco>${esc(campo(pergunta, "texto"))}</p>
+        ${botaoOuvir}
       </div>
-      <p class="pergunta__texto" tabindex="-1" data-foco>${esc(campo(pergunta, "texto"))}</p>
-      ${ajuda ? `<p class="pergunta__ajuda">${esc(ajuda)}</p>` : ""}
       <div class="botoes-sim-nao">
-        <button class="botao" data-valor="sim">${esc(t("sim"))}</button>
-        <button class="botao botao--secundario" data-valor="nao">${esc(t("nao"))}</button>
+        <button class="botao botao--resposta" data-valor="sim">${ICONES.visto}${esc(t("sim"))}</button>
+        <button class="botao botao--resposta botao--resposta-nao" data-valor="nao">${ICONES.cruz}${esc(t("nao"))}</button>
       </div>
-      <div class="botoes">
+      <div class="botoes botoes--linha">
         ${podeVoltar ? `<button class="botao--fantasma" id="btn-voltar">${esc(t("voltar_pergunta"))}</button>` : ""}
         <button class="botao--fantasma" id="btn-recomecar">${esc(t("recomecar"))}</button>
       </div>
@@ -589,21 +623,131 @@ function ecraPergunta(saida) {
   if (podeVoltar) {
     document.getElementById("btn-voltar").addEventListener("click", voltarAtras);
   }
-  $app.querySelectorAll("[data-valor]").forEach((botao) =>
+  // Microinteração (v0.16): o botão tocado confirma-se visualmente por um
+  // instante antes de a próxima pergunta entrar; os dois ficam inativos
+  // para evitar toques duplos. Com movimento reduzido, avança já.
+  const botoesResposta = Array.from($app.querySelectorAll("[data-valor]"));
+  botoesResposta.forEach((botao) =>
     botao.addEventListener("click", () => {
       const valor = botao.dataset.valor;
+      botoesResposta.forEach((b) => (b.disabled = true));
+      botao.classList.add("escolhido");
       estado.historico.push({
         id: pergunta.id,
-        texto: campo(pergunta, "texto"),
+        // Guardamos as duas línguas em bruto (não o texto já resolvido) para
+        // que o resumo e o histórico possam mudar de língua depois. v0.14.3
+        texto: pergunta.texto || "",
+        texto_en: pergunta.texto_en || "",
         resposta: valor,
       });
       estado.respostas[pergunta.id] = valor;
-      avancarTriagem();
+      setTimeout(avancarTriagem, MOVIMENTO_OK ? 160 : 0);
     })
   );
 }
 
 /* ---------------------------------------------------- ecrã: resultado -- */
+
+// Cartão "O que pode fazer": conselhos práticos do fluxo, em linguagem do
+// utente. POLÍTICA DE SEGURANÇA: mostramos SÓ os itens que têm texto_utente
+// (uma reescrita leiga validada). Os itens só-clínicos (avaliar escalas,
+// ativar meios, fármacos por nome...) vêm no backend mas NÃO aparecem aqui;
+// ao contrário das perguntas, aqui não há recuo para o texto clínico, porque
+// mostrar uma instrução clínica crua a um leigo pode ser inseguro.
+// v0.15.2: a decisão do QUE mostrar (filtro de segurança, escolha da língua
+// e desduplicação) saiu para Nucleo.conselhosParaMostrar (static/js/
+// nucleo.js), que é puro e tem testes dedicados em Node (tests/js/); esta
+// função só pinta o que o núcleo devolver.
+function htmlAconselhamento(aconselhamento) {
+  if (!aconselhamento) return "";
+  const itens = Nucleo.conselhosParaMostrar(aconselhamento.itens, estado.lingua);
+  if (!itens.length) return "";
+
+  // v0.15.1: o primeiro item destaca-se como AÇÃO PRINCIPAL. A tabela lista
+  // os conselhos por ordem de aparição; para o leigo, o primeiro é o gesto
+  // mais importante e ganha ênfase visual, o resto fica como apoio.
+  const lista = itens
+    .map(
+      (i, idx) =>
+        `<li${idx === 0 ? ' class="item-principal"' : ""}>${esc(i)}</li>`
+    )
+    .join("");
+
+  // v0.15.1: ler em voz alta (Web Speech API do browser, sem rede). O
+  // público-alvo pode ter vista fraca ou pouca literacia; ouvir os conselhos
+  // ajuda. O botão só aparece se o browser suportar SpeechSynthesis.
+  const suportaVoz =
+    typeof window !== "undefined" && "speechSynthesis" in window;
+  const botaoLer = suportaVoz
+    ? `<button type="button" class="btn-ler no-print" aria-label="${esc(
+        t("ler_aria")
+      )}"><span class="btn-ler__icone">${ICONES.som}</span><span class="btn-ler__txt">${esc(
+        t("ler")
+      )}</span></button>`
+    : "";
+
+  return `
+    <div class="cartao cartao-cuidado cartao-aconselhamento">
+      <div class="cartao-cuidado__cabecalho cartao-cuidado__cabecalho--acao">
+        <h3>${esc(t("aconselhamento_titulo"))}</h3>
+        ${botaoLer}
+      </div>
+      <div class="cartao-cuidado__corpo">
+        <ul class="lista-fazer">${lista}</ul>
+        <p class="texto-suave">${esc(t("aconselhamento_nota"))}</p>
+      </div>
+    </div>`;
+}
+
+/* Ler em voz alta (v0.15.1). Usa a Web Speech API do browser — local, sem
+   chamadas de rede. Lê o que está no cartão, na língua da interface: pt-PT
+   com a app em português, en-GB em inglês (os conselhos têm versão inglesa
+   desde a v0.15.1). Um segundo toque no botão pára a leitura; mudar de ecrã
+   também (ver render). Se o browser não suportar SpeechSynthesis, o botão
+   nem chega a aparecer. */
+function pararLeitura() {
+  try {
+    if (window.speechSynthesis) window.speechSynthesis.cancel();
+  } catch (_) { /* sem suporte: nada a fazer */ }
+  document
+    .querySelectorAll(".btn-ler.a-ler")
+    .forEach((b) => b.classList.remove("a-ler"));
+}
+
+/* Fala uma lista de frases na língua da interface. Um segundo toque no
+   botão (ou mudar de ecrã, ver render) pára a leitura. Base comum do
+   cartão de conselhos (v0.15.1) e da pergunta (v0.16). */
+function falarFrases(frases, botao) {
+  const sintese = window.speechSynthesis;
+  if (!sintese || !frases.length) return;
+  if (sintese.speaking || sintese.pending) {
+    pararLeitura();
+    return;
+  }
+  const fala = new SpeechSynthesisUtterance(frases.join(". "));
+  fala.lang = estado.lingua === "en" ? "en-GB" : "pt-PT";
+  fala.rate = 0.95;
+  const limpar = () => botao && botao.classList.remove("a-ler");
+  fala.onend = limpar;
+  fala.onerror = limpar;
+  if (botao) botao.classList.add("a-ler");
+  sintese.speak(fala);
+}
+
+function lerCartao(cartao, botao) {
+  if (!cartao) return;
+  const frases = Array.from(cartao.querySelectorAll(".lista-fazer li"))
+    .map((li) => li.textContent.trim())
+    .filter(Boolean);
+  falarFrases(frases, botao);
+}
+
+/* v0.16: ouvir a própria pergunta. Lê o texto da pergunta no ecrã atual. */
+function lerPergunta(botao) {
+  const alvo = $app.querySelector(".pergunta__texto");
+  if (!alvo) return;
+  falarFrases([alvo.textContent.trim()], botao);
+}
 
 function mostrarResultado(resultado) {
   estado.renderAtual = () => mostrarResultado(resultado);
@@ -621,7 +765,7 @@ function mostrarResultado(resultado) {
           ${estado.historico
             .map(
               (h) =>
-                `<li>${esc(h.texto)}: <strong>${esc(h.resposta === "sim" ? t("sim") : t("nao"))}</strong></li>`
+                `<li>${esc(campo(h, "texto"))}: <strong>${esc(h.resposta === "sim" ? t("sim") : t("nao"))}</strong></li>`
             )
             .join("")}
         </ul>
@@ -629,28 +773,38 @@ function mostrarResultado(resultado) {
       </details>`
     : "";
 
+  // v0.16: a guia deixa de ser uma linha com lombada e passa a CARTÃO DE
+  // PRIORIDADE: fundo tingido na cor da triagem, forma acessível + nome da
+  // cor no rótulo, classificação em corpo de capa e o tempo-alvo numa
+  // pílula com relógio. A frase de abertura humaniza o que antes parecia
+  // um campo de base de dados.
   render(`
     <div class="cartao">
-      <p class="pulseira-rotulo" tabindex="-1" data-foco>${esc(t("res_rotulo"))}</p>
-      <div class="pulseira pulseira--${esc(resultado.cor)}">
-        <span class="pulseira__nome">${esc(campo(info, "nome"))}</span>
-        <span class="pulseira__classificacao">${esc(campo(info, "classificacao"))}</span>
-      </div>
-      <p class="resultado__tempo">${esc(campo(info, "tempo_alvo"))}</p>
+      <p class="res-intro" tabindex="-1" data-foco>${esc(t("res_intro"))}</p>
+      <section class="pulseira pulseira--${esc(resultado.cor)}">
+        <p class="pulseira-rotulo">${esc(t("res_rotulo"))} <span class="pulseira__cor">${esc(campo(info, "nome"))}</span></p>
+        <p class="pulseira__classificacao">${esc(campo(info, "classificacao"))}</p>
+        <p class="pulseira__tempo">${ICONES.relogio}<span>${esc(campo(info, "tempo_alvo"))}</span></p>
+      </section>
       <p class="resultado__motivo">${esc(campo(info, "descricao"))}</p>
       ${motivo ? `<p class="resultado__motivo">${esc(motivo)}</p>` : ""}
       ${nota ? `<p class="resultado__nota">${esc(nota)}</p>` : ""}
       ${resumoRespostas}
       ${aviso(t("res_aviso"))}
-      <div class="botoes">
-        ${
-          eVermelho
-            ? `<a class="botao botao--112" href="tel:112">${esc(t("res_112"))}</a>
-               <button class="botao botao--secundario" id="btn-onde">${esc(t("res_ver_urgencia"))}</button>`
-            : `<button class="botao" id="btn-onde">${esc(t("res_onde"))}</button>`
-        }
-        <button class="botao--fantasma" id="btn-recomecar">${esc(t("recomecar"))}</button>
-      </div>
+      ${
+        eVermelho
+          ? `<div class="botoes botoes--emergencia"><a class="botao botao--112" href="tel:112">${ICONES.telefone}${esc(t("res_112"))}</a></div>`
+          : ""
+      }
+    </div>
+    ${htmlAconselhamento(resultado.aconselhamento)}
+    <div class="botoes botoes--nav">
+      ${
+        eVermelho
+          ? `<button class="botao botao--secundario" id="btn-onde">${ICONES.pin}${esc(t("res_ver_urgencia"))}</button>`
+          : `<button class="botao" id="btn-onde">${ICONES.pin}${esc(t("res_onde"))}</button>`
+      }
+      <button class="botao--fantasma" id="btn-recomecar">${esc(t("recomecar"))}</button>
     </div>
   `);
 
@@ -820,6 +974,10 @@ async function ecraLocalManual(motivoChave) {
 
 async function obterEncaminhamento() {
   const loc = estado.localizacao;
+  // v0.16: o mapa vive num acordeão ABERTO por defeito: a pessoa vê
+  // logo onde fica, e o botão oferece "Ocultar o mapa" a quem preferir
+  // o ecrã mais curto. O Leaflet só arranca dentro do acordeão.
+  estado.mapaVisivel = true;
   render(esqueleto(t("loc_obter")));
   // Aquece o cache de tempos de espera antes de decidir. Se falhar
   // (sem internet, site em baixo), o encaminhamento segue à mesma.
@@ -844,17 +1002,35 @@ async function obterEncaminhamento() {
 function htmlUnidade(u, comMapa) {
   const rotuloServico = t("un_servico");
   const rotuloTipo = t("un_tipo");
-  // v0.11.2: a distância e o tempo de carro deixam a linha de texto
-  // corrido e passam a dois CHIPS distintos, na linguagem visual do
-  // selo "Aberto agora". Sem estimativa por estrada, o chip da
-  // distância leva a nota "linha reta" (comportamento antigo).
-  // v0.11.3: com um valor registado na tabela local (metodo "medido"),
-  // a distância passa a ser POR ESTRADA e o tempo troca "estim." por
-  // "registado"; a espera e as pessoas em espera ganham chips próprios
-  // (âmbar) na mesma linha, em vez da frase corrida.
   const tv = u.tempo_viagem || null;
   const minViagem = tv && tv.minutos != null ? tv.minutos : null;
   const kmEstrada = tv && tv.distancia_km != null ? tv.distancia_km : null;
+  const espera = u.aberta_agora ? u.tempo_espera : null;
+
+  // v0.16, cartão principal: os três números que decidem a ida (tempo de
+  // carro, espera e estado) sobem de chips para BLOCOS de estatística —
+  // número grande, rótulo pequeno. Os chips mantêm o contexto de segunda
+  // linha (distância por estrada, pessoas em espera). No cartão simples
+  // (centro de saúde "se persistir"), fica tudo em chips como antes.
+  const statViagem =
+    minViagem != null
+      ? `<div class="stat"><span class="stat__valor">${esc(t("minutos_aprox", minViagem))}</span><span class="stat__rotulo">${esc(t("stat_carro"))}</span><span class="stat__nota">${esc(
+          t(tv.metodo === "medido" ? "chip_viagem_nota_medido" : "chip_viagem_nota")
+        )}</span></div>`
+      : "";
+  const statEspera =
+    espera && espera.minutos != null
+      ? `<div class="stat stat--espera"><span class="stat__valor">${esc(t("minutos_aprox", espera.minutos))}</span><span class="stat__rotulo">${esc(t("stat_espera"))}</span>${
+          espera.ambito === "cor"
+            ? `<span class="stat__nota">${esc(t("chip_espera_nota_cor"))}</span>`
+            : ""
+        }</div>`
+      : "";
+  const statEstado = `<div class="stat stat--estado ${u.aberta_agora ? "stat--aberto" : "stat--fechado"}"><span class="stat__valor">${esc(
+    t(u.aberta_agora ? "estado_aberto" : "estado_fechado")
+  )}</span><span class="stat__rotulo">${esc(t("stat_agora"))}</span></div>`;
+  const stats = `<div class="stats">${statViagem}${statEspera}${statEstado}</div>`;
+
   const chipKm = `<span class="chip chip--dado">${ICONES.pin}${esc(
     t("chip_km", kmEstrada != null ? kmEstrada : u.distancia_km)
   )}${
@@ -870,7 +1046,6 @@ function htmlUnidade(u, comMapa) {
           t(tv.metodo === "medido" ? "chip_viagem_nota_medido" : "chip_viagem_nota")
         )}</span></span>`
       : "";
-  const espera = u.aberta_agora ? u.tempo_espera : null;
   const chipEspera =
     espera && espera.minutos != null
       ? `<span class="chip chip--espera">${ICONES.relogio}${esc(t("chip_espera", espera.minutos))}${
@@ -883,9 +1058,24 @@ function htmlUnidade(u, comMapa) {
     espera && espera.em_espera != null
       ? `<span class="chip chip--espera">${ICONES.pessoas}${esc(t("chip_pessoas", espera.em_espera))}</span>`
       : "";
+  // Linha de chips: no cartão principal os stats já mostram viagem e
+  // espera, por isso os chips levam só o contexto restante; no simples,
+  // levam tudo (o comportamento anterior).
+  const chips = comMapa
+    ? `<div class="unidade__trajeto">${chipKm}${chipPessoas}</div>`
+    : `<div class="unidade__trajeto">${chipKm}${chipViagem}${chipEspera}${chipPessoas}</div>`;
+
   const horarios = Object.entries(campo(u, "horarios") || {})
     .map(([s, texto]) => `<li><strong>${esc(rotuloServico[s] || s)}:</strong> ${esc(texto)}</li>`)
     .join("");
+  // Horários num acordeão (v0.16): abertos por defeito quando a unidade
+  // está fechada (é quando interessam), recolhidos quando está aberta.
+  const blocoHorarios = horarios
+    ? `<details class="detalhes-horarios"${u.aberta_agora ? "" : " open"}>
+         <summary>${esc(t("horarios_titulo"))}</summary>
+         <ul class="unidade__horarios">${horarios}</ul>
+       </details>`
+    : "";
   const reabre = campo(u, "proxima_abertura_texto");
 
   return `
@@ -900,25 +1090,30 @@ function htmlUnidade(u, comMapa) {
           ${esc(u.aberta_agora ? t("un_aberta") : t("un_fechada"))}
         </span>
       </div>
-      <div class="unidade__trajeto">${chipKm}${chipViagem}${chipEspera}${chipPessoas}</div>
+      ${comMapa ? stats : ""}
+      ${chips}
       ${
         !u.aberta_agora && reabre
           ? `<p class="unidade__reabre">${esc(capitalizar(reabre))}.</p>`
           : ""
       }
-      ${horarios ? `<ul class="unidade__horarios">${horarios}</ul>` : ""}
-      ${u.morada ? `<p class="unidade__meta">${esc(u.morada)}</p>` : ""}
+      ${
+        u.morada
+          ? `<p class="unidade__morada">${ICONES.pin}<span>${esc(u.morada)}</span></p>`
+          : ""
+      }
+      ${blocoHorarios}
       ${u.notas ? `<p class="unidade__meta">${esc(u.notas)}</p>` : ""}
       ${u.dados_confirmados ? "" : aviso(esc(t("un_reconfirmar")))}
-      <div class="botoes">
+      <div class="botoes botoes--linha">
         ${
           u.telefone
-            ? `<a class="botao botao--secundario" href="${telHref(u.telefone)}">${esc(t("un_ligar", u.telefone))}</a>`
+            ? `<a class="botao botao--secundario" href="${telHref(u.telefone)}">${ICONES.telefone}${esc(t("un_ligar", u.telefone))}</a>`
             : ""
         }
         <a class="botao botao--secundario" target="_blank" rel="noopener"
            href="https://www.google.com/maps/dir/?api=1&destination=${u.lat},${u.lng}">
-          ${esc(t("un_gmaps"))}
+          ${ICONES.mapa}${esc(t("un_gmaps"))}
         </a>
       </div>
       ${
@@ -931,7 +1126,13 @@ function htmlUnidade(u, comMapa) {
           <p class="texto-suave">${esc(t("qr_dica"))}</p>
         </div>
       </div>
-      <div class="mapa" id="mapa"></div>`
+      <div class="botoes no-print">
+        <button class="botao botao--secundario" id="btn-mapa"
+                aria-expanded="false" aria-controls="mapa-envelope">
+          ${ICONES.mapa}<span id="btn-mapa-txt">${esc(t("ver_mapa"))}</span>
+        </button>
+      </div>
+      <div class="mapa-envelope" id="mapa-envelope" hidden><div class="mapa" id="mapa"></div></div>`
           : ""
       }
     </div>
@@ -1152,18 +1353,31 @@ function ecraEncaminhamento(dados, utente) {
     infoEspera = `<p class="texto-suave espera-estado">${esc(t("esp_indisponivel"))}</p>`;
   }
 
-  // v0.11: transparência sobre a origem dos tempos de viagem (nota curta,
-  // só quando a recomendação inclui uma estimativa por estrada). v0.11.3:
-  // quando os tempos vêm da tabela local (metodo "medido"), a nota
-  // explica essa origem em vez da rede simplificada.
-  const tvPrincipal =
-    dados.unidade && dados.unidade.tempo_viagem ? dados.unidade.tempo_viagem : null;
-  const metodoMedido =
-    (dados.viagem_info && dados.viagem_info.metodo === "medido") ||
-    (tvPrincipal && tvPrincipal.metodo === "medido");
-  const infoViagem =
-    tvPrincipal && tvPrincipal.minutos != null
-      ? `<p class="texto-suave espera-estado">${esc(t(metodoMedido ? "viagem_nota_medido" : "viagem_nota"))}</p>`
+  // v0.14.2: a nota de metodologia dos tempos de viagem ("rede
+  // simplificada" / "tabela local") saiu do frontend. Não acrescentava
+  // nada para o utente e o detalhe técnico fica documentado (README e
+  // docs) para quem analisar a aplicação. Os chips de trajeto (com as
+  // etiquetas "estim."/"registado") continuam a dar o contexto útil.
+
+  // v0.13.1: explicabilidade. Os motivos vêm do backend nas duas
+  // línguas ({texto, texto_en}) e mostram-se num bloco expansível,
+  // para um clínico (ou um curioso) poder auditar a decisão.
+  const motivos = Array.isArray(dados.motivos) ? dados.motivos : [];
+  const blocoPorque = motivos.length
+    ? `<details class="porque">
+         <summary>${esc(t("porque_titulo"))}</summary>
+         <ul>${motivos.map((m) => `<li>${esc(campo(m, "texto"))}</li>`).join("")}</ul>
+         <p class="texto-suave porque__nota">${esc(t("porque_nota"))}</p>
+       </details>`
+    : "";
+
+  // v0.16: a prioridade acompanha a pessoa até este ecrã numa pílula
+  // discreta (forma + cor + classificação), para o contexto do resultado
+  // não se perder ao mudar de ecrã.
+  const infoCor = (estado.resultado && estado.resultado.cor_info) || dados.cor_info || null;
+  const pilulaContexto =
+    infoCor && dados.cor
+      ? `<p class="contexto pulseira--${esc(dados.cor)}"><span class="pulseira__cor">${esc(campo(infoCor, "nome"))}</span><span>${esc(campo(infoCor, "classificacao"))}</span></p>`
       : "";
 
   render(`
@@ -1173,11 +1387,12 @@ function ecraEncaminhamento(dados, utente) {
         : ""
     }
     <div class="cartao">
+      ${pilulaContexto}
       <h2 class="titulo-ecra" tabindex="-1" data-foco>${esc(t("enc_titulos")[dados.acao] || t("enc_recomendacao"))}</h2>
       <p>${esc(campo(dados, "mensagem"))}</p>
       ${hora ? `<p class="texto-suave">${esc(t("enc_calculo", hora, diaDescricao))}</p>` : ""}
       ${infoEspera}
-      ${infoViagem}
+      ${blocoPorque}
       <div class="local-linha no-print">
         <span class="texto-suave">${esc(t("loc_usada_prefixo"))}${localTexto}.</span>
         <button class="botao--mini" id="btn-alterar-local">${esc(t("alterar_local"))}</button>
@@ -1201,19 +1416,33 @@ function ecraEncaminhamento(dados, utente) {
       <h3 class="unidade__nome">${esc(t("contactos_titulo"))}</h3>
       <div class="contactos">
         <a class="contacto" href="tel:112">
-          <span class="contacto__nome">${esc(t("ct_emergencia"))}</span><br />
-          <span class="contacto__numero">112</span>
+          <span class="contacto__icone">${ICONES.telefone}</span>
+          <span><span class="contacto__nome">${esc(t("ct_emergencia"))}</span><br />
+          <span class="contacto__numero">112</span></span>
         </a>
         <a class="contacto" href="tel:808242424">
-          <span class="contacto__nome">${esc(t("ct_sns"))}</span><br />
-          <span class="contacto__numero">808 24 24 24</span>
+          <span class="contacto__icone">${ICONES.telefone}</span>
+          <span><span class="contacto__nome">${esc(t("ct_sns"))}</span><br />
+          <span class="contacto__numero">808 24 24 24</span></span>
         </a>
       </div>
-      <div class="botoes no-print">
-        <button class="botao botao--secundario" id="btn-pdf">${esc(t("pdf_descarregar"))}</button>
-        <button class="botao botao--secundario" id="btn-imprimir">${esc(t("imprimir"))}</button>
-        <button class="botao--fantasma" id="btn-recomecar">${esc(t("nova_avaliacao"))}</button>
-      </div>
+    </div>
+    ${
+      /* v0.15.1: o aconselhamento ("O que pode fazer") reaparece aqui, mas no
+         FIM do ecrã, depois das unidades e dos botões de contacto: neste ponto
+         o utente já viu os conselhos no resultado, e o que procura primeiro é
+         para onde ir e a quem ligar. O cartão fecha o ecrã como lembrete; os
+         dados já vinham no resultado (estado.resultado.aconselhamento). */
+      estado.resultado
+        ? htmlAconselhamento(estado.resultado.aconselhamento)
+        : ""
+    }
+    <div class="botoes botoes--nav botoes--linha no-print">
+      <button class="botao botao--secundario" id="btn-pdf">${esc(t("pdf_descarregar"))}</button>
+      <button class="botao botao--secundario" id="btn-imprimir">${esc(t("imprimir"))}</button>
+    </div>
+    <div class="botoes no-print">
+      <button class="botao--fantasma" id="btn-recomecar">${esc(t("nova_avaliacao"))}</button>
     </div>
   `);
 
@@ -1226,9 +1455,37 @@ function ecraEncaminhamento(dados, utente) {
     .getElementById("btn-alterar-local")
     .addEventListener("click", () => ecraLocalManual("loc_alterar"));
   if (dados.unidade) {
-    iniciarMapa(dados, utente);
     preencherQR(dados.unidade);
+    ligarMapaAcordeao(dados, utente);
   }
+}
+
+/* v0.16: o mapa vive num acordeão ABERTO por defeito, com o botão a
+   oferecer "Ocultar o mapa". O Leaflet arranca só aqui dentro (nunca no
+   render do ecrã), na primeira abertura; reaberturas só revalidam o
+   tamanho. A preferência (aberto/fechado) fica em estado.mapaVisivel
+   para sobreviver à troca de língua, que redesenha o ecrã. */
+function ligarMapaAcordeao(dados, utente) {
+  const botao = document.getElementById("btn-mapa");
+  const envelope = document.getElementById("mapa-envelope");
+  const txt = document.getElementById("btn-mapa-txt");
+  if (!botao || !envelope) return;
+  let iniciado = false;
+  const aplicar = (visivel) => {
+    estado.mapaVisivel = visivel;
+    envelope.hidden = !visivel;
+    botao.setAttribute("aria-expanded", String(visivel));
+    if (txt) txt.textContent = t(visivel ? "ocultar_mapa" : "ver_mapa");
+    if (!visivel) return;
+    if (!iniciado) {
+      iniciarMapa(dados, utente); // o contentor já está visível: o Leaflet mede bem
+      iniciado = true;
+    } else if (estado.mapa) {
+      estado.mapa.invalidateSize();
+    }
+  };
+  botao.addEventListener("click", () => aplicar(envelope.hidden));
+  if (estado.mapaVisivel) aplicar(true); // reabrir após troca de língua
 }
 
 /* QR com as direções do Google Maps para a unidade recomendada: lê-se
@@ -1338,27 +1595,10 @@ function iniciarMapa(dados, utente) {
   mapa.fitBounds(L.latLngBounds(pontos), { padding: [40, 40] });
 }
 
-/* Mostra a versão real do backend no crachá do topo, para nunca ficar
-   desatualizada como aconteceu antes. Se estiver offline, mantém-se o valor
-   que está no HTML. */
-async function mostrarVersao() {
-  const alvo = document.getElementById("app-versao");
-  if (!alvo) return;
-  try {
-    const r = await fetch("/api/saude");
-    if (!r.ok) return;
-    const dados = await r.json();
-    if (dados && dados.versao) alvo.textContent = "v" + dados.versao;
-  } catch (_) {
-    /* offline: fica o valor do HTML */
-  }
-}
-
 /* ---------------------------------------------------------------- boot -- */
 
 estado.lingua = linguaInicial();
 aplicarLinguaEstatica();
-mostrarVersao();
 
 const $btnLingua = document.getElementById("btn-lingua");
 if ($btnLingua) {
@@ -1372,5 +1612,19 @@ if ($btnLingua) {
     else ecraInicio();
   });
 }
+
+// Ler em voz alta: delegação. O botão pode viver no cartão de
+// aconselhamento (resultado e encaminhamento) ou junto da pergunta
+// (v0.16), por isso não se liga por id — ouve-se o clique e decide-se.
+document.addEventListener("click", (evento) => {
+  const alvo = evento.target;
+  const botao = alvo && alvo.closest ? alvo.closest(".btn-ler") : null;
+  if (!botao) return;
+  if (botao.classList.contains("btn-ler--pergunta")) {
+    lerPergunta(botao);
+    return;
+  }
+  lerCartao(botao.closest(".cartao-aconselhamento"), botao);
+});
 
 ecraInicio();

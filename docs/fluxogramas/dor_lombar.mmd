@@ -1,0 +1,85 @@
+flowchart TD
+  inicio(["Início: Dor lombar"])
+  dor_lombar_p1_1849["1. [P1] Compromisso da via aérea?"]
+  dor_lombar_p1_2120["2. [P1] Respiração ineficaz?"]
+  dor_lombar_p1_2365["3. [P1] Sinais de choque?"]
+  dor_lombar_p1_2378["4. [P1] Não reativo?"]
+  dor_lombar_p2_2379["5. [P2] Défice neurológico agudo?<br/><24h"]
+  dor_lombar_p2_2380["6. [P2] Muito quente?"]
+  dor_lombar_p2_2381["7. [P2] Possível sépsis?"]
+  dor_lombar_p2_2382["8. [P2] História de aneurisma<br/>abdominal ou aórtico?"]
+  dor_lombar_p2_2383["9. [P2] Mecanismo significativo de<br/>lesão?"]
+  dor_lombar_p2_2384["10. [P2] Dor aórtica?"]
+  dor_lombar_p2_2385["11. [P2] Dor severa?"]
+  dor_lombar_p3_2386["12. [P3] Novos sinais e/ou sintomas<br/>neurológicos?"]
+  dor_lombar_p3_2387["13. [P3] Quente?"]
+  dor_lombar_p3_2388["14. [P3] Traumatismo direto da região<br/>lombar?"]
+  dor_lombar_p3_2389["15. [P3] Incapacidade de andar?"]
+  dor_lombar_p3_2390["16. [P3] História Inapropriada?"]
+  dor_lombar_p3_2391["17. [P3] Dor moderada?"]
+  dor_lombar_p4_2392["18. [P4] Dor persistente?"]
+  dor_lombar_p4_2395["19. [P4] Problema recente?"]
+  inicio --> dor_lombar_p1_1849
+  dor_lombar_p1_1849_sim(["VERMELHO"]):::vermelho
+  dor_lombar_p1_1849 -->|Sim| dor_lombar_p1_1849_sim
+  dor_lombar_p1_1849 -->|Não| dor_lombar_p1_2120
+  dor_lombar_p1_2120_sim(["VERMELHO"]):::vermelho
+  dor_lombar_p1_2120 -->|Sim| dor_lombar_p1_2120_sim
+  dor_lombar_p1_2120 -->|Não| dor_lombar_p1_2365
+  dor_lombar_p1_2365_sim(["VERMELHO"]):::vermelho
+  dor_lombar_p1_2365 -->|Sim| dor_lombar_p1_2365_sim
+  dor_lombar_p1_2365 -->|Não| dor_lombar_p1_2378
+  dor_lombar_p1_2378_sim(["VERMELHO"]):::vermelho
+  dor_lombar_p1_2378 -->|Sim| dor_lombar_p1_2378_sim
+  dor_lombar_p1_2378 -->|Não| dor_lombar_p2_2379
+  dor_lombar_p2_2379_sim(["LARANJA"]):::laranja
+  dor_lombar_p2_2379 -->|Sim| dor_lombar_p2_2379_sim
+  dor_lombar_p2_2379 -->|Não| dor_lombar_p2_2380
+  dor_lombar_p2_2380_sim(["LARANJA"]):::laranja
+  dor_lombar_p2_2380 -->|Sim| dor_lombar_p2_2380_sim
+  dor_lombar_p2_2380 -->|Não| dor_lombar_p2_2381
+  dor_lombar_p2_2381_sim(["LARANJA"]):::laranja
+  dor_lombar_p2_2381 -->|Sim| dor_lombar_p2_2381_sim
+  dor_lombar_p2_2381 -->|Não| dor_lombar_p2_2382
+  dor_lombar_p2_2382_sim(["LARANJA"]):::laranja
+  dor_lombar_p2_2382 -->|Sim| dor_lombar_p2_2382_sim
+  dor_lombar_p2_2382 -->|Não| dor_lombar_p2_2383
+  dor_lombar_p2_2383_sim(["LARANJA"]):::laranja
+  dor_lombar_p2_2383 -->|Sim| dor_lombar_p2_2383_sim
+  dor_lombar_p2_2383 -->|Não| dor_lombar_p2_2384
+  dor_lombar_p2_2384_sim(["LARANJA"]):::laranja
+  dor_lombar_p2_2384 -->|Sim| dor_lombar_p2_2384_sim
+  dor_lombar_p2_2384 -->|Não| dor_lombar_p2_2385
+  dor_lombar_p2_2385_sim(["LARANJA"]):::laranja
+  dor_lombar_p2_2385 -->|Sim| dor_lombar_p2_2385_sim
+  dor_lombar_p2_2385 -->|Não| dor_lombar_p3_2386
+  dor_lombar_p3_2386_sim(["AMARELO"]):::amarelo
+  dor_lombar_p3_2386 -->|Sim| dor_lombar_p3_2386_sim
+  dor_lombar_p3_2386 -->|Não| dor_lombar_p3_2387
+  dor_lombar_p3_2387_sim(["AMARELO"]):::amarelo
+  dor_lombar_p3_2387 -->|Sim| dor_lombar_p3_2387_sim
+  dor_lombar_p3_2387 -->|Não| dor_lombar_p3_2388
+  dor_lombar_p3_2388_sim(["AMARELO"]):::amarelo
+  dor_lombar_p3_2388 -->|Sim| dor_lombar_p3_2388_sim
+  dor_lombar_p3_2388 -->|Não| dor_lombar_p3_2389
+  dor_lombar_p3_2389_sim(["AMARELO"]):::amarelo
+  dor_lombar_p3_2389 -->|Sim| dor_lombar_p3_2389_sim
+  dor_lombar_p3_2389 -->|Não| dor_lombar_p3_2390
+  dor_lombar_p3_2390_sim(["AMARELO"]):::amarelo
+  dor_lombar_p3_2390 -->|Sim| dor_lombar_p3_2390_sim
+  dor_lombar_p3_2390 -->|Não| dor_lombar_p3_2391
+  dor_lombar_p3_2391_sim(["AMARELO"]):::amarelo
+  dor_lombar_p3_2391 -->|Sim| dor_lombar_p3_2391_sim
+  dor_lombar_p3_2391 -->|Não| dor_lombar_p4_2392
+  dor_lombar_p4_2392_sim(["VERDE"]):::verde
+  dor_lombar_p4_2392 -->|Sim| dor_lombar_p4_2392_sim
+  dor_lombar_p4_2392 -->|Não| dor_lombar_p4_2395
+  dor_lombar_p4_2395_sim(["VERDE"]):::verde
+  dor_lombar_p4_2395 -->|Sim| dor_lombar_p4_2395_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  dor_lombar_p4_2395 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

@@ -6,7 +6,7 @@ sentido no teu computador):
 
     python scripts/testar_espera.py
 
-Vai às duas páginas do SEISRAM, mostra o que conseguiu ler para cada
+Vai às duas páginas do SESARAM, mostra o que conseguiu ler para cada
 unidade e — importante — lista os nomes que o site mostra mas que ainda
 não estão em app/data/espera_nomes.json (campo "por_mapear"). Se
 aparecer algum, cola-me o output que eu acrescento o mapeamento.

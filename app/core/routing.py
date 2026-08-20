@@ -37,14 +37,37 @@ Decisões desta versão (todas a validar clinicamente com o SESARAM):
      (ver TEXTOS_AUTOCUIDADO), porque "esperar em casa" é muitas vezes
      uma opção legítima numa situação pouco urgente.
 5. Em caso de dúvida, o sistema erra por excesso de urgência.
+
+Organização desde a v0.13.1 (responsabilidade única; ver
+docs/adr/0010-divisao-routing.md): este módulo DECIDE; as frases
+mostradas ao utente vivem em routing_textos.py; a lista "porquê esta
+recomendação?" (explicabilidade) é construída por motivos.py e devolvida
+no campo `motivos` de todas as respostas.
 """
 
 from __future__ import annotations
 
+import json as _json
+import logging
 from datetime import datetime
+from pathlib import Path as _Path
 
-from . import espera, feriados, geo, horarios, unidades, viagem
+from . import espera, feriados, geo, horarios, motivos, unidades, viagem
 from .cores import CONTACTOS, info_cor
+from .routing_textos import (
+    NOTA_TRANSFERENCIA_PORTO_SANTO,
+    NOTA_TRANSFERENCIA_PORTO_SANTO_EN,
+    _contexto_do_dia,
+    _contexto_do_dia_en,
+    _descricao_dia_en,
+    _horario_en,
+    _texto_chegada,
+    _texto_chegada_en,
+    _texto_proxima_abertura,
+    _texto_proxima_abertura_en,
+)
+
+logger = logging.getLogger(__name__)
 
 try:
     from zoneinfo import ZoneInfo
@@ -77,18 +100,6 @@ SERVICOS_POR_COR: dict[str, list[str]] = {
 SERVICOS_URGENCIA = ["urgencia_polivalente", "urgencia_basica", "atendimento_urgente"]
 SERVICOS_HOSPITALARES = ["urgencia_polivalente", "urgencia_basica"]
 
-NOTA_TRANSFERENCIA_PORTO_SANTO = (
-    " Em situações muito graves, a transferência para o Hospital "
-    "Dr. Nélio Mendonça é organizada pelos serviços de emergência, "
-    "se necessário por via aérea."
-)
-
-NOTA_TRANSFERENCIA_PORTO_SANTO_EN = (
-    " In very serious situations, the transfer to Hospital "
-    "Dr. Nélio Mendonça is arranged by the emergency services, "
-    "by air if necessary."
-)
-
 # Textos fixos mostrados ao utente no verde e no azul. Estão aqui, num
 # só sítio, para poderem ser revistos na sessão de validação clínica
 # (o scripts/gerar_validacao_clinica.py inclui-os no documento).
@@ -96,9 +107,6 @@ NOTA_TRANSFERENCIA_PORTO_SANTO_EN = (
 # ser revistos e corrigidos pela equipa clínica sem tocar em Python, tal
 # como as regras de triagem. Estrutura por cor: titulo, intro, fazer[],
 # evitar[], alerta_titulo, alerta[] — e as variantes *_en em inglês.
-import json as _json
-from pathlib import Path as _Path
-
 _FICHEIRO_AUTOCUIDADO = _Path(__file__).resolve().parents[1] / "data" / "autocuidado.json"
 
 TEXTOS_AUTOCUIDADO: dict[str, dict] = _json.loads(
@@ -118,6 +126,10 @@ def _carregar_politica() -> dict:
     try:
         dados = _json.loads(_FICHEIRO_POLITICA.read_text(encoding="utf-8"))
     except FileNotFoundError:  # pragma: no cover - recuo defensivo
+        logger.warning(
+            "encaminhamento.json em falta; a usar a política predefinida "
+            "(vermelho/laranja/amarelo -> hospital hnm)"
+        )
         dados = {}
     return {
         "hospital_id": dados.get("hospital_id", "hnm"),
@@ -136,19 +148,15 @@ def _ilha_do_utente(lat: float, lng: float) -> str:
     return ordenadas[0].get("ilha", "madeira") if ordenadas else "madeira"
 
 
-def _texto_proxima_abertura(abre: datetime, agora: datetime) -> str:
-    """Ex.: "abre hoje às 14:00", "abre segunda-feira às 08:00",
-    "abre a 28 de dezembro (segunda-feira) às 08:00"."""
-    dias_de_diferenca = (abre.date() - agora.date()).days
-    hora = abre.strftime("%H:%M")
-    if dias_de_diferenca == 0:
-        return f"abre hoje às {hora}"
-    if dias_de_diferenca == 1:
-        return f"abre amanhã às {hora}"
-    nome_dia = feriados.DIAS_SEMANA[abre.weekday()]
-    if dias_de_diferenca < 7:
-        return f"abre {nome_dia} às {hora}"
-    return f"abre a {feriados.data_legivel(abre.date())} ({nome_dia}) às {hora}"
+def _concelho_do_utente(lat: float, lng: float) -> str | None:
+    """Concelho estimado do utente: o da unidade mais próxima.
+
+    Serve só para o CONTEXTO do dia (ex.: dizer que hoje é o feriado
+    municipal do concelho do utente). A decisão de aberto/fechado de
+    CADA unidade usa sempre o concelho DESSA unidade, não este (ver
+    _resumo_unidade)."""
+    ordenadas = geo.ordenar_por_distancia(unidades.todas(), lat, lng)
+    return ordenadas[0].get("concelho") if ordenadas else None
 
 
 def _resumo_unidade(
@@ -161,9 +169,12 @@ def _resumo_unidade(
 ) -> dict:
     """Versão da unidade pronta a enviar ao frontend."""
     correspondentes = [s for s in procurados if s in unidade["servicos"]]
+    # O concelho da unidade entra aqui para os feriados municipais
+    # (v0.14.2): uma consulta fecha no feriado municipal do SEU concelho,
+    # a urgência 24h mantém-se aberta (ver horarios.py / feriados.py).
+    concelho = unidade.get("concelho")
     abertos = [
-        s for s in correspondentes
-        if horarios.esta_aberto(unidade["servicos"][s], quando)
+        s for s in correspondentes if horarios.esta_aberto(unidade["servicos"][s], quando, concelho)
     ]
     resumo = {
         "id": unidade["id"],
@@ -184,9 +195,7 @@ def _resumo_unidade(
         "tempo_viagem": tempo_viagem,
         "aberta_agora": bool(abertos),
         "servicos_abertos": abertos,
-        "horarios": {
-            s: unidade["servicos"][s].get("texto", "") for s in correspondentes
-        },
+        "horarios": {s: unidade["servicos"][s].get("texto", "") for s in correspondentes},
         "horarios_en": {
             s: _horario_en(unidade["servicos"][s].get("texto", "")) for s in correspondentes
         },
@@ -196,7 +205,7 @@ def _resumo_unidade(
     # serviços procurados) — evita o efeito "assume que é dia útil".
     if not abertos:
         aberturas = [
-            horarios.proxima_abertura(unidade["servicos"][s], quando)
+            horarios.proxima_abertura(unidade["servicos"][s], quando, concelho=concelho)
             for s in correspondentes
         ]
         aberturas = [a for a in aberturas if a is not None]
@@ -206,75 +215,22 @@ def _resumo_unidade(
             resumo["proxima_abertura_texto"] = _texto_proxima_abertura(abre, quando)
             resumo["proxima_abertura_texto_en"] = _texto_proxima_abertura_en(abre, quando)
 
-    # Tempo de espera em tempo real (SEISRAM), quando o cache o tiver.
+    # Tempo de espera em tempo real (SESARAM), quando o cache o tiver.
     # No hospital, a coluna é a da própria cor do utente.
-    if esperas:
+    # Exceção (v0.14.2): no VERMELHO (emergente) o doente é atendido de
+    # imediato — mostrar "tempo de espera" ou "pessoas em espera" seria
+    # enganador, e o próprio site do SESARAM não publica espera para a
+    # cor emergente. Por isso a espera nunca se junta ao cartão no
+    # vermelho; ali a unidade é apenas uma referência (a ação é o 112).
+    if esperas and cor != "vermelho":
         tempo_espera = espera.para_unidade(esperas, unidade["id"], cor)
         if tempo_espera:
             resumo["tempo_espera"] = tempo_espera
     return resumo
 
 
-_DIAS_EN = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-
-
-def _texto_proxima_abertura_en(abre: datetime, quando: datetime) -> str:
-    """Versão inglesa de "abre segunda-feira às 08:00" (para o modo EN)."""
-    hora = f"{abre.hour:02d}:{abre.minute:02d}"
-    if abre.date() == quando.date():
-        return f"opens today at {hora}"
-    if (abre.date() - quando.date()).days == 1:
-        return f"opens tomorrow at {hora}"
-    return f"opens on {_DIAS_EN[abre.weekday()]} at {hora}"
-
-
-# Tradução dos textos de horário das unidades (que vivem em unidades.json em
-# português). São formulaicos, por isso uma substituição de vocabulário chega,
-# em vez de guardar um texto_en por serviço em dezenas de unidades. As horas
-# (08:00-17:00) mantêm-se. Ordem importa: termos mais longos primeiro.
-_HORARIO_SUBS = [
-    ("Dias úteis", "Weekdays"),
-    ("Segundas-Feiras", "Mondays"),
-    ("Sábados", "Saturdays"),
-    ("Sábado", "Saturday"),
-    ("Segundas", "Mondays"),
-    ("Terças", "Tuesdays"),
-    ("Quartas", "Wednesdays"),
-    ("Quintas", "Thursdays"),
-    ("Sextas", "Fridays"),
-    ("enfermagem, com marcação prévia", "nursing, by prior appointment"),
-    ("com marcação prévia", "by prior appointment"),
-    ("enfermagem", "nursing"),
-    ("Urgência aberta 24 horas", "Open 24 hours"),
-    (" e ", " and "),
-    (" a ", " to "),
-    ("das ", ""),
-    (" às ", " to "),
-]
-
-
-def _horario_en(texto: str) -> str:
-    """Versão inglesa de um texto de horário (ex.: "Dias úteis, 08:00-20:00")."""
-    resultado = texto
-    for pt, en in _HORARIO_SUBS:
-        resultado = resultado.replace(pt, en)
-    return resultado
-
-
-def _descricao_dia_en(dia) -> str:
-    """Versão inglesa de descricao_do_dia (ex.: "Wednesday", "Saturday, holiday: …")."""
-    nome_semana = _DIAS_EN[dia.weekday()]
-    nome_feriado = feriados.feriado_em(dia)
-    if nome_feriado:
-        return f"{nome_semana}, holiday: {nome_feriado}"
-    return nome_semana
-
-
 def _elegiveis_na_ilha(procurados: list[str], ilha: str) -> list[dict]:
-    na_ilha = [
-        u for u in unidades.com_servicos(procurados)
-        if u.get("ilha", "madeira") == ilha
-    ]
+    na_ilha = [u for u in unidades.com_servicos(procurados) if u.get("ilha", "madeira") == ilha]
     # Rede de segurança: se a ilha não tiver nenhuma unidade com estes
     # serviços, é melhor sugerir algo do que nada.
     return na_ilha or unidades.com_servicos(procurados)
@@ -305,65 +261,14 @@ def _candidatas(
     # um único pedido), e a ordem passa a ser por TEMPO, não por km.
     tempos = viagem.tempos_para_unidades(lat, lng, ordenadas)
     resumos = [
-        _resumo_unidade(u, servicos, quando, esperas, cor, tempos.get(u["id"]))
-        for u in ordenadas
+        _resumo_unidade(u, servicos, quando, esperas, cor, tempos.get(u["id"])) for u in ordenadas
     ]
     resumos.sort(key=_chave_ordenacao)
     return resumos
 
 
-def _texto_chegada(u: dict) -> str:
-    """"2.1 km, ~9 min de carro" — ou só os km, sem estimativa. Com uma
-    medição (v0.11.3) há distância POR ESTRADA, e é essa que se mostra."""
-    tv = u.get("tempo_viagem") or {}
-    minutos = tv.get("minutos")
-    if minutos is None:
-        return f"{u['distancia_km']} km"
-    km_estrada = tv.get("distancia_km")
-    if km_estrada is not None:
-        return f"{km_estrada} km por estrada, ~{minutos} min de carro"
-    return f"{u['distancia_km']} km, ~{minutos} min de carro"
-
-
-def _texto_chegada_en(u: dict) -> str:
-    tv = u.get("tempo_viagem") or {}
-    minutos = tv.get("minutos")
-    if minutos is None:
-        return f"{u['distancia_km']} km"
-    km_estrada = tv.get("distancia_km")
-    if km_estrada is not None:
-        return f"{km_estrada} km by road, ~{minutos} min by car"
-    return f"{u['distancia_km']} km, ~{minutos} min by car"
-
-
 def _primeira_aberta(candidatas: list[dict]) -> dict | None:
     return next((c for c in candidatas if c["aberta_agora"]), None)
-
-
-def _contexto_do_dia(quando: datetime) -> str:
-    """Início de frase que explica PORQUÊ os centros estão fechados."""
-    dia = quando.date()
-    tipo = feriados.tipo_de_dia(dia)
-    if tipo == "feriado":
-        return f"Hoje é feriado ({feriados.feriado_em(dia)}) e "
-    if tipo == "sabado":
-        return "É sábado e "
-    if tipo == "domingo":
-        return "É domingo e "
-    return "A esta hora, "
-
-
-def _contexto_do_dia_en(quando: datetime) -> str:
-    """Versão inglesa de _contexto_do_dia."""
-    dia = quando.date()
-    tipo = feriados.tipo_de_dia(dia)
-    if tipo == "feriado":
-        return f"Today is a public holiday ({feriados.feriado_em(dia)}) and "
-    if tipo == "sabado":
-        return "It's Saturday and "
-    if tipo == "domingo":
-        return "It's Sunday and "
-    return "At this time, "
 
 
 def _resumo_hospital(
@@ -418,6 +323,10 @@ def decidir_encaminhamento(
     esperas = espera.do_cache()
     ilha = _ilha_do_utente(lat, lng)
     no_porto_santo = ilha == "porto_santo"
+    # Concelho do utente (o da unidade mais próxima): usado só para o
+    # CONTEXTO do dia — ex.: reconhecer o feriado municipal do concelho
+    # do utente (v0.14.2). Não afeta o aberto/fechado de cada unidade.
+    concelho_utente = _concelho_do_utente(lat, lng)
 
     candidatas = _candidatas(SERVICOS_POR_COR[cor], lat, lng, quando, ilha, esperas, cor)
     abertas = [c for c in candidatas if c["aberta_agora"]]
@@ -425,11 +334,7 @@ def decidir_encaminhamento(
     # Que método de viagem foi realmente usado neste pedido (osrm|rede),
     # para a interface poder ser transparente sobre a estimativa.
     metodo_viagem = next(
-        (
-            (c.get("tempo_viagem") or {}).get("metodo")
-            for c in candidatas
-            if c.get("tempo_viagem")
-        ),
+        ((c.get("tempo_viagem") or {}).get("metodo") for c in candidatas if c.get("tempo_viagem")),
         None,
     )
 
@@ -440,15 +345,13 @@ def decidir_encaminhamento(
         "ilha": ilha,
         "contactos": CONTACTOS,
         "gerado_em": quando.isoformat(timespec="minutes"),
-        "espera_info": {
-            k: esperas.get(k) for k in ("disponivel", "desatualizado", "obtido_em")
-        },
+        "espera_info": {k: esperas.get(k) for k in ("disponivel", "desatualizado", "obtido_em")},
         "viagem_info": viagem.descrever(metodo_viagem),
         "dia": {
-            "tipo": feriados.tipo_de_dia(dia),
-            "feriado": feriados.feriado_em(dia),
-            "descricao": feriados.descricao_do_dia(dia),
-            "descricao_en": _descricao_dia_en(dia),
+            "tipo": feriados.tipo_de_dia(dia, concelho_utente),
+            "feriado": feriados.feriado_em(dia, concelho_utente),
+            "descricao": feriados.descricao_do_dia(dia, concelho_utente),
+            "descricao_en": _descricao_dia_en(dia, concelho_utente),
         },
     }
 
@@ -464,24 +367,13 @@ def decidir_encaminhamento(
             referencia = _resumo_hospital(lat, lng, quando, esperas, cor)
             aplicada = referencia is not None
         if referencia is not None:
-            frase_ref = (
-                "O hospital de referência é indicado abaixo apenas como "
-                "referência."
-            )
-            frase_ref_en = (
-                "The reference hospital is shown below for reference only."
-            )
+            frase_ref = "O hospital de referência é indicado abaixo apenas como " "referência."
+            frase_ref_en = "The reference hospital is shown below for reference only."
             alternativas = []
         else:
             referencia = abertas[0] if abertas else (candidatas[0] if candidatas else None)
-            frase_ref = (
-                "A urgência mais próxima é indicada abaixo apenas como "
-                "referência."
-            )
-            frase_ref_en = (
-                "The nearest emergency department is shown below for "
-                "reference only."
-            )
+            frase_ref = "A urgência mais próxima é indicada abaixo apenas como " "referência."
+            frase_ref_en = "The nearest emergency department is shown below for " "reference only."
             alternativas = [] if no_porto_santo else abertas[1:3]
         mensagem = (
             "Ligue já o 112. Siga as instruções do operador e, se possível, "
@@ -501,6 +393,12 @@ def decidir_encaminhamento(
             "unidade": referencia,
             "alternativas": alternativas,
             "politica": {"destino": destino_ref, "fonte": fonte, "aplicada": aplicada},
+            "motivos": motivos.compilar(
+                motivos.cor(cor),
+                motivos.emergencia_112(),
+                motivos.politica_hospital(cor) if aplicada else None,
+                motivos.ilha_porto_santo() if no_porto_santo else None,
+            ),
         }
 
     # ---------------------------------------------------------------- #
@@ -534,11 +432,26 @@ def decidir_encaminhamento(
                     "alternativas": [],
                     "reordenado_por_espera": False,
                     "politica": politica_info | {"aplicada": True},
+                    "motivos": motivos.compilar(
+                        motivos.cor(cor),
+                        motivos.politica_hospital(cor),
+                        motivos.unidade_aberta(hospital),
+                        motivos.proximidade(hospital),
+                        motivos.espera_atual(hospital),
+                    ),
                 }
             # Hospital configurado sem urgência aberta nos dados (id
             # trocado ou erro de horários): recuo seguro para o
             # comportamento por proximidade, em vez de mandar alguém
             # para uma porta que os dados dizem estar fechada.
+            # Isto é um problema de DADOS, não do utente — fica no log
+            # (sem localização nem respostas; ver docs/adr/0011-logging.md).
+            logger.warning(
+                "Encaminhamento (%s): hospital de referência '%s' sem "
+                "urgência aberta nos dados; recuo para proximidade.",
+                cor,
+                POLITICA["hospital_id"],
+            )
             politica_info = politica_info | {"recuo": True}
 
         if abertas:
@@ -551,9 +464,7 @@ def decidir_encaminhamento(
             if cor == "laranja" and not no_porto_santo:
                 mostradas = [principal, *alternativas]
                 tem_hospitalar = any(
-                    s in u["horarios"]
-                    for u in mostradas
-                    for s in SERVICOS_HOSPITALARES
+                    s in u["horarios"] for u in mostradas for s in SERVICOS_HOSPITALARES
                 )
                 if not tem_hospitalar:
                     hospitalares = _candidatas(
@@ -595,6 +506,17 @@ def decidir_encaminhamento(
             if no_porto_santo and cor == "laranja":
                 mensagem += NOTA_TRANSFERENCIA_PORTO_SANTO
                 mensagem_en += NOTA_TRANSFERENCIA_PORTO_SANTO_EN
+            # Porquê esta unidade e não outra: a fonte da política, o
+            # estado (aberta, tempo de viagem, espera) e, se aplicável,
+            # a troca pela espera e a regra da ilha.
+            if politica_info.get("recuo"):
+                motivo_politica = motivos.recuo_hospital()
+            elif fonte == "fluxograma":
+                motivo_politica = motivos.politica_fluxograma()
+            elif no_porto_santo:
+                motivo_politica = None  # a regra da ilha explica o destino
+            else:
+                motivo_politica = motivos.politica_proximidade()
             return base | {
                 "acao": "ir_unidade",
                 "mensagem": mensagem,
@@ -603,6 +525,15 @@ def decidir_encaminhamento(
                 "alternativas": alternativas,
                 "reordenado_por_espera": bool(troca),
                 "politica": politica_info,
+                "motivos": motivos.compilar(
+                    motivos.cor(cor),
+                    motivo_politica,
+                    motivos.unidade_aberta(principal),
+                    motivos.proximidade(principal),
+                    motivos.espera_atual(principal),
+                    motivos.troca_por_espera(troca, principal) if troca else None,
+                    motivos.ilha_porto_santo() if no_porto_santo else None,
+                ),
             }
         # Sem nada aberto (não deve acontecer: há urgências 24h). Segurança:
         return base | {
@@ -612,12 +543,15 @@ def decidir_encaminhamento(
                 "Ligue 112 para orientação imediata."
             ),
             "mensagem_en": (
-                "We could not find an open unit near you. "
-                "Call 112 for immediate guidance."
+                "We could not find an open unit near you. " "Call 112 for immediate guidance."
             ),
             "unidade": candidatas[0] if candidatas else None,
             "alternativas": [],
             "politica": politica_info,
+            "motivos": motivos.compilar(
+                motivos.cor(cor),
+                motivos.sem_urgencias_abertas(),
+            ),
         }
 
     # ---------------------------------------------------------------- #
@@ -629,16 +563,12 @@ def decidir_encaminhamento(
         # Há alguma CONSULTA aberta agora? (Não basta a unidade estar
         # "aberta" pelo atendimento urgente 24h — era isso que fazia o
         # sistema parecer assumir que qualquer dia é dia útil.)
-        consultas_abertas = [
-            c for c in abertas if "consulta_aberta" in c["servicos_abertos"]
-        ]
+        consultas_abertas = [c for c in abertas if "consulta_aberta" in c["servicos_abertos"]]
 
         if consultas_abertas:
             principal = abertas[0]  # a aberta mais próxima (de qualquer tipo)
             centro_extra = (
-                centro_local
-                if centro_local and centro_local["id"] != principal["id"]
-                else None
+                centro_local if centro_local and centro_local["id"] != principal["id"] else None
             )
             return base | {
                 "acao": "ir_unidade",
@@ -658,6 +588,13 @@ def decidir_encaminhamento(
                 "alternativas": [] if no_porto_santo else abertas[1:3],
                 "centro_saude_proximo": centro_extra,
                 "autocuidado": TEXTOS_AUTOCUIDADO["verde"],
+                "motivos": motivos.compilar(
+                    motivos.cor(cor),
+                    motivos.verde_evitar_urgencia(),
+                    motivos.unidade_aberta(principal),
+                    motivos.proximidade(principal),
+                    motivos.espera_atual(principal),
+                ),
             }
 
         if abertas:
@@ -676,7 +613,7 @@ def decidir_encaminhamento(
                 else ""
             )
             mensagem = (
-                _contexto_do_dia(quando)
+                _contexto_do_dia(quando, concelho_utente)
                 + f"os centros de saúde estão fechados{reabre}. "
                 "Numa situação pouco urgente tem duas opções razoáveis: "
                 "vigiar em casa com o apoio do SNS 24, ou, se preferir ser "
@@ -684,7 +621,7 @@ def decidir_encaminhamento(
                 f"({_texto_chegada(principal)}), com atendimento aberto."
             )
             mensagem_en = (
-                _contexto_do_dia_en(quando)
+                _contexto_do_dia_en(quando, concelho_utente)
                 + f"the health centres are closed{reabre_en}. "
                 "In a non-urgent situation you have two reasonable options: "
                 "watch and wait at home with SNS 24 support, or, if you prefer "
@@ -699,6 +636,14 @@ def decidir_encaminhamento(
                 "alternativas": [] if no_porto_santo else abertas[1:3],
                 "centro_saude_proximo": centro_local,
                 "autocuidado": TEXTOS_AUTOCUIDADO["verde"],
+                "motivos": motivos.compilar(
+                    motivos.cor(cor),
+                    motivos.centros_fechados(quando, concelho_utente),
+                    motivos.verde_duas_opcoes(),
+                    motivos.unidade_aberta(principal),
+                    motivos.proximidade(principal),
+                    motivos.espera_atual(principal),
+                ),
             }
 
         # Nada aberto de todo (só possível se os dados de atendimento
@@ -708,7 +653,7 @@ def decidir_encaminhamento(
         return base | {
             "acao": "contactar_sns24",
             "mensagem": (
-                _contexto_do_dia(quando)
+                _contexto_do_dia(quando, concelho_utente)
                 + "não encontrámos unidades abertas para situações pouco "
                 "urgentes perto de si. Ligue para o SNS 24 (808 24 24 24) "
                 "para aconselhamento, ou aguarde pela abertura da unidade "
@@ -716,7 +661,7 @@ def decidir_encaminhamento(
                 "urgência."
             ),
             "mensagem_en": (
-                _contexto_do_dia_en(quando)
+                _contexto_do_dia_en(quando, concelho_utente)
                 + "we could not find units open for non-urgent situations "
                 "near you. Call SNS 24 (808 24 24 24) for advice, or wait for "
                 "the unit shown below to open. If symptoms worsen, go to the "
@@ -726,11 +671,21 @@ def decidir_encaminhamento(
             "alternativas": [urgencia_aberta] if urgencia_aberta else [],
             "centro_saude_proximo": centro_local,
             "autocuidado": TEXTOS_AUTOCUIDADO["verde"],
+            "motivos": motivos.compilar(
+                motivos.cor(cor),
+                motivos.centros_fechados(quando, concelho_utente),
+                motivos.sem_unidades_abertas(),
+            ),
         }
 
     # ---------------------------------------------------------------- #
     if cor == "azul":
-        proxima = candidatas[0] if candidatas else None
+        # Como no verde (v0.14.2): o centro de saúde principal é o mais
+        # próximo / mais rápido de chegar, e as duas unidades seguintes
+        # aparecem numa secção de alternativas. No Porto Santo a regra da
+        # ilha mantém só a unidade local (sem alternativas noutra ilha).
+        principal = candidatas[0] if candidatas else None
+        alternativas = [] if no_porto_santo else candidatas[1:3]
         return base | {
             "acao": "autocuidado",
             "mensagem": (
@@ -743,9 +698,14 @@ def decidir_encaminhamento(
                 "symptoms at home; if you need advice, SNS 24 and your health "
                 "centre (shown below) are the right contacts."
             ),
-            "unidade": proxima,
-            "alternativas": [],
+            "unidade": principal,
+            "alternativas": alternativas,
             "autocuidado": TEXTOS_AUTOCUIDADO["azul"],
+            "motivos": motivos.compilar(
+                motivos.cor(cor),
+                motivos.azul_autocuidado(),
+                motivos.ilha_porto_santo() if no_porto_santo else None,
+            ),
         }
 
     raise ValueError(f"Cor de triagem desconhecida: {cor!r}")

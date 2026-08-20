@@ -1,0 +1,53 @@
+/* ==========================================================================
+   Public Sans — embutida no projeto (v0.16.2).
+
+   Antes, a fonte vinha do Google Fonts em runtime, o que contrariava dois
+   princípios do próprio projeto: o "funciona offline" (Leaflet, Mermaid e
+   o gerador de QR já estavam em static/vendor precisamente para não haver
+   CDNs) e a privacidade — carregar fontes da Google envia o IP de cada
+   utente a um terceiro, o que já foi considerado violação do RGPD por
+   tribunais europeus. Agora os quatro pesos usados pela interface (400,
+   600, 700 e 800; ver static/css/style.css) vivem aqui ao lado, tal como
+   os outros vendors, e a app não faz nenhum pedido de rede por causa de
+   tipografia. Bónus: fica possível uma Content-Security-Policy estrita.
+
+   Origem: release oficial v2.001 de https://github.com/uswds/public-sans
+   (U.S. Web Design System). Licença: SIL Open Font License 1.1 — ver
+   OFL.txt e LICENSE.md nesta pasta. Só woff2: todos os browsers que a
+   app suporta o leem, e é o formato mais pequeno.
+
+   font-display: swap — o texto aparece logo com a fonte de sistema e
+   troca quando a Public Sans carrega (do disco local, ou seja, já).
+   ========================================================================== */
+
+@font-face {
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("PublicSans-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("PublicSans-SemiBold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("PublicSans-Bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Public Sans";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("PublicSans-ExtraBold.woff2") format("woff2");
+}

@@ -1,0 +1,129 @@
+flowchart TD
+  inicio(["Início: Mordeduras e picadas"])
+  mordeduras_e_picadas_p1_1864["1. [P1] Compromisso da via aérea?"]
+  mordeduras_e_picadas_p1_2135["2. [P1] Respiração ineficaz?"]
+  mordeduras_e_picadas_p1_2707["3. [P1] Estridor?"]
+  mordeduras_e_picadas_p1_2708["4. [P1] Hemorragia catastrófica?"]
+  mordeduras_e_picadas_p1_2709["5. [P1] Sinais de choque?"]
+  mordeduras_e_picadas_p1_2710["6. [P1] Não reativo?"]
+  mordeduras_e_picadas_p2_2711["7. [P2] Edema da língua?"]
+  mordeduras_e_picadas_p2_2712["8. [P2] Edema da face?"]
+  mordeduras_e_picadas_p2_2713["9. [P2] Incapacidade de articular<br/>frases completas?"]
+  mordeduras_e_picadas_p2_2714["10. [P2] Grande Hemorragia<br/>incontrolável?"]
+  mordeduras_e_picadas_p2_2715["11. [P2] Alteração do estado de<br/>consciência?"]
+  mordeduras_e_picadas_p2_2716["12. [P2] Muito quente?"]
+  mordeduras_e_picadas_p2_2717["13. [P2] Possível sépsis?"]
+  mordeduras_e_picadas_p2_2718["14. [P2] Alta mortalidade?"]
+  mordeduras_e_picadas_p2_2719["15. [P2] História significativa de<br/>alergia?"]
+  mordeduras_e_picadas_p2_2720["16. [P2] Dor severa?"]
+  mordeduras_e_picadas_p2_2721["17. [P2] Prurido severo?"]
+  mordeduras_e_picadas_p3_2722["18. [P3] Pequena hemorragia<br/>incontrolável?"]
+  mordeduras_e_picadas_p3_2723["19. [P3] Quente?"]
+  mordeduras_e_picadas_p3_2724["20. [P3] Exantema eritematoso ou<br/>bolhoso?"]
+  mordeduras_e_picadas_p3_2725["21. [P3] Mortalidade moderada?"]
+  mordeduras_e_picadas_p3_2726["22. [P3] Dor moderada?"]
+  mordeduras_e_picadas_p3_2727["23. [P3] Prurido moderado?"]
+  mordeduras_e_picadas_p4_2728["24. [P4] Febre persistente?"]
+  mordeduras_e_picadas_p4_2731["25. [P4] Inflamação local?"]
+  mordeduras_e_picadas_p4_2732["26. [P4] Infeção local?"]
+  mordeduras_e_picadas_p4_2735["27. [P4] Edema?"]
+  mordeduras_e_picadas_p4_2736["28. [P4] Dor persistente?"]
+  mordeduras_e_picadas_p4_2739["29. [P4] Prurido persistente?"]
+  mordeduras_e_picadas_p4_2740["30. [P4] Problema recente?"]
+  inicio --> mordeduras_e_picadas_p1_1864
+  mordeduras_e_picadas_p1_1864_sim(["VERMELHO"]):::vermelho
+  mordeduras_e_picadas_p1_1864 -->|Sim| mordeduras_e_picadas_p1_1864_sim
+  mordeduras_e_picadas_p1_1864 -->|Não| mordeduras_e_picadas_p1_2135
+  mordeduras_e_picadas_p1_2135_sim(["VERMELHO"]):::vermelho
+  mordeduras_e_picadas_p1_2135 -->|Sim| mordeduras_e_picadas_p1_2135_sim
+  mordeduras_e_picadas_p1_2135 -->|Não| mordeduras_e_picadas_p1_2707
+  mordeduras_e_picadas_p1_2707_sim(["VERMELHO"]):::vermelho
+  mordeduras_e_picadas_p1_2707 -->|Sim| mordeduras_e_picadas_p1_2707_sim
+  mordeduras_e_picadas_p1_2707 -->|Não| mordeduras_e_picadas_p1_2708
+  mordeduras_e_picadas_p1_2708_sim(["VERMELHO"]):::vermelho
+  mordeduras_e_picadas_p1_2708 -->|Sim| mordeduras_e_picadas_p1_2708_sim
+  mordeduras_e_picadas_p1_2708 -->|Não| mordeduras_e_picadas_p1_2709
+  mordeduras_e_picadas_p1_2709_sim(["VERMELHO"]):::vermelho
+  mordeduras_e_picadas_p1_2709 -->|Sim| mordeduras_e_picadas_p1_2709_sim
+  mordeduras_e_picadas_p1_2709 -->|Não| mordeduras_e_picadas_p1_2710
+  mordeduras_e_picadas_p1_2710_sim(["VERMELHO"]):::vermelho
+  mordeduras_e_picadas_p1_2710 -->|Sim| mordeduras_e_picadas_p1_2710_sim
+  mordeduras_e_picadas_p1_2710 -->|Não| mordeduras_e_picadas_p2_2711
+  mordeduras_e_picadas_p2_2711_sim(["LARANJA"]):::laranja
+  mordeduras_e_picadas_p2_2711 -->|Sim| mordeduras_e_picadas_p2_2711_sim
+  mordeduras_e_picadas_p2_2711 -->|Não| mordeduras_e_picadas_p2_2712
+  mordeduras_e_picadas_p2_2712_sim(["LARANJA"]):::laranja
+  mordeduras_e_picadas_p2_2712 -->|Sim| mordeduras_e_picadas_p2_2712_sim
+  mordeduras_e_picadas_p2_2712 -->|Não| mordeduras_e_picadas_p2_2713
+  mordeduras_e_picadas_p2_2713_sim(["LARANJA"]):::laranja
+  mordeduras_e_picadas_p2_2713 -->|Sim| mordeduras_e_picadas_p2_2713_sim
+  mordeduras_e_picadas_p2_2713 -->|Não| mordeduras_e_picadas_p2_2714
+  mordeduras_e_picadas_p2_2714_sim(["LARANJA"]):::laranja
+  mordeduras_e_picadas_p2_2714 -->|Sim| mordeduras_e_picadas_p2_2714_sim
+  mordeduras_e_picadas_p2_2714 -->|Não| mordeduras_e_picadas_p2_2715
+  mordeduras_e_picadas_p2_2715_sim(["LARANJA"]):::laranja
+  mordeduras_e_picadas_p2_2715 -->|Sim| mordeduras_e_picadas_p2_2715_sim
+  mordeduras_e_picadas_p2_2715 -->|Não| mordeduras_e_picadas_p2_2716
+  mordeduras_e_picadas_p2_2716_sim(["LARANJA"]):::laranja
+  mordeduras_e_picadas_p2_2716 -->|Sim| mordeduras_e_picadas_p2_2716_sim
+  mordeduras_e_picadas_p2_2716 -->|Não| mordeduras_e_picadas_p2_2717
+  mordeduras_e_picadas_p2_2717_sim(["LARANJA"]):::laranja
+  mordeduras_e_picadas_p2_2717 -->|Sim| mordeduras_e_picadas_p2_2717_sim
+  mordeduras_e_picadas_p2_2717 -->|Não| mordeduras_e_picadas_p2_2718
+  mordeduras_e_picadas_p2_2718_sim(["LARANJA"]):::laranja
+  mordeduras_e_picadas_p2_2718 -->|Sim| mordeduras_e_picadas_p2_2718_sim
+  mordeduras_e_picadas_p2_2718 -->|Não| mordeduras_e_picadas_p2_2719
+  mordeduras_e_picadas_p2_2719_sim(["LARANJA"]):::laranja
+  mordeduras_e_picadas_p2_2719 -->|Sim| mordeduras_e_picadas_p2_2719_sim
+  mordeduras_e_picadas_p2_2719 -->|Não| mordeduras_e_picadas_p2_2720
+  mordeduras_e_picadas_p2_2720_sim(["LARANJA"]):::laranja
+  mordeduras_e_picadas_p2_2720 -->|Sim| mordeduras_e_picadas_p2_2720_sim
+  mordeduras_e_picadas_p2_2720 -->|Não| mordeduras_e_picadas_p2_2721
+  mordeduras_e_picadas_p2_2721_sim(["LARANJA"]):::laranja
+  mordeduras_e_picadas_p2_2721 -->|Sim| mordeduras_e_picadas_p2_2721_sim
+  mordeduras_e_picadas_p2_2721 -->|Não| mordeduras_e_picadas_p3_2722
+  mordeduras_e_picadas_p3_2722_sim(["AMARELO"]):::amarelo
+  mordeduras_e_picadas_p3_2722 -->|Sim| mordeduras_e_picadas_p3_2722_sim
+  mordeduras_e_picadas_p3_2722 -->|Não| mordeduras_e_picadas_p3_2723
+  mordeduras_e_picadas_p3_2723_sim(["AMARELO"]):::amarelo
+  mordeduras_e_picadas_p3_2723 -->|Sim| mordeduras_e_picadas_p3_2723_sim
+  mordeduras_e_picadas_p3_2723 -->|Não| mordeduras_e_picadas_p3_2724
+  mordeduras_e_picadas_p3_2724_sim(["AMARELO"]):::amarelo
+  mordeduras_e_picadas_p3_2724 -->|Sim| mordeduras_e_picadas_p3_2724_sim
+  mordeduras_e_picadas_p3_2724 -->|Não| mordeduras_e_picadas_p3_2725
+  mordeduras_e_picadas_p3_2725_sim(["AMARELO"]):::amarelo
+  mordeduras_e_picadas_p3_2725 -->|Sim| mordeduras_e_picadas_p3_2725_sim
+  mordeduras_e_picadas_p3_2725 -->|Não| mordeduras_e_picadas_p3_2726
+  mordeduras_e_picadas_p3_2726_sim(["AMARELO"]):::amarelo
+  mordeduras_e_picadas_p3_2726 -->|Sim| mordeduras_e_picadas_p3_2726_sim
+  mordeduras_e_picadas_p3_2726 -->|Não| mordeduras_e_picadas_p3_2727
+  mordeduras_e_picadas_p3_2727_sim(["AMARELO"]):::amarelo
+  mordeduras_e_picadas_p3_2727 -->|Sim| mordeduras_e_picadas_p3_2727_sim
+  mordeduras_e_picadas_p3_2727 -->|Não| mordeduras_e_picadas_p4_2728
+  mordeduras_e_picadas_p4_2728_sim(["VERDE"]):::verde
+  mordeduras_e_picadas_p4_2728 -->|Sim| mordeduras_e_picadas_p4_2728_sim
+  mordeduras_e_picadas_p4_2728 -->|Não| mordeduras_e_picadas_p4_2731
+  mordeduras_e_picadas_p4_2731_sim(["VERDE"]):::verde
+  mordeduras_e_picadas_p4_2731 -->|Sim| mordeduras_e_picadas_p4_2731_sim
+  mordeduras_e_picadas_p4_2731 -->|Não| mordeduras_e_picadas_p4_2732
+  mordeduras_e_picadas_p4_2732_sim(["VERDE"]):::verde
+  mordeduras_e_picadas_p4_2732 -->|Sim| mordeduras_e_picadas_p4_2732_sim
+  mordeduras_e_picadas_p4_2732 -->|Não| mordeduras_e_picadas_p4_2735
+  mordeduras_e_picadas_p4_2735_sim(["VERDE"]):::verde
+  mordeduras_e_picadas_p4_2735 -->|Sim| mordeduras_e_picadas_p4_2735_sim
+  mordeduras_e_picadas_p4_2735 -->|Não| mordeduras_e_picadas_p4_2736
+  mordeduras_e_picadas_p4_2736_sim(["VERDE"]):::verde
+  mordeduras_e_picadas_p4_2736 -->|Sim| mordeduras_e_picadas_p4_2736_sim
+  mordeduras_e_picadas_p4_2736 -->|Não| mordeduras_e_picadas_p4_2739
+  mordeduras_e_picadas_p4_2739_sim(["VERDE"]):::verde
+  mordeduras_e_picadas_p4_2739 -->|Sim| mordeduras_e_picadas_p4_2739_sim
+  mordeduras_e_picadas_p4_2739 -->|Não| mordeduras_e_picadas_p4_2740
+  mordeduras_e_picadas_p4_2740_sim(["VERDE"]):::verde
+  mordeduras_e_picadas_p4_2740 -->|Sim| mordeduras_e_picadas_p4_2740_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  mordeduras_e_picadas_p4_2740 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

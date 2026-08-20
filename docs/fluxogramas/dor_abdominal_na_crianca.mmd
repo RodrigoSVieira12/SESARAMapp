@@ -1,0 +1,113 @@
+flowchart TD
+  inicio(["Início: Dor abdominal na criança"])
+  dor_abdominal_na_crianca_p1_1846["1. [P1] Compromisso da via aérea?"]
+  dor_abdominal_na_crianca_p1_2117["2. [P1] Respiração ineficaz?"]
+  dor_abdominal_na_crianca_p1_2298["3. [P1] Sinais de choque?"]
+  dor_abdominal_na_crianca_p1_2299["4. [P1] Não reativo?"]
+  dor_abdominal_na_crianca_p2_2300["5. [P2] Hematemeses?"]
+  dor_abdominal_na_crianca_p2_2301["6. [P2] Hematoquésias, melenas ou<br/>retorragias?"]
+  dor_abdominal_na_crianca_p2_2302["7. [P2] Hemorragia vaginal em<br/>gestação superior a 20 semanas?"]
+  dor_abdominal_na_crianca_p2_3292["8. [P2] Prostrado?"]
+  dor_abdominal_na_crianca_p2_3293["9. [P2] Muito quente?"]
+  dor_abdominal_na_crianca_p2_3294["10. [P2] Possível sépsis?"]
+  dor_abdominal_na_crianca_p2_3295["11. [P2] Erupção cutânea desconhecida?"]
+  dor_abdominal_na_crianca_p2_3296["12. [P2] Dor testicular?"]
+  dor_abdominal_na_crianca_p2_3297["13. [P2] Dor severa?"]
+  dor_abdominal_na_crianca_p3_2308["14. [P3] Vómitos incoercíveis?"]
+  dor_abdominal_na_crianca_p3_2309["15. [P3] Fezes pretas ou raiadas de<br/>sangue?"]
+  dor_abdominal_na_crianca_p3_2310["16. [P3] Quente?"]
+  dor_abdominal_na_crianca_p3_2311["17. [P3] Massa abdominal visível?"]
+  dor_abdominal_na_crianca_p3_2312["18. [P3] Inconsolável pelos pais?"]
+  dor_abdominal_na_crianca_p3_2313["19. [P3] História de hematemeses?"]
+  dor_abdominal_na_crianca_p3_2314["20. [P3] História Inapropriada?"]
+  dor_abdominal_na_crianca_p3_2315["21. [P3] Possível gravidez?"]
+  dor_abdominal_na_crianca_p3_2316["22. [P3] Dor moderada?"]
+  dor_abdominal_na_crianca_p4_2317["23. [P4] Vómitos persistentes?"]
+  dor_abdominal_na_crianca_p4_2318["24. [P4] Febre persistente?"]
+  dor_abdominal_na_crianca_p4_2321["25. [P4] Dor persistente?"]
+  dor_abdominal_na_crianca_p4_2324["26. [P4] Problema recente?"]
+  inicio --> dor_abdominal_na_crianca_p1_1846
+  dor_abdominal_na_crianca_p1_1846_sim(["VERMELHO"]):::vermelho
+  dor_abdominal_na_crianca_p1_1846 -->|Sim| dor_abdominal_na_crianca_p1_1846_sim
+  dor_abdominal_na_crianca_p1_1846 -->|Não| dor_abdominal_na_crianca_p1_2117
+  dor_abdominal_na_crianca_p1_2117_sim(["VERMELHO"]):::vermelho
+  dor_abdominal_na_crianca_p1_2117 -->|Sim| dor_abdominal_na_crianca_p1_2117_sim
+  dor_abdominal_na_crianca_p1_2117 -->|Não| dor_abdominal_na_crianca_p1_2298
+  dor_abdominal_na_crianca_p1_2298_sim(["VERMELHO"]):::vermelho
+  dor_abdominal_na_crianca_p1_2298 -->|Sim| dor_abdominal_na_crianca_p1_2298_sim
+  dor_abdominal_na_crianca_p1_2298 -->|Não| dor_abdominal_na_crianca_p1_2299
+  dor_abdominal_na_crianca_p1_2299_sim(["VERMELHO"]):::vermelho
+  dor_abdominal_na_crianca_p1_2299 -->|Sim| dor_abdominal_na_crianca_p1_2299_sim
+  dor_abdominal_na_crianca_p1_2299 -->|Não| dor_abdominal_na_crianca_p2_2300
+  dor_abdominal_na_crianca_p2_2300_sim(["LARANJA"]):::laranja
+  dor_abdominal_na_crianca_p2_2300 -->|Sim| dor_abdominal_na_crianca_p2_2300_sim
+  dor_abdominal_na_crianca_p2_2300 -->|Não| dor_abdominal_na_crianca_p2_2301
+  dor_abdominal_na_crianca_p2_2301_sim(["LARANJA"]):::laranja
+  dor_abdominal_na_crianca_p2_2301 -->|Sim| dor_abdominal_na_crianca_p2_2301_sim
+  dor_abdominal_na_crianca_p2_2301 -->|Não| dor_abdominal_na_crianca_p2_2302
+  dor_abdominal_na_crianca_p2_2302_sim(["LARANJA"]):::laranja
+  dor_abdominal_na_crianca_p2_2302 -->|Sim| dor_abdominal_na_crianca_p2_2302_sim
+  dor_abdominal_na_crianca_p2_2302 -->|Não| dor_abdominal_na_crianca_p2_3292
+  dor_abdominal_na_crianca_p2_3292_sim(["LARANJA"]):::laranja
+  dor_abdominal_na_crianca_p2_3292 -->|Sim| dor_abdominal_na_crianca_p2_3292_sim
+  dor_abdominal_na_crianca_p2_3292 -->|Não| dor_abdominal_na_crianca_p2_3293
+  dor_abdominal_na_crianca_p2_3293_sim(["LARANJA"]):::laranja
+  dor_abdominal_na_crianca_p2_3293 -->|Sim| dor_abdominal_na_crianca_p2_3293_sim
+  dor_abdominal_na_crianca_p2_3293 -->|Não| dor_abdominal_na_crianca_p2_3294
+  dor_abdominal_na_crianca_p2_3294_sim(["LARANJA"]):::laranja
+  dor_abdominal_na_crianca_p2_3294 -->|Sim| dor_abdominal_na_crianca_p2_3294_sim
+  dor_abdominal_na_crianca_p2_3294 -->|Não| dor_abdominal_na_crianca_p2_3295
+  dor_abdominal_na_crianca_p2_3295_sim(["LARANJA"]):::laranja
+  dor_abdominal_na_crianca_p2_3295 -->|Sim| dor_abdominal_na_crianca_p2_3295_sim
+  dor_abdominal_na_crianca_p2_3295 -->|Não| dor_abdominal_na_crianca_p2_3296
+  dor_abdominal_na_crianca_p2_3296_sim(["LARANJA"]):::laranja
+  dor_abdominal_na_crianca_p2_3296 -->|Sim| dor_abdominal_na_crianca_p2_3296_sim
+  dor_abdominal_na_crianca_p2_3296 -->|Não| dor_abdominal_na_crianca_p2_3297
+  dor_abdominal_na_crianca_p2_3297_sim(["LARANJA"]):::laranja
+  dor_abdominal_na_crianca_p2_3297 -->|Sim| dor_abdominal_na_crianca_p2_3297_sim
+  dor_abdominal_na_crianca_p2_3297 -->|Não| dor_abdominal_na_crianca_p3_2308
+  dor_abdominal_na_crianca_p3_2308_sim(["AMARELO"]):::amarelo
+  dor_abdominal_na_crianca_p3_2308 -->|Sim| dor_abdominal_na_crianca_p3_2308_sim
+  dor_abdominal_na_crianca_p3_2308 -->|Não| dor_abdominal_na_crianca_p3_2309
+  dor_abdominal_na_crianca_p3_2309_sim(["AMARELO"]):::amarelo
+  dor_abdominal_na_crianca_p3_2309 -->|Sim| dor_abdominal_na_crianca_p3_2309_sim
+  dor_abdominal_na_crianca_p3_2309 -->|Não| dor_abdominal_na_crianca_p3_2310
+  dor_abdominal_na_crianca_p3_2310_sim(["AMARELO"]):::amarelo
+  dor_abdominal_na_crianca_p3_2310 -->|Sim| dor_abdominal_na_crianca_p3_2310_sim
+  dor_abdominal_na_crianca_p3_2310 -->|Não| dor_abdominal_na_crianca_p3_2311
+  dor_abdominal_na_crianca_p3_2311_sim(["AMARELO"]):::amarelo
+  dor_abdominal_na_crianca_p3_2311 -->|Sim| dor_abdominal_na_crianca_p3_2311_sim
+  dor_abdominal_na_crianca_p3_2311 -->|Não| dor_abdominal_na_crianca_p3_2312
+  dor_abdominal_na_crianca_p3_2312_sim(["AMARELO"]):::amarelo
+  dor_abdominal_na_crianca_p3_2312 -->|Sim| dor_abdominal_na_crianca_p3_2312_sim
+  dor_abdominal_na_crianca_p3_2312 -->|Não| dor_abdominal_na_crianca_p3_2313
+  dor_abdominal_na_crianca_p3_2313_sim(["AMARELO"]):::amarelo
+  dor_abdominal_na_crianca_p3_2313 -->|Sim| dor_abdominal_na_crianca_p3_2313_sim
+  dor_abdominal_na_crianca_p3_2313 -->|Não| dor_abdominal_na_crianca_p3_2314
+  dor_abdominal_na_crianca_p3_2314_sim(["AMARELO"]):::amarelo
+  dor_abdominal_na_crianca_p3_2314 -->|Sim| dor_abdominal_na_crianca_p3_2314_sim
+  dor_abdominal_na_crianca_p3_2314 -->|Não| dor_abdominal_na_crianca_p3_2315
+  dor_abdominal_na_crianca_p3_2315_sim(["AMARELO"]):::amarelo
+  dor_abdominal_na_crianca_p3_2315 -->|Sim| dor_abdominal_na_crianca_p3_2315_sim
+  dor_abdominal_na_crianca_p3_2315 -->|Não| dor_abdominal_na_crianca_p3_2316
+  dor_abdominal_na_crianca_p3_2316_sim(["AMARELO"]):::amarelo
+  dor_abdominal_na_crianca_p3_2316 -->|Sim| dor_abdominal_na_crianca_p3_2316_sim
+  dor_abdominal_na_crianca_p3_2316 -->|Não| dor_abdominal_na_crianca_p4_2317
+  dor_abdominal_na_crianca_p4_2317_sim(["VERDE"]):::verde
+  dor_abdominal_na_crianca_p4_2317 -->|Sim| dor_abdominal_na_crianca_p4_2317_sim
+  dor_abdominal_na_crianca_p4_2317 -->|Não| dor_abdominal_na_crianca_p4_2318
+  dor_abdominal_na_crianca_p4_2318_sim(["VERDE"]):::verde
+  dor_abdominal_na_crianca_p4_2318 -->|Sim| dor_abdominal_na_crianca_p4_2318_sim
+  dor_abdominal_na_crianca_p4_2318 -->|Não| dor_abdominal_na_crianca_p4_2321
+  dor_abdominal_na_crianca_p4_2321_sim(["VERDE"]):::verde
+  dor_abdominal_na_crianca_p4_2321 -->|Sim| dor_abdominal_na_crianca_p4_2321_sim
+  dor_abdominal_na_crianca_p4_2321 -->|Não| dor_abdominal_na_crianca_p4_2324
+  dor_abdominal_na_crianca_p4_2324_sim(["VERDE"]):::verde
+  dor_abdominal_na_crianca_p4_2324 -->|Sim| dor_abdominal_na_crianca_p4_2324_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  dor_abdominal_na_crianca_p4_2324 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

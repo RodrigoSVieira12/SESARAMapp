@@ -57,6 +57,7 @@ def sem_esperas(monkeypatch):
 
 # --------------------------------------------------------------- helpers --
 
+
 def _sem_comentarios_js(codigo: str) -> str:
     """Remove comentários /* ... */ e // ... de um ficheiro JS.
 
@@ -87,6 +88,7 @@ def _assert_sem_travessoes(texto: str, origem: str):
 
 # ---------------------------------------------------------------- versão --
 
+
 def test_versao_no_minimo_0_11_2():
     """O pino exato da versão corrente vive no ficheiro de testes dessa
     versão (ver test_v11_3.py); aqui só se garante que não andámos para
@@ -102,6 +104,7 @@ def test_api_saude_reporta_versao():
 
 
 # ------------------------------------------------- textos.js sem dashes --
+
 
 def test_textos_js_sem_travessoes():
     codigo = (RAIZ / "static" / "js" / "textos.js").read_text(encoding="utf-8")
@@ -131,6 +134,7 @@ def test_chaves_chip_presentes_e_antigas_ausentes():
 
 # ------------------------------------------------------ dados sem dashes --
 
+
 def test_autocuidado_sem_travessoes():
     dados = json.loads((RAIZ / "app" / "data" / "autocuidado.json").read_text(encoding="utf-8"))
     for texto in _strings_recursivas(dados):
@@ -159,6 +163,7 @@ def test_unidades_textos_sem_faixas_com_hifen():
 
 # ---------------------------------------------------- routing e tradução --
 
+
 def test_horario_en_traduz_das_as():
     assert routing._horario_en("Dias úteis, das 08:00 às 20:00") == "Weekdays, 08:00 to 20:00"
 
@@ -181,6 +186,7 @@ def test_encaminhamento_resposta_sem_travessoes(sem_esperas, monkeypatch, lingua
 
 
 # -------------------------------------------------------------- PDF ------
+
 
 def test_pdf_titulos_sem_travessoes():
     for lingua, textos in pdf_clinico._TXT.items():

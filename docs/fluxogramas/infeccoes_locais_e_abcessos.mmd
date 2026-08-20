@@ -1,0 +1,73 @@
+flowchart TD
+  inicio(["Início: Infeções locais e abcessos"])
+  infeccoes_locais_e_abcessos_p1_1862["1. [P1] Compromisso da via aérea?"]
+  infeccoes_locais_e_abcessos_p1_2133["2. [P1] Respiração ineficaz?"]
+  infeccoes_locais_e_abcessos_p1_2668["3. [P1] Sinais de choque?"]
+  infeccoes_locais_e_abcessos_p1_2669["4. [P1] Não reativo?"]
+  infeccoes_locais_e_abcessos_p2_2670["5. [P2] Compromisso vascular distal?"]
+  infeccoes_locais_e_abcessos_p2_2671["6. [P2] Muito quente?"]
+  infeccoes_locais_e_abcessos_p2_2672["7. [P2] Possível sépsis?"]
+  infeccoes_locais_e_abcessos_p2_2673["8. [P2] Dor severa?"]
+  infeccoes_locais_e_abcessos_p3_2674["9. [P3] Quente?"]
+  infeccoes_locais_e_abcessos_p3_2675["10. [P3] Articulação quente?"]
+  infeccoes_locais_e_abcessos_p3_2676["11. [P3] Dor à mobilização das<br/>articulações?"]
+  infeccoes_locais_e_abcessos_p3_2677["12. [P3] Dor moderada?"]
+  infeccoes_locais_e_abcessos_p4_2678["13. [P4] Febre persistente?"]
+  infeccoes_locais_e_abcessos_p4_2681["14. [P4] Dor persistente?"]
+  infeccoes_locais_e_abcessos_p4_2682["15. [P4] Problema recente?"]
+  infeccoes_locais_e_abcessos_p4_2685["16. [P4] Edema?"]
+  inicio --> infeccoes_locais_e_abcessos_p1_1862
+  infeccoes_locais_e_abcessos_p1_1862_sim(["VERMELHO"]):::vermelho
+  infeccoes_locais_e_abcessos_p1_1862 -->|Sim| infeccoes_locais_e_abcessos_p1_1862_sim
+  infeccoes_locais_e_abcessos_p1_1862 -->|Não| infeccoes_locais_e_abcessos_p1_2133
+  infeccoes_locais_e_abcessos_p1_2133_sim(["VERMELHO"]):::vermelho
+  infeccoes_locais_e_abcessos_p1_2133 -->|Sim| infeccoes_locais_e_abcessos_p1_2133_sim
+  infeccoes_locais_e_abcessos_p1_2133 -->|Não| infeccoes_locais_e_abcessos_p1_2668
+  infeccoes_locais_e_abcessos_p1_2668_sim(["VERMELHO"]):::vermelho
+  infeccoes_locais_e_abcessos_p1_2668 -->|Sim| infeccoes_locais_e_abcessos_p1_2668_sim
+  infeccoes_locais_e_abcessos_p1_2668 -->|Não| infeccoes_locais_e_abcessos_p1_2669
+  infeccoes_locais_e_abcessos_p1_2669_sim(["VERMELHO"]):::vermelho
+  infeccoes_locais_e_abcessos_p1_2669 -->|Sim| infeccoes_locais_e_abcessos_p1_2669_sim
+  infeccoes_locais_e_abcessos_p1_2669 -->|Não| infeccoes_locais_e_abcessos_p2_2670
+  infeccoes_locais_e_abcessos_p2_2670_sim(["LARANJA"]):::laranja
+  infeccoes_locais_e_abcessos_p2_2670 -->|Sim| infeccoes_locais_e_abcessos_p2_2670_sim
+  infeccoes_locais_e_abcessos_p2_2670 -->|Não| infeccoes_locais_e_abcessos_p2_2671
+  infeccoes_locais_e_abcessos_p2_2671_sim(["LARANJA"]):::laranja
+  infeccoes_locais_e_abcessos_p2_2671 -->|Sim| infeccoes_locais_e_abcessos_p2_2671_sim
+  infeccoes_locais_e_abcessos_p2_2671 -->|Não| infeccoes_locais_e_abcessos_p2_2672
+  infeccoes_locais_e_abcessos_p2_2672_sim(["LARANJA"]):::laranja
+  infeccoes_locais_e_abcessos_p2_2672 -->|Sim| infeccoes_locais_e_abcessos_p2_2672_sim
+  infeccoes_locais_e_abcessos_p2_2672 -->|Não| infeccoes_locais_e_abcessos_p2_2673
+  infeccoes_locais_e_abcessos_p2_2673_sim(["LARANJA"]):::laranja
+  infeccoes_locais_e_abcessos_p2_2673 -->|Sim| infeccoes_locais_e_abcessos_p2_2673_sim
+  infeccoes_locais_e_abcessos_p2_2673 -->|Não| infeccoes_locais_e_abcessos_p3_2674
+  infeccoes_locais_e_abcessos_p3_2674_sim(["AMARELO"]):::amarelo
+  infeccoes_locais_e_abcessos_p3_2674 -->|Sim| infeccoes_locais_e_abcessos_p3_2674_sim
+  infeccoes_locais_e_abcessos_p3_2674 -->|Não| infeccoes_locais_e_abcessos_p3_2675
+  infeccoes_locais_e_abcessos_p3_2675_sim(["AMARELO"]):::amarelo
+  infeccoes_locais_e_abcessos_p3_2675 -->|Sim| infeccoes_locais_e_abcessos_p3_2675_sim
+  infeccoes_locais_e_abcessos_p3_2675 -->|Não| infeccoes_locais_e_abcessos_p3_2676
+  infeccoes_locais_e_abcessos_p3_2676_sim(["AMARELO"]):::amarelo
+  infeccoes_locais_e_abcessos_p3_2676 -->|Sim| infeccoes_locais_e_abcessos_p3_2676_sim
+  infeccoes_locais_e_abcessos_p3_2676 -->|Não| infeccoes_locais_e_abcessos_p3_2677
+  infeccoes_locais_e_abcessos_p3_2677_sim(["AMARELO"]):::amarelo
+  infeccoes_locais_e_abcessos_p3_2677 -->|Sim| infeccoes_locais_e_abcessos_p3_2677_sim
+  infeccoes_locais_e_abcessos_p3_2677 -->|Não| infeccoes_locais_e_abcessos_p4_2678
+  infeccoes_locais_e_abcessos_p4_2678_sim(["VERDE"]):::verde
+  infeccoes_locais_e_abcessos_p4_2678 -->|Sim| infeccoes_locais_e_abcessos_p4_2678_sim
+  infeccoes_locais_e_abcessos_p4_2678 -->|Não| infeccoes_locais_e_abcessos_p4_2681
+  infeccoes_locais_e_abcessos_p4_2681_sim(["VERDE"]):::verde
+  infeccoes_locais_e_abcessos_p4_2681 -->|Sim| infeccoes_locais_e_abcessos_p4_2681_sim
+  infeccoes_locais_e_abcessos_p4_2681 -->|Não| infeccoes_locais_e_abcessos_p4_2682
+  infeccoes_locais_e_abcessos_p4_2682_sim(["VERDE"]):::verde
+  infeccoes_locais_e_abcessos_p4_2682 -->|Sim| infeccoes_locais_e_abcessos_p4_2682_sim
+  infeccoes_locais_e_abcessos_p4_2682 -->|Não| infeccoes_locais_e_abcessos_p4_2685
+  infeccoes_locais_e_abcessos_p4_2685_sim(["VERDE"]):::verde
+  infeccoes_locais_e_abcessos_p4_2685 -->|Sim| infeccoes_locais_e_abcessos_p4_2685_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  infeccoes_locais_e_abcessos_p4_2685 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

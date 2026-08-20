@@ -1,0 +1,85 @@
+flowchart TD
+  inicio(["Início: Diabetes"])
+  diabetes_p1_1839["1. [P1] Compromisso da via aérea?"]
+  diabetes_p1_2089["2. [P1] Respiração ineficaz?"]
+  diabetes_p1_2090["3. [P1] Sinais de choque?"]
+  diabetes_p1_2091["4. [P1] Não reativo?"]
+  diabetes_p1_2092["5. [P1] Hipoglicémia?"]
+  diabetes_p2_2093["6. [P2] Alteração do estado de<br/>consciência?"]
+  diabetes_p2_2094["7. [P2] Muito quente?"]
+  diabetes_p2_2095["8. [P2] Possível sépsis?"]
+  diabetes_p2_3272["9. [P2] Hiperglicémia c/ cetose?"]
+  diabetes_p2_3273["10. [P2] Dor severa?"]
+  diabetes_p3_2097["11. [P3] Hiperglicémia?"]
+  diabetes_p3_2098["12. [P3] Vómitos incoercíveis?"]
+  diabetes_p3_2099["13. [P3] Quente?"]
+  diabetes_p3_2100["14. [P3] Dor moderada?"]
+  diabetes_p4_2101["15. [P4] Vómitos persistentes?"]
+  diabetes_p4_2104["16. [P4] Febre persistente?"]
+  diabetes_p4_2105["17. [P4] Perda do controle da<br/>glicémia?"]
+  diabetes_p4_2108["18. [P4] Dor persistente?"]
+  diabetes_p4_2109["19. [P4] Problema recente?"]
+  inicio --> diabetes_p1_1839
+  diabetes_p1_1839_sim(["VERMELHO"]):::vermelho
+  diabetes_p1_1839 -->|Sim| diabetes_p1_1839_sim
+  diabetes_p1_1839 -->|Não| diabetes_p1_2089
+  diabetes_p1_2089_sim(["VERMELHO"]):::vermelho
+  diabetes_p1_2089 -->|Sim| diabetes_p1_2089_sim
+  diabetes_p1_2089 -->|Não| diabetes_p1_2090
+  diabetes_p1_2090_sim(["VERMELHO"]):::vermelho
+  diabetes_p1_2090 -->|Sim| diabetes_p1_2090_sim
+  diabetes_p1_2090 -->|Não| diabetes_p1_2091
+  diabetes_p1_2091_sim(["VERMELHO"]):::vermelho
+  diabetes_p1_2091 -->|Sim| diabetes_p1_2091_sim
+  diabetes_p1_2091 -->|Não| diabetes_p1_2092
+  diabetes_p1_2092_sim(["VERMELHO"]):::vermelho
+  diabetes_p1_2092 -->|Sim| diabetes_p1_2092_sim
+  diabetes_p1_2092 -->|Não| diabetes_p2_2093
+  diabetes_p2_2093_sim(["LARANJA"]):::laranja
+  diabetes_p2_2093 -->|Sim| diabetes_p2_2093_sim
+  diabetes_p2_2093 -->|Não| diabetes_p2_2094
+  diabetes_p2_2094_sim(["LARANJA"]):::laranja
+  diabetes_p2_2094 -->|Sim| diabetes_p2_2094_sim
+  diabetes_p2_2094 -->|Não| diabetes_p2_2095
+  diabetes_p2_2095_sim(["LARANJA"]):::laranja
+  diabetes_p2_2095 -->|Sim| diabetes_p2_2095_sim
+  diabetes_p2_2095 -->|Não| diabetes_p2_3272
+  diabetes_p2_3272_sim(["LARANJA"]):::laranja
+  diabetes_p2_3272 -->|Sim| diabetes_p2_3272_sim
+  diabetes_p2_3272 -->|Não| diabetes_p2_3273
+  diabetes_p2_3273_sim(["LARANJA"]):::laranja
+  diabetes_p2_3273 -->|Sim| diabetes_p2_3273_sim
+  diabetes_p2_3273 -->|Não| diabetes_p3_2097
+  diabetes_p3_2097_sim(["AMARELO"]):::amarelo
+  diabetes_p3_2097 -->|Sim| diabetes_p3_2097_sim
+  diabetes_p3_2097 -->|Não| diabetes_p3_2098
+  diabetes_p3_2098_sim(["AMARELO"]):::amarelo
+  diabetes_p3_2098 -->|Sim| diabetes_p3_2098_sim
+  diabetes_p3_2098 -->|Não| diabetes_p3_2099
+  diabetes_p3_2099_sim(["AMARELO"]):::amarelo
+  diabetes_p3_2099 -->|Sim| diabetes_p3_2099_sim
+  diabetes_p3_2099 -->|Não| diabetes_p3_2100
+  diabetes_p3_2100_sim(["AMARELO"]):::amarelo
+  diabetes_p3_2100 -->|Sim| diabetes_p3_2100_sim
+  diabetes_p3_2100 -->|Não| diabetes_p4_2101
+  diabetes_p4_2101_sim(["VERDE"]):::verde
+  diabetes_p4_2101 -->|Sim| diabetes_p4_2101_sim
+  diabetes_p4_2101 -->|Não| diabetes_p4_2104
+  diabetes_p4_2104_sim(["VERDE"]):::verde
+  diabetes_p4_2104 -->|Sim| diabetes_p4_2104_sim
+  diabetes_p4_2104 -->|Não| diabetes_p4_2105
+  diabetes_p4_2105_sim(["VERDE"]):::verde
+  diabetes_p4_2105 -->|Sim| diabetes_p4_2105_sim
+  diabetes_p4_2105 -->|Não| diabetes_p4_2108
+  diabetes_p4_2108_sim(["VERDE"]):::verde
+  diabetes_p4_2108 -->|Sim| diabetes_p4_2108_sim
+  diabetes_p4_2108 -->|Não| diabetes_p4_2109
+  diabetes_p4_2109_sim(["VERDE"]):::verde
+  diabetes_p4_2109 -->|Sim| diabetes_p4_2109_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  diabetes_p4_2109 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

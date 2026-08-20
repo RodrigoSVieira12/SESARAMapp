@@ -1,0 +1,93 @@
+flowchart TD
+  inicio(["Início: Problemas de ouvidos"])
+  problemas_de_ouvidos_p1_1870["1. [P1] Compromisso da via aérea?"]
+  problemas_de_ouvidos_p1_2141["2. [P1] Respiração ineficaz?"]
+  problemas_de_ouvidos_p1_2754["3. [P1] Sinais de choque?"]
+  problemas_de_ouvidos_p1_2766["4. [P1] Não reativo?"]
+  problemas_de_ouvidos_p2_2912["5. [P2] Grande Hemorragia<br/>incontrolável?"]
+  problemas_de_ouvidos_p2_2913["6. [P2] Alteração do estado de<br/>consciência?"]
+  problemas_de_ouvidos_p2_2914["7. [P2] Muito quente?"]
+  problemas_de_ouvidos_p2_2915["8. [P2] Possível sépsis?"]
+  problemas_de_ouvidos_p2_2916["9. [P2] Dor severa?"]
+  problemas_de_ouvidos_p3_2917["10. [P3] Pequena hemorragia<br/>incontrolável?"]
+  problemas_de_ouvidos_p3_2918["11. [P3] Vómitos persistentes?"]
+  problemas_de_ouvidos_p3_2919["12. [P3] Quente?"]
+  problemas_de_ouvidos_p3_2920["13. [P3] História de TCE?"]
+  problemas_de_ouvidos_p3_2921["14. [P3] História Inapropriada?"]
+  problemas_de_ouvidos_p3_2922["15. [P3] Dor moderada?"]
+  problemas_de_ouvidos_p4_2923["16. [P4] Febre persistente?"]
+  problemas_de_ouvidos_p4_2926["17. [P4] Hematoma do pavilhão<br/>auricular?"]
+  problemas_de_ouvidos_p4_2927["18. [P4] Vertigens?"]
+  problemas_de_ouvidos_p4_2930["19. [P4] Perda recente de audição?"]
+  problemas_de_ouvidos_p4_2931["20. [P4] Dor persistente?"]
+  problemas_de_ouvidos_p4_2934["21. [P4] Problema recente?"]
+  inicio --> problemas_de_ouvidos_p1_1870
+  problemas_de_ouvidos_p1_1870_sim(["VERMELHO"]):::vermelho
+  problemas_de_ouvidos_p1_1870 -->|Sim| problemas_de_ouvidos_p1_1870_sim
+  problemas_de_ouvidos_p1_1870 -->|Não| problemas_de_ouvidos_p1_2141
+  problemas_de_ouvidos_p1_2141_sim(["VERMELHO"]):::vermelho
+  problemas_de_ouvidos_p1_2141 -->|Sim| problemas_de_ouvidos_p1_2141_sim
+  problemas_de_ouvidos_p1_2141 -->|Não| problemas_de_ouvidos_p1_2754
+  problemas_de_ouvidos_p1_2754_sim(["VERMELHO"]):::vermelho
+  problemas_de_ouvidos_p1_2754 -->|Sim| problemas_de_ouvidos_p1_2754_sim
+  problemas_de_ouvidos_p1_2754 -->|Não| problemas_de_ouvidos_p1_2766
+  problemas_de_ouvidos_p1_2766_sim(["VERMELHO"]):::vermelho
+  problemas_de_ouvidos_p1_2766 -->|Sim| problemas_de_ouvidos_p1_2766_sim
+  problemas_de_ouvidos_p1_2766 -->|Não| problemas_de_ouvidos_p2_2912
+  problemas_de_ouvidos_p2_2912_sim(["LARANJA"]):::laranja
+  problemas_de_ouvidos_p2_2912 -->|Sim| problemas_de_ouvidos_p2_2912_sim
+  problemas_de_ouvidos_p2_2912 -->|Não| problemas_de_ouvidos_p2_2913
+  problemas_de_ouvidos_p2_2913_sim(["LARANJA"]):::laranja
+  problemas_de_ouvidos_p2_2913 -->|Sim| problemas_de_ouvidos_p2_2913_sim
+  problemas_de_ouvidos_p2_2913 -->|Não| problemas_de_ouvidos_p2_2914
+  problemas_de_ouvidos_p2_2914_sim(["LARANJA"]):::laranja
+  problemas_de_ouvidos_p2_2914 -->|Sim| problemas_de_ouvidos_p2_2914_sim
+  problemas_de_ouvidos_p2_2914 -->|Não| problemas_de_ouvidos_p2_2915
+  problemas_de_ouvidos_p2_2915_sim(["LARANJA"]):::laranja
+  problemas_de_ouvidos_p2_2915 -->|Sim| problemas_de_ouvidos_p2_2915_sim
+  problemas_de_ouvidos_p2_2915 -->|Não| problemas_de_ouvidos_p2_2916
+  problemas_de_ouvidos_p2_2916_sim(["LARANJA"]):::laranja
+  problemas_de_ouvidos_p2_2916 -->|Sim| problemas_de_ouvidos_p2_2916_sim
+  problemas_de_ouvidos_p2_2916 -->|Não| problemas_de_ouvidos_p3_2917
+  problemas_de_ouvidos_p3_2917_sim(["AMARELO"]):::amarelo
+  problemas_de_ouvidos_p3_2917 -->|Sim| problemas_de_ouvidos_p3_2917_sim
+  problemas_de_ouvidos_p3_2917 -->|Não| problemas_de_ouvidos_p3_2918
+  problemas_de_ouvidos_p3_2918_sim(["AMARELO"]):::amarelo
+  problemas_de_ouvidos_p3_2918 -->|Sim| problemas_de_ouvidos_p3_2918_sim
+  problemas_de_ouvidos_p3_2918 -->|Não| problemas_de_ouvidos_p3_2919
+  problemas_de_ouvidos_p3_2919_sim(["AMARELO"]):::amarelo
+  problemas_de_ouvidos_p3_2919 -->|Sim| problemas_de_ouvidos_p3_2919_sim
+  problemas_de_ouvidos_p3_2919 -->|Não| problemas_de_ouvidos_p3_2920
+  problemas_de_ouvidos_p3_2920_sim(["AMARELO"]):::amarelo
+  problemas_de_ouvidos_p3_2920 -->|Sim| problemas_de_ouvidos_p3_2920_sim
+  problemas_de_ouvidos_p3_2920 -->|Não| problemas_de_ouvidos_p3_2921
+  problemas_de_ouvidos_p3_2921_sim(["AMARELO"]):::amarelo
+  problemas_de_ouvidos_p3_2921 -->|Sim| problemas_de_ouvidos_p3_2921_sim
+  problemas_de_ouvidos_p3_2921 -->|Não| problemas_de_ouvidos_p3_2922
+  problemas_de_ouvidos_p3_2922_sim(["AMARELO"]):::amarelo
+  problemas_de_ouvidos_p3_2922 -->|Sim| problemas_de_ouvidos_p3_2922_sim
+  problemas_de_ouvidos_p3_2922 -->|Não| problemas_de_ouvidos_p4_2923
+  problemas_de_ouvidos_p4_2923_sim(["VERDE"]):::verde
+  problemas_de_ouvidos_p4_2923 -->|Sim| problemas_de_ouvidos_p4_2923_sim
+  problemas_de_ouvidos_p4_2923 -->|Não| problemas_de_ouvidos_p4_2926
+  problemas_de_ouvidos_p4_2926_sim(["VERDE"]):::verde
+  problemas_de_ouvidos_p4_2926 -->|Sim| problemas_de_ouvidos_p4_2926_sim
+  problemas_de_ouvidos_p4_2926 -->|Não| problemas_de_ouvidos_p4_2927
+  problemas_de_ouvidos_p4_2927_sim(["VERDE"]):::verde
+  problemas_de_ouvidos_p4_2927 -->|Sim| problemas_de_ouvidos_p4_2927_sim
+  problemas_de_ouvidos_p4_2927 -->|Não| problemas_de_ouvidos_p4_2930
+  problemas_de_ouvidos_p4_2930_sim(["VERDE"]):::verde
+  problemas_de_ouvidos_p4_2930 -->|Sim| problemas_de_ouvidos_p4_2930_sim
+  problemas_de_ouvidos_p4_2930 -->|Não| problemas_de_ouvidos_p4_2931
+  problemas_de_ouvidos_p4_2931_sim(["VERDE"]):::verde
+  problemas_de_ouvidos_p4_2931 -->|Sim| problemas_de_ouvidos_p4_2931_sim
+  problemas_de_ouvidos_p4_2931 -->|Não| problemas_de_ouvidos_p4_2934
+  problemas_de_ouvidos_p4_2934_sim(["VERDE"]):::verde
+  problemas_de_ouvidos_p4_2934 -->|Sim| problemas_de_ouvidos_p4_2934_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  problemas_de_ouvidos_p4_2934 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

@@ -1,0 +1,607 @@
+{
+  "descricao": "Reescritas do aconselhamento clinico em linguagem do utente, nas duas linguas, com o estado de validacao clinica por item (v0.15.2). E ESTE o ficheiro que a equipa clinica edita: a chave de cada item e o texto clinico EXATO da tabela de Manchester (espacos colapsados num so), 'pt' e 'en' sao a frase mostrada ao utente em cada lingua, e 'validado'/'validado_por'/'validado_em' registam a aprovacao clinica. Depois de editar, correr: python scripts/aplicar_aconselhamento_utente.py (nao precisa do Excel). Regras de escrita e politica de seguranca: docs/GUIA_DOS_DADOS.md, seccao 'Aconselhamento ao utente'.",
+  "politica": [
+    "So itens com uma versao LEIGA SEGURA entram aqui; acoes so do profissional (avaliar escalas, ativar meios, farmacos por nome, isolamento, policia, CIAV...) ficam de fora DE PROPOSITO e nunca aparecem ao utente.",
+    "O frontend NAO recua para o texto clinico: item sem entrada aqui = item invisivel para o utente.",
+    "Onde o gesto do leigo difere do gesto clinico, escreve-se a acao segura em casa (ex.: 'nao tente endireitar o membro', e nao 'alinhar o membro').",
+    "Frases curtas, palavras simples, tratar por 'voce'; doses remetidas para a bula, nunca numeros; ressalva 'se nao houver contraindicacao' nos medicamentos.",
+    "'validado': true so depois de revisao clinica formal, preenchendo tambem 'validado_por' e 'validado_em' (AAAA-MM-DD). Enquanto false, o item conta como proposta."
+  ],
+  "itens": {
+    "Não reativo e não respira: iniciar T-CPR": {
+      "pt": "Se a pessoa não acorda e não respira, ligue já para o 112 e não desligue: ao telefone ensinam-no, passo a passo, a fazer compressões no meio do peito até a ajuda chegar.",
+      "en": "If the person does not wake up and is not breathing, call 112 right away and stay on the line: they will guide you, step by step, through chest compressions in the middle of the chest until help arrives.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Não reativo mas respira: colocar em PLS": {
+      "pt": "Se a pessoa não acorda mas respira, deite-a de lado, com a cabeça um pouco inclinada para trás para a boca ficar livre (posição lateral de segurança). Fique junto dela e ligue 112.",
+      "en": "If the person does not wake up but is breathing, lay them on their side, with the head tilted slightly back so the mouth stays clear (recovery position). Stay with them and call 112.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Alteração do estado de consciência: colocar em PLS": {
+      "pt": "Se a pessoa está muito sonolenta ou baralhada, deite-a de lado (posição lateral de segurança) e vá vigiando a respiração. Ligue 112 se piorar ou deixar de reagir.",
+      "en": "If the person is very drowsy or confused, lay them on their side (recovery position) and keep watching their breathing. Call 112 if they get worse or stop responding.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Sinais de choque: deitar no chão e levantar as pernas. Aquecer a vítima": {
+      "pt": "Se a pessoa está muito pálida, suada e fraca, deite-a e levante-lhe as pernas. Cubra-a para a aquecer e ligue 112.",
+      "en": "If the person is very pale, sweaty and weak, lay them down and raise their legs. Cover them to keep them warm and call 112.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Sinais de choque: posição horizontal. Aquecer a vítima": {
+      "pt": "Se a pessoa está muito pálida, suada e fraca, deite-a bem esticada e cubra-a para a aquecer. Ligue 112.",
+      "en": "If the person is very pale, sweaty and weak, lay them down flat and cover them to keep them warm. Call 112.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Hemorragia catastrófica: aplicar pressão com pano limpo e seco. Torniquete se hemorragia não parar": {
+      "pt": "Faça pressão forte e sem parar sobre a ferida com um pano limpo e seco. Se o sangue não parar, mantenha a pressão, aperte com força um pouco acima da ferida e ligue já 112.",
+      "en": "Press hard on the wound, without stopping, with a clean, dry cloth. If the bleeding does not stop, keep pressing, squeeze firmly a little above the wound and call 112 right away.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Hemorragia catastrófica: aplicar pressão com pano limpo e seco": {
+      "pt": "Faça pressão forte e sem parar sobre a ferida com um pano limpo e seco, e ligue já 112.",
+      "en": "Press hard on the wound, without stopping, with a clean, dry cloth, and call 112 right away.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Grande hemorragia incontrolável: aplicar pressão com pano limpo e seco. Torniquete se hemorragia não parar": {
+      "pt": "Faça pressão forte sobre a ferida com um pano limpo e seco. Se o sangue não parar, mantenha a pressão, aperte um pouco acima da ferida e ligue 112.",
+      "en": "Press hard on the wound with a clean, dry cloth. If the bleeding does not stop, keep pressing, squeeze a little above the wound and call 112.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Grande hemorragia incontrolável: aplicar pressão com pano limpo e seco": {
+      "pt": "Faça pressão forte sobre a ferida com um pano limpo e seco até o sangue parar. Se não parar, mantenha a pressão e ligue 112.",
+      "en": "Press hard on the wound with a clean, dry cloth until the bleeding stops. If it does not stop, keep pressing and call 112.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Pequena hemorragia incontrolável: aplicar pressão com pano limpo e seco": {
+      "pt": "Faça pressão sobre a ferida com um pano limpo e seco até o sangue parar. Se não parar, mantenha a pressão e procure ajuda.",
+      "en": "Press on the wound with a clean, dry cloth until the bleeding stops. If it does not stop, keep pressing and get help.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Hematoma no couro cabeludo: aplicar pressão com pano limpo e seco. Gelo indireto no local": {
+      "pt": "Se houver galo ou ferida na cabeça, faça pressão com um pano limpo e seco e aplique gelo por cima, sempre envolvido num pano (nunca diretamente na pele).",
+      "en": "If there is a bump or a wound on the head, press on it with a clean, dry cloth and apply ice on top, always wrapped in a cloth (never directly on the skin).",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Défice neurológico agudo: avaliar escala de Cincinnati": {
+      "pt": "Verifique sinais de AVC: peça à pessoa para sorrir (a boca fica ao lado?), para levantar os dois braços (um cai?) e para dizer uma frase (a fala sai enrolada?). Se notar algum destes sinais, ligue já 112.",
+      "en": "Check for signs of a stroke: ask the person to smile (does the mouth droop to one side?), to raise both arms (does one drift down?) and to say a sentence (is the speech slurred?). If you notice any of these signs, call 112 right away.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Novos sinais e/ou sintomas neurológicos: avaliar escala de Cincinnati": {
+      "pt": "Verifique sinais de AVC: sorrir (boca ao lado?), levantar os dois braços (um cai?), dizer uma frase (fala enrolada?). Se notar algum, ligue já 112.",
+      "en": "Check for signs of a stroke: smiling (mouth drooping to one side?), raising both arms (does one drift down?), saying a sentence (slurred speech?). If you notice any, call 112 right away.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "História de perda de consciência: avaliar escala de Cincinnati": {
+      "pt": "Verifique sinais de AVC: sorrir (boca ao lado?), levantar os dois braços (um cai?), dizer uma frase (fala enrolada?). Se notar algum, ligue já 112.",
+      "en": "Check for signs of a stroke: smiling (mouth drooping to one side?), raising both arms (does one drift down?), saying a sentence (slurred speech?). If you notice any, call 112 right away.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "História de perda de consciência: avaliar escala de Cincinnati e despistar dor precordial": {
+      "pt": "Verifique sinais de AVC: sorrir (boca ao lado?), levantar os dois braços (um cai?), dizer uma frase (fala enrolada?). Se notar algum destes sinais, ou se houver dor no peito, ligue já 112.",
+      "en": "Check for signs of a stroke: smiling (mouth drooping to one side?), raising both arms (does one drift down?), saying a sentence (slurred speech?). If you notice any of these signs, or if there is chest pain, call 112 right away.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Instalação súbita: avaliar escala de Cincinnati e despistar dor precordial": {
+      "pt": "Se começou de repente, verifique sinais de AVC (boca ao lado, um braço sem força, fala enrolada). Se notar algum, ou se houver dor no peito, ligue já 112.",
+      "en": "If it started suddenly, check for signs of a stroke (mouth drooping to one side, one arm weak, slurred speech). If you notice any, or if there is chest pain, call 112 right away.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Compromisso da via aérea: Pancadas interescapulares e manobra de Heimlich": {
+      "pt": "Se está a engasgar-se e não consegue respirar nem falar: dê 5 pancadas fortes nas costas, entre as omoplatas. Se não sair, faça a manobra de Heimlich (abraçá-la por trás e apertar com força por baixo das costelas). Ligue 112.",
+      "en": "If the person is choking and cannot breathe or speak: give 5 firm blows to the back, between the shoulder blades. If it does not come out, do the Heimlich manoeuvre (hold them from behind and squeeze hard just below the ribs). Call 112.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Convulsão atual: afastar objetos, não meter nada na boca, aguardar pelo fim da convulsão": {
+      "pt": "Durante a convulsão, afaste objetos à volta e proteja a cabeça. NÃO meta nada na boca nem a segure à força. Espere que passe. Se durar mais de 5 minutos, ligue 112.",
+      "en": "During the seizure, move objects out of the way and protect the head. Do NOT put anything in the mouth or hold the person down. Wait for it to pass. If it lasts more than 5 minutes, call 112.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Convulsão atual: afastar objetos, não meter nada na boca, proteger a cabeça, aguardar pelo fim da convulsão": {
+      "pt": "Durante a convulsão, afaste objetos à volta e proteja a cabeça (por exemplo, com algo mole por baixo). NÃO meta nada na boca. Espere que passe. Se durar mais de 5 minutos, ligue 112.",
+      "en": "During the seizure, move objects out of the way and protect the head (for example, with something soft underneath). Do NOT put anything in the mouth. Wait for it to pass. If it lasts more than 5 minutes, call 112.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Dispneia aguda: se possível, sentar e inclinar ligeiramente para a frente": {
+      "pt": "Se sentir muita falta de ar, sente-se e incline-se um pouco para a frente, costuma ajudar a respirar melhor. Se não melhorar, procure ajuda.",
+      "en": "If you feel very short of breath, sit down and lean slightly forward; it usually makes breathing easier. If it does not get better, get help.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Dispneia aguda: sentar e inclinar ligeiramente para a frente": {
+      "pt": "Se sentir muita falta de ar, sente-se e incline-se um pouco para a frente. Se não melhorar, procure ajuda.",
+      "en": "If you feel very short of breath, sit down and lean slightly forward. If it does not get better, get help.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Dispneia aguda: sentar ligeiramente para a frente": {
+      "pt": "Se sentir muita falta de ar, sente-se e incline-se um pouco para a frente. Se não melhorar, procure ajuda.",
+      "en": "If you feel very short of breath, sit down and lean slightly forward. If it does not get better, get help.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Dispneia progressiva: sentar e inclinar ligeiramente para a frente": {
+      "pt": "Se a falta de ar vai aumentando, sente-se e incline-se um pouco para a frente. Se não melhorar, procure ajuda.",
+      "en": "If the shortness of breath keeps getting worse, sit down and lean slightly forward. If it does not improve, get help.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Estridor: se possível, sentar e inclinar ligeiramente para a frente": {
+      "pt": "Se a respiração faz um som agudo, sente-se e incline-se um pouco para a frente. Se piorar, ligue 112.",
+      "en": "If your breathing makes a high-pitched sound, sit down and lean slightly forward. If it gets worse, call 112.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Incapacidade de articular frases completas: sentar e inclinar ligeiramente para a frente.": {
+      "pt": "Se não consegue dizer uma frase inteira sem parar para respirar, sente-se e incline-se um pouco para a frente. Ligue 112 se piorar.",
+      "en": "If you cannot say a full sentence without stopping to breathe, sit down and lean slightly forward. Call 112 if it gets worse.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Com palpitações: sentar e não fazer esforços": {
+      "pt": "Se sentir o coração a bater depressa, sente-se, descanse e evite esforços. Se não passar ou tiver dor no peito, ligue 112.",
+      "en": "If you feel your heart racing, sit down, rest and avoid exertion. If it does not pass, or if you have chest pain, call 112.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Quente: paracetamol": {
+      "pt": "Pode ter febre. Se quiser, pode tomar paracetamol, na dose indicada na bula.",
+      "en": "You may have a fever. If you wish, you can take paracetamol, at the dose on the package leaflet.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Muito quente: paracematol e arrefecimento": {
+      "pt": "Se tiver febre alta, pode tomar paracetamol (dose da bula). Arrefeça: roupa leve, ambiente fresco e beba líquidos.",
+      "en": "If you have a high fever, you can take paracetamol (dose on the leaflet). Cool down: light clothing, a cool room, and drink fluids.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Quente: paracetamol e arrefecimento": {
+      "pt": "Se tiver febre, pode tomar paracetamol (dose da bula) e arrefecer: roupa leve, ambiente fresco e beba líquidos.",
+      "en": "If you have a fever, you can take paracetamol (dose on the leaflet) and cool down: light clothing, a cool room, and drink fluids.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Muito quente: paracetamol e ibuprofeno": {
+      "pt": "Se tiver febre alta, pode tomar paracetamol e, se não houver contraindicação, também ibuprofeno, sempre nas doses da bula. Beba líquidos e mantenha-se fresco.",
+      "en": "If you have a high fever, you can take paracetamol and, if it is safe for you, ibuprofen as well, always at the doses on the leaflet. Drink fluids and keep cool.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Febre persistente: Rever dose e horário dos antipiréticos": {
+      "pt": "Se a febre não passa, veja quando tomou o último medicamento para a febre e respeite o intervalo da bula. Não ultrapasse a dose diária.",
+      "en": "If the fever will not go down, check when you last took fever medicine and keep to the interval on the leaflet. Do not exceed the daily dose.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Febre persistente: arrefecimento": {
+      "pt": "Se a febre não passa, arrefeça: roupa leve, ambiente fresco e beba líquidos.",
+      "en": "If the fever will not go down, cool off: light clothing, a cool room, and drink fluids.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Dor moderada: paracetamol ou ibuprofeno": {
+      "pt": "Para as dores, pode tomar paracetamol ou ibuprofeno, na dose da bula (se não houver contraindicação).",
+      "en": "For the pain, you can take paracetamol or ibuprofen, at the dose on the leaflet (if it is safe for you).",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Dor moderada: paracetamol": {
+      "pt": "Para as dores, pode tomar paracetamol na dose indicada na bula.",
+      "en": "For the pain, you can take paracetamol at the dose on the package leaflet.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Dor severa: paracetamol e ibuprofeno": {
+      "pt": "Para dores fortes, pode tomar paracetamol e, se não houver contraindicação, também ibuprofeno, nas doses da bula.",
+      "en": "For severe pain, you can take paracetamol and, if it is safe for you, ibuprofen as well, at the doses on the leaflet.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Dor severa: paracetamol ou ibuprofeno": {
+      "pt": "Para dores fortes, pode tomar paracetamol ou ibuprofeno, na dose da bula (se não houver contraindicação).",
+      "en": "For severe pain, you can take paracetamol or ibuprofen, at the dose on the leaflet (if it is safe for you).",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Dor severa: paracetamol": {
+      "pt": "Para dores fortes, pode tomar paracetamol na dose indicada na bula.",
+      "en": "For severe pain, you can take paracetamol at the dose on the package leaflet.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Dor persistente: confirmar dose e horário da analgesia": {
+      "pt": "Se a dor não passa, veja quando tomou o último analgésico e respeite o intervalo da bula. Não ultrapasse a dose diária.",
+      "en": "If the pain will not go away, check when you last took a painkiller and keep to the interval on the leaflet. Do not exceed the daily dose.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Dor persistente: confirmar o horário da analgesia": {
+      "pt": "Se a dor não passa, veja quando tomou o último analgésico e respeite o intervalo indicado na bula.",
+      "en": "If the pain will not go away, check when you last took a painkiller and keep to the interval on the leaflet.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Dor persistente: rever dose e horário do paracetamol": {
+      "pt": "Se a dor não passa, veja quando tomou o último paracetamol e respeite o intervalo da bula. Não ultrapasse a dose diária.",
+      "en": "If the pain will not go away, check when you last took paracetamol and keep to the interval on the leaflet. Do not exceed the daily dose.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Dor persistente: rever horário e dose dos analgesicos": {
+      "pt": "Se a dor não passa, veja quando tomou o último analgésico e respeite o intervalo da bula. Não ultrapasse a dose diária.",
+      "en": "If the pain will not go away, check when you last took a painkiller and keep to the interval on the leaflet. Do not exceed the daily dose.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Dor persistente: rever horário da analgesia": {
+      "pt": "Se a dor não passa, veja quando tomou o último analgésico e respeite o intervalo da bula.",
+      "en": "If the pain will not go away, check when you last took a painkiller and keep to the interval on the leaflet.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Dor moderada: adotar posição antiálgica. Tomar paracetamol ou ibuprofeno": {
+      "pt": "Ponha-se na posição em que dói menos. Para as dores, pode tomar paracetamol ou ibuprofeno (dose da bula).",
+      "en": "Get into the position that hurts least. For the pain, you can take paracetamol or ibuprofen (dose on the leaflet).",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Dor severa: adotar posição antiálgica. Tomar paracetamol e ibuprofeno": {
+      "pt": "Ponha-se na posição em que dói menos. Para dores fortes, pode tomar paracetamol e, se não houver contraindicação, ibuprofeno (doses da bula).",
+      "en": "Get into the position that hurts least. For severe pain, you can take paracetamol and, if it is safe for you, ibuprofen (doses on the leaflet).",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Dor severa: posição antiálgica. Paracetamol e ibuprofeno": {
+      "pt": "Ponha-se na posição em que dói menos. Pode tomar paracetamol e, se não houver contraindicação, ibuprofeno (doses da bula).",
+      "en": "Get into the position that hurts least. You can take paracetamol and, if it is safe for you, ibuprofen (doses on the leaflet).",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Cefaleia persistente: paracetamol. Confirmar o horário da medicação habitual": {
+      "pt": "Para a dor de cabeça, pode tomar paracetamol (dose da bula). Confirme também se já tomou a sua medicação habitual à hora certa.",
+      "en": "For the headache, you can take paracetamol (dose on the leaflet). Also check whether you have taken your usual medication at the right time.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Dor pleurítica: paracetamol ou ibuprofeno": {
+      "pt": "Se a dor piora ao respirar fundo, pode tomar paracetamol ou ibuprofeno (dose da bula, se não houver contraindicação).",
+      "en": "If the pain gets worse when you breathe in deeply, you can take paracetamol or ibuprofen (dose on the leaflet, if it is safe for you).",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Edema: ibuprofeno. Aplicar gelo": {
+      "pt": "Se tiver inchaço, aplique gelo envolvido num pano (nunca diretamente na pele) e pode tomar ibuprofeno (dose da bula, se não houver contraindicação).",
+      "en": "If there is swelling, apply ice wrapped in a cloth (never directly on the skin) and you can take ibuprofen (dose on the leaflet, if it is safe for you).",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Edema: ibuprofeno e gelo no local": {
+      "pt": "Se tiver inchaço, aplique gelo envolvido num pano e pode tomar ibuprofeno (dose da bula, se não houver contraindicação).",
+      "en": "If there is swelling, apply ice wrapped in a cloth and you can take ibuprofen (dose on the leaflet, if it is safe for you).",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Edema: paracetamol. Aplicar gelo": {
+      "pt": "Se tiver inchaço, aplique gelo envolvido num pano e pode tomar paracetamol (dose da bula).",
+      "en": "If there is swelling, apply ice wrapped in a cloth and you can take paracetamol (dose on the leaflet).",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Edema: retirar joias se parte afetada for mão ou pulso. Aplicar gelo. Ibuprofeno": {
+      "pt": "Se a mão ou o pulso incharem, tire anéis e pulseiras antes que apertem. Aplique gelo num pano e pode tomar ibuprofeno (dose da bula, se não houver contraindicação).",
+      "en": "If the hand or wrist swells, take off rings and bracelets before they become tight. Apply ice wrapped in a cloth and you can take ibuprofen (dose on the leaflet, if it is safe for you).",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Edema: retirar joias se parte afetada for mão ou pulso. Ibuprofeno. Aplicar gelo": {
+      "pt": "Se a mão ou o pulso incharem, tire anéis e pulseiras antes que apertem. Aplique gelo num pano e pode tomar ibuprofeno (dose da bula, se não houver contraindicação).",
+      "en": "If the hand or wrist swells, take off rings and bracelets before they become tight. Apply ice wrapped in a cloth and you can take ibuprofen (dose on the leaflet, if it is safe for you).",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Articulação quente; Dor à mobilização das articulações: Aplicar gelo": {
+      "pt": "Se a articulação estiver quente e doer a mexer, aplique gelo envolvido num pano e evite forçá-la.",
+      "en": "If the joint is warm and hurts when you move it, apply ice wrapped in a cloth and avoid forcing it.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Articulação quente; Dor à mobilização das articulações: paracetamol. Aplicar gelo": {
+      "pt": "Se a articulação estiver quente e doer a mexer, aplique gelo num pano e pode tomar paracetamol (dose da bula).",
+      "en": "If the joint is warm and hurts when you move it, apply ice wrapped in a cloth and you can take paracetamol (dose on the leaflet).",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Articulação quente; Dor à mobilização das articulações: imobilizar partes afetadas. Tomar paracetamol e ibuprofeno. Aplicar gelo": {
+      "pt": "Não force a articulação, mantenha-a quieta. Aplique gelo num pano e pode tomar paracetamol e ibuprofeno (doses da bula, se não houver contraindicação).",
+      "en": "Do not force the joint; keep it still. Apply ice wrapped in a cloth and you can take paracetamol and ibuprofen (doses on the leaflet, if it is safe for you).",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Deformação: alinhar o membro": {
+      "pt": "Não tente endireitar o membro. Mantenha-o quieto e apoiado tal como está, e procure ajuda.",
+      "en": "Do not try to straighten the limb. Keep it still and supported just as it is, and get help.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Deformação grosseira: manter o membro alinhado": {
+      "pt": "Não tente endireitar o membro. Mantenha-o quieto e apoiado tal como está, e procure ajuda.",
+      "en": "Do not try to straighten the limb. Keep it still and supported just as it is, and get help.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Deformação: manter o membro alinhado": {
+      "pt": "Não tente endireitar o membro. Mantenha-o quieto e apoiado tal como está, e procure ajuda.",
+      "en": "Do not try to straighten the limb. Keep it still and supported just as it is, and get help.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Compromisso vascular distal: alinhar o membro": {
+      "pt": "Não tente endireitar o membro. Mantenha-o quieto e apoiado, e procure ajuda com urgência.",
+      "en": "Do not try to straighten the limb. Keep it still and supported, and get help urgently.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Compromisso vascular distal: manter o membro alinhado": {
+      "pt": "Mantenha o membro quieto e apoiado tal como está, e procure ajuda com urgência.",
+      "en": "Keep the limb still and supported just as it is, and get help urgently.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Fratura exposta: Não aplicar pressão direta": {
+      "pt": "Se houver osso à vista ou ferida aberta, não faça pressão diretamente sobre o osso. Cubra com um pano limpo e ligue 112.",
+      "en": "If bone is visible or there is an open wound, do not press directly on the bone. Cover it with a clean cloth and call 112.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Fratura exposta: alinhar o membro": {
+      "pt": "Não tente endireitar o membro. Cubra a ferida com um pano limpo, mantenha o membro quieto e ligue 112.",
+      "en": "Do not try to straighten the limb. Cover the wound with a clean cloth, keep the limb still and call 112.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Olho vermelho: lavar com água corrente durante 5 minutos": {
+      "pt": "Lave o olho com água corrente da torneira durante pelo menos 5 minutos, mantendo-o aberto.",
+      "en": "Rinse the eye under running tap water for at least 5 minutes, keeping it open.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Dor severa: Irrigar a zona afetada, de preferência com água a correr, durante pelo menos 10 min. Paracetamol e ibuprofeno": {
+      "pt": "Lave bem a zona com água a correr durante pelo menos 10 minutos. Para a dor, pode tomar paracetamol e ibuprofeno (doses da bula, se não houver contraindicação).",
+      "en": "Wash the area well under running water for at least 10 minutes. For the pain, you can take paracetamol and ibuprofen (doses on the leaflet, if it is safe for you).",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Inalação de fumo: Hidratação com água": {
+      "pt": "Se respirou fumo, saia para o ar livre e beba água aos poucos. Se tiver falta de ar, ligue 112.",
+      "en": "If you breathed in smoke, get out into fresh air and sip water slowly. If you feel short of breath, call 112.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Prurido severo: cetrizina (ou outro anti-histamínico disponível)": {
+      "pt": "Se tiver muita comichão, pode tomar um comprimido para a alergia (anti-histamínico, como a cetirizina), seguindo a bula. Evite coçar.",
+      "en": "If you are very itchy, you can take an allergy tablet (an antihistamine, such as cetirizine), following the leaflet. Try not to scratch.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Prurido moderado: cetrizina (ou outro anti-histamínico disponível)": {
+      "pt": "Se tiver comichão, pode tomar um comprimido para a alergia (anti-histamínico), seguindo a bula. Evite coçar.",
+      "en": "If you are itchy, you can take an allergy tablet (an antihistamine), following the leaflet. Try not to scratch.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Evitar coçar": {
+      "pt": "Evite coçar, para não piorar a pele.",
+      "en": "Try not to scratch, so the skin does not get worse.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Evitar contacto com os alergénios": {
+      "pt": "Afaste-se daquilo a que é alérgico.",
+      "en": "Stay away from whatever you are allergic to.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Vómitos incoercíveis: pausa alimentar, hidratação com líquidos claros": {
+      "pt": "Se vomita muito, faça uma pausa na comida e beba líquidos claros aos golinhos (água, chá fraco). Retome a comida devagar.",
+      "en": "If you are vomiting a lot, take a break from food and sip clear fluids (water, weak tea). Go back to eating slowly.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Vómitos incoercíveis: pausa alimentar. Apenas hidratação oral com água": {
+      "pt": "Se vomita muito, faça uma pausa na comida e beba só água, aos golinhos. Retome a comida devagar.",
+      "en": "If you are vomiting a lot, take a break from food and sip only water, a little at a time. Go back to eating slowly.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Vómitos persistentes: pausa alimentar, hidratação com líquidos açucarados": {
+      "pt": "Se vomita muito, faça uma pausa na comida e beba líquidos aos golinhos, com um pouco de açúcar. Retome a comida devagar.",
+      "en": "If you are vomiting a lot, take a break from food and sip fluids with a little sugar. Go back to eating slowly.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Sinais de desidratação: hidratação oral com liquido claro e açucarado": {
+      "pt": "Beba líquidos aos poucos e com frequência (água, ou água com um pouco de açúcar e uma pitada de sal).",
+      "en": "Drink fluids little and often (water, or water with a little sugar and a pinch of salt).",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Não se alimenta; não urina: hidratação oral com liquido claro e açucarado": {
+      "pt": "Ofereça líquidos aos poucos e com frequência (água com um pouco de açúcar). Se continuar sem beber nem urinar, procure ajuda.",
+      "en": "Offer fluids little and often (water with a little sugar). If the person still will not drink or pass urine, get help.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Disúria: reforço da hidratação oral com liquido claro": {
+      "pt": "Se lhe arde a urinar, beba mais líquidos claros ao longo do dia.",
+      "en": "If it burns when you pass urine, drink more clear fluids throughout the day.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Hiperglicemia: Hidratação com água": {
+      "pt": "Beba água com regularidade.",
+      "en": "Drink water regularly.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Hipoglicémia: Pedir para administrar glucagon. Se via aérea patente, dar papa de açúcar": {
+      "pt": "Se a pessoa é diabética e está fraca ou confusa mas consegue engolir em segurança, dê-lhe algo com açúcar (sumo, ou água com açúcar). Se não conseguir engolir ou não acordar, ligue 112.",
+      "en": "If the person has diabetes and is weak or confused but can swallow safely, give them something sugary (juice, or water with sugar). If they cannot swallow or do not wake up, call 112.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Ferida: limpeza e penso com iodopovidona": {
+      "pt": "Lave a ferida com água e sabão, seque e cubra com um penso. Pode desinfetar com um antissético (por exemplo, iodopovidona).",
+      "en": "Wash the wound with soap and water, dry it and cover it with a dressing. You can disinfect it with an antiseptic (for example, povidone-iodine).",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Pequena feridas e escoriações: limpeza e penso com iodopovidona": {
+      "pt": "Lave a ferida ou arranhão com água e sabão, seque e cubra com um penso. Pode desinfetar com um antissético (por exemplo, iodopovidona).",
+      "en": "Wash the wound or graze with soap and water, dry it and cover it with a dressing. You can disinfect it with an antiseptic (for example, povidone-iodine).",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Aplicar penso seco não aderente": {
+      "pt": "Cubra a zona com um penso seco que não cole à ferida.",
+      "en": "Cover the area with a dry dressing that will not stick to the wound.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Almofada com um bom suporte": {
+      "pt": "Use uma almofada que apoie bem o pescoço e a cabeça.",
+      "en": "Use a pillow that gives good support to your neck and head.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Evitar conduzir, se os movimentos do pescoço estiverem limitados": {
+      "pt": "Não conduza se não conseguir mexer bem o pescoço.",
+      "en": "Do not drive if you cannot move your neck properly.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Utilizar preservativo até esclarecimento da situação": {
+      "pt": "Use preservativo em todas as relações até a situação estar esclarecida.",
+      "en": "Use a condom every time you have sex until the situation is clarified.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Confirmar se tem analgesia SOS (paracetamol e ibuprofeno)": {
+      "pt": "Veja se tem em casa medicamentos para as dores (paracetamol e ibuprofeno).",
+      "en": "Check that you have pain relief at home (paracetamol and ibuprofen).",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    },
+    "Considerar causas: Stress, computador, uso excessivo de analgésicos, enxaqueca. Manter hidratação com fluídos claros. Evitar café ou álcool": {
+      "pt": "A dor de cabeça pode vir do stress, de muitas horas ao computador, do uso excessivo de analgésicos ou de enxaqueca. Beba água, descanse os olhos e evite café e álcool.",
+      "en": "Headaches can come from stress, long hours at a computer, overuse of painkillers, or migraine. Drink water, rest your eyes and avoid coffee and alcohol.",
+      "validado": false,
+      "validado_por": null,
+      "validado_em": null
+    }
+  }
+}

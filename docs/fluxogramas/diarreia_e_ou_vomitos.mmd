@@ -1,0 +1,93 @@
+flowchart TD
+  inicio(["Início: Diarreia e/ou vómitos"])
+  diarreia_e_ou_vomitos_p1_1840["1. [P1] Compromisso da via aérea?"]
+  diarreia_e_ou_vomitos_p1_2111["2. [P1] Respiração ineficaz?"]
+  diarreia_e_ou_vomitos_p1_2151["3. [P1] Sinais de choque?"]
+  diarreia_e_ou_vomitos_p1_2152["4. [P1] Não reativo?"]
+  diarreia_e_ou_vomitos_p2_2153["5. [P2] Hematemeses?"]
+  diarreia_e_ou_vomitos_p2_2154["6. [P2] Hematoquésias, melenas ou<br/>retorragias?"]
+  diarreia_e_ou_vomitos_p2_2155["7. [P2] Alteração do estado de<br/>consciência?"]
+  diarreia_e_ou_vomitos_p2_2156["8. [P2] Prostrado?"]
+  diarreia_e_ou_vomitos_p2_2158["9. [P2] Muito quente?"]
+  diarreia_e_ou_vomitos_p2_2159["10. [P2] Possível sépsis?"]
+  diarreia_e_ou_vomitos_p2_2160["11. [P2] Dor severa?"]
+  diarreia_e_ou_vomitos_p3_2161["12. [P3] Vómitos incoercíveis?"]
+  diarreia_e_ou_vomitos_p3_2162["13. [P3] Sinais de desidratação?"]
+  diarreia_e_ou_vomitos_p3_2163["14. [P3] Fezes pretas ou raiadas de<br/>sangue?"]
+  diarreia_e_ou_vomitos_p3_2164["15. [P3] Quente?"]
+  diarreia_e_ou_vomitos_p3_2165["16. [P3] História de hematemeses?"]
+  diarreia_e_ou_vomitos_p3_2166["17. [P3] Dor moderada?"]
+  diarreia_e_ou_vomitos_p4_2167["18. [P4] Vómitos persistentes?"]
+  diarreia_e_ou_vomitos_p4_2169["19. [P4] Febre persistente?"]
+  diarreia_e_ou_vomitos_p4_2172["20. [P4] Dor persistente?"]
+  diarreia_e_ou_vomitos_p4_2173["21. [P4] Problema recente?"]
+  inicio --> diarreia_e_ou_vomitos_p1_1840
+  diarreia_e_ou_vomitos_p1_1840_sim(["VERMELHO"]):::vermelho
+  diarreia_e_ou_vomitos_p1_1840 -->|Sim| diarreia_e_ou_vomitos_p1_1840_sim
+  diarreia_e_ou_vomitos_p1_1840 -->|Não| diarreia_e_ou_vomitos_p1_2111
+  diarreia_e_ou_vomitos_p1_2111_sim(["VERMELHO"]):::vermelho
+  diarreia_e_ou_vomitos_p1_2111 -->|Sim| diarreia_e_ou_vomitos_p1_2111_sim
+  diarreia_e_ou_vomitos_p1_2111 -->|Não| diarreia_e_ou_vomitos_p1_2151
+  diarreia_e_ou_vomitos_p1_2151_sim(["VERMELHO"]):::vermelho
+  diarreia_e_ou_vomitos_p1_2151 -->|Sim| diarreia_e_ou_vomitos_p1_2151_sim
+  diarreia_e_ou_vomitos_p1_2151 -->|Não| diarreia_e_ou_vomitos_p1_2152
+  diarreia_e_ou_vomitos_p1_2152_sim(["VERMELHO"]):::vermelho
+  diarreia_e_ou_vomitos_p1_2152 -->|Sim| diarreia_e_ou_vomitos_p1_2152_sim
+  diarreia_e_ou_vomitos_p1_2152 -->|Não| diarreia_e_ou_vomitos_p2_2153
+  diarreia_e_ou_vomitos_p2_2153_sim(["LARANJA"]):::laranja
+  diarreia_e_ou_vomitos_p2_2153 -->|Sim| diarreia_e_ou_vomitos_p2_2153_sim
+  diarreia_e_ou_vomitos_p2_2153 -->|Não| diarreia_e_ou_vomitos_p2_2154
+  diarreia_e_ou_vomitos_p2_2154_sim(["LARANJA"]):::laranja
+  diarreia_e_ou_vomitos_p2_2154 -->|Sim| diarreia_e_ou_vomitos_p2_2154_sim
+  diarreia_e_ou_vomitos_p2_2154 -->|Não| diarreia_e_ou_vomitos_p2_2155
+  diarreia_e_ou_vomitos_p2_2155_sim(["LARANJA"]):::laranja
+  diarreia_e_ou_vomitos_p2_2155 -->|Sim| diarreia_e_ou_vomitos_p2_2155_sim
+  diarreia_e_ou_vomitos_p2_2155 -->|Não| diarreia_e_ou_vomitos_p2_2156
+  diarreia_e_ou_vomitos_p2_2156_sim(["LARANJA"]):::laranja
+  diarreia_e_ou_vomitos_p2_2156 -->|Sim| diarreia_e_ou_vomitos_p2_2156_sim
+  diarreia_e_ou_vomitos_p2_2156 -->|Não| diarreia_e_ou_vomitos_p2_2158
+  diarreia_e_ou_vomitos_p2_2158_sim(["LARANJA"]):::laranja
+  diarreia_e_ou_vomitos_p2_2158 -->|Sim| diarreia_e_ou_vomitos_p2_2158_sim
+  diarreia_e_ou_vomitos_p2_2158 -->|Não| diarreia_e_ou_vomitos_p2_2159
+  diarreia_e_ou_vomitos_p2_2159_sim(["LARANJA"]):::laranja
+  diarreia_e_ou_vomitos_p2_2159 -->|Sim| diarreia_e_ou_vomitos_p2_2159_sim
+  diarreia_e_ou_vomitos_p2_2159 -->|Não| diarreia_e_ou_vomitos_p2_2160
+  diarreia_e_ou_vomitos_p2_2160_sim(["LARANJA"]):::laranja
+  diarreia_e_ou_vomitos_p2_2160 -->|Sim| diarreia_e_ou_vomitos_p2_2160_sim
+  diarreia_e_ou_vomitos_p2_2160 -->|Não| diarreia_e_ou_vomitos_p3_2161
+  diarreia_e_ou_vomitos_p3_2161_sim(["AMARELO"]):::amarelo
+  diarreia_e_ou_vomitos_p3_2161 -->|Sim| diarreia_e_ou_vomitos_p3_2161_sim
+  diarreia_e_ou_vomitos_p3_2161 -->|Não| diarreia_e_ou_vomitos_p3_2162
+  diarreia_e_ou_vomitos_p3_2162_sim(["AMARELO"]):::amarelo
+  diarreia_e_ou_vomitos_p3_2162 -->|Sim| diarreia_e_ou_vomitos_p3_2162_sim
+  diarreia_e_ou_vomitos_p3_2162 -->|Não| diarreia_e_ou_vomitos_p3_2163
+  diarreia_e_ou_vomitos_p3_2163_sim(["AMARELO"]):::amarelo
+  diarreia_e_ou_vomitos_p3_2163 -->|Sim| diarreia_e_ou_vomitos_p3_2163_sim
+  diarreia_e_ou_vomitos_p3_2163 -->|Não| diarreia_e_ou_vomitos_p3_2164
+  diarreia_e_ou_vomitos_p3_2164_sim(["AMARELO"]):::amarelo
+  diarreia_e_ou_vomitos_p3_2164 -->|Sim| diarreia_e_ou_vomitos_p3_2164_sim
+  diarreia_e_ou_vomitos_p3_2164 -->|Não| diarreia_e_ou_vomitos_p3_2165
+  diarreia_e_ou_vomitos_p3_2165_sim(["AMARELO"]):::amarelo
+  diarreia_e_ou_vomitos_p3_2165 -->|Sim| diarreia_e_ou_vomitos_p3_2165_sim
+  diarreia_e_ou_vomitos_p3_2165 -->|Não| diarreia_e_ou_vomitos_p3_2166
+  diarreia_e_ou_vomitos_p3_2166_sim(["AMARELO"]):::amarelo
+  diarreia_e_ou_vomitos_p3_2166 -->|Sim| diarreia_e_ou_vomitos_p3_2166_sim
+  diarreia_e_ou_vomitos_p3_2166 -->|Não| diarreia_e_ou_vomitos_p4_2167
+  diarreia_e_ou_vomitos_p4_2167_sim(["VERDE"]):::verde
+  diarreia_e_ou_vomitos_p4_2167 -->|Sim| diarreia_e_ou_vomitos_p4_2167_sim
+  diarreia_e_ou_vomitos_p4_2167 -->|Não| diarreia_e_ou_vomitos_p4_2169
+  diarreia_e_ou_vomitos_p4_2169_sim(["VERDE"]):::verde
+  diarreia_e_ou_vomitos_p4_2169 -->|Sim| diarreia_e_ou_vomitos_p4_2169_sim
+  diarreia_e_ou_vomitos_p4_2169 -->|Não| diarreia_e_ou_vomitos_p4_2172
+  diarreia_e_ou_vomitos_p4_2172_sim(["VERDE"]):::verde
+  diarreia_e_ou_vomitos_p4_2172 -->|Sim| diarreia_e_ou_vomitos_p4_2172_sim
+  diarreia_e_ou_vomitos_p4_2172 -->|Não| diarreia_e_ou_vomitos_p4_2173
+  diarreia_e_ou_vomitos_p4_2173_sim(["VERDE"]):::verde
+  diarreia_e_ou_vomitos_p4_2173 -->|Sim| diarreia_e_ou_vomitos_p4_2173_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  diarreia_e_ou_vomitos_p4_2173 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

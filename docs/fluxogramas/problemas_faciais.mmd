@@ -1,0 +1,125 @@
+flowchart TD
+  inicio(["Início: Problemas faciais"])
+  problemas_faciais_p1_1868["1. [P1] Compromisso da via aérea?"]
+  problemas_faciais_p1_2139["2. [P1] Respiração ineficaz?"]
+  problemas_faciais_p1_2748["3. [P1] Hemorragia catastrófica?"]
+  problemas_faciais_p1_2753["4. [P1] Sinais de choque?"]
+  problemas_faciais_p1_2834["5. [P1] Não reativo?"]
+  problemas_faciais_p2_2835["6. [P2] Grande Hemorragia<br/>incontrolável?"]
+  problemas_faciais_p2_2836["7. [P2] Alteração do estado de<br/>consciência?"]
+  problemas_faciais_p2_2837["8. [P2] Défice neurológico agudo?<br/><24h"]
+  problemas_faciais_p2_2838["9. [P2] Muito quente?"]
+  problemas_faciais_p2_2839["10. [P2] Possível sépsis?"]
+  problemas_faciais_p2_2840["11. [P2] Dor severa?"]
+  problemas_faciais_p3_2841["12. [P3] Pequena hemorragia<br/>incontrolável?"]
+  problemas_faciais_p3_2842["13. [P3] Novos sinais e/ou sintomas<br/>neurológicos?"]
+  problemas_faciais_p3_2843["14. [P3] Quente?"]
+  problemas_faciais_p3_2844["15. [P3] Avulsão dentária recente?"]
+  problemas_faciais_p3_2845["16. [P3] Deformação grosseira?"]
+  problemas_faciais_p3_2846["17. [P3] Alteração da coagulação?"]
+  problemas_faciais_p3_2847["18. [P3] História de perda de<br/>consciência?"]
+  problemas_faciais_p3_2848["19. [P3] História Inapropriada?"]
+  problemas_faciais_p3_2849["20. [P3] Recente redução da acuidade<br/>visual?"]
+  problemas_faciais_p3_2850["21. [P3] Diplopia?"]
+  problemas_faciais_p3_2851["22. [P3] Dor moderada?"]
+  problemas_faciais_p4_3329["23. [P4] Edema da face?"]
+  problemas_faciais_p4_3330["24. [P4] Febre persistente?"]
+  problemas_faciais_p4_3331["25. [P4] Alteração da sensibilidade da<br/>face?"]
+  problemas_faciais_p4_3332["26. [P4] Hematoma do pavilhão<br/>auricular?"]
+  problemas_faciais_p4_3333["27. [P4] Olho vermelho?"]
+  problemas_faciais_p4_3334["28. [P4] Dor persistente?"]
+  problemas_faciais_p4_3335["29. [P4] Problema recente?"]
+  inicio --> problemas_faciais_p1_1868
+  problemas_faciais_p1_1868_sim(["VERMELHO"]):::vermelho
+  problemas_faciais_p1_1868 -->|Sim| problemas_faciais_p1_1868_sim
+  problemas_faciais_p1_1868 -->|Não| problemas_faciais_p1_2139
+  problemas_faciais_p1_2139_sim(["VERMELHO"]):::vermelho
+  problemas_faciais_p1_2139 -->|Sim| problemas_faciais_p1_2139_sim
+  problemas_faciais_p1_2139 -->|Não| problemas_faciais_p1_2748
+  problemas_faciais_p1_2748_sim(["VERMELHO"]):::vermelho
+  problemas_faciais_p1_2748 -->|Sim| problemas_faciais_p1_2748_sim
+  problemas_faciais_p1_2748 -->|Não| problemas_faciais_p1_2753
+  problemas_faciais_p1_2753_sim(["VERMELHO"]):::vermelho
+  problemas_faciais_p1_2753 -->|Sim| problemas_faciais_p1_2753_sim
+  problemas_faciais_p1_2753 -->|Não| problemas_faciais_p1_2834
+  problemas_faciais_p1_2834_sim(["VERMELHO"]):::vermelho
+  problemas_faciais_p1_2834 -->|Sim| problemas_faciais_p1_2834_sim
+  problemas_faciais_p1_2834 -->|Não| problemas_faciais_p2_2835
+  problemas_faciais_p2_2835_sim(["LARANJA"]):::laranja
+  problemas_faciais_p2_2835 -->|Sim| problemas_faciais_p2_2835_sim
+  problemas_faciais_p2_2835 -->|Não| problemas_faciais_p2_2836
+  problemas_faciais_p2_2836_sim(["LARANJA"]):::laranja
+  problemas_faciais_p2_2836 -->|Sim| problemas_faciais_p2_2836_sim
+  problemas_faciais_p2_2836 -->|Não| problemas_faciais_p2_2837
+  problemas_faciais_p2_2837_sim(["LARANJA"]):::laranja
+  problemas_faciais_p2_2837 -->|Sim| problemas_faciais_p2_2837_sim
+  problemas_faciais_p2_2837 -->|Não| problemas_faciais_p2_2838
+  problemas_faciais_p2_2838_sim(["LARANJA"]):::laranja
+  problemas_faciais_p2_2838 -->|Sim| problemas_faciais_p2_2838_sim
+  problemas_faciais_p2_2838 -->|Não| problemas_faciais_p2_2839
+  problemas_faciais_p2_2839_sim(["LARANJA"]):::laranja
+  problemas_faciais_p2_2839 -->|Sim| problemas_faciais_p2_2839_sim
+  problemas_faciais_p2_2839 -->|Não| problemas_faciais_p2_2840
+  problemas_faciais_p2_2840_sim(["LARANJA"]):::laranja
+  problemas_faciais_p2_2840 -->|Sim| problemas_faciais_p2_2840_sim
+  problemas_faciais_p2_2840 -->|Não| problemas_faciais_p3_2841
+  problemas_faciais_p3_2841_sim(["AMARELO"]):::amarelo
+  problemas_faciais_p3_2841 -->|Sim| problemas_faciais_p3_2841_sim
+  problemas_faciais_p3_2841 -->|Não| problemas_faciais_p3_2842
+  problemas_faciais_p3_2842_sim(["AMARELO"]):::amarelo
+  problemas_faciais_p3_2842 -->|Sim| problemas_faciais_p3_2842_sim
+  problemas_faciais_p3_2842 -->|Não| problemas_faciais_p3_2843
+  problemas_faciais_p3_2843_sim(["AMARELO"]):::amarelo
+  problemas_faciais_p3_2843 -->|Sim| problemas_faciais_p3_2843_sim
+  problemas_faciais_p3_2843 -->|Não| problemas_faciais_p3_2844
+  problemas_faciais_p3_2844_sim(["AMARELO"]):::amarelo
+  problemas_faciais_p3_2844 -->|Sim| problemas_faciais_p3_2844_sim
+  problemas_faciais_p3_2844 -->|Não| problemas_faciais_p3_2845
+  problemas_faciais_p3_2845_sim(["AMARELO"]):::amarelo
+  problemas_faciais_p3_2845 -->|Sim| problemas_faciais_p3_2845_sim
+  problemas_faciais_p3_2845 -->|Não| problemas_faciais_p3_2846
+  problemas_faciais_p3_2846_sim(["AMARELO"]):::amarelo
+  problemas_faciais_p3_2846 -->|Sim| problemas_faciais_p3_2846_sim
+  problemas_faciais_p3_2846 -->|Não| problemas_faciais_p3_2847
+  problemas_faciais_p3_2847_sim(["AMARELO"]):::amarelo
+  problemas_faciais_p3_2847 -->|Sim| problemas_faciais_p3_2847_sim
+  problemas_faciais_p3_2847 -->|Não| problemas_faciais_p3_2848
+  problemas_faciais_p3_2848_sim(["AMARELO"]):::amarelo
+  problemas_faciais_p3_2848 -->|Sim| problemas_faciais_p3_2848_sim
+  problemas_faciais_p3_2848 -->|Não| problemas_faciais_p3_2849
+  problemas_faciais_p3_2849_sim(["AMARELO"]):::amarelo
+  problemas_faciais_p3_2849 -->|Sim| problemas_faciais_p3_2849_sim
+  problemas_faciais_p3_2849 -->|Não| problemas_faciais_p3_2850
+  problemas_faciais_p3_2850_sim(["AMARELO"]):::amarelo
+  problemas_faciais_p3_2850 -->|Sim| problemas_faciais_p3_2850_sim
+  problemas_faciais_p3_2850 -->|Não| problemas_faciais_p3_2851
+  problemas_faciais_p3_2851_sim(["AMARELO"]):::amarelo
+  problemas_faciais_p3_2851 -->|Sim| problemas_faciais_p3_2851_sim
+  problemas_faciais_p3_2851 -->|Não| problemas_faciais_p4_3329
+  problemas_faciais_p4_3329_sim(["VERDE"]):::verde
+  problemas_faciais_p4_3329 -->|Sim| problemas_faciais_p4_3329_sim
+  problemas_faciais_p4_3329 -->|Não| problemas_faciais_p4_3330
+  problemas_faciais_p4_3330_sim(["VERDE"]):::verde
+  problemas_faciais_p4_3330 -->|Sim| problemas_faciais_p4_3330_sim
+  problemas_faciais_p4_3330 -->|Não| problemas_faciais_p4_3331
+  problemas_faciais_p4_3331_sim(["VERDE"]):::verde
+  problemas_faciais_p4_3331 -->|Sim| problemas_faciais_p4_3331_sim
+  problemas_faciais_p4_3331 -->|Não| problemas_faciais_p4_3332
+  problemas_faciais_p4_3332_sim(["VERDE"]):::verde
+  problemas_faciais_p4_3332 -->|Sim| problemas_faciais_p4_3332_sim
+  problemas_faciais_p4_3332 -->|Não| problemas_faciais_p4_3333
+  problemas_faciais_p4_3333_sim(["VERDE"]):::verde
+  problemas_faciais_p4_3333 -->|Sim| problemas_faciais_p4_3333_sim
+  problemas_faciais_p4_3333 -->|Não| problemas_faciais_p4_3334
+  problemas_faciais_p4_3334_sim(["VERDE"]):::verde
+  problemas_faciais_p4_3334 -->|Sim| problemas_faciais_p4_3334_sim
+  problemas_faciais_p4_3334 -->|Não| problemas_faciais_p4_3335
+  problemas_faciais_p4_3335_sim(["VERDE"]):::verde
+  problemas_faciais_p4_3335 -->|Sim| problemas_faciais_p4_3335_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  problemas_faciais_p4_3335 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

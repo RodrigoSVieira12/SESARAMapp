@@ -1,0 +1,101 @@
+flowchart TD
+  inicio(["Início: Embriaguez aparente"])
+  embriaguez_aparente_p1_1852["1. [P1] Compromisso da via aérea?"]
+  embriaguez_aparente_p1_2123["2. [P1] Respiração ineficaz?"]
+  embriaguez_aparente_p1_2368["3. [P1] Sinais de choque?"]
+  embriaguez_aparente_p1_2375["4. [P1] Não reativo?"]
+  embriaguez_aparente_p1_2430["5. [P1] Convulsão atual?"]
+  embriaguez_aparente_p2_2431["6. [P2] Dispneia aguda?"]
+  embriaguez_aparente_p2_2432["7. [P2] Alteração do estado de<br/>consciência?"]
+  embriaguez_aparente_p2_2433["8. [P2] Défice neurológico agudo?<br/><24h"]
+  embriaguez_aparente_p2_2434["9. [P2] Agressividade ou agitação<br/>severa?"]
+  embriaguez_aparente_p2_2435["10. [P2] Risco elevado de abandono sem<br/>avaliação?"]
+  embriaguez_aparente_p2_2436["11. [P2] Risco elevado de<br/>auto-agressão?"]
+  embriaguez_aparente_p2_2437["12. [P2] Risco elevado de agressão a<br/>terceiros?"]
+  embriaguez_aparente_p2_2438["13. [P2] Dor severa?"]
+  embriaguez_aparente_p3_2439["14. [P3] Novos sinais e/ou sintomas<br/>neurológicos?"]
+  embriaguez_aparente_p3_2440["15. [P3] História de perda de<br/>consciência?"]
+  embriaguez_aparente_p3_2441["16. [P3] História de TCE?"]
+  embriaguez_aparente_p3_2442["17. [P3] Vómitos incoercíveis?"]
+  embriaguez_aparente_p3_2443["18. [P3] Idade inferior a 16 anos?"]
+  embriaguez_aparente_p3_2444["19. [P3] História Inapropriada?"]
+  embriaguez_aparente_p3_2445["20. [P3] Dor moderada?"]
+  embriaguez_aparente_p4_2446["21. [P4] Vómitos persistentes?"]
+  embriaguez_aparente_p4_2449["22. [P4] Dor persistente?"]
+  embriaguez_aparente_p4_2450["23. [P4] Problema recente?"]
+  inicio --> embriaguez_aparente_p1_1852
+  embriaguez_aparente_p1_1852_sim(["VERMELHO"]):::vermelho
+  embriaguez_aparente_p1_1852 -->|Sim| embriaguez_aparente_p1_1852_sim
+  embriaguez_aparente_p1_1852 -->|Não| embriaguez_aparente_p1_2123
+  embriaguez_aparente_p1_2123_sim(["VERMELHO"]):::vermelho
+  embriaguez_aparente_p1_2123 -->|Sim| embriaguez_aparente_p1_2123_sim
+  embriaguez_aparente_p1_2123 -->|Não| embriaguez_aparente_p1_2368
+  embriaguez_aparente_p1_2368_sim(["VERMELHO"]):::vermelho
+  embriaguez_aparente_p1_2368 -->|Sim| embriaguez_aparente_p1_2368_sim
+  embriaguez_aparente_p1_2368 -->|Não| embriaguez_aparente_p1_2375
+  embriaguez_aparente_p1_2375_sim(["VERMELHO"]):::vermelho
+  embriaguez_aparente_p1_2375 -->|Sim| embriaguez_aparente_p1_2375_sim
+  embriaguez_aparente_p1_2375 -->|Não| embriaguez_aparente_p1_2430
+  embriaguez_aparente_p1_2430_sim(["VERMELHO"]):::vermelho
+  embriaguez_aparente_p1_2430 -->|Sim| embriaguez_aparente_p1_2430_sim
+  embriaguez_aparente_p1_2430 -->|Não| embriaguez_aparente_p2_2431
+  embriaguez_aparente_p2_2431_sim(["LARANJA"]):::laranja
+  embriaguez_aparente_p2_2431 -->|Sim| embriaguez_aparente_p2_2431_sim
+  embriaguez_aparente_p2_2431 -->|Não| embriaguez_aparente_p2_2432
+  embriaguez_aparente_p2_2432_sim(["LARANJA"]):::laranja
+  embriaguez_aparente_p2_2432 -->|Sim| embriaguez_aparente_p2_2432_sim
+  embriaguez_aparente_p2_2432 -->|Não| embriaguez_aparente_p2_2433
+  embriaguez_aparente_p2_2433_sim(["LARANJA"]):::laranja
+  embriaguez_aparente_p2_2433 -->|Sim| embriaguez_aparente_p2_2433_sim
+  embriaguez_aparente_p2_2433 -->|Não| embriaguez_aparente_p2_2434
+  embriaguez_aparente_p2_2434_sim(["LARANJA"]):::laranja
+  embriaguez_aparente_p2_2434 -->|Sim| embriaguez_aparente_p2_2434_sim
+  embriaguez_aparente_p2_2434 -->|Não| embriaguez_aparente_p2_2435
+  embriaguez_aparente_p2_2435_sim(["LARANJA"]):::laranja
+  embriaguez_aparente_p2_2435 -->|Sim| embriaguez_aparente_p2_2435_sim
+  embriaguez_aparente_p2_2435 -->|Não| embriaguez_aparente_p2_2436
+  embriaguez_aparente_p2_2436_sim(["LARANJA"]):::laranja
+  embriaguez_aparente_p2_2436 -->|Sim| embriaguez_aparente_p2_2436_sim
+  embriaguez_aparente_p2_2436 -->|Não| embriaguez_aparente_p2_2437
+  embriaguez_aparente_p2_2437_sim(["LARANJA"]):::laranja
+  embriaguez_aparente_p2_2437 -->|Sim| embriaguez_aparente_p2_2437_sim
+  embriaguez_aparente_p2_2437 -->|Não| embriaguez_aparente_p2_2438
+  embriaguez_aparente_p2_2438_sim(["LARANJA"]):::laranja
+  embriaguez_aparente_p2_2438 -->|Sim| embriaguez_aparente_p2_2438_sim
+  embriaguez_aparente_p2_2438 -->|Não| embriaguez_aparente_p3_2439
+  embriaguez_aparente_p3_2439_sim(["AMARELO"]):::amarelo
+  embriaguez_aparente_p3_2439 -->|Sim| embriaguez_aparente_p3_2439_sim
+  embriaguez_aparente_p3_2439 -->|Não| embriaguez_aparente_p3_2440
+  embriaguez_aparente_p3_2440_sim(["AMARELO"]):::amarelo
+  embriaguez_aparente_p3_2440 -->|Sim| embriaguez_aparente_p3_2440_sim
+  embriaguez_aparente_p3_2440 -->|Não| embriaguez_aparente_p3_2441
+  embriaguez_aparente_p3_2441_sim(["AMARELO"]):::amarelo
+  embriaguez_aparente_p3_2441 -->|Sim| embriaguez_aparente_p3_2441_sim
+  embriaguez_aparente_p3_2441 -->|Não| embriaguez_aparente_p3_2442
+  embriaguez_aparente_p3_2442_sim(["AMARELO"]):::amarelo
+  embriaguez_aparente_p3_2442 -->|Sim| embriaguez_aparente_p3_2442_sim
+  embriaguez_aparente_p3_2442 -->|Não| embriaguez_aparente_p3_2443
+  embriaguez_aparente_p3_2443_sim(["AMARELO"]):::amarelo
+  embriaguez_aparente_p3_2443 -->|Sim| embriaguez_aparente_p3_2443_sim
+  embriaguez_aparente_p3_2443 -->|Não| embriaguez_aparente_p3_2444
+  embriaguez_aparente_p3_2444_sim(["AMARELO"]):::amarelo
+  embriaguez_aparente_p3_2444 -->|Sim| embriaguez_aparente_p3_2444_sim
+  embriaguez_aparente_p3_2444 -->|Não| embriaguez_aparente_p3_2445
+  embriaguez_aparente_p3_2445_sim(["AMARELO"]):::amarelo
+  embriaguez_aparente_p3_2445 -->|Sim| embriaguez_aparente_p3_2445_sim
+  embriaguez_aparente_p3_2445 -->|Não| embriaguez_aparente_p4_2446
+  embriaguez_aparente_p4_2446_sim(["VERDE"]):::verde
+  embriaguez_aparente_p4_2446 -->|Sim| embriaguez_aparente_p4_2446_sim
+  embriaguez_aparente_p4_2446 -->|Não| embriaguez_aparente_p4_2449
+  embriaguez_aparente_p4_2449_sim(["VERDE"]):::verde
+  embriaguez_aparente_p4_2449 -->|Sim| embriaguez_aparente_p4_2449_sim
+  embriaguez_aparente_p4_2449 -->|Não| embriaguez_aparente_p4_2450
+  embriaguez_aparente_p4_2450_sim(["VERDE"]):::verde
+  embriaguez_aparente_p4_2450 -->|Sim| embriaguez_aparente_p4_2450_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  embriaguez_aparente_p4_2450 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

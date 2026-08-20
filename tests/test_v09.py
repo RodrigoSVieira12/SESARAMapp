@@ -22,12 +22,13 @@ cliente = TestClient(app)
 # /api/integracao/triagem                                                 #
 # --------------------------------------------------------------------- #
 
+
 def test_integracao_devolve_pergunta_quando_faltam_respostas():
-    r = cliente.post("/api/integracao/triagem", json={"queixa": "febre", "respostas": {}})
+    r = cliente.post("/api/integracao/triagem", json={"queixa": "agressao", "respostas": {}})
     assert r.status_code == 200
     corpo = r.json()
     assert corpo["tipo"] == "pergunta"
-    assert corpo["queixa"] == "febre"
+    assert corpo["queixa"] == "agressao"
     # tem de trazer uma pergunta para o chamador mostrar
     assert "pergunta" in corpo
 

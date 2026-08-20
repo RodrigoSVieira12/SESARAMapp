@@ -1,0 +1,113 @@
+flowchart TD
+  inicio(["Início: Comportamento estranho"])
+  comportamento_estranho_p1_1833["1. [P1] Compromisso da via aérea?"]
+  comportamento_estranho_p1_1932["2. [P1] Respiração ineficaz?"]
+  comportamento_estranho_p1_1933["3. [P1] Sinais de choque?"]
+  comportamento_estranho_p1_1934["4. [P1] Não reativo?"]
+  comportamento_estranho_p2_1935["5. [P2] Alteração do estado de<br/>consciência?"]
+  comportamento_estranho_p2_1936["6. [P2] Défice neurológico agudo?<br/><24h"]
+  comportamento_estranho_p2_1937["7. [P2] Agressividade ou agitação<br/>severa?"]
+  comportamento_estranho_p2_1938["8. [P2] Risco elevado de abandono sem<br/>avaliação?"]
+  comportamento_estranho_p2_1939["9. [P2] Risco elevado de<br/>auto-agressão?"]
+  comportamento_estranho_p2_1940["10. [P2] Risco elevado de agressão a<br/>terceiros?"]
+  comportamento_estranho_p2_1941["11. [P2] Alucinação aparente?"]
+  comportamento_estranho_p2_1942["12. [P2] Novos sinais/sintomas de<br/>psicose?"]
+  comportamento_estranho_p2_1943["13. [P2] História de sobredosagem ou<br/>envenenamento?"]
+  comportamento_estranho_p3_1944["14. [P3] Novos sinais e/ou sintomas<br/>neurológicos?"]
+  comportamento_estranho_p3_1945["15. [P3] Angústia marcada?"]
+  comportamento_estranho_p3_1946["16. [P3] Agressividade ou agitação<br/>moderada?"]
+  comportamento_estranho_p3_3227["17. [P3] Risco moderado de agressão a<br/>terceiros?"]
+  comportamento_estranho_p3_3228["18. [P3] Risco moderado de abandono do<br/>local s/ avaliação?"]
+  comportamento_estranho_p3_3229["19. [P3] Risco moderado de<br/>auto-agressão?"]
+  comportamento_estranho_p3_3230["20. [P3] História de perda de<br/>consciência?"]
+  comportamento_estranho_p3_3231["21. [P3] Parto recente?"]
+  comportamento_estranho_p3_3232["22. [P3] História psiquiátrica<br/>significativa?"]
+  comportamento_estranho_p4_1952["23. [P4] Alta de serviço de saúde<br/>mental nos últimos 15 dias?"]
+  comportamento_estranho_p4_1955["24. [P4] Novos sintomas de doença<br/>mental significativa?"]
+  comportamento_estranho_p4_1956["25. [P4] Preocupação com a salvaguarda<br/>do doente?"]
+  comportamento_estranho_p4_1959["26. [P4] Auto-agressão sem<br/>antecedentes psiquiátricos?"]
+  inicio --> comportamento_estranho_p1_1833
+  comportamento_estranho_p1_1833_sim(["VERMELHO"]):::vermelho
+  comportamento_estranho_p1_1833 -->|Sim| comportamento_estranho_p1_1833_sim
+  comportamento_estranho_p1_1833 -->|Não| comportamento_estranho_p1_1932
+  comportamento_estranho_p1_1932_sim(["VERMELHO"]):::vermelho
+  comportamento_estranho_p1_1932 -->|Sim| comportamento_estranho_p1_1932_sim
+  comportamento_estranho_p1_1932 -->|Não| comportamento_estranho_p1_1933
+  comportamento_estranho_p1_1933_sim(["VERMELHO"]):::vermelho
+  comportamento_estranho_p1_1933 -->|Sim| comportamento_estranho_p1_1933_sim
+  comportamento_estranho_p1_1933 -->|Não| comportamento_estranho_p1_1934
+  comportamento_estranho_p1_1934_sim(["VERMELHO"]):::vermelho
+  comportamento_estranho_p1_1934 -->|Sim| comportamento_estranho_p1_1934_sim
+  comportamento_estranho_p1_1934 -->|Não| comportamento_estranho_p2_1935
+  comportamento_estranho_p2_1935_sim(["LARANJA"]):::laranja
+  comportamento_estranho_p2_1935 -->|Sim| comportamento_estranho_p2_1935_sim
+  comportamento_estranho_p2_1935 -->|Não| comportamento_estranho_p2_1936
+  comportamento_estranho_p2_1936_sim(["LARANJA"]):::laranja
+  comportamento_estranho_p2_1936 -->|Sim| comportamento_estranho_p2_1936_sim
+  comportamento_estranho_p2_1936 -->|Não| comportamento_estranho_p2_1937
+  comportamento_estranho_p2_1937_sim(["LARANJA"]):::laranja
+  comportamento_estranho_p2_1937 -->|Sim| comportamento_estranho_p2_1937_sim
+  comportamento_estranho_p2_1937 -->|Não| comportamento_estranho_p2_1938
+  comportamento_estranho_p2_1938_sim(["LARANJA"]):::laranja
+  comportamento_estranho_p2_1938 -->|Sim| comportamento_estranho_p2_1938_sim
+  comportamento_estranho_p2_1938 -->|Não| comportamento_estranho_p2_1939
+  comportamento_estranho_p2_1939_sim(["LARANJA"]):::laranja
+  comportamento_estranho_p2_1939 -->|Sim| comportamento_estranho_p2_1939_sim
+  comportamento_estranho_p2_1939 -->|Não| comportamento_estranho_p2_1940
+  comportamento_estranho_p2_1940_sim(["LARANJA"]):::laranja
+  comportamento_estranho_p2_1940 -->|Sim| comportamento_estranho_p2_1940_sim
+  comportamento_estranho_p2_1940 -->|Não| comportamento_estranho_p2_1941
+  comportamento_estranho_p2_1941_sim(["LARANJA"]):::laranja
+  comportamento_estranho_p2_1941 -->|Sim| comportamento_estranho_p2_1941_sim
+  comportamento_estranho_p2_1941 -->|Não| comportamento_estranho_p2_1942
+  comportamento_estranho_p2_1942_sim(["LARANJA"]):::laranja
+  comportamento_estranho_p2_1942 -->|Sim| comportamento_estranho_p2_1942_sim
+  comportamento_estranho_p2_1942 -->|Não| comportamento_estranho_p2_1943
+  comportamento_estranho_p2_1943_sim(["LARANJA"]):::laranja
+  comportamento_estranho_p2_1943 -->|Sim| comportamento_estranho_p2_1943_sim
+  comportamento_estranho_p2_1943 -->|Não| comportamento_estranho_p3_1944
+  comportamento_estranho_p3_1944_sim(["AMARELO"]):::amarelo
+  comportamento_estranho_p3_1944 -->|Sim| comportamento_estranho_p3_1944_sim
+  comportamento_estranho_p3_1944 -->|Não| comportamento_estranho_p3_1945
+  comportamento_estranho_p3_1945_sim(["AMARELO"]):::amarelo
+  comportamento_estranho_p3_1945 -->|Sim| comportamento_estranho_p3_1945_sim
+  comportamento_estranho_p3_1945 -->|Não| comportamento_estranho_p3_1946
+  comportamento_estranho_p3_1946_sim(["AMARELO"]):::amarelo
+  comportamento_estranho_p3_1946 -->|Sim| comportamento_estranho_p3_1946_sim
+  comportamento_estranho_p3_1946 -->|Não| comportamento_estranho_p3_3227
+  comportamento_estranho_p3_3227_sim(["AMARELO"]):::amarelo
+  comportamento_estranho_p3_3227 -->|Sim| comportamento_estranho_p3_3227_sim
+  comportamento_estranho_p3_3227 -->|Não| comportamento_estranho_p3_3228
+  comportamento_estranho_p3_3228_sim(["AMARELO"]):::amarelo
+  comportamento_estranho_p3_3228 -->|Sim| comportamento_estranho_p3_3228_sim
+  comportamento_estranho_p3_3228 -->|Não| comportamento_estranho_p3_3229
+  comportamento_estranho_p3_3229_sim(["AMARELO"]):::amarelo
+  comportamento_estranho_p3_3229 -->|Sim| comportamento_estranho_p3_3229_sim
+  comportamento_estranho_p3_3229 -->|Não| comportamento_estranho_p3_3230
+  comportamento_estranho_p3_3230_sim(["AMARELO"]):::amarelo
+  comportamento_estranho_p3_3230 -->|Sim| comportamento_estranho_p3_3230_sim
+  comportamento_estranho_p3_3230 -->|Não| comportamento_estranho_p3_3231
+  comportamento_estranho_p3_3231_sim(["AMARELO"]):::amarelo
+  comportamento_estranho_p3_3231 -->|Sim| comportamento_estranho_p3_3231_sim
+  comportamento_estranho_p3_3231 -->|Não| comportamento_estranho_p3_3232
+  comportamento_estranho_p3_3232_sim(["AMARELO"]):::amarelo
+  comportamento_estranho_p3_3232 -->|Sim| comportamento_estranho_p3_3232_sim
+  comportamento_estranho_p3_3232 -->|Não| comportamento_estranho_p4_1952
+  comportamento_estranho_p4_1952_sim(["VERDE"]):::verde
+  comportamento_estranho_p4_1952 -->|Sim| comportamento_estranho_p4_1952_sim
+  comportamento_estranho_p4_1952 -->|Não| comportamento_estranho_p4_1955
+  comportamento_estranho_p4_1955_sim(["VERDE"]):::verde
+  comportamento_estranho_p4_1955 -->|Sim| comportamento_estranho_p4_1955_sim
+  comportamento_estranho_p4_1955 -->|Não| comportamento_estranho_p4_1956
+  comportamento_estranho_p4_1956_sim(["VERDE"]):::verde
+  comportamento_estranho_p4_1956 -->|Sim| comportamento_estranho_p4_1956_sim
+  comportamento_estranho_p4_1956 -->|Não| comportamento_estranho_p4_1959
+  comportamento_estranho_p4_1959_sim(["VERDE"]):::verde
+  comportamento_estranho_p4_1959 -->|Sim| comportamento_estranho_p4_1959_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  comportamento_estranho_p4_1959 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

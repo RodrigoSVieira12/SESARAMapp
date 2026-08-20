@@ -71,7 +71,9 @@ def main() -> int:
             f"Erro absoluto médio:  v0.10 (linha reta ÷ 50 km/h) = {media_antigo:.1f} min   "
             f"|   v0.11 (rede) = {media_novo:.1f} min"
         )
-        print(f"Pior caso:            v0.10 = {pior_antigo:.0f} min   |   v0.11 = {pior_novo:.0f} min")
+        print(
+            f"Pior caso:            v0.10 = {pior_antigo:.0f} min   |   v0.11 = {pior_novo:.0f} min"
+        )
         print(
             "\nNota: os tempos de referência são típicos e estão por confirmar; a rede\n"
             "afina-se editando app/data/rede_viagem.json (minutos das ligações) e\n"

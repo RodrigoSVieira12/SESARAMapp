@@ -1,0 +1,96 @@
+# Integração contínua (v0.13.1).
+#
+# A cada push e pull request: validar os dados, auditar as traduções e
+# correr a bateria de testes com cobertura. A ideia é que nada do que os
+# scripts locais já garantem (dados íntegros, traduções completas, testes
+# a passar) possa entrar no repositório partido sem alguém reparar.
+#
+# Espelha os comandos do README, para que "passa em CI" signifique
+# exatamente "passa na minha máquina".
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+
+jobs:
+  testes:
+    name: "Dados, traduções e testes (Python ${{ matrix.python-version }})"
+    runs-on: ubuntu-latest
+
+    # O README promete "Python 3.11+"; a matriz garante que a promessa é
+    # mesmo testada nas duas versões, e não só na mais recente (v0.16.2).
+    # fail-fast desligado: se uma versão partir, queremos ver as duas.
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+
+    steps:
+      - name: Obter o código
+        uses: actions/checkout@v4
+
+      - name: Instalar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Instalar dependências
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install -r requirements-dev.txt
+
+      # Lint e formato (v0.16.1). O ruff apanha imports não usados e
+      # redefinições (um F811 teria acusado logo a _primeira_aberta
+      # duplicada de outrora); o black --check garante o formato único.
+      # Configuração e justificação: pyproject.toml.
+      - name: Lint (ruff) e formato (black --check)
+        run: |
+          python -m ruff check .
+          python -m black --check .
+
+      # Falha cedo, como no arranque do servidor: dados malformados
+      # (ids repetidos, ramos incompletos, cores inválidas, ciclos,
+      # coordenadas fora da RAM, horários mal formados) param aqui.
+      - name: Validar os ficheiros de dados
+        run: python scripts/validar_dados.py
+
+      # A interface e os conteúdos clínicos têm de estar totalmente
+      # bilingues; o auditor devolve código != 0 se faltar algum _en.
+      - name: Auditar as traduções (PT -> EN)
+        run: python scripts/auditar_traducoes.py
+
+      # Aconselhamento ao utente: apanha a deriva silenciosa do mapeamento
+      # (chaves órfãs = != 0) e imprime o relatório (cobertura, colisões,
+      # gralhas de origem e dimensão do backlog oculto). A validação de
+      # dados acima já bloqueia nos órfãos; este passo dá o relatório legível.
+      - name: Verificar o aconselhamento ao utente
+        run: python scripts/verificar_aconselhamento.py
+
+      - name: Verificar as perguntas ao utente
+        run: python scripts/verificar_perguntas.py
+
+      # A bateria completa. Corre-se o pytest diretamente (rápido de ler
+      # no log) e mede-se a cobertura de app/ logo a seguir.
+      - name: Correr os testes
+        run: python -m pytest -q
+
+      # A propriedade de segurança do frontend ("o utente só vê itens com
+      # texto_utente; nunca o texto clínico") vive em static/js/nucleo.js e
+      # está fixada por testes que correm em Node (v0.15.2). O runner de
+      # testes vem com o próprio Node — sem npm nem dependências.
+      - name: Testes do núcleo JS (filtro de segurança do aconselhamento)
+        run: node --test tests/js/teste_nucleo.js
+
+      # Contraste (WCAG 1.4.3/1.4.11) e básicos de acessibilidade da página,
+      # verificáveis sem browser. O público-alvo (idoso, baixa visão) é quem
+      # mais depende disto; regressões de contraste bloqueiam aqui (v0.15.2).
+      - name: Auditar a acessibilidade (estático)
+        run: python scripts/auditar_acessibilidade.py
+
+      - name: Medir a cobertura de app/
+        run: python scripts/cobertura_testes.py

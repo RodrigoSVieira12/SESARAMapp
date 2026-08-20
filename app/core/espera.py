@@ -1,4 +1,4 @@
-"""Tempos de espera em tempo real (SESARAM / sistema SEISRAM).
+"""Tempos de espera em tempo real (SESARAM / sistema SESARAM).
 
 Fontes: as duas páginas públicas embebidas em
 https://www.sesaram.pt/portal/utente/urgencia/tempo-de-espera
@@ -32,6 +32,7 @@ próxima se a poupança estimada for grande e o desvio pequeno.
 from __future__ import annotations
 
 import json
+import logging
 import re
 from datetime import datetime
 from pathlib import Path
@@ -41,19 +42,21 @@ from bs4 import BeautifulSoup
 
 from .sugestoes import normalizar
 
+logger = logging.getLogger(__name__)
+
 # ------------------------------------------------------------- fontes -- #
 
 URL_HOSPITAL = "https://web.sesaram.pt/SEISRAM_WBE_WEB/PT/TEMPO-ESPERA.awp?t=1"
 URL_CENTROS = "https://web.sesaram.pt/SEISRAM_WBE_WEB/PT/TEMPO-ESPERA-CSP.awp"
 
-TEMPO_LIMITE_HTTP = 6            # segundos por pedido
-TTL_SEGUNDOS = 180               # frescura normal do cache (e cache negativa)
+TEMPO_LIMITE_HTTP = 6  # segundos por pedido
+TTL_SEGUNDOS = 180  # frescura normal do cache (e cache negativa)
 VALIDADE_MAXIMA_SEGUNDOS = 1800  # com a fonte em baixo, o cache antigo vale 30 min
 
 # Regra de troca (EXPERIMENTAL — por validar clinicamente):
-VELOCIDADE_MEDIA_KMH = 50        # RECUO da viagem (v0.11 usa app/core/viagem.py)
-POUPANCA_MINIMA_MIN = 30         # só trocar se poupar pelo menos isto
-DESVIO_MAXIMO_KM = 15            # e sem obrigar a um grande desvio
+VELOCIDADE_MEDIA_KMH = 50  # RECUO da viagem (v0.11 usa app/core/viagem.py)
+POUPANCA_MINIMA_MIN = 30  # só trocar se poupar pelo menos isto
+DESVIO_MAXIMO_KM = 15  # e sem obrigar a um grande desvio
 
 _PASTA_DATA = Path(__file__).resolve().parents[1] / "data"
 _FICHEIRO_CACHE = _PASTA_DATA / "espera_cache.json"
@@ -61,9 +64,7 @@ _FICHEIRO_NOMES = _PASTA_DATA / "espera_nomes.json"
 
 NOMES_PARA_ID: dict[str, str] = {
     normalizar(nome): unidade_id
-    for nome, unidade_id in json.loads(
-        _FICHEIRO_NOMES.read_text(encoding="utf-8")
-    )["nomes"].items()
+    for nome, unidade_id in json.loads(_FICHEIRO_NOMES.read_text(encoding="utf-8"))["nomes"].items()
 }
 
 # Cabeçalhos das colunas do hospital (já normalizados) → cor do projeto.
@@ -86,7 +87,7 @@ _RE_PARECE_TEMPO = re.compile(r"\d\s*[hm]|\d{1,2}:\d{2}", re.I)
 
 
 def interpretar_tempo(texto: str) -> int | None:
-    """"8m" → 8; "2h37" → 157; "1h" → 60; "1:05" → 65; lixo → None."""
+    """ "8m" → 8; "2h37" → 157; "1h" → 60; "1:05" → 65; lixo → None."""
     limpo = (texto or "").strip().lower()
     if not limpo:
         return None
@@ -103,7 +104,7 @@ def interpretar_tempo(texto: str) -> int | None:
 
 
 def interpretar_tempo_e_atendidos(texto: str) -> tuple[int | None, int | None]:
-    """"26m / 16" → (26, 16); "2h37 / 7" → (157, 7); "" → (None, None)."""
+    """ "26m / 16" → (26, 16); "2h37 / 7" → (157, 7); "" → (None, None)."""
     limpo = (texto or "").strip()
     if not limpo:
         return None, None
@@ -119,9 +120,7 @@ def interpretar_tempo_e_atendidos(texto: str) -> tuple[int | None, int | None]:
 
 def extrair_ultima_atualizacao(html: str) -> str | None:
     texto = normalizar(BeautifulSoup(html, "html.parser").get_text(" "))
-    encontrado = re.search(
-        r"ultima atualizacao:?\s*(\d{4}-\d{2}-\d{2}\s+\d{1,2}:\d{2})", texto
-    )
+    encontrado = re.search(r"ultima atualizacao:?\s*(\d{4}-\d{2}-\d{2}\s+\d{1,2}:\d{2})", texto)
     return encontrado.group(1) if encontrado else None
 
 
@@ -145,12 +144,8 @@ def extrair_centros(html: str) -> dict[str, dict]:
         chave = normalizar(nome)
         if not (2 <= len(nome) <= 60) or "atualiza" in chave or "utentes" in chave:
             continue
-        em_espera = next(
-            (int(c) for c in celulas[1:] if _RE_INTEIRO.match(c.strip())), None
-        )
-        celula_tempo = next(
-            (c for c in celulas[1:] if _RE_PARECE_TEMPO.search(c)), ""
-        )
+        em_espera = next((int(c) for c in celulas[1:] if _RE_INTEIRO.match(c.strip())), None)
+        celula_tempo = next((c for c in celulas[1:] if _RE_PARECE_TEMPO.search(c)), "")
         tempo, atendidos = interpretar_tempo_e_atendidos(celula_tempo)
         if em_espera is None and tempo is None:
             continue  # linha decorativa ou de cabeçalho
@@ -213,22 +208,14 @@ def extrair_hospital(html: str) -> dict:
                     registo["tem_dados"] = True
 
     def _fechar(registo: dict) -> dict:
-        tempo = (
-            int(registo["soma_tempo"] / registo["peso"] + 0.5)
-            if registo["peso"]
-            else None
-        )
+        tempo = int(registo["soma_tempo"] / registo["peso"] + 0.5) if registo["peso"] else None
         return {
             "em_espera": registo["em_espera"],
             "tempo_medio_min": tempo,
             "atendidos": registo["atendidos"] or None,
         }
 
-    por_cor = {
-        cor: _fechar(registo)
-        for cor, registo in acumulado.items()
-        if registo["tem_dados"]
-    }
+    por_cor = {cor: _fechar(registo) for cor, registo in acumulado.items() if registo["tem_dados"]}
 
     geral = {
         "em_espera": sum(r["em_espera"] for r in acumulado.values()),
@@ -244,6 +231,7 @@ def extrair_hospital(html: str) -> dict:
 
 
 # --------------------------------------------------- descarga e cache -- #
+
 
 def _obter_html(url: str) -> str:
     """Pedido HTTP às páginas do SESARAM (separado para os testes o simularem)."""
@@ -283,6 +271,7 @@ def descarregar() -> dict:
             else:
                 por_mapear.append(dados["nome_site"])
     except Exception as exc:  # noqa: BLE001 — a app segue sem tempos
+        logger.warning("Tempos de espera: falha na página dos centros de saúde (%s)", exc)
         erros.append(f"centros_saude: {exc}")
 
     try:
@@ -298,8 +287,14 @@ def descarregar() -> dict:
                 "atualizado_no_site": atualizado,
             }
     except Exception as exc:  # noqa: BLE001
+        logger.warning("Tempos de espera: falha na página do hospital (%s)", exc)
         erros.append(f"hospital: {exc}")
 
+    if unidades_encontradas:
+        logger.info(
+            "Tempos de espera atualizados: %d unidades com dados",
+            len(unidades_encontradas),
+        )
     return {
         "obtido_em": _agora_iso(),
         "ok": bool(unidades_encontradas),
@@ -318,9 +313,7 @@ def _ler_cache() -> dict | None:
 
 def _gravar_cache(pacote: dict) -> None:
     _FICHEIRO_CACHE.parent.mkdir(parents=True, exist_ok=True)
-    _FICHEIRO_CACHE.write_text(
-        json.dumps(pacote, ensure_ascii=False, indent=2), encoding="utf-8"
-    )
+    _FICHEIRO_CACHE.write_text(json.dumps(pacote, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
 def _idade_segundos(pacote: dict | None) -> float | None:
@@ -365,6 +358,11 @@ def obter(force: bool = False) -> dict:
             "unidades": cache["unidades"],
             "dados_de": cache.get("dados_de") or cache.get("obtido_em"),
         }
+        logger.warning(
+            "Tempos de espera: fonte indisponível; a servir dados de %s "
+            "marcados como desatualizados",
+            novo["dados_de"],
+        )
     _gravar_cache(novo)
     return _com_estado(novo)
 
@@ -386,6 +384,7 @@ def do_cache() -> dict:
 
 # ----------------------------------------------- uso pelo encaminhamento -- #
 
+
 def para_unidade(esperas: dict, unidade_id: str, cor: str | None = None) -> dict | None:
     """Bloco 'tempo_espera' pronto a embutir no resumo de uma unidade.
 
@@ -401,8 +400,7 @@ def para_unidade(esperas: dict, unidade_id: str, cor: str | None = None) -> dict
 
     def _valido(dados: dict | None) -> bool:
         return bool(dados) and (
-            dados.get("tempo_medio_min") is not None
-            or dados.get("em_espera") is not None
+            dados.get("tempo_medio_min") is not None or dados.get("em_espera") is not None
         )
 
     if registo.get("tipo_dados") == "por_cor":

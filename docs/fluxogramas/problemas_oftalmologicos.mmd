@@ -1,0 +1,77 @@
+flowchart TD
+  inicio(["Início: Problema nos olhos ou na<br/>visão"])
+  problemas_oftalmologicos_p1_2890["1. [P1] Lesão ocular química?"]
+  problemas_oftalmologicos_p2_2891["2. [P2] Alteração do estado de<br/>consciência?"]
+  problemas_oftalmologicos_p2_2892["3. [P2] Muito quente?"]
+  problemas_oftalmologicos_p2_2893["4. [P2] Possível sépsis?"]
+  problemas_oftalmologicos_p2_2894["5. [P2] Traumatismo ocular<br/>penetrante?"]
+  problemas_oftalmologicos_p2_2895["6. [P2] Perda súbita de visão?"]
+  problemas_oftalmologicos_p2_2896["7. [P2] Dor severa?"]
+  problemas_oftalmologicos_p3_2897["8. [P3] Quente?"]
+  problemas_oftalmologicos_p3_2898["9. [P3] História Inapropriada?"]
+  problemas_oftalmologicos_p3_2899["10. [P3] Recente redução da acuidade<br/>visual?"]
+  problemas_oftalmologicos_p3_2900["11. [P3] Diplopia?"]
+  problemas_oftalmologicos_p3_2901["12. [P3] Dor moderada?"]
+  problemas_oftalmologicos_p4_2902["13. [P4] Febre persistente?"]
+  problemas_oftalmologicos_p4_2905["14. [P4] Sensação de corpo estranho?"]
+  problemas_oftalmologicos_p4_2906["15. [P4] Olho vermelho?"]
+  problemas_oftalmologicos_p4_2909["16. [P4] Dor persistente?"]
+  problemas_oftalmologicos_p4_2910["17. [P4] Problema recente?"]
+  inicio --> problemas_oftalmologicos_p1_2890
+  problemas_oftalmologicos_p1_2890_sim(["VERMELHO"]):::vermelho
+  problemas_oftalmologicos_p1_2890 -->|Sim| problemas_oftalmologicos_p1_2890_sim
+  problemas_oftalmologicos_p1_2890 -->|Não| problemas_oftalmologicos_p2_2891
+  problemas_oftalmologicos_p2_2891_sim(["LARANJA"]):::laranja
+  problemas_oftalmologicos_p2_2891 -->|Sim| problemas_oftalmologicos_p2_2891_sim
+  problemas_oftalmologicos_p2_2891 -->|Não| problemas_oftalmologicos_p2_2892
+  problemas_oftalmologicos_p2_2892_sim(["LARANJA"]):::laranja
+  problemas_oftalmologicos_p2_2892 -->|Sim| problemas_oftalmologicos_p2_2892_sim
+  problemas_oftalmologicos_p2_2892 -->|Não| problemas_oftalmologicos_p2_2893
+  problemas_oftalmologicos_p2_2893_sim(["LARANJA"]):::laranja
+  problemas_oftalmologicos_p2_2893 -->|Sim| problemas_oftalmologicos_p2_2893_sim
+  problemas_oftalmologicos_p2_2893 -->|Não| problemas_oftalmologicos_p2_2894
+  problemas_oftalmologicos_p2_2894_sim(["LARANJA"]):::laranja
+  problemas_oftalmologicos_p2_2894 -->|Sim| problemas_oftalmologicos_p2_2894_sim
+  problemas_oftalmologicos_p2_2894 -->|Não| problemas_oftalmologicos_p2_2895
+  problemas_oftalmologicos_p2_2895_sim(["LARANJA"]):::laranja
+  problemas_oftalmologicos_p2_2895 -->|Sim| problemas_oftalmologicos_p2_2895_sim
+  problemas_oftalmologicos_p2_2895 -->|Não| problemas_oftalmologicos_p2_2896
+  problemas_oftalmologicos_p2_2896_sim(["LARANJA"]):::laranja
+  problemas_oftalmologicos_p2_2896 -->|Sim| problemas_oftalmologicos_p2_2896_sim
+  problemas_oftalmologicos_p2_2896 -->|Não| problemas_oftalmologicos_p3_2897
+  problemas_oftalmologicos_p3_2897_sim(["AMARELO"]):::amarelo
+  problemas_oftalmologicos_p3_2897 -->|Sim| problemas_oftalmologicos_p3_2897_sim
+  problemas_oftalmologicos_p3_2897 -->|Não| problemas_oftalmologicos_p3_2898
+  problemas_oftalmologicos_p3_2898_sim(["AMARELO"]):::amarelo
+  problemas_oftalmologicos_p3_2898 -->|Sim| problemas_oftalmologicos_p3_2898_sim
+  problemas_oftalmologicos_p3_2898 -->|Não| problemas_oftalmologicos_p3_2899
+  problemas_oftalmologicos_p3_2899_sim(["AMARELO"]):::amarelo
+  problemas_oftalmologicos_p3_2899 -->|Sim| problemas_oftalmologicos_p3_2899_sim
+  problemas_oftalmologicos_p3_2899 -->|Não| problemas_oftalmologicos_p3_2900
+  problemas_oftalmologicos_p3_2900_sim(["AMARELO"]):::amarelo
+  problemas_oftalmologicos_p3_2900 -->|Sim| problemas_oftalmologicos_p3_2900_sim
+  problemas_oftalmologicos_p3_2900 -->|Não| problemas_oftalmologicos_p3_2901
+  problemas_oftalmologicos_p3_2901_sim(["AMARELO"]):::amarelo
+  problemas_oftalmologicos_p3_2901 -->|Sim| problemas_oftalmologicos_p3_2901_sim
+  problemas_oftalmologicos_p3_2901 -->|Não| problemas_oftalmologicos_p4_2902
+  problemas_oftalmologicos_p4_2902_sim(["VERDE"]):::verde
+  problemas_oftalmologicos_p4_2902 -->|Sim| problemas_oftalmologicos_p4_2902_sim
+  problemas_oftalmologicos_p4_2902 -->|Não| problemas_oftalmologicos_p4_2905
+  problemas_oftalmologicos_p4_2905_sim(["VERDE"]):::verde
+  problemas_oftalmologicos_p4_2905 -->|Sim| problemas_oftalmologicos_p4_2905_sim
+  problemas_oftalmologicos_p4_2905 -->|Não| problemas_oftalmologicos_p4_2906
+  problemas_oftalmologicos_p4_2906_sim(["VERDE"]):::verde
+  problemas_oftalmologicos_p4_2906 -->|Sim| problemas_oftalmologicos_p4_2906_sim
+  problemas_oftalmologicos_p4_2906 -->|Não| problemas_oftalmologicos_p4_2909
+  problemas_oftalmologicos_p4_2909_sim(["VERDE"]):::verde
+  problemas_oftalmologicos_p4_2909 -->|Sim| problemas_oftalmologicos_p4_2909_sim
+  problemas_oftalmologicos_p4_2909 -->|Não| problemas_oftalmologicos_p4_2910
+  problemas_oftalmologicos_p4_2910_sim(["VERDE"]):::verde
+  problemas_oftalmologicos_p4_2910 -->|Sim| problemas_oftalmologicos_p4_2910_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  problemas_oftalmologicos_p4_2910 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

@@ -20,9 +20,7 @@ from pathlib import Path
 
 _FICHEIRO = Path(__file__).resolve().parents[1] / "data" / "sinonimos.json"
 
-SINONIMOS: dict[str, list[str]] = json.loads(
-    _FICHEIRO.read_text(encoding="utf-8")
-)["sinonimos"]
+SINONIMOS: dict[str, list[str]] = json.loads(_FICHEIRO.read_text(encoding="utf-8"))["sinonimos"]
 
 
 def normalizar(texto: str) -> str:
@@ -65,11 +63,7 @@ def sugerir(texto: str, queixas: list[dict], maximo: int = 5) -> list[dict]:
             if termo and termo in consulta:
                 pontos += 3 if " " in termo else 2
         for palavra in palavras:
-            if any(
-                parte.startswith(palavra)
-                for termo in termos_norm
-                for parte in termo.split()
-            ):
+            if any(parte.startswith(palavra) for termo in termos_norm for parte in termo.split()):
                 pontos += 1
 
         if pontos:

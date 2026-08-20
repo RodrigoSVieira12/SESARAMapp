@@ -1,0 +1,85 @@
+flowchart TD
+  inicio(["Início: Sobredosagem e<br/>envenenamento"])
+  sobredosagem_e_envenenamento_p1_1874["1. [P1] Compromisso da via aérea?"]
+  sobredosagem_e_envenenamento_p1_2145["2. [P1] Respiração ineficaz?"]
+  sobredosagem_e_envenenamento_p1_2758["3. [P1] Sinais de choque?"]
+  sobredosagem_e_envenenamento_p1_2770["4. [P1] Não reativo?"]
+  sobredosagem_e_envenenamento_p1_3002["5. [P1] Convulsão atual?"]
+  sobredosagem_e_envenenamento_p2_3003["6. [P2] Alteração do estado de<br/>consciência?"]
+  sobredosagem_e_envenenamento_p2_3004["7. [P2] Agressividade ou agitação<br/>severa?"]
+  sobredosagem_e_envenenamento_p2_3005["8. [P2] Risco elevado de<br/>auto-agressão?"]
+  sobredosagem_e_envenenamento_p2_3006["9. [P2] Risco elevado de agressão a<br/>terceiros?"]
+  sobredosagem_e_envenenamento_p2_3007["10. [P2] Alta mortalidade?"]
+  sobredosagem_e_envenenamento_p3_3008["11. [P3] Angústia marcada?"]
+  sobredosagem_e_envenenamento_p3_3009["12. [P3] Risco moderado de<br/>auto-agressão?"]
+  sobredosagem_e_envenenamento_p3_3010["13. [P3] História de perda de<br/>consciência?"]
+  sobredosagem_e_envenenamento_p3_3011["14. [P3] Mortalidade moderada?"]
+  sobredosagem_e_envenenamento_p3_3012["15. [P3] História psiquiátrica<br/>significativa?"]
+  sobredosagem_e_envenenamento_p4_3013["16. [P4] Alta de serviço de saúde<br/>mental nos últimos 15 dias?"]
+  sobredosagem_e_envenenamento_p4_3014["17. [P4] Novos sintomas de doença<br/>mental significativa?"]
+  sobredosagem_e_envenenamento_p4_3015["18. [P4] Preocupação com a salvaguarda<br/>do doente?"]
+  sobredosagem_e_envenenamento_p4_3016["19. [P4] Auto-agressão sem<br/>antecedentes psiquiátricos?"]
+  inicio --> sobredosagem_e_envenenamento_p1_1874
+  sobredosagem_e_envenenamento_p1_1874_sim(["VERMELHO"]):::vermelho
+  sobredosagem_e_envenenamento_p1_1874 -->|Sim| sobredosagem_e_envenenamento_p1_1874_sim
+  sobredosagem_e_envenenamento_p1_1874 -->|Não| sobredosagem_e_envenenamento_p1_2145
+  sobredosagem_e_envenenamento_p1_2145_sim(["VERMELHO"]):::vermelho
+  sobredosagem_e_envenenamento_p1_2145 -->|Sim| sobredosagem_e_envenenamento_p1_2145_sim
+  sobredosagem_e_envenenamento_p1_2145 -->|Não| sobredosagem_e_envenenamento_p1_2758
+  sobredosagem_e_envenenamento_p1_2758_sim(["VERMELHO"]):::vermelho
+  sobredosagem_e_envenenamento_p1_2758 -->|Sim| sobredosagem_e_envenenamento_p1_2758_sim
+  sobredosagem_e_envenenamento_p1_2758 -->|Não| sobredosagem_e_envenenamento_p1_2770
+  sobredosagem_e_envenenamento_p1_2770_sim(["VERMELHO"]):::vermelho
+  sobredosagem_e_envenenamento_p1_2770 -->|Sim| sobredosagem_e_envenenamento_p1_2770_sim
+  sobredosagem_e_envenenamento_p1_2770 -->|Não| sobredosagem_e_envenenamento_p1_3002
+  sobredosagem_e_envenenamento_p1_3002_sim(["VERMELHO"]):::vermelho
+  sobredosagem_e_envenenamento_p1_3002 -->|Sim| sobredosagem_e_envenenamento_p1_3002_sim
+  sobredosagem_e_envenenamento_p1_3002 -->|Não| sobredosagem_e_envenenamento_p2_3003
+  sobredosagem_e_envenenamento_p2_3003_sim(["LARANJA"]):::laranja
+  sobredosagem_e_envenenamento_p2_3003 -->|Sim| sobredosagem_e_envenenamento_p2_3003_sim
+  sobredosagem_e_envenenamento_p2_3003 -->|Não| sobredosagem_e_envenenamento_p2_3004
+  sobredosagem_e_envenenamento_p2_3004_sim(["LARANJA"]):::laranja
+  sobredosagem_e_envenenamento_p2_3004 -->|Sim| sobredosagem_e_envenenamento_p2_3004_sim
+  sobredosagem_e_envenenamento_p2_3004 -->|Não| sobredosagem_e_envenenamento_p2_3005
+  sobredosagem_e_envenenamento_p2_3005_sim(["LARANJA"]):::laranja
+  sobredosagem_e_envenenamento_p2_3005 -->|Sim| sobredosagem_e_envenenamento_p2_3005_sim
+  sobredosagem_e_envenenamento_p2_3005 -->|Não| sobredosagem_e_envenenamento_p2_3006
+  sobredosagem_e_envenenamento_p2_3006_sim(["LARANJA"]):::laranja
+  sobredosagem_e_envenenamento_p2_3006 -->|Sim| sobredosagem_e_envenenamento_p2_3006_sim
+  sobredosagem_e_envenenamento_p2_3006 -->|Não| sobredosagem_e_envenenamento_p2_3007
+  sobredosagem_e_envenenamento_p2_3007_sim(["LARANJA"]):::laranja
+  sobredosagem_e_envenenamento_p2_3007 -->|Sim| sobredosagem_e_envenenamento_p2_3007_sim
+  sobredosagem_e_envenenamento_p2_3007 -->|Não| sobredosagem_e_envenenamento_p3_3008
+  sobredosagem_e_envenenamento_p3_3008_sim(["AMARELO"]):::amarelo
+  sobredosagem_e_envenenamento_p3_3008 -->|Sim| sobredosagem_e_envenenamento_p3_3008_sim
+  sobredosagem_e_envenenamento_p3_3008 -->|Não| sobredosagem_e_envenenamento_p3_3009
+  sobredosagem_e_envenenamento_p3_3009_sim(["AMARELO"]):::amarelo
+  sobredosagem_e_envenenamento_p3_3009 -->|Sim| sobredosagem_e_envenenamento_p3_3009_sim
+  sobredosagem_e_envenenamento_p3_3009 -->|Não| sobredosagem_e_envenenamento_p3_3010
+  sobredosagem_e_envenenamento_p3_3010_sim(["AMARELO"]):::amarelo
+  sobredosagem_e_envenenamento_p3_3010 -->|Sim| sobredosagem_e_envenenamento_p3_3010_sim
+  sobredosagem_e_envenenamento_p3_3010 -->|Não| sobredosagem_e_envenenamento_p3_3011
+  sobredosagem_e_envenenamento_p3_3011_sim(["AMARELO"]):::amarelo
+  sobredosagem_e_envenenamento_p3_3011 -->|Sim| sobredosagem_e_envenenamento_p3_3011_sim
+  sobredosagem_e_envenenamento_p3_3011 -->|Não| sobredosagem_e_envenenamento_p3_3012
+  sobredosagem_e_envenenamento_p3_3012_sim(["AMARELO"]):::amarelo
+  sobredosagem_e_envenenamento_p3_3012 -->|Sim| sobredosagem_e_envenenamento_p3_3012_sim
+  sobredosagem_e_envenenamento_p3_3012 -->|Não| sobredosagem_e_envenenamento_p4_3013
+  sobredosagem_e_envenenamento_p4_3013_sim(["VERDE"]):::verde
+  sobredosagem_e_envenenamento_p4_3013 -->|Sim| sobredosagem_e_envenenamento_p4_3013_sim
+  sobredosagem_e_envenenamento_p4_3013 -->|Não| sobredosagem_e_envenenamento_p4_3014
+  sobredosagem_e_envenenamento_p4_3014_sim(["VERDE"]):::verde
+  sobredosagem_e_envenenamento_p4_3014 -->|Sim| sobredosagem_e_envenenamento_p4_3014_sim
+  sobredosagem_e_envenenamento_p4_3014 -->|Não| sobredosagem_e_envenenamento_p4_3015
+  sobredosagem_e_envenenamento_p4_3015_sim(["VERDE"]):::verde
+  sobredosagem_e_envenenamento_p4_3015 -->|Sim| sobredosagem_e_envenenamento_p4_3015_sim
+  sobredosagem_e_envenenamento_p4_3015 -->|Não| sobredosagem_e_envenenamento_p4_3016
+  sobredosagem_e_envenenamento_p4_3016_sim(["VERDE"]):::verde
+  sobredosagem_e_envenenamento_p4_3016 -->|Sim| sobredosagem_e_envenenamento_p4_3016_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  sobredosagem_e_envenenamento_p4_3016 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

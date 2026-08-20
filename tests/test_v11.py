@@ -6,7 +6,7 @@ O que mudou (e o que estes testes prendem):
   relevo + OSRM opcional (desligado por omissão) com recuo automático.
 - O encaminhamento ordena as candidatas por TEMPO de viagem (era por
   linha reta) e as mensagens passam a incluir "~X min de carro".
-- A regra de troca (viagem + espera) soma agora a espera real do SEISRAM
+- A regra de troca (viagem + espera) soma agora a espera real do SESARAM
   a uma viagem por estrada, não a um palpite em linha reta.
 
 Casos geográficos escolhidos de propósito: o Curral das Freiras é o
@@ -51,6 +51,7 @@ def sem_esperas(monkeypatch):
 # --------------------------------------------------------------------- #
 # Rede: carregamento e validação                                          #
 # --------------------------------------------------------------------- #
+
 
 def test_rede_carrega_e_e_valida():
     rede = viagem.carregar_rede(recarregar=True)
@@ -105,6 +106,7 @@ def test_validacao_apanha_no_solto():
 # --------------------------------------------------------------------- #
 # Estimador: propriedades e geografia da Madeira                          #
 # --------------------------------------------------------------------- #
+
 
 def test_mesmo_ponto_da_tempo_pequeno():
     est = viagem.estimar(*FUNCHAL, *FUNCHAL)
@@ -163,6 +165,7 @@ def test_tempos_para_unidades_cobre_a_lista():
 # Integração no encaminhamento                                            #
 # --------------------------------------------------------------------- #
 
+
 def test_resumo_da_unidade_tem_tempo_viagem(sem_esperas):
     saida = routing.decidir_encaminhamento("laranja", *FUNCHAL, quando=SEGUNDA_10H)
     tv = saida["unidade"]["tempo_viagem"]
@@ -215,6 +218,7 @@ def test_porto_santo_continua_sem_atravessar_o_mar(sem_esperas):
 # Regra de troca: viagem por estrada + espera real                        #
 # --------------------------------------------------------------------- #
 
+
 def test_tempo_total_usa_viagem_por_estrada():
     resumo = {
         "distancia_km": 40,  # o recuo antigo daria 48 min de viagem
@@ -233,13 +237,19 @@ def test_troca_decide_com_tempos_de_estrada():
     """A montanha entra na conta: a unidade 'perto' em km mas com viagem
     longa por estrada perde para a que está a 10 min de carro."""
     perto = {
-        "id": "perto", "nome": "perto", "aberta_agora": True,
-        "distancia_km": 2, "tempo_viagem": {"minutos": 40, "metodo": "rede"},
+        "id": "perto",
+        "nome": "perto",
+        "aberta_agora": True,
+        "distancia_km": 2,
+        "tempo_viagem": {"minutos": 40, "metodo": "rede"},
         "tempo_espera": {"minutos": 30},
     }
     longe = {
-        "id": "longe", "nome": "longe", "aberta_agora": True,
-        "distancia_km": 7, "tempo_viagem": {"minutos": 10, "metodo": "rede"},
+        "id": "longe",
+        "nome": "longe",
+        "aberta_agora": True,
+        "distancia_km": 7,
+        "tempo_viagem": {"minutos": 10, "metodo": "rede"},
         "tempo_espera": {"minutos": 20},
     }
     principal, _, troca = espera.escolher_principal([perto, longe])
@@ -252,6 +262,7 @@ def test_troca_decide_com_tempos_de_estrada():
 # --------------------------------------------------------------------- #
 # OSRM opcional: liga por configuração, recua em silêncio                 #
 # --------------------------------------------------------------------- #
+
 
 def test_osrm_desligado_por_omissao(monkeypatch):
     monkeypatch.delenv(viagem.VARIAVEL_OSRM, raising=False)
@@ -292,15 +303,21 @@ def test_osrm_em_falha_recua_para_a_rede_e_arrefece(monkeypatch):
 # API                                                                     #
 # --------------------------------------------------------------------- #
 
+
 def test_api_encaminhamento_devolve_viagem(sem_esperas):
     from fastapi.testclient import TestClient
+
     from app.main import app
 
     cliente = TestClient(app)
     resposta = cliente.post(
         "/api/encaminhamento",
-        json={"cor": "amarelo", "lat": FUNCHAL[0], "lng": FUNCHAL[1],
-              "quando": SEGUNDA_10H.isoformat()},
+        json={
+            "cor": "amarelo",
+            "lat": FUNCHAL[0],
+            "lng": FUNCHAL[1],
+            "quando": SEGUNDA_10H.isoformat(),
+        },
     )
     corpo = resposta.json()
     assert resposta.status_code == 200
@@ -310,14 +327,17 @@ def test_api_encaminhamento_devolve_viagem(sem_esperas):
 
 def test_api_endpoint_viagem():
     from fastapi.testclient import TestClient
+
     from app.main import app
 
     cliente = TestClient(app)
     resposta = cliente.get(
         "/api/viagem",
         params={
-            "lat": CURRAL[0], "lng": CURRAL[1],
-            "lat_destino": HNM[0], "lng_destino": HNM[1],
+            "lat": CURRAL[0],
+            "lng": CURRAL[1],
+            "lat_destino": HNM[0],
+            "lng_destino": HNM[1],
         },
     )
     corpo = resposta.json()
@@ -328,6 +348,7 @@ def test_api_endpoint_viagem():
 
 def test_api_unidades_proxima_inclui_tempo():
     from fastapi.testclient import TestClient
+
     from app.main import app
 
     cliente = TestClient(app)

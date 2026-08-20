@@ -66,6 +66,7 @@ atualizar = _carregar_script("atualizar_tempos_medidos")
 # Utilitários                                                            #
 # --------------------------------------------------------------------- #
 
+
 @pytest.fixture(autouse=True)
 def _estado_limpo():
     """Cada teste parte sem cache da tabela e sem estado OSRM."""
@@ -122,6 +123,7 @@ def _par(tempo=None, dist=None, **extras):
 # 1a. O ficheiro entregue                                                 #
 # --------------------------------------------------------------------- #
 
+
 def test_ficheiro_entregue_passa_a_validacao():
     assert tm.validar(DADOS_FICHEIRO) == []
 
@@ -129,16 +131,12 @@ def test_ficheiro_entregue_passa_a_validacao():
 def test_origens_cobrem_freguesias_e_sitios():
     prep = localidades.carregar()
     n_freg = sum(len(c["freguesias"]) for c in prep["concelhos"])
-    n_sitios = sum(
-        len(f["sitios"]) for c in prep["concelhos"] for f in c["freguesias"]
-    )
+    n_sitios = sum(len(f["sitios"]) for c in prep["concelhos"] for f in c["freguesias"])
     assert len(DADOS_FICHEIRO["medicoes"]) == n_freg + n_sitios
 
 
 def test_destinos_existem_e_ficam_na_mesma_ilha():
-    ilha_por_unidade = {
-        u["id"]: u.get("ilha", "madeira") for u in unidades.todas()
-    }
+    ilha_por_unidade = {u["id"]: u.get("ilha", "madeira") for u in unidades.todas()}
     for m in DADOS_FICHEIRO["medicoes"]:
         for uid in m["destinos"]:
             assert uid in ilha_por_unidade, f"{m['origem']} -> {uid}"
@@ -154,6 +152,7 @@ def test_toda_origem_da_madeira_inclui_o_hospital():
 # --------------------------------------------------------------------- #
 # 1b. Validação apanha enganos de edição                                  #
 # --------------------------------------------------------------------- #
+
 
 def test_validar_apanha_unidade_inexistente():
     dados = copy.deepcopy(DADOS_FICHEIRO)
@@ -179,6 +178,7 @@ def test_validar_apanha_fonte_que_nao_e_texto():
 # 1c. O gerador do esqueleto                                              #
 # --------------------------------------------------------------------- #
 
+
 def test_gerador_produz_esqueleto_todo_por_preencher():
     dados, resumo = atualizar.gerar(None)
     assert resumo["pares"] > 0
@@ -202,9 +202,7 @@ def test_gerador_preserva_medicoes_preenchidas():
 
 def test_gerador_com_todos_cobre_a_ilha_inteira():
     dados, _ = atualizar.gerar(None, todos=True)
-    da_madeira = [
-        u["id"] for u in unidades.todas() if u.get("ilha", "madeira") == "madeira"
-    ]
+    da_madeira = [u["id"] for u in unidades.todas() if u.get("ilha", "madeira") == "madeira"]
     exemplo = next(m for m in dados["medicoes"] if m["ilha"] == "madeira")
     assert set(exemplo["destinos"]) == set(da_madeira) | {"hnm"}
 
@@ -212,6 +210,7 @@ def test_gerador_com_todos_cobre_a_ilha_inteira():
 # --------------------------------------------------------------------- #
 # 2. O módulo de procura                                                  #
 # --------------------------------------------------------------------- #
+
 
 def test_tabela_sem_medicoes_fica_inativa():
     _ativar([_medicao("x/a", "A", 32.70, -16.90, {"hnm": _par()})])
@@ -253,7 +252,7 @@ def test_procurar_nao_atravessa_barreiras():
     (lat_a, lng_a), (lat_b, lng_b) = rede["barreiras"][0]  # segmento preparado
     lat_m, lng_m = (lat_a + lat_b) / 2, (lng_a + lng_b) / 2
 
-    ancora = (lat_m + 0.008, lng_m)   # a norte da crista
+    ancora = (lat_m + 0.008, lng_m)  # a norte da crista
     do_outro_lado = (lat_m - 0.008, lng_m)
     do_mesmo_lado = (lat_m + 0.010, lng_m)
 
@@ -283,6 +282,7 @@ def test_ficheiro_ausente_desliga_sem_erro(monkeypatch, tmp_path):
 # --------------------------------------------------------------------- #
 # 3a. Integração no estimador                                             #
 # --------------------------------------------------------------------- #
+
 
 def test_estimar_com_destino_id_usa_a_tabela():
     lat, lng = _centro_freguesia("santa_cruz", "gaula")
@@ -354,6 +354,7 @@ def test_tempos_para_unidades_mistura_metodos():
 # 3b. Encaminhamento e API                                                #
 # --------------------------------------------------------------------- #
 
+
 def test_encaminhamento_usa_a_tabela_e_di_lo():
     """Com a tabela preenchida para as unidades plausíveis da zona, o
     principal (seja ele qual for: o encaminhamento decide) tem de vir
@@ -379,17 +380,13 @@ def test_encaminhamento_usa_a_tabela_e_di_lo():
             )
         ]
     )
-    resposta = cliente.post(
-        "/api/encaminhamento", json={"cor": "laranja", "lat": lat, "lng": lng}
-    )
+    resposta = cliente.post("/api/encaminhamento", json={"cor": "laranja", "lat": lat, "lng": lng})
     assert resposta.status_code == 200
     corpo = resposta.json()
     principal = corpo["unidade"]
     assert principal["id"] in tabela
     assert principal["tempo_viagem"]["metodo"] == "medido"
-    assert principal["tempo_viagem"]["distancia_km"] == pytest.approx(
-        tabela[principal["id"]][1]
-    )
+    assert principal["tempo_viagem"]["distancia_km"] == pytest.approx(tabela[principal["id"]][1])
     assert corpo["viagem_info"]["metodo"] == "medido"
     assert "km por estrada" in corpo["mensagem"]
     assert "min de carro" in corpo["mensagem"]
@@ -398,9 +395,7 @@ def test_encaminhamento_usa_a_tabela_e_di_lo():
 def test_api_viagem_com_unidade_devolve_medido():
     lat, lng = _centro_freguesia("santa_cruz", "gaula")
     _ativar([_medicao("santa_cruz/gaula", "Gaula", lat, lng, {"cs_gaula": _par(5, 2.0)})])
-    resposta = cliente.get(
-        "/api/viagem", params={"lat": lat, "lng": lng, "unidade": "cs_gaula"}
-    )
+    resposta = cliente.get("/api/viagem", params={"lat": lat, "lng": lng, "unidade": "cs_gaula"})
     assert resposta.status_code == 200
     corpo = resposta.json()
     assert corpo["destino"]["unidade"] == "cs_gaula"
@@ -435,9 +430,7 @@ def test_resposta_com_tabela_continua_sem_travessoes():
             )
         ]
     )
-    resposta = cliente.post(
-        "/api/encaminhamento", json={"cor": "laranja", "lat": lat, "lng": lng}
-    )
+    resposta = cliente.post("/api/encaminhamento", json={"cor": "laranja", "lat": lat, "lng": lng})
     texto = json.dumps(resposta.json(), ensure_ascii=False)
     assert "\u2014" not in texto  # —
     assert "\u2013" not in texto  # –
@@ -446,6 +439,7 @@ def test_resposta_com_tabela_continua_sem_travessoes():
 # --------------------------------------------------------------------- #
 # 4. O script de preenchimento automático (motor simulado)                #
 # --------------------------------------------------------------------- #
+
 
 def _falso_motor(segundos=300.0, metros=5000.0, celulas_nulas=()):
     """Motor simulado: devolve matrizes constantes; certas células (linha,
@@ -488,9 +482,7 @@ def test_calcular_preenche_nulls_e_preserva_o_resto():
 
 
 def test_calcular_com_forcar_recalcula_tudo():
-    dados = _tabela(
-        [_medicao("m/b", "B", 32.71, -16.91, {"hnm": _par(7, 3.0, fonte="manual")})]
-    )
+    dados = _tabela([_medicao("m/b", "B", 32.71, -16.91, {"hnm": _par(7, 3.0, fonte="manual")})])
     pedir, _ = _falso_motor()
     calc.preencher(dados, pedir, "osrm", lote=5, pausa=0, forcar=True)
     par = dados["medicoes"][0]["destinos"]["hnm"]
@@ -498,9 +490,7 @@ def test_calcular_com_forcar_recalcula_tudo():
 
 
 def test_calcular_arredonda_com_pisos_e_conta_sem_rota():
-    dados = _tabela(
-        [_medicao("m/a", "A", 32.70, -16.90, {"hnm": _par(), "cs_gaula": _par()})]
-    )
+    dados = _tabela([_medicao("m/a", "A", 32.70, -16.90, {"hnm": _par(), "cs_gaula": _par()})])
     pedir, _ = _falso_motor(segundos=20.0, metros=40.0, celulas_nulas=[(0, 0)])
     estatisticas = calc.preencher(dados, pedir, "ors", lote=5, pausa=0)
     destinos = dados["medicoes"][0]["destinos"]
@@ -515,11 +505,8 @@ def test_calcular_arredonda_com_pisos_e_conta_sem_rota():
 
 def test_calcular_lotes_respeitam_tamanho_e_ilhas():
     medicoes = [
-        _medicao(f"m/{i}", f"M{i}", 32.70 + i / 100, -16.90, {"hnm": _par()})
-        for i in range(7)
-    ] + [
-        _medicao("ps/c", "C", 33.06, -16.34, {"cs_porto_santo": _par()}, ilha="porto_santo")
-    ]
+        _medicao(f"m/{i}", f"M{i}", 32.70 + i / 100, -16.90, {"hnm": _par()}) for i in range(7)
+    ] + [_medicao("ps/c", "C", 33.06, -16.34, {"cs_porto_santo": _par()}, ilha="porto_santo")]
     pendentes = calc._pendentes(_tabela(medicoes), forcar=False, filtro=None)
     lotes = calc._lotes_por_ilha(pendentes, lote=3)
     assert [len(grupo) for grupo in lotes] == [3, 3, 1, 1]

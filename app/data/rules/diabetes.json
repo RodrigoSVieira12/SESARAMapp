@@ -1,0 +1,220 @@
+{
+  "id": "diabetes",
+  "nome": "Diabetes",
+  "nome_en": "Diabetes",
+  "descricao": "Problema relacionado com a diabetes ou o açúcar no sangue.",
+  "descricao_en": "A problem related to diabetes or blood sugar.",
+  "pediatrico": false,
+  "fonte": "Discriminadores do Sistema de Triagem de Manchester, organizados por prioridade clínica (P1-P5). Importados da tabela de referência; sujeitos a validação clínica antes de uso real.",
+  "fonte_en": "Manchester Triage System discriminators, organised by clinical priority (P1-P5). Imported from the reference table; subject to clinical validation before real use.",
+  "perguntas": [
+    {
+      "id": "diabetes_p1_1839",
+      "disc_id": 1839,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Compromisso da via aérea?",
+      "texto_utente": "A respiração está muito difícil ou ruidosa, como se o ar não passasse bem pela garganta (a roncar ou a gorgolejar)?",
+      "texto_en": "Airway compromise?",
+      "texto_utente_en": "Is breathing very difficult or noisy, as if air can't pass properly through the throat (snoring or gurgling)?",
+      "descricao": "A via aérea poderá estar comprometida, por não se conseguir manter aberta, ou porque os reflexos protetores da via respiratória (que evitam a aspiração) se perderam. A incapacidade de manter a via aérea aberta, poderá resultar numa obstrução total ou parcial, intermitente ou não. Isto manifestar-se-á por sons como o ressonar ou o gorgolejar durante a respiração."
+    },
+    {
+      "id": "diabetes_p1_2089",
+      "disc_id": 2089,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Respiração ineficaz?",
+      "texto_utente": "A respiração está tão fraca ou cansada que parece não entrar ar suficiente (respiração aos arrancos ou muito a custo)?",
+      "texto_en": "Ineffective breathing?",
+      "texto_utente_en": "Is breathing so weak or laboured that not enough air seems to get in (gasping or a real struggle)?",
+      "descricao": "Doentes que não conseguem respirar suficientemente bem para manter uma oxigenação adequada e com falência respiratória, sofrem de respiração ineficaz. Poderá resultar num esforço acrescentado para respirar, ou em exaustão, incluindo uma respiração tipo “gasping”."
+    },
+    {
+      "id": "diabetes_p1_2090",
+      "disc_id": 2090,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Sinais de choque?",
+      "texto_utente": "Tem suores frios, pele muito pálida ou acinzentada, o coração a bater depressa e uma grande fraqueza?",
+      "texto_en": "Signs of shock?",
+      "texto_utente_en": "Are there cold sweats, very pale or greyish skin, a fast heartbeat and severe weakness?",
+      "descricao": "O choque é uma entrega inadequada de oxigénio aos tecidos. Os sinais clássicos incluem suores, palidez, taquicardia, hipotensão e nível de consciência reduzido."
+    },
+    {
+      "id": "diabetes_p1_2091",
+      "disc_id": 2091,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Não reativo?",
+      "texto_utente": "Está sem reagir a nada, nem quando lhe falam, lhe tocam ou lhe fazem doer?",
+      "texto_en": "Unresponsive?",
+      "texto_utente_en": "Is the person not reacting at all, even to voice, touch or pain?",
+      "descricao": "Não responde a um estímulo doloroso."
+    },
+    {
+      "id": "diabetes_p1_2092",
+      "disc_id": 2092,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Hipoglicémia?",
+      "texto_utente": "Tem o açúcar no sangue baixo (abaixo de 55 mg/dl)?",
+      "texto_en": "Hypoglycaemia (low blood sugar)?",
+      "texto_utente_en": "Is your blood sugar low (below 55 mg/dl)?",
+      "descricao": "Glicémia inferior a 55 mg/dl."
+    },
+    {
+      "id": "diabetes_p2_2093",
+      "disc_id": 2093,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Alteração do estado de consciência?",
+      "texto_utente": "Está sonolento ou baralhado, só reagindo quando lhe falam ou lhe tocam (não está bem desperto)?",
+      "texto_en": "Altered level of consciousness?",
+      "texto_utente_en": "Is the person drowsy or muddled, responding only to voice or touch (not fully alert)?",
+      "descricao": "Não está totalmente alerta. Só responde à voz, à dor"
+    },
+    {
+      "id": "diabetes_p2_2094",
+      "disc_id": 2094,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Muito quente?",
+      "texto_utente": "Tem febre muito alta? (num adulto, 41°C ou mais; num bebé com menos de 12 meses, 38,5°C ou mais)",
+      "texto_en": "Very hot (high temperature)?",
+      "texto_utente_en": "Do you have a very high fever? (in an adult, 41°C or more; in a baby under 12 months, 38.5°C or more)",
+      "descricao": "No Adulto temperatura igual ou superior a 41ºC; Crianças com menos de 12 meses a temperatura é igual ou superior a 38.5ºC"
+    },
+    {
+      "id": "diabetes_p2_2095",
+      "disc_id": 2095,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Possível sépsis?",
+      "texto_utente": "Tem sinais de uma infeção a alastrar depressa, como confusão, respiração muito acelerada ou uma fraqueza que se instala de repente?",
+      "texto_en": "Possible sepsis?",
+      "texto_utente_en": "Are there signs of a fast-spreading infection, such as confusion, very rapid breathing or weakness that comes on suddenly?",
+      "descricao": "Suspeitar de sépsis em vítimas que apresentem alteração do estado de consciência, hipotensão (sistólica inferior a 100mmHg), ou aumento da frequência respiratória (frequência superior a 22 cpm). Nas crianças deve ser determinada a possibilidade de sépsis pelas tabelas de parâmetros vitais ajustados à idade."
+    },
+    {
+      "id": "diabetes_p2_3272",
+      "disc_id": 3272,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Hiperglicémia c/ cetose?",
+      "texto_utente": "Tem o açúcar no sangue muito alto e cetonas positivas (no teste da urina ou do sangue)?",
+      "texto_en": "Hyperglycaemia with ketosis?",
+      "texto_utente_en": "Is your blood sugar very high with positive ketones (on a urine or blood test)?"
+    },
+    {
+      "id": "diabetes_p2_3273",
+      "disc_id": 3273,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Dor severa?",
+      "texto_utente": "Tem dores muito fortes, quase a não aguentar (das piores que alguma vez sentiu)?",
+      "texto_en": "Severe pain?",
+      "texto_utente_en": "Do you have very severe pain, almost unbearable (some of the worst you've ever felt)?",
+      "descricao": "Dor significativa e insuportável, frequentemente referida como a pior de sempre. Alterações na expressão facial, de comportamento e nas atividades diárias permitem avaliar o nível de dor, especialmente nos doentes não comunicativos (por exemplo nas crianças e bebés), ou quando existem barreiras de comunicação pelo idioma ou por demência."
+    },
+    {
+      "id": "diabetes_p3_2097",
+      "disc_id": 2097,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Hiperglicémia?",
+      "texto_utente": "Tem o açúcar no sangue muito alto (acima de 300 mg/dl)?",
+      "texto_en": "Hyperglycaemia (high blood sugar)?",
+      "texto_utente_en": "Is your blood sugar very high (above 300 mg/dl)?",
+      "descricao": "Glicémia superior a 300 mg/dl."
+    },
+    {
+      "id": "diabetes_p3_2098",
+      "disc_id": 2098,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Vómitos incoercíveis?",
+      "texto_utente": "Está a vomitar sem parar, sem conseguir suster?",
+      "texto_en": "Uncontrollable vomiting?",
+      "texto_utente_en": "Are you vomiting non-stop and unable to hold it back?",
+      "descricao": "Vómitos constantes e/ou frequentes, podendo ser acompanhados de náuseas."
+    },
+    {
+      "id": "diabetes_p3_2099",
+      "disc_id": 2099,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Quente?",
+      "texto_utente": "Tem febre? (num adulto, acima de 38,5°C; numa criança, 38,5°C a 39,8°C; num recém-nascido com menos de 28 dias, 37,5°C a 38,4°C)",
+      "texto_en": "Hot (raised temperature)?",
+      "texto_utente_en": "Do you have a fever? (in an adult, above 38.5°C; in a child, 38.5°C to 39.8°C; in a newborn under 28 days, 37.5°C to 38.4°C)",
+      "descricao": "No adulto, uma temperatura > 38.5-40.9ºC; Na criança é 38.5-39.8ºC; No recém-nascido com menos de 28 dias é 37.5-38.4ºC."
+    },
+    {
+      "id": "diabetes_p3_2100",
+      "disc_id": 2100,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Dor moderada?",
+      "texto_utente": "Tem dores a sério, que o impedem de fazer algumas coisas do dia a dia?",
+      "texto_en": "Moderate pain?",
+      "texto_utente_en": "Do you have noticeable pain that stops you doing some everyday things?",
+      "descricao": "Dor significativa que incapacita para algumas atividades diárias. Alterações na expressão facial, de comportamento e nas atividades diárias permitem avaliar o nível de dor, especialmente nos doentes não comunicativos (por exemplo nas crianças e bebés), ou quando existem barreiras de comunicação pelo idioma ou por demência."
+    },
+    {
+      "id": "diabetes_p4_2101",
+      "disc_id": 2101,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Vómitos persistentes?",
+      "texto_utente": "Continua a vomitar, mesmo depois de esperar ou de tomar algum medicamento?",
+      "texto_en": "Persistent vomiting?",
+      "texto_utente_en": "Do you keep vomiting, even after waiting or taking medication?",
+      "descricao": "Vómitos que não passaram, apesar da espera ou da medicação que tomou."
+    },
+    {
+      "id": "diabetes_p4_2104",
+      "disc_id": 2104,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Febre persistente?",
+      "texto_utente": "A febre não cede, mesmo alternando os medicamentos para baixar a febre (paracetamol e ibuprofeno)?",
+      "texto_en": "Persistent fever?",
+      "texto_utente_en": "Does the fever not come down, even alternating the fever medicines (paracetamol and ibuprofen)?",
+      "descricao": "Febre que não cede à toma intercalada de antipiréticos (paracetamol e ibuprofeno)"
+    },
+    {
+      "id": "diabetes_p4_2105",
+      "disc_id": 2105,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Perda do controle da glicémia?",
+      "texto_utente": "O açúcar no sangue está fora dos valores que costuma ter?",
+      "texto_en": "Loss of blood-sugar control?",
+      "texto_utente_en": "Is your blood sugar outside your usual range?",
+      "descricao": "Níveis de glicémia que estão fora dos valores habituais do doente"
+    },
+    {
+      "id": "diabetes_p4_2108",
+      "disc_id": 2108,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Dor persistente?",
+      "texto_utente": "A dor continua sem passar, mesmo depois de esperar ou de tomar um analgésico?",
+      "texto_en": "Persistent pain?",
+      "texto_utente_en": "Does the pain carry on without easing, even after waiting or taking a painkiller?",
+      "descricao": "Dor que não desaparece após algum tempo ou após tomar a medicação apropriada. Mudanças nas expressões faciais, comportamento e interrupção da atividade permitirão avaliar os níveis de dor, especialmente em pacientes não comunicativos, como por exemplo crianças muito pequenas e bebés, ou onde existam barreiras à comunicação devido ao idioma ou a demência."
+    },
+    {
+      "id": "diabetes_p4_2109",
+      "disc_id": 2109,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Problema recente?",
+      "texto_utente": "Este problema começou na última semana?",
+      "texto_en": "Recent problem?",
+      "texto_utente_en": "Did this problem start within the last week?",
+      "descricao": "Um problema que aparece no decorrer da última semana."
+    }
+  ]
+}

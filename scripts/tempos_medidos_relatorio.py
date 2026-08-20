@@ -60,8 +60,10 @@ def progresso(dados: dict) -> int:
                 feitos += 1
                 linha[0] += 1
     largura = max(len(c) for c in por_concelho)
-    print(f"Tempos medidos: {feitos} de {total} pares preenchidos "
-          f"({feitos * 100 // total if total else 0}%).\n")
+    print(
+        f"Tempos medidos: {feitos} de {total} pares preenchidos "
+        f"({feitos * 100 // total if total else 0}%).\n"
+    )
     for concelho in sorted(por_concelho):
         f, t = por_concelho[concelho]
         barra = "#" * (f * 20 // t) if t else ""
@@ -78,9 +80,7 @@ def links(dados: dict, filtro: str | None) -> int:
     for m in dados["medicoes"]:
         if filtro and filtro not in m["origem"]:
             continue
-        pendentes = [
-            uid for uid, v in m["destinos"].items() if v.get("tempo_min") is None
-        ]
+        pendentes = [uid for uid, v in m["destinos"].items() if v.get("tempo_min") is None]
         if not pendentes:
             continue
         em_falta += len(pendentes)
@@ -96,7 +96,9 @@ def links(dados: dict, filtro: str | None) -> int:
             print(f"  -> {nomes[uid]} ({uid})")
             print(f"     {url}")
     if em_falta == 0:
-        print("Nada por medir" + (f" para o filtro '{filtro}'." if filtro else ": tudo preenchido."))
+        print(
+            "Nada por medir" + (f" para o filtro '{filtro}'." if filtro else ": tudo preenchido.")
+        )
     else:
         print(f"\n{em_falta} pares por medir" + (f" (filtro: {filtro})" if filtro else "") + ".")
     return 0

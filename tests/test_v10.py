@@ -33,6 +33,7 @@ def _num_paginas(pdf: bytes) -> int:
 # v0.10.3 — tradução dos textos gerados pelo backend                      #
 # --------------------------------------------------------------------- #
 
+
 def test_encaminhamento_tem_mensagem_en_em_todas_as_cores():
     for cor in ("vermelho", "laranja", "amarelo", "verde", "azul"):
         d = routing.decidir_encaminhamento(cor, _LAT, _LNG, quando=_SABADO)
@@ -81,6 +82,7 @@ def test_horario_en_traduz_padroes_conhecidos():
 # --------------------------------------------------------------------- #
 # v0.10.3 — conteúdo clínico e interface totalmente traduzidos            #
 # --------------------------------------------------------------------- #
+
 
 def test_conteudo_clinico_sem_lacunas_de_traducao():
     # importa a própria ferramenta de auditoria e exige zero lacunas

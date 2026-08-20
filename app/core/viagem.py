@@ -5,7 +5,7 @@ estimava-se a 50 km/h. Na Madeira isso engana — o Curral das Freiras tem
 o Funchal "encostado" no mapa e uma serra pelo meio; a via rápida faz o
 contrário, encurta em tempo o que parece longe em quilómetros. A regra
 de troca (viagem + espera) somava por isso uma medição real (espera do
-SEISRAM) a um palpite (linha reta). Este módulo substitui o palpite por
+SESARAM) a um palpite (linha reta). Este módulo substitui o palpite por
 uma estimativa por estrada, SEM enviar a localização de ninguém para
 fora e SEM depender de serviços externos.
 
@@ -45,6 +45,7 @@ from __future__ import annotations
 
 import heapq
 import json
+import logging
 import os
 import time
 from pathlib import Path
@@ -52,6 +53,8 @@ from pathlib import Path
 import requests
 
 from .geo import haversine_km
+
+logger = logging.getLogger(__name__)
 
 # ------------------------------------------------------------ ficheiros -- #
 
@@ -67,8 +70,9 @@ ILHAS_CONHECIDAS = {"madeira", "porto_santo"}
 # ------------------------------------------------------------------ OSRM -- #
 
 VARIAVEL_OSRM = "VIAGEM_OSRM_URL"
-TEMPO_LIMITE_OSRM = 3.0          # segundos por pedido
-TTL_OSRM_SEGUNDOS = 600          # cache de respostas
+TEMPO_LIMITE_OSRM = 3.0  # segundos por pedido
+TTL_OSRM_SEGUNDOS = 600  # cache de respostas
+
 ARREFECIMENTO_OSRM_SEGUNDOS = 120  # após falha, não insistir já a seguir
 
 _cache_osrm: dict[tuple, tuple[float, list]] = {}
@@ -76,6 +80,7 @@ _cache_osrm: dict[tuple, tuple[float, list]] = {}
 # time.monotonic() pode valer poucos segundos e "monotonic() - 0.0" cairia
 # dentro da janela de arrefecimento, desligando o OSRM sem razão.
 _NUNCA_FALHOU = float("-inf")
+
 _osrm_falhou_em: float = _NUNCA_FALHOU
 
 
@@ -134,9 +139,7 @@ def carregar_rede(recarregar: bool = False) -> dict:
         dados = json.loads(FICHEIRO_REDE.read_text(encoding="utf-8"))
         problemas = validar_rede(dados)
         if problemas:
-            raise ErroRedeViagem(
-                "rede_viagem.json inválido:\n- " + "\n- ".join(problemas)
-            )
+            raise ErroRedeViagem("rede_viagem.json inválido:\n- " + "\n- ".join(problemas))
         _rede_cache = _preparar(dados)
     return _rede_cache
 
@@ -232,9 +235,16 @@ def validar_rede(dados: dict) -> list[str]:
             problemas.append(f"modelo_local.{chave} inválido ({valor!r})")
     for chave in ("fator_desvio", "velocidade_kmh"):
         escaloes = modelo.get(chave)
-        if not isinstance(escaloes, list) or not escaloes or not all(
-            isinstance(e, list) and len(e) == 2 and all(isinstance(x, (int, float)) for x in e) and e[1] > 0
-            for e in escaloes
+        if (
+            not isinstance(escaloes, list)
+            or not escaloes
+            or not all(
+                isinstance(e, list)
+                and len(e) == 2
+                and all(isinstance(x, (int, float)) for x in e)
+                and e[1] > 0
+                for e in escaloes
+            )
         ):
             problemas.append(f"modelo_local.{chave} inválido")
 
@@ -250,9 +260,7 @@ def _preparar(dados: dict) -> dict:
         minutos = float(lig["minutos"])
         vizinhos[a].append((b, minutos))
         vizinhos[b].append((a, minutos))
-    barreiras = [
-        (tuple(b["de"]), tuple(b["para"])) for b in dados.get("barreiras", [])
-    ]
+    barreiras = [(tuple(b["de"]), tuple(b["para"])) for b in dados.get("barreiras", [])]
     return {
         "por_id": por_id,
         "vizinhos": vizinhos,
@@ -263,6 +271,7 @@ def _preparar(dados: dict) -> dict:
 
 
 # ----------------------------------------------------------- geometria --- #
+
 
 def _orientacao(p, q, r) -> int:
     valor = (q[1] - p[1]) * (r[0] - q[0]) - (q[0] - p[0]) * (r[1] - q[1])
@@ -301,6 +310,7 @@ def _cruza_barreira(p1, p2, barreiras) -> bool:
 
 # -------------------------------------------------------- modelo local --- #
 
+
 def _escalao(valor: float, escaloes: list[list[float]]) -> float:
     for limite, resultado in escaloes:
         if valor <= limite:
@@ -321,6 +331,7 @@ def _minutos_locais(d_km: float, modelo: dict) -> float:
 
 
 # ------------------------------------------------------------- grafo ----- #
+
 
 def ilha_do_ponto(lat: float, lng: float, rede: dict | None = None) -> str:
     """Ilha estimada: a do nó da rede mais próximo (coerente com o routing)."""
@@ -405,6 +416,7 @@ def _tempo_rede(lat1: float, lng1: float, lat2: float, lng2: float) -> float | N
 
 # --------------------------------------------------------------- OSRM ---- #
 
+
 def _osrm_base() -> str | None:
     return (os.environ.get(VARIAVEL_OSRM) or "").strip().rstrip("/") or None
 
@@ -427,7 +439,9 @@ def _repor_estado_osrm() -> None:
     _osrm_falhou_em = _NUNCA_FALHOU
 
 
-def _tempos_osrm(lat: float, lng: float, destinos: list[tuple[float, float]]) -> list[float | None] | None:
+def _tempos_osrm(
+    lat: float, lng: float, destinos: list[tuple[float, float]]
+) -> list[float | None] | None:
     """Tempos (min) da origem a TODOS os destinos num só pedido /table.
 
     None (o todo) = OSRM desligado ou indisponível → quem chama recua
@@ -446,9 +460,7 @@ def _tempos_osrm(lat: float, lng: float, destinos: list[tuple[float, float]]) ->
     if guardado and time.monotonic() - guardado[0] <= TTL_OSRM_SEGUNDOS:
         return guardado[1]
 
-    coordenadas = ";".join(
-        f"{lng_:.4f},{lat_:.4f}" for lat_, lng_ in [(lat, lng), *destinos]
-    )
+    coordenadas = ";".join(f"{lng_:.4f},{lat_:.4f}" for lat_, lng_ in [(lat, lng), *destinos])
     url = f"{base}/table/v1/driving/{coordenadas}?sources=0&annotations=duration"
     try:
         dados = _pedir_osrm(url)
@@ -458,7 +470,15 @@ def _tempos_osrm(lat: float, lng: float, destinos: list[tuple[float, float]]) ->
         if len(duracoes) != len(destinos):
             raise ValueError("OSRM devolveu um número inesperado de durações")
         minutos = [None if d is None else float(d) / 60.0 for d in duracoes]
-    except Exception:  # noqa: BLE001 — qualquer falha: recuar em silêncio
+    except Exception as exc:  # noqa: BLE001 — qualquer falha: recuar
+        # Sem URL nem coordenadas no log (a URL leva a localização do
+        # utente; ver docs/adr/0011-logging.md). Só o facto e a pausa.
+        logger.warning(
+            "OSRM falhou (%s: %s); a usar a rede calibrada durante %ds",
+            type(exc).__name__,
+            exc,
+            ARREFECIMENTO_OSRM_SEGUNDOS,
+        )
         _osrm_falhou_em = time.monotonic()
         return None
 
@@ -469,6 +489,7 @@ def _tempos_osrm(lat: float, lng: float, destinos: list[tuple[float, float]]) ->
 
 
 # ------------------------------------------------------------- público --- #
+
 
 def _arredondar(minutos: float) -> int:
     return max(1, int(minutos + 0.5))

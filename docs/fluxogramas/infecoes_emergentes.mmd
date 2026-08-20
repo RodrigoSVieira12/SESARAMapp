@@ -1,0 +1,89 @@
+flowchart TD
+  inicio(["Início: Infeções emergentes"])
+  infecoes_emergentes_p1_1878["1. [P1] Compromisso da via aérea?"]
+  infecoes_emergentes_p1_2149["2. [P1] Respiração ineficaz?"]
+  infecoes_emergentes_p1_2762["3. [P1] Sinais de choque?"]
+  infecoes_emergentes_p1_2774["4. [P1] Não reativo?"]
+  infecoes_emergentes_p1_3062["5. [P1] Convulsão atual?"]
+  infecoes_emergentes_p2_3064["6. [P2] Alteração do estado de<br/>consciência?"]
+  infecoes_emergentes_p2_3087["7. [P2] Dispneia aguda?"]
+  infecoes_emergentes_p2_3088["8. [P2] Hematoquésias, melenas ou<br/>retorragias?"]
+  infecoes_emergentes_p2_3089["9. [P2] Erupção cutânea desconhecida?"]
+  infecoes_emergentes_p2_3090["10. [P2] Alteração da imunidade<br/>conhecida?"]
+  infecoes_emergentes_p2_3091["11. [P2] Muito quente?"]
+  infecoes_emergentes_p2_3092["12. [P2] Possível sépsis?"]
+  infecoes_emergentes_p3_3093["13. [P3] Pequena hemorragia<br/>incontrolável?"]
+  infecoes_emergentes_p3_3094["14. [P3] Novos sinais e/ou sintomas<br/>neurológicos?"]
+  infecoes_emergentes_p3_3095["15. [P3] Exantema eritematoso ou<br/>bolhoso?"]
+  infecoes_emergentes_p3_3096["16. [P3] História hematológica ou<br/>metabólica significativa?"]
+  infecoes_emergentes_p3_3097["17. [P3] História significativa de<br/>doença respiratória?"]
+  infecoes_emergentes_p4_3098["18. [P4] Erupção cutânea desconhecida?"]
+  infecoes_emergentes_p4_3099["19. [P4] Risco de contaminação?"]
+  infecoes_emergentes_p4_3100["20. [P4] Dor persistente?"]
+  inicio --> infecoes_emergentes_p1_1878
+  infecoes_emergentes_p1_1878_sim(["VERMELHO"]):::vermelho
+  infecoes_emergentes_p1_1878 -->|Sim| infecoes_emergentes_p1_1878_sim
+  infecoes_emergentes_p1_1878 -->|Não| infecoes_emergentes_p1_2149
+  infecoes_emergentes_p1_2149_sim(["VERMELHO"]):::vermelho
+  infecoes_emergentes_p1_2149 -->|Sim| infecoes_emergentes_p1_2149_sim
+  infecoes_emergentes_p1_2149 -->|Não| infecoes_emergentes_p1_2762
+  infecoes_emergentes_p1_2762_sim(["VERMELHO"]):::vermelho
+  infecoes_emergentes_p1_2762 -->|Sim| infecoes_emergentes_p1_2762_sim
+  infecoes_emergentes_p1_2762 -->|Não| infecoes_emergentes_p1_2774
+  infecoes_emergentes_p1_2774_sim(["VERMELHO"]):::vermelho
+  infecoes_emergentes_p1_2774 -->|Sim| infecoes_emergentes_p1_2774_sim
+  infecoes_emergentes_p1_2774 -->|Não| infecoes_emergentes_p1_3062
+  infecoes_emergentes_p1_3062_sim(["VERMELHO"]):::vermelho
+  infecoes_emergentes_p1_3062 -->|Sim| infecoes_emergentes_p1_3062_sim
+  infecoes_emergentes_p1_3062 -->|Não| infecoes_emergentes_p2_3064
+  infecoes_emergentes_p2_3064_sim(["LARANJA"]):::laranja
+  infecoes_emergentes_p2_3064 -->|Sim| infecoes_emergentes_p2_3064_sim
+  infecoes_emergentes_p2_3064 -->|Não| infecoes_emergentes_p2_3087
+  infecoes_emergentes_p2_3087_sim(["LARANJA"]):::laranja
+  infecoes_emergentes_p2_3087 -->|Sim| infecoes_emergentes_p2_3087_sim
+  infecoes_emergentes_p2_3087 -->|Não| infecoes_emergentes_p2_3088
+  infecoes_emergentes_p2_3088_sim(["LARANJA"]):::laranja
+  infecoes_emergentes_p2_3088 -->|Sim| infecoes_emergentes_p2_3088_sim
+  infecoes_emergentes_p2_3088 -->|Não| infecoes_emergentes_p2_3089
+  infecoes_emergentes_p2_3089_sim(["LARANJA"]):::laranja
+  infecoes_emergentes_p2_3089 -->|Sim| infecoes_emergentes_p2_3089_sim
+  infecoes_emergentes_p2_3089 -->|Não| infecoes_emergentes_p2_3090
+  infecoes_emergentes_p2_3090_sim(["LARANJA"]):::laranja
+  infecoes_emergentes_p2_3090 -->|Sim| infecoes_emergentes_p2_3090_sim
+  infecoes_emergentes_p2_3090 -->|Não| infecoes_emergentes_p2_3091
+  infecoes_emergentes_p2_3091_sim(["LARANJA"]):::laranja
+  infecoes_emergentes_p2_3091 -->|Sim| infecoes_emergentes_p2_3091_sim
+  infecoes_emergentes_p2_3091 -->|Não| infecoes_emergentes_p2_3092
+  infecoes_emergentes_p2_3092_sim(["LARANJA"]):::laranja
+  infecoes_emergentes_p2_3092 -->|Sim| infecoes_emergentes_p2_3092_sim
+  infecoes_emergentes_p2_3092 -->|Não| infecoes_emergentes_p3_3093
+  infecoes_emergentes_p3_3093_sim(["AMARELO"]):::amarelo
+  infecoes_emergentes_p3_3093 -->|Sim| infecoes_emergentes_p3_3093_sim
+  infecoes_emergentes_p3_3093 -->|Não| infecoes_emergentes_p3_3094
+  infecoes_emergentes_p3_3094_sim(["AMARELO"]):::amarelo
+  infecoes_emergentes_p3_3094 -->|Sim| infecoes_emergentes_p3_3094_sim
+  infecoes_emergentes_p3_3094 -->|Não| infecoes_emergentes_p3_3095
+  infecoes_emergentes_p3_3095_sim(["AMARELO"]):::amarelo
+  infecoes_emergentes_p3_3095 -->|Sim| infecoes_emergentes_p3_3095_sim
+  infecoes_emergentes_p3_3095 -->|Não| infecoes_emergentes_p3_3096
+  infecoes_emergentes_p3_3096_sim(["AMARELO"]):::amarelo
+  infecoes_emergentes_p3_3096 -->|Sim| infecoes_emergentes_p3_3096_sim
+  infecoes_emergentes_p3_3096 -->|Não| infecoes_emergentes_p3_3097
+  infecoes_emergentes_p3_3097_sim(["AMARELO"]):::amarelo
+  infecoes_emergentes_p3_3097 -->|Sim| infecoes_emergentes_p3_3097_sim
+  infecoes_emergentes_p3_3097 -->|Não| infecoes_emergentes_p4_3098
+  infecoes_emergentes_p4_3098_sim(["VERDE"]):::verde
+  infecoes_emergentes_p4_3098 -->|Sim| infecoes_emergentes_p4_3098_sim
+  infecoes_emergentes_p4_3098 -->|Não| infecoes_emergentes_p4_3099
+  infecoes_emergentes_p4_3099_sim(["VERDE"]):::verde
+  infecoes_emergentes_p4_3099 -->|Sim| infecoes_emergentes_p4_3099_sim
+  infecoes_emergentes_p4_3099 -->|Não| infecoes_emergentes_p4_3100
+  infecoes_emergentes_p4_3100_sim(["VERDE"]):::verde
+  infecoes_emergentes_p4_3100 -->|Sim| infecoes_emergentes_p4_3100_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  infecoes_emergentes_p4_3100 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

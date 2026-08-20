@@ -1,0 +1,93 @@
+flowchart TD
+  inicio(["Início: Corpo estranho"])
+  corpo_estranho_p1_1835["1. [P1] Compromisso da via aérea?"]
+  corpo_estranho_p1_1985["2. [P1] Estridor?"]
+  corpo_estranho_p1_1986["3. [P1] Respiração ineficaz?"]
+  corpo_estranho_p1_1987["4. [P1] Hemorragia catastrófica?"]
+  corpo_estranho_p1_1988["5. [P1] Sinais de choque?"]
+  corpo_estranho_p1_1989["6. [P1] Não reativo?"]
+  corpo_estranho_p2_1990["7. [P2] Grande Hemorragia<br/>incontrolável?"]
+  corpo_estranho_p2_1991["8. [P2] Alteração do estado de<br/>consciência?"]
+  corpo_estranho_p2_1992["9. [P2] Traumatismo ocular<br/>penetrante?"]
+  corpo_estranho_p2_1993["10. [P2] Ingestão de objeto perigoso?"]
+  corpo_estranho_p2_1994["11. [P2] Mecanismo significativo de<br/>lesão?"]
+  corpo_estranho_p2_1995["12. [P2] Dor severa?"]
+  corpo_estranho_p3_1996["13. [P3] Pequena hemorragia<br/>incontrolável?"]
+  corpo_estranho_p3_1997["14. [P3] História Inapropriada?"]
+  corpo_estranho_p3_1998["15. [P3] Dor moderada?"]
+  corpo_estranho_p4_1999["16. [P4] Infeção local?"]
+  corpo_estranho_p4_2001["17. [P4] Inflamação local?"]
+  corpo_estranho_p4_2004["18. [P4] Olho vermelho?"]
+  corpo_estranho_p4_2005["19. [P4] Edema?"]
+  corpo_estranho_p4_2008["20. [P4] Dor persistente?"]
+  corpo_estranho_p4_2009["21. [P4] Problema recente?"]
+  inicio --> corpo_estranho_p1_1835
+  corpo_estranho_p1_1835_sim(["VERMELHO"]):::vermelho
+  corpo_estranho_p1_1835 -->|Sim| corpo_estranho_p1_1835_sim
+  corpo_estranho_p1_1835 -->|Não| corpo_estranho_p1_1985
+  corpo_estranho_p1_1985_sim(["VERMELHO"]):::vermelho
+  corpo_estranho_p1_1985 -->|Sim| corpo_estranho_p1_1985_sim
+  corpo_estranho_p1_1985 -->|Não| corpo_estranho_p1_1986
+  corpo_estranho_p1_1986_sim(["VERMELHO"]):::vermelho
+  corpo_estranho_p1_1986 -->|Sim| corpo_estranho_p1_1986_sim
+  corpo_estranho_p1_1986 -->|Não| corpo_estranho_p1_1987
+  corpo_estranho_p1_1987_sim(["VERMELHO"]):::vermelho
+  corpo_estranho_p1_1987 -->|Sim| corpo_estranho_p1_1987_sim
+  corpo_estranho_p1_1987 -->|Não| corpo_estranho_p1_1988
+  corpo_estranho_p1_1988_sim(["VERMELHO"]):::vermelho
+  corpo_estranho_p1_1988 -->|Sim| corpo_estranho_p1_1988_sim
+  corpo_estranho_p1_1988 -->|Não| corpo_estranho_p1_1989
+  corpo_estranho_p1_1989_sim(["VERMELHO"]):::vermelho
+  corpo_estranho_p1_1989 -->|Sim| corpo_estranho_p1_1989_sim
+  corpo_estranho_p1_1989 -->|Não| corpo_estranho_p2_1990
+  corpo_estranho_p2_1990_sim(["LARANJA"]):::laranja
+  corpo_estranho_p2_1990 -->|Sim| corpo_estranho_p2_1990_sim
+  corpo_estranho_p2_1990 -->|Não| corpo_estranho_p2_1991
+  corpo_estranho_p2_1991_sim(["LARANJA"]):::laranja
+  corpo_estranho_p2_1991 -->|Sim| corpo_estranho_p2_1991_sim
+  corpo_estranho_p2_1991 -->|Não| corpo_estranho_p2_1992
+  corpo_estranho_p2_1992_sim(["LARANJA"]):::laranja
+  corpo_estranho_p2_1992 -->|Sim| corpo_estranho_p2_1992_sim
+  corpo_estranho_p2_1992 -->|Não| corpo_estranho_p2_1993
+  corpo_estranho_p2_1993_sim(["LARANJA"]):::laranja
+  corpo_estranho_p2_1993 -->|Sim| corpo_estranho_p2_1993_sim
+  corpo_estranho_p2_1993 -->|Não| corpo_estranho_p2_1994
+  corpo_estranho_p2_1994_sim(["LARANJA"]):::laranja
+  corpo_estranho_p2_1994 -->|Sim| corpo_estranho_p2_1994_sim
+  corpo_estranho_p2_1994 -->|Não| corpo_estranho_p2_1995
+  corpo_estranho_p2_1995_sim(["LARANJA"]):::laranja
+  corpo_estranho_p2_1995 -->|Sim| corpo_estranho_p2_1995_sim
+  corpo_estranho_p2_1995 -->|Não| corpo_estranho_p3_1996
+  corpo_estranho_p3_1996_sim(["AMARELO"]):::amarelo
+  corpo_estranho_p3_1996 -->|Sim| corpo_estranho_p3_1996_sim
+  corpo_estranho_p3_1996 -->|Não| corpo_estranho_p3_1997
+  corpo_estranho_p3_1997_sim(["AMARELO"]):::amarelo
+  corpo_estranho_p3_1997 -->|Sim| corpo_estranho_p3_1997_sim
+  corpo_estranho_p3_1997 -->|Não| corpo_estranho_p3_1998
+  corpo_estranho_p3_1998_sim(["AMARELO"]):::amarelo
+  corpo_estranho_p3_1998 -->|Sim| corpo_estranho_p3_1998_sim
+  corpo_estranho_p3_1998 -->|Não| corpo_estranho_p4_1999
+  corpo_estranho_p4_1999_sim(["VERDE"]):::verde
+  corpo_estranho_p4_1999 -->|Sim| corpo_estranho_p4_1999_sim
+  corpo_estranho_p4_1999 -->|Não| corpo_estranho_p4_2001
+  corpo_estranho_p4_2001_sim(["VERDE"]):::verde
+  corpo_estranho_p4_2001 -->|Sim| corpo_estranho_p4_2001_sim
+  corpo_estranho_p4_2001 -->|Não| corpo_estranho_p4_2004
+  corpo_estranho_p4_2004_sim(["VERDE"]):::verde
+  corpo_estranho_p4_2004 -->|Sim| corpo_estranho_p4_2004_sim
+  corpo_estranho_p4_2004 -->|Não| corpo_estranho_p4_2005
+  corpo_estranho_p4_2005_sim(["VERDE"]):::verde
+  corpo_estranho_p4_2005 -->|Sim| corpo_estranho_p4_2005_sim
+  corpo_estranho_p4_2005 -->|Não| corpo_estranho_p4_2008
+  corpo_estranho_p4_2008_sim(["VERDE"]):::verde
+  corpo_estranho_p4_2008 -->|Sim| corpo_estranho_p4_2008_sim
+  corpo_estranho_p4_2008 -->|Não| corpo_estranho_p4_2009
+  corpo_estranho_p4_2009_sim(["VERDE"]):::verde
+  corpo_estranho_p4_2009 -->|Sim| corpo_estranho_p4_2009_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  corpo_estranho_p4_2009 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

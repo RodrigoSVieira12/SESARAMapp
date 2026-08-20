@@ -1,0 +1,93 @@
+flowchart TD
+  inicio(["Início: Exposição a químicos"])
+  exposicao_a_quimicos_p1_1855["1. [P1] Compromisso da via aérea?"]
+  exposicao_a_quimicos_p1_2126["2. [P1] Respiração ineficaz?"]
+  exposicao_a_quimicos_p1_2371["3. [P1] Sinais de choque?"]
+  exposicao_a_quimicos_p1_2372["4. [P1] Não reativo?"]
+  exposicao_a_quimicos_p1_2501["5. [P1] Estridor?"]
+  exposicao_a_quimicos_p1_2502["6. [P1] Convulsão atual?"]
+  exposicao_a_quimicos_p1_2503["7. [P1] Lesão ocular química?"]
+  exposicao_a_quimicos_p2_2504["8. [P2] Edema da língua?"]
+  exposicao_a_quimicos_p2_2505["9. [P2] Edema da face?"]
+  exposicao_a_quimicos_p2_2506["10. [P2] Lesão por inalação?"]
+  exposicao_a_quimicos_p2_2507["11. [P2] Alteração do estado de<br/>consciência?"]
+  exposicao_a_quimicos_p2_2508["12. [P2] Alta mortalidade?"]
+  exposicao_a_quimicos_p2_2509["13. [P2] Risco de contaminação?"]
+  exposicao_a_quimicos_p2_2510["14. [P2] Dor severa?"]
+  exposicao_a_quimicos_p3_2511["15. [P3] Inalação de fumo?"]
+  exposicao_a_quimicos_p3_2512["16. [P3] Exantema eritematoso ou<br/>bolhoso?"]
+  exposicao_a_quimicos_p3_2513["17. [P3] História Inapropriada?"]
+  exposicao_a_quimicos_p3_2514["18. [P3] Mortalidade moderada?"]
+  exposicao_a_quimicos_p3_2515["19. [P3] Dor moderada?"]
+  exposicao_a_quimicos_p4_2516["20. [P4] Dor persistente?"]
+  exposicao_a_quimicos_p4_2519["21. [P4] Problema recente?"]
+  inicio --> exposicao_a_quimicos_p1_1855
+  exposicao_a_quimicos_p1_1855_sim(["VERMELHO"]):::vermelho
+  exposicao_a_quimicos_p1_1855 -->|Sim| exposicao_a_quimicos_p1_1855_sim
+  exposicao_a_quimicos_p1_1855 -->|Não| exposicao_a_quimicos_p1_2126
+  exposicao_a_quimicos_p1_2126_sim(["VERMELHO"]):::vermelho
+  exposicao_a_quimicos_p1_2126 -->|Sim| exposicao_a_quimicos_p1_2126_sim
+  exposicao_a_quimicos_p1_2126 -->|Não| exposicao_a_quimicos_p1_2371
+  exposicao_a_quimicos_p1_2371_sim(["VERMELHO"]):::vermelho
+  exposicao_a_quimicos_p1_2371 -->|Sim| exposicao_a_quimicos_p1_2371_sim
+  exposicao_a_quimicos_p1_2371 -->|Não| exposicao_a_quimicos_p1_2372
+  exposicao_a_quimicos_p1_2372_sim(["VERMELHO"]):::vermelho
+  exposicao_a_quimicos_p1_2372 -->|Sim| exposicao_a_quimicos_p1_2372_sim
+  exposicao_a_quimicos_p1_2372 -->|Não| exposicao_a_quimicos_p1_2501
+  exposicao_a_quimicos_p1_2501_sim(["VERMELHO"]):::vermelho
+  exposicao_a_quimicos_p1_2501 -->|Sim| exposicao_a_quimicos_p1_2501_sim
+  exposicao_a_quimicos_p1_2501 -->|Não| exposicao_a_quimicos_p1_2502
+  exposicao_a_quimicos_p1_2502_sim(["VERMELHO"]):::vermelho
+  exposicao_a_quimicos_p1_2502 -->|Sim| exposicao_a_quimicos_p1_2502_sim
+  exposicao_a_quimicos_p1_2502 -->|Não| exposicao_a_quimicos_p1_2503
+  exposicao_a_quimicos_p1_2503_sim(["VERMELHO"]):::vermelho
+  exposicao_a_quimicos_p1_2503 -->|Sim| exposicao_a_quimicos_p1_2503_sim
+  exposicao_a_quimicos_p1_2503 -->|Não| exposicao_a_quimicos_p2_2504
+  exposicao_a_quimicos_p2_2504_sim(["LARANJA"]):::laranja
+  exposicao_a_quimicos_p2_2504 -->|Sim| exposicao_a_quimicos_p2_2504_sim
+  exposicao_a_quimicos_p2_2504 -->|Não| exposicao_a_quimicos_p2_2505
+  exposicao_a_quimicos_p2_2505_sim(["LARANJA"]):::laranja
+  exposicao_a_quimicos_p2_2505 -->|Sim| exposicao_a_quimicos_p2_2505_sim
+  exposicao_a_quimicos_p2_2505 -->|Não| exposicao_a_quimicos_p2_2506
+  exposicao_a_quimicos_p2_2506_sim(["LARANJA"]):::laranja
+  exposicao_a_quimicos_p2_2506 -->|Sim| exposicao_a_quimicos_p2_2506_sim
+  exposicao_a_quimicos_p2_2506 -->|Não| exposicao_a_quimicos_p2_2507
+  exposicao_a_quimicos_p2_2507_sim(["LARANJA"]):::laranja
+  exposicao_a_quimicos_p2_2507 -->|Sim| exposicao_a_quimicos_p2_2507_sim
+  exposicao_a_quimicos_p2_2507 -->|Não| exposicao_a_quimicos_p2_2508
+  exposicao_a_quimicos_p2_2508_sim(["LARANJA"]):::laranja
+  exposicao_a_quimicos_p2_2508 -->|Sim| exposicao_a_quimicos_p2_2508_sim
+  exposicao_a_quimicos_p2_2508 -->|Não| exposicao_a_quimicos_p2_2509
+  exposicao_a_quimicos_p2_2509_sim(["LARANJA"]):::laranja
+  exposicao_a_quimicos_p2_2509 -->|Sim| exposicao_a_quimicos_p2_2509_sim
+  exposicao_a_quimicos_p2_2509 -->|Não| exposicao_a_quimicos_p2_2510
+  exposicao_a_quimicos_p2_2510_sim(["LARANJA"]):::laranja
+  exposicao_a_quimicos_p2_2510 -->|Sim| exposicao_a_quimicos_p2_2510_sim
+  exposicao_a_quimicos_p2_2510 -->|Não| exposicao_a_quimicos_p3_2511
+  exposicao_a_quimicos_p3_2511_sim(["AMARELO"]):::amarelo
+  exposicao_a_quimicos_p3_2511 -->|Sim| exposicao_a_quimicos_p3_2511_sim
+  exposicao_a_quimicos_p3_2511 -->|Não| exposicao_a_quimicos_p3_2512
+  exposicao_a_quimicos_p3_2512_sim(["AMARELO"]):::amarelo
+  exposicao_a_quimicos_p3_2512 -->|Sim| exposicao_a_quimicos_p3_2512_sim
+  exposicao_a_quimicos_p3_2512 -->|Não| exposicao_a_quimicos_p3_2513
+  exposicao_a_quimicos_p3_2513_sim(["AMARELO"]):::amarelo
+  exposicao_a_quimicos_p3_2513 -->|Sim| exposicao_a_quimicos_p3_2513_sim
+  exposicao_a_quimicos_p3_2513 -->|Não| exposicao_a_quimicos_p3_2514
+  exposicao_a_quimicos_p3_2514_sim(["AMARELO"]):::amarelo
+  exposicao_a_quimicos_p3_2514 -->|Sim| exposicao_a_quimicos_p3_2514_sim
+  exposicao_a_quimicos_p3_2514 -->|Não| exposicao_a_quimicos_p3_2515
+  exposicao_a_quimicos_p3_2515_sim(["AMARELO"]):::amarelo
+  exposicao_a_quimicos_p3_2515 -->|Sim| exposicao_a_quimicos_p3_2515_sim
+  exposicao_a_quimicos_p3_2515 -->|Não| exposicao_a_quimicos_p4_2516
+  exposicao_a_quimicos_p4_2516_sim(["VERDE"]):::verde
+  exposicao_a_quimicos_p4_2516 -->|Sim| exposicao_a_quimicos_p4_2516_sim
+  exposicao_a_quimicos_p4_2516 -->|Não| exposicao_a_quimicos_p4_2519
+  exposicao_a_quimicos_p4_2519_sim(["VERDE"]):::verde
+  exposicao_a_quimicos_p4_2519 -->|Sim| exposicao_a_quimicos_p4_2519_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  exposicao_a_quimicos_p4_2519 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

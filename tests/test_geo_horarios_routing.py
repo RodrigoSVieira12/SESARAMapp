@@ -20,6 +20,7 @@ PORTO_SANTO = (33.06, -16.34)
 
 # ---------------------------------------------------------------- geo --
 
+
 def test_haversine_distancia_zero():
     assert haversine_km(32.65, -16.9, 32.65, -16.9) == 0
 
@@ -36,6 +37,7 @@ def test_haversine_e_simetrica():
 
 
 # ----------------------------------------------------------- horarios --
+
 
 def test_datas_de_referencia_corretas():
     assert SEGUNDA_10H.weekday() == 0
@@ -66,6 +68,7 @@ def test_horario_tolera_travessao_tipografico():
 
 
 # ------------------------------------------------------------ routing --
+
 
 def test_vermelho_manda_ligar_112():
     saida = routing.decidir_encaminhamento("vermelho", *FUNCHAL, quando=SEGUNDA_10H)
@@ -119,6 +122,7 @@ def test_azul_recomenda_autocuidado():
 
 
 # ------------------------------------------------------- regra da ilha --
+
 
 def test_recomendacoes_no_funchal_nao_atravessam_o_mar():
     saida = routing.decidir_encaminhamento("laranja", *FUNCHAL, quando=SEGUNDA_10H)

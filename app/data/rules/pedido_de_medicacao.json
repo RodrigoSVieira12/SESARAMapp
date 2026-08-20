@@ -1,0 +1,56 @@
+{
+  "id": "pedido_de_medicacao",
+  "nome": "Pedido de medicação",
+  "nome_en": "Request for medication",
+  "descricao": "Pedido relacionado com medicação.",
+  "descricao_en": "A request related to medication.",
+  "pediatrico": false,
+  "fonte": "Discriminadores do Sistema de Triagem de Manchester, organizados por prioridade clínica (P1-P5). Importados da tabela de referência; sujeitos a validação clínica antes de uso real.",
+  "fonte_en": "Manchester Triage System discriminators, organised by clinical priority (P1-P5). Imported from the reference table; subject to clinical validation before real use.",
+  "perguntas": [
+    {
+      "id": "pedido_de_medicacao_p3_3353",
+      "disc_id": 3353,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Falta de medicação c/ consequências graves e imediata?",
+      "texto_utente": "Ficou sem um medicamento que não pode falhar (por exemplo, a insulina) e pode piorar depressa sem ele?",
+      "texto_en": "Missed medication with serious, immediate consequences?",
+      "texto_utente_en": "Have you run out of a medicine you can't miss (for example insulin) and could get worse quickly without it?",
+      "descricao": "Falta de medicamentos regulares, como a insulina, que podem causar exacerbação ou recaída da condição se não forem tomados em breve"
+    },
+    {
+      "id": "pedido_de_medicacao_p3_3354",
+      "disc_id": 3354,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Pedido de pilula do dia seguinte e sexo desprotegido 66/72 horas?",
+      "texto_utente": "Quer a pílula do dia seguinte depois de ter tido relações sem proteção há menos de 3 dias?",
+      "texto_en": "Request for the morning-after pill with unprotected sex 66/72 hours ago?",
+      "texto_utente_en": "Do you want the morning-after pill after having unprotected sex less than 3 days ago?",
+      "descricao": "Existe uma janela de oportunidade para a contraceção pós-coito, cuja melhor evidência sugere que termina em 72 horas."
+    },
+    {
+      "id": "pedido_de_medicacao_p4_3122",
+      "disc_id": 3122,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Falta de medicação c/ consequências graves e imediata?",
+      "texto_utente": "Ficou sem um medicamento que não pode falhar (por exemplo, a insulina) e pode piorar depressa sem ele?",
+      "texto_en": "Missed medication with serious, immediate consequences?",
+      "texto_utente_en": "Have you run out of a medicine you can't miss (for example insulin) and could get worse quickly without it?",
+      "descricao": "Falta de medicamentos regulares, como a insulina, que podem causar exacerbação ou recaída da condição se não forem tomados em breve"
+    },
+    {
+      "id": "pedido_de_medicacao_p4_3123",
+      "disc_id": 3123,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Pedido de pilula do dia seguinte e sexo desprotegido 66/72 horas?",
+      "texto_utente": "Quer a pílula do dia seguinte depois de ter tido relações sem proteção há menos de 3 dias?",
+      "texto_en": "Request for the morning-after pill with unprotected sex 66/72 hours ago?",
+      "texto_utente_en": "Do you want the morning-after pill after having unprotected sex less than 3 days ago?",
+      "descricao": "Existe uma janela de oportunidade para a contraceção pós-coito, cuja melhor evidência sugere que termina em 72 horas."
+    }
+  ]
+}

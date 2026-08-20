@@ -1,0 +1,317 @@
+{
+  "id": "pedido_de_apoio_diferenciado",
+  "nome": "Pedido de apoio diferenciado",
+  "nome_en": "Request for differentiated support",
+  "descricao": "Pedido de apoio ou transporte diferenciado entre unidades.",
+  "descricao_en": "Request for differentiated support or transfer between units.",
+  "pediatrico": false,
+  "fonte": "Discriminadores do Sistema de Triagem de Manchester, organizados por prioridade clínica (P1-P5). Importados da tabela de referência; sujeitos a validação clínica antes de uso real.",
+  "fonte_en": "Manchester Triage System discriminators, organised by clinical priority (P1-P5). Imported from the reference table; subject to clinical validation before real use.",
+  "perguntas": [
+    {
+      "id": "pedido_de_apoio_diferenciado_p1_3133",
+      "disc_id": 3133,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Paragem cardiorespiratória / VVPCR",
+      "texto_utente": "Está sem respirar ou sem pulso?",
+      "texto_en": "Cardiac arrest / resuscitation pathway?",
+      "texto_utente_en": "Is the person not breathing or without a pulse?",
+      "descricao": "Doente em paragem cardiorrespiratória identificada por um profissional de saúde"
+    },
+    {
+      "id": "pedido_de_apoio_diferenciado_p1_3134",
+      "disc_id": 3134,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Respiração ineficaz?",
+      "texto_utente": "A respiração está tão fraca ou cansada que parece não entrar ar suficiente (respiração aos arrancos ou muito a custo)?",
+      "texto_en": "Ineffective breathing?",
+      "texto_utente_en": "Is breathing so weak or laboured that not enough air seems to get in (gasping or a real struggle)?",
+      "descricao": "Doentes que não conseguem respirar suficientemente bem para manter uma oxigenação adequada e com falência respiratória, sofrem de respiração ineficaz. Poderá resultar num esforço acrescentado para respirar, ou em exaustão, incluindo uma respiração tipo “gasping”."
+    },
+    {
+      "id": "pedido_de_apoio_diferenciado_p1_3135",
+      "disc_id": 3135,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Dor precordial / VVC",
+      "texto_utente": "Sente dor ou um aperto no meio do peito, que pode ser do coração?",
+      "texto_en": "Precordial pain / coronary fast-track?",
+      "texto_utente_en": "Do you feel pain or tightness in the centre of the chest that could be from the heart?"
+    },
+    {
+      "id": "pedido_de_apoio_diferenciado_p1_3136",
+      "disc_id": 3136,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Dor aórtica?",
+      "texto_utente": "Tem uma dor forte e súbita no peito ou na barriga, como se rasgasse por dentro, que pode passar para as costas?",
+      "texto_en": "Aortic pain?",
+      "texto_utente_en": "Do you have sudden, severe pain in the chest or abdomen, like a tearing inside, that may move to the back?",
+      "descricao": "O início dos sintomas é súbito e a queixa principal é dor severa abdominal ou torácica. A dor pode ser descrita como fina, facada ou dilacerante. A dor aórtica torácica clássica é sentida à volta do esterno com irradiação para as omoplatas. A dor aórtica abdominal é sentida no centro do abdómen e irradia para as costas. A dor pode diminuir ou desaparecer e depois reaparecer noutra localização. Com o passar do tempo a dor pode também ser sentida nos braços, pescoço, maxilar estomago ou ancas."
+    },
+    {
+      "id": "pedido_de_apoio_diferenciado_p1_3137",
+      "disc_id": 3137,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "NEWS igual ou superior a 7?",
+      "texto_utente": "Sente-se muito mal ou quase a desmaiar?",
+      "texto_en": "NEWS score of 7 or above?",
+      "texto_utente_en": "Do you feel very unwell or close to fainting?",
+      "descricao": "Somatório dos pontos da escala NEWS superior ou igual a 7. Indica uma situação clínica instável a precisar apoio de uma equipa SAV no local."
+    },
+    {
+      "id": "pedido_de_apoio_diferenciado_p1_3138",
+      "disc_id": 3138,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Mecanismo significativo de lesão / VTT",
+      "texto_utente": "O acidente ou o impacto foi muito forte?",
+      "texto_en": "Significant mechanism of injury / major trauma pathway?",
+      "texto_utente_en": "Was the accident or impact very strong?"
+    },
+    {
+      "id": "pedido_de_apoio_diferenciado_p1_3139",
+      "disc_id": 3139,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Convulsão atual?",
+      "texto_utente": "Está a ter uma convulsão neste momento (um ataque, com o corpo a tremer ou a ficar rígido)?",
+      "texto_en": "Current seizure?",
+      "texto_utente_en": "Is a seizure happening right now (a fit, with the body shaking or going stiff)?",
+      "descricao": "Doentes que se encontram atualmente sofrendo de convulsões (na fase tónica, clónica ou com outra manifestação relevante) preenchem este critério."
+    },
+    {
+      "id": "pedido_de_apoio_diferenciado_p1_3140",
+      "disc_id": 3140,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Hipoglicémia?",
+      "texto_utente": "Tem o açúcar no sangue baixo (abaixo de 55 mg/dl)?",
+      "texto_en": "Hypoglycaemia (low blood sugar)?",
+      "texto_utente_en": "Is your blood sugar low (below 55 mg/dl)?",
+      "descricao": "Glicémia inferior a 55 mg/dl."
+    },
+    {
+      "id": "pedido_de_apoio_diferenciado_p1_3141",
+      "disc_id": 3141,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Apresentação de segmentos fetais?",
+      "texto_utente": "Está em trabalho de parto e já se veem partes do bebé na vagina?",
+      "texto_en": "Presentation of fetal parts?",
+      "texto_utente_en": "Are you in labour with parts of the baby already showing at the vagina?",
+      "descricao": "Fase de nascimento ou o aparecimento de outras partes fetais na vagina."
+    },
+    {
+      "id": "pedido_de_apoio_diferenciado_p2_3142",
+      "disc_id": 3142,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Défice neurológico agudo / VVAVC",
+      "texto_utente": "Sentiu de repente fraqueza num lado do corpo, a cara descaída ou dificuldade em falar?",
+      "texto_en": "Acute neurological deficit / stroke fast-track?",
+      "texto_utente_en": "Did you suddenly get weakness on one side, a drooping face or trouble speaking?"
+    },
+    {
+      "id": "pedido_de_apoio_diferenciado_p2_3143",
+      "disc_id": 3143,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Possível sépsis / VVS",
+      "texto_utente": "Tem sinais de uma infeção grave a alastrar, como febre alta com tremores, confusão ou muita fraqueza?",
+      "texto_en": "Possible sepsis / sepsis pathway?",
+      "texto_utente_en": "Are there signs of a serious spreading infection, such as high fever with shivering, confusion or great weakness?"
+    },
+    {
+      "id": "pedido_de_apoio_diferenciado_p2_3145",
+      "disc_id": 3145,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Profissional de saúde preocupado?",
+      "texto_utente": "Algum profissional de saúde que o esteja a acompanhar está preocupado com o seu estado?",
+      "texto_en": "Health professional concerned?",
+      "texto_utente_en": "Is a health professional looking after you worried about your condition?",
+      "descricao": "Situação em que o profissional de saúde que está a atender presencialmente o doente manifesta preocupação pela estabilidade hemodinâmica do doente"
+    },
+    {
+      "id": "pedido_de_apoio_diferenciado_p2_3146",
+      "disc_id": 3146,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "História de sobredosagem ou envenenamento?",
+      "texto_utente": "Há a possibilidade de ter tomado comprimidos a mais ou algo tóxico (por exemplo, caixas de comprimidos vazias por perto)?",
+      "texto_en": "History of overdose or poisoning?",
+      "texto_utente_en": "Could there have been too many tablets or something poisonous taken (for example empty tablet packets nearby)?",
+      "descricao": "Esta informação poderá ser prestada por terceiros ou poderá ser deduzida na presença de caixas de substâncias perigosas vazias."
+    },
+    {
+      "id": "pedido_de_apoio_diferenciado_p2_3147",
+      "disc_id": 3147,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Transporte AEROMÉDICO nível B",
+      "texto_utente": "Precisa de ser levado de helicóptero, com cuidados médicos durante a viagem?",
+      "texto_en": "Aeromedical transport level B",
+      "texto_utente_en": "Do you need to be taken by helicopter, with medical care during the journey?"
+    },
+    {
+      "id": "pedido_de_apoio_diferenciado_p2_3148",
+      "disc_id": 3148,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Transporte AEROMÉDICO nível C",
+      "texto_utente": "Precisa de ser levado de helicóptero, com cuidados médicos avançados durante a viagem?",
+      "texto_en": "Aeromedical transport level C",
+      "texto_utente_en": "Do you need to be taken by helicopter, with advanced medical care during the journey?"
+    },
+    {
+      "id": "pedido_de_apoio_diferenciado_p2_3149",
+      "disc_id": 3149,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Transporte secundário NÍVEL A",
+      "texto_utente": "Precisa de ser transferido para outro hospital, com cuidados básicos durante a viagem?",
+      "texto_en": "Secondary transport level A",
+      "texto_utente_en": "Do you need to be transferred to another hospital, with basic care during the journey?"
+    },
+    {
+      "id": "pedido_de_apoio_diferenciado_p2_3150",
+      "disc_id": 3150,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Transporte secundário NÍVEL B",
+      "texto_utente": "Precisa de ser transferido para outro hospital, com cuidados médicos durante a viagem?",
+      "texto_en": "Secondary transport level B",
+      "texto_utente_en": "Do you need to be transferred to another hospital, with medical care during the journey?"
+    },
+    {
+      "id": "pedido_de_apoio_diferenciado_p2_3151",
+      "disc_id": 3151,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Transporte secundário NÍVEL C",
+      "texto_utente": "Precisa de ser transferido para outro hospital, com cuidados médicos avançados durante a viagem?",
+      "texto_en": "Secondary transport level C",
+      "texto_utente_en": "Do you need to be transferred to another hospital, with advanced medical care during the journey?"
+    },
+    {
+      "id": "pedido_de_apoio_diferenciado_p2_3157",
+      "disc_id": 3157,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "NEWS igual ou superior a 7?",
+      "texto_utente": "Sente-se muito mal ou quase a desmaiar?",
+      "texto_en": "NEWS score of 7 or above?",
+      "texto_utente_en": "Do you feel very unwell or close to fainting?",
+      "descricao": "Somatório dos pontos da escala NEWS superior ou igual a 7. Indica uma situação clínica instável a precisar apoio de uma equipa SAV no local."
+    },
+    {
+      "id": "pedido_de_apoio_diferenciado_p3_3119",
+      "disc_id": 3119,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Novos sinais e/ou sintomas neurológicos?",
+      "texto_utente": "Há mais de 24 horas, notou algo de novo, como perder força ou sensibilidade, ou dificuldade em controlar a urina ou as fezes?",
+      "texto_en": "New neurological signs and/or symptoms?",
+      "texto_utente_en": "More than 24 hours ago, did you notice something new, such as losing strength or feeling, or trouble controlling your bladder or bowel?",
+      "descricao": "Podem incluir alteração ou perda de sensibilidade, enfraquecimento dos membros (transitório ou permanente) ou alterações do funcionamento da bexiga ou do intestino (incontinência) há > 24 horas."
+    },
+    {
+      "id": "pedido_de_apoio_diferenciado_p3_3152",
+      "disc_id": 3152,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Transporte AEROMÉDICO nível B",
+      "texto_utente": "Precisa de ser levado de helicóptero, com cuidados médicos durante a viagem?",
+      "texto_en": "Aeromedical transport level B",
+      "texto_utente_en": "Do you need to be taken by helicopter, with medical care during the journey?"
+    },
+    {
+      "id": "pedido_de_apoio_diferenciado_p3_3153",
+      "disc_id": 3153,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Transporte AEROMÉDICO nível C",
+      "texto_utente": "Precisa de ser levado de helicóptero, com cuidados médicos avançados durante a viagem?",
+      "texto_en": "Aeromedical transport level C",
+      "texto_utente_en": "Do you need to be taken by helicopter, with advanced medical care during the journey?"
+    },
+    {
+      "id": "pedido_de_apoio_diferenciado_p3_3154",
+      "disc_id": 3154,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Transporte secundário NÍVEL A",
+      "texto_utente": "Precisa de ser transferido para outro hospital, com cuidados básicos durante a viagem?",
+      "texto_en": "Secondary transport level A",
+      "texto_utente_en": "Do you need to be transferred to another hospital, with basic care during the journey?"
+    },
+    {
+      "id": "pedido_de_apoio_diferenciado_p3_3155",
+      "disc_id": 3155,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Transporte secundário NÍVEL B",
+      "texto_utente": "Precisa de ser transferido para outro hospital, com cuidados médicos durante a viagem?",
+      "texto_en": "Secondary transport level B",
+      "texto_utente_en": "Do you need to be transferred to another hospital, with medical care during the journey?"
+    },
+    {
+      "id": "pedido_de_apoio_diferenciado_p3_3156",
+      "disc_id": 3156,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Transporte secundário NÍVEL C",
+      "texto_utente": "Precisa de ser transferido para outro hospital, com cuidados médicos avançados durante a viagem?",
+      "texto_en": "Secondary transport level C",
+      "texto_utente_en": "Do you need to be transferred to another hospital, with advanced medical care during the journey?"
+    },
+    {
+      "id": "pedido_de_apoio_diferenciado_p3_3158",
+      "disc_id": 3158,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "NEWS com um parâmetro de nivel 3?",
+      "texto_utente": "Está mais fraco, mais tonto ou a respirar pior do que há pouco?",
+      "texto_en": "NEWS with a single level-3 parameter?",
+      "texto_utente_en": "Are you weaker, dizzier or breathing worse than a short while ago?",
+      "descricao": "Somatório dos pontos da escala NEWS entre 5 e 6. Indica uma situação clínica instável a precisar de transporte urgente à unidade de saúde com capacidade SAV mais próxima"
+    },
+    {
+      "id": "pedido_de_apoio_diferenciado_p3_3159",
+      "disc_id": 3159,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "NEWS de 5 a 6?",
+      "texto_utente": "Está a sentir-se pior do que estava há pouco?",
+      "texto_en": "NEWS score of 5 to 6?",
+      "texto_utente_en": "Are you feeling worse than you were a short while ago?",
+      "descricao": "Somatório dos pontos da escala NEWS entre 5 e 6. Indica uma situação clínica instável a precisar de transporte emergente à unidade de saúde com capacidade SAV mais próxima"
+    },
+    {
+      "id": "pedido_de_apoio_diferenciado_p4_3121",
+      "disc_id": 3121,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Novos sinais e/ou sintomas neurológicos?",
+      "texto_utente": "Há mais de 24 horas, notou algo de novo, como perder força ou sensibilidade, ou dificuldade em controlar a urina ou as fezes?",
+      "texto_en": "New neurological signs and/or symptoms?",
+      "texto_utente_en": "More than 24 hours ago, did you notice something new, such as losing strength or feeling, or trouble controlling your bladder or bowel?",
+      "descricao": "Podem incluir alteração ou perda de sensibilidade, enfraquecimento dos membros (transitório ou permanente) ou alterações do funcionamento da bexiga ou do intestino (incontinência) há > 24 horas."
+    },
+    {
+      "id": "pedido_de_apoio_diferenciado_p4_3160",
+      "disc_id": 3160,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "NEWS igual ou superior a 7?",
+      "texto_utente": "Sente-se muito mal ou quase a desmaiar?",
+      "texto_en": "NEWS score of 7 or above?",
+      "texto_utente_en": "Do you feel very unwell or close to fainting?",
+      "descricao": "Somatório dos pontos da escala NEWS superior ou igual a 7. Indica uma situação clínica instável a precisar apoio de uma equipa SAV no local."
+    }
+  ]
+}

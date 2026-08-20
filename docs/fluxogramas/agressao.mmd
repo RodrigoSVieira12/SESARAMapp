@@ -1,0 +1,93 @@
+flowchart TD
+  inicio(["Início: Agressão"])
+  agressao_p1_1738["1. [P1] Compromisso da via aérea?"]
+  agressao_p1_1739["2. [P1] Respiração ineficaz?"]
+  agressao_p1_1740["3. [P1] Hemorragia catastrófica?"]
+  agressao_p1_1741["4. [P1] História recente de viagem ao<br/>estrangeiro"]
+  agressao_p1_1742["5. [P1] Não reativo?"]
+  agressao_p1_1765["6. [P1] Sinais de choque?"]
+  agressao_p2_1743["7. [P2] Dispneia aguda?"]
+  agressao_p2_1744["8. [P2] Grande Hemorragia<br/>incontrolável?"]
+  agressao_p2_1745["9. [P2] Alteração do estado de<br/>consciência?"]
+  agressao_p2_1746["10. [P2] Défice neurológico agudo?<br/><24h"]
+  agressao_p2_1747["11. [P2] Mecanismo significativo de<br/>lesão?"]
+  agressao_p2_1748["12. [P2] Dor severa?"]
+  agressao_p3_1749["13. [P3] Pequena hemorragia<br/>incontrolável?"]
+  agressao_p3_1750["14. [P3] Novos sinais e/ou sintomas<br/>neurológicos?"]
+  agressao_p3_1751["15. [P3] História de perda de<br/>consciência?"]
+  agressao_p3_1752["16. [P3] História Inapropriada?"]
+  agressao_p3_1753["17. [P3] Deformação?"]
+  agressao_p3_1754["18. [P3] Dor moderada?"]
+  agressao_p4_1755["19. [P4] Edema?"]
+  agressao_p4_1756["20. [P4] Dor persistente?"]
+  agressao_p4_1757["21. [P4] Problema recente?"]
+  inicio --> agressao_p1_1738
+  agressao_p1_1738_sim(["VERMELHO"]):::vermelho
+  agressao_p1_1738 -->|Sim| agressao_p1_1738_sim
+  agressao_p1_1738 -->|Não| agressao_p1_1739
+  agressao_p1_1739_sim(["VERMELHO"]):::vermelho
+  agressao_p1_1739 -->|Sim| agressao_p1_1739_sim
+  agressao_p1_1739 -->|Não| agressao_p1_1740
+  agressao_p1_1740_sim(["VERMELHO"]):::vermelho
+  agressao_p1_1740 -->|Sim| agressao_p1_1740_sim
+  agressao_p1_1740 -->|Não| agressao_p1_1741
+  agressao_p1_1741_sim(["VERMELHO"]):::vermelho
+  agressao_p1_1741 -->|Sim| agressao_p1_1741_sim
+  agressao_p1_1741 -->|Não| agressao_p1_1742
+  agressao_p1_1742_sim(["VERMELHO"]):::vermelho
+  agressao_p1_1742 -->|Sim| agressao_p1_1742_sim
+  agressao_p1_1742 -->|Não| agressao_p1_1765
+  agressao_p1_1765_sim(["VERMELHO"]):::vermelho
+  agressao_p1_1765 -->|Sim| agressao_p1_1765_sim
+  agressao_p1_1765 -->|Não| agressao_p2_1743
+  agressao_p2_1743_sim(["LARANJA"]):::laranja
+  agressao_p2_1743 -->|Sim| agressao_p2_1743_sim
+  agressao_p2_1743 -->|Não| agressao_p2_1744
+  agressao_p2_1744_sim(["LARANJA"]):::laranja
+  agressao_p2_1744 -->|Sim| agressao_p2_1744_sim
+  agressao_p2_1744 -->|Não| agressao_p2_1745
+  agressao_p2_1745_sim(["LARANJA"]):::laranja
+  agressao_p2_1745 -->|Sim| agressao_p2_1745_sim
+  agressao_p2_1745 -->|Não| agressao_p2_1746
+  agressao_p2_1746_sim(["LARANJA"]):::laranja
+  agressao_p2_1746 -->|Sim| agressao_p2_1746_sim
+  agressao_p2_1746 -->|Não| agressao_p2_1747
+  agressao_p2_1747_sim(["LARANJA"]):::laranja
+  agressao_p2_1747 -->|Sim| agressao_p2_1747_sim
+  agressao_p2_1747 -->|Não| agressao_p2_1748
+  agressao_p2_1748_sim(["LARANJA"]):::laranja
+  agressao_p2_1748 -->|Sim| agressao_p2_1748_sim
+  agressao_p2_1748 -->|Não| agressao_p3_1749
+  agressao_p3_1749_sim(["AMARELO"]):::amarelo
+  agressao_p3_1749 -->|Sim| agressao_p3_1749_sim
+  agressao_p3_1749 -->|Não| agressao_p3_1750
+  agressao_p3_1750_sim(["AMARELO"]):::amarelo
+  agressao_p3_1750 -->|Sim| agressao_p3_1750_sim
+  agressao_p3_1750 -->|Não| agressao_p3_1751
+  agressao_p3_1751_sim(["AMARELO"]):::amarelo
+  agressao_p3_1751 -->|Sim| agressao_p3_1751_sim
+  agressao_p3_1751 -->|Não| agressao_p3_1752
+  agressao_p3_1752_sim(["AMARELO"]):::amarelo
+  agressao_p3_1752 -->|Sim| agressao_p3_1752_sim
+  agressao_p3_1752 -->|Não| agressao_p3_1753
+  agressao_p3_1753_sim(["AMARELO"]):::amarelo
+  agressao_p3_1753 -->|Sim| agressao_p3_1753_sim
+  agressao_p3_1753 -->|Não| agressao_p3_1754
+  agressao_p3_1754_sim(["AMARELO"]):::amarelo
+  agressao_p3_1754 -->|Sim| agressao_p3_1754_sim
+  agressao_p3_1754 -->|Não| agressao_p4_1755
+  agressao_p4_1755_sim(["VERDE"]):::verde
+  agressao_p4_1755 -->|Sim| agressao_p4_1755_sim
+  agressao_p4_1755 -->|Não| agressao_p4_1756
+  agressao_p4_1756_sim(["VERDE"]):::verde
+  agressao_p4_1756 -->|Sim| agressao_p4_1756_sim
+  agressao_p4_1756 -->|Não| agressao_p4_1757
+  agressao_p4_1757_sim(["VERDE"]):::verde
+  agressao_p4_1757 -->|Sim| agressao_p4_1757_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  agressao_p4_1757 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

@@ -1,0 +1,88 @@
+flowchart TD
+  inicio(["Início: Autoagressão"])
+  autoagressao_p1_1805["1. [P1] Compromisso da via aérea?"]
+  autoagressao_p1_1806["2. [P1] Respiração ineficaz?"]
+  autoagressao_p1_1807["3. [P1] Hemorragia catastrófica?"]
+  autoagressao_p1_1808["4. [P1] Sinais de choque?"]
+  autoagressao_p1_1809["5. [P1] Não reativo?"]
+  autoagressao_p2_1810["6. [P2] Dispneia aguda?"]
+  autoagressao_p2_1811["7. [P2] Grande Hemorragia<br/>incontrolável?"]
+  autoagressao_p2_1812["8. [P2] Alteração do estado de<br/>consciência?"]
+  autoagressao_p2_1813["9. [P2] Agressividade ou agitação<br/>severa?"]
+  autoagressao_p2_1814["10. [P2] Risco elevado de abandono sem<br/>avaliação?"]
+  autoagressao_p2_1815["11. [P2] Risco elevado de<br/>auto-agressão?"]
+  autoagressao_p2_1816["12. [P2] Risco elevado de agressão a<br/>terceiros?"]
+  autoagressao_p2_1817["13. [P2] Mecanismo significativo de<br/>lesão?"]
+  autoagressao_p2_1818["14. [P2] Dor severa?"]
+  autoagressao_p3_1819["15. [P3] Pequena hemorragia<br/>incontrolável?"]
+  autoagressao_p3_1820["16. [P3] Angústia marcada?"]
+  autoagressao_p3_1821["17. [P3] Risco moderado de<br/>auto-agressão?"]
+  autoagressao_p3_1822["18. [P3] História Inapropriada?"]
+  autoagressao_p3_1823["19. [P3] História psiquiátrica<br/>significativa?"]
+  autoagressao_p3_1824["20. [P3] Dor moderada?"]
+  inicio --> autoagressao_p1_1805
+  autoagressao_p1_1805_sim(["VERMELHO"]):::vermelho
+  autoagressao_p1_1805 -->|Sim| autoagressao_p1_1805_sim
+  autoagressao_p1_1805 -->|Não| autoagressao_p1_1806
+  autoagressao_p1_1806_sim(["VERMELHO"]):::vermelho
+  autoagressao_p1_1806 -->|Sim| autoagressao_p1_1806_sim
+  autoagressao_p1_1806 -->|Não| autoagressao_p1_1807
+  autoagressao_p1_1807_sim(["VERMELHO"]):::vermelho
+  autoagressao_p1_1807 -->|Sim| autoagressao_p1_1807_sim
+  autoagressao_p1_1807 -->|Não| autoagressao_p1_1808
+  autoagressao_p1_1808_sim(["VERMELHO"]):::vermelho
+  autoagressao_p1_1808 -->|Sim| autoagressao_p1_1808_sim
+  autoagressao_p1_1808 -->|Não| autoagressao_p1_1809
+  autoagressao_p1_1809_sim(["VERMELHO"]):::vermelho
+  autoagressao_p1_1809 -->|Sim| autoagressao_p1_1809_sim
+  autoagressao_p1_1809 -->|Não| autoagressao_p2_1810
+  autoagressao_p2_1810_sim(["LARANJA"]):::laranja
+  autoagressao_p2_1810 -->|Sim| autoagressao_p2_1810_sim
+  autoagressao_p2_1810 -->|Não| autoagressao_p2_1811
+  autoagressao_p2_1811_sim(["LARANJA"]):::laranja
+  autoagressao_p2_1811 -->|Sim| autoagressao_p2_1811_sim
+  autoagressao_p2_1811 -->|Não| autoagressao_p2_1812
+  autoagressao_p2_1812_sim(["LARANJA"]):::laranja
+  autoagressao_p2_1812 -->|Sim| autoagressao_p2_1812_sim
+  autoagressao_p2_1812 -->|Não| autoagressao_p2_1813
+  autoagressao_p2_1813_sim(["LARANJA"]):::laranja
+  autoagressao_p2_1813 -->|Sim| autoagressao_p2_1813_sim
+  autoagressao_p2_1813 -->|Não| autoagressao_p2_1814
+  autoagressao_p2_1814_sim(["LARANJA"]):::laranja
+  autoagressao_p2_1814 -->|Sim| autoagressao_p2_1814_sim
+  autoagressao_p2_1814 -->|Não| autoagressao_p2_1815
+  autoagressao_p2_1815_sim(["LARANJA"]):::laranja
+  autoagressao_p2_1815 -->|Sim| autoagressao_p2_1815_sim
+  autoagressao_p2_1815 -->|Não| autoagressao_p2_1816
+  autoagressao_p2_1816_sim(["LARANJA"]):::laranja
+  autoagressao_p2_1816 -->|Sim| autoagressao_p2_1816_sim
+  autoagressao_p2_1816 -->|Não| autoagressao_p2_1817
+  autoagressao_p2_1817_sim(["LARANJA"]):::laranja
+  autoagressao_p2_1817 -->|Sim| autoagressao_p2_1817_sim
+  autoagressao_p2_1817 -->|Não| autoagressao_p2_1818
+  autoagressao_p2_1818_sim(["LARANJA"]):::laranja
+  autoagressao_p2_1818 -->|Sim| autoagressao_p2_1818_sim
+  autoagressao_p2_1818 -->|Não| autoagressao_p3_1819
+  autoagressao_p3_1819_sim(["AMARELO"]):::amarelo
+  autoagressao_p3_1819 -->|Sim| autoagressao_p3_1819_sim
+  autoagressao_p3_1819 -->|Não| autoagressao_p3_1820
+  autoagressao_p3_1820_sim(["AMARELO"]):::amarelo
+  autoagressao_p3_1820 -->|Sim| autoagressao_p3_1820_sim
+  autoagressao_p3_1820 -->|Não| autoagressao_p3_1821
+  autoagressao_p3_1821_sim(["AMARELO"]):::amarelo
+  autoagressao_p3_1821 -->|Sim| autoagressao_p3_1821_sim
+  autoagressao_p3_1821 -->|Não| autoagressao_p3_1822
+  autoagressao_p3_1822_sim(["AMARELO"]):::amarelo
+  autoagressao_p3_1822 -->|Sim| autoagressao_p3_1822_sim
+  autoagressao_p3_1822 -->|Não| autoagressao_p3_1823
+  autoagressao_p3_1823_sim(["AMARELO"]):::amarelo
+  autoagressao_p3_1823 -->|Sim| autoagressao_p3_1823_sim
+  autoagressao_p3_1823 -->|Não| autoagressao_p3_1824
+  autoagressao_p3_1824_sim(["AMARELO"]):::amarelo
+  autoagressao_p3_1824 -->|Sim| autoagressao_p3_1824_sim
+  sem_positivo(["VERDE<br/>Sem discriminador positivo"]):::verde
+  autoagressao_p3_1824 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

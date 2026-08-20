@@ -1,0 +1,243 @@
+{
+  "id": "corpo_estranho",
+  "nome": "Corpo estranho",
+  "nome_en": "Foreign body",
+  "descricao": "Objeto preso ou engolido.",
+  "descricao_en": "An object stuck or swallowed.",
+  "pediatrico": false,
+  "fonte": "Discriminadores do Sistema de Triagem de Manchester, organizados por prioridade clínica (P1-P5). Importados da tabela de referência; sujeitos a validação clínica antes de uso real.",
+  "fonte_en": "Manchester Triage System discriminators, organised by clinical priority (P1-P5). Imported from the reference table; subject to clinical validation before real use.",
+  "perguntas": [
+    {
+      "id": "corpo_estranho_p1_1835",
+      "disc_id": 1835,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Compromisso da via aérea?",
+      "texto_utente": "A respiração está muito difícil ou ruidosa, como se o ar não passasse bem pela garganta (a roncar ou a gorgolejar)?",
+      "texto_en": "Airway compromise?",
+      "texto_utente_en": "Is breathing very difficult or noisy, as if air can't pass properly through the throat (snoring or gurgling)?",
+      "descricao": "A via aérea poderá estar comprometida, por não se conseguir manter aberta, ou porque os reflexos protetores da via respiratória (que evitam a aspiração) se perderam. A incapacidade de manter a via aérea aberta, poderá resultar numa obstrução total ou parcial, intermitente ou não. Isto manifestar-se-á por sons como o ressonar ou o gorgolejar durante a respiração."
+    },
+    {
+      "id": "corpo_estranho_p1_1985",
+      "disc_id": 1985,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Estridor?",
+      "texto_utente": "A respiração faz um som agudo e áspero ao inspirar, que se ouve melhor de boca aberta?",
+      "texto_en": "Stridor?",
+      "texto_utente_en": "Does breathing make a harsh, high-pitched sound when breathing in, heard best with the mouth open?",
+      "descricao": "Som que poderá ser inspiratório ou expiratório, ou ambos. O estridor é ouvido mais claramente quando se respira de boca aberta."
+    },
+    {
+      "id": "corpo_estranho_p1_1986",
+      "disc_id": 1986,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Respiração ineficaz?",
+      "texto_utente": "A respiração está tão fraca ou cansada que parece não entrar ar suficiente (respiração aos arrancos ou muito a custo)?",
+      "texto_en": "Ineffective breathing?",
+      "texto_utente_en": "Is breathing so weak or laboured that not enough air seems to get in (gasping or a real struggle)?",
+      "descricao": "Doentes que não conseguem respirar suficientemente bem para manter uma oxigenação adequada e com falência respiratória, sofrem de respiração ineficaz. Poderá resultar num esforço acrescentado para respirar, ou em exaustão, incluindo uma respiração tipo “gasping”."
+    },
+    {
+      "id": "corpo_estranho_p1_1987",
+      "disc_id": 1987,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Hemorragia catastrófica?",
+      "texto_utente": "Está a sangrar muitíssimo, com sangue a jorrar, e não consegue parar?",
+      "texto_en": "Catastrophic haemorrhage?",
+      "texto_utente_en": "Is there massive bleeding, with blood spurting out, that you cannot stop?",
+      "descricao": "Hemorragia arterial em quantidade e velocidade catastróficas que, se não for controlada rapidamente, provocará a morte da vítima."
+    },
+    {
+      "id": "corpo_estranho_p1_1988",
+      "disc_id": 1988,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Sinais de choque?",
+      "texto_utente": "Tem suores frios, pele muito pálida ou acinzentada, o coração a bater depressa e uma grande fraqueza?",
+      "texto_en": "Signs of shock?",
+      "texto_utente_en": "Are there cold sweats, very pale or greyish skin, a fast heartbeat and severe weakness?",
+      "descricao": "O choque é uma entrega inadequada de oxigénio aos tecidos. Os sinais clássicos incluem suores, palidez, taquicardia, hipotensão e nível de consciência reduzido."
+    },
+    {
+      "id": "corpo_estranho_p1_1989",
+      "disc_id": 1989,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Não reativo?",
+      "texto_utente": "Está sem reagir a nada, nem quando lhe falam, lhe tocam ou lhe fazem doer?",
+      "texto_en": "Unresponsive?",
+      "texto_utente_en": "Is the person not reacting at all, even to voice, touch or pain?",
+      "descricao": "Não responde a um estímulo doloroso."
+    },
+    {
+      "id": "corpo_estranho_p2_1990",
+      "disc_id": 1990,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Grande Hemorragia incontrolável?",
+      "texto_utente": "Está a sangrar muito e não pára mesmo fazendo pressão, encharcando os panos depressa?",
+      "texto_en": "Major uncontrollable haemorrhage?",
+      "texto_utente_en": "Is there heavy bleeding that won't stop even with firm pressure, soaking through cloths quickly?",
+      "descricao": "Hemorragia que não é rapidamente controlada pela aplicação de pressão direta sustentada e que continua a sangrar muito ou a encharcar rapidamente os panos ou pensos."
+    },
+    {
+      "id": "corpo_estranho_p2_1991",
+      "disc_id": 1991,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Alteração do estado de consciência?",
+      "texto_utente": "Está sonolento ou baralhado, só reagindo quando lhe falam ou lhe tocam (não está bem desperto)?",
+      "texto_en": "Altered level of consciousness?",
+      "texto_utente_en": "Is the person drowsy or muddled, responding only to voice or touch (not fully alert)?",
+      "descricao": "Não está totalmente alerta. Só responde à voz, à dor"
+    },
+    {
+      "id": "corpo_estranho_p2_1992",
+      "disc_id": 1992,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Traumatismo ocular penetrante?",
+      "texto_utente": "Espetou ou furou o olho com alguma coisa?",
+      "texto_en": "Penetrating eye injury?",
+      "texto_utente_en": "Has something pierced or gone into the eye?",
+      "descricao": "Um evento recente fisicamente traumático com a penetração do globo ocular"
+    },
+    {
+      "id": "corpo_estranho_p2_1993",
+      "disc_id": 1993,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Ingestão de objeto perigoso?",
+      "texto_utente": "Engoliu um objeto perigoso (por exemplo, uma pilha de botão, ímanes ou uma lâmina)?",
+      "texto_en": "Swallowed a dangerous object?",
+      "texto_utente_en": "Have you swallowed a dangerous object (for example a button battery, magnets or a blade)?",
+      "descricao": "Ingestão de um objeto estranho perigoso ou potencialmente perigoso (Ex.: botão, pilha ou bateria, ímãs ou lâminas de barbear) que possa ser uma ameaça potencial para a vida"
+    },
+    {
+      "id": "corpo_estranho_p2_1994",
+      "disc_id": 1994,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Mecanismo significativo de lesão?",
+      "texto_utente": "A lesão foi num acidente grave (queda de um sítio alto, choque a grande velocidade, tiro, facada ou explosão)?",
+      "texto_en": "Significant mechanism of injury?",
+      "texto_utente_en": "Did the injury happen in a serious accident (a fall from height, a high-speed crash, a gunshot, a stabbing or an explosion)?",
+      "descricao": "São significativas as lesões penetrantes (facadas ou tiros) e as lesões com elevada transferência de energia, tais como quedas de altura, acidentes de tráfego a alta velocidade (velocidade superior a 60 km/h), ejecção de um veículo, morte de ocupantes e deformação significativa de um veículo. Pode ser especialmente significativa uma história de saltar de um edifício em chamas ou de exposição a uma explosão."
+    },
+    {
+      "id": "corpo_estranho_p2_1995",
+      "disc_id": 1995,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Dor severa?",
+      "texto_utente": "Tem dores muito fortes, quase a não aguentar (das piores que alguma vez sentiu)?",
+      "texto_en": "Severe pain?",
+      "texto_utente_en": "Do you have very severe pain, almost unbearable (some of the worst you've ever felt)?",
+      "descricao": "Dor significativa e insuportável, frequentemente referida como a pior de sempre. Alterações na expressão facial, de comportamento e nas atividades diárias permitem avaliar o nível de dor, especialmente nos doentes não comunicativos (por exemplo nas crianças e bebés), ou quando existem barreiras de comunicação pelo idioma ou por demência."
+    },
+    {
+      "id": "corpo_estranho_p3_1996",
+      "disc_id": 1996,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Pequena hemorragia incontrolável?",
+      "texto_utente": "Tem uma pequena ferida que continua a sangrar e não pára, mesmo fazendo pressão?",
+      "texto_en": "Minor uncontrollable haemorrhage?",
+      "texto_utente_en": "Is there a small wound that keeps bleeding and won't stop, even with pressure?",
+      "descricao": "Quando é impossível controlar uma hemorragia rapidamente através da aplicação de pressão direta sustentada, continuando a sangrar levemente ou a escorrer sangue."
+    },
+    {
+      "id": "corpo_estranho_p3_1997",
+      "disc_id": 1997,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "História Inapropriada?",
+      "texto_utente": "A explicação que foi dada para as lesões não bate certo com aquilo que se vê?",
+      "texto_en": "Inappropriate history?",
+      "texto_utente_en": "Does the explanation given for the injuries not match what can be seen?",
+      "descricao": "Quando a história fornecida não explica as alterações físicas, então é inapropriada. Isto é importante pois é um sinal de perigo para a salvaguarda de adultos e crianças."
+    },
+    {
+      "id": "corpo_estranho_p3_1998",
+      "disc_id": 1998,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Dor moderada?",
+      "texto_utente": "Tem dores a sério, que o impedem de fazer algumas coisas do dia a dia?",
+      "texto_en": "Moderate pain?",
+      "texto_utente_en": "Do you have noticeable pain that stops you doing some everyday things?",
+      "descricao": "Dor significativa que incapacita para algumas atividades diárias. Alterações na expressão facial, de comportamento e nas atividades diárias permitem avaliar o nível de dor, especialmente nos doentes não comunicativos (por exemplo nas crianças e bebés), ou quando existem barreiras de comunicação pelo idioma ou por demência."
+    },
+    {
+      "id": "corpo_estranho_p4_1999",
+      "disc_id": 1999,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Infeção local?",
+      "texto_utente": "Há um sítio com sinais de infeção (dor, inchaço e vermelhidão, com ou sem pus)?",
+      "texto_en": "Local infection?",
+      "texto_utente_en": "Is there a spot with signs of infection (pain, swelling and redness, with or without pus)?",
+      "descricao": "A infeção local geralmente manifesta-se como inflamação (dor, edema e eritema) confinada a um local ou área específica, com ou sem acúmulo de pus."
+    },
+    {
+      "id": "corpo_estranho_p4_2001",
+      "disc_id": 2001,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Inflamação local?",
+      "texto_utente": "Há um ponto do corpo com dor, inchaço e vermelhidão juntos, mas só naquele sítio?",
+      "texto_en": "Local inflammation?",
+      "texto_utente_en": "Is there one spot with pain, swelling and redness together, but only in that place?",
+      "descricao": "A inflamação local envolve dor, edema e eritema confinados a um determinado local ou área."
+    },
+    {
+      "id": "corpo_estranho_p4_2004",
+      "disc_id": 2004,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Olho vermelho?",
+      "texto_utente": "Tem o olho vermelho (com ou sem dor)?",
+      "texto_en": "Red eye?",
+      "texto_utente_en": "Is the eye red (with or without pain)?",
+      "descricao": "Olhos que se apresentam vermelhos. Um olho vermelho pode ser doloroso, ou não, e poderá ser total ou parcialmente afetado"
+    },
+    {
+      "id": "corpo_estranho_p4_2005",
+      "disc_id": 2005,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Edema?",
+      "texto_utente": "Há alguma zona inchada ou mais volumosa do que é habitual?",
+      "texto_en": "Swelling?",
+      "texto_utente_en": "Is there any area that is swollen or bigger than usual?",
+      "descricao": "Inchaço ou aumento de volume anormal."
+    },
+    {
+      "id": "corpo_estranho_p4_2008",
+      "disc_id": 2008,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Dor persistente?",
+      "texto_utente": "A dor continua sem passar, mesmo depois de esperar ou de tomar um analgésico?",
+      "texto_en": "Persistent pain?",
+      "texto_utente_en": "Does the pain carry on without easing, even after waiting or taking a painkiller?",
+      "descricao": "Dor que não desaparece após algum tempo ou após tomar a medicação apropriada. Mudanças nas expressões faciais, comportamento e interrupção da atividade permitirão avaliar os níveis de dor, especialmente em pacientes não comunicativos, como por exemplo crianças muito pequenas e bebés, ou onde existam barreiras à comunicação devido ao idioma ou a demência."
+    },
+    {
+      "id": "corpo_estranho_p4_2009",
+      "disc_id": 2009,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Problema recente?",
+      "texto_utente": "Este problema começou na última semana?",
+      "texto_en": "Recent problem?",
+      "texto_utente_en": "Did this problem start within the last week?",
+      "descricao": "Um problema que aparece no decorrer da última semana."
+    }
+  ]
+}

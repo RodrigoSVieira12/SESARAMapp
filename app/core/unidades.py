@@ -33,7 +33,4 @@ def concelhos() -> list[str]:
 
 def com_servicos(nomes_servicos: list[str]) -> list[dict]:
     """Unidades que oferecem pelo menos um dos serviços pedidos."""
-    return [
-        u for u in todas()
-        if any(s in u.get("servicos", {}) for s in nomes_servicos)
-    ]
+    return [u for u in todas() if any(s in u.get("servicos", {}) for s in nomes_servicos)]

@@ -17,12 +17,16 @@ RE_NO = re.compile(r"^\s{2}(\w+)[\[\(]", re.M)
 RE_ARESTA = re.compile(r"^\s{2}(\w+) -->(?:\|[^|]+\|)? (\w+)$", re.M)
 
 
-def test_fluxograma_da_febre_tem_a_estrutura_esperada():
-    texto = fluxogramas.mermaid_do_fluxo(motor.fluxos["febre"])
+def test_fluxograma_tem_a_estrutura_linear_esperada():
+    texto = fluxogramas.mermaid_do_fluxo(motor.fluxos["agressao"])
     assert texto.startswith("flowchart TD")
-    assert "fe_q1[" in texto
-    assert "fe_q1 -->|Sim| fe_q10" in texto  # o salto que só se vê desenhado
-    assert "classDef verde" in texto and "classDef laranja" in texto
+    # 1.º discriminador presente e ligado a partir do início
+    assert "agressao_p1_1738[" in texto
+    assert "inicio --> agressao_p1_1738" in texto
+    # Cada "Sim" leva a um desfecho colorido; o último "Não" ao azul.
+    assert "-->|Sim| agressao_p1_1738_sim" in texto
+    assert "sem_positivo" in texto  # desfecho azul (sem discriminador positivo)
+    assert "classDef vermelho" in texto and "classDef azul" in texto
 
 
 def test_todas_as_arestas_apontam_para_nos_que_existem():
@@ -37,12 +41,10 @@ def test_todas_as_arestas_apontam_para_nos_que_existem():
 def test_cada_ramo_terminal_gera_um_desfecho_colorido():
     for fid, fluxo in motor.fluxos.items():
         texto = fluxogramas.mermaid_do_fluxo(fluxo)
-        terminais = sum(
-            1
-            for p in fluxo["perguntas"]
-            for resposta in ("sim", "nao")
-            if "resultado" in p[resposta]
-        )
+        # No modelo linear, cada discriminador tem um desfecho "Sim"
+        # colorido, mais um desfecho azul final (sem discriminador
+        # positivo).
+        terminais = len(fluxo["perguntas"]) + 1
         assert texto.count(":::") == terminais, fid
 
 

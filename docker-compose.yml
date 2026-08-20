@@ -1,0 +1,21 @@
+# Onde ir? (RAM, protótipo SESARAM) — docker compose (v0.13.0)
+#
+# Arrancar:            docker compose up --build
+# Parar:               Ctrl+C (ou docker compose down)
+# Correr os testes:    docker compose run --rm onde-ir python -m pytest
+#
+# É deliberadamente um serviço só: a aplicação é stateless e serve a API
+# e o frontend no mesmo processo, portanto não há base de dados nem
+# outros contentores para orquestrar.
+
+services:
+  onde-ir:
+    build: .
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    # environment:
+    #   # Opcional (ver docs/ARQUITETURA.md, secção "Viagem em camadas"):
+    #   # apontar para um servidor OSRM interno do SESARAM para tempos de
+    #   # viagem mais precisos. Desligado por omissão, por privacidade.
+    #   VIAGEM_OSRM_URL: "http://osrm.interno.sesaram.pt:5000"

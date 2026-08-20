@@ -65,6 +65,7 @@ def _sitio(prep, cid, fid, sid):
 # Carregamento e forma dos dados                                          #
 # --------------------------------------------------------------------- #
 
+
 def test_carrega_e_conta_os_niveis():
     """Os concelhos são divisão administrativa (11, estável); freguesias
     e sítios são dados EDITÁVEIS que crescem e encolhem com a curadoria,
@@ -89,7 +90,6 @@ def test_todos_os_niveis_tem_centro():
 def test_nomes_de_concelho_batem_com_unidades():
     """Se um concelho tiver grafia diferente da das unidades, o cruzamento
     de dados no encaminhamento falha em silêncio — por isso prende-se aqui."""
-    import json
     from app.core import unidades as mod_unidades
 
     prep = _prep()
@@ -102,12 +102,19 @@ def test_nomes_de_concelho_batem_com_unidades():
 # Ordenação e centros                                                     #
 # --------------------------------------------------------------------- #
 
+
 def test_freguesias_ordenadas_sem_acentos():
     """'Água de Pena' tem de ficar no princípio (A), não no fim — a
     ordenação ignora acentos. Machico é o caso canónico."""
     prep = _prep()
     nomes = [f["nome"] for f in _concelho(prep, "machico")["freguesias"]]
-    assert nomes == ["Água de Pena", "Caniçal", "Machico", "Porto da Cruz", "Santo António da Serra"]
+    assert nomes == [
+        "Água de Pena",
+        "Caniçal",
+        "Machico",
+        "Porto da Cruz",
+        "Santo António da Serra",
+    ]
 
 
 def test_concelhos_ordenados_alfabeticamente():
@@ -151,17 +158,30 @@ def test_pontos_dentro_dos_limites_da_ilha():
 # Validação: erros sintéticos rebentam                                    #
 # --------------------------------------------------------------------- #
 
+
 def _base_valida() -> dict:
     """Um documento mínimo mas válido, para lhe injetar defeitos."""
     return {
         "concelhos": [
             {
-                "id": "funchal", "nome": "Funchal", "ilha": "madeira",
-                "lat": 32.6496, "lng": -16.9086,
+                "id": "funchal",
+                "nome": "Funchal",
+                "ilha": "madeira",
+                "lat": 32.6496,
+                "lng": -16.9086,
                 "freguesias": [
-                    {"id": "se", "nome": "Sé", "sitios": [
-                        {"id": "mar", "nome": "Avenida do Mar", "lat": 32.6463, "lng": -16.9115},
-                    ]},
+                    {
+                        "id": "se",
+                        "nome": "Sé",
+                        "sitios": [
+                            {
+                                "id": "mar",
+                                "nome": "Avenida do Mar",
+                                "lat": 32.6463,
+                                "lng": -16.9115,
+                            },
+                        ],
+                    },
                 ],
             },
         ],
@@ -202,12 +222,13 @@ def test_erro_ilha_desconhecida():
 # Avisos brandos                                                          #
 # --------------------------------------------------------------------- #
 
+
 def test_aviso_sitio_longe_do_centro():
     """Um sítio a >12 km do centro do concelho é quase de certeza um
     engano de transcrição — foi assim que se apanhou o 'Outeiro'."""
     prep = copy.deepcopy(_prep())
     f = _freguesia(prep, "santa_cruz", "camacha")
-    f["sitios"][0]["lat"] = 32.698331   # coordenadas que caíam nos Canhas
+    f["sitios"][0]["lat"] = 32.698331  # coordenadas que caíam nos Canhas
     f["sitios"][0]["lng"] = -17.117938
     avisos = localidades.avisos(prep)
     assert any("Camacha" in a and "km do centro" in a for a in avisos)
@@ -242,6 +263,7 @@ def test_outeiro_ficou_de_fora_da_camacha():
 # API                                                                     #
 # --------------------------------------------------------------------- #
 
+
 def test_endpoint_localidades_ok():
     resposta = cliente.get("/api/localidades")
     assert resposta.status_code == 200
@@ -264,6 +286,7 @@ def test_endpoint_localidades_vem_ordenado():
 # Integração: o ganho concreto do modo mais fino                          #
 # --------------------------------------------------------------------- #
 
+
 def test_camacha_encaminha_melhor_que_a_vila(sem_esperas):
     """Na Camacha (freguesia) o encaminhamento manda ao CS da Camacha;
     escolher só o concelho (vila de Santa Cruz) mandaria ao CS de Santa
@@ -275,9 +298,7 @@ def test_camacha_encaminha_melhor_que_a_vila(sem_esperas):
     r_camacha = routing.decidir_encaminhamento(
         "verde", camacha["lat"], camacha["lng"], quando=SEGUNDA_10H
     )
-    r_vila = routing.decidir_encaminhamento(
-        "verde", vila["lat"], vila["lng"], quando=SEGUNDA_10H
-    )
+    r_vila = routing.decidir_encaminhamento("verde", vila["lat"], vila["lng"], quando=SEGUNDA_10H)
     assert r_camacha["unidade"]["id"] == "cs_camacha"
     assert r_vila["unidade"]["id"] == "cs_santa_cruz"
 
@@ -287,8 +308,12 @@ def test_viagem_camacha_vs_vila_em_minutos():
     está muito mais perto (em tempo) do que o CS de Santa Cruz."""
     prep = _prep()
     camacha = _freguesia(prep, "santa_cruz", "camacha")["centro"]
-    ate_camacha = viagem.estimar(camacha["lat"], camacha["lng"], 32.679459439871096, -16.844161004091234)
-    ate_santa_cruz = viagem.estimar(camacha["lat"], camacha["lng"], 32.68960137504053, -16.794276586899944)
+    ate_camacha = viagem.estimar(
+        camacha["lat"], camacha["lng"], 32.679459439871096, -16.844161004091234
+    )
+    ate_santa_cruz = viagem.estimar(
+        camacha["lat"], camacha["lng"], 32.68960137504053, -16.794276586899944
+    )
     assert ate_camacha["minutos"] < ate_santa_cruz["minutos"]
     assert ate_camacha["minutos"] <= 10
     assert ate_santa_cruz["minutos"] >= 15

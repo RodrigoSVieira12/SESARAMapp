@@ -1,0 +1,23 @@
+flowchart TD
+  inicio(["Início: Pedido para terceiros"])
+  pedido_para_terceiros_p1_3126["1. [P1] Possivel paragem<br/>cardiorespiratória?"]
+  pedido_para_terceiros_p2_3127["2. [P2] Impossivel confirmar se<br/>vitima fala?"]
+  pedido_para_terceiros_p2_3128["3. [P2] Impossivel confirmar se<br/>vitima está em pé?"]
+  pedido_para_terceiros_p2_3129["4. [P2] Alarme automático?"]
+  inicio --> pedido_para_terceiros_p1_3126
+  pedido_para_terceiros_p1_3126_sim(["VERMELHO"]):::vermelho
+  pedido_para_terceiros_p1_3126 -->|Sim| pedido_para_terceiros_p1_3126_sim
+  pedido_para_terceiros_p1_3126 -->|Não| pedido_para_terceiros_p2_3127
+  pedido_para_terceiros_p2_3127_sim(["LARANJA"]):::laranja
+  pedido_para_terceiros_p2_3127 -->|Sim| pedido_para_terceiros_p2_3127_sim
+  pedido_para_terceiros_p2_3127 -->|Não| pedido_para_terceiros_p2_3128
+  pedido_para_terceiros_p2_3128_sim(["LARANJA"]):::laranja
+  pedido_para_terceiros_p2_3128 -->|Sim| pedido_para_terceiros_p2_3128_sim
+  pedido_para_terceiros_p2_3128 -->|Não| pedido_para_terceiros_p2_3129
+  pedido_para_terceiros_p2_3129_sim(["LARANJA"]):::laranja
+  pedido_para_terceiros_p2_3129 -->|Sim| pedido_para_terceiros_p2_3129_sim
+  sem_positivo(["AMARELO<br/>Sem discriminador positivo"]):::amarelo
+  pedido_para_terceiros_p2_3129 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

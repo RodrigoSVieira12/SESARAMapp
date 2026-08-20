@@ -1,0 +1,68 @@
+flowchart TD
+  inicio(["Início: Acidente ou lesão grave"])
+  grande_traumatismo_p1_1857["1. [P1] Compromisso da via aérea?"]
+  grande_traumatismo_p1_2128["2. [P1] Respiração ineficaz?"]
+  grande_traumatismo_p1_2546["3. [P1] Hemorragia catastrófica?"]
+  grande_traumatismo_p1_2547["4. [P1] Sinais de choque?"]
+  grande_traumatismo_p1_2548["5. [P1] Não reativo?"]
+  grande_traumatismo_p2_3214["6. [P2] Dispneia aguda?"]
+  grande_traumatismo_p2_3215["7. [P2] Grande Hemorragia<br/>incontrolável?"]
+  grande_traumatismo_p2_3216["8. [P2] Alteração do estado de<br/>consciência?"]
+  grande_traumatismo_p2_3217["9. [P2] Défice neurológico agudo?<br/><24h"]
+  grande_traumatismo_p2_3218["10. [P2] Mecanismo significativo de<br/>lesão?"]
+  grande_traumatismo_p2_3219["11. [P2] Dor severa?"]
+  grande_traumatismo_p3_3220["12. [P3] Pequena hemorragia<br/>incontrolável?"]
+  grande_traumatismo_p3_3221["13. [P3] História de perda de<br/>consciência?"]
+  grande_traumatismo_p3_3222["14. [P3] História clinica<br/>significativa?"]
+  grande_traumatismo_p3_3223["15. [P3] Dor moderada?"]
+  inicio --> grande_traumatismo_p1_1857
+  grande_traumatismo_p1_1857_sim(["VERMELHO"]):::vermelho
+  grande_traumatismo_p1_1857 -->|Sim| grande_traumatismo_p1_1857_sim
+  grande_traumatismo_p1_1857 -->|Não| grande_traumatismo_p1_2128
+  grande_traumatismo_p1_2128_sim(["VERMELHO"]):::vermelho
+  grande_traumatismo_p1_2128 -->|Sim| grande_traumatismo_p1_2128_sim
+  grande_traumatismo_p1_2128 -->|Não| grande_traumatismo_p1_2546
+  grande_traumatismo_p1_2546_sim(["VERMELHO"]):::vermelho
+  grande_traumatismo_p1_2546 -->|Sim| grande_traumatismo_p1_2546_sim
+  grande_traumatismo_p1_2546 -->|Não| grande_traumatismo_p1_2547
+  grande_traumatismo_p1_2547_sim(["VERMELHO"]):::vermelho
+  grande_traumatismo_p1_2547 -->|Sim| grande_traumatismo_p1_2547_sim
+  grande_traumatismo_p1_2547 -->|Não| grande_traumatismo_p1_2548
+  grande_traumatismo_p1_2548_sim(["VERMELHO"]):::vermelho
+  grande_traumatismo_p1_2548 -->|Sim| grande_traumatismo_p1_2548_sim
+  grande_traumatismo_p1_2548 -->|Não| grande_traumatismo_p2_3214
+  grande_traumatismo_p2_3214_sim(["LARANJA"]):::laranja
+  grande_traumatismo_p2_3214 -->|Sim| grande_traumatismo_p2_3214_sim
+  grande_traumatismo_p2_3214 -->|Não| grande_traumatismo_p2_3215
+  grande_traumatismo_p2_3215_sim(["LARANJA"]):::laranja
+  grande_traumatismo_p2_3215 -->|Sim| grande_traumatismo_p2_3215_sim
+  grande_traumatismo_p2_3215 -->|Não| grande_traumatismo_p2_3216
+  grande_traumatismo_p2_3216_sim(["LARANJA"]):::laranja
+  grande_traumatismo_p2_3216 -->|Sim| grande_traumatismo_p2_3216_sim
+  grande_traumatismo_p2_3216 -->|Não| grande_traumatismo_p2_3217
+  grande_traumatismo_p2_3217_sim(["LARANJA"]):::laranja
+  grande_traumatismo_p2_3217 -->|Sim| grande_traumatismo_p2_3217_sim
+  grande_traumatismo_p2_3217 -->|Não| grande_traumatismo_p2_3218
+  grande_traumatismo_p2_3218_sim(["LARANJA"]):::laranja
+  grande_traumatismo_p2_3218 -->|Sim| grande_traumatismo_p2_3218_sim
+  grande_traumatismo_p2_3218 -->|Não| grande_traumatismo_p2_3219
+  grande_traumatismo_p2_3219_sim(["LARANJA"]):::laranja
+  grande_traumatismo_p2_3219 -->|Sim| grande_traumatismo_p2_3219_sim
+  grande_traumatismo_p2_3219 -->|Não| grande_traumatismo_p3_3220
+  grande_traumatismo_p3_3220_sim(["AMARELO"]):::amarelo
+  grande_traumatismo_p3_3220 -->|Sim| grande_traumatismo_p3_3220_sim
+  grande_traumatismo_p3_3220 -->|Não| grande_traumatismo_p3_3221
+  grande_traumatismo_p3_3221_sim(["AMARELO"]):::amarelo
+  grande_traumatismo_p3_3221 -->|Sim| grande_traumatismo_p3_3221_sim
+  grande_traumatismo_p3_3221 -->|Não| grande_traumatismo_p3_3222
+  grande_traumatismo_p3_3222_sim(["AMARELO"]):::amarelo
+  grande_traumatismo_p3_3222 -->|Sim| grande_traumatismo_p3_3222_sim
+  grande_traumatismo_p3_3222 -->|Não| grande_traumatismo_p3_3223
+  grande_traumatismo_p3_3223_sim(["AMARELO"]):::amarelo
+  grande_traumatismo_p3_3223 -->|Sim| grande_traumatismo_p3_3223_sim
+  sem_positivo(["VERDE<br/>Sem discriminador positivo"]):::verde
+  grande_traumatismo_p3_3223 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

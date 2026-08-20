@@ -1,0 +1,242 @@
+{
+  "id": "agressao",
+  "nome": "Agressão",
+  "nome_en": "Assault",
+  "descricao": "Foi vítima de uma agressão física.",
+  "descricao_en": "You have been physically assaulted.",
+  "pediatrico": false,
+  "fonte": "Discriminadores do Sistema de Triagem de Manchester, organizados por prioridade clínica (P1-P5). Importados da tabela de referência; sujeitos a validação clínica antes de uso real.",
+  "fonte_en": "Manchester Triage System discriminators, organised by clinical priority (P1-P5). Imported from the reference table; subject to clinical validation before real use.",
+  "perguntas": [
+    {
+      "id": "agressao_p1_1738",
+      "disc_id": 1738,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Compromisso da via aérea?",
+      "texto_utente": "A respiração está muito difícil ou ruidosa, como se o ar não passasse bem pela garganta (a roncar ou a gorgolejar)?",
+      "texto_en": "Airway compromise?",
+      "texto_utente_en": "Is breathing very difficult or noisy, as if air can't pass properly through the throat (snoring or gurgling)?",
+      "descricao": "A via aérea poderá estar comprometida, por não se conseguir manter aberta, ou porque os reflexos protetores da via respiratória (que evitam a aspiração) se perderam. A incapacidade de manter a via aérea aberta, poderá resultar numa obstrução total ou parcial, intermitente ou não. Isto manifestar-se-á por sons como o ressonar ou o gorgolejar durante a respiração."
+    },
+    {
+      "id": "agressao_p1_1739",
+      "disc_id": 1739,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Respiração ineficaz?",
+      "texto_utente": "A respiração está tão fraca ou cansada que parece não entrar ar suficiente (respiração aos arrancos ou muito a custo)?",
+      "texto_en": "Ineffective breathing?",
+      "texto_utente_en": "Is breathing so weak or laboured that not enough air seems to get in (gasping or a real struggle)?",
+      "descricao": "Doentes que não conseguem respirar suficientemente bem para manter uma oxigenação adequada e com falência respiratória, sofrem de respiração ineficaz. Poderá resultar num esforço acrescentado para respirar, ou em exaustão, incluindo uma respiração tipo “gasping”."
+    },
+    {
+      "id": "agressao_p1_1740",
+      "disc_id": 1740,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Hemorragia catastrófica?",
+      "texto_utente": "Está a sangrar muitíssimo, com sangue a jorrar, e não consegue parar?",
+      "texto_en": "Catastrophic haemorrhage?",
+      "texto_utente_en": "Is there massive bleeding, with blood spurting out, that you cannot stop?",
+      "descricao": "Hemorragia arterial em quantidade e velocidade catastróficas que, se não for controlada rapidamente, provocará a morte da vítima."
+    },
+    {
+      "id": "agressao_p1_1741",
+      "disc_id": 1741,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "História recente de viagem ao estrangeiro",
+      "texto_utente": "Viajou para fora do país nas últimas semanas?",
+      "texto_en": "Recent history of foreign travel",
+      "texto_utente_en": "Have you travelled abroad in the last few weeks?"
+    },
+    {
+      "id": "agressao_p1_1742",
+      "disc_id": 1742,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Não reativo?",
+      "texto_utente": "Está sem reagir a nada, nem quando lhe falam, lhe tocam ou lhe fazem doer?",
+      "texto_en": "Unresponsive?",
+      "texto_utente_en": "Is the person not reacting at all, even to voice, touch or pain?",
+      "descricao": "Não responde a um estímulo doloroso."
+    },
+    {
+      "id": "agressao_p1_1765",
+      "disc_id": 1765,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Sinais de choque?",
+      "texto_utente": "Tem suores frios, pele muito pálida ou acinzentada, o coração a bater depressa e uma grande fraqueza?",
+      "texto_en": "Signs of shock?",
+      "texto_utente_en": "Are there cold sweats, very pale or greyish skin, a fast heartbeat and severe weakness?",
+      "descricao": "O choque é uma entrega inadequada de oxigénio aos tecidos. Os sinais clássicos incluem suores, palidez, taquicardia, hipotensão e nível de consciência reduzido."
+    },
+    {
+      "id": "agressao_p2_1743",
+      "disc_id": 1743,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Dispneia aguda?",
+      "texto_utente": "Ficou de repente com falta de ar (ou uma falta de ar que já tinha piorou muito de um momento para o outro)?",
+      "texto_en": "Acute shortness of breath?",
+      "texto_utente_en": "Did shortness of breath come on suddenly (or did a breathlessness you already had suddenly get much worse)?",
+      "descricao": "Dificuldade respiratória que se desenvolve subitamente ou uma repentina exacerbação de dispneia crónica."
+    },
+    {
+      "id": "agressao_p2_1744",
+      "disc_id": 1744,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Grande Hemorragia incontrolável?",
+      "texto_utente": "Está a sangrar muito e não pára mesmo fazendo pressão, encharcando os panos depressa?",
+      "texto_en": "Major uncontrollable haemorrhage?",
+      "texto_utente_en": "Is there heavy bleeding that won't stop even with firm pressure, soaking through cloths quickly?",
+      "descricao": "Hemorragia que não é rapidamente controlada pela aplicação de pressão direta sustentada e que continua a sangrar muito ou a encharcar rapidamente os panos ou pensos."
+    },
+    {
+      "id": "agressao_p2_1745",
+      "disc_id": 1745,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Alteração do estado de consciência?",
+      "texto_utente": "Está sonolento ou baralhado, só reagindo quando lhe falam ou lhe tocam (não está bem desperto)?",
+      "texto_en": "Altered level of consciousness?",
+      "texto_utente_en": "Is the person drowsy or muddled, responding only to voice or touch (not fully alert)?",
+      "descricao": "Não está totalmente alerta. Só responde à voz, à dor"
+    },
+    {
+      "id": "agressao_p2_1746",
+      "disc_id": 1746,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Défice neurológico agudo? <24h",
+      "texto_utente": "Nas últimas 24 horas, perdeu de repente a força, a sensibilidade ou os movimentos (por exemplo, num braço, numa perna ou na fala)?",
+      "texto_en": "Acute neurological deficit? (<24h)",
+      "texto_utente_en": "In the last 24 hours, did you suddenly lose strength, feeling or movement (for example in an arm, a leg or your speech)?",
+      "descricao": "Qualquer perda de função neurológica acontecida = 24 horas, incluindo alterações sensitivas, redução da força (temporária ou permanente) dos membros ou alterações funcionais vesicais ou do intestino."
+    },
+    {
+      "id": "agressao_p2_1747",
+      "disc_id": 1747,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Mecanismo significativo de lesão?",
+      "texto_utente": "A lesão foi num acidente grave (queda de um sítio alto, choque a grande velocidade, tiro, facada ou explosão)?",
+      "texto_en": "Significant mechanism of injury?",
+      "texto_utente_en": "Did the injury happen in a serious accident (a fall from height, a high-speed crash, a gunshot, a stabbing or an explosion)?",
+      "descricao": "São significativas as lesões penetrantes (facadas ou tiros) e as lesões com elevada transferência de energia, tais como quedas de altura, acidentes de tráfego a alta velocidade (velocidade superior a 60 km/h), ejecção de um veículo, morte de ocupantes e deformação significativa de um veículo. Pode ser especialmente significativa uma história de saltar de um edifício em chamas ou de exposição a uma explosão."
+    },
+    {
+      "id": "agressao_p2_1748",
+      "disc_id": 1748,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Dor severa?",
+      "texto_utente": "Tem dores muito fortes, quase a não aguentar (das piores que alguma vez sentiu)?",
+      "texto_en": "Severe pain?",
+      "texto_utente_en": "Do you have very severe pain, almost unbearable (some of the worst you've ever felt)?",
+      "descricao": "Dor significativa e insuportável, frequentemente referida como a pior de sempre. Alterações na expressão facial, de comportamento e nas atividades diárias permitem avaliar o nível de dor, especialmente nos doentes não comunicativos (por exemplo nas crianças e bebés), ou quando existem barreiras de comunicação pelo idioma ou por demência."
+    },
+    {
+      "id": "agressao_p3_1749",
+      "disc_id": 1749,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Pequena hemorragia incontrolável?",
+      "texto_utente": "Tem uma pequena ferida que continua a sangrar e não pára, mesmo fazendo pressão?",
+      "texto_en": "Minor uncontrollable haemorrhage?",
+      "texto_utente_en": "Is there a small wound that keeps bleeding and won't stop, even with pressure?",
+      "descricao": "Quando é impossível controlar uma hemorragia rapidamente através da aplicação de pressão direta sustentada, continuando a sangrar levemente ou a escorrer sangue."
+    },
+    {
+      "id": "agressao_p3_1750",
+      "disc_id": 1750,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Novos sinais e/ou sintomas neurológicos?",
+      "texto_utente": "Há mais de 24 horas, notou algo de novo, como perder força ou sensibilidade, ou dificuldade em controlar a urina ou as fezes?",
+      "texto_en": "New neurological signs and/or symptoms?",
+      "texto_utente_en": "More than 24 hours ago, did you notice something new, such as losing strength or feeling, or trouble controlling your bladder or bowel?",
+      "descricao": "Podem incluir alteração ou perda de sensibilidade, enfraquecimento dos membros (transitório ou permanente) ou alterações do funcionamento da bexiga ou do intestino (incontinência) há > 24 horas."
+    },
+    {
+      "id": "agressao_p3_1751",
+      "disc_id": 1751,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "História de perda de consciência?",
+      "texto_utente": "Chegou a desmaiar ou a perder os sentidos (nem que fosse só por instantes)?",
+      "texto_en": "History of loss of consciousness?",
+      "texto_utente_en": "Did you faint or black out at any point (even for just a moment)?",
+      "descricao": "Pode haver uma testemunha fiável que possa dizer se o doente esteve inconsciente (e durante quanto tempo). Caso contrário, se o doente não se recorda do incidente deve-se presumir que esteve inconsciente."
+    },
+    {
+      "id": "agressao_p3_1752",
+      "disc_id": 1752,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "História Inapropriada?",
+      "texto_utente": "A explicação que foi dada para as lesões não bate certo com aquilo que se vê?",
+      "texto_en": "Inappropriate history?",
+      "texto_utente_en": "Does the explanation given for the injuries not match what can be seen?",
+      "descricao": "Quando a história fornecida não explica as alterações físicas, então é inapropriada. Isto é importante pois é um sinal de perigo para a salvaguarda de adultos e crianças."
+    },
+    {
+      "id": "agressao_p3_1753",
+      "disc_id": 1753,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Deformação?",
+      "texto_utente": "Há alguma parte do corpo com um aspeto torto, deformado ou fora do sítio?",
+      "texto_en": "Deformity?",
+      "texto_utente_en": "Is any part of the body crooked, deformed or out of place?",
+      "descricao": "Situação sempre subjetiva. Estão implícitas angulações ou rotações anormais."
+    },
+    {
+      "id": "agressao_p3_1754",
+      "disc_id": 1754,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Dor moderada?",
+      "texto_utente": "Tem dores a sério, que o impedem de fazer algumas coisas do dia a dia?",
+      "texto_en": "Moderate pain?",
+      "texto_utente_en": "Do you have noticeable pain that stops you doing some everyday things?",
+      "descricao": "Dor significativa que incapacita para algumas atividades diárias. Alterações na expressão facial, de comportamento e nas atividades diárias permitem avaliar o nível de dor, especialmente nos doentes não comunicativos (por exemplo nas crianças e bebés), ou quando existem barreiras de comunicação pelo idioma ou por demência."
+    },
+    {
+      "id": "agressao_p4_1755",
+      "disc_id": 1755,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Edema?",
+      "texto_utente": "Há alguma zona inchada ou mais volumosa do que é habitual?",
+      "texto_en": "Swelling?",
+      "texto_utente_en": "Is there any area that is swollen or bigger than usual?",
+      "descricao": "Inchaço ou aumento de volume anormal."
+    },
+    {
+      "id": "agressao_p4_1756",
+      "disc_id": 1756,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Dor persistente?",
+      "texto_utente": "A dor continua sem passar, mesmo depois de esperar ou de tomar um analgésico?",
+      "texto_en": "Persistent pain?",
+      "texto_utente_en": "Does the pain carry on without easing, even after waiting or taking a painkiller?",
+      "descricao": "Dor que não desaparece após algum tempo ou após tomar a medicação apropriada. Mudanças nas expressões faciais, comportamento e interrupção da atividade permitirão avaliar os níveis de dor, especialmente em pacientes não comunicativos, como por exemplo crianças muito pequenas e bebés, ou onde existam barreiras à comunicação devido ao idioma ou a demência."
+    },
+    {
+      "id": "agressao_p4_1757",
+      "disc_id": 1757,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Problema recente?",
+      "texto_utente": "Este problema começou na última semana?",
+      "texto_en": "Recent problem?",
+      "texto_utente_en": "Did this problem start within the last week?",
+      "descricao": "Um problema que aparece no decorrer da última semana."
+    }
+  ]
+}

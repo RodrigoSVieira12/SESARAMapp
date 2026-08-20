@@ -49,7 +49,8 @@ PORTO_SANTO = (33.06, -16.35)
 def sem_esperas(monkeypatch):
     """Isola os testes do cache de espera que outros testes escrevem."""
     monkeypatch.setattr(
-        espera, "do_cache",
+        espera,
+        "do_cache",
         lambda: {"disponivel": False, "desatualizado": False, "obtido_em": None},
     )
 
@@ -57,6 +58,7 @@ def sem_esperas(monkeypatch):
 # --------------------------------------------------------------------- #
 # Versão e configuração                                                   #
 # --------------------------------------------------------------------- #
+
 
 def test_versao_e_pelo_menos_0_12_1():
     partes = tuple(int(p) for p in versao.VERSAO.split("."))
@@ -85,6 +87,7 @@ def test_politica_carregada_aponta_para_unidade_real():
 # --------------------------------------------------------------------- #
 # A política em ação: laranja e amarelo vão diretos ao hospital           #
 # --------------------------------------------------------------------- #
+
 
 def test_laranja_e_amarelo_vao_ao_hnm_de_qualquer_concelho(sem_esperas):
     """O cerne da v0.12.1: mesmo com atendimento urgente aberto ao lado
@@ -132,19 +135,24 @@ def test_vermelho_mostra_o_hospital_como_referencia(sem_esperas):
 def test_hospital_mostra_espera_da_cor_do_utente(monkeypatch):
     """A coluna de espera certa (a da cor) continua a acompanhar o
     encaminhamento direto — era um dos ganhos da v0.8 e mantém-se."""
-    monkeypatch.setattr(espera, "do_cache", lambda: {
-        "disponivel": True, "desatualizado": False,
-        "obtido_em": "2026-06-29T10:00:00",
-        "unidades": {
-            "hnm": {
-                "tipo_dados": "por_cor",
-                "por_cor": {"amarelo": {"em_espera": 5, "tempo_medio_min": 55, "atendidos": 9}},
-                "geral": {"em_espera": 20, "tempo_medio_min": 90, "atendidos": 40},
-                "fonte": "hospital",
-                "atualizado_no_site": "2026-06-29 10:00",
+    monkeypatch.setattr(
+        espera,
+        "do_cache",
+        lambda: {
+            "disponivel": True,
+            "desatualizado": False,
+            "obtido_em": "2026-06-29T10:00:00",
+            "unidades": {
+                "hnm": {
+                    "tipo_dados": "por_cor",
+                    "por_cor": {"amarelo": {"em_espera": 5, "tempo_medio_min": 55, "atendidos": 9}},
+                    "geral": {"em_espera": 20, "tempo_medio_min": 90, "atendidos": 40},
+                    "fonte": "hospital",
+                    "atualizado_no_site": "2026-06-29 10:00",
+                },
             },
         },
-    })
+    )
     saida = routing.decidir_encaminhamento("amarelo", *FUNCHAL, quando=SEGUNDA_10H)
     te = saida["unidade"]["tempo_espera"]
     assert te["minutos"] == 55 and te["ambito"] == "cor"
@@ -153,6 +161,7 @@ def test_hospital_mostra_espera_da_cor_do_utente(monkeypatch):
 # --------------------------------------------------------------------- #
 # Regra da ilha: o Porto Santo não muda                                   #
 # --------------------------------------------------------------------- #
+
 
 def test_porto_santo_mantem_a_regra_da_ilha(sem_esperas):
     for cor in ("vermelho", "laranja", "amarelo"):
@@ -164,6 +173,7 @@ def test_porto_santo_mantem_a_regra_da_ilha(sem_esperas):
 # --------------------------------------------------------------------- #
 # A válvula: desfechos amarelos com "destino": "atendimento_urgente"      #
 # --------------------------------------------------------------------- #
+
 
 def test_excecao_amarela_volta_a_urgencia_mais_proxima(sem_esperas):
     saida = routing.decidir_encaminhamento(
@@ -222,9 +232,7 @@ def test_cor_retirada_da_politica_volta_a_proximidade(sem_esperas, monkeypatch):
     """O caminho previsto para "certos amarelos" globalmente: retirar
     'amarelo' de encaminhamento.json repõe a proximidade sem mexer em
     código."""
-    monkeypatch.setitem(
-        routing.POLITICA, "direto_para_hospital", ["vermelho", "laranja"]
-    )
+    monkeypatch.setitem(routing.POLITICA, "direto_para_hospital", ["vermelho", "laranja"])
     saida = routing.decidir_encaminhamento("amarelo", *MACHICO, quando=SEGUNDA_10H)
     assert saida["unidade"]["id"] == "cs_machico"
     assert saida["politica"]["fonte"] == "predefinicao"
@@ -241,9 +249,7 @@ RED_FLAGS_MINIMO = {
 
 
 def _escrever(pasta: Path, nome: str, dados: dict) -> None:
-    (pasta / nome).write_text(
-        json.dumps(dados, ensure_ascii=False, indent=1), encoding="utf-8"
-    )
+    (pasta / nome).write_text(json.dumps(dados, ensure_ascii=False, indent=1), encoding="utf-8")
 
 
 def _fluxo(perguntas: list[dict]) -> dict:
@@ -252,11 +258,21 @@ def _fluxo(perguntas: list[dict]) -> dict:
 
 def test_validador_aceita_destino_em_amarelo(tmp_path):
     _escrever(tmp_path, "red_flags.json", RED_FLAGS_MINIMO)
-    _escrever(tmp_path, "teste.json", _fluxo([
-        {"id": "q1", "texto": "?",
-         "sim": {"resultado": {"cor": "amarelo", "destino": "atendimento_urgente"}},
-         "nao": {"resultado": {"cor": "verde"}}},
-    ]))
+    _escrever(
+        tmp_path,
+        "teste.json",
+        _fluxo(
+            [
+                {
+                    "id": "q1",
+                    "prioridade": "P3",
+                    "cor": "amarelo",
+                    "texto": "?",
+                    "destino": "atendimento_urgente",
+                },
+            ]
+        ),
+    )
     motor = TriageEngine(tmp_path)
     saida = motor.avaliar("teste", {"q1": "sim"})
     # O motor passa o campo tal e qual ao resultado, para a API e o
@@ -266,22 +282,42 @@ def test_validador_aceita_destino_em_amarelo(tmp_path):
 
 def test_validador_rejeita_destino_invalido(tmp_path):
     _escrever(tmp_path, "red_flags.json", RED_FLAGS_MINIMO)
-    _escrever(tmp_path, "teste.json", _fluxo([
-        {"id": "q1", "texto": "?",
-         "sim": {"resultado": {"cor": "amarelo", "destino": "hospitall"}},
-         "nao": {"resultado": {"cor": "verde"}}},
-    ]))
+    _escrever(
+        tmp_path,
+        "teste.json",
+        _fluxo(
+            [
+                {
+                    "id": "q1",
+                    "prioridade": "P3",
+                    "cor": "amarelo",
+                    "texto": "?",
+                    "destino": "hospitall",
+                },
+            ]
+        ),
+    )
     with pytest.raises(RuntimeError, match="destino inválido"):
         TriageEngine(tmp_path)
 
 
 def test_validador_rejeita_destino_fora_do_amarelo(tmp_path):
     _escrever(tmp_path, "red_flags.json", RED_FLAGS_MINIMO)
-    _escrever(tmp_path, "teste.json", _fluxo([
-        {"id": "q1", "texto": "?",
-         "sim": {"resultado": {"cor": "verde", "destino": "atendimento_urgente"}},
-         "nao": {"resultado": {"cor": "azul"}}},
-    ]))
+    _escrever(
+        tmp_path,
+        "teste.json",
+        _fluxo(
+            [
+                {
+                    "id": "q1",
+                    "prioridade": "P4",
+                    "cor": "verde",
+                    "texto": "?",
+                    "destino": "atendimento_urgente",
+                },
+            ]
+        ),
+    )
     with pytest.raises(RuntimeError, match="amarelos"):
         TriageEngine(tmp_path)
 
@@ -297,12 +333,18 @@ def test_regras_reais_continuam_a_validar():
 # API: o destino viaja do desfecho até ao encaminhamento                  #
 # --------------------------------------------------------------------- #
 
+
 def test_api_encaminhamento_aceita_destino(sem_esperas):
-    resposta = cliente.post("/api/encaminhamento", json={
-        "cor": "amarelo", "lat": MACHICO[0], "lng": MACHICO[1],
-        "destino": "atendimento_urgente",
-        "quando": SEGUNDA_10H.isoformat(),
-    })
+    resposta = cliente.post(
+        "/api/encaminhamento",
+        json={
+            "cor": "amarelo",
+            "lat": MACHICO[0],
+            "lng": MACHICO[1],
+            "destino": "atendimento_urgente",
+            "quando": SEGUNDA_10H.isoformat(),
+        },
+    )
     assert resposta.status_code == 200
     corpo = resposta.json()
     assert corpo["unidade"]["id"] == "cs_machico"
@@ -310,18 +352,28 @@ def test_api_encaminhamento_aceita_destino(sem_esperas):
 
 
 def test_api_encaminhamento_rejeita_destino_desconhecido():
-    resposta = cliente.post("/api/encaminhamento", json={
-        "cor": "amarelo", "lat": MACHICO[0], "lng": MACHICO[1],
-        "destino": "farmacia",
-    })
+    resposta = cliente.post(
+        "/api/encaminhamento",
+        json={
+            "cor": "amarelo",
+            "lat": MACHICO[0],
+            "lng": MACHICO[1],
+            "destino": "farmacia",
+        },
+    )
     assert resposta.status_code == 422
 
 
 def test_api_encaminhamento_sem_destino_vai_ao_hospital(sem_esperas):
-    resposta = cliente.post("/api/encaminhamento", json={
-        "cor": "amarelo", "lat": MACHICO[0], "lng": MACHICO[1],
-        "quando": SEGUNDA_10H.isoformat(),
-    })
+    resposta = cliente.post(
+        "/api/encaminhamento",
+        json={
+            "cor": "amarelo",
+            "lat": MACHICO[0],
+            "lng": MACHICO[1],
+            "quando": SEGUNDA_10H.isoformat(),
+        },
+    )
     assert resposta.status_code == 200
     assert resposta.json()["unidade"]["id"] == "hnm"
 
@@ -332,17 +384,31 @@ def test_integracao_propaga_o_destino_do_desfecho(sem_esperas, tmp_path, monkeyp
     from app.api import routes
 
     _escrever(tmp_path, "red_flags.json", RED_FLAGS_MINIMO)
-    _escrever(tmp_path, "teste.json", _fluxo([
-        {"id": "q1", "texto": "?",
-         "sim": {"resultado": {"cor": "amarelo", "destino": "atendimento_urgente",
-                               "motivo": "m"}},
-         "nao": {"resultado": {"cor": "verde"}}},
-    ]))
+    _escrever(
+        tmp_path,
+        "teste.json",
+        _fluxo(
+            [
+                {
+                    "id": "q1",
+                    "prioridade": "P3",
+                    "cor": "amarelo",
+                    "texto": "?",
+                    "destino": "atendimento_urgente",
+                },
+            ]
+        ),
+    )
     monkeypatch.setattr(routes, "engine", TriageEngine(tmp_path))
-    resposta = cliente.post("/api/integracao/triagem", json={
-        "queixa": "teste", "respostas": {"q1": "sim"},
-        "lat": MACHICO[0], "lng": MACHICO[1],
-    })
+    resposta = cliente.post(
+        "/api/integracao/triagem",
+        json={
+            "queixa": "teste",
+            "respostas": {"q1": "sim"},
+            "lat": MACHICO[0],
+            "lng": MACHICO[1],
+        },
+    )
     assert resposta.status_code == 200
     corpo = resposta.json()
     assert corpo["resultado"]["destino"] == "atendimento_urgente"
@@ -354,12 +420,20 @@ def test_integracao_propaga_o_destino_do_desfecho(sem_esperas, tmp_path, monkeyp
 # Fluxogramas: a exceção fica visível na árvore                           #
 # --------------------------------------------------------------------- #
 
+
 def test_fluxograma_marca_desfechos_com_excecao():
-    fluxo = _fluxo([
-        {"id": "q1", "texto": "Pergunta?", "texto_en": "Question?",
-         "sim": {"resultado": {"cor": "amarelo", "destino": "atendimento_urgente"}},
-         "nao": {"resultado": {"cor": "verde"}}},
-    ])
+    fluxo = _fluxo(
+        [
+            {
+                "id": "q1",
+                "prioridade": "P3",
+                "cor": "amarelo",
+                "texto": "Pergunta?",
+                "texto_en": "Question?",
+                "destino": "atendimento_urgente",
+            },
+        ]
+    )
     pt = fluxogramas.mermaid_do_fluxo(fluxo, "pt")
     en = fluxogramas.mermaid_do_fluxo(fluxo, "en")
     assert "pode ir ao atendimento urgente" in pt
@@ -367,19 +441,20 @@ def test_fluxograma_marca_desfechos_com_excecao():
 
 
 def test_fluxograma_sem_excecao_nao_ganha_marca():
-    """Regressão: sem o campo destino, o desenho fica exatamente como
-    dantes (os .mmd do repositório não podem mudar por esta feature)."""
-    fluxo = _fluxo([
-        {"id": "q1", "texto": "Pergunta?",
-         "sim": {"resultado": {"cor": "amarelo"}},
-         "nao": {"resultado": {"cor": "verde"}}},
-    ])
+    """Regressão: sem o campo destino, o desenho não ganha a marca da
+    exceção."""
+    fluxo = _fluxo(
+        [
+            {"id": "q1", "prioridade": "P3", "cor": "amarelo", "texto": "Pergunta?"},
+        ]
+    )
     assert "atendimento urgente" not in fluxogramas.mermaid_do_fluxo(fluxo, "pt")
 
 
 # --------------------------------------------------------------------- #
 # Documentação                                                            #
 # --------------------------------------------------------------------- #
+
 
 def test_readmes_mostram_o_link_da_previsualizacao():
     """Pedido explícito da v0.12.1: o link completo da pré-visualização
@@ -390,7 +465,14 @@ def test_readmes_mostram_o_link_da_previsualizacao():
 
 
 def test_readmes_documentam_a_politica():
+    # A política de hospital direto é mencionada nos READMEs (o ficheiro
+    # editável), mas o histórico de versões saiu deles na v0.13.1: a
+    # referência "0.12.1" vive agora no CHANGELOG. Este teste segue essa
+    # mudança em vez de forçar o regresso do histórico ao README.
     for nome in ("README.md", "README.pt.md"):
         texto = (RAIZ / nome).read_text(encoding="utf-8")
         assert "encaminhamento.json" in texto, nome
+    for nome in ("CHANGELOG.md", "CHANGELOG.pt.md"):
+        texto = (RAIZ / nome).read_text(encoding="utf-8")
         assert "0.12.1" in texto, nome
+        assert "encaminhamento.json" in texto, nome

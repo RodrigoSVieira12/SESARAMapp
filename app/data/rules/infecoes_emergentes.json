@@ -1,0 +1,232 @@
+{
+  "id": "infecoes_emergentes",
+  "nome": "Infeções emergentes",
+  "nome_en": "Emerging infections",
+  "descricao": "Suspeita de infeção emergente ou de risco de saúde pública.",
+  "descricao_en": "Suspected emerging infection or public-health risk.",
+  "pediatrico": false,
+  "fonte": "Discriminadores do Sistema de Triagem de Manchester, organizados por prioridade clínica (P1-P5). Importados da tabela de referência; sujeitos a validação clínica antes de uso real.",
+  "fonte_en": "Manchester Triage System discriminators, organised by clinical priority (P1-P5). Imported from the reference table; subject to clinical validation before real use.",
+  "perguntas": [
+    {
+      "id": "infecoes_emergentes_p1_1878",
+      "disc_id": 1878,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Compromisso da via aérea?",
+      "texto_utente": "A respiração está muito difícil ou ruidosa, como se o ar não passasse bem pela garganta (a roncar ou a gorgolejar)?",
+      "texto_en": "Airway compromise?",
+      "texto_utente_en": "Is breathing very difficult or noisy, as if air can't pass properly through the throat (snoring or gurgling)?",
+      "descricao": "A via aérea poderá estar comprometida, por não se conseguir manter aberta, ou porque os reflexos protetores da via respiratória (que evitam a aspiração) se perderam. A incapacidade de manter a via aérea aberta, poderá resultar numa obstrução total ou parcial, intermitente ou não. Isto manifestar-se-á por sons como o ressonar ou o gorgolejar durante a respiração."
+    },
+    {
+      "id": "infecoes_emergentes_p1_2149",
+      "disc_id": 2149,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Respiração ineficaz?",
+      "texto_utente": "A respiração está tão fraca ou cansada que parece não entrar ar suficiente (respiração aos arrancos ou muito a custo)?",
+      "texto_en": "Ineffective breathing?",
+      "texto_utente_en": "Is breathing so weak or laboured that not enough air seems to get in (gasping or a real struggle)?",
+      "descricao": "Doentes que não conseguem respirar suficientemente bem para manter uma oxigenação adequada e com falência respiratória, sofrem de respiração ineficaz. Poderá resultar num esforço acrescentado para respirar, ou em exaustão, incluindo uma respiração tipo “gasping”."
+    },
+    {
+      "id": "infecoes_emergentes_p1_2762",
+      "disc_id": 2762,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Sinais de choque?",
+      "texto_utente": "Tem suores frios, pele muito pálida ou acinzentada, o coração a bater depressa e uma grande fraqueza?",
+      "texto_en": "Signs of shock?",
+      "texto_utente_en": "Are there cold sweats, very pale or greyish skin, a fast heartbeat and severe weakness?",
+      "descricao": "O choque é uma entrega inadequada de oxigénio aos tecidos. Os sinais clássicos incluem suores, palidez, taquicardia, hipotensão e nível de consciência reduzido."
+    },
+    {
+      "id": "infecoes_emergentes_p1_2774",
+      "disc_id": 2774,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Não reativo?",
+      "texto_utente": "Está sem reagir a nada, nem quando lhe falam, lhe tocam ou lhe fazem doer?",
+      "texto_en": "Unresponsive?",
+      "texto_utente_en": "Is the person not reacting at all, even to voice, touch or pain?",
+      "descricao": "Não responde a um estímulo doloroso."
+    },
+    {
+      "id": "infecoes_emergentes_p1_3062",
+      "disc_id": 3062,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Convulsão atual?",
+      "texto_utente": "Está a ter uma convulsão neste momento (um ataque, com o corpo a tremer ou a ficar rígido)?",
+      "texto_en": "Current seizure?",
+      "texto_utente_en": "Is a seizure happening right now (a fit, with the body shaking or going stiff)?",
+      "descricao": "Doentes que se encontram atualmente sofrendo de convulsões (na fase tónica, clónica ou com outra manifestação relevante) preenchem este critério."
+    },
+    {
+      "id": "infecoes_emergentes_p2_3064",
+      "disc_id": 3064,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Alteração do estado de consciência?",
+      "texto_utente": "Está sonolento ou baralhado, só reagindo quando lhe falam ou lhe tocam (não está bem desperto)?",
+      "texto_en": "Altered level of consciousness?",
+      "texto_utente_en": "Is the person drowsy or muddled, responding only to voice or touch (not fully alert)?",
+      "descricao": "Não está totalmente alerta. Só responde à voz, à dor"
+    },
+    {
+      "id": "infecoes_emergentes_p2_3087",
+      "disc_id": 3087,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Dispneia aguda?",
+      "texto_utente": "Ficou de repente com falta de ar (ou uma falta de ar que já tinha piorou muito de um momento para o outro)?",
+      "texto_en": "Acute shortness of breath?",
+      "texto_utente_en": "Did shortness of breath come on suddenly (or did a breathlessness you already had suddenly get much worse)?",
+      "descricao": "Dificuldade respiratória que se desenvolve subitamente ou uma repentina exacerbação de dispneia crónica."
+    },
+    {
+      "id": "infecoes_emergentes_p2_3088",
+      "disc_id": 3088,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Hematoquésias, melenas ou retorragias?",
+      "texto_utente": "Saiu sangue pelo rabo ou nas fezes (vermelho-vivo ou muito escuro)?",
+      "texto_en": "Blood in the stool or rectal bleeding?",
+      "texto_utente_en": "Has blood come from the back passage or in the stool (bright red or very dark)?",
+      "descricao": "Numa hemorragia gastrointestinal maciça e ativa, o sangue vermelho-escuro é expelido pelo reto. À medida que aumenta o tempo de trânsito gastrointestinal o sangue torna-se mais escuro – vindo a tornar-se em melenas."
+    },
+    {
+      "id": "infecoes_emergentes_p2_3089",
+      "disc_id": 3089,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Erupção cutânea desconhecida?",
+      "texto_utente": "Apareceu-lhe uma erupção na pele sem se saber porquê?",
+      "texto_en": "Unknown skin rash?",
+      "texto_utente_en": "Has a rash appeared on the skin with no known cause?",
+      "descricao": "Qualquer erupção cutânea cuja a causa não se possa identificar."
+    },
+    {
+      "id": "infecoes_emergentes_p2_3090",
+      "disc_id": 3090,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Alteração da imunidade conhecida?",
+      "texto_utente": "Tem as defesas em baixo (por uma doença ou por tomar remédios que baixam a imunidade, como a quimioterapia)?",
+      "texto_en": "Known immune impairment?",
+      "texto_utente_en": "Are your defences low (from an illness or from taking medicines that lower immunity, such as chemotherapy)?",
+      "descricao": "Qualquer doente sob terapêutica imunossupressora ou com doença que cause imunossupressão."
+    },
+    {
+      "id": "infecoes_emergentes_p2_3091",
+      "disc_id": 3091,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Muito quente?",
+      "texto_utente": "Tem febre muito alta? (num adulto, 41°C ou mais; num bebé com menos de 12 meses, 38,5°C ou mais)",
+      "texto_en": "Very hot (high temperature)?",
+      "texto_utente_en": "Do you have a very high fever? (in an adult, 41°C or more; in a baby under 12 months, 38.5°C or more)",
+      "descricao": "No Adulto temperatura igual ou superior a 41ºC; Crianças com menos de 12 meses a temperatura é igual ou superior a 38.5ºC"
+    },
+    {
+      "id": "infecoes_emergentes_p2_3092",
+      "disc_id": 3092,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Possível sépsis?",
+      "texto_utente": "Tem sinais de uma infeção a alastrar depressa, como confusão, respiração muito acelerada ou uma fraqueza que se instala de repente?",
+      "texto_en": "Possible sepsis?",
+      "texto_utente_en": "Are there signs of a fast-spreading infection, such as confusion, very rapid breathing or weakness that comes on suddenly?",
+      "descricao": "Suspeitar de sépsis em vítimas que apresentem alteração do estado de consciência, hipotensão (sistólica inferior a 100mmHg), ou aumento da frequência respiratória (frequência superior a 22 cpm). Nas crianças deve ser determinada a possibilidade de sépsis pelas tabelas de parâmetros vitais ajustados à idade."
+    },
+    {
+      "id": "infecoes_emergentes_p3_3093",
+      "disc_id": 3093,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Pequena hemorragia incontrolável?",
+      "texto_utente": "Tem uma pequena ferida que continua a sangrar e não pára, mesmo fazendo pressão?",
+      "texto_en": "Minor uncontrollable haemorrhage?",
+      "texto_utente_en": "Is there a small wound that keeps bleeding and won't stop, even with pressure?",
+      "descricao": "Quando é impossível controlar uma hemorragia rapidamente através da aplicação de pressão direta sustentada, continuando a sangrar levemente ou a escorrer sangue."
+    },
+    {
+      "id": "infecoes_emergentes_p3_3094",
+      "disc_id": 3094,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Novos sinais e/ou sintomas neurológicos?",
+      "texto_utente": "Há mais de 24 horas, notou algo de novo, como perder força ou sensibilidade, ou dificuldade em controlar a urina ou as fezes?",
+      "texto_en": "New neurological signs and/or symptoms?",
+      "texto_utente_en": "More than 24 hours ago, did you notice something new, such as losing strength or feeling, or trouble controlling your bladder or bowel?",
+      "descricao": "Podem incluir alteração ou perda de sensibilidade, enfraquecimento dos membros (transitório ou permanente) ou alterações do funcionamento da bexiga ou do intestino (incontinência) há > 24 horas."
+    },
+    {
+      "id": "infecoes_emergentes_p3_3095",
+      "disc_id": 3095,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Exantema eritematoso ou bolhoso?",
+      "texto_utente": "Tem borbulhas com bolhas ou vermelhidão a cobrir uma grande parte do corpo?",
+      "texto_en": "Erythematous or blistering rash?",
+      "texto_utente_en": "Do you have a rash with blisters or redness covering a large part of the body?",
+      "descricao": "Qualquer erupção de vesículas que cobrem uma área superior a 10% da superfície corporal."
+    },
+    {
+      "id": "infecoes_emergentes_p3_3096",
+      "disc_id": 3096,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "História hematológica ou metabólica significativa?",
+      "texto_utente": "Tem uma doença do sangue ou do metabolismo que pode piorar depressa?",
+      "texto_en": "Significant haematological or metabolic history?",
+      "texto_utente_en": "Do you have a blood or metabolic condition that can get worse quickly?",
+      "descricao": "Doente com distúrbios hematológicos ou uma doença metabólica congénita que pode desenvolver complicações rapidamente."
+    },
+    {
+      "id": "infecoes_emergentes_p3_3097",
+      "disc_id": 3097,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "História significativa de doença respiratória?",
+      "texto_utente": "Tem uma doença dos pulmões conhecida e grave (por exemplo, já teve crises perigosas ou usa oxigénio em casa)?",
+      "texto_en": "Significant history of respiratory disease?",
+      "texto_utente_en": "Do you have a known serious lung condition (for example past dangerous flare-ups or home oxygen)?",
+      "descricao": "História de doença respiratória instável ou de episódios anteriores com perigo de vida. Incluir os doentes com oxigenoterapia ou ventilação não invasiva domiciliária."
+    },
+    {
+      "id": "infecoes_emergentes_p4_3098",
+      "disc_id": 3098,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Erupção cutânea desconhecida?",
+      "texto_utente": "Apareceu-lhe uma erupção na pele sem se saber porquê?",
+      "texto_en": "Unknown skin rash?",
+      "texto_utente_en": "Has a rash appeared on the skin with no known cause?",
+      "descricao": "Qualquer erupção cutânea cuja a causa não se possa identificar."
+    },
+    {
+      "id": "infecoes_emergentes_p4_3099",
+      "disc_id": 3099,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Risco de contaminação?",
+      "texto_utente": "Há o risco de aquilo o contaminar a si ou a outras pessoas à volta?",
+      "texto_en": "Risk of contamination?",
+      "texto_utente_en": "Is there a risk of it contaminating you or other people around?",
+      "descricao": "Quando a exposição implica risco de perpetuação da contaminação do próprio ou de terceiros, incluindo profissionais de saúde"
+    },
+    {
+      "id": "infecoes_emergentes_p4_3100",
+      "disc_id": 3100,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Dor persistente?",
+      "texto_utente": "A dor continua sem passar, mesmo depois de esperar ou de tomar um analgésico?",
+      "texto_en": "Persistent pain?",
+      "texto_utente_en": "Does the pain carry on without easing, even after waiting or taking a painkiller?",
+      "descricao": "Dor que não desaparece após algum tempo ou após tomar a medicação apropriada. Mudanças nas expressões faciais, comportamento e interrupção da atividade permitirão avaliar os níveis de dor, especialmente em pacientes não comunicativos, como por exemplo crianças muito pequenas e bebés, ou onde existam barreiras à comunicação devido ao idioma ou a demência."
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+flowchart TD
+  inicio(["Início: Dispneia no adulto"])
+  dispneia_no_adulto_p1_1841["1. [P1] Compromisso da via aérea?"]
+  dispneia_no_adulto_p1_2112["2. [P1] Respiração ineficaz?"]
+  dispneia_no_adulto_p1_2175["3. [P1] Estridor?"]
+  dispneia_no_adulto_p1_2176["4. [P1] Baba-se?"]
+  dispneia_no_adulto_p1_2177["5. [P1] Sinais de choque?"]
+  dispneia_no_adulto_p1_2178["6. [P1] Não reativo?"]
+  dispneia_no_adulto_p2_2179["7. [P2] Lesão por inalação?"]
+  dispneia_no_adulto_p2_2180["8. [P2] Incapacidade de articular<br/>frases completas?"]
+  dispneia_no_adulto_p2_2181["9. [P2] Exaustão?"]
+  dispneia_no_adulto_p2_2182["10. [P2] Grande Hemorragia<br/>incontrolável?"]
+  dispneia_no_adulto_p2_2183["11. [P2] Alteração do estado de<br/>consciência?"]
+  dispneia_no_adulto_p2_2184["12. [P2] Muito quente?"]
+  dispneia_no_adulto_p2_2185["13. [P2] Possível sépsis?"]
+  dispneia_no_adulto_p2_2186["14. [P2] Início agudo pós-traumático?"]
+  dispneia_no_adulto_p2_2187["15. [P2] História significativa de<br/>doença respiratória?"]
+  dispneia_no_adulto_p2_2188["16. [P2] Dor précordial?"]
+  dispneia_no_adulto_p3_2189["17. [P3] Broncoespasmo?"]
+  dispneia_no_adulto_p3_2190["18. [P3] Inalação de fumo?"]
+  dispneia_no_adulto_p3_2191["19. [P3] Quente?"]
+  dispneia_no_adulto_p3_2192["20. [P3] História de traumatismo<br/>torácico?"]
+  dispneia_no_adulto_p3_2193["21. [P3] Dor pleurítica?"]
+  dispneia_no_adulto_p4_2194["22. [P4] Febre persistente?"]
+  dispneia_no_adulto_p4_2197["23. [P4] Tosse produtiva?"]
+  dispneia_no_adulto_p4_2198["24. [P4] Problema recente?"]
+  inicio --> dispneia_no_adulto_p1_1841
+  dispneia_no_adulto_p1_1841_sim(["VERMELHO"]):::vermelho
+  dispneia_no_adulto_p1_1841 -->|Sim| dispneia_no_adulto_p1_1841_sim
+  dispneia_no_adulto_p1_1841 -->|Não| dispneia_no_adulto_p1_2112
+  dispneia_no_adulto_p1_2112_sim(["VERMELHO"]):::vermelho
+  dispneia_no_adulto_p1_2112 -->|Sim| dispneia_no_adulto_p1_2112_sim
+  dispneia_no_adulto_p1_2112 -->|Não| dispneia_no_adulto_p1_2175
+  dispneia_no_adulto_p1_2175_sim(["VERMELHO"]):::vermelho
+  dispneia_no_adulto_p1_2175 -->|Sim| dispneia_no_adulto_p1_2175_sim
+  dispneia_no_adulto_p1_2175 -->|Não| dispneia_no_adulto_p1_2176
+  dispneia_no_adulto_p1_2176_sim(["VERMELHO"]):::vermelho
+  dispneia_no_adulto_p1_2176 -->|Sim| dispneia_no_adulto_p1_2176_sim
+  dispneia_no_adulto_p1_2176 -->|Não| dispneia_no_adulto_p1_2177
+  dispneia_no_adulto_p1_2177_sim(["VERMELHO"]):::vermelho
+  dispneia_no_adulto_p1_2177 -->|Sim| dispneia_no_adulto_p1_2177_sim
+  dispneia_no_adulto_p1_2177 -->|Não| dispneia_no_adulto_p1_2178
+  dispneia_no_adulto_p1_2178_sim(["VERMELHO"]):::vermelho
+  dispneia_no_adulto_p1_2178 -->|Sim| dispneia_no_adulto_p1_2178_sim
+  dispneia_no_adulto_p1_2178 -->|Não| dispneia_no_adulto_p2_2179
+  dispneia_no_adulto_p2_2179_sim(["LARANJA"]):::laranja
+  dispneia_no_adulto_p2_2179 -->|Sim| dispneia_no_adulto_p2_2179_sim
+  dispneia_no_adulto_p2_2179 -->|Não| dispneia_no_adulto_p2_2180
+  dispneia_no_adulto_p2_2180_sim(["LARANJA"]):::laranja
+  dispneia_no_adulto_p2_2180 -->|Sim| dispneia_no_adulto_p2_2180_sim
+  dispneia_no_adulto_p2_2180 -->|Não| dispneia_no_adulto_p2_2181
+  dispneia_no_adulto_p2_2181_sim(["LARANJA"]):::laranja
+  dispneia_no_adulto_p2_2181 -->|Sim| dispneia_no_adulto_p2_2181_sim
+  dispneia_no_adulto_p2_2181 -->|Não| dispneia_no_adulto_p2_2182
+  dispneia_no_adulto_p2_2182_sim(["LARANJA"]):::laranja
+  dispneia_no_adulto_p2_2182 -->|Sim| dispneia_no_adulto_p2_2182_sim
+  dispneia_no_adulto_p2_2182 -->|Não| dispneia_no_adulto_p2_2183
+  dispneia_no_adulto_p2_2183_sim(["LARANJA"]):::laranja
+  dispneia_no_adulto_p2_2183 -->|Sim| dispneia_no_adulto_p2_2183_sim
+  dispneia_no_adulto_p2_2183 -->|Não| dispneia_no_adulto_p2_2184
+  dispneia_no_adulto_p2_2184_sim(["LARANJA"]):::laranja
+  dispneia_no_adulto_p2_2184 -->|Sim| dispneia_no_adulto_p2_2184_sim
+  dispneia_no_adulto_p2_2184 -->|Não| dispneia_no_adulto_p2_2185
+  dispneia_no_adulto_p2_2185_sim(["LARANJA"]):::laranja
+  dispneia_no_adulto_p2_2185 -->|Sim| dispneia_no_adulto_p2_2185_sim
+  dispneia_no_adulto_p2_2185 -->|Não| dispneia_no_adulto_p2_2186
+  dispneia_no_adulto_p2_2186_sim(["LARANJA"]):::laranja
+  dispneia_no_adulto_p2_2186 -->|Sim| dispneia_no_adulto_p2_2186_sim
+  dispneia_no_adulto_p2_2186 -->|Não| dispneia_no_adulto_p2_2187
+  dispneia_no_adulto_p2_2187_sim(["LARANJA"]):::laranja
+  dispneia_no_adulto_p2_2187 -->|Sim| dispneia_no_adulto_p2_2187_sim
+  dispneia_no_adulto_p2_2187 -->|Não| dispneia_no_adulto_p2_2188
+  dispneia_no_adulto_p2_2188_sim(["LARANJA"]):::laranja
+  dispneia_no_adulto_p2_2188 -->|Sim| dispneia_no_adulto_p2_2188_sim
+  dispneia_no_adulto_p2_2188 -->|Não| dispneia_no_adulto_p3_2189
+  dispneia_no_adulto_p3_2189_sim(["AMARELO"]):::amarelo
+  dispneia_no_adulto_p3_2189 -->|Sim| dispneia_no_adulto_p3_2189_sim
+  dispneia_no_adulto_p3_2189 -->|Não| dispneia_no_adulto_p3_2190
+  dispneia_no_adulto_p3_2190_sim(["AMARELO"]):::amarelo
+  dispneia_no_adulto_p3_2190 -->|Sim| dispneia_no_adulto_p3_2190_sim
+  dispneia_no_adulto_p3_2190 -->|Não| dispneia_no_adulto_p3_2191
+  dispneia_no_adulto_p3_2191_sim(["AMARELO"]):::amarelo
+  dispneia_no_adulto_p3_2191 -->|Sim| dispneia_no_adulto_p3_2191_sim
+  dispneia_no_adulto_p3_2191 -->|Não| dispneia_no_adulto_p3_2192
+  dispneia_no_adulto_p3_2192_sim(["AMARELO"]):::amarelo
+  dispneia_no_adulto_p3_2192 -->|Sim| dispneia_no_adulto_p3_2192_sim
+  dispneia_no_adulto_p3_2192 -->|Não| dispneia_no_adulto_p3_2193
+  dispneia_no_adulto_p3_2193_sim(["AMARELO"]):::amarelo
+  dispneia_no_adulto_p3_2193 -->|Sim| dispneia_no_adulto_p3_2193_sim
+  dispneia_no_adulto_p3_2193 -->|Não| dispneia_no_adulto_p4_2194
+  dispneia_no_adulto_p4_2194_sim(["VERDE"]):::verde
+  dispneia_no_adulto_p4_2194 -->|Sim| dispneia_no_adulto_p4_2194_sim
+  dispneia_no_adulto_p4_2194 -->|Não| dispneia_no_adulto_p4_2197
+  dispneia_no_adulto_p4_2197_sim(["VERDE"]):::verde
+  dispneia_no_adulto_p4_2197 -->|Sim| dispneia_no_adulto_p4_2197_sim
+  dispneia_no_adulto_p4_2197 -->|Não| dispneia_no_adulto_p4_2198
+  dispneia_no_adulto_p4_2198_sim(["VERDE"]):::verde
+  dispneia_no_adulto_p4_2198 -->|Sim| dispneia_no_adulto_p4_2198_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  dispneia_no_adulto_p4_2198 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

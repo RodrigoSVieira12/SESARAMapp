@@ -1,0 +1,243 @@
+{
+  "id": "exposicao_a_quimicos",
+  "nome": "Exposição a químicos",
+  "nome_en": "Exposure to chemicals",
+  "descricao": "Contacto com um produto químico perigoso.",
+  "descricao_en": "Contact with a hazardous chemical.",
+  "pediatrico": false,
+  "fonte": "Discriminadores do Sistema de Triagem de Manchester, organizados por prioridade clínica (P1-P5). Importados da tabela de referência; sujeitos a validação clínica antes de uso real.",
+  "fonte_en": "Manchester Triage System discriminators, organised by clinical priority (P1-P5). Imported from the reference table; subject to clinical validation before real use.",
+  "perguntas": [
+    {
+      "id": "exposicao_a_quimicos_p1_1855",
+      "disc_id": 1855,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Compromisso da via aérea?",
+      "texto_utente": "A respiração está muito difícil ou ruidosa, como se o ar não passasse bem pela garganta (a roncar ou a gorgolejar)?",
+      "texto_en": "Airway compromise?",
+      "texto_utente_en": "Is breathing very difficult or noisy, as if air can't pass properly through the throat (snoring or gurgling)?",
+      "descricao": "A via aérea poderá estar comprometida, por não se conseguir manter aberta, ou porque os reflexos protetores da via respiratória (que evitam a aspiração) se perderam. A incapacidade de manter a via aérea aberta, poderá resultar numa obstrução total ou parcial, intermitente ou não. Isto manifestar-se-á por sons como o ressonar ou o gorgolejar durante a respiração."
+    },
+    {
+      "id": "exposicao_a_quimicos_p1_2126",
+      "disc_id": 2126,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Respiração ineficaz?",
+      "texto_utente": "A respiração está tão fraca ou cansada que parece não entrar ar suficiente (respiração aos arrancos ou muito a custo)?",
+      "texto_en": "Ineffective breathing?",
+      "texto_utente_en": "Is breathing so weak or laboured that not enough air seems to get in (gasping or a real struggle)?",
+      "descricao": "Doentes que não conseguem respirar suficientemente bem para manter uma oxigenação adequada e com falência respiratória, sofrem de respiração ineficaz. Poderá resultar num esforço acrescentado para respirar, ou em exaustão, incluindo uma respiração tipo “gasping”."
+    },
+    {
+      "id": "exposicao_a_quimicos_p1_2371",
+      "disc_id": 2371,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Sinais de choque?",
+      "texto_utente": "Tem suores frios, pele muito pálida ou acinzentada, o coração a bater depressa e uma grande fraqueza?",
+      "texto_en": "Signs of shock?",
+      "texto_utente_en": "Are there cold sweats, very pale or greyish skin, a fast heartbeat and severe weakness?",
+      "descricao": "O choque é uma entrega inadequada de oxigénio aos tecidos. Os sinais clássicos incluem suores, palidez, taquicardia, hipotensão e nível de consciência reduzido."
+    },
+    {
+      "id": "exposicao_a_quimicos_p1_2372",
+      "disc_id": 2372,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Não reativo?",
+      "texto_utente": "Está sem reagir a nada, nem quando lhe falam, lhe tocam ou lhe fazem doer?",
+      "texto_en": "Unresponsive?",
+      "texto_utente_en": "Is the person not reacting at all, even to voice, touch or pain?",
+      "descricao": "Não responde a um estímulo doloroso."
+    },
+    {
+      "id": "exposicao_a_quimicos_p1_2501",
+      "disc_id": 2501,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Estridor?",
+      "texto_utente": "A respiração faz um som agudo e áspero ao inspirar, que se ouve melhor de boca aberta?",
+      "texto_en": "Stridor?",
+      "texto_utente_en": "Does breathing make a harsh, high-pitched sound when breathing in, heard best with the mouth open?",
+      "descricao": "Som que poderá ser inspiratório ou expiratório, ou ambos. O estridor é ouvido mais claramente quando se respira de boca aberta."
+    },
+    {
+      "id": "exposicao_a_quimicos_p1_2502",
+      "disc_id": 2502,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Convulsão atual?",
+      "texto_utente": "Está a ter uma convulsão neste momento (um ataque, com o corpo a tremer ou a ficar rígido)?",
+      "texto_en": "Current seizure?",
+      "texto_utente_en": "Is a seizure happening right now (a fit, with the body shaking or going stiff)?",
+      "descricao": "Doentes que se encontram atualmente sofrendo de convulsões (na fase tónica, clónica ou com outra manifestação relevante) preenchem este critério."
+    },
+    {
+      "id": "exposicao_a_quimicos_p1_2503",
+      "disc_id": 2503,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Lesão ocular química?",
+      "texto_utente": "Entrou-lhe algum produto químico no olho (que arde, queima ou faz ver pior)?",
+      "texto_en": "Chemical eye injury?",
+      "texto_utente_en": "Has a chemical got into the eye (stinging, burning or making vision worse)?",
+      "descricao": "Qualquer substância que salpique ou seja colocada nos olhos, que venha a causar sensação de picadas, queimadura ou que reduza a visão, deve presumir-se capaz de causar lesão química"
+    },
+    {
+      "id": "exposicao_a_quimicos_p2_2504",
+      "disc_id": 2504,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Edema da língua?",
+      "texto_utente": "A língua está inchada?",
+      "texto_en": "Tongue swelling?",
+      "texto_utente_en": "Is the tongue swollen?",
+      "descricao": "Inchaço ou aumento de volume da língua, em qualquer grau."
+    },
+    {
+      "id": "exposicao_a_quimicos_p2_2505",
+      "disc_id": 2505,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Edema da face?",
+      "texto_utente": "A cara está a inchar (muitas vezes começa pelos lábios)?",
+      "texto_en": "Facial swelling?",
+      "texto_utente_en": "Is the face swelling up (often starting with the lips)?",
+      "descricao": "Inchaço difuso na face, envolvendo habitualmente os lábios."
+    },
+    {
+      "id": "exposicao_a_quimicos_p2_2506",
+      "disc_id": 2506,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Lesão por inalação?",
+      "texto_utente": "Respirou fumo ou produtos químicos (por exemplo, esteve fechado num sítio cheio de fumo, ou está rouco e com fuligem no nariz ou na boca)?",
+      "texto_en": "Inhalation injury?",
+      "texto_utente_en": "Have you breathed in smoke or chemicals (for example, shut in a smoke-filled space, or hoarse with soot around the nose or mouth)?",
+      "descricao": "História de ter estado confinado a um espaço cheio de fumo é o indicador mais seguro de inalação de fumo. Podem observar-se depósitos em redor da boca e nariz e/ou rouquidão. A história é a forma mais sugestiva para se diagnosticar a possível inalação de substâncias químicas, mesmo sem a observação de sinais evidentes."
+    },
+    {
+      "id": "exposicao_a_quimicos_p2_2507",
+      "disc_id": 2507,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Alteração do estado de consciência?",
+      "texto_utente": "Está sonolento ou baralhado, só reagindo quando lhe falam ou lhe tocam (não está bem desperto)?",
+      "texto_en": "Altered level of consciousness?",
+      "texto_utente_en": "Is the person drowsy or muddled, responding only to voice or touch (not fully alert)?",
+      "descricao": "Não está totalmente alerta. Só responde à voz, à dor"
+    },
+    {
+      "id": "exposicao_a_quimicos_p2_2508",
+      "disc_id": 2508,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Alta mortalidade?",
+      "texto_utente": "A substância envolvida é das que podem causar doença grave ou até a morte (na dúvida, responda sim)?",
+      "texto_en": "High mortality?",
+      "texto_utente_en": "Is the substance involved one that can cause serious illness or even death (if in doubt, answer yes)?",
+      "descricao": "Probabilidade alta da substância ingerida ou a que a vítima foi exposta causar doença grave ou morte. Poderá ser necessário pedir aconselhamento ao centro de informação antivenenos para esclarecer o nível de risco do doente. Em caso de dúvida, presumir alto risco."
+    },
+    {
+      "id": "exposicao_a_quimicos_p2_2509",
+      "disc_id": 2509,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Risco de contaminação?",
+      "texto_utente": "Há o risco de aquilo o contaminar a si ou a outras pessoas à volta?",
+      "texto_en": "Risk of contamination?",
+      "texto_utente_en": "Is there a risk of it contaminating you or other people around?",
+      "descricao": "Quando a exposição implica risco de perpetuação da contaminação do próprio ou de terceiros, incluindo profissionais de saúde"
+    },
+    {
+      "id": "exposicao_a_quimicos_p2_2510",
+      "disc_id": 2510,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Dor severa?",
+      "texto_utente": "Tem dores muito fortes, quase a não aguentar (das piores que alguma vez sentiu)?",
+      "texto_en": "Severe pain?",
+      "texto_utente_en": "Do you have very severe pain, almost unbearable (some of the worst you've ever felt)?",
+      "descricao": "Dor significativa e insuportável, frequentemente referida como a pior de sempre. Alterações na expressão facial, de comportamento e nas atividades diárias permitem avaliar o nível de dor, especialmente nos doentes não comunicativos (por exemplo nas crianças e bebés), ou quando existem barreiras de comunicação pelo idioma ou por demência."
+    },
+    {
+      "id": "exposicao_a_quimicos_p3_2511",
+      "disc_id": 2511,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Inalação de fumo?",
+      "texto_utente": "Esteve num sítio cheio de fumo e pode ter respirado fumo?",
+      "texto_en": "Smoke inhalation?",
+      "texto_utente_en": "Were you in a smoke-filled place and may have breathed in smoke?",
+      "descricao": "Deve presumir-se ter havido inalação de fumo quando o doente estiver confinado a um espaço cheio de fumo. Os sinais físicos de fuligem oral ou nasal são menos seguros, mas significativos se presentes."
+    },
+    {
+      "id": "exposicao_a_quimicos_p3_2512",
+      "disc_id": 2512,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Exantema eritematoso ou bolhoso?",
+      "texto_utente": "Tem borbulhas com bolhas ou vermelhidão a cobrir uma grande parte do corpo?",
+      "texto_en": "Erythematous or blistering rash?",
+      "texto_utente_en": "Do you have a rash with blisters or redness covering a large part of the body?",
+      "descricao": "Qualquer erupção de vesículas que cobrem uma área superior a 10% da superfície corporal."
+    },
+    {
+      "id": "exposicao_a_quimicos_p3_2513",
+      "disc_id": 2513,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "História Inapropriada?",
+      "texto_utente": "A explicação que foi dada para as lesões não bate certo com aquilo que se vê?",
+      "texto_en": "Inappropriate history?",
+      "texto_utente_en": "Does the explanation given for the injuries not match what can be seen?",
+      "descricao": "Quando a história fornecida não explica as alterações físicas, então é inapropriada. Isto é importante pois é um sinal de perigo para a salvaguarda de adultos e crianças."
+    },
+    {
+      "id": "exposicao_a_quimicos_p3_2514",
+      "disc_id": 2514,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Mortalidade moderada?",
+      "texto_utente": "A substância envolvida tem um risco médio de causar doença grave (na dúvida, responda sim)?",
+      "texto_en": "Moderate mortality?",
+      "texto_utente_en": "Does the substance involved carry a moderate risk of serious illness (if in doubt, answer yes)?",
+      "descricao": "Probabilidade moderada de substância ingerida ou que a vítima foi exposta causar doença grave ou morte. Poderá ser necessário recorrer ao aconselhamento do centro de informações antivenenos para esclarecer o nível de risco do doente. Em caso de dúvida, presumir alto risco."
+    },
+    {
+      "id": "exposicao_a_quimicos_p3_2515",
+      "disc_id": 2515,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Dor moderada?",
+      "texto_utente": "Tem dores a sério, que o impedem de fazer algumas coisas do dia a dia?",
+      "texto_en": "Moderate pain?",
+      "texto_utente_en": "Do you have noticeable pain that stops you doing some everyday things?",
+      "descricao": "Dor significativa que incapacita para algumas atividades diárias. Alterações na expressão facial, de comportamento e nas atividades diárias permitem avaliar o nível de dor, especialmente nos doentes não comunicativos (por exemplo nas crianças e bebés), ou quando existem barreiras de comunicação pelo idioma ou por demência."
+    },
+    {
+      "id": "exposicao_a_quimicos_p4_2516",
+      "disc_id": 2516,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Dor persistente?",
+      "texto_utente": "A dor continua sem passar, mesmo depois de esperar ou de tomar um analgésico?",
+      "texto_en": "Persistent pain?",
+      "texto_utente_en": "Does the pain carry on without easing, even after waiting or taking a painkiller?",
+      "descricao": "Dor que não desaparece após algum tempo ou após tomar a medicação apropriada. Mudanças nas expressões faciais, comportamento e interrupção da atividade permitirão avaliar os níveis de dor, especialmente em pacientes não comunicativos, como por exemplo crianças muito pequenas e bebés, ou onde existam barreiras à comunicação devido ao idioma ou a demência."
+    },
+    {
+      "id": "exposicao_a_quimicos_p4_2519",
+      "disc_id": 2519,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Problema recente?",
+      "texto_utente": "Este problema começou na última semana?",
+      "texto_en": "Recent problem?",
+      "texto_utente_en": "Did this problem start within the last week?",
+      "descricao": "Um problema que aparece no decorrer da última semana."
+    }
+  ]
+}

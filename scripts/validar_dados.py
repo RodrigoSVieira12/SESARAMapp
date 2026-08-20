@@ -63,15 +63,14 @@ def validar_regras() -> list[str]:
     return []
 
 
-def _validar_horario(
-    prefixo: str, horario: dict, erros: list[str], avisos: list[str]
-) -> None:
+def _validar_horario(prefixo: str, horario: dict, erros: list[str], avisos: list[str]) -> None:
     tipo = horario.get("tipo")
     if tipo == "24h":
         return
     if tipo != "semanal":
-        erros.append(f"{prefixo}: tipo de horário desconhecido {tipo!r} "
-                     f"(use \"24h\" ou \"semanal\")")
+        erros.append(
+            f"{prefixo}: tipo de horário desconhecido {tipo!r} " f'(use "24h" ou "semanal")'
+        )
         return
     horas = horario.get("horas", {})
     dias_validos = DIAS + ["feriado"]
@@ -89,7 +88,7 @@ def _validar_horario(
         if dia_fds not in horas:
             avisos.append(
                 f"{prefixo}: sem chave {dia_fds!r}; assume-se FECHADO nesse "
-                f"dia. Para ficar explícito, acrescenta \"{dia_fds}\": []"
+                f'dia. Para ficar explícito, acrescenta "{dia_fds}": []'
             )
 
     for dia, faixas in horas.items():
@@ -98,19 +97,22 @@ def _validar_horario(
             continue
         for faixa in faixas:
             if "\u2013" in faixa or "\u2014" in faixa:
-                erros.append(f"{prefixo}: a faixa {faixa!r} usa um travessao "
-                             f"tipografico; escreva com o traco simples do "
-                             f"teclado, por exemplo 08:30-17:00")
+                erros.append(
+                    f"{prefixo}: a faixa {faixa!r} usa um travessao "
+                    f"tipografico; escreva com o traco simples do "
+                    f"teclado, por exemplo 08:30-17:00"
+                )
                 continue
             if not PADRAO_FAIXA.match(faixa):
-                erros.append(f"{prefixo}: faixa {faixa!r} não está no formato "
-                             f"HH:MM-HH:MM")
+                erros.append(f"{prefixo}: faixa {faixa!r} não está no formato " f"HH:MM-HH:MM")
                 continue
             inicio, fim = faixa.split("-")
             if _minutos(inicio) >= _minutos(fim):
-                erros.append(f"{prefixo}: faixa {faixa!r} tem início depois do "
-                             f"fim (faixas não podem atravessar a meia-noite; "
-                             f"use ...-23:59)")
+                erros.append(
+                    f"{prefixo}: faixa {faixa!r} tem início depois do "
+                    f"fim (faixas não podem atravessar a meia-noite; "
+                    f"use ...-23:59)"
+                )
 
 
 def validar_unidades() -> tuple[list[str], list[str], list[str]]:
@@ -139,30 +141,39 @@ def validar_unidades() -> tuple[list[str], list[str], list[str]]:
             ids_vistos.add(uid)
 
         if u.get("ilha") not in ("madeira", "porto_santo"):
-            erros.append(f"{prefixo}: ilha {u.get('ilha')!r} invalida "
-                         f"(usar \"madeira\" ou \"porto_santo\")")
+            erros.append(
+                f"{prefixo}: ilha {u.get('ilha')!r} invalida " f'(usar "madeira" ou "porto_santo")'
+            )
 
         if u.get("tipo") not in TIPOS_CONHECIDOS:
-            erros.append(f"{prefixo}: tipo {u.get('tipo')!r} desconhecido "
-                         f"(use {sorted(TIPOS_CONHECIDOS)})")
+            erros.append(
+                f"{prefixo}: tipo {u.get('tipo')!r} desconhecido "
+                f"(use {sorted(TIPOS_CONHECIDOS)})"
+            )
 
         lat, lng = u.get("lat"), u.get("lng")
         if isinstance(lat, (int, float)) and isinstance(lng, (int, float)):
             if not (LAT_MIN <= lat <= LAT_MAX and LNG_MIN <= lng <= LNG_MAX):
-                erros.append(f"{prefixo}: coordenadas ({lat}, {lng}) fora da "
-                             f"RAM. Copie-as do Google Maps com o botão "
-                             f"direito sobre o local")
+                erros.append(
+                    f"{prefixo}: coordenadas ({lat}, {lng}) fora da "
+                    f"RAM. Copie-as do Google Maps com o botão "
+                    f"direito sobre o local"
+                )
         else:
             erros.append(f"{prefixo}: lat/lng têm de ser números")
 
         for nome_servico, horario in (u.get("servicos") or {}).items():
             if nome_servico not in SERVICOS_CONHECIDOS:
-                avisos.append(f"{prefixo}: serviço {nome_servico!r} não é usado "
-                              f"pelo encaminhamento (conhecidos: "
-                              f"{sorted(SERVICOS_CONHECIDOS)})")
+                avisos.append(
+                    f"{prefixo}: serviço {nome_servico!r} não é usado "
+                    f"pelo encaminhamento (conhecidos: "
+                    f"{sorted(SERVICOS_CONHECIDOS)})"
+                )
             if not horario.get("texto"):
-                avisos.append(f"{prefixo}: o serviço {nome_servico!r} não tem "
-                              f"\"texto\" (é o que o utente vê)")
+                avisos.append(
+                    f"{prefixo}: o serviço {nome_servico!r} não tem "
+                    f'"texto" (é o que o utente vê)'
+                )
             _validar_horario(f"{prefixo}, {nome_servico}", horario, erros, avisos)
 
         confirmada = bool(u.get("dados_confirmados"))
@@ -176,15 +187,18 @@ def validar_unidades() -> tuple[list[str], list[str], list[str]]:
     for u in unidades:
         chave = (u.get("lat"), u.get("lng"))
         if chave in vistos:
-            avisos.append(f"unidades.json: {u.get('nome')} tem coordenadas "
-                          f"exatamente iguais a {vistos[chave]}; confirmar "
-                          f"qual esta errada")
+            avisos.append(
+                f"unidades.json: {u.get('nome')} tem coordenadas "
+                f"exatamente iguais a {vistos[chave]}; confirmar "
+                f"qual esta errada"
+            )
         else:
             vistos[chave] = u.get("nome")
 
     # Unidade sem nenhuma vizinha a menos de 10 km (na mesma ilha): na
     # densidade da Madeira, e sinal de coordenadas provavelmente erradas.
     from app.core.geo import haversine_km
+
     for u in unidades:
         vizinhas = [
             haversine_km(u["lat"], u["lng"], v["lat"], v["lng"])
@@ -192,9 +206,11 @@ def validar_unidades() -> tuple[list[str], list[str], list[str]]:
             if v is not u and v.get("ilha") == u.get("ilha")
         ]
         if vizinhas and min(vizinhas) > 10:
-            avisos.append(f"unidades.json: {u.get('nome')} esta a mais de "
-                          f"10 km de qualquer outra unidade; verificar as "
-                          f"coordenadas no Google Maps")
+            avisos.append(
+                f"unidades.json: {u.get('nome')} esta a mais de "
+                f"10 km de qualquer outra unidade; verificar as "
+                f"coordenadas no Google Maps"
+            )
 
     if not erros:
         print(f"  OK: {len(unidades)} unidades com estrutura válida")
@@ -225,8 +241,10 @@ def validar_autocuidado() -> list[str]:
         for base in ("fazer", "evitar", "alerta"):
             pt, en = bloco.get(base), bloco.get(f"{base}_en")
             if isinstance(pt, list) and isinstance(en, list) and len(pt) != len(en):
-                erros.append(f"{prefixo}: {base!r} tem {len(pt)} itens mas "
-                             f"{base}_en tem {len(en)} — devem corresponder um a um")
+                erros.append(
+                    f"{prefixo}: {base!r} tem {len(pt)} itens mas "
+                    f"{base}_en tem {len(en)} — devem corresponder um a um"
+                )
     return erros
 
 
@@ -243,14 +261,20 @@ def validar_sinonimos() -> tuple[list[str], list[str]]:
     ids_fluxos = set(TriageEngine().fluxos)
     for queixa_id, termos in dados.items():
         if queixa_id not in ids_fluxos:
-            erros.append(f"sinonimos.json: {queixa_id!r} não corresponde a nenhum "
-                         f"fluxo em app/data/rules/ (existem: {sorted(ids_fluxos)})")
+            erros.append(
+                f"sinonimos.json: {queixa_id!r} não corresponde a nenhum "
+                f"fluxo em app/data/rules/ (existem: {sorted(ids_fluxos)})"
+            )
         if not isinstance(termos, list) or not termos:
-            erros.append(f"sinonimos.json ({queixa_id}): o valor tem de ser uma "
-                         "lista de palavras/expressões")
+            erros.append(
+                f"sinonimos.json ({queixa_id}): o valor tem de ser uma "
+                "lista de palavras/expressões"
+            )
     for queixa_id in sorted(ids_fluxos - set(dados)):
-        avisos.append(f"sinonimos.json: a queixa {queixa_id!r} não tem sinónimos — "
-                      "a pesquisa em texto livre só a encontra pelo nome")
+        avisos.append(
+            f"sinonimos.json: a queixa {queixa_id!r} não tem sinónimos — "
+            "a pesquisa em texto livre só a encontra pelo nome"
+        )
     return erros, avisos
 
 
@@ -387,10 +411,25 @@ def validar_tempos_medidos() -> tuple[list[str], list[str]]:
         n_origens = len(dados.get("medicoes", []))
         n_pares = sum(len(m.get("destinos") or {}) for m in dados.get("medicoes", []))
         print(
-            f"  OK: tempos por estrada com {n_origens} origens e "
-            f"{n_pares} pares origem/destino"
+            f"  OK: tempos por estrada com {n_origens} origens e " f"{n_pares} pares origem/destino"
         )
     return erros, avisos
+
+
+def validar_aconselhamento() -> tuple[list[str], list[str]]:
+    """Integridade do aconselhamento ao utente (v0.15.1).
+
+    Delega em scripts/verificar_aconselhamento.py: chaves órfãs (mapeamento que
+    já não bate com a tabela) são ERRO e bloqueiam; colisões, gralhas de origem
+    e afins são avisos. Assim, "passa em CI" passa a incluir também que o
+    aconselhamento não derivou em silêncio.
+    """
+    sys.path.insert(0, str(RAIZ / "scripts"))
+    try:
+        from verificar_aconselhamento import analisar  # noqa: E402
+    except Exception as exc:  # pragma: no cover - defensivo
+        return [f"não consegui verificar o aconselhamento: {exc}"], []
+    return analisar()
 
 
 def main() -> int:
@@ -427,6 +466,16 @@ def main() -> int:
     print("A verificar os nomes de tempo de espera (app/data/espera_nomes.json)…")
     erros.extend(validar_espera_nomes())
 
+    print("A verificar o aconselhamento ao utente (app/data/aconselhamento.json)…")
+    erros_acons, avisos_acons = validar_aconselhamento()
+    erros.extend(erros_acons)
+    avisos.extend(avisos_acons)
+    if not erros_acons:
+        print(
+            "  OK: aconselhamento em sincronia (chaves, traduções, reescritas "
+            "e estado de validação)"
+        )
+
     if avisos:
         print("\nAvisos (não impedem o funcionamento):")
         for aviso in avisos:
@@ -436,8 +485,10 @@ def main() -> int:
         print(f"\nUnidades com dados ainda por confirmar ({len(por_confirmar)}):")
         for nome in por_confirmar:
             print(f"    {nome}")
-        print("  (Quando confirmares uma, remove os \"(CONFIRMAR)\" e muda "
-              "\"dados_confirmados\" para true.)")
+        print(
+            '  (Quando confirmares uma, remove os "(CONFIRMAR)" e muda '
+            '"dados_confirmados" para true.)'
+        )
 
     if erros:
         print("\nERROS a corrigir antes de arrancar o servidor:")
@@ -446,8 +497,8 @@ def main() -> int:
         return 1
 
     print("\nNota sobre feriados: nos feriados nacionais e regionais da RAM")
-    print("(ver GET /api/feriados) os horários \"semanal\" contam como FECHADOS,")
-    print("salvo se o serviço tiver a chave \"feriado\" com faixas próprias.")
+    print('(ver GET /api/feriados) os horários "semanal" contam como FECHADOS,')
+    print('salvo se o serviço tiver a chave "feriado" com faixas próprias.')
 
     print("\nTudo certo. Podes arrancar o servidor com confiança.")
     return 0

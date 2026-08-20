@@ -1,0 +1,105 @@
+flowchart TD
+  inicio(["Início: Bebé que não está bem (<<br/>12 meses)"])
+  bebe_que_nao_esta_bem_12_meses_p1_1877["1. [P1] Compromisso da via aérea?"]
+  bebe_que_nao_esta_bem_12_meses_p1_2148["2. [P1] Respiração ineficaz?"]
+  bebe_que_nao_esta_bem_12_meses_p1_2761["3. [P1] Sinais de choque?"]
+  bebe_que_nao_esta_bem_12_meses_p1_2773["4. [P1] Não reativo?"]
+  bebe_que_nao_esta_bem_12_meses_p1_3061["5. [P1] Convulsão atual?"]
+  bebe_que_nao_esta_bem_12_meses_p2_3063["6. [P2] Alteração do estado de<br/>consciência?"]
+  bebe_que_nao_esta_bem_12_meses_p2_3065["7. [P2] Sem reação ao estímulo dos<br/>pais?"]
+  bebe_que_nao_esta_bem_12_meses_p2_3066["8. [P2] Muito quente?"]
+  bebe_que_nao_esta_bem_12_meses_p2_3067["9. [P2] Possível sépsis?"]
+  bebe_que_nao_esta_bem_12_meses_p2_3068["10. [P2] Sinais de meningismo?"]
+  bebe_que_nao_esta_bem_12_meses_p2_3069["11. [P2] Erupção cutânea desconhecida?"]
+  bebe_que_nao_esta_bem_12_meses_p2_3070["12. [P2] Alteração da imunidade<br/>conhecida?"]
+  bebe_que_nao_esta_bem_12_meses_p2_3071["13. [P2] História de risco especial de<br/>infeção?"]
+  bebe_que_nao_esta_bem_12_meses_p2_3072["14. [P2] Dor severa?"]
+  bebe_que_nao_esta_bem_12_meses_p3_3073["15. [P3] Sinais de desidratação?"]
+  bebe_que_nao_esta_bem_12_meses_p3_3074["16. [P3] Não se alimenta?"]
+  bebe_que_nao_esta_bem_12_meses_p3_3075["17. [P3] Não urina?"]
+  bebe_que_nao_esta_bem_12_meses_p3_3076["18. [P3] História Inapropriada?"]
+  bebe_que_nao_esta_bem_12_meses_p3_3077["19. [P3] História hematológica ou<br/>metabólica significativa?"]
+  bebe_que_nao_esta_bem_12_meses_p3_3078["20. [P3] Dor moderada?"]
+  bebe_que_nao_esta_bem_12_meses_p4_3079["21. [P4] Febre persistente?"]
+  bebe_que_nao_esta_bem_12_meses_p4_3082["22. [P4] História de viagens ao<br/>estrangeiro?"]
+  bebe_que_nao_esta_bem_12_meses_p4_3083["23. [P4] Dor persistente?"]
+  bebe_que_nao_esta_bem_12_meses_p4_3086["24. [P4] Problema recente?"]
+  inicio --> bebe_que_nao_esta_bem_12_meses_p1_1877
+  bebe_que_nao_esta_bem_12_meses_p1_1877_sim(["VERMELHO"]):::vermelho
+  bebe_que_nao_esta_bem_12_meses_p1_1877 -->|Sim| bebe_que_nao_esta_bem_12_meses_p1_1877_sim
+  bebe_que_nao_esta_bem_12_meses_p1_1877 -->|Não| bebe_que_nao_esta_bem_12_meses_p1_2148
+  bebe_que_nao_esta_bem_12_meses_p1_2148_sim(["VERMELHO"]):::vermelho
+  bebe_que_nao_esta_bem_12_meses_p1_2148 -->|Sim| bebe_que_nao_esta_bem_12_meses_p1_2148_sim
+  bebe_que_nao_esta_bem_12_meses_p1_2148 -->|Não| bebe_que_nao_esta_bem_12_meses_p1_2761
+  bebe_que_nao_esta_bem_12_meses_p1_2761_sim(["VERMELHO"]):::vermelho
+  bebe_que_nao_esta_bem_12_meses_p1_2761 -->|Sim| bebe_que_nao_esta_bem_12_meses_p1_2761_sim
+  bebe_que_nao_esta_bem_12_meses_p1_2761 -->|Não| bebe_que_nao_esta_bem_12_meses_p1_2773
+  bebe_que_nao_esta_bem_12_meses_p1_2773_sim(["VERMELHO"]):::vermelho
+  bebe_que_nao_esta_bem_12_meses_p1_2773 -->|Sim| bebe_que_nao_esta_bem_12_meses_p1_2773_sim
+  bebe_que_nao_esta_bem_12_meses_p1_2773 -->|Não| bebe_que_nao_esta_bem_12_meses_p1_3061
+  bebe_que_nao_esta_bem_12_meses_p1_3061_sim(["VERMELHO"]):::vermelho
+  bebe_que_nao_esta_bem_12_meses_p1_3061 -->|Sim| bebe_que_nao_esta_bem_12_meses_p1_3061_sim
+  bebe_que_nao_esta_bem_12_meses_p1_3061 -->|Não| bebe_que_nao_esta_bem_12_meses_p2_3063
+  bebe_que_nao_esta_bem_12_meses_p2_3063_sim(["LARANJA"]):::laranja
+  bebe_que_nao_esta_bem_12_meses_p2_3063 -->|Sim| bebe_que_nao_esta_bem_12_meses_p2_3063_sim
+  bebe_que_nao_esta_bem_12_meses_p2_3063 -->|Não| bebe_que_nao_esta_bem_12_meses_p2_3065
+  bebe_que_nao_esta_bem_12_meses_p2_3065_sim(["LARANJA"]):::laranja
+  bebe_que_nao_esta_bem_12_meses_p2_3065 -->|Sim| bebe_que_nao_esta_bem_12_meses_p2_3065_sim
+  bebe_que_nao_esta_bem_12_meses_p2_3065 -->|Não| bebe_que_nao_esta_bem_12_meses_p2_3066
+  bebe_que_nao_esta_bem_12_meses_p2_3066_sim(["LARANJA"]):::laranja
+  bebe_que_nao_esta_bem_12_meses_p2_3066 -->|Sim| bebe_que_nao_esta_bem_12_meses_p2_3066_sim
+  bebe_que_nao_esta_bem_12_meses_p2_3066 -->|Não| bebe_que_nao_esta_bem_12_meses_p2_3067
+  bebe_que_nao_esta_bem_12_meses_p2_3067_sim(["LARANJA"]):::laranja
+  bebe_que_nao_esta_bem_12_meses_p2_3067 -->|Sim| bebe_que_nao_esta_bem_12_meses_p2_3067_sim
+  bebe_que_nao_esta_bem_12_meses_p2_3067 -->|Não| bebe_que_nao_esta_bem_12_meses_p2_3068
+  bebe_que_nao_esta_bem_12_meses_p2_3068_sim(["LARANJA"]):::laranja
+  bebe_que_nao_esta_bem_12_meses_p2_3068 -->|Sim| bebe_que_nao_esta_bem_12_meses_p2_3068_sim
+  bebe_que_nao_esta_bem_12_meses_p2_3068 -->|Não| bebe_que_nao_esta_bem_12_meses_p2_3069
+  bebe_que_nao_esta_bem_12_meses_p2_3069_sim(["LARANJA"]):::laranja
+  bebe_que_nao_esta_bem_12_meses_p2_3069 -->|Sim| bebe_que_nao_esta_bem_12_meses_p2_3069_sim
+  bebe_que_nao_esta_bem_12_meses_p2_3069 -->|Não| bebe_que_nao_esta_bem_12_meses_p2_3070
+  bebe_que_nao_esta_bem_12_meses_p2_3070_sim(["LARANJA"]):::laranja
+  bebe_que_nao_esta_bem_12_meses_p2_3070 -->|Sim| bebe_que_nao_esta_bem_12_meses_p2_3070_sim
+  bebe_que_nao_esta_bem_12_meses_p2_3070 -->|Não| bebe_que_nao_esta_bem_12_meses_p2_3071
+  bebe_que_nao_esta_bem_12_meses_p2_3071_sim(["LARANJA"]):::laranja
+  bebe_que_nao_esta_bem_12_meses_p2_3071 -->|Sim| bebe_que_nao_esta_bem_12_meses_p2_3071_sim
+  bebe_que_nao_esta_bem_12_meses_p2_3071 -->|Não| bebe_que_nao_esta_bem_12_meses_p2_3072
+  bebe_que_nao_esta_bem_12_meses_p2_3072_sim(["LARANJA"]):::laranja
+  bebe_que_nao_esta_bem_12_meses_p2_3072 -->|Sim| bebe_que_nao_esta_bem_12_meses_p2_3072_sim
+  bebe_que_nao_esta_bem_12_meses_p2_3072 -->|Não| bebe_que_nao_esta_bem_12_meses_p3_3073
+  bebe_que_nao_esta_bem_12_meses_p3_3073_sim(["AMARELO"]):::amarelo
+  bebe_que_nao_esta_bem_12_meses_p3_3073 -->|Sim| bebe_que_nao_esta_bem_12_meses_p3_3073_sim
+  bebe_que_nao_esta_bem_12_meses_p3_3073 -->|Não| bebe_que_nao_esta_bem_12_meses_p3_3074
+  bebe_que_nao_esta_bem_12_meses_p3_3074_sim(["AMARELO"]):::amarelo
+  bebe_que_nao_esta_bem_12_meses_p3_3074 -->|Sim| bebe_que_nao_esta_bem_12_meses_p3_3074_sim
+  bebe_que_nao_esta_bem_12_meses_p3_3074 -->|Não| bebe_que_nao_esta_bem_12_meses_p3_3075
+  bebe_que_nao_esta_bem_12_meses_p3_3075_sim(["AMARELO"]):::amarelo
+  bebe_que_nao_esta_bem_12_meses_p3_3075 -->|Sim| bebe_que_nao_esta_bem_12_meses_p3_3075_sim
+  bebe_que_nao_esta_bem_12_meses_p3_3075 -->|Não| bebe_que_nao_esta_bem_12_meses_p3_3076
+  bebe_que_nao_esta_bem_12_meses_p3_3076_sim(["AMARELO"]):::amarelo
+  bebe_que_nao_esta_bem_12_meses_p3_3076 -->|Sim| bebe_que_nao_esta_bem_12_meses_p3_3076_sim
+  bebe_que_nao_esta_bem_12_meses_p3_3076 -->|Não| bebe_que_nao_esta_bem_12_meses_p3_3077
+  bebe_que_nao_esta_bem_12_meses_p3_3077_sim(["AMARELO"]):::amarelo
+  bebe_que_nao_esta_bem_12_meses_p3_3077 -->|Sim| bebe_que_nao_esta_bem_12_meses_p3_3077_sim
+  bebe_que_nao_esta_bem_12_meses_p3_3077 -->|Não| bebe_que_nao_esta_bem_12_meses_p3_3078
+  bebe_que_nao_esta_bem_12_meses_p3_3078_sim(["AMARELO"]):::amarelo
+  bebe_que_nao_esta_bem_12_meses_p3_3078 -->|Sim| bebe_que_nao_esta_bem_12_meses_p3_3078_sim
+  bebe_que_nao_esta_bem_12_meses_p3_3078 -->|Não| bebe_que_nao_esta_bem_12_meses_p4_3079
+  bebe_que_nao_esta_bem_12_meses_p4_3079_sim(["VERDE"]):::verde
+  bebe_que_nao_esta_bem_12_meses_p4_3079 -->|Sim| bebe_que_nao_esta_bem_12_meses_p4_3079_sim
+  bebe_que_nao_esta_bem_12_meses_p4_3079 -->|Não| bebe_que_nao_esta_bem_12_meses_p4_3082
+  bebe_que_nao_esta_bem_12_meses_p4_3082_sim(["VERDE"]):::verde
+  bebe_que_nao_esta_bem_12_meses_p4_3082 -->|Sim| bebe_que_nao_esta_bem_12_meses_p4_3082_sim
+  bebe_que_nao_esta_bem_12_meses_p4_3082 -->|Não| bebe_que_nao_esta_bem_12_meses_p4_3083
+  bebe_que_nao_esta_bem_12_meses_p4_3083_sim(["VERDE"]):::verde
+  bebe_que_nao_esta_bem_12_meses_p4_3083 -->|Sim| bebe_que_nao_esta_bem_12_meses_p4_3083_sim
+  bebe_que_nao_esta_bem_12_meses_p4_3083 -->|Não| bebe_que_nao_esta_bem_12_meses_p4_3086
+  bebe_que_nao_esta_bem_12_meses_p4_3086_sim(["VERDE"]):::verde
+  bebe_que_nao_esta_bem_12_meses_p4_3086 -->|Sim| bebe_que_nao_esta_bem_12_meses_p4_3086_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  bebe_que_nao_esta_bem_12_meses_p4_3086 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

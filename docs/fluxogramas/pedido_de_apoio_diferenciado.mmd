@@ -1,0 +1,125 @@
+flowchart TD
+  inicio(["Início: Pedido de apoio<br/>diferenciado"])
+  pedido_de_apoio_diferenciado_p1_3133["1. [P1] Paragem cardiorespiratória /<br/>VVPCR"]
+  pedido_de_apoio_diferenciado_p1_3134["2. [P1] Respiração ineficaz?"]
+  pedido_de_apoio_diferenciado_p1_3135["3. [P1] Dor precordial / VVC"]
+  pedido_de_apoio_diferenciado_p1_3136["4. [P1] Dor aórtica?"]
+  pedido_de_apoio_diferenciado_p1_3137["5. [P1] NEWS igual ou superior a 7?"]
+  pedido_de_apoio_diferenciado_p1_3138["6. [P1] Mecanismo significativo de<br/>lesão / VTT"]
+  pedido_de_apoio_diferenciado_p1_3139["7. [P1] Convulsão atual?"]
+  pedido_de_apoio_diferenciado_p1_3140["8. [P1] Hipoglicémia?"]
+  pedido_de_apoio_diferenciado_p1_3141["9. [P1] Apresentação de segmentos<br/>fetais?"]
+  pedido_de_apoio_diferenciado_p2_3142["10. [P2] Défice neurológico agudo /<br/>VVAVC"]
+  pedido_de_apoio_diferenciado_p2_3143["11. [P2] Possível sépsis / VVS"]
+  pedido_de_apoio_diferenciado_p2_3145["12. [P2] Profissional de saúde<br/>preocupado?"]
+  pedido_de_apoio_diferenciado_p2_3146["13. [P2] História de sobredosagem ou<br/>envenenamento?"]
+  pedido_de_apoio_diferenciado_p2_3147["14. [P2] Transporte AEROMÉDICO nível B"]
+  pedido_de_apoio_diferenciado_p2_3148["15. [P2] Transporte AEROMÉDICO nível C"]
+  pedido_de_apoio_diferenciado_p2_3149["16. [P2] Transporte secundário NÍVEL A"]
+  pedido_de_apoio_diferenciado_p2_3150["17. [P2] Transporte secundário NÍVEL B"]
+  pedido_de_apoio_diferenciado_p2_3151["18. [P2] Transporte secundário NÍVEL C"]
+  pedido_de_apoio_diferenciado_p2_3157["19. [P2] NEWS igual ou superior a 7?"]
+  pedido_de_apoio_diferenciado_p3_3119["20. [P3] Novos sinais e/ou sintomas<br/>neurológicos?"]
+  pedido_de_apoio_diferenciado_p3_3152["21. [P3] Transporte AEROMÉDICO nível B"]
+  pedido_de_apoio_diferenciado_p3_3153["22. [P3] Transporte AEROMÉDICO nível C"]
+  pedido_de_apoio_diferenciado_p3_3154["23. [P3] Transporte secundário NÍVEL A"]
+  pedido_de_apoio_diferenciado_p3_3155["24. [P3] Transporte secundário NÍVEL B"]
+  pedido_de_apoio_diferenciado_p3_3156["25. [P3] Transporte secundário NÍVEL C"]
+  pedido_de_apoio_diferenciado_p3_3158["26. [P3] NEWS com um parâmetro de<br/>nivel 3?"]
+  pedido_de_apoio_diferenciado_p3_3159["27. [P3] NEWS de 5 a 6?"]
+  pedido_de_apoio_diferenciado_p4_3121["28. [P4] Novos sinais e/ou sintomas<br/>neurológicos?"]
+  pedido_de_apoio_diferenciado_p4_3160["29. [P4] NEWS igual ou superior a 7?"]
+  inicio --> pedido_de_apoio_diferenciado_p1_3133
+  pedido_de_apoio_diferenciado_p1_3133_sim(["VERMELHO"]):::vermelho
+  pedido_de_apoio_diferenciado_p1_3133 -->|Sim| pedido_de_apoio_diferenciado_p1_3133_sim
+  pedido_de_apoio_diferenciado_p1_3133 -->|Não| pedido_de_apoio_diferenciado_p1_3134
+  pedido_de_apoio_diferenciado_p1_3134_sim(["VERMELHO"]):::vermelho
+  pedido_de_apoio_diferenciado_p1_3134 -->|Sim| pedido_de_apoio_diferenciado_p1_3134_sim
+  pedido_de_apoio_diferenciado_p1_3134 -->|Não| pedido_de_apoio_diferenciado_p1_3135
+  pedido_de_apoio_diferenciado_p1_3135_sim(["VERMELHO"]):::vermelho
+  pedido_de_apoio_diferenciado_p1_3135 -->|Sim| pedido_de_apoio_diferenciado_p1_3135_sim
+  pedido_de_apoio_diferenciado_p1_3135 -->|Não| pedido_de_apoio_diferenciado_p1_3136
+  pedido_de_apoio_diferenciado_p1_3136_sim(["VERMELHO"]):::vermelho
+  pedido_de_apoio_diferenciado_p1_3136 -->|Sim| pedido_de_apoio_diferenciado_p1_3136_sim
+  pedido_de_apoio_diferenciado_p1_3136 -->|Não| pedido_de_apoio_diferenciado_p1_3137
+  pedido_de_apoio_diferenciado_p1_3137_sim(["VERMELHO"]):::vermelho
+  pedido_de_apoio_diferenciado_p1_3137 -->|Sim| pedido_de_apoio_diferenciado_p1_3137_sim
+  pedido_de_apoio_diferenciado_p1_3137 -->|Não| pedido_de_apoio_diferenciado_p1_3138
+  pedido_de_apoio_diferenciado_p1_3138_sim(["VERMELHO"]):::vermelho
+  pedido_de_apoio_diferenciado_p1_3138 -->|Sim| pedido_de_apoio_diferenciado_p1_3138_sim
+  pedido_de_apoio_diferenciado_p1_3138 -->|Não| pedido_de_apoio_diferenciado_p1_3139
+  pedido_de_apoio_diferenciado_p1_3139_sim(["VERMELHO"]):::vermelho
+  pedido_de_apoio_diferenciado_p1_3139 -->|Sim| pedido_de_apoio_diferenciado_p1_3139_sim
+  pedido_de_apoio_diferenciado_p1_3139 -->|Não| pedido_de_apoio_diferenciado_p1_3140
+  pedido_de_apoio_diferenciado_p1_3140_sim(["VERMELHO"]):::vermelho
+  pedido_de_apoio_diferenciado_p1_3140 -->|Sim| pedido_de_apoio_diferenciado_p1_3140_sim
+  pedido_de_apoio_diferenciado_p1_3140 -->|Não| pedido_de_apoio_diferenciado_p1_3141
+  pedido_de_apoio_diferenciado_p1_3141_sim(["VERMELHO"]):::vermelho
+  pedido_de_apoio_diferenciado_p1_3141 -->|Sim| pedido_de_apoio_diferenciado_p1_3141_sim
+  pedido_de_apoio_diferenciado_p1_3141 -->|Não| pedido_de_apoio_diferenciado_p2_3142
+  pedido_de_apoio_diferenciado_p2_3142_sim(["LARANJA"]):::laranja
+  pedido_de_apoio_diferenciado_p2_3142 -->|Sim| pedido_de_apoio_diferenciado_p2_3142_sim
+  pedido_de_apoio_diferenciado_p2_3142 -->|Não| pedido_de_apoio_diferenciado_p2_3143
+  pedido_de_apoio_diferenciado_p2_3143_sim(["LARANJA"]):::laranja
+  pedido_de_apoio_diferenciado_p2_3143 -->|Sim| pedido_de_apoio_diferenciado_p2_3143_sim
+  pedido_de_apoio_diferenciado_p2_3143 -->|Não| pedido_de_apoio_diferenciado_p2_3145
+  pedido_de_apoio_diferenciado_p2_3145_sim(["LARANJA"]):::laranja
+  pedido_de_apoio_diferenciado_p2_3145 -->|Sim| pedido_de_apoio_diferenciado_p2_3145_sim
+  pedido_de_apoio_diferenciado_p2_3145 -->|Não| pedido_de_apoio_diferenciado_p2_3146
+  pedido_de_apoio_diferenciado_p2_3146_sim(["LARANJA"]):::laranja
+  pedido_de_apoio_diferenciado_p2_3146 -->|Sim| pedido_de_apoio_diferenciado_p2_3146_sim
+  pedido_de_apoio_diferenciado_p2_3146 -->|Não| pedido_de_apoio_diferenciado_p2_3147
+  pedido_de_apoio_diferenciado_p2_3147_sim(["LARANJA"]):::laranja
+  pedido_de_apoio_diferenciado_p2_3147 -->|Sim| pedido_de_apoio_diferenciado_p2_3147_sim
+  pedido_de_apoio_diferenciado_p2_3147 -->|Não| pedido_de_apoio_diferenciado_p2_3148
+  pedido_de_apoio_diferenciado_p2_3148_sim(["LARANJA"]):::laranja
+  pedido_de_apoio_diferenciado_p2_3148 -->|Sim| pedido_de_apoio_diferenciado_p2_3148_sim
+  pedido_de_apoio_diferenciado_p2_3148 -->|Não| pedido_de_apoio_diferenciado_p2_3149
+  pedido_de_apoio_diferenciado_p2_3149_sim(["LARANJA"]):::laranja
+  pedido_de_apoio_diferenciado_p2_3149 -->|Sim| pedido_de_apoio_diferenciado_p2_3149_sim
+  pedido_de_apoio_diferenciado_p2_3149 -->|Não| pedido_de_apoio_diferenciado_p2_3150
+  pedido_de_apoio_diferenciado_p2_3150_sim(["LARANJA"]):::laranja
+  pedido_de_apoio_diferenciado_p2_3150 -->|Sim| pedido_de_apoio_diferenciado_p2_3150_sim
+  pedido_de_apoio_diferenciado_p2_3150 -->|Não| pedido_de_apoio_diferenciado_p2_3151
+  pedido_de_apoio_diferenciado_p2_3151_sim(["LARANJA"]):::laranja
+  pedido_de_apoio_diferenciado_p2_3151 -->|Sim| pedido_de_apoio_diferenciado_p2_3151_sim
+  pedido_de_apoio_diferenciado_p2_3151 -->|Não| pedido_de_apoio_diferenciado_p2_3157
+  pedido_de_apoio_diferenciado_p2_3157_sim(["LARANJA"]):::laranja
+  pedido_de_apoio_diferenciado_p2_3157 -->|Sim| pedido_de_apoio_diferenciado_p2_3157_sim
+  pedido_de_apoio_diferenciado_p2_3157 -->|Não| pedido_de_apoio_diferenciado_p3_3119
+  pedido_de_apoio_diferenciado_p3_3119_sim(["AMARELO"]):::amarelo
+  pedido_de_apoio_diferenciado_p3_3119 -->|Sim| pedido_de_apoio_diferenciado_p3_3119_sim
+  pedido_de_apoio_diferenciado_p3_3119 -->|Não| pedido_de_apoio_diferenciado_p3_3152
+  pedido_de_apoio_diferenciado_p3_3152_sim(["AMARELO"]):::amarelo
+  pedido_de_apoio_diferenciado_p3_3152 -->|Sim| pedido_de_apoio_diferenciado_p3_3152_sim
+  pedido_de_apoio_diferenciado_p3_3152 -->|Não| pedido_de_apoio_diferenciado_p3_3153
+  pedido_de_apoio_diferenciado_p3_3153_sim(["AMARELO"]):::amarelo
+  pedido_de_apoio_diferenciado_p3_3153 -->|Sim| pedido_de_apoio_diferenciado_p3_3153_sim
+  pedido_de_apoio_diferenciado_p3_3153 -->|Não| pedido_de_apoio_diferenciado_p3_3154
+  pedido_de_apoio_diferenciado_p3_3154_sim(["AMARELO"]):::amarelo
+  pedido_de_apoio_diferenciado_p3_3154 -->|Sim| pedido_de_apoio_diferenciado_p3_3154_sim
+  pedido_de_apoio_diferenciado_p3_3154 -->|Não| pedido_de_apoio_diferenciado_p3_3155
+  pedido_de_apoio_diferenciado_p3_3155_sim(["AMARELO"]):::amarelo
+  pedido_de_apoio_diferenciado_p3_3155 -->|Sim| pedido_de_apoio_diferenciado_p3_3155_sim
+  pedido_de_apoio_diferenciado_p3_3155 -->|Não| pedido_de_apoio_diferenciado_p3_3156
+  pedido_de_apoio_diferenciado_p3_3156_sim(["AMARELO"]):::amarelo
+  pedido_de_apoio_diferenciado_p3_3156 -->|Sim| pedido_de_apoio_diferenciado_p3_3156_sim
+  pedido_de_apoio_diferenciado_p3_3156 -->|Não| pedido_de_apoio_diferenciado_p3_3158
+  pedido_de_apoio_diferenciado_p3_3158_sim(["AMARELO"]):::amarelo
+  pedido_de_apoio_diferenciado_p3_3158 -->|Sim| pedido_de_apoio_diferenciado_p3_3158_sim
+  pedido_de_apoio_diferenciado_p3_3158 -->|Não| pedido_de_apoio_diferenciado_p3_3159
+  pedido_de_apoio_diferenciado_p3_3159_sim(["AMARELO"]):::amarelo
+  pedido_de_apoio_diferenciado_p3_3159 -->|Sim| pedido_de_apoio_diferenciado_p3_3159_sim
+  pedido_de_apoio_diferenciado_p3_3159 -->|Não| pedido_de_apoio_diferenciado_p4_3121
+  pedido_de_apoio_diferenciado_p4_3121_sim(["VERDE"]):::verde
+  pedido_de_apoio_diferenciado_p4_3121 -->|Sim| pedido_de_apoio_diferenciado_p4_3121_sim
+  pedido_de_apoio_diferenciado_p4_3121 -->|Não| pedido_de_apoio_diferenciado_p4_3160
+  pedido_de_apoio_diferenciado_p4_3160_sim(["VERDE"]):::verde
+  pedido_de_apoio_diferenciado_p4_3160 -->|Sim| pedido_de_apoio_diferenciado_p4_3160_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  pedido_de_apoio_diferenciado_p4_3160 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

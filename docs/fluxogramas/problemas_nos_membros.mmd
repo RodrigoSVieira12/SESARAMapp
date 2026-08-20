@@ -1,0 +1,113 @@
+flowchart TD
+  inicio(["Início: Problemas nos membros"])
+  problemas_nos_membros_p1_1869["1. [P1] Compromisso da via aérea?"]
+  problemas_nos_membros_p1_2140["2. [P1] Respiração ineficaz?"]
+  problemas_nos_membros_p1_2747["3. [P1] Sinais de choque?"]
+  problemas_nos_membros_p1_2749["4. [P1] Hemorragia catastrófica?"]
+  problemas_nos_membros_p1_2765["5. [P1] Não reativo?"]
+  problemas_nos_membros_p2_2866["6. [P2] Dispneia aguda?"]
+  problemas_nos_membros_p2_2867["7. [P2] Grande Hemorragia<br/>incontrolável?"]
+  problemas_nos_membros_p2_2868["8. [P2] Compromisso vascular distal?"]
+  problemas_nos_membros_p2_2869["9. [P2] Alteração do estado de<br/>consciência?"]
+  problemas_nos_membros_p2_2870["10. [P2] Défice neurológico agudo?<br/><24h"]
+  problemas_nos_membros_p2_2871["11. [P2] Muito quente?"]
+  problemas_nos_membros_p2_2872["12. [P2] Possível sépsis?"]
+  problemas_nos_membros_p2_2873["13. [P2] Fratura exposta?"]
+  problemas_nos_membros_p2_2874["14. [P2] Tensão cutânea?"]
+  problemas_nos_membros_p2_2875["15. [P2] Dor severa?"]
+  problemas_nos_membros_p3_2876["16. [P3] Pequena hemorragia<br/>incontrolável?"]
+  problemas_nos_membros_p3_2877["17. [P3] Novos sinais e/ou sintomas<br/>neurológicos?"]
+  problemas_nos_membros_p3_2878["18. [P3] Deformação?"]
+  problemas_nos_membros_p3_2879["19. [P3] Quente?"]
+  problemas_nos_membros_p3_2880["20. [P3] Alteração da coagulação?"]
+  problemas_nos_membros_p3_2881["21. [P3] História Inapropriada?"]
+  problemas_nos_membros_p3_2882["22. [P3] Dor pleurítica?"]
+  problemas_nos_membros_p3_2883["23. [P3] Dor moderada?"]
+  problemas_nos_membros_p4_2884["24. [P4] Edema?"]
+  problemas_nos_membros_p4_2887["25. [P4] Dor persistente?"]
+  problemas_nos_membros_p4_2888["26. [P4] Problema recente?"]
+  inicio --> problemas_nos_membros_p1_1869
+  problemas_nos_membros_p1_1869_sim(["VERMELHO"]):::vermelho
+  problemas_nos_membros_p1_1869 -->|Sim| problemas_nos_membros_p1_1869_sim
+  problemas_nos_membros_p1_1869 -->|Não| problemas_nos_membros_p1_2140
+  problemas_nos_membros_p1_2140_sim(["VERMELHO"]):::vermelho
+  problemas_nos_membros_p1_2140 -->|Sim| problemas_nos_membros_p1_2140_sim
+  problemas_nos_membros_p1_2140 -->|Não| problemas_nos_membros_p1_2747
+  problemas_nos_membros_p1_2747_sim(["VERMELHO"]):::vermelho
+  problemas_nos_membros_p1_2747 -->|Sim| problemas_nos_membros_p1_2747_sim
+  problemas_nos_membros_p1_2747 -->|Não| problemas_nos_membros_p1_2749
+  problemas_nos_membros_p1_2749_sim(["VERMELHO"]):::vermelho
+  problemas_nos_membros_p1_2749 -->|Sim| problemas_nos_membros_p1_2749_sim
+  problemas_nos_membros_p1_2749 -->|Não| problemas_nos_membros_p1_2765
+  problemas_nos_membros_p1_2765_sim(["VERMELHO"]):::vermelho
+  problemas_nos_membros_p1_2765 -->|Sim| problemas_nos_membros_p1_2765_sim
+  problemas_nos_membros_p1_2765 -->|Não| problemas_nos_membros_p2_2866
+  problemas_nos_membros_p2_2866_sim(["LARANJA"]):::laranja
+  problemas_nos_membros_p2_2866 -->|Sim| problemas_nos_membros_p2_2866_sim
+  problemas_nos_membros_p2_2866 -->|Não| problemas_nos_membros_p2_2867
+  problemas_nos_membros_p2_2867_sim(["LARANJA"]):::laranja
+  problemas_nos_membros_p2_2867 -->|Sim| problemas_nos_membros_p2_2867_sim
+  problemas_nos_membros_p2_2867 -->|Não| problemas_nos_membros_p2_2868
+  problemas_nos_membros_p2_2868_sim(["LARANJA"]):::laranja
+  problemas_nos_membros_p2_2868 -->|Sim| problemas_nos_membros_p2_2868_sim
+  problemas_nos_membros_p2_2868 -->|Não| problemas_nos_membros_p2_2869
+  problemas_nos_membros_p2_2869_sim(["LARANJA"]):::laranja
+  problemas_nos_membros_p2_2869 -->|Sim| problemas_nos_membros_p2_2869_sim
+  problemas_nos_membros_p2_2869 -->|Não| problemas_nos_membros_p2_2870
+  problemas_nos_membros_p2_2870_sim(["LARANJA"]):::laranja
+  problemas_nos_membros_p2_2870 -->|Sim| problemas_nos_membros_p2_2870_sim
+  problemas_nos_membros_p2_2870 -->|Não| problemas_nos_membros_p2_2871
+  problemas_nos_membros_p2_2871_sim(["LARANJA"]):::laranja
+  problemas_nos_membros_p2_2871 -->|Sim| problemas_nos_membros_p2_2871_sim
+  problemas_nos_membros_p2_2871 -->|Não| problemas_nos_membros_p2_2872
+  problemas_nos_membros_p2_2872_sim(["LARANJA"]):::laranja
+  problemas_nos_membros_p2_2872 -->|Sim| problemas_nos_membros_p2_2872_sim
+  problemas_nos_membros_p2_2872 -->|Não| problemas_nos_membros_p2_2873
+  problemas_nos_membros_p2_2873_sim(["LARANJA"]):::laranja
+  problemas_nos_membros_p2_2873 -->|Sim| problemas_nos_membros_p2_2873_sim
+  problemas_nos_membros_p2_2873 -->|Não| problemas_nos_membros_p2_2874
+  problemas_nos_membros_p2_2874_sim(["LARANJA"]):::laranja
+  problemas_nos_membros_p2_2874 -->|Sim| problemas_nos_membros_p2_2874_sim
+  problemas_nos_membros_p2_2874 -->|Não| problemas_nos_membros_p2_2875
+  problemas_nos_membros_p2_2875_sim(["LARANJA"]):::laranja
+  problemas_nos_membros_p2_2875 -->|Sim| problemas_nos_membros_p2_2875_sim
+  problemas_nos_membros_p2_2875 -->|Não| problemas_nos_membros_p3_2876
+  problemas_nos_membros_p3_2876_sim(["AMARELO"]):::amarelo
+  problemas_nos_membros_p3_2876 -->|Sim| problemas_nos_membros_p3_2876_sim
+  problemas_nos_membros_p3_2876 -->|Não| problemas_nos_membros_p3_2877
+  problemas_nos_membros_p3_2877_sim(["AMARELO"]):::amarelo
+  problemas_nos_membros_p3_2877 -->|Sim| problemas_nos_membros_p3_2877_sim
+  problemas_nos_membros_p3_2877 -->|Não| problemas_nos_membros_p3_2878
+  problemas_nos_membros_p3_2878_sim(["AMARELO"]):::amarelo
+  problemas_nos_membros_p3_2878 -->|Sim| problemas_nos_membros_p3_2878_sim
+  problemas_nos_membros_p3_2878 -->|Não| problemas_nos_membros_p3_2879
+  problemas_nos_membros_p3_2879_sim(["AMARELO"]):::amarelo
+  problemas_nos_membros_p3_2879 -->|Sim| problemas_nos_membros_p3_2879_sim
+  problemas_nos_membros_p3_2879 -->|Não| problemas_nos_membros_p3_2880
+  problemas_nos_membros_p3_2880_sim(["AMARELO"]):::amarelo
+  problemas_nos_membros_p3_2880 -->|Sim| problemas_nos_membros_p3_2880_sim
+  problemas_nos_membros_p3_2880 -->|Não| problemas_nos_membros_p3_2881
+  problemas_nos_membros_p3_2881_sim(["AMARELO"]):::amarelo
+  problemas_nos_membros_p3_2881 -->|Sim| problemas_nos_membros_p3_2881_sim
+  problemas_nos_membros_p3_2881 -->|Não| problemas_nos_membros_p3_2882
+  problemas_nos_membros_p3_2882_sim(["AMARELO"]):::amarelo
+  problemas_nos_membros_p3_2882 -->|Sim| problemas_nos_membros_p3_2882_sim
+  problemas_nos_membros_p3_2882 -->|Não| problemas_nos_membros_p3_2883
+  problemas_nos_membros_p3_2883_sim(["AMARELO"]):::amarelo
+  problemas_nos_membros_p3_2883 -->|Sim| problemas_nos_membros_p3_2883_sim
+  problemas_nos_membros_p3_2883 -->|Não| problemas_nos_membros_p4_2884
+  problemas_nos_membros_p4_2884_sim(["VERDE"]):::verde
+  problemas_nos_membros_p4_2884 -->|Sim| problemas_nos_membros_p4_2884_sim
+  problemas_nos_membros_p4_2884 -->|Não| problemas_nos_membros_p4_2887
+  problemas_nos_membros_p4_2887_sim(["VERDE"]):::verde
+  problemas_nos_membros_p4_2887 -->|Sim| problemas_nos_membros_p4_2887_sim
+  problemas_nos_membros_p4_2887 -->|Não| problemas_nos_membros_p4_2888
+  problemas_nos_membros_p4_2888_sim(["VERDE"]):::verde
+  problemas_nos_membros_p4_2888 -->|Sim| problemas_nos_membros_p4_2888_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  problemas_nos_membros_p4_2888 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

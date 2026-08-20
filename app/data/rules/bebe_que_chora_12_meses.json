@@ -1,0 +1,232 @@
+{
+  "id": "bebe_que_chora_12_meses",
+  "nome": "Bebé que chora (< 12 meses)",
+  "nome_en": "Crying baby (< 12 months)",
+  "descricao": "Bebé com menos de 12 meses que chora muito.",
+  "descricao_en": "A baby under 12 months who is crying a lot.",
+  "pediatrico": true,
+  "fonte": "Discriminadores do Sistema de Triagem de Manchester, organizados por prioridade clínica (P1-P5). Importados da tabela de referência; sujeitos a validação clínica antes de uso real.",
+  "fonte_en": "Manchester Triage System discriminators, organised by clinical priority (P1-P5). Imported from the reference table; subject to clinical validation before real use.",
+  "perguntas": [
+    {
+      "id": "bebe_que_chora_12_meses_p1_1831",
+      "disc_id": 1831,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Compromisso da via aérea?",
+      "texto_utente": "A respiração está muito difícil ou ruidosa, como se o ar não passasse bem pela garganta (a roncar ou a gorgolejar)?",
+      "texto_en": "Airway compromise?",
+      "texto_utente_en": "Is breathing very difficult or noisy, as if air can't pass properly through the throat (snoring or gurgling)?",
+      "descricao": "A via aérea poderá estar comprometida, por não se conseguir manter aberta, ou porque os reflexos protetores da via respiratória (que evitam a aspiração) se perderam. A incapacidade de manter a via aérea aberta, poderá resultar numa obstrução total ou parcial, intermitente ou não. Isto manifestar-se-á por sons como o ressonar ou o gorgolejar durante a respiração."
+    },
+    {
+      "id": "bebe_que_chora_12_meses_p1_1879",
+      "disc_id": 1879,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Respiração ineficaz?",
+      "texto_utente": "A respiração está tão fraca ou cansada que parece não entrar ar suficiente (respiração aos arrancos ou muito a custo)?",
+      "texto_en": "Ineffective breathing?",
+      "texto_utente_en": "Is breathing so weak or laboured that not enough air seems to get in (gasping or a real struggle)?",
+      "descricao": "Doentes que não conseguem respirar suficientemente bem para manter uma oxigenação adequada e com falência respiratória, sofrem de respiração ineficaz. Poderá resultar num esforço acrescentado para respirar, ou em exaustão, incluindo uma respiração tipo “gasping”."
+    },
+    {
+      "id": "bebe_que_chora_12_meses_p1_1880",
+      "disc_id": 1880,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Sinais de choque?",
+      "texto_utente": "Tem suores frios, pele muito pálida ou acinzentada, o coração a bater depressa e uma grande fraqueza?",
+      "texto_en": "Signs of shock?",
+      "texto_utente_en": "Are there cold sweats, very pale or greyish skin, a fast heartbeat and severe weakness?",
+      "descricao": "O choque é uma entrega inadequada de oxigénio aos tecidos. Os sinais clássicos incluem suores, palidez, taquicardia, hipotensão e nível de consciência reduzido."
+    },
+    {
+      "id": "bebe_que_chora_12_meses_p1_1881",
+      "disc_id": 1881,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Não reativo?",
+      "texto_utente": "Está sem reagir a nada, nem quando lhe falam, lhe tocam ou lhe fazem doer?",
+      "texto_en": "Unresponsive?",
+      "texto_utente_en": "Is the person not reacting at all, even to voice, touch or pain?",
+      "descricao": "Não responde a um estímulo doloroso."
+    },
+    {
+      "id": "bebe_que_chora_12_meses_p2_1882",
+      "disc_id": 1882,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Prostrado?",
+      "texto_utente": "Está muito abatido e sem forças (numa criança, pode estar molinha ou muito apática)?",
+      "texto_en": "Prostrate (extreme weakness)?",
+      "texto_utente_en": "Are you very weak and drained (in a child, they may be floppy or very listless)?",
+      "descricao": "Os pais poderão descrever os seus filhos como apáticos, pouco reativos ou “molengões”. O tónus é em geral reduzido – o sinal mais notável é o movimento da cabeça."
+    },
+    {
+      "id": "bebe_que_chora_12_meses_p2_1883",
+      "disc_id": 1883,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Muito quente?",
+      "texto_utente": "Tem febre muito alta? (num adulto, 41°C ou mais; num bebé com menos de 12 meses, 38,5°C ou mais)",
+      "texto_en": "Very hot (high temperature)?",
+      "texto_utente_en": "Do you have a very high fever? (in an adult, 41°C or more; in a baby under 12 months, 38.5°C or more)",
+      "descricao": "No Adulto temperatura igual ou superior a 41ºC; Crianças com menos de 12 meses a temperatura é igual ou superior a 38.5ºC"
+    },
+    {
+      "id": "bebe_que_chora_12_meses_p2_1884",
+      "disc_id": 1884,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Possível sépsis?",
+      "texto_utente": "Tem sinais de uma infeção a alastrar depressa, como confusão, respiração muito acelerada ou uma fraqueza que se instala de repente?",
+      "texto_en": "Possible sepsis?",
+      "texto_utente_en": "Are there signs of a fast-spreading infection, such as confusion, very rapid breathing or weakness that comes on suddenly?",
+      "descricao": "Suspeitar de sépsis em vítimas que apresentem alteração do estado de consciência, hipotensão (sistólica inferior a 100mmHg), ou aumento da frequência respiratória (frequência superior a 22 cpm). Nas crianças deve ser determinada a possibilidade de sépsis pelas tabelas de parâmetros vitais ajustados à idade."
+    },
+    {
+      "id": "bebe_que_chora_12_meses_p2_1885",
+      "disc_id": 1885,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Erupção cutânea desconhecida?",
+      "texto_utente": "Apareceu-lhe uma erupção na pele sem se saber porquê?",
+      "texto_en": "Unknown skin rash?",
+      "texto_utente_en": "Has a rash appeared on the skin with no known cause?",
+      "descricao": "Qualquer erupção cutânea cuja a causa não se possa identificar."
+    },
+    {
+      "id": "bebe_que_chora_12_meses_p2_1886",
+      "disc_id": 1886,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Dor severa?",
+      "texto_utente": "Tem dores muito fortes, quase a não aguentar (das piores que alguma vez sentiu)?",
+      "texto_en": "Severe pain?",
+      "texto_utente_en": "Do you have very severe pain, almost unbearable (some of the worst you've ever felt)?",
+      "descricao": "Dor significativa e insuportável, frequentemente referida como a pior de sempre. Alterações na expressão facial, de comportamento e nas atividades diárias permitem avaliar o nível de dor, especialmente nos doentes não comunicativos (por exemplo nas crianças e bebés), ou quando existem barreiras de comunicação pelo idioma ou por demência."
+    },
+    {
+      "id": "bebe_que_chora_12_meses_p3_1887",
+      "disc_id": 1887,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Não se alimenta?",
+      "texto_utente": "A criança não está a comer nem a beber como costuma (ou vomita logo a seguir)?",
+      "texto_en": "Not feeding?",
+      "texto_utente_en": "Is the child not eating or drinking as usual (or vomiting straight afterwards)?",
+      "descricao": "Crianças que não ingerem alimentos sólidos ou líquidos (como o esperado) por via oral. Crianças que ingerem alimentos mas que em seguida a vomitam poderão também preencher este critério."
+    },
+    {
+      "id": "bebe_que_chora_12_meses_p3_1888",
+      "disc_id": 1888,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Quente?",
+      "texto_utente": "Tem febre? (num adulto, acima de 38,5°C; numa criança, 38,5°C a 39,8°C; num recém-nascido com menos de 28 dias, 37,5°C a 38,4°C)",
+      "texto_en": "Hot (raised temperature)?",
+      "texto_utente_en": "Do you have a fever? (in an adult, above 38.5°C; in a child, 38.5°C to 39.8°C; in a newborn under 28 days, 37.5°C to 38.4°C)",
+      "descricao": "No adulto, uma temperatura > 38.5-40.9ºC; Na criança é 38.5-39.8ºC; No recém-nascido com menos de 28 dias é 37.5-38.4ºC."
+    },
+    {
+      "id": "bebe_que_chora_12_meses_p3_1889",
+      "disc_id": 1889,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Inconsolável pelos pais?",
+      "texto_utente": "A criança não se acalma, por mais que os pais a tentem confortar?",
+      "texto_en": "Inconsolable by the parents?",
+      "texto_utente_en": "Can the child not be settled, no matter how the parents try to comfort them?",
+      "descricao": "As crianças cujo choro ou angústia não respondem às tentativas de conforto dos pais preenchem este critério."
+    },
+    {
+      "id": "bebe_que_chora_12_meses_p3_1890",
+      "disc_id": 1890,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Choro prolongado ou ininterrupto?",
+      "texto_utente": "A criança chora sem parar há duas horas ou mais?",
+      "texto_en": "Prolonged or incessant crying?",
+      "texto_utente_en": "Has the child been crying non-stop for two hours or more?",
+      "descricao": "Qualquer criança que chore continuamente, durante duas horas ou mais, preenche este critério."
+    },
+    {
+      "id": "bebe_que_chora_12_meses_p3_1891",
+      "disc_id": 1891,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "História de perda de consciência?",
+      "texto_utente": "Chegou a desmaiar ou a perder os sentidos (nem que fosse só por instantes)?",
+      "texto_en": "History of loss of consciousness?",
+      "texto_utente_en": "Did you faint or black out at any point (even for just a moment)?",
+      "descricao": "Pode haver uma testemunha fiável que possa dizer se o doente esteve inconsciente (e durante quanto tempo). Caso contrário, se o doente não se recorda do incidente deve-se presumir que esteve inconsciente."
+    },
+    {
+      "id": "bebe_que_chora_12_meses_p3_1892",
+      "disc_id": 1892,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "História Inapropriada?",
+      "texto_utente": "A explicação que foi dada para as lesões não bate certo com aquilo que se vê?",
+      "texto_en": "Inappropriate history?",
+      "texto_utente_en": "Does the explanation given for the injuries not match what can be seen?",
+      "descricao": "Quando a história fornecida não explica as alterações físicas, então é inapropriada. Isto é importante pois é um sinal de perigo para a salvaguarda de adultos e crianças."
+    },
+    {
+      "id": "bebe_que_chora_12_meses_p3_1893",
+      "disc_id": 1893,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Dor moderada?",
+      "texto_utente": "Tem dores a sério, que o impedem de fazer algumas coisas do dia a dia?",
+      "texto_en": "Moderate pain?",
+      "texto_utente_en": "Do you have noticeable pain that stops you doing some everyday things?",
+      "descricao": "Dor significativa que incapacita para algumas atividades diárias. Alterações na expressão facial, de comportamento e nas atividades diárias permitem avaliar o nível de dor, especialmente nos doentes não comunicativos (por exemplo nas crianças e bebés), ou quando existem barreiras de comunicação pelo idioma ou por demência."
+    },
+    {
+      "id": "bebe_que_chora_12_meses_p4_1894",
+      "disc_id": 1894,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Febre persistente?",
+      "texto_utente": "A febre não cede, mesmo alternando os medicamentos para baixar a febre (paracetamol e ibuprofeno)?",
+      "texto_en": "Persistent fever?",
+      "texto_utente_en": "Does the fever not come down, even alternating the fever medicines (paracetamol and ibuprofen)?",
+      "descricao": "Febre que não cede à toma intercalada de antipiréticos (paracetamol e ibuprofeno)"
+    },
+    {
+      "id": "bebe_que_chora_12_meses_p4_1896",
+      "disc_id": 1896,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Comportamento estranho na criança?",
+      "texto_utente": "A criança está diferente do costume (muito rabugenta, queixosa ou indisposta)?",
+      "texto_en": "Unusual behaviour in the child?",
+      "texto_utente_en": "Is the child not their usual self (very fretful, whiny or out of sorts)?",
+      "descricao": "Criança que se comporta de forma não habitual numa determinada situação. Os tutores prestam frequentemente esta informação de forma voluntária. Estas crianças são muitas vezes referidas como \"rabugentas\" ou “indispostas”."
+    },
+    {
+      "id": "bebe_que_chora_12_meses_p4_1899",
+      "disc_id": 1899,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Dor persistente?",
+      "texto_utente": "A dor continua sem passar, mesmo depois de esperar ou de tomar um analgésico?",
+      "texto_en": "Persistent pain?",
+      "texto_utente_en": "Does the pain carry on without easing, even after waiting or taking a painkiller?",
+      "descricao": "Dor que não desaparece após algum tempo ou após tomar a medicação apropriada. Mudanças nas expressões faciais, comportamento e interrupção da atividade permitirão avaliar os níveis de dor, especialmente em pacientes não comunicativos, como por exemplo crianças muito pequenas e bebés, ou onde existam barreiras à comunicação devido ao idioma ou a demência."
+    },
+    {
+      "id": "bebe_que_chora_12_meses_p4_1900",
+      "disc_id": 1900,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Problema recente?",
+      "texto_utente": "Este problema começou na última semana?",
+      "texto_en": "Recent problem?",
+      "texto_utente_en": "Did this problem start within the last week?",
+      "descricao": "Um problema que aparece no decorrer da última semana."
+    }
+  ]
+}

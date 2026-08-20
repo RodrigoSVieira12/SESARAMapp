@@ -1,0 +1,32 @@
+# O que NÃO entra na imagem Docker.
+# Regra: entra o que é preciso para CORRER (código, dados, static, testes);
+# fica de fora o que é do desenvolvimento local ou artefactos gerados.
+
+.git
+.gitignore
+__pycache__
+*.pyc
+.pytest_cache
+.venv
+venv
+.DS_Store
+
+# Artefactos de cobertura (gerados por scripts/cobertura_testes.py)
+.coverage
+htmlcov/
+
+# Documentação: útil no repositório, desnecessária dentro do contentor
+# (o validacao_clinica.html sozinho são ~3,5 MB).
+docs/
+README.md
+README.pt.md
+
+# Cache dos tempos de espera: é gerado em execução; começar limpo.
+app/data/espera_cache.json
+
+# Ficheiros Docker (não são precisos dentro da própria imagem)
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+*.zip

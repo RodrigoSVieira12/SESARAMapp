@@ -1,0 +1,56 @@
+{
+  "id": "pedido_para_terceiros",
+  "nome": "Pedido para terceiros",
+  "nome_en": "Request on behalf of another",
+  "descricao": "Pedido feito em nome de outra pessoa.",
+  "descricao_en": "A request made on behalf of another person.",
+  "pediatrico": false,
+  "fonte": "Discriminadores do Sistema de Triagem de Manchester, organizados por prioridade clínica (P1-P5). Importados da tabela de referência; sujeitos a validação clínica antes de uso real.",
+  "fonte_en": "Manchester Triage System discriminators, organised by clinical priority (P1-P5). Imported from the reference table; subject to clinical validation before real use.",
+  "perguntas": [
+    {
+      "id": "pedido_para_terceiros_p1_3126",
+      "disc_id": 3126,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Possivel paragem cardiorespiratória?",
+      "texto_utente": "A pessoa parece não estar a respirar nem a mexer-se?",
+      "texto_en": "Possible cardiac arrest?",
+      "texto_utente_en": "Does the person appear not to be breathing or moving?",
+      "descricao": "Durante a chamada é referido que a vítima não respira ou está morta."
+    },
+    {
+      "id": "pedido_para_terceiros_p2_3127",
+      "disc_id": 3127,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Impossivel confirmar se vitima fala?",
+      "texto_utente": "Não consegue confirmar se a pessoa fala ou responde?",
+      "texto_en": "Unable to confirm whether the person is speaking?",
+      "texto_utente_en": "Are you unable to confirm whether the person can speak or respond?",
+      "descricao": "O contactante não fornece qualquer indicação de que a vítima consegue falar, nem é possível ouvir a vítima a falar durante o telefonema."
+    },
+    {
+      "id": "pedido_para_terceiros_p2_3128",
+      "disc_id": 3128,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Impossivel confirmar se vitima está em pé?",
+      "texto_utente": "Não consegue confirmar se a pessoa se aguenta de pé?",
+      "texto_en": "Unable to confirm whether the person is standing?",
+      "texto_utente_en": "Are you unable to confirm whether the person can stand up?",
+      "descricao": "O contactante não fornece qualquer indicação sobre a posição da vítima durante a chamada."
+    },
+    {
+      "id": "pedido_para_terceiros_p2_3129",
+      "disc_id": 3129,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Alarme automático?",
+      "texto_utente": "O aviso veio de um alarme automático, sem informação sobre a pessoa?",
+      "texto_en": "Automatic alarm?",
+      "texto_utente_en": "Did the alert come from an automatic alarm, with no information about the person?",
+      "descricao": "Chamada de um sistema informático de alarme automático, que apenas notifica a ocorrência, mas não transmite qualquer dado sobre a vítima."
+    }
+  ]
+}

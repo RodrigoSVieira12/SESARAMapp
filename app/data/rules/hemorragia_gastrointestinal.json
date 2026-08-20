@@ -1,0 +1,221 @@
+{
+  "id": "hemorragia_gastrointestinal",
+  "nome": "Sangue nos vómitos ou nas fezes",
+  "nome_en": "Blood in vomit or stools",
+  "descricao": "Hemorragia gastrointestinal.",
+  "descricao_en": "Gastrointestinal bleeding.",
+  "pediatrico": false,
+  "fonte": "Discriminadores do Sistema de Triagem de Manchester, organizados por prioridade clínica (P1-P5). Importados da tabela de referência; sujeitos a validação clínica antes de uso real.",
+  "fonte_en": "Manchester Triage System discriminators, organised by clinical priority (P1-P5). Imported from the reference table; subject to clinical validation before real use.",
+  "perguntas": [
+    {
+      "id": "hemorragia_gastrointestinal_p1_1859",
+      "disc_id": 1859,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Compromisso da via aérea?",
+      "texto_utente": "A respiração está muito difícil ou ruidosa, como se o ar não passasse bem pela garganta (a roncar ou a gorgolejar)?",
+      "texto_en": "Airway compromise?",
+      "texto_utente_en": "Is breathing very difficult or noisy, as if air can't pass properly through the throat (snoring or gurgling)?",
+      "descricao": "A via aérea poderá estar comprometida, por não se conseguir manter aberta, ou porque os reflexos protetores da via respiratória (que evitam a aspiração) se perderam. A incapacidade de manter a via aérea aberta, poderá resultar numa obstrução total ou parcial, intermitente ou não. Isto manifestar-se-á por sons como o ressonar ou o gorgolejar durante a respiração."
+    },
+    {
+      "id": "hemorragia_gastrointestinal_p1_2130",
+      "disc_id": 2130,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Respiração ineficaz?",
+      "texto_utente": "A respiração está tão fraca ou cansada que parece não entrar ar suficiente (respiração aos arrancos ou muito a custo)?",
+      "texto_en": "Ineffective breathing?",
+      "texto_utente_en": "Is breathing so weak or laboured that not enough air seems to get in (gasping or a real struggle)?",
+      "descricao": "Doentes que não conseguem respirar suficientemente bem para manter uma oxigenação adequada e com falência respiratória, sofrem de respiração ineficaz. Poderá resultar num esforço acrescentado para respirar, ou em exaustão, incluindo uma respiração tipo “gasping”."
+    },
+    {
+      "id": "hemorragia_gastrointestinal_p1_2550",
+      "disc_id": 2550,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Hemorragia catastrófica?",
+      "texto_utente": "Está a sangrar muitíssimo, com sangue a jorrar, e não consegue parar?",
+      "texto_en": "Catastrophic haemorrhage?",
+      "texto_utente_en": "Is there massive bleeding, with blood spurting out, that you cannot stop?",
+      "descricao": "Hemorragia arterial em quantidade e velocidade catastróficas que, se não for controlada rapidamente, provocará a morte da vítima."
+    },
+    {
+      "id": "hemorragia_gastrointestinal_p1_2553",
+      "disc_id": 2553,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Sinais de choque?",
+      "texto_utente": "Tem suores frios, pele muito pálida ou acinzentada, o coração a bater depressa e uma grande fraqueza?",
+      "texto_en": "Signs of shock?",
+      "texto_utente_en": "Are there cold sweats, very pale or greyish skin, a fast heartbeat and severe weakness?",
+      "descricao": "O choque é uma entrega inadequada de oxigénio aos tecidos. Os sinais clássicos incluem suores, palidez, taquicardia, hipotensão e nível de consciência reduzido."
+    },
+    {
+      "id": "hemorragia_gastrointestinal_p1_2556",
+      "disc_id": 2556,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Não reativo?",
+      "texto_utente": "Está sem reagir a nada, nem quando lhe falam, lhe tocam ou lhe fazem doer?",
+      "texto_en": "Unresponsive?",
+      "texto_utente_en": "Is the person not reacting at all, even to voice, touch or pain?",
+      "descricao": "Não responde a um estímulo doloroso."
+    },
+    {
+      "id": "hemorragia_gastrointestinal_p2_2608",
+      "disc_id": 2608,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Hematemeses?",
+      "texto_utente": "Vomitou sangue (vermelho-vivo ou escuro, parecido com borras de café)?",
+      "texto_en": "Vomiting blood (haematemesis)?",
+      "texto_utente_en": "Have you vomited blood (bright red or dark, like coffee grounds)?",
+      "descricao": "O sangue expelido no vómito poderá ser fresco (vermelho-vivo) ou escuro, ou com aparência de borras de café."
+    },
+    {
+      "id": "hemorragia_gastrointestinal_p2_2609",
+      "disc_id": 2609,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Hematoquésias, melenas ou retorragias?",
+      "texto_utente": "Saiu sangue pelo rabo ou nas fezes (vermelho-vivo ou muito escuro)?",
+      "texto_en": "Blood in the stool or rectal bleeding?",
+      "texto_utente_en": "Has blood come from the back passage or in the stool (bright red or very dark)?",
+      "descricao": "Numa hemorragia gastrointestinal maciça e ativa, o sangue vermelho-escuro é expelido pelo reto. À medida que aumenta o tempo de trânsito gastrointestinal o sangue torna-se mais escuro – vindo a tornar-se em melenas."
+    },
+    {
+      "id": "hemorragia_gastrointestinal_p2_2610",
+      "disc_id": 2610,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Alteração do estado de consciência?",
+      "texto_utente": "Está sonolento ou baralhado, só reagindo quando lhe falam ou lhe tocam (não está bem desperto)?",
+      "texto_en": "Altered level of consciousness?",
+      "texto_utente_en": "Is the person drowsy or muddled, responding only to voice or touch (not fully alert)?",
+      "descricao": "Não está totalmente alerta. Só responde à voz, à dor"
+    },
+    {
+      "id": "hemorragia_gastrointestinal_p2_2611",
+      "disc_id": 2611,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Possível sépsis?",
+      "texto_utente": "Tem sinais de uma infeção a alastrar depressa, como confusão, respiração muito acelerada ou uma fraqueza que se instala de repente?",
+      "texto_en": "Possible sepsis?",
+      "texto_utente_en": "Are there signs of a fast-spreading infection, such as confusion, very rapid breathing or weakness that comes on suddenly?",
+      "descricao": "Suspeitar de sépsis em vítimas que apresentem alteração do estado de consciência, hipotensão (sistólica inferior a 100mmHg), ou aumento da frequência respiratória (frequência superior a 22 cpm). Nas crianças deve ser determinada a possibilidade de sépsis pelas tabelas de parâmetros vitais ajustados à idade."
+    },
+    {
+      "id": "hemorragia_gastrointestinal_p2_2612",
+      "disc_id": 2612,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "História significativa de hemorragia gastrointestinal?",
+      "texto_utente": "Já teve hemorragias graves no aparelho digestivo (por exemplo, por uma úlcera ou por varizes no esófago)?",
+      "texto_en": "Significant history of gastrointestinal bleeding?",
+      "texto_utente_en": "Have you had serious bleeding in the digestive tract before (for example from an ulcer or from oesophageal varices)?",
+      "descricao": "História de hemorragia gastrointestinal associada a doença ulcerosa ou varizes esofágicas."
+    },
+    {
+      "id": "hemorragia_gastrointestinal_p2_2613",
+      "disc_id": 2613,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Dor severa?",
+      "texto_utente": "Tem dores muito fortes, quase a não aguentar (das piores que alguma vez sentiu)?",
+      "texto_en": "Severe pain?",
+      "texto_utente_en": "Do you have very severe pain, almost unbearable (some of the worst you've ever felt)?",
+      "descricao": "Dor significativa e insuportável, frequentemente referida como a pior de sempre. Alterações na expressão facial, de comportamento e nas atividades diárias permitem avaliar o nível de dor, especialmente nos doentes não comunicativos (por exemplo nas crianças e bebés), ou quando existem barreiras de comunicação pelo idioma ou por demência."
+    },
+    {
+      "id": "hemorragia_gastrointestinal_p3_2614",
+      "disc_id": 2614,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Vómitos incoercíveis?",
+      "texto_utente": "Está a vomitar sem parar, sem conseguir suster?",
+      "texto_en": "Uncontrollable vomiting?",
+      "texto_utente_en": "Are you vomiting non-stop and unable to hold it back?",
+      "descricao": "Vómitos constantes e/ou frequentes, podendo ser acompanhados de náuseas."
+    },
+    {
+      "id": "hemorragia_gastrointestinal_p3_2615",
+      "disc_id": 2615,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Fezes pretas ou raiadas de sangue?",
+      "texto_utente": "As fezes estão pretas (como alcatrão) ou com fios de sangue?",
+      "texto_en": "Black or blood-streaked stools?",
+      "texto_utente_en": "Are the stools black (like tar) or streaked with blood?",
+      "descricao": "As fezes aparecem com cor vermelho-escura. A ausência periódica ou temporária deste tipo de manifestação, não exclui o diagnóstico. Qualquer sinal de apresentação de fezes pretas, constitui um alerta."
+    },
+    {
+      "id": "hemorragia_gastrointestinal_p3_2616",
+      "disc_id": 2616,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Alteração da coagulação?",
+      "texto_utente": "Tem um problema de coagulação do sangue ou toma medicamentos para o sangue não coalhar (por exemplo, varfarina)?",
+      "texto_en": "Coagulation disorder?",
+      "texto_utente_en": "Do you have a blood-clotting problem or take blood-thinning medicines (for example warfarin)?",
+      "descricao": "Alteração da coagulação associada a doença hematológica ou terapêutica."
+    },
+    {
+      "id": "hemorragia_gastrointestinal_p3_2617",
+      "disc_id": 2617,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "História de hematemeses?",
+      "texto_utente": "Vomitou sangue há pouco tempo (vermelho ou escuro, parecido com borras de café)?",
+      "texto_en": "History of vomiting blood?",
+      "texto_utente_en": "Have you recently vomited blood (red or dark, like coffee grounds)?",
+      "descricao": "Hematemese recente e clinicamente evidente, vómitos de sangue alterado (borras de café) ou de sangue misturado com vómito."
+    },
+    {
+      "id": "hemorragia_gastrointestinal_p3_2618",
+      "disc_id": 2618,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Dor moderada?",
+      "texto_utente": "Tem dores a sério, que o impedem de fazer algumas coisas do dia a dia?",
+      "texto_en": "Moderate pain?",
+      "texto_utente_en": "Do you have noticeable pain that stops you doing some everyday things?",
+      "descricao": "Dor significativa que incapacita para algumas atividades diárias. Alterações na expressão facial, de comportamento e nas atividades diárias permitem avaliar o nível de dor, especialmente nos doentes não comunicativos (por exemplo nas crianças e bebés), ou quando existem barreiras de comunicação pelo idioma ou por demência."
+    },
+    {
+      "id": "hemorragia_gastrointestinal_p4_2619",
+      "disc_id": 2619,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Vómitos persistentes?",
+      "texto_utente": "Continua a vomitar, mesmo depois de esperar ou de tomar algum medicamento?",
+      "texto_en": "Persistent vomiting?",
+      "texto_utente_en": "Do you keep vomiting, even after waiting or taking medication?",
+      "descricao": "Vómitos que não passaram, apesar da espera ou da medicação que tomou."
+    },
+    {
+      "id": "hemorragia_gastrointestinal_p4_2622",
+      "disc_id": 2622,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Dor persistente?",
+      "texto_utente": "A dor continua sem passar, mesmo depois de esperar ou de tomar um analgésico?",
+      "texto_en": "Persistent pain?",
+      "texto_utente_en": "Does the pain carry on without easing, even after waiting or taking a painkiller?",
+      "descricao": "Dor que não desaparece após algum tempo ou após tomar a medicação apropriada. Mudanças nas expressões faciais, comportamento e interrupção da atividade permitirão avaliar os níveis de dor, especialmente em pacientes não comunicativos, como por exemplo crianças muito pequenas e bebés, ou onde existam barreiras à comunicação devido ao idioma ou a demência."
+    },
+    {
+      "id": "hemorragia_gastrointestinal_p4_2623",
+      "disc_id": 2623,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Problema recente?",
+      "texto_utente": "Este problema começou na última semana?",
+      "texto_en": "Recent problem?",
+      "texto_utente_en": "Did this problem start within the last week?",
+      "descricao": "Um problema que aparece no decorrer da última semana."
+    }
+  ]
+}

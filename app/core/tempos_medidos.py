@@ -114,6 +114,7 @@ def carregar(recarregar: bool = False) -> dict:
 
 # ------------------------------------------------------------ validação -- #
 
+
 def _numero(valor) -> bool:
     return isinstance(valor, (int, float)) and not isinstance(valor, bool)
 
@@ -171,20 +172,14 @@ def validar(dados: dict) -> list[str]:
                 continue
             tempo = valores.get("tempo_min")
             dist = valores.get("distancia_km")
-            if tempo is not None and (
-                not _numero(tempo) or tempo <= 0 or tempo > _TEMPO_MAX_MIN
-            ):
+            if tempo is not None and (not _numero(tempo) or tempo <= 0 or tempo > _TEMPO_MAX_MIN):
                 problemas.append(f"{onde}: '{uid}'.tempo_min inválido ({tempo!r})")
-            if dist is not None and (
-                not _numero(dist) or dist <= 0 or dist > _DISTANCIA_MAX_KM
-            ):
+            if dist is not None and (not _numero(dist) or dist <= 0 or dist > _DISTANCIA_MAX_KM):
                 problemas.append(f"{onde}: '{uid}'.distancia_km inválido ({dist!r})")
             for campo in ("fonte", "calculado_em"):
                 extra = valores.get(campo)
                 if extra is not None and not isinstance(extra, str):
-                    problemas.append(
-                        f"{onde}: '{uid}'.{campo} deve ser texto ({extra!r})"
-                    )
+                    problemas.append(f"{onde}: '{uid}'.{campo} deve ser texto ({extra!r})")
 
     return problemas
 
@@ -220,6 +215,7 @@ def avisos(dados: dict | None = None) -> list[str]:
 
 # ------------------------------------------------------------ preparação -- #
 
+
 def _preparar(dados: dict) -> dict:
     ancoras = []
     for m in dados["medicoes"]:
@@ -253,6 +249,7 @@ def _preparar(dados: dict) -> dict:
 
 # --------------------------------------------------------------- procura -- #
 
+
 def procurar(lat: float, lng: float, unidade_id: str) -> dict | None:
     """Tempo MEDIDO da zona do utente até uma unidade, se existir.
 
@@ -278,10 +275,7 @@ def procurar(lat: float, lng: float, unidade_id: str) -> dict | None:
 
     raio = float(tabela["parametros"].get("raio_ancoragem_km", 3.0))
     proximas = sorted(
-        (
-            (haversine_km(lat, lng, a["lat"], a["lng"]), a)
-            for a in candidatas
-        ),
+        ((haversine_km(lat, lng, a["lat"], a["lng"]), a) for a in candidatas),
         key=lambda par: par[0],
     )
     for d_km, ancora in proximas:
@@ -292,9 +286,7 @@ def procurar(lat: float, lng: float, unidade_id: str) -> dict | None:
         medido = ancora["medidos"].get(unidade_id)
         if medido is None:
             continue
-        if _viagem._cruza_barreira(
-            (lat, lng), (ancora["lat"], ancora["lng"]), rede["barreiras"]
-        ):
+        if _viagem._cruza_barreira((lat, lng), (ancora["lat"], ancora["lng"]), rede["barreiras"]):
             continue
         minutos = float(medido["tempo_min"])
         distancia = medido.get("distancia_km")

@@ -1,0 +1,85 @@
+flowchart TD
+  inicio(["Início: Lesão toraco-abdominal"])
+  lesao_toraco_abdominal_p1_1863["1. [P1] Compromisso da via aérea?"]
+  lesao_toraco_abdominal_p1_2134["2. [P1] Respiração ineficaz?"]
+  lesao_toraco_abdominal_p1_2686["3. [P1] Hemorragia catastrófica?"]
+  lesao_toraco_abdominal_p1_2687["4. [P1] Sinais de choque?"]
+  lesao_toraco_abdominal_p1_2688["5. [P1] Não reativo?"]
+  lesao_toraco_abdominal_p2_2689["6. [P2] Dispneia aguda?"]
+  lesao_toraco_abdominal_p2_2690["7. [P2] Grande Hemorragia<br/>incontrolável?"]
+  lesao_toraco_abdominal_p2_2691["8. [P2] Alteração do estado de<br/>consciência?"]
+  lesao_toraco_abdominal_p2_2692["9. [P2] Evisceração de orgãos?"]
+  lesao_toraco_abdominal_p2_2693["10. [P2] Mecanismo significativo de<br/>lesão?"]
+  lesao_toraco_abdominal_p2_2694["11. [P2] Dor moderada?"]
+  lesao_toraco_abdominal_p3_2695["12. [P3] Pequena hemorragia<br/>incontrolável?"]
+  lesao_toraco_abdominal_p3_2696["13. [P3] História Inapropriada?"]
+  lesao_toraco_abdominal_p3_2697["14. [P3] Dor pleurítica?"]
+  lesao_toraco_abdominal_p3_2698["15. [P3] Dor moderada?"]
+  lesao_toraco_abdominal_p4_2699["16. [P4] Infeção local?"]
+  lesao_toraco_abdominal_p4_2700["17. [P4] Inflamação local?"]
+  lesao_toraco_abdominal_p4_2701["18. [P4] Dor persistente?"]
+  lesao_toraco_abdominal_p4_2702["19. [P4] Problema recente?"]
+  inicio --> lesao_toraco_abdominal_p1_1863
+  lesao_toraco_abdominal_p1_1863_sim(["VERMELHO"]):::vermelho
+  lesao_toraco_abdominal_p1_1863 -->|Sim| lesao_toraco_abdominal_p1_1863_sim
+  lesao_toraco_abdominal_p1_1863 -->|Não| lesao_toraco_abdominal_p1_2134
+  lesao_toraco_abdominal_p1_2134_sim(["VERMELHO"]):::vermelho
+  lesao_toraco_abdominal_p1_2134 -->|Sim| lesao_toraco_abdominal_p1_2134_sim
+  lesao_toraco_abdominal_p1_2134 -->|Não| lesao_toraco_abdominal_p1_2686
+  lesao_toraco_abdominal_p1_2686_sim(["VERMELHO"]):::vermelho
+  lesao_toraco_abdominal_p1_2686 -->|Sim| lesao_toraco_abdominal_p1_2686_sim
+  lesao_toraco_abdominal_p1_2686 -->|Não| lesao_toraco_abdominal_p1_2687
+  lesao_toraco_abdominal_p1_2687_sim(["VERMELHO"]):::vermelho
+  lesao_toraco_abdominal_p1_2687 -->|Sim| lesao_toraco_abdominal_p1_2687_sim
+  lesao_toraco_abdominal_p1_2687 -->|Não| lesao_toraco_abdominal_p1_2688
+  lesao_toraco_abdominal_p1_2688_sim(["VERMELHO"]):::vermelho
+  lesao_toraco_abdominal_p1_2688 -->|Sim| lesao_toraco_abdominal_p1_2688_sim
+  lesao_toraco_abdominal_p1_2688 -->|Não| lesao_toraco_abdominal_p2_2689
+  lesao_toraco_abdominal_p2_2689_sim(["LARANJA"]):::laranja
+  lesao_toraco_abdominal_p2_2689 -->|Sim| lesao_toraco_abdominal_p2_2689_sim
+  lesao_toraco_abdominal_p2_2689 -->|Não| lesao_toraco_abdominal_p2_2690
+  lesao_toraco_abdominal_p2_2690_sim(["LARANJA"]):::laranja
+  lesao_toraco_abdominal_p2_2690 -->|Sim| lesao_toraco_abdominal_p2_2690_sim
+  lesao_toraco_abdominal_p2_2690 -->|Não| lesao_toraco_abdominal_p2_2691
+  lesao_toraco_abdominal_p2_2691_sim(["LARANJA"]):::laranja
+  lesao_toraco_abdominal_p2_2691 -->|Sim| lesao_toraco_abdominal_p2_2691_sim
+  lesao_toraco_abdominal_p2_2691 -->|Não| lesao_toraco_abdominal_p2_2692
+  lesao_toraco_abdominal_p2_2692_sim(["LARANJA"]):::laranja
+  lesao_toraco_abdominal_p2_2692 -->|Sim| lesao_toraco_abdominal_p2_2692_sim
+  lesao_toraco_abdominal_p2_2692 -->|Não| lesao_toraco_abdominal_p2_2693
+  lesao_toraco_abdominal_p2_2693_sim(["LARANJA"]):::laranja
+  lesao_toraco_abdominal_p2_2693 -->|Sim| lesao_toraco_abdominal_p2_2693_sim
+  lesao_toraco_abdominal_p2_2693 -->|Não| lesao_toraco_abdominal_p2_2694
+  lesao_toraco_abdominal_p2_2694_sim(["LARANJA"]):::laranja
+  lesao_toraco_abdominal_p2_2694 -->|Sim| lesao_toraco_abdominal_p2_2694_sim
+  lesao_toraco_abdominal_p2_2694 -->|Não| lesao_toraco_abdominal_p3_2695
+  lesao_toraco_abdominal_p3_2695_sim(["AMARELO"]):::amarelo
+  lesao_toraco_abdominal_p3_2695 -->|Sim| lesao_toraco_abdominal_p3_2695_sim
+  lesao_toraco_abdominal_p3_2695 -->|Não| lesao_toraco_abdominal_p3_2696
+  lesao_toraco_abdominal_p3_2696_sim(["AMARELO"]):::amarelo
+  lesao_toraco_abdominal_p3_2696 -->|Sim| lesao_toraco_abdominal_p3_2696_sim
+  lesao_toraco_abdominal_p3_2696 -->|Não| lesao_toraco_abdominal_p3_2697
+  lesao_toraco_abdominal_p3_2697_sim(["AMARELO"]):::amarelo
+  lesao_toraco_abdominal_p3_2697 -->|Sim| lesao_toraco_abdominal_p3_2697_sim
+  lesao_toraco_abdominal_p3_2697 -->|Não| lesao_toraco_abdominal_p3_2698
+  lesao_toraco_abdominal_p3_2698_sim(["AMARELO"]):::amarelo
+  lesao_toraco_abdominal_p3_2698 -->|Sim| lesao_toraco_abdominal_p3_2698_sim
+  lesao_toraco_abdominal_p3_2698 -->|Não| lesao_toraco_abdominal_p4_2699
+  lesao_toraco_abdominal_p4_2699_sim(["VERDE"]):::verde
+  lesao_toraco_abdominal_p4_2699 -->|Sim| lesao_toraco_abdominal_p4_2699_sim
+  lesao_toraco_abdominal_p4_2699 -->|Não| lesao_toraco_abdominal_p4_2700
+  lesao_toraco_abdominal_p4_2700_sim(["VERDE"]):::verde
+  lesao_toraco_abdominal_p4_2700 -->|Sim| lesao_toraco_abdominal_p4_2700_sim
+  lesao_toraco_abdominal_p4_2700 -->|Não| lesao_toraco_abdominal_p4_2701
+  lesao_toraco_abdominal_p4_2701_sim(["VERDE"]):::verde
+  lesao_toraco_abdominal_p4_2701 -->|Sim| lesao_toraco_abdominal_p4_2701_sim
+  lesao_toraco_abdominal_p4_2701 -->|Não| lesao_toraco_abdominal_p4_2702
+  lesao_toraco_abdominal_p4_2702_sim(["VERDE"]):::verde
+  lesao_toraco_abdominal_p4_2702 -->|Sim| lesao_toraco_abdominal_p4_2702_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  lesao_toraco_abdominal_p4_2702 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

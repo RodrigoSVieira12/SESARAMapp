@@ -1,16 +1,23 @@
 /* ==========================================================================
-   Onde ir? Protótipo SESARAM — v0.5
-   Direção visual: "Serviço público".
+   Onde ir? Protótipo SESARAM — v0.16
+   Direção visual: "Serviço público", agora com maneiras de aplicação de
+   saúde (SNS 24 / MyChart): um objetivo por ecrã, botões grandes, cartões
+   com ar, tipografia com hierarquia clara.
 
-   A linguagem dos portais institucionais portugueses: banda de cor sólida
-   no topo e no rodapé, superfícies brancas, contornos em vez de sombras,
-   cantos discretos, etiquetas em maiúsculas pequenas.
+   O que NÃO muda (decisões deliberadas de versões anteriores):
+     - Public Sans em todos os papéis (uma família bem usada > duas);
+       na v0.16 entra o peso 800 só para títulos e respostas.
+     - Contornos VISÍVEIS nos cartões (--linha >= 3:1): o público idoso com
+       sensibilidade ao contraste reduzida precisa de ver onde acaba um
+       cartão. A profundidade nova (sombras suaves) SOMA-SE ao contorno,
+       nunca o substitui. scripts/auditar_acessibilidade.py fixa os valores.
+     - As cinco cores de Manchester só aparecem no RESULTADO (v0.14.1);
+       o resto da interface é neutro de propósito.
 
-   Tipo: Public Sans (a fonte de serviços públicos digitais) em todos os
-   papéis — uma família usada bem transmite mais confiança do que duas.
-
-   Elemento-assinatura: o resultado é uma GUIA DE ENCAMINHAMENTO — um
-   cartão com lombada na cor da triagem, pensado também para impressão.
+   Elemento-assinatura (v0.16): a GUIA DE PRIORIDADE — o cartão do
+   resultado ganha um fundo tingido na cor da triagem, lombada grossa,
+   classificação em destaque e o tempo-alvo numa pílula própria. É a
+   "pulseira" da urgência, agora inconfundível.
 
    Nota: os azuis institucionais são provisórios. Quando houver cores
    oficiais do SESARAM, basta trocar --primaria e --primaria-escura.
@@ -24,10 +31,24 @@
   --primaria: #185fa5;          /* azul de ação (botões, ligações) */
   --primaria-escura: #0c447c;   /* azul de serviço (bandas, títulos) */
   --primaria-clara: #eaf2fa;    /* tinta de fundo (hover, avisos info) */
-  --linha: #d4dbe3;
-  --linha-forte: #aeb9c4;
-  --raio: 6px;                  /* controlos */
-  --raio-cartao: 8px;           /* cartões */
+  /* Filetes e contornos. Desde a v0.15.2 cumprem a WCAG por si: --linha
+     (contornos de cartões, listas e botões) >= 3:1 sobre branco E sobre o
+     fundo (1.4.11, contraste não textual); --linha-forte (campos de texto,
+     e também usada como cor de TEXTO no apagar do histórico) >= 4.5:1.
+     scripts/auditar_acessibilidade.py bloqueia regressões no CI. */
+  --linha: #7b8894;
+  --linha-forte: #5b6873;
+
+  /* Raios (v0.16): mais generosos, linguagem de app. */
+  --raio: 12px;                 /* controlos */
+  --raio-cartao: 16px;          /* cartões */
+  --raio-pilula: 999px;
+
+  /* Profundidade (v0.16): sombras discretas POR CIMA do contorno. */
+  --sombra-cartao: 0 1px 2px rgba(12, 32, 52, 0.05),
+                   0 12px 32px -20px rgba(12, 32, 52, 0.28);
+  --sombra-flutuar: 0 2px 4px rgba(12, 32, 52, 0.08),
+                    0 14px 28px -16px rgba(12, 32, 52, 0.30);
 
   /* Cores da Triagem de Manchester (funcionais, fixadas pelo domínio) */
   --vermelho: #d32f2f;
@@ -54,15 +75,15 @@ body {
 }
 
 /* Etiqueta institucional: maiúsculas pequenas espaçadas. Reutilizada
-   pelo rótulo da guia, pela fase do progresso e pelos contactos. */
+   pelo rótulo da guia, pelos grupos de queixas e pelos contactos. */
 .etiqueta,
 .pulseira-rotulo,
-.progresso__fase,
+.qx-grupo-titulo,
 .contacto__nome {
   font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.09em;
 }
 
 /* --------------------------------------------------------------- topo -- */
@@ -74,21 +95,38 @@ body {
 }
 
 .topo__conteudo {
-  max-width: 640px;
+  max-width: 680px;
   margin: 0 auto;
-  padding: 1rem 1.25rem 0.9rem;
+  padding: 0.95rem 1.25rem 0.85rem;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: 1rem;
 }
 
+/* v0.16: símbolo (a cruz do favicon) junto da marca, para a página ter
+   cara de aplicação e não só de cabeçalho de site. */
+.topo__identidade {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.topo__simbolo {
+  flex: 0 0 auto;
+  width: 2.4rem;
+  height: 2.4rem;
+  color: #fff;
+}
+
+.topo__simbolo svg { width: 100%; height: 100%; display: block; }
+
 .topo__lingua {
   flex: 0 0 auto;
-  margin-top: 0.2rem;
-  padding: 0.35rem 0.85rem;
+  padding: 0.4rem 0.9rem;
   border: 1px solid rgba(255, 255, 255, 0.55);
-  border-radius: 999px;
+  border-radius: var(--raio-pilula);
   background: transparent;
   color: #fff;
   font: inherit;
@@ -100,17 +138,25 @@ body {
 
 .topo__lingua:hover { background: rgba(255, 255, 255, 0.12); }
 
+.topo__controlos {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
 .topo__marca {
   margin: 0;
-  font-weight: 700;
-  font-size: 1.45rem;
+  font-weight: 800;
+  font-size: 1.35rem;
   letter-spacing: -0.01em;
   color: #fff;
+  line-height: 1.15;
 }
 
 .topo__sub {
-  margin: 0.15rem 0 0;
-  font-size: 0.85rem;
+  margin: 0.1rem 0 0;
+  font-size: 0.8rem;
   color: #b9cfe8;
 }
 
@@ -119,15 +165,15 @@ body {
 .app {
   flex: 1;
   width: 100%;
-  max-width: 640px;
+  max-width: 680px;
   margin: 0 auto;
-  padding: 1.5rem 1.25rem 3rem;
+  padding: 1.6rem 1.15rem 3.5rem;
 }
 
-.ecra { animation: entrar 0.22s ease-out both; }
+.ecra { animation: entrar 0.28s cubic-bezier(0.2, 0.7, 0.3, 1) both; }
 
 @keyframes entrar {
-  from { opacity: 0; transform: translateY(6px); }
+  from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: none; }
 }
 
@@ -135,18 +181,28 @@ body {
   background: var(--superficie);
   border: 1px solid var(--linha);
   border-radius: var(--raio-cartao);
-  padding: 1.5rem;
+  box-shadow: var(--sombra-cartao);
+  padding: clamp(1.25rem, 4vw, 1.75rem);
 }
 
-.cartao + .cartao { margin-top: 1rem; }
+/* v0.16: mais ar entre cartões — a mudança barata que mais "moderniza". */
+.cartao + .cartao,
+.cartao + .botoes--nav,
+.botoes--nav + .cartao { margin-top: 1.4rem; }
 
 .titulo-ecra {
-  margin: 0 0 0.75rem;
-  font-weight: 700;
-  font-size: 1.5rem;
-  letter-spacing: -0.01em;
+  margin: 0 0 0.85rem;
+  font-weight: 800;
+  font-size: 1.6rem;
+  letter-spacing: -0.015em;
   line-height: 1.2;
   color: var(--tinta);
+}
+
+/* Título do ecrã inicial: o único que pode crescer para tamanho de capa. */
+.titulo-ecra--hero {
+  font-size: clamp(1.8rem, 6vw, 2.2rem);
+  margin-bottom: 0.6rem;
 }
 
 .texto-suave { color: var(--tinta-suave); }
@@ -160,36 +216,53 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 0.55rem;
   width: 100%;
-  min-height: 54px;               /* alvo de toque generoso */
-  padding: 0.8rem 1.25rem;
+  min-height: 56px;               /* alvo de toque generoso */
+  padding: 0.85rem 1.3rem;
   border: 1px solid var(--primaria);
   border-radius: var(--raio);
   background: var(--primaria);
   color: #fff;
   font: inherit;
-  font-weight: 600;
-  font-size: 1.02rem;
+  font-weight: 700;
+  font-size: 1.05rem;
   cursor: pointer;
   text-decoration: none;
-  transition: background 0.15s ease, border-color 0.15s ease;
+  transition: background 0.15s ease, border-color 0.15s ease,
+              box-shadow 0.15s ease, transform 0.1s ease;
 }
 
-.botao:hover { background: var(--primaria-escura); border-color: var(--primaria-escura); }
-.botao:active { transform: translateY(1px); }
+.botao svg { width: 1.15rem; height: 1.15rem; flex: 0 0 auto; }
+
+@media (hover: hover) {
+  .botao:hover {
+    background: var(--primaria-escura);
+    border-color: var(--primaria-escura);
+    box-shadow: var(--sombra-flutuar);
+  }
+}
+
+.botao:active { transform: translateY(1px) scale(0.995); box-shadow: none; }
 
 .botao--secundario {
   background: var(--superficie);
   color: var(--primaria-escura);
 }
 
-.botao--secundario:hover { background: var(--primaria-clara); border-color: var(--primaria-escura); }
+@media (hover: hover) {
+  .botao--secundario:hover {
+    background: var(--primaria-clara);
+    border-color: var(--primaria-escura);
+  }
+}
 
 .botao--112 {
   background: var(--vermelho);
   border-color: var(--vermelho);
   font-size: 1.15rem;
-  font-weight: 700;
+  font-weight: 800;
+  min-height: 62px;
 }
 
 .botao--112:hover { background: #a92222; border-color: #a92222; }
@@ -198,6 +271,7 @@ body {
   background: none;
   border: none;
   min-height: 48px;
+  padding: 0.5rem 0.5rem;
   color: var(--primaria-escura);
   font: inherit;
   font-weight: 600;
@@ -209,14 +283,60 @@ body {
 
 .botao--fantasma:hover { color: var(--primaria); }
 
-.botoes { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.25rem; }
+.botoes { display: flex; flex-direction: column; gap: 0.8rem; margin-top: 1.35rem; }
 
+/* v0.16: os botões de navegação secundária podem viver lado a lado
+   quando há espaço, para o ecrã acabar mais curto. */
+.botoes--linha { flex-direction: row; flex-wrap: wrap; }
+.botoes--linha > * { flex: 1 1 200px; }
+
+/* ------------------------------------------ Sim / Não (v0.16, gigantes) --
+   A resposta É o ecrã: dois alvos enormes, neutros (nem verde nem
+   vermelho — na triagem, "sim" costuma significar pior, e pintar o "sim"
+   de verde daria o sinal errado). Ícones de visto/cruz ajudam quem lê
+   com dificuldade. */
 .botoes-sim-nao {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
-  margin-top: 1.5rem;
+  gap: 0.85rem;
+  margin-top: 1.6rem;
 }
+
+.botao--resposta {
+  min-height: 88px;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 1.35rem;
+  font-weight: 800;
+  border-radius: 14px;
+  border-width: 2px;
+}
+
+.botao--resposta svg { width: 1.5rem; height: 1.5rem; }
+
+.botao--resposta-nao {
+  background: var(--superficie);
+  color: var(--primaria-escura);
+}
+
+@media (hover: hover) {
+  .botao--resposta-nao:hover {
+    background: var(--primaria-clara);
+    border-color: var(--primaria-escura);
+  }
+}
+
+/* Microinteração: ao tocar, o botão escolhido confirma-se visualmente
+   um instante antes de a próxima pergunta entrar. */
+.botao--resposta.escolhido {
+  background: var(--primaria-escura);
+  border-color: var(--primaria-escura);
+  color: #fff;
+  transform: scale(0.985);
+}
+
+.botao--resposta[disabled] { cursor: default; }
+.botao--resposta[disabled]:not(.escolhido) { opacity: 0.55; }
 
 :focus-visible {
   outline: 3px solid var(--primaria);
@@ -224,15 +344,79 @@ body {
   border-radius: var(--raio);
 }
 
-/* -------------------------------------------- início: passos e selo ---- */
+/* -------------------------------------------- início: capa e atalhos ---- */
+
+.inicio-lead { margin: 0 0 0.4rem; font-size: 1.05rem; }
+
+/* Atalhos de emergência: os mesmos contactos do rodapé, à mão logo à
+   entrada — quem chega em pânico não devia ter de fazer scroll. */
+.atalhos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+  margin-top: 1.1rem;
+}
+
+.atalho {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.8rem 0.95rem;
+  min-height: 60px;
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  background: var(--superficie);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.atalho:hover { border-color: var(--primaria); background: var(--primaria-clara); }
+
+.atalho__icone {
+  flex: 0 0 auto;
+  width: 2.1rem;
+  height: 2.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--primaria-clara);
+  color: var(--primaria-escura);
+}
+
+.atalho__icone svg { width: 1.15rem; height: 1.15rem; }
+
+.atalho--112 .atalho__icone { background: #fdecec; color: #b91c1c; }
+
+.atalho__num { display: block; font-weight: 800; font-size: 1.08rem; line-height: 1.2; }
+.atalho__desc { display: block; font-size: 0.8rem; color: var(--tinta-suave); }
+
+/* "Como funciona?": os três passos, agora recolhidos — quem já conhece a
+   aplicação vai direto ao botão; quem quer saber, abre. */
+.como {
+  margin-top: 1.2rem;
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  background: var(--superficie);
+  padding: 0.75rem 1rem;
+}
+
+.como summary {
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--primaria-escura);
+}
+
+.como[open] summary { margin-bottom: 0.6rem; }
 
 .passos {
   list-style: none;
-  margin: 1.25rem 0 0;
+  margin: 0.4rem 0 0.2rem;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 0.85rem;
   counter-reset: passo;
 }
 
@@ -255,15 +439,18 @@ body {
   color: #fff;
   font-weight: 700;
   font-size: 0.95rem;
-  border-radius: var(--raio);
+  border-radius: 8px;
 }
 
 .passos strong { display: block; }
 .passos__desc { color: var(--tinta-suave); font-size: 0.92rem; }
 
 .selo-privacidade {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
   margin-top: 1.4rem;
-  padding: 0.7rem 0.9rem;
+  padding: 0.75rem 0.95rem;
   border: 1px solid var(--linha);
   border-left: 4px solid var(--primaria-escura);
   border-radius: var(--raio);
@@ -272,66 +459,29 @@ body {
   color: var(--tinta-suave);
 }
 
-/* ----------------------------------------------------- lista de sinais -- */
-
-.lista-sinais { display: flex; flex-direction: column; gap: 0.6rem; margin: 1rem 0 0; }
-
-.separador-sinais {
-  margin: 1.4rem 0 0;
-  font-weight: 600;
-  color: var(--tinta-suave);
-}
-
-/* Sinais de emergência: linhas com lombada vermelha — a gravidade fica
-   marcada sem transformar a lista num alarme. */
-.sinal-botao {
-  display: block;
-  width: 100%;
-  min-height: 54px;
-  padding: 0.9rem 1rem;
-  text-align: left;
-  font: inherit;
-  color: var(--tinta);
-  background: var(--superficie);
-  border: 1px solid var(--linha);
-  border-left: 4px solid var(--vermelho);
-  border-radius: var(--raio);
-  cursor: pointer;
-  transition: border-color 0.15s ease, background 0.15s ease;
-}
-
-.sinal-botao:hover { border-color: var(--vermelho); background: #fbf1f1; }
-
-/* (mantido por compatibilidade com versões antigas do ecrã de sinais) */
-.sinal {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  padding: 0.9rem 1rem;
-  border: 1px solid var(--linha);
-  border-radius: var(--raio);
-  cursor: pointer;
-  background: var(--superficie);
-}
-
-.sinal input {
-  width: 1.4rem;
-  height: 1.4rem;
+.selo-privacidade svg {
+  flex: 0 0 auto;
+  width: 1.15rem;
+  height: 1.15rem;
   margin-top: 0.1rem;
-  accent-color: var(--vermelho);
-  flex-shrink: 0;
+  color: var(--primaria-escura);
 }
 
 /* ------------------------------------------------------------- queixas -- */
 
+.qx-grupo-titulo {
+  margin: 1.5rem 0 0.6rem;
+  color: var(--tinta-suave);
+}
+
 .grelha-queixas {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
-  margin-top: 1rem;
+  gap: 0.8rem;
+  margin-top: 0.4rem;
 }
 
-@media (max-width: 460px) {
+@media (max-width: 480px) {
   .grelha-queixas { grid-template-columns: 1fr; }
 }
 
@@ -340,120 +490,198 @@ body {
   flex-direction: column;
   align-items: flex-start;
   gap: 0.25rem;
-  padding: 1rem;
-  min-height: 54px;
+  padding: 1rem 1.05rem;
+  min-height: 56px;
   border: 1px solid var(--linha);
-  border-radius: var(--raio-cartao);
+  border-radius: var(--raio);
   background: var(--superficie);
   font: inherit;
   text-align: left;
   cursor: pointer;
-  transition: border-color 0.15s ease, background 0.15s ease;
+  transition: border-color 0.15s ease, background 0.15s ease,
+              box-shadow 0.15s ease;
 }
 
-.queixa:hover { border-color: var(--primaria); background: var(--primaria-clara); }
+.queixa:hover {
+  border-color: var(--primaria);
+  background: var(--primaria-clara);
+  box-shadow: var(--sombra-flutuar);
+}
 
-.queixa__nome { font-weight: 700; font-size: 1.02rem; }
+.queixa__nome { font-weight: 700; font-size: 1.02rem; line-height: 1.3; }
 .queixa__descricao { font-size: 0.88rem; color: var(--tinta-suave); }
 
 /* ----------------------------------------------------------- progresso -- */
 
-.progresso { margin-bottom: 1.25rem; }
+/* v0.16: volta a haver noção de progresso, mas HONESTA. O total exato é
+   impossível de prometer (uma resposta pode terminar a avaliação mais
+   cedo), por isso o que se mostra é o número da pergunta e o MÁXIMO do
+   fluxo: "Pergunta 4 · no máximo 23". A barra enche até esse máximo. */
+.progresso { margin-bottom: 1.4rem; }
 
-.fases { display: flex; gap: 0.35rem; margin-bottom: 0.55rem; }
-
-.fases__passo {
-  height: 8px;
-  flex: 1;
-  border-radius: 2px;
-  background: #e3e9f0;
+.progresso__cima {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.45rem;
 }
 
-.fases__passo--ativo { background: var(--primaria); }
-
-.progresso__fase {
-  margin: 0 0 0.2rem;
+.progresso__num {
+  font-size: 0.9rem;
+  font-weight: 700;
   color: var(--primaria-escura);
 }
 
-.progresso__texto {
+.progresso__max {
   font-size: 0.85rem;
-  font-weight: 600;
   color: var(--tinta-suave);
-  margin: 0 0 0.4rem;
 }
 
 .progresso__barra {
-  height: 6px;
-  border-radius: 3px;
+  height: 8px;
+  border-radius: 4px;
   background: #e3e9f0;
   overflow: hidden;
 }
 
 .progresso__preenchimento {
   height: 100%;
-  border-radius: 3px;
+  border-radius: 4px;
   background: var(--primaria);
-  transition: width 0.25s ease;
+  transition: width 0.3s ease;
+}
+
+.pergunta__cabecalho {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.85rem;
 }
 
 .pergunta__texto {
-  font-weight: 700;
-  font-size: 1.35rem;
-  line-height: 1.3;
+  font-weight: 800;
+  font-size: clamp(1.4rem, 5.2vw, 1.65rem);
+  line-height: 1.28;
   margin: 0;
   color: var(--tinta);
+  letter-spacing: -0.01em;
 }
 
-.pergunta__ajuda { margin: 0.6rem 0 0; color: var(--tinta-suave); }
-
-/* ------------------------------- guia de encaminhamento (assinatura) --- */
-
-.pulseira-rotulo {
-  color: var(--tinta-suave);
-  margin: 0 0 0.6rem;
+/* Ouvir a pergunta: pílula discreta ao lado do texto (v0.16). O público
+   pode ter vista fraca ou pouca literacia; a voz ajuda. */
+.btn-ler--pergunta {
+  border-color: var(--linha);
+  background: var(--superficie);
+  color: var(--primaria-escura);
 }
 
-/* A guia: cartão com lombada de 10px na cor da triagem. A cor exata do
-   texto pequeno é escurecida no amarelo e no laranja para dar contraste
-   suficiente sobre o branco. */
+.btn-ler--pergunta:hover { background: var(--primaria-clara); }
+
+.btn-ler--pergunta.a-ler {
+  background: var(--primaria-escura);
+  border-color: var(--primaria-escura);
+  color: #fff;
+}
+
+/* ------------------------------- guia de prioridade (assinatura v0.16) --- */
+
+.res-intro { margin: 0 0 0.75rem; font-size: 1.02rem; }
+
+/* A guia: fundo tingido na cor da triagem + lombada + forma distinta
+   (daltonismo) + classificação em destaque, num cartão COMPACTO de
+   propósito (a prioridade tem de saltar à vista sem dominar o ecrã).
+   As tintas de fundo são pastéis fixados à mão; o texto pequeno usa
+   --cor-texto, escurecido por cor para cumprir 4.5:1 (o auditor
+   verifica cada valor). */
 .pulseira {
   --cor-triagem: var(--tinta-suave);
-  --cor-texto: var(--cor-triagem);
+  --cor-texto: var(--tinta-suave);
+  --tinta-fundo: var(--superficie);
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
-  background: var(--superficie);
+  background: var(--tinta-fundo);
   border: 1px solid var(--linha);
-  border-left: 10px solid var(--cor-triagem);
+  border-left: 8px solid var(--cor-triagem);
   border-radius: var(--raio);
-  padding: 1.05rem 1.25rem;
+  padding: 0.85rem 1.05rem 0.95rem;
 }
+
+.pulseira-rotulo { color: var(--cor-texto); margin: 0 0 0.25rem; }
 
 .pulseira__nome {
   order: -1; /* a cor ("Verde") aparece como etiqueta acima do título */
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--cor-texto);
+  display: none; /* o nome da cor vive agora dentro do rótulo composto */
 }
 
 .pulseira__classificacao {
-  font-weight: 700;
-  font-size: 1.5rem;
+  font-weight: 800;
+  font-size: clamp(1.3rem, 4.6vw, 1.55rem);
   line-height: 1.15;
+  letter-spacing: -0.01em;
   color: var(--tinta);
 }
 
-.pulseira--vermelho { --cor-triagem: var(--vermelho); }
-.pulseira--laranja  { --cor-triagem: var(--laranja); --cor-texto: #b35400; }
-.pulseira--amarelo  { --cor-triagem: var(--amarelo); --cor-texto: #8f6400; }
-.pulseira--verde    { --cor-triagem: var(--verde); }
-.pulseira--azul     { --cor-triagem: var(--azul); }
+/* Rótulo composto "Prioridade estimada · Amarelo": a forma acessível
+   (círculo/triângulo/losango/quadrado/estrela) entra antes do nome. */
+.pulseira__cor {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+}
+
+.pulseira__cor::before {
+  content: "";
+  display: inline-block;
+  width: 0.95em;
+  height: 0.95em;
+  background: var(--cor-triagem);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35);
+}
+
+.pulseira--vermelho { --cor-triagem: var(--vermelho); --cor-texto: #b91c1c; --tinta-fundo: #fdecec; }
+.pulseira--laranja  { --cor-triagem: var(--laranja);  --cor-texto: #a04a00; --tinta-fundo: #fdf0e3; }
+.pulseira--amarelo  { --cor-triagem: var(--amarelo);  --cor-texto: #8f6400; --tinta-fundo: #fdf6de; }
+.pulseira--verde    { --cor-triagem: var(--verde);    --cor-texto: #256b29; --tinta-fundo: #e9f4ea; }
+.pulseira--azul     { --cor-triagem: var(--azul);     --cor-texto: #1565c0; --tinta-fundo: #e8f0fb; }
+
+/* Acessibilidade: a cor sozinha não chega (~8% dos homens têm daltonismo
+   vermelho-verde). Cada nível tem uma FORMA distinta, com contorno escuro
+   para se ver sobre a tinta clara. */
+.pulseira--vermelho .pulseira__cor::before { border-radius: 50%; }             /* círculo */
+.pulseira--laranja  .pulseira__cor::before {
+  clip-path: polygon(50% 0, 100% 100%, 0 100%); box-shadow: none;              /* triângulo */
+}
+.pulseira--amarelo  .pulseira__cor::before {
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); box-shadow: none;      /* losango */
+}
+.pulseira--verde    .pulseira__cor::before { border-radius: 3px; }             /* quadrado */
+.pulseira--azul     .pulseira__cor::before {
+  clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  box-shadow: none;                                                            /* estrela */
+}
+
+/* Tempo-alvo numa pílula própria, com relógio: a informação que o utente
+   procura primeiro ("com que urgência?") deixa de ser uma linha perdida. */
+.pulseira__tempo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  align-self: flex-start;
+  margin-top: 0.6rem;
+  padding: 0.32rem 0.7rem;
+  border: 1px solid var(--linha);
+  border-radius: var(--raio-pilula);
+  background: var(--superficie);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.pulseira__tempo svg { width: 0.95rem; height: 0.95rem; color: var(--cor-texto); }
 
 .resultado__tempo { font-weight: 700; margin: 1.1rem 0 0; }
-.resultado__motivo { margin: 0.5rem 0 0; }
+.resultado__motivo { margin: 0.85rem 0 0; }
 .resultado__nota { margin: 0.5rem 0 0; color: var(--tinta-suave); }
 
 /* --------------------------------------------------------------- aviso -- */
@@ -470,7 +698,7 @@ body {
 
 /* ------------------------------------------------------------ unidades -- */
 
-.unidade { margin-top: 1rem; }
+.unidade { margin-top: 1.4rem; }
 
 .unidade__cabecalho {
   display: flex;
@@ -482,25 +710,80 @@ body {
 
 .unidade__nome {
   margin: 0;
-  font-weight: 700;
-  font-size: 1.2rem;
+  font-weight: 800;
+  font-size: 1.25rem;
   line-height: 1.25;
+  letter-spacing: -0.01em;
   color: var(--tinta);
 }
 
 .unidade__meta { margin: 0.35rem 0 0; color: var(--tinta-suave); font-size: 0.95rem; }
 
+.unidade__morada {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+  margin: 0.75rem 0 0;
+  color: var(--tinta-suave);
+  font-size: 0.95rem;
+}
+
+.unidade__morada svg {
+  flex: 0 0 auto;
+  width: 1rem;
+  height: 1rem;
+  margin-top: 0.2rem;
+  color: var(--primaria-escura);
+}
+
 .unidade__reabre {
-  margin: 0.35rem 0 0;
+  margin: 0.6rem 0 0;
   font-size: 0.95rem;
   font-weight: 600;
   color: #8c5a11;
 }
 
+/* v0.16: os três números que decidem a ida — tempo de carro, espera e
+   estado — passam de chips em linha a BLOCOS de estatística: número
+   grande, rótulo pequeno, nota discreta. Lê-se num relance. */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
+  gap: 0.7rem;
+  margin-top: 1rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  background: var(--fundo);
+  min-width: 0;
+}
+
+.stat__valor { font-weight: 800; font-size: 1.18rem; line-height: 1.2; letter-spacing: -0.01em; }
+.stat__rotulo { font-size: 0.8rem; color: var(--tinta-suave); }
+.stat__nota { font-size: 0.72rem; color: var(--tinta-suave); opacity: 0.85; }
+
+.stat--aberto  { background: #e7f2e8; border-color: #9dbfa1; }
+.stat--aberto .stat__valor { color: #1d5a23; }
+.stat--fechado { background: #f5e8e8; border-color: #c9a2a2; }
+.stat--fechado .stat__valor { color: #8c2626; }
+.stat--espera  { background: #fbf1de; border-color: #cfb07a; }
+.stat--espera .stat__valor { color: #8c5a11; }
+
+@media (max-width: 420px) {
+  .stats { grid-template-columns: 1fr 1fr; }
+  .stat--estado { grid-column: 1 / -1; flex-direction: row; align-items: baseline; gap: 0.45rem; }
+}
+
 .chip {
   display: inline-block;
   padding: 0.3rem 0.75rem;
-  border-radius: 999px;
+  border-radius: var(--raio-pilula);
   font-size: 0.85rem;
   font-weight: 700;
   white-space: nowrap;
@@ -509,8 +792,8 @@ body {
 .chip--aberto  { background: #e7f2e8; color: #1d5a23; }
 .chip--fechado { background: #f5e8e8; color: #8c2626; }
 
-/* v0.11.3: espera em tom âmbar, entre o verde (aberto) e o vermelho
-   (fechado): é informação de pressão, não de estado. */
+/* Espera em tom âmbar, entre o verde (aberto) e o vermelho (fechado):
+   é informação de pressão, não de estado. */
 .chip--espera {
   background: #fbf1de;
   color: #8c5a11;
@@ -519,20 +802,15 @@ body {
   gap: 0.35rem;
 }
 
-.chip--espera svg {
-  width: 0.85rem;
-  height: 0.85rem;
-  flex: none;
-}
+.chip--espera svg { width: 0.85rem; height: 0.85rem; flex: none; }
 
-/* v0.11.2: linha de chips com distância e tempo de carro no cartão da
-   unidade. Reutiliza a base .chip para manter a mesma linguagem visual
-   do selo aberto/fechado, mas em tom informativo (azul claro). */
+/* Linha de chips com os dados de contexto do trajeto (distância por
+   estrada, pessoas em espera), abaixo dos blocos de estatística. */
 .unidade__trajeto {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
-  margin: 0.55rem 0 0.15rem;
+  margin: 0.7rem 0 0.15rem;
 }
 
 .chip--dado {
@@ -543,65 +821,77 @@ body {
   gap: 0.35rem;
 }
 
-.chip--dado svg {
-  width: 0.85rem;
-  height: 0.85rem;
-  flex: none;
+.chip--dado svg { width: 0.85rem; height: 0.85rem; flex: none; }
+
+.chip__nota { font-weight: 400; opacity: 0.75; }
+
+/* Variante compacta para as alternativas, um degrau abaixo do cartão
+   principal para não competir com ele. */
+.chip--mini { padding: 0.16rem 0.55rem; font-size: 0.78rem; }
+.chip--mini svg { width: 0.75rem; height: 0.75rem; }
+
+/* Horários recolhidos num acordeão (v0.16): quando a unidade está aberta,
+   raramente interessam já; quando está fechada, o app.js abre-os por
+   defeito. */
+.detalhes-horarios {
+  margin-top: 0.85rem;
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  padding: 0.7rem 0.95rem;
+  background: var(--superficie);
 }
 
-.chip__nota {
-  font-weight: 400;
-  opacity: 0.75;
+.detalhes-horarios summary {
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--primaria-escura);
 }
 
-/* v0.11.3: variante compacta para as alternativas, um degrau abaixo do
-   cartão principal para não competir com ele. */
-.chip--mini {
-  padding: 0.16rem 0.55rem;
-  font-size: 0.78rem;
-}
-
-.chip--mini svg {
-  width: 0.75rem;
-  height: 0.75rem;
-}
-
-.unidade__horarios { margin: 0.75rem 0 0; padding-left: 1.2rem; }
+.unidade__horarios { margin: 0.6rem 0 0.15rem; padding-left: 1.2rem; }
 .unidade__horarios li { margin: 0.2rem 0; }
 
+/* -------------------------------------------------- mapa em acordeão ---- */
+
+/* v0.16: o mapa deixa de dominar o cartão. Primeiro a pessoa lê PARA ONDE
+   vai; "Ver no mapa" abre o ONDE FICA. O Leaflet só é iniciado na
+   primeira abertura (poupa trabalho a quem nunca abre). */
+.mapa-envelope { margin-top: 1rem; }
+
 .mapa {
-  height: 320px;
-  margin-top: 1rem;
+  height: 340px;
   border-radius: var(--raio);
   border: 1px solid var(--linha);
   z-index: 0; /* evita que o mapa tape botões */
 }
 
-.alternativas { margin-top: 1rem; }
+.alternativas { margin-top: 1.4rem; }
 
 .alternativa {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.85rem 1rem;
+  padding: 0.9rem 1rem;
   border: 1px solid var(--linha);
   border-radius: var(--raio);
-  margin-top: 0.6rem;
+  margin-top: 0.7rem;
   background: var(--superficie);
 }
 
+@media (max-width: 430px) {
+  .alternativa { flex-direction: column; align-items: stretch; }
+  .alternativa .ligacao { align-self: flex-end; }
+}
+
 .alternativa__corpo { min-width: 0; }
-.alternativa__nome { font-weight: 600; }
+.alternativa__nome { font-weight: 700; }
 .alternativa__meta { font-size: 0.88rem; color: var(--tinta-suave); }
 
-/* v0.11.3: mini chips por baixo do nome, e a reabertura numa linha
-   discreta própria (antes ia tudo numa frase corrida). */
 .alternativa__chips {
   display: flex;
   flex-wrap: wrap;
   gap: 0.3rem;
-  margin-top: 0.35rem;
+  margin-top: 0.4rem;
 }
 
 .alternativa__reabre {
@@ -610,21 +900,42 @@ body {
   color: var(--tinta-suave);
 }
 
+/* ------------------------------------------------- contexto do resultado -- */
+
+/* Pílula que acompanha a prioridade até ao ecrã de encaminhamento, para a
+   pessoa não perder o contexto ao mudar de ecrã (v0.16). */
+.contexto {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.9rem;
+  padding: 0.35rem 0.85rem 0.35rem 0.6rem;
+  border: 1px solid var(--linha);
+  border-radius: var(--raio-pilula);
+  background: var(--tinta-fundo, var(--superficie));
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.contexto .pulseira__cor::before { width: 0.85em; height: 0.85em; }
+
 /* ----------------------------------------------------------- contactos -- */
 
 .contactos {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
-  margin-top: 1.25rem;
+  gap: 0.8rem;
+  margin-top: 1.1rem;
 }
 
-@media (max-width: 460px) {
+@media (max-width: 480px) {
   .contactos { grid-template-columns: 1fr; }
 }
 
 .contacto {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
   padding: 0.85rem 1rem;
   border: 1px solid var(--linha);
   border-radius: var(--raio);
@@ -636,26 +947,40 @@ body {
 
 .contacto:hover { border-color: var(--primaria); background: var(--primaria-clara); }
 
+.contacto__icone {
+  flex: 0 0 auto;
+  width: 2.1rem;
+  height: 2.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--primaria-clara);
+  color: var(--primaria-escura);
+}
+
+.contacto__icone svg { width: 1.1rem; height: 1.1rem; }
+
 .contacto__nome { color: var(--tinta-suave); }
-.contacto__numero { font-weight: 700; font-size: 1.15rem; }
+.contacto__numero { font-weight: 800; font-size: 1.12rem; }
 
 /* ---------------------------------------------------------------- campo -- */
 
 .campo {
   width: 100%;
-  min-height: 54px;
-  padding: 0.75rem 1rem;
+  min-height: 56px;
+  padding: 0.8rem 1rem;
   margin-top: 1rem;
   font: inherit;
+  font-size: 1.02rem;
   border: 1px solid var(--linha-forte);
   border-radius: var(--raio);
   background: var(--superficie);
   color: inherit;
 }
 
-/* Rótulos visíveis por cima dos selects do modo manual de localização
-   (v0.11.1): mais claros do que aria-label sozinho, sobretudo para quem
-   tem menos à-vontade com formulários. */
+.campo:focus-visible { outline-offset: 0; }
+
 .campo-rotulo {
   display: block;
   margin-top: 1.1rem;
@@ -664,13 +989,9 @@ body {
 }
 
 .campo-rotulo + .campo,
-#bloco-sitio .campo {
-  margin-top: 0.35rem;
-}
+#bloco-sitio .campo { margin-top: 0.35rem; }
 
-.loc-dica {
-  margin-top: 0.85rem;
-}
+.loc-dica { margin-top: 0.85rem; }
 
 /* --------------------------------------------------------------- rodapé -- */
 
@@ -682,7 +1003,7 @@ body {
   color: #c3d5ea;
 }
 
-.rodape p { max-width: 640px; margin: 0 auto; }
+.rodape p { max-width: 680px; margin: 0 auto; }
 .rodape strong { color: #fff; }
 .rodape a { color: #fff; font-weight: 600; text-underline-offset: 3px; }
 .rodape__nota { margin-top: 0.5rem !important; font-size: 0.8rem; color: #8fa9c8; }
@@ -706,6 +1027,45 @@ body {
 .respostas ul { margin: 0.75rem 0 0.25rem; padding-left: 1.2rem; }
 .respostas li { margin: 0.35rem 0; }
 
+/* --------------------------------- porquê esta recomendação? (v0.13.1) -- */
+
+.porque {
+  margin-top: 1rem;
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  padding: 0.85rem 1rem;
+  background: var(--superficie);
+}
+
+.porque summary {
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--primaria-escura);
+}
+
+.porque ul {
+  margin: 0.75rem 0 0.25rem;
+  padding-left: 0;
+  list-style: none;
+}
+
+.porque li {
+  margin: 0.45rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.porque li::before {
+  content: "\2713";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-weight: 700;
+  color: var(--primaria-escura);
+}
+
+.porque__nota { margin: 0.6rem 0 0; font-size: 0.85rem; }
+
 /* ---------------------------------------------------- foco acessível ----- */
 
 [data-foco]:focus { outline: none; } /* o foco programático não precisa de anel */
@@ -722,36 +1082,16 @@ body {
   font-weight: 600;
 }
 
-/* --------------------------------------------------------- chip versão -- */
-
-.versao {
-  display: inline-block;
-  margin-left: 0.45rem;
-  padding: 0.12rem 0.55rem;
-  vertical-align: middle;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  background: transparent;
-  color: #fff;
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-}
-
 /* --------------------------------------- localização e autocuidado ------ */
 
-/* Linha "Localização usada: … · Alterar localização" */
 .local-linha {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   gap: 0.35rem 0.75rem;
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
 }
 
-/* v0.11.3: o "Alterar localização" passa de ligação sublinhada a um
-   mini botão tipo pílula: mais óbvio como ação, sem o peso de um botão
-   primário. */
 .botao--mini {
   border: 1px solid var(--primaria);
   background: var(--superficie);
@@ -760,7 +1100,7 @@ body {
   font-size: 0.88rem;
   font-weight: 600;
   padding: 0.3rem 0.8rem;
-  border-radius: 999px;
+  border-radius: var(--raio-pilula);
   cursor: pointer;
 }
 
@@ -777,36 +1117,21 @@ body {
   color: var(--tinta-suave);
 }
 
-/* Cartão de autocuidado: "esperar em casa também é uma opção".
-   Acento no azul institucional, de propósito NÃO verde-triagem, para
-   não parecer uma segunda guia. */
-.autocuidado {
-  border-left: 6px solid var(--primaria);
-}
-
-.autocuidado__alerta {
-  padding: 0.6rem 0.8rem;
-  background: #fdf7e6;
-  border: 1px solid #ecd9a0;
-  border-radius: var(--raio);
-  font-size: 0.98rem;
-}
-
 /* -------------------------------------------- esqueletos de carregamento -- */
 
-.esqueleto { display: flex; flex-direction: column; gap: 0.8rem; }
+.esqueleto { display: flex; flex-direction: column; gap: 0.85rem; }
 
 .esqueleto__linha {
   height: 16px;
-  border-radius: 4px;
+  border-radius: 6px;
   background: linear-gradient(90deg, #e6ebf1 25%, #f2f5f9 50%, #e6ebf1 75%);
   background-size: 200% 100%;
   animation: brilho 1.1s linear infinite;
 }
 
-.esqueleto__linha--titulo { height: 26px; width: 60%; margin-bottom: 0.2rem; }
+.esqueleto__linha--titulo { height: 28px; width: 60%; margin-bottom: 0.2rem; }
 .esqueleto__linha--curta { width: 80%; }
-.esqueleto__linha--botao { height: 54px; border-radius: var(--raio); margin-top: 0.4rem; }
+.esqueleto__linha--botao { height: 56px; border-radius: var(--raio); margin-top: 0.4rem; }
 
 @keyframes brilho {
   to { background-position: -200% 0; }
@@ -814,15 +1139,11 @@ body {
 
 /* ------------------------------- cartões de cuidado (padrão NHS) ------- */
 
-/* Faixa de cabeçalho colorida + seta + corpo, como os care cards do
-   NHS design system — mas pintados com a NOSSA paleta: azul
-   institucional para "cuidar-se em casa", vermelho de triagem para
-   "procure ajuda se". As cinco cores de Manchester ficam intocadas. */
 .cartao-cuidado { padding: 0; overflow: visible; }
 
 .cartao-cuidado__cabecalho {
   position: relative;
-  padding: 0.7rem 1.5rem;
+  padding: 0.75rem 1.5rem;
   border-radius: calc(var(--raio-cartao) - 1px) calc(var(--raio-cartao) - 1px) 0 0;
   color: #fff;
 }
@@ -847,11 +1168,59 @@ body {
 .cartao-cuidado__cabecalho--info::after { border-top-color: var(--primaria); }
 .cartao-cuidado__cabecalho--alerta { background: var(--vermelho); }
 .cartao-cuidado__cabecalho--alerta::after { border-top-color: var(--vermelho); }
+.cartao-cuidado__cabecalho--acao { background: var(--primaria-escura); }
+.cartao-cuidado__cabecalho--acao::after { border-top-color: var(--primaria-escura); }
+
+.cartao-aconselhamento { margin-top: 1.4rem; }
+
+.cartao-cuidado__cabecalho--acao {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.btn-ler {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: var(--raio-pilula);
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-ler:hover { background: rgba(255, 255, 255, 0.22); }
+.btn-ler__icone { display: inline-flex; }
+.btn-ler__icone svg { width: 1.05rem; height: 1.05rem; display: block; }
+.btn-ler.a-ler { background: #fff; color: var(--primaria-escura); border-color: #fff; }
+
+/* Sobrepõe a base para a variante da pergunta (fundo claro). */
+.btn-ler.btn-ler--pergunta { background: var(--superficie); border-color: var(--linha); color: var(--primaria-escura); }
+.btn-ler.btn-ler--pergunta:hover { background: var(--primaria-clara); }
+.btn-ler.btn-ler--pergunta.a-ler { background: var(--primaria-escura); border-color: var(--primaria-escura); color: #fff; }
+
+/* O primeiro conselho é a AÇÃO PRINCIPAL: mais peso e um filete à
+   esquerda para saltar à vista de quem está sob stress. */
+.lista-fazer li.item-principal {
+  font-weight: 700;
+  padding-top: 0.15rem;
+  padding-bottom: 0.15rem;
+  border-left: 3px solid var(--primaria-escura);
+  padding-left: 2.1rem;
+  margin-left: -0.2rem;
+}
+.lista-fazer li.item-principal::before { left: 0.35rem; }
 
 .cartao-cuidado__corpo { padding: 1.2rem 1.5rem 1.35rem; }
 .cartao-cuidado__corpo > p:first-child { margin-top: 0.35rem; }
 
-/* Listas fazer (visto) / evitar (cruz) / alerta, à NHS do-dont-list. */
 .lista-fazer,
 .lista-evitar,
 .lista-alerta {
@@ -865,11 +1234,11 @@ body {
 .lista-alerta li {
   position: relative;
   padding-left: 1.9rem;
-  margin: 0.45rem 0;
+  margin: 0.5rem 0;
 }
 
 .lista-fazer li::before {
-  content: "\2713"; /* ✓ */
+  content: "\2713"; /* visto */
   position: absolute;
   left: 0.15rem;
   top: 0;
@@ -878,7 +1247,7 @@ body {
 }
 
 .lista-evitar li::before {
-  content: "\2715"; /* ✕ */
+  content: "\2715"; /* cruz */
   position: absolute;
   left: 0.15rem;
   top: 0;
@@ -919,7 +1288,7 @@ body {
   display: inline-block;
   margin-left: 0.45rem;
   padding: 0.1rem 0.55rem;
-  border-radius: 999px;
+  border-radius: var(--raio-pilula);
   background: var(--primaria-escura);
   color: #fff;
   font-size: 0.66rem;
@@ -979,7 +1348,10 @@ body {
   .ecra { animation: none; }
   .esqueleto__linha { animation: none; background: #e6ebf1; }
   .progresso__preenchimento { transition: none; }
+  .botao,
+  .botao--resposta { transition: none; }
   .botao:active { transform: none; }
+  .botao--resposta.escolhido { transform: none; }
 }
 
 /* Impressão: guardar/entregar o resultado em papel ou PDF. Esconde-se
@@ -989,17 +1361,25 @@ body {
   .topo, .rodape { background: #fff; color: #000; border-color: #000; }
   .topo__marca, .rodape strong, .rodape a { color: #000; }
   .topo__sub, .rodape__nota { color: #444; }
-  .versao { color: #000; border-color: #000; }
-  .cartao { border: 1px solid #bbb; break-inside: avoid; }
-  .pulseira { border: 1px solid #bbb; border-left: 10px solid var(--cor-triagem); }
+  .topo__simbolo { display: none; }
+  .cartao { border: 1px solid #bbb; box-shadow: none; break-inside: avoid; }
+  .pulseira {
+    background: #fff;
+    border: 1px solid #bbb;
+    border-left: 8px solid var(--cor-triagem);
+  }
+  .stat { background: #fff; }
   .no-print,
   .mapa,
+  .mapa-envelope,
   .botoes,
   .botao,
   .botao--fantasma,
   .botao--mini,
   .faixa-demo,
   .respostas { display: none !important; }
+  .detalhes-horarios { border: none; padding: 0; }
+  .detalhes-horarios:not([open]) { display: none; }
   a { text-decoration: none; color: inherit; }
 }
 
@@ -1014,7 +1394,7 @@ body {
 }
 .historico-item {
   border: 1px solid var(--linha);
-  border-radius: 8px;
+  border-radius: var(--raio);
   padding: 12px 14px;
 }
 .historico-item__topo {

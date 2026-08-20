@@ -1,0 +1,85 @@
+flowchart TD
+  inicio(["Início: Sangue nos vómitos ou nas<br/>fezes"])
+  hemorragia_gastrointestinal_p1_1859["1. [P1] Compromisso da via aérea?"]
+  hemorragia_gastrointestinal_p1_2130["2. [P1] Respiração ineficaz?"]
+  hemorragia_gastrointestinal_p1_2550["3. [P1] Hemorragia catastrófica?"]
+  hemorragia_gastrointestinal_p1_2553["4. [P1] Sinais de choque?"]
+  hemorragia_gastrointestinal_p1_2556["5. [P1] Não reativo?"]
+  hemorragia_gastrointestinal_p2_2608["6. [P2] Hematemeses?"]
+  hemorragia_gastrointestinal_p2_2609["7. [P2] Hematoquésias, melenas ou<br/>retorragias?"]
+  hemorragia_gastrointestinal_p2_2610["8. [P2] Alteração do estado de<br/>consciência?"]
+  hemorragia_gastrointestinal_p2_2611["9. [P2] Possível sépsis?"]
+  hemorragia_gastrointestinal_p2_2612["10. [P2] História significativa de<br/>hemorragia gastrointestinal?"]
+  hemorragia_gastrointestinal_p2_2613["11. [P2] Dor severa?"]
+  hemorragia_gastrointestinal_p3_2614["12. [P3] Vómitos incoercíveis?"]
+  hemorragia_gastrointestinal_p3_2615["13. [P3] Fezes pretas ou raiadas de<br/>sangue?"]
+  hemorragia_gastrointestinal_p3_2616["14. [P3] Alteração da coagulação?"]
+  hemorragia_gastrointestinal_p3_2617["15. [P3] História de hematemeses?"]
+  hemorragia_gastrointestinal_p3_2618["16. [P3] Dor moderada?"]
+  hemorragia_gastrointestinal_p4_2619["17. [P4] Vómitos persistentes?"]
+  hemorragia_gastrointestinal_p4_2622["18. [P4] Dor persistente?"]
+  hemorragia_gastrointestinal_p4_2623["19. [P4] Problema recente?"]
+  inicio --> hemorragia_gastrointestinal_p1_1859
+  hemorragia_gastrointestinal_p1_1859_sim(["VERMELHO"]):::vermelho
+  hemorragia_gastrointestinal_p1_1859 -->|Sim| hemorragia_gastrointestinal_p1_1859_sim
+  hemorragia_gastrointestinal_p1_1859 -->|Não| hemorragia_gastrointestinal_p1_2130
+  hemorragia_gastrointestinal_p1_2130_sim(["VERMELHO"]):::vermelho
+  hemorragia_gastrointestinal_p1_2130 -->|Sim| hemorragia_gastrointestinal_p1_2130_sim
+  hemorragia_gastrointestinal_p1_2130 -->|Não| hemorragia_gastrointestinal_p1_2550
+  hemorragia_gastrointestinal_p1_2550_sim(["VERMELHO"]):::vermelho
+  hemorragia_gastrointestinal_p1_2550 -->|Sim| hemorragia_gastrointestinal_p1_2550_sim
+  hemorragia_gastrointestinal_p1_2550 -->|Não| hemorragia_gastrointestinal_p1_2553
+  hemorragia_gastrointestinal_p1_2553_sim(["VERMELHO"]):::vermelho
+  hemorragia_gastrointestinal_p1_2553 -->|Sim| hemorragia_gastrointestinal_p1_2553_sim
+  hemorragia_gastrointestinal_p1_2553 -->|Não| hemorragia_gastrointestinal_p1_2556
+  hemorragia_gastrointestinal_p1_2556_sim(["VERMELHO"]):::vermelho
+  hemorragia_gastrointestinal_p1_2556 -->|Sim| hemorragia_gastrointestinal_p1_2556_sim
+  hemorragia_gastrointestinal_p1_2556 -->|Não| hemorragia_gastrointestinal_p2_2608
+  hemorragia_gastrointestinal_p2_2608_sim(["LARANJA"]):::laranja
+  hemorragia_gastrointestinal_p2_2608 -->|Sim| hemorragia_gastrointestinal_p2_2608_sim
+  hemorragia_gastrointestinal_p2_2608 -->|Não| hemorragia_gastrointestinal_p2_2609
+  hemorragia_gastrointestinal_p2_2609_sim(["LARANJA"]):::laranja
+  hemorragia_gastrointestinal_p2_2609 -->|Sim| hemorragia_gastrointestinal_p2_2609_sim
+  hemorragia_gastrointestinal_p2_2609 -->|Não| hemorragia_gastrointestinal_p2_2610
+  hemorragia_gastrointestinal_p2_2610_sim(["LARANJA"]):::laranja
+  hemorragia_gastrointestinal_p2_2610 -->|Sim| hemorragia_gastrointestinal_p2_2610_sim
+  hemorragia_gastrointestinal_p2_2610 -->|Não| hemorragia_gastrointestinal_p2_2611
+  hemorragia_gastrointestinal_p2_2611_sim(["LARANJA"]):::laranja
+  hemorragia_gastrointestinal_p2_2611 -->|Sim| hemorragia_gastrointestinal_p2_2611_sim
+  hemorragia_gastrointestinal_p2_2611 -->|Não| hemorragia_gastrointestinal_p2_2612
+  hemorragia_gastrointestinal_p2_2612_sim(["LARANJA"]):::laranja
+  hemorragia_gastrointestinal_p2_2612 -->|Sim| hemorragia_gastrointestinal_p2_2612_sim
+  hemorragia_gastrointestinal_p2_2612 -->|Não| hemorragia_gastrointestinal_p2_2613
+  hemorragia_gastrointestinal_p2_2613_sim(["LARANJA"]):::laranja
+  hemorragia_gastrointestinal_p2_2613 -->|Sim| hemorragia_gastrointestinal_p2_2613_sim
+  hemorragia_gastrointestinal_p2_2613 -->|Não| hemorragia_gastrointestinal_p3_2614
+  hemorragia_gastrointestinal_p3_2614_sim(["AMARELO"]):::amarelo
+  hemorragia_gastrointestinal_p3_2614 -->|Sim| hemorragia_gastrointestinal_p3_2614_sim
+  hemorragia_gastrointestinal_p3_2614 -->|Não| hemorragia_gastrointestinal_p3_2615
+  hemorragia_gastrointestinal_p3_2615_sim(["AMARELO"]):::amarelo
+  hemorragia_gastrointestinal_p3_2615 -->|Sim| hemorragia_gastrointestinal_p3_2615_sim
+  hemorragia_gastrointestinal_p3_2615 -->|Não| hemorragia_gastrointestinal_p3_2616
+  hemorragia_gastrointestinal_p3_2616_sim(["AMARELO"]):::amarelo
+  hemorragia_gastrointestinal_p3_2616 -->|Sim| hemorragia_gastrointestinal_p3_2616_sim
+  hemorragia_gastrointestinal_p3_2616 -->|Não| hemorragia_gastrointestinal_p3_2617
+  hemorragia_gastrointestinal_p3_2617_sim(["AMARELO"]):::amarelo
+  hemorragia_gastrointestinal_p3_2617 -->|Sim| hemorragia_gastrointestinal_p3_2617_sim
+  hemorragia_gastrointestinal_p3_2617 -->|Não| hemorragia_gastrointestinal_p3_2618
+  hemorragia_gastrointestinal_p3_2618_sim(["AMARELO"]):::amarelo
+  hemorragia_gastrointestinal_p3_2618 -->|Sim| hemorragia_gastrointestinal_p3_2618_sim
+  hemorragia_gastrointestinal_p3_2618 -->|Não| hemorragia_gastrointestinal_p4_2619
+  hemorragia_gastrointestinal_p4_2619_sim(["VERDE"]):::verde
+  hemorragia_gastrointestinal_p4_2619 -->|Sim| hemorragia_gastrointestinal_p4_2619_sim
+  hemorragia_gastrointestinal_p4_2619 -->|Não| hemorragia_gastrointestinal_p4_2622
+  hemorragia_gastrointestinal_p4_2622_sim(["VERDE"]):::verde
+  hemorragia_gastrointestinal_p4_2622 -->|Sim| hemorragia_gastrointestinal_p4_2622_sim
+  hemorragia_gastrointestinal_p4_2622 -->|Não| hemorragia_gastrointestinal_p4_2623
+  hemorragia_gastrointestinal_p4_2623_sim(["VERDE"]):::verde
+  hemorragia_gastrointestinal_p4_2623 -->|Sim| hemorragia_gastrointestinal_p4_2623_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  hemorragia_gastrointestinal_p4_2623 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

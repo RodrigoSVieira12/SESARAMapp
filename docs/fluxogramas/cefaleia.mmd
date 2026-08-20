@@ -1,0 +1,117 @@
+flowchart TD
+  inicio(["Início: Cefaleia"])
+  cefaleia_p1_1832["1. [P1] Compromisso da via aérea?"]
+  cefaleia_p1_1902["2. [P1] Respiração ineficaz?"]
+  cefaleia_p1_1903["3. [P1] Sinais de choque?"]
+  cefaleia_p1_1904["4. [P1] Não reativo?"]
+  cefaleia_p1_1905["5. [P1] Convulsão atual?"]
+  cefaleia_p2_1906["6. [P2] Alteração do estado de<br/>consciência?"]
+  cefaleia_p2_1907["7. [P2] Défice neurológico agudo?<br/><24h"]
+  cefaleia_p2_1908["8. [P2] Muito quente?"]
+  cefaleia_p2_1909["9. [P2] Possível sépsis?"]
+  cefaleia_p2_1910["10. [P2] Sinais de meningismo?"]
+  cefaleia_p2_1911["11. [P2] Erupção cutânea desconhecida?"]
+  cefaleia_p2_1912["12. [P2] Perda súbita de visão?"]
+  cefaleia_p2_1913["13. [P2] Vertigem persistente de novo?"]
+  cefaleia_p2_1914["14. [P2] Início repentino?"]
+  cefaleia_p2_1915["15. [P2] Dor severa?"]
+  cefaleia_p3_1916["16. [P3] Vómitos incoercíveis?"]
+  cefaleia_p3_1917["17. [P3] Novos sinais e/ou sintomas<br/>neurológicos?"]
+  cefaleia_p3_1918["18. [P3] Quente?"]
+  cefaleia_p3_1919["19. [P3] História de perda de<br/>consciência?"]
+  cefaleia_p3_1920["20. [P3] História Inapropriada?"]
+  cefaleia_p3_1921["21. [P3] Recente redução da acuidade<br/>visual?"]
+  cefaleia_p3_1922["22. [P3] Dor à palpação da região<br/>temporal?"]
+  cefaleia_p3_1923["23. [P3] Dor moderada?"]
+  cefaleia_p4_1924["24. [P4] Vómitos persistentes?"]
+  cefaleia_p4_1926["25. [P4] Febre persistente?"]
+  cefaleia_p4_1929["26. [P4] Dor persistente?"]
+  cefaleia_p4_1930["27. [P4] Problema recente?"]
+  inicio --> cefaleia_p1_1832
+  cefaleia_p1_1832_sim(["VERMELHO"]):::vermelho
+  cefaleia_p1_1832 -->|Sim| cefaleia_p1_1832_sim
+  cefaleia_p1_1832 -->|Não| cefaleia_p1_1902
+  cefaleia_p1_1902_sim(["VERMELHO"]):::vermelho
+  cefaleia_p1_1902 -->|Sim| cefaleia_p1_1902_sim
+  cefaleia_p1_1902 -->|Não| cefaleia_p1_1903
+  cefaleia_p1_1903_sim(["VERMELHO"]):::vermelho
+  cefaleia_p1_1903 -->|Sim| cefaleia_p1_1903_sim
+  cefaleia_p1_1903 -->|Não| cefaleia_p1_1904
+  cefaleia_p1_1904_sim(["VERMELHO"]):::vermelho
+  cefaleia_p1_1904 -->|Sim| cefaleia_p1_1904_sim
+  cefaleia_p1_1904 -->|Não| cefaleia_p1_1905
+  cefaleia_p1_1905_sim(["VERMELHO"]):::vermelho
+  cefaleia_p1_1905 -->|Sim| cefaleia_p1_1905_sim
+  cefaleia_p1_1905 -->|Não| cefaleia_p2_1906
+  cefaleia_p2_1906_sim(["LARANJA"]):::laranja
+  cefaleia_p2_1906 -->|Sim| cefaleia_p2_1906_sim
+  cefaleia_p2_1906 -->|Não| cefaleia_p2_1907
+  cefaleia_p2_1907_sim(["LARANJA"]):::laranja
+  cefaleia_p2_1907 -->|Sim| cefaleia_p2_1907_sim
+  cefaleia_p2_1907 -->|Não| cefaleia_p2_1908
+  cefaleia_p2_1908_sim(["LARANJA"]):::laranja
+  cefaleia_p2_1908 -->|Sim| cefaleia_p2_1908_sim
+  cefaleia_p2_1908 -->|Não| cefaleia_p2_1909
+  cefaleia_p2_1909_sim(["LARANJA"]):::laranja
+  cefaleia_p2_1909 -->|Sim| cefaleia_p2_1909_sim
+  cefaleia_p2_1909 -->|Não| cefaleia_p2_1910
+  cefaleia_p2_1910_sim(["LARANJA"]):::laranja
+  cefaleia_p2_1910 -->|Sim| cefaleia_p2_1910_sim
+  cefaleia_p2_1910 -->|Não| cefaleia_p2_1911
+  cefaleia_p2_1911_sim(["LARANJA"]):::laranja
+  cefaleia_p2_1911 -->|Sim| cefaleia_p2_1911_sim
+  cefaleia_p2_1911 -->|Não| cefaleia_p2_1912
+  cefaleia_p2_1912_sim(["LARANJA"]):::laranja
+  cefaleia_p2_1912 -->|Sim| cefaleia_p2_1912_sim
+  cefaleia_p2_1912 -->|Não| cefaleia_p2_1913
+  cefaleia_p2_1913_sim(["LARANJA"]):::laranja
+  cefaleia_p2_1913 -->|Sim| cefaleia_p2_1913_sim
+  cefaleia_p2_1913 -->|Não| cefaleia_p2_1914
+  cefaleia_p2_1914_sim(["LARANJA"]):::laranja
+  cefaleia_p2_1914 -->|Sim| cefaleia_p2_1914_sim
+  cefaleia_p2_1914 -->|Não| cefaleia_p2_1915
+  cefaleia_p2_1915_sim(["LARANJA"]):::laranja
+  cefaleia_p2_1915 -->|Sim| cefaleia_p2_1915_sim
+  cefaleia_p2_1915 -->|Não| cefaleia_p3_1916
+  cefaleia_p3_1916_sim(["AMARELO"]):::amarelo
+  cefaleia_p3_1916 -->|Sim| cefaleia_p3_1916_sim
+  cefaleia_p3_1916 -->|Não| cefaleia_p3_1917
+  cefaleia_p3_1917_sim(["AMARELO"]):::amarelo
+  cefaleia_p3_1917 -->|Sim| cefaleia_p3_1917_sim
+  cefaleia_p3_1917 -->|Não| cefaleia_p3_1918
+  cefaleia_p3_1918_sim(["AMARELO"]):::amarelo
+  cefaleia_p3_1918 -->|Sim| cefaleia_p3_1918_sim
+  cefaleia_p3_1918 -->|Não| cefaleia_p3_1919
+  cefaleia_p3_1919_sim(["AMARELO"]):::amarelo
+  cefaleia_p3_1919 -->|Sim| cefaleia_p3_1919_sim
+  cefaleia_p3_1919 -->|Não| cefaleia_p3_1920
+  cefaleia_p3_1920_sim(["AMARELO"]):::amarelo
+  cefaleia_p3_1920 -->|Sim| cefaleia_p3_1920_sim
+  cefaleia_p3_1920 -->|Não| cefaleia_p3_1921
+  cefaleia_p3_1921_sim(["AMARELO"]):::amarelo
+  cefaleia_p3_1921 -->|Sim| cefaleia_p3_1921_sim
+  cefaleia_p3_1921 -->|Não| cefaleia_p3_1922
+  cefaleia_p3_1922_sim(["AMARELO"]):::amarelo
+  cefaleia_p3_1922 -->|Sim| cefaleia_p3_1922_sim
+  cefaleia_p3_1922 -->|Não| cefaleia_p3_1923
+  cefaleia_p3_1923_sim(["AMARELO"]):::amarelo
+  cefaleia_p3_1923 -->|Sim| cefaleia_p3_1923_sim
+  cefaleia_p3_1923 -->|Não| cefaleia_p4_1924
+  cefaleia_p4_1924_sim(["VERDE"]):::verde
+  cefaleia_p4_1924 -->|Sim| cefaleia_p4_1924_sim
+  cefaleia_p4_1924 -->|Não| cefaleia_p4_1926
+  cefaleia_p4_1926_sim(["VERDE"]):::verde
+  cefaleia_p4_1926 -->|Sim| cefaleia_p4_1926_sim
+  cefaleia_p4_1926 -->|Não| cefaleia_p4_1929
+  cefaleia_p4_1929_sim(["VERDE"]):::verde
+  cefaleia_p4_1929 -->|Sim| cefaleia_p4_1929_sim
+  cefaleia_p4_1929 -->|Não| cefaleia_p4_1930
+  cefaleia_p4_1930_sim(["VERDE"]):::verde
+  cefaleia_p4_1930 -->|Sim| cefaleia_p4_1930_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  cefaleia_p4_1930 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

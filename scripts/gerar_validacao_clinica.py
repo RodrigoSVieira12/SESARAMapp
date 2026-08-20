@@ -133,40 +133,39 @@ def _biblioteca_mermaid() -> str:
     return codigo.replace("</script>", "<\\/script>")
 
 
-def descrever_ramo(ramo: dict, numeros: dict[str, int]) -> str:
-    if "resultado" in ramo:
-        r = ramo["resultado"]
-        cor = r.get("cor", "?")
-        partes = [f'<span class="cor-tag">{html.escape(cor)}</span>']
-        if r.get("motivo"):
-            partes.append(html.escape(r["motivo"]))
-        texto = "RESULTADO: " + ", ".join(partes)
-        if r.get("nota"):
-            texto += f'<br /><span class="meta">Nota mostrada ao utente: '
-            texto += f'{html.escape(r["nota"])}</span>'
-        return texto
-    return f"seguir para a pergunta {numeros[ramo['proxima']]}"
+def descrever_sim(disc: dict) -> str:
+    """Desfecho do ramo SIM de um discriminador: a cor da sua prioridade."""
+    cor = disc.get("cor", "?")
+    texto = f'RESULTADO: <span class="cor-tag">{html.escape(cor)}</span>'
+    if disc.get("destino") == "atendimento_urgente":
+        texto += ' <span class="meta">(pode ir ao atendimento urgente)</span>'
+    return texto
 
 
 def seccao_queixa(fluxo: dict) -> str:
-    numeros = {p["id"]: i + 1 for i, p in enumerate(fluxo["perguntas"])}
+    perguntas = fluxo["perguntas"]
+    numeros = {p["id"]: i + 1 for i, p in enumerate(perguntas)}
     blocos: list[str] = []
-    for pergunta in fluxo["perguntas"]:
+    for indice, pergunta in enumerate(perguntas):
         n = numeros[pergunta["id"]]
+        # A descrição clínica (coluna H) é a ajuda mostrada ao utente.
+        descricao = pergunta.get("ajuda") or pergunta.get("descricao")
         ajuda = (
-            f'<p class="ajuda">Ajuda mostrada ao utente: '
-            f'{html.escape(pergunta["ajuda"])}</p>'
-            if pergunta.get("ajuda")
+            f'<p class="ajuda">Ajuda mostrada ao utente: {html.escape(descricao)}</p>'
+            if descricao
             else ""
         )
-        fase = pergunta.get("fase", 2)
+        if indice + 1 < len(perguntas):
+            nao = f"seguir para o discriminador {numeros[perguntas[indice + 1]['id']]}"
+        else:
+            nao = 'RESULTADO: <span class="cor-tag">azul</span> (sem discriminador positivo)'
         blocos.append(f"""
         <div class="pergunta">
-          <p class="meta">Fase {fase}</p>
+          <p class="meta">Prioridade {html.escape(pergunta.get("prioridade", "?"))}</p>
           <p><strong>{n}.</strong> {html.escape(pergunta["texto"])}</p>
           {ajuda}
-          <p class="ramo">Se <strong>SIM</strong>: {descrever_ramo(pergunta["sim"], numeros)}</p>
-          <p class="ramo">Se <strong>NÃO</strong>: {descrever_ramo(pergunta["nao"], numeros)}</p>
+          <p class="ramo">Se <strong>SIM</strong>: {descrever_sim(pergunta)}</p>
+          <p class="ramo">Se <strong>NÃO</strong>: {nao}</p>
         </div>""")
 
     return f"""
@@ -206,17 +205,14 @@ def construir_documento(motor: TriageEngine) -> str:
         for c in CORES.values()
     )
 
-    sinais = "".join(
-        f"<li>{html.escape(s['texto'])}</li>" for s in motor.listar_red_flags()
-    )
+    sinais = "".join(f"<li>{html.escape(s['texto'])}</li>" for s in motor.listar_red_flags())
 
     seccoes = "".join(seccao_queixa(f) for f in motor.fluxos.values())
 
     def _lista(itens: list) -> str:
         return "<ul>" + "".join(f"<li>{html.escape(str(i))}</li>" for i in itens) + "</ul>"
 
-    blocos_autocuidado = "".join(
-        f"""
+    blocos_autocuidado = "".join(f"""
         <div class="pergunta">
           <p class="meta">Cor: <span class="cor-tag">{html.escape(cor)}</span></p>
           <p><strong>Título:</strong> {html.escape(t["titulo"])}</p>
@@ -224,9 +220,7 @@ def construir_documento(motor: TriageEngine) -> str:
           <p><strong>Fazer (lista com visto ✓):</strong></p>{_lista(t.get("fazer", []))}
           <p><strong>Evitar (lista com cruz ✕):</strong></p>{_lista(t.get("evitar", []))}
           <p><strong>{html.escape(t.get("alerta_titulo", "Procure ajuda se:"))}</strong></p>{_lista(t.get("alerta", []))}
-        </div>"""
-        for cor, t in TEXTOS_AUTOCUIDADO.items()
-    )
+        </div>""" for cor, t in TEXTOS_AUTOCUIDADO.items())
 
     seccao_textos = f"""
     <section class="queixa">
@@ -277,16 +271,22 @@ def construir_documento(motor: TriageEngine) -> str:
     <h1>Onde ir?, Documento de validação clínica das regras de triagem</h1>
     <p class="meta">Gerado automaticamente a partir de app/data/rules/ em {date.today().isoformat()}.
     Protótipo académico, SESARAM, Região Autónoma da Madeira.</p>
-    <div class="aviso"><strong>Estado atual:</strong> todos os fluxos abaixo são
-    EXEMPLOS de desenvolvimento e ainda não foram validados clinicamente.
-    Este documento existe precisamente para essa revisão: por favor risque,
-    corrija e anote diretamente no papel.</div>
-    <p><strong>Como ler:</strong> cada queixa tem perguntas de sim/não numeradas.
-    Cada resposta ou remete para outra pergunta, ou termina numa cor de
-    prioridade (inspirada na Triagem de Manchester). Cada queixa inclui também
-    o <strong>fluxograma desenhado</strong> — a mesma árvore em formato visual,
-    com os desfechos nas cinco cores e os números a cruzar com a lista. Em caso
-    de dúvida, a regra do projeto é errar por excesso de urgência.</p>
+    <div class="aviso"><strong>Estado atual:</strong> os discriminadores abaixo
+    foram importados da tabela de referência da Triagem de Manchester
+    (fluxograma, prioridade, discriminador e descrição clínica) e ainda não
+    foram validados clinicamente para esta aplicação. Este documento existe
+    precisamente para essa revisão: por favor risque, corrija e anote
+    diretamente no papel.</div>
+    <p><strong>Como ler:</strong> cada queixa tem uma sequência de
+    <strong>discriminadores</strong> da Triagem de Manchester, numerados e
+    ordenados por prioridade clínica (P1 a P5). A cada discriminador faz-se
+    uma pergunta de sim/não: o <strong>primeiro SIM</strong> determina a cor
+    da sua prioridade e termina a triagem; se todos forem NÃO, o desfecho é
+    <strong>azul</strong> (sem discriminador positivo). Cada queixa inclui
+    também o <strong>fluxograma desenhado</strong> — a mesma sequência em
+    formato visual, com os desfechos nas cinco cores e os números a cruzar
+    com a lista. Em caso de dúvida, a regra do projeto é errar por excesso
+    de urgência.</p>
     <p><strong>Encaminhamento por cor (v0.12.1):</strong> por indicação do
     SESARAM, vermelho, laranja e amarelo são encaminhados diretamente para o
     Hospital Dr. Nélio Mendonça (no vermelho a ação continua a ser ligar 112,
@@ -306,7 +306,11 @@ def construir_documento(motor: TriageEngine) -> str:
       <tr><th>Cor</th><th>Classificação</th><th>Tempo-alvo de observação</th></tr>
       {linhas_cores}
     </table>
-    <p><strong>Fases:</strong> cada pergunta pertence a uma fase: 1 perguntas gerais, 2 perguntas específicas, 3 avaliação da gravidade. A ordem real depende das respostas.</p>
+    <p><strong>Prioridades:</strong> cada discriminador pertence a uma
+    prioridade de Manchester — P1 vermelho (emergente), P2 laranja (muito
+    urgente), P3 amarelo (urgente), P4 verde (pouco urgente), P5 azul (não
+    urgente). Os discriminadores são verificados da prioridade mais alta para
+    a mais baixa.</p>
     <h2>Sinais de emergência (avaliados antes de qualquer queixa)</h2>
     <p class="meta">Qualquer um selecionado ⇒ VERMELHO e indicação para ligar 112.</p>
     <ul>{sinais}</ul>

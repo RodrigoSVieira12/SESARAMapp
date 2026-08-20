@@ -1,0 +1,105 @@
+flowchart TD
+  inicio(["Início: Manchas, borbulhas ou<br/>erupção na pele"])
+  erupcoes_cutaneas_p1_1853["1. [P1] Compromisso da via aérea?"]
+  erupcoes_cutaneas_p1_2124["2. [P1] Respiração ineficaz?"]
+  erupcoes_cutaneas_p1_2369["3. [P1] Sinais de choque?"]
+  erupcoes_cutaneas_p1_2374["4. [P1] Não reativo?"]
+  erupcoes_cutaneas_p1_2452["5. [P1] Estridor?"]
+  erupcoes_cutaneas_p2_2453["6. [P2] Edema da língua?"]
+  erupcoes_cutaneas_p2_2454["7. [P2] Edema da face?"]
+  erupcoes_cutaneas_p2_2455["8. [P2] Dispneia aguda?"]
+  erupcoes_cutaneas_p2_2456["9. [P2] Alteração do estado de<br/>consciência?"]
+  erupcoes_cutaneas_p2_2457["10. [P2] Erupção cutânea desconhecida?"]
+  erupcoes_cutaneas_p2_2458["11. [P2] Muito quente?"]
+  erupcoes_cutaneas_p2_2459["12. [P2] Possível sépsis?"]
+  erupcoes_cutaneas_p2_2460["13. [P2] História significativa de<br/>alergia?"]
+  erupcoes_cutaneas_p2_2461["14. [P2] Dor severa?"]
+  erupcoes_cutaneas_p2_2462["15. [P2] Prurido severo?"]
+  erupcoes_cutaneas_p3_2463["16. [P3] Quente?"]
+  erupcoes_cutaneas_p3_2464["17. [P3] Exantema eritematoso ou<br/>bolhoso?"]
+  erupcoes_cutaneas_p3_2465["18. [P3] História Inapropriada?"]
+  erupcoes_cutaneas_p3_2466["19. [P3] Dor moderada?"]
+  erupcoes_cutaneas_p3_2467["20. [P3] Prurido moderado?"]
+  erupcoes_cutaneas_p4_2468["21. [P4] Febre persistente?"]
+  erupcoes_cutaneas_p4_2471["22. [P4] Prurido persistente?"]
+  erupcoes_cutaneas_p4_2472["23. [P4] Dor persistente?"]
+  erupcoes_cutaneas_p4_2475["24. [P4] Problema recente?"]
+  inicio --> erupcoes_cutaneas_p1_1853
+  erupcoes_cutaneas_p1_1853_sim(["VERMELHO"]):::vermelho
+  erupcoes_cutaneas_p1_1853 -->|Sim| erupcoes_cutaneas_p1_1853_sim
+  erupcoes_cutaneas_p1_1853 -->|Não| erupcoes_cutaneas_p1_2124
+  erupcoes_cutaneas_p1_2124_sim(["VERMELHO"]):::vermelho
+  erupcoes_cutaneas_p1_2124 -->|Sim| erupcoes_cutaneas_p1_2124_sim
+  erupcoes_cutaneas_p1_2124 -->|Não| erupcoes_cutaneas_p1_2369
+  erupcoes_cutaneas_p1_2369_sim(["VERMELHO"]):::vermelho
+  erupcoes_cutaneas_p1_2369 -->|Sim| erupcoes_cutaneas_p1_2369_sim
+  erupcoes_cutaneas_p1_2369 -->|Não| erupcoes_cutaneas_p1_2374
+  erupcoes_cutaneas_p1_2374_sim(["VERMELHO"]):::vermelho
+  erupcoes_cutaneas_p1_2374 -->|Sim| erupcoes_cutaneas_p1_2374_sim
+  erupcoes_cutaneas_p1_2374 -->|Não| erupcoes_cutaneas_p1_2452
+  erupcoes_cutaneas_p1_2452_sim(["VERMELHO"]):::vermelho
+  erupcoes_cutaneas_p1_2452 -->|Sim| erupcoes_cutaneas_p1_2452_sim
+  erupcoes_cutaneas_p1_2452 -->|Não| erupcoes_cutaneas_p2_2453
+  erupcoes_cutaneas_p2_2453_sim(["LARANJA"]):::laranja
+  erupcoes_cutaneas_p2_2453 -->|Sim| erupcoes_cutaneas_p2_2453_sim
+  erupcoes_cutaneas_p2_2453 -->|Não| erupcoes_cutaneas_p2_2454
+  erupcoes_cutaneas_p2_2454_sim(["LARANJA"]):::laranja
+  erupcoes_cutaneas_p2_2454 -->|Sim| erupcoes_cutaneas_p2_2454_sim
+  erupcoes_cutaneas_p2_2454 -->|Não| erupcoes_cutaneas_p2_2455
+  erupcoes_cutaneas_p2_2455_sim(["LARANJA"]):::laranja
+  erupcoes_cutaneas_p2_2455 -->|Sim| erupcoes_cutaneas_p2_2455_sim
+  erupcoes_cutaneas_p2_2455 -->|Não| erupcoes_cutaneas_p2_2456
+  erupcoes_cutaneas_p2_2456_sim(["LARANJA"]):::laranja
+  erupcoes_cutaneas_p2_2456 -->|Sim| erupcoes_cutaneas_p2_2456_sim
+  erupcoes_cutaneas_p2_2456 -->|Não| erupcoes_cutaneas_p2_2457
+  erupcoes_cutaneas_p2_2457_sim(["LARANJA"]):::laranja
+  erupcoes_cutaneas_p2_2457 -->|Sim| erupcoes_cutaneas_p2_2457_sim
+  erupcoes_cutaneas_p2_2457 -->|Não| erupcoes_cutaneas_p2_2458
+  erupcoes_cutaneas_p2_2458_sim(["LARANJA"]):::laranja
+  erupcoes_cutaneas_p2_2458 -->|Sim| erupcoes_cutaneas_p2_2458_sim
+  erupcoes_cutaneas_p2_2458 -->|Não| erupcoes_cutaneas_p2_2459
+  erupcoes_cutaneas_p2_2459_sim(["LARANJA"]):::laranja
+  erupcoes_cutaneas_p2_2459 -->|Sim| erupcoes_cutaneas_p2_2459_sim
+  erupcoes_cutaneas_p2_2459 -->|Não| erupcoes_cutaneas_p2_2460
+  erupcoes_cutaneas_p2_2460_sim(["LARANJA"]):::laranja
+  erupcoes_cutaneas_p2_2460 -->|Sim| erupcoes_cutaneas_p2_2460_sim
+  erupcoes_cutaneas_p2_2460 -->|Não| erupcoes_cutaneas_p2_2461
+  erupcoes_cutaneas_p2_2461_sim(["LARANJA"]):::laranja
+  erupcoes_cutaneas_p2_2461 -->|Sim| erupcoes_cutaneas_p2_2461_sim
+  erupcoes_cutaneas_p2_2461 -->|Não| erupcoes_cutaneas_p2_2462
+  erupcoes_cutaneas_p2_2462_sim(["LARANJA"]):::laranja
+  erupcoes_cutaneas_p2_2462 -->|Sim| erupcoes_cutaneas_p2_2462_sim
+  erupcoes_cutaneas_p2_2462 -->|Não| erupcoes_cutaneas_p3_2463
+  erupcoes_cutaneas_p3_2463_sim(["AMARELO"]):::amarelo
+  erupcoes_cutaneas_p3_2463 -->|Sim| erupcoes_cutaneas_p3_2463_sim
+  erupcoes_cutaneas_p3_2463 -->|Não| erupcoes_cutaneas_p3_2464
+  erupcoes_cutaneas_p3_2464_sim(["AMARELO"]):::amarelo
+  erupcoes_cutaneas_p3_2464 -->|Sim| erupcoes_cutaneas_p3_2464_sim
+  erupcoes_cutaneas_p3_2464 -->|Não| erupcoes_cutaneas_p3_2465
+  erupcoes_cutaneas_p3_2465_sim(["AMARELO"]):::amarelo
+  erupcoes_cutaneas_p3_2465 -->|Sim| erupcoes_cutaneas_p3_2465_sim
+  erupcoes_cutaneas_p3_2465 -->|Não| erupcoes_cutaneas_p3_2466
+  erupcoes_cutaneas_p3_2466_sim(["AMARELO"]):::amarelo
+  erupcoes_cutaneas_p3_2466 -->|Sim| erupcoes_cutaneas_p3_2466_sim
+  erupcoes_cutaneas_p3_2466 -->|Não| erupcoes_cutaneas_p3_2467
+  erupcoes_cutaneas_p3_2467_sim(["AMARELO"]):::amarelo
+  erupcoes_cutaneas_p3_2467 -->|Sim| erupcoes_cutaneas_p3_2467_sim
+  erupcoes_cutaneas_p3_2467 -->|Não| erupcoes_cutaneas_p4_2468
+  erupcoes_cutaneas_p4_2468_sim(["VERDE"]):::verde
+  erupcoes_cutaneas_p4_2468 -->|Sim| erupcoes_cutaneas_p4_2468_sim
+  erupcoes_cutaneas_p4_2468 -->|Não| erupcoes_cutaneas_p4_2471
+  erupcoes_cutaneas_p4_2471_sim(["VERDE"]):::verde
+  erupcoes_cutaneas_p4_2471 -->|Sim| erupcoes_cutaneas_p4_2471_sim
+  erupcoes_cutaneas_p4_2471 -->|Não| erupcoes_cutaneas_p4_2472
+  erupcoes_cutaneas_p4_2472_sim(["VERDE"]):::verde
+  erupcoes_cutaneas_p4_2472 -->|Sim| erupcoes_cutaneas_p4_2472_sim
+  erupcoes_cutaneas_p4_2472 -->|Não| erupcoes_cutaneas_p4_2475
+  erupcoes_cutaneas_p4_2475_sim(["VERDE"]):::verde
+  erupcoes_cutaneas_p4_2475 -->|Sim| erupcoes_cutaneas_p4_2475_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  erupcoes_cutaneas_p4_2475 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

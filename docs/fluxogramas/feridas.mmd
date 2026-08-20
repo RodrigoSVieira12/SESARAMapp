@@ -1,0 +1,101 @@
+flowchart TD
+  inicio(["Início: Feridas"])
+  feridas_p1_1856["1. [P1] Compromisso da via aérea?"]
+  feridas_p1_2127["2. [P1] Respiração ineficaz?"]
+  feridas_p1_2520["3. [P1] Hemorragia catastrófica?"]
+  feridas_p1_2521["4. [P1] Sinais de choque?"]
+  feridas_p1_2522["5. [P1] Não reativo?"]
+  feridas_p2_2523["6. [P2] Grande Hemorragia<br/>incontrolável?"]
+  feridas_p2_2524["7. [P2] Compromisso vascular distal?"]
+  feridas_p2_2525["8. [P2] Alteração do estado de<br/>consciência?"]
+  feridas_p2_2526["9. [P2] Défice neurológico agudo?<br/><24h"]
+  feridas_p2_2527["10. [P2] Muito quente?"]
+  feridas_p2_2528["11. [P2] Possível sépsis?"]
+  feridas_p2_2529["12. [P2] Dor severa?"]
+  feridas_p3_2530["13. [P3] Pequena hemorragia<br/>incontrolável?"]
+  feridas_p3_2531["14. [P3] Novos sinais e/ou sintomas<br/>neurológicos?"]
+  feridas_p3_2532["15. [P3] Quente?"]
+  feridas_p3_2533["16. [P3] Traumatismo vaginal?"]
+  feridas_p3_2534["17. [P3] História Inapropriada?"]
+  feridas_p3_2535["18. [P3] Dor moderada?"]
+  feridas_p4_2536["19. [P4] Febre persistente?"]
+  feridas_p4_2539["20. [P4] Infeção local?"]
+  feridas_p4_2540["21. [P4] Inflamação local?"]
+  feridas_p4_2543["22. [P4] Dor persistente?"]
+  feridas_p4_2544["23. [P4] Problema recente?"]
+  inicio --> feridas_p1_1856
+  feridas_p1_1856_sim(["VERMELHO"]):::vermelho
+  feridas_p1_1856 -->|Sim| feridas_p1_1856_sim
+  feridas_p1_1856 -->|Não| feridas_p1_2127
+  feridas_p1_2127_sim(["VERMELHO"]):::vermelho
+  feridas_p1_2127 -->|Sim| feridas_p1_2127_sim
+  feridas_p1_2127 -->|Não| feridas_p1_2520
+  feridas_p1_2520_sim(["VERMELHO"]):::vermelho
+  feridas_p1_2520 -->|Sim| feridas_p1_2520_sim
+  feridas_p1_2520 -->|Não| feridas_p1_2521
+  feridas_p1_2521_sim(["VERMELHO"]):::vermelho
+  feridas_p1_2521 -->|Sim| feridas_p1_2521_sim
+  feridas_p1_2521 -->|Não| feridas_p1_2522
+  feridas_p1_2522_sim(["VERMELHO"]):::vermelho
+  feridas_p1_2522 -->|Sim| feridas_p1_2522_sim
+  feridas_p1_2522 -->|Não| feridas_p2_2523
+  feridas_p2_2523_sim(["LARANJA"]):::laranja
+  feridas_p2_2523 -->|Sim| feridas_p2_2523_sim
+  feridas_p2_2523 -->|Não| feridas_p2_2524
+  feridas_p2_2524_sim(["LARANJA"]):::laranja
+  feridas_p2_2524 -->|Sim| feridas_p2_2524_sim
+  feridas_p2_2524 -->|Não| feridas_p2_2525
+  feridas_p2_2525_sim(["LARANJA"]):::laranja
+  feridas_p2_2525 -->|Sim| feridas_p2_2525_sim
+  feridas_p2_2525 -->|Não| feridas_p2_2526
+  feridas_p2_2526_sim(["LARANJA"]):::laranja
+  feridas_p2_2526 -->|Sim| feridas_p2_2526_sim
+  feridas_p2_2526 -->|Não| feridas_p2_2527
+  feridas_p2_2527_sim(["LARANJA"]):::laranja
+  feridas_p2_2527 -->|Sim| feridas_p2_2527_sim
+  feridas_p2_2527 -->|Não| feridas_p2_2528
+  feridas_p2_2528_sim(["LARANJA"]):::laranja
+  feridas_p2_2528 -->|Sim| feridas_p2_2528_sim
+  feridas_p2_2528 -->|Não| feridas_p2_2529
+  feridas_p2_2529_sim(["LARANJA"]):::laranja
+  feridas_p2_2529 -->|Sim| feridas_p2_2529_sim
+  feridas_p2_2529 -->|Não| feridas_p3_2530
+  feridas_p3_2530_sim(["AMARELO"]):::amarelo
+  feridas_p3_2530 -->|Sim| feridas_p3_2530_sim
+  feridas_p3_2530 -->|Não| feridas_p3_2531
+  feridas_p3_2531_sim(["AMARELO"]):::amarelo
+  feridas_p3_2531 -->|Sim| feridas_p3_2531_sim
+  feridas_p3_2531 -->|Não| feridas_p3_2532
+  feridas_p3_2532_sim(["AMARELO"]):::amarelo
+  feridas_p3_2532 -->|Sim| feridas_p3_2532_sim
+  feridas_p3_2532 -->|Não| feridas_p3_2533
+  feridas_p3_2533_sim(["AMARELO"]):::amarelo
+  feridas_p3_2533 -->|Sim| feridas_p3_2533_sim
+  feridas_p3_2533 -->|Não| feridas_p3_2534
+  feridas_p3_2534_sim(["AMARELO"]):::amarelo
+  feridas_p3_2534 -->|Sim| feridas_p3_2534_sim
+  feridas_p3_2534 -->|Não| feridas_p3_2535
+  feridas_p3_2535_sim(["AMARELO"]):::amarelo
+  feridas_p3_2535 -->|Sim| feridas_p3_2535_sim
+  feridas_p3_2535 -->|Não| feridas_p4_2536
+  feridas_p4_2536_sim(["VERDE"]):::verde
+  feridas_p4_2536 -->|Sim| feridas_p4_2536_sim
+  feridas_p4_2536 -->|Não| feridas_p4_2539
+  feridas_p4_2539_sim(["VERDE"]):::verde
+  feridas_p4_2539 -->|Sim| feridas_p4_2539_sim
+  feridas_p4_2539 -->|Não| feridas_p4_2540
+  feridas_p4_2540_sim(["VERDE"]):::verde
+  feridas_p4_2540 -->|Sim| feridas_p4_2540_sim
+  feridas_p4_2540 -->|Não| feridas_p4_2543
+  feridas_p4_2543_sim(["VERDE"]):::verde
+  feridas_p4_2543 -->|Sim| feridas_p4_2543_sim
+  feridas_p4_2543 -->|Não| feridas_p4_2544
+  feridas_p4_2544_sim(["VERDE"]):::verde
+  feridas_p4_2544 -->|Sim| feridas_p4_2544_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  feridas_p4_2544 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

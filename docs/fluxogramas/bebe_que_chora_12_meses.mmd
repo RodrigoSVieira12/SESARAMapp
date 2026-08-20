@@ -1,0 +1,89 @@
+flowchart TD
+  inicio(["Início: Bebé que chora (< 12<br/>meses)"])
+  bebe_que_chora_12_meses_p1_1831["1. [P1] Compromisso da via aérea?"]
+  bebe_que_chora_12_meses_p1_1879["2. [P1] Respiração ineficaz?"]
+  bebe_que_chora_12_meses_p1_1880["3. [P1] Sinais de choque?"]
+  bebe_que_chora_12_meses_p1_1881["4. [P1] Não reativo?"]
+  bebe_que_chora_12_meses_p2_1882["5. [P2] Prostrado?"]
+  bebe_que_chora_12_meses_p2_1883["6. [P2] Muito quente?"]
+  bebe_que_chora_12_meses_p2_1884["7. [P2] Possível sépsis?"]
+  bebe_que_chora_12_meses_p2_1885["8. [P2] Erupção cutânea desconhecida?"]
+  bebe_que_chora_12_meses_p2_1886["9. [P2] Dor severa?"]
+  bebe_que_chora_12_meses_p3_1887["10. [P3] Não se alimenta?"]
+  bebe_que_chora_12_meses_p3_1888["11. [P3] Quente?"]
+  bebe_que_chora_12_meses_p3_1889["12. [P3] Inconsolável pelos pais?"]
+  bebe_que_chora_12_meses_p3_1890["13. [P3] Choro prolongado ou<br/>ininterrupto?"]
+  bebe_que_chora_12_meses_p3_1891["14. [P3] História de perda de<br/>consciência?"]
+  bebe_que_chora_12_meses_p3_1892["15. [P3] História Inapropriada?"]
+  bebe_que_chora_12_meses_p3_1893["16. [P3] Dor moderada?"]
+  bebe_que_chora_12_meses_p4_1894["17. [P4] Febre persistente?"]
+  bebe_que_chora_12_meses_p4_1896["18. [P4] Comportamento estranho na<br/>criança?"]
+  bebe_que_chora_12_meses_p4_1899["19. [P4] Dor persistente?"]
+  bebe_que_chora_12_meses_p4_1900["20. [P4] Problema recente?"]
+  inicio --> bebe_que_chora_12_meses_p1_1831
+  bebe_que_chora_12_meses_p1_1831_sim(["VERMELHO"]):::vermelho
+  bebe_que_chora_12_meses_p1_1831 -->|Sim| bebe_que_chora_12_meses_p1_1831_sim
+  bebe_que_chora_12_meses_p1_1831 -->|Não| bebe_que_chora_12_meses_p1_1879
+  bebe_que_chora_12_meses_p1_1879_sim(["VERMELHO"]):::vermelho
+  bebe_que_chora_12_meses_p1_1879 -->|Sim| bebe_que_chora_12_meses_p1_1879_sim
+  bebe_que_chora_12_meses_p1_1879 -->|Não| bebe_que_chora_12_meses_p1_1880
+  bebe_que_chora_12_meses_p1_1880_sim(["VERMELHO"]):::vermelho
+  bebe_que_chora_12_meses_p1_1880 -->|Sim| bebe_que_chora_12_meses_p1_1880_sim
+  bebe_que_chora_12_meses_p1_1880 -->|Não| bebe_que_chora_12_meses_p1_1881
+  bebe_que_chora_12_meses_p1_1881_sim(["VERMELHO"]):::vermelho
+  bebe_que_chora_12_meses_p1_1881 -->|Sim| bebe_que_chora_12_meses_p1_1881_sim
+  bebe_que_chora_12_meses_p1_1881 -->|Não| bebe_que_chora_12_meses_p2_1882
+  bebe_que_chora_12_meses_p2_1882_sim(["LARANJA"]):::laranja
+  bebe_que_chora_12_meses_p2_1882 -->|Sim| bebe_que_chora_12_meses_p2_1882_sim
+  bebe_que_chora_12_meses_p2_1882 -->|Não| bebe_que_chora_12_meses_p2_1883
+  bebe_que_chora_12_meses_p2_1883_sim(["LARANJA"]):::laranja
+  bebe_que_chora_12_meses_p2_1883 -->|Sim| bebe_que_chora_12_meses_p2_1883_sim
+  bebe_que_chora_12_meses_p2_1883 -->|Não| bebe_que_chora_12_meses_p2_1884
+  bebe_que_chora_12_meses_p2_1884_sim(["LARANJA"]):::laranja
+  bebe_que_chora_12_meses_p2_1884 -->|Sim| bebe_que_chora_12_meses_p2_1884_sim
+  bebe_que_chora_12_meses_p2_1884 -->|Não| bebe_que_chora_12_meses_p2_1885
+  bebe_que_chora_12_meses_p2_1885_sim(["LARANJA"]):::laranja
+  bebe_que_chora_12_meses_p2_1885 -->|Sim| bebe_que_chora_12_meses_p2_1885_sim
+  bebe_que_chora_12_meses_p2_1885 -->|Não| bebe_que_chora_12_meses_p2_1886
+  bebe_que_chora_12_meses_p2_1886_sim(["LARANJA"]):::laranja
+  bebe_que_chora_12_meses_p2_1886 -->|Sim| bebe_que_chora_12_meses_p2_1886_sim
+  bebe_que_chora_12_meses_p2_1886 -->|Não| bebe_que_chora_12_meses_p3_1887
+  bebe_que_chora_12_meses_p3_1887_sim(["AMARELO"]):::amarelo
+  bebe_que_chora_12_meses_p3_1887 -->|Sim| bebe_que_chora_12_meses_p3_1887_sim
+  bebe_que_chora_12_meses_p3_1887 -->|Não| bebe_que_chora_12_meses_p3_1888
+  bebe_que_chora_12_meses_p3_1888_sim(["AMARELO"]):::amarelo
+  bebe_que_chora_12_meses_p3_1888 -->|Sim| bebe_que_chora_12_meses_p3_1888_sim
+  bebe_que_chora_12_meses_p3_1888 -->|Não| bebe_que_chora_12_meses_p3_1889
+  bebe_que_chora_12_meses_p3_1889_sim(["AMARELO"]):::amarelo
+  bebe_que_chora_12_meses_p3_1889 -->|Sim| bebe_que_chora_12_meses_p3_1889_sim
+  bebe_que_chora_12_meses_p3_1889 -->|Não| bebe_que_chora_12_meses_p3_1890
+  bebe_que_chora_12_meses_p3_1890_sim(["AMARELO"]):::amarelo
+  bebe_que_chora_12_meses_p3_1890 -->|Sim| bebe_que_chora_12_meses_p3_1890_sim
+  bebe_que_chora_12_meses_p3_1890 -->|Não| bebe_que_chora_12_meses_p3_1891
+  bebe_que_chora_12_meses_p3_1891_sim(["AMARELO"]):::amarelo
+  bebe_que_chora_12_meses_p3_1891 -->|Sim| bebe_que_chora_12_meses_p3_1891_sim
+  bebe_que_chora_12_meses_p3_1891 -->|Não| bebe_que_chora_12_meses_p3_1892
+  bebe_que_chora_12_meses_p3_1892_sim(["AMARELO"]):::amarelo
+  bebe_que_chora_12_meses_p3_1892 -->|Sim| bebe_que_chora_12_meses_p3_1892_sim
+  bebe_que_chora_12_meses_p3_1892 -->|Não| bebe_que_chora_12_meses_p3_1893
+  bebe_que_chora_12_meses_p3_1893_sim(["AMARELO"]):::amarelo
+  bebe_que_chora_12_meses_p3_1893 -->|Sim| bebe_que_chora_12_meses_p3_1893_sim
+  bebe_que_chora_12_meses_p3_1893 -->|Não| bebe_que_chora_12_meses_p4_1894
+  bebe_que_chora_12_meses_p4_1894_sim(["VERDE"]):::verde
+  bebe_que_chora_12_meses_p4_1894 -->|Sim| bebe_que_chora_12_meses_p4_1894_sim
+  bebe_que_chora_12_meses_p4_1894 -->|Não| bebe_que_chora_12_meses_p4_1896
+  bebe_que_chora_12_meses_p4_1896_sim(["VERDE"]):::verde
+  bebe_que_chora_12_meses_p4_1896 -->|Sim| bebe_que_chora_12_meses_p4_1896_sim
+  bebe_que_chora_12_meses_p4_1896 -->|Não| bebe_que_chora_12_meses_p4_1899
+  bebe_que_chora_12_meses_p4_1899_sim(["VERDE"]):::verde
+  bebe_que_chora_12_meses_p4_1899 -->|Sim| bebe_que_chora_12_meses_p4_1899_sim
+  bebe_que_chora_12_meses_p4_1899 -->|Não| bebe_que_chora_12_meses_p4_1900
+  bebe_que_chora_12_meses_p4_1900_sim(["VERDE"]):::verde
+  bebe_que_chora_12_meses_p4_1900 -->|Sim| bebe_que_chora_12_meses_p4_1900_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  bebe_que_chora_12_meses_p4_1900 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

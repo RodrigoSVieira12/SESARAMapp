@@ -1,0 +1,232 @@
+{
+  "id": "problemas_urinarios",
+  "nome": "Problemas urinários",
+  "nome_en": "Urinary problems",
+  "descricao": "Dificuldade ou dor ao urinar.",
+  "descricao_en": "Difficulty or pain passing urine.",
+  "pediatrico": false,
+  "fonte": "Discriminadores do Sistema de Triagem de Manchester, organizados por prioridade clínica (P1-P5). Importados da tabela de referência; sujeitos a validação clínica antes de uso real.",
+  "fonte_en": "Manchester Triage System discriminators, organised by clinical priority (P1-P5). Imported from the reference table; subject to clinical validation before real use.",
+  "perguntas": [
+    {
+      "id": "problemas_urinarios_p1_1871",
+      "disc_id": 1871,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Compromisso da via aérea?",
+      "texto_utente": "A respiração está muito difícil ou ruidosa, como se o ar não passasse bem pela garganta (a roncar ou a gorgolejar)?",
+      "texto_en": "Airway compromise?",
+      "texto_utente_en": "Is breathing very difficult or noisy, as if air can't pass properly through the throat (snoring or gurgling)?",
+      "descricao": "A via aérea poderá estar comprometida, por não se conseguir manter aberta, ou porque os reflexos protetores da via respiratória (que evitam a aspiração) se perderam. A incapacidade de manter a via aérea aberta, poderá resultar numa obstrução total ou parcial, intermitente ou não. Isto manifestar-se-á por sons como o ressonar ou o gorgolejar durante a respiração."
+    },
+    {
+      "id": "problemas_urinarios_p1_2142",
+      "disc_id": 2142,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Respiração ineficaz?",
+      "texto_utente": "A respiração está tão fraca ou cansada que parece não entrar ar suficiente (respiração aos arrancos ou muito a custo)?",
+      "texto_en": "Ineffective breathing?",
+      "texto_utente_en": "Is breathing so weak or laboured that not enough air seems to get in (gasping or a real struggle)?",
+      "descricao": "Doentes que não conseguem respirar suficientemente bem para manter uma oxigenação adequada e com falência respiratória, sofrem de respiração ineficaz. Poderá resultar num esforço acrescentado para respirar, ou em exaustão, incluindo uma respiração tipo “gasping”."
+    },
+    {
+      "id": "problemas_urinarios_p1_2755",
+      "disc_id": 2755,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Sinais de choque?",
+      "texto_utente": "Tem suores frios, pele muito pálida ou acinzentada, o coração a bater depressa e uma grande fraqueza?",
+      "texto_en": "Signs of shock?",
+      "texto_utente_en": "Are there cold sweats, very pale or greyish skin, a fast heartbeat and severe weakness?",
+      "descricao": "O choque é uma entrega inadequada de oxigénio aos tecidos. Os sinais clássicos incluem suores, palidez, taquicardia, hipotensão e nível de consciência reduzido."
+    },
+    {
+      "id": "problemas_urinarios_p2_2935",
+      "disc_id": 2935,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Alteração do estado de consciência?",
+      "texto_utente": "Está sonolento ou baralhado, só reagindo quando lhe falam ou lhe tocam (não está bem desperto)?",
+      "texto_en": "Altered level of consciousness?",
+      "texto_utente_en": "Is the person drowsy or muddled, responding only to voice or touch (not fully alert)?",
+      "descricao": "Não está totalmente alerta. Só responde à voz, à dor"
+    },
+    {
+      "id": "problemas_urinarios_p2_2937",
+      "disc_id": 2937,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Muito quente?",
+      "texto_utente": "Tem febre muito alta? (num adulto, 41°C ou mais; num bebé com menos de 12 meses, 38,5°C ou mais)",
+      "texto_en": "Very hot (high temperature)?",
+      "texto_utente_en": "Do you have a very high fever? (in an adult, 41°C or more; in a baby under 12 months, 38.5°C or more)",
+      "descricao": "No Adulto temperatura igual ou superior a 41ºC; Crianças com menos de 12 meses a temperatura é igual ou superior a 38.5ºC"
+    },
+    {
+      "id": "problemas_urinarios_p2_2938",
+      "disc_id": 2938,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Possível sépsis?",
+      "texto_utente": "Tem sinais de uma infeção a alastrar depressa, como confusão, respiração muito acelerada ou uma fraqueza que se instala de repente?",
+      "texto_en": "Possible sepsis?",
+      "texto_utente_en": "Are there signs of a fast-spreading infection, such as confusion, very rapid breathing or weakness that comes on suddenly?",
+      "descricao": "Suspeitar de sépsis em vítimas que apresentem alteração do estado de consciência, hipotensão (sistólica inferior a 100mmHg), ou aumento da frequência respiratória (frequência superior a 22 cpm). Nas crianças deve ser determinada a possibilidade de sépsis pelas tabelas de parâmetros vitais ajustados à idade."
+    },
+    {
+      "id": "problemas_urinarios_p2_2939",
+      "disc_id": 2939,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Priapismo?",
+      "texto_utente": "Tem uma ereção que não passa há bastante tempo?",
+      "texto_en": "Priapism?",
+      "texto_utente_en": "Do you have an erection that won't go down after a long time?",
+      "descricao": "Ereção sustentada do pénis."
+    },
+    {
+      "id": "problemas_urinarios_p2_2940",
+      "disc_id": 2940,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Alteração da imunidade conhecida?",
+      "texto_utente": "Tem as defesas em baixo (por uma doença ou por tomar remédios que baixam a imunidade, como a quimioterapia)?",
+      "texto_en": "Known immune impairment?",
+      "texto_utente_en": "Are your defences low (from an illness or from taking medicines that lower immunity, such as chemotherapy)?",
+      "descricao": "Qualquer doente sob terapêutica imunossupressora ou com doença que cause imunossupressão."
+    },
+    {
+      "id": "problemas_urinarios_p2_2941",
+      "disc_id": 2941,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Dor severa?",
+      "texto_utente": "Tem dores muito fortes, quase a não aguentar (das piores que alguma vez sentiu)?",
+      "texto_en": "Severe pain?",
+      "texto_utente_en": "Do you have very severe pain, almost unbearable (some of the worst you've ever felt)?",
+      "descricao": "Dor significativa e insuportável, frequentemente referida como a pior de sempre. Alterações na expressão facial, de comportamento e nas atividades diárias permitem avaliar o nível de dor, especialmente nos doentes não comunicativos (por exemplo nas crianças e bebés), ou quando existem barreiras de comunicação pelo idioma ou por demência."
+    },
+    {
+      "id": "problemas_urinarios_p3_3339",
+      "disc_id": 3339,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Vómitos persistentes?",
+      "texto_utente": "Continua a vomitar, mesmo depois de esperar ou de tomar algum medicamento?",
+      "texto_en": "Persistent vomiting?",
+      "texto_utente_en": "Do you keep vomiting, even after waiting or taking medication?",
+      "descricao": "Vómitos que não passaram, apesar da espera ou da medicação que tomou."
+    },
+    {
+      "id": "problemas_urinarios_p3_3340",
+      "disc_id": 3340,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Não urina?",
+      "texto_utente": "Deixou de fazer xixi (numa criança, nota-se pela fralda que fica seca)?",
+      "texto_en": "Not passing urine?",
+      "texto_utente_en": "Have you stopped passing urine (in a child, you may notice the nappy staying dry)?",
+      "descricao": "Falência de produção de urina ou micção. Isto pode ser difícil de valorizar nas crianças (e nos idosos), podendo ser feita referência ao número de fraldas utilizadas."
+    },
+    {
+      "id": "problemas_urinarios_p3_3341",
+      "disc_id": 3341,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Hematúria clinicamente evidente?",
+      "texto_utente": "A urina está com sangue que se vê a olho nu?",
+      "texto_en": "Clinically evident blood in the urine?",
+      "texto_utente_en": "Is there blood in the urine that you can see with the naked eye?",
+      "descricao": "Sangue na urina, visível a olho nu."
+    },
+    {
+      "id": "problemas_urinarios_p3_3342",
+      "disc_id": 3342,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Quente?",
+      "texto_utente": "Tem febre? (num adulto, acima de 38,5°C; numa criança, 38,5°C a 39,8°C; num recém-nascido com menos de 28 dias, 37,5°C a 38,4°C)",
+      "texto_en": "Hot (raised temperature)?",
+      "texto_utente_en": "Do you have a fever? (in an adult, above 38.5°C; in a child, 38.5°C to 39.8°C; in a newborn under 28 days, 37.5°C to 38.4°C)",
+      "descricao": "No adulto, uma temperatura > 38.5-40.9ºC; Na criança é 38.5-39.8ºC; No recém-nascido com menos de 28 dias é 37.5-38.4ºC."
+    },
+    {
+      "id": "problemas_urinarios_p3_3343",
+      "disc_id": 3343,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Cólica?",
+      "texto_utente": "A dor vem e vai por vagas, como cólicas?",
+      "texto_en": "Colic?",
+      "texto_utente_en": "Does the pain come and go in waves, like colic?",
+      "descricao": "Dor que vai e vem em ondas. A cólica renal tende a ir e vir  em períodos de 20 minutos."
+    },
+    {
+      "id": "problemas_urinarios_p3_3344",
+      "disc_id": 3344,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Dor moderada?",
+      "texto_utente": "Tem dores a sério, que o impedem de fazer algumas coisas do dia a dia?",
+      "texto_en": "Moderate pain?",
+      "texto_utente_en": "Do you have noticeable pain that stops you doing some everyday things?",
+      "descricao": "Dor significativa que incapacita para algumas atividades diárias. Alterações na expressão facial, de comportamento e nas atividades diárias permitem avaliar o nível de dor, especialmente nos doentes não comunicativos (por exemplo nas crianças e bebés), ou quando existem barreiras de comunicação pelo idioma ou por demência."
+    },
+    {
+      "id": "problemas_urinarios_p4_2948",
+      "disc_id": 2948,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Vómitos persistentes?",
+      "texto_utente": "Continua a vomitar, mesmo depois de esperar ou de tomar algum medicamento?",
+      "texto_en": "Persistent vomiting?",
+      "texto_utente_en": "Do you keep vomiting, even after waiting or taking medication?",
+      "descricao": "Vómitos que não passaram, apesar da espera ou da medicação que tomou."
+    },
+    {
+      "id": "problemas_urinarios_p4_2951",
+      "disc_id": 2951,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Febre persistente?",
+      "texto_utente": "A febre não cede, mesmo alternando os medicamentos para baixar a febre (paracetamol e ibuprofeno)?",
+      "texto_en": "Persistent fever?",
+      "texto_utente_en": "Does the fever not come down, even alternating the fever medicines (paracetamol and ibuprofen)?",
+      "descricao": "Febre que não cede à toma intercalada de antipiréticos (paracetamol e ibuprofeno)"
+    },
+    {
+      "id": "problemas_urinarios_p4_2952",
+      "disc_id": 2952,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Disúria?",
+      "texto_utente": "Dói ou custa a fazer xixi?",
+      "texto_en": "Dysuria (pain passing urine)?",
+      "texto_utente_en": "Does it hurt or is it difficult to pass urine?",
+      "descricao": "Dor ou dificuldade em urinar."
+    },
+    {
+      "id": "problemas_urinarios_p4_2955",
+      "disc_id": 2955,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Dor persistente?",
+      "texto_utente": "A dor continua sem passar, mesmo depois de esperar ou de tomar um analgésico?",
+      "texto_en": "Persistent pain?",
+      "texto_utente_en": "Does the pain carry on without easing, even after waiting or taking a painkiller?",
+      "descricao": "Dor que não desaparece após algum tempo ou após tomar a medicação apropriada. Mudanças nas expressões faciais, comportamento e interrupção da atividade permitirão avaliar os níveis de dor, especialmente em pacientes não comunicativos, como por exemplo crianças muito pequenas e bebés, ou onde existam barreiras à comunicação devido ao idioma ou a demência."
+    },
+    {
+      "id": "problemas_urinarios_p4_2956",
+      "disc_id": 2956,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Problema recente?",
+      "texto_utente": "Este problema começou na última semana?",
+      "texto_en": "Recent problem?",
+      "texto_utente_en": "Did this problem start within the last week?",
+      "descricao": "Um problema que aparece no decorrer da última semana."
+    }
+  ]
+}

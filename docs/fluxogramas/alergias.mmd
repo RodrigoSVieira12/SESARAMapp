@@ -1,0 +1,97 @@
+flowchart TD
+  inicio(["Início: Alergias"])
+  alergias_p1_1761["1. [P1] Compromisso da via aérea?"]
+  alergias_p1_1762["2. [P1] Estridor?"]
+  alergias_p1_1763["3. [P1] Baba-se?"]
+  alergias_p1_1764["4. [P1] Respiração ineficaz?"]
+  alergias_p1_1766["5. [P1] Sinais de choque?"]
+  alergias_p1_1767["6. [P1] Não reativo?"]
+  alergias_p2_1768["7. [P2] Edema da língua?"]
+  alergias_p2_1769["8. [P2] Edema da face?"]
+  alergias_p2_1770["9. [P2] Incapacidade de articular<br/>frases completas?"]
+  alergias_p2_1771["10. [P2] Alteração do estado de<br/>consciência?"]
+  alergias_p2_1772["11. [P2] História significativa de<br/>alergia?"]
+  alergias_p2_1773["12. [P2] Dor severa?"]
+  alergias_p2_1774["13. [P2] Prurido severo?"]
+  alergias_p3_1775["14. [P3] Broncoespasmo?"]
+  alergias_p3_1776["15. [P3] Exantema eritematoso ou<br/>bolhoso?"]
+  alergias_p3_1777["16. [P3] Dor moderada?"]
+  alergias_p3_1778["17. [P3] Prurido moderado?"]
+  alergias_p4_1779["18. [P4] Inflamação local?"]
+  alergias_p4_1780["19. [P4] Dor persistente?"]
+  alergias_p4_1783["20. [P4] Prurido persistente?"]
+  alergias_p4_1785["21. [P4] Eritema persistente?"]
+  alergias_p4_1788["22. [P4] Problema recente?"]
+  inicio --> alergias_p1_1761
+  alergias_p1_1761_sim(["VERMELHO"]):::vermelho
+  alergias_p1_1761 -->|Sim| alergias_p1_1761_sim
+  alergias_p1_1761 -->|Não| alergias_p1_1762
+  alergias_p1_1762_sim(["VERMELHO"]):::vermelho
+  alergias_p1_1762 -->|Sim| alergias_p1_1762_sim
+  alergias_p1_1762 -->|Não| alergias_p1_1763
+  alergias_p1_1763_sim(["VERMELHO"]):::vermelho
+  alergias_p1_1763 -->|Sim| alergias_p1_1763_sim
+  alergias_p1_1763 -->|Não| alergias_p1_1764
+  alergias_p1_1764_sim(["VERMELHO"]):::vermelho
+  alergias_p1_1764 -->|Sim| alergias_p1_1764_sim
+  alergias_p1_1764 -->|Não| alergias_p1_1766
+  alergias_p1_1766_sim(["VERMELHO"]):::vermelho
+  alergias_p1_1766 -->|Sim| alergias_p1_1766_sim
+  alergias_p1_1766 -->|Não| alergias_p1_1767
+  alergias_p1_1767_sim(["VERMELHO"]):::vermelho
+  alergias_p1_1767 -->|Sim| alergias_p1_1767_sim
+  alergias_p1_1767 -->|Não| alergias_p2_1768
+  alergias_p2_1768_sim(["LARANJA"]):::laranja
+  alergias_p2_1768 -->|Sim| alergias_p2_1768_sim
+  alergias_p2_1768 -->|Não| alergias_p2_1769
+  alergias_p2_1769_sim(["LARANJA"]):::laranja
+  alergias_p2_1769 -->|Sim| alergias_p2_1769_sim
+  alergias_p2_1769 -->|Não| alergias_p2_1770
+  alergias_p2_1770_sim(["LARANJA"]):::laranja
+  alergias_p2_1770 -->|Sim| alergias_p2_1770_sim
+  alergias_p2_1770 -->|Não| alergias_p2_1771
+  alergias_p2_1771_sim(["LARANJA"]):::laranja
+  alergias_p2_1771 -->|Sim| alergias_p2_1771_sim
+  alergias_p2_1771 -->|Não| alergias_p2_1772
+  alergias_p2_1772_sim(["LARANJA"]):::laranja
+  alergias_p2_1772 -->|Sim| alergias_p2_1772_sim
+  alergias_p2_1772 -->|Não| alergias_p2_1773
+  alergias_p2_1773_sim(["LARANJA"]):::laranja
+  alergias_p2_1773 -->|Sim| alergias_p2_1773_sim
+  alergias_p2_1773 -->|Não| alergias_p2_1774
+  alergias_p2_1774_sim(["LARANJA"]):::laranja
+  alergias_p2_1774 -->|Sim| alergias_p2_1774_sim
+  alergias_p2_1774 -->|Não| alergias_p3_1775
+  alergias_p3_1775_sim(["AMARELO"]):::amarelo
+  alergias_p3_1775 -->|Sim| alergias_p3_1775_sim
+  alergias_p3_1775 -->|Não| alergias_p3_1776
+  alergias_p3_1776_sim(["AMARELO"]):::amarelo
+  alergias_p3_1776 -->|Sim| alergias_p3_1776_sim
+  alergias_p3_1776 -->|Não| alergias_p3_1777
+  alergias_p3_1777_sim(["AMARELO"]):::amarelo
+  alergias_p3_1777 -->|Sim| alergias_p3_1777_sim
+  alergias_p3_1777 -->|Não| alergias_p3_1778
+  alergias_p3_1778_sim(["AMARELO"]):::amarelo
+  alergias_p3_1778 -->|Sim| alergias_p3_1778_sim
+  alergias_p3_1778 -->|Não| alergias_p4_1779
+  alergias_p4_1779_sim(["VERDE"]):::verde
+  alergias_p4_1779 -->|Sim| alergias_p4_1779_sim
+  alergias_p4_1779 -->|Não| alergias_p4_1780
+  alergias_p4_1780_sim(["VERDE"]):::verde
+  alergias_p4_1780 -->|Sim| alergias_p4_1780_sim
+  alergias_p4_1780 -->|Não| alergias_p4_1783
+  alergias_p4_1783_sim(["VERDE"]):::verde
+  alergias_p4_1783 -->|Sim| alergias_p4_1783_sim
+  alergias_p4_1783 -->|Não| alergias_p4_1785
+  alergias_p4_1785_sim(["VERDE"]):::verde
+  alergias_p4_1785 -->|Sim| alergias_p4_1785_sim
+  alergias_p4_1785 -->|Não| alergias_p4_1788
+  alergias_p4_1788_sim(["VERDE"]):::verde
+  alergias_p4_1788 -->|Sim| alergias_p4_1788_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  alergias_p4_1788 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

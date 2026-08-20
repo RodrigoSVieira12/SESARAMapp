@@ -22,6 +22,7 @@ from __future__ import annotations
 import io
 from datetime import datetime
 from typing import Any
+from xml.sax.saxutils import escape
 
 from reportlab.lib import colors
 from reportlab.lib.enums import TA_LEFT
@@ -134,6 +135,39 @@ _TXT = {
 }
 
 
+def _esc(valor: Any) -> str:
+    """Escapa texto vindo de fora antes do mini-HTML do reportlab (v0.16.1).
+
+    O Paragraph interpreta um subconjunto de XML (<b>, <font>, entidades
+    &...;). Todo o texto que chega no pedido (queixa, mensagem, nome da
+    unidade, contactos, ...) tem de passar por aqui ANTES de entrar num
+    Paragraph: um "<" solto rebentava o parser (500) e uma tag <img>
+    chegava a tocar no sistema de ficheiros do servidor. Depois de
+    escapado, só o markup escrito por ESTE módulo é interpretado.
+    """
+    return escape(str(valor), {'"': "&quot;", "'": "&#x27;"})
+
+
+# Tetos de sanidade do gerador (v0.16.2). O reportlab demora tanto mais
+# quanto maior o parágrafo (a quebra de linhas não é linear): antes destes
+# cortes, uma "mensagem" de meio megabyte custava dezenas de segundos de
+# CPU num único pedido. Os limites Pydantic (app/models/schemas.py) já
+# barram isso na API; estes tetos garantem a mesma propriedade a quem
+# chamar gerar_pdf diretamente (um integrador, um teste, um script) e
+# para os campos livres (unidade, autocuidado) que os schemas não
+# estruturam. São folgados face ao conteúdo real: a maior mensagem tem
+# ~700 caracteres e nenhum campo curto passa dos ~110.
+_TETO_CURTO = 300  # nomes, moradas, rótulos, queixa
+_TETO_LONGO = 3000  # mensagem de recomendação
+_TETO_HORARIOS = 8  # linhas de horário por unidade
+
+
+def _aparar(valor: Any, maximo: int) -> str:
+    """Corta texto ao teto dado, marcando o corte com uma reticência."""
+    texto = str(valor)
+    return texto if len(texto) <= maximo else texto[: maximo - 1] + "…"
+
+
 def _hora_legivel(iso: str | None, lingua: str) -> str:
     if not iso:
         iso = datetime.now().isoformat()
@@ -208,15 +242,24 @@ def gerar_pdf(dados: dict) -> bytes:
 
     # PDF enxuto e de uma página: só o que um utente leva consigo ou mostra.
     # Cabeçalho compacto (instituição + data + queixa).
-    el.append(Paragraph(T["cabecalho"], ParagraphStyle(
-        "cab", parent=normal, fontSize=9.5, textColor=colors.HexColor("#0C447C"),
-        fontName="Helvetica-Bold")))
+    el.append(
+        Paragraph(
+            T["cabecalho"],
+            ParagraphStyle(
+                "cab",
+                parent=normal,
+                fontSize=9.5,
+                textColor=colors.HexColor("#0C447C"),
+                fontName="Helvetica-Bold",
+            ),
+        )
+    )
     el.append(HRFlowable(width="100%", thickness=1, color=colors.HexColor("#0C447C")))
     el.append(Spacer(1, 5))
     el.append(Paragraph(T["titulo"], titulo))
-    linha_data = f"{T['gerado']} {_hora_legivel(dados.get('gerado_em'), lingua)}"
+    linha_data = f"{T['gerado']} {_esc(_aparar(_hora_legivel(dados.get('gerado_em'), lingua), 60))}"
     if dados.get("queixa"):
-        linha_data += f" &nbsp;·&nbsp; {T['queixa']}: {dados['queixa']}"
+        linha_data += f" &nbsp;·&nbsp; {T['queixa']}: {_esc(_aparar(dados['queixa'], _TETO_CURTO))}"
     el.append(Paragraph(linha_data, suave))
     el.append(Spacer(1, 8))
 
@@ -224,33 +267,44 @@ def gerar_pdf(dados: dict) -> bytes:
     cor = dados.get("cor")
     if cor:
         cor_hex = _cor_segura(dados.get("cor_hex"))
-        classif = dados.get("classificacao") or cor.capitalize()
-        tempo = dados.get("tempo_alvo") or ""
+        classif = _aparar(dados.get("classificacao") or cor.capitalize(), _TETO_CURTO)
+        tempo = _aparar(dados.get("tempo_alvo") or "", _TETO_CURTO)
         faixa = Table(
-            [[Paragraph(
-                f'<font color="white"><b>{T["prioridade"].upper()}</b><br/>'
-                f'<font size="14">{classif}</font></font>',
-                ParagraphStyle("faixa", parent=normal, textColor=colors.white)),
-              Paragraph(
-                f'<font color="white">{tempo}</font>',
-                ParagraphStyle("faixaR", parent=normal, textColor=colors.white,
-                               alignment=2))]],
+            [
+                [
+                    Paragraph(
+                        f'<font color="white"><b>{T["prioridade"].upper()}</b><br/>'
+                        f'<font size="14">{_esc(classif)}</font></font>',
+                        ParagraphStyle("faixa", parent=normal, textColor=colors.white),
+                    ),
+                    Paragraph(
+                        f'<font color="white">{_esc(tempo)}</font>',
+                        ParagraphStyle(
+                            "faixaR", parent=normal, textColor=colors.white, alignment=2
+                        ),
+                    ),
+                ]
+            ],
             colWidths=[110 * mm, 64 * mm],
         )
-        faixa.setStyle(TableStyle([
-            ("BACKGROUND", (0, 0), (-1, -1), cor_hex),
-            ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
-            ("TOPPADDING", (0, 0), (-1, -1), 7),
-            ("BOTTOMPADDING", (0, 0), (-1, -1), 7),
-            ("LEFTPADDING", (0, 0), (-1, -1), 10),
-            ("RIGHTPADDING", (0, 0), (-1, -1), 10),
-        ]))
+        faixa.setStyle(
+            TableStyle(
+                [
+                    ("BACKGROUND", (0, 0), (-1, -1), cor_hex),
+                    ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+                    ("TOPPADDING", (0, 0), (-1, -1), 7),
+                    ("BOTTOMPADDING", (0, 0), (-1, -1), 7),
+                    ("LEFTPADDING", (0, 0), (-1, -1), 10),
+                    ("RIGHTPADDING", (0, 0), (-1, -1), 10),
+                ]
+            )
+        )
         el.append(faixa)
 
     # Recomendação (o que fazer / para onde ir).
     if dados.get("mensagem"):
         el.append(Paragraph(T["recomendacao"], h_sec))
-        el.append(Paragraph(str(dados["mensagem"]), normal))
+        el.append(Paragraph(_esc(_aparar(dados["mensagem"], _TETO_LONGO)), normal))
 
     # Unidade sugerida: nome, morada, telefone, horários. Sem distância nem
     # tempo de espera (só fazem sentido em direto, ficam desatualizados no
@@ -258,32 +312,60 @@ def gerar_pdf(dados: dict) -> bytes:
     unidade = dados.get("unidade")
     if isinstance(unidade, dict) and unidade.get("nome"):
         el.append(Paragraph(T["unidade"], h_sec))
-        el.append(Paragraph(f"<b>{unidade['nome']}</b>", normal))
+        el.append(Paragraph(f"<b>{_esc(_aparar(unidade['nome'], _TETO_CURTO))}</b>", normal))
         if unidade.get("morada"):
-            el.append(Paragraph(f"{T['morada']}: {unidade['morada']}", normal))
+            el.append(
+                Paragraph(f"{T['morada']}: {_esc(_aparar(unidade['morada'], _TETO_CURTO))}", normal)
+            )
         if unidade.get("telefone"):
-            el.append(Paragraph(f"{T['telefone']}: {unidade['telefone']}", normal))
+            el.append(
+                Paragraph(
+                    f"{T['telefone']}: {_esc(_aparar(unidade['telefone'], _TETO_CURTO))}", normal
+                )
+            )
         horarios = unidade.get("horarios") or {}
         if horarios:
-            partes = [f"{serv_labels.get(k, k)}: {v}" for k, v in horarios.items()]
+            partes = [
+                f"{_esc(_aparar(serv_labels.get(k, k), _TETO_CURTO))}: "
+                f"{_esc(_aparar(v, _TETO_CURTO))}"
+                for k, v in list(horarios.items())[:_TETO_HORARIOS]
+            ]
             el.append(Paragraph(f"{T['horarios']}: " + "; ".join(partes), normal))
 
     # Sinais de alarme: quando procurar ajuda com urgência (o essencial de
     # segurança). Limitado a quatro para não crescer.
     ac = dados.get("autocuidado")
     if isinstance(ac, dict) and ac.get("alerta"):
-        el.append(Paragraph((ac.get("alerta_titulo") or "").strip() or T["autocuidado"], h_sec))
+        el.append(
+            Paragraph(
+                _esc(
+                    _aparar(
+                        (ac.get("alerta_titulo") or "").strip() or T["autocuidado"], _TETO_CURTO
+                    )
+                ),
+                h_sec,
+            )
+        )
         for item in ac["alerta"][:4]:
-            el.append(Paragraph(
-                f'&nbsp;&nbsp;<font color="#C62828">•</font> {item}', normal))
+            el.append(
+                Paragraph(
+                    f'&nbsp;&nbsp;<font color="#C62828">•</font> '
+                    f"{_esc(_aparar(item, _TETO_CURTO))}",
+                    normal,
+                )
+            )
 
     # Contactos úteis (uma linha).
     contactos = dados.get("contactos") or {}
     n_112 = ((contactos.get("emergencia") or {}).get("numero")) or "112"
     n_sns = ((contactos.get("sns24") or {}).get("numero")) or "808 24 24 24"
     el.append(Paragraph(T["contactos"], h_sec))
-    el.append(Paragraph(
-        f"{T['emergencia']}: <b>{n_112}</b> &nbsp;·&nbsp; {T['sns']}: <b>{n_sns}</b>", normal))
+    el.append(
+        Paragraph(
+            f"{T['emergencia']}: <b>{_esc(n_112)}</b> &nbsp;·&nbsp; {T['sns']}: <b>{_esc(n_sns)}</b>",
+            normal,
+        )
+    )
 
     # Rodapé/aviso.
     el.append(Spacer(1, 10))

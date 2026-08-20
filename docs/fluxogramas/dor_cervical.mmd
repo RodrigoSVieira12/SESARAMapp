@@ -1,0 +1,81 @@
+flowchart TD
+  inicio(["Início: Dor cervical"])
+  dor_cervical_p1_1847["1. [P1] Compromisso da via aérea?"]
+  dor_cervical_p1_2118["2. [P1] Respiração ineficaz?"]
+  dor_cervical_p1_2325["3. [P1] Sinais de choque?"]
+  dor_cervical_p1_2326["4. [P1] Não reativo?"]
+  dor_cervical_p2_2327["5. [P2] Alteração do estado de<br/>consciência?"]
+  dor_cervical_p2_2328["6. [P2] Défice neurológico agudo?<br/><24h"]
+  dor_cervical_p2_2329["7. [P2] Muito quente?"]
+  dor_cervical_p2_2330["8. [P2] Possível sépsis?"]
+  dor_cervical_p2_2331["9. [P2] Sinais de meningismo?"]
+  dor_cervical_p2_2332["10. [P2] Erupção cutânea desconhecida?"]
+  dor_cervical_p2_2333["11. [P2] Dor severa?"]
+  dor_cervical_p3_2334["12. [P3] Novos sinais e/ou sintomas<br/>neurológicos?"]
+  dor_cervical_p3_2335["13. [P3] Quente?"]
+  dor_cervical_p3_2336["14. [P3] Traumatismo direto da região<br/>cervical?"]
+  dor_cervical_p3_2337["15. [P3] Dor moderada?"]
+  dor_cervical_p4_2338["16. [P4] Febre persistente?"]
+  dor_cervical_p4_2341["17. [P4] Dor persistente?"]
+  dor_cervical_p4_2342["18. [P4] Problema recente?"]
+  inicio --> dor_cervical_p1_1847
+  dor_cervical_p1_1847_sim(["VERMELHO"]):::vermelho
+  dor_cervical_p1_1847 -->|Sim| dor_cervical_p1_1847_sim
+  dor_cervical_p1_1847 -->|Não| dor_cervical_p1_2118
+  dor_cervical_p1_2118_sim(["VERMELHO"]):::vermelho
+  dor_cervical_p1_2118 -->|Sim| dor_cervical_p1_2118_sim
+  dor_cervical_p1_2118 -->|Não| dor_cervical_p1_2325
+  dor_cervical_p1_2325_sim(["VERMELHO"]):::vermelho
+  dor_cervical_p1_2325 -->|Sim| dor_cervical_p1_2325_sim
+  dor_cervical_p1_2325 -->|Não| dor_cervical_p1_2326
+  dor_cervical_p1_2326_sim(["VERMELHO"]):::vermelho
+  dor_cervical_p1_2326 -->|Sim| dor_cervical_p1_2326_sim
+  dor_cervical_p1_2326 -->|Não| dor_cervical_p2_2327
+  dor_cervical_p2_2327_sim(["LARANJA"]):::laranja
+  dor_cervical_p2_2327 -->|Sim| dor_cervical_p2_2327_sim
+  dor_cervical_p2_2327 -->|Não| dor_cervical_p2_2328
+  dor_cervical_p2_2328_sim(["LARANJA"]):::laranja
+  dor_cervical_p2_2328 -->|Sim| dor_cervical_p2_2328_sim
+  dor_cervical_p2_2328 -->|Não| dor_cervical_p2_2329
+  dor_cervical_p2_2329_sim(["LARANJA"]):::laranja
+  dor_cervical_p2_2329 -->|Sim| dor_cervical_p2_2329_sim
+  dor_cervical_p2_2329 -->|Não| dor_cervical_p2_2330
+  dor_cervical_p2_2330_sim(["LARANJA"]):::laranja
+  dor_cervical_p2_2330 -->|Sim| dor_cervical_p2_2330_sim
+  dor_cervical_p2_2330 -->|Não| dor_cervical_p2_2331
+  dor_cervical_p2_2331_sim(["LARANJA"]):::laranja
+  dor_cervical_p2_2331 -->|Sim| dor_cervical_p2_2331_sim
+  dor_cervical_p2_2331 -->|Não| dor_cervical_p2_2332
+  dor_cervical_p2_2332_sim(["LARANJA"]):::laranja
+  dor_cervical_p2_2332 -->|Sim| dor_cervical_p2_2332_sim
+  dor_cervical_p2_2332 -->|Não| dor_cervical_p2_2333
+  dor_cervical_p2_2333_sim(["LARANJA"]):::laranja
+  dor_cervical_p2_2333 -->|Sim| dor_cervical_p2_2333_sim
+  dor_cervical_p2_2333 -->|Não| dor_cervical_p3_2334
+  dor_cervical_p3_2334_sim(["AMARELO"]):::amarelo
+  dor_cervical_p3_2334 -->|Sim| dor_cervical_p3_2334_sim
+  dor_cervical_p3_2334 -->|Não| dor_cervical_p3_2335
+  dor_cervical_p3_2335_sim(["AMARELO"]):::amarelo
+  dor_cervical_p3_2335 -->|Sim| dor_cervical_p3_2335_sim
+  dor_cervical_p3_2335 -->|Não| dor_cervical_p3_2336
+  dor_cervical_p3_2336_sim(["AMARELO"]):::amarelo
+  dor_cervical_p3_2336 -->|Sim| dor_cervical_p3_2336_sim
+  dor_cervical_p3_2336 -->|Não| dor_cervical_p3_2337
+  dor_cervical_p3_2337_sim(["AMARELO"]):::amarelo
+  dor_cervical_p3_2337 -->|Sim| dor_cervical_p3_2337_sim
+  dor_cervical_p3_2337 -->|Não| dor_cervical_p4_2338
+  dor_cervical_p4_2338_sim(["VERDE"]):::verde
+  dor_cervical_p4_2338 -->|Sim| dor_cervical_p4_2338_sim
+  dor_cervical_p4_2338 -->|Não| dor_cervical_p4_2341
+  dor_cervical_p4_2341_sim(["VERDE"]):::verde
+  dor_cervical_p4_2341 -->|Sim| dor_cervical_p4_2341_sim
+  dor_cervical_p4_2341 -->|Não| dor_cervical_p4_2342
+  dor_cervical_p4_2342_sim(["VERDE"]):::verde
+  dor_cervical_p4_2342 -->|Sim| dor_cervical_p4_2342_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  dor_cervical_p4_2342 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

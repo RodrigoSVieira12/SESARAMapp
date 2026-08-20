@@ -1,0 +1,101 @@
+flowchart TD
+  inicio(["Início: Doença mental"])
+  doenca_mental_p1_1843["1. [P1] Compromisso da via aérea?"]
+  doenca_mental_p1_2114["2. [P1] Respiração ineficaz?"]
+  doenca_mental_p1_2225["3. [P1] Sinais de choque?"]
+  doenca_mental_p1_2226["4. [P1] Não reativo?"]
+  doenca_mental_p2_2227["5. [P2] Alteração do estado de<br/>consciência?"]
+  doenca_mental_p2_2228["6. [P2] Agressividade ou agitação<br/>severa?"]
+  doenca_mental_p2_2229["7. [P2] Risco elevado de abandono sem<br/>avaliação?"]
+  doenca_mental_p2_2230["8. [P2] Risco elevado de<br/>auto-agressão?"]
+  doenca_mental_p2_2231["9. [P2] Risco elevado de agressão a<br/>terceiros?"]
+  doenca_mental_p2_2232["10. [P2] Alucinação aparente?"]
+  doenca_mental_p2_2233["11. [P2] Novos sinais/sintomas de<br/>psicose?"]
+  doenca_mental_p3_2234["12. [P3] Internamento compulsivo<br/>provável?"]
+  doenca_mental_p3_2235["13. [P3] Angústia marcada?"]
+  doenca_mental_p3_2236["14. [P3] Agressividade ou agitação<br/>moderada?"]
+  doenca_mental_p3_2237["15. [P3] Risco moderado de agressão a<br/>terceiros?"]
+  doenca_mental_p3_2238["16. [P3] Risco moderado de abandono do<br/>local s/ avaliação?"]
+  doenca_mental_p3_2239["17. [P3] Risco moderado de<br/>auto-agressão?"]
+  doenca_mental_p3_2240["18. [P3] Parto recente?"]
+  doenca_mental_p3_2241["19. [P3] História psiquiátrica<br/>significativa?"]
+  doenca_mental_p4_2242["20. [P4] Alta de serviço de saúde<br/>mental nos últimos 15 dias?"]
+  doenca_mental_p4_2243["21. [P4] Novos sintomas de doença<br/>mental significativa?"]
+  doenca_mental_p4_2244["22. [P4] Preocupação com a salvaguarda<br/>do doente?"]
+  doenca_mental_p4_2245["23. [P4] Auto-agressão sem<br/>antecedentes psiquiátricos?"]
+  inicio --> doenca_mental_p1_1843
+  doenca_mental_p1_1843_sim(["VERMELHO"]):::vermelho
+  doenca_mental_p1_1843 -->|Sim| doenca_mental_p1_1843_sim
+  doenca_mental_p1_1843 -->|Não| doenca_mental_p1_2114
+  doenca_mental_p1_2114_sim(["VERMELHO"]):::vermelho
+  doenca_mental_p1_2114 -->|Sim| doenca_mental_p1_2114_sim
+  doenca_mental_p1_2114 -->|Não| doenca_mental_p1_2225
+  doenca_mental_p1_2225_sim(["VERMELHO"]):::vermelho
+  doenca_mental_p1_2225 -->|Sim| doenca_mental_p1_2225_sim
+  doenca_mental_p1_2225 -->|Não| doenca_mental_p1_2226
+  doenca_mental_p1_2226_sim(["VERMELHO"]):::vermelho
+  doenca_mental_p1_2226 -->|Sim| doenca_mental_p1_2226_sim
+  doenca_mental_p1_2226 -->|Não| doenca_mental_p2_2227
+  doenca_mental_p2_2227_sim(["LARANJA"]):::laranja
+  doenca_mental_p2_2227 -->|Sim| doenca_mental_p2_2227_sim
+  doenca_mental_p2_2227 -->|Não| doenca_mental_p2_2228
+  doenca_mental_p2_2228_sim(["LARANJA"]):::laranja
+  doenca_mental_p2_2228 -->|Sim| doenca_mental_p2_2228_sim
+  doenca_mental_p2_2228 -->|Não| doenca_mental_p2_2229
+  doenca_mental_p2_2229_sim(["LARANJA"]):::laranja
+  doenca_mental_p2_2229 -->|Sim| doenca_mental_p2_2229_sim
+  doenca_mental_p2_2229 -->|Não| doenca_mental_p2_2230
+  doenca_mental_p2_2230_sim(["LARANJA"]):::laranja
+  doenca_mental_p2_2230 -->|Sim| doenca_mental_p2_2230_sim
+  doenca_mental_p2_2230 -->|Não| doenca_mental_p2_2231
+  doenca_mental_p2_2231_sim(["LARANJA"]):::laranja
+  doenca_mental_p2_2231 -->|Sim| doenca_mental_p2_2231_sim
+  doenca_mental_p2_2231 -->|Não| doenca_mental_p2_2232
+  doenca_mental_p2_2232_sim(["LARANJA"]):::laranja
+  doenca_mental_p2_2232 -->|Sim| doenca_mental_p2_2232_sim
+  doenca_mental_p2_2232 -->|Não| doenca_mental_p2_2233
+  doenca_mental_p2_2233_sim(["LARANJA"]):::laranja
+  doenca_mental_p2_2233 -->|Sim| doenca_mental_p2_2233_sim
+  doenca_mental_p2_2233 -->|Não| doenca_mental_p3_2234
+  doenca_mental_p3_2234_sim(["AMARELO"]):::amarelo
+  doenca_mental_p3_2234 -->|Sim| doenca_mental_p3_2234_sim
+  doenca_mental_p3_2234 -->|Não| doenca_mental_p3_2235
+  doenca_mental_p3_2235_sim(["AMARELO"]):::amarelo
+  doenca_mental_p3_2235 -->|Sim| doenca_mental_p3_2235_sim
+  doenca_mental_p3_2235 -->|Não| doenca_mental_p3_2236
+  doenca_mental_p3_2236_sim(["AMARELO"]):::amarelo
+  doenca_mental_p3_2236 -->|Sim| doenca_mental_p3_2236_sim
+  doenca_mental_p3_2236 -->|Não| doenca_mental_p3_2237
+  doenca_mental_p3_2237_sim(["AMARELO"]):::amarelo
+  doenca_mental_p3_2237 -->|Sim| doenca_mental_p3_2237_sim
+  doenca_mental_p3_2237 -->|Não| doenca_mental_p3_2238
+  doenca_mental_p3_2238_sim(["AMARELO"]):::amarelo
+  doenca_mental_p3_2238 -->|Sim| doenca_mental_p3_2238_sim
+  doenca_mental_p3_2238 -->|Não| doenca_mental_p3_2239
+  doenca_mental_p3_2239_sim(["AMARELO"]):::amarelo
+  doenca_mental_p3_2239 -->|Sim| doenca_mental_p3_2239_sim
+  doenca_mental_p3_2239 -->|Não| doenca_mental_p3_2240
+  doenca_mental_p3_2240_sim(["AMARELO"]):::amarelo
+  doenca_mental_p3_2240 -->|Sim| doenca_mental_p3_2240_sim
+  doenca_mental_p3_2240 -->|Não| doenca_mental_p3_2241
+  doenca_mental_p3_2241_sim(["AMARELO"]):::amarelo
+  doenca_mental_p3_2241 -->|Sim| doenca_mental_p3_2241_sim
+  doenca_mental_p3_2241 -->|Não| doenca_mental_p4_2242
+  doenca_mental_p4_2242_sim(["VERDE"]):::verde
+  doenca_mental_p4_2242 -->|Sim| doenca_mental_p4_2242_sim
+  doenca_mental_p4_2242 -->|Não| doenca_mental_p4_2243
+  doenca_mental_p4_2243_sim(["VERDE"]):::verde
+  doenca_mental_p4_2243 -->|Sim| doenca_mental_p4_2243_sim
+  doenca_mental_p4_2243 -->|Não| doenca_mental_p4_2244
+  doenca_mental_p4_2244_sim(["VERDE"]):::verde
+  doenca_mental_p4_2244 -->|Sim| doenca_mental_p4_2244_sim
+  doenca_mental_p4_2244 -->|Não| doenca_mental_p4_2245
+  doenca_mental_p4_2245_sim(["VERDE"]):::verde
+  doenca_mental_p4_2245 -->|Sim| doenca_mental_p4_2245_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  doenca_mental_p4_2245 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

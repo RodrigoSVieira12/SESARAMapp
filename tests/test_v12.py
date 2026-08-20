@@ -25,7 +25,6 @@ import importlib.util
 import re
 from pathlib import Path
 
-import pytest
 from fastapi.testclient import TestClient
 
 from app import versao
@@ -57,6 +56,7 @@ RE_CLASSDEF = re.compile(r"classDef (\w+)")
 # --------------------------------------------------------------------- #
 # Versão e bibliotecas embutidas (static/vendor)                          #
 # --------------------------------------------------------------------- #
+
 
 def test_versao_e_0_12_ou_superior():
     partes = tuple(int(x) for x in versao.VERSAO.split("."))
@@ -104,6 +104,7 @@ def test_index_html_ja_nao_depende_do_unpkg():
 # Documento de validação clínica: autossuficiente e com falhas visíveis  #
 # --------------------------------------------------------------------- #
 
+
 def test_documento_embute_a_biblioteca_e_todos_os_fluxogramas():
     documento = gerador.construir_documento(motor)
     assert "unpkg.com" not in documento
@@ -150,6 +151,7 @@ def test_mmd_no_disco_sao_os_das_regras_atuais():
 # Fluxogramas em inglês (com recuo seguro para PT)                        #
 # --------------------------------------------------------------------- #
 
+
 def test_mermaid_pt_continua_exatamente_como_antes():
     for fluxo in motor.fluxos.values():
         texto = fluxogramas.mermaid_do_fluxo(fluxo)
@@ -160,14 +162,14 @@ def test_mermaid_pt_continua_exatamente_como_antes():
 
 
 def test_mermaid_en_traduz_rotulos_textos_e_nome():
-    texto = fluxogramas.mermaid_do_fluxo(motor.fluxos["febre"], "en")
+    texto = fluxogramas.mermaid_do_fluxo(motor.fluxos["dor_toracica"], "en")
     assert texto.startswith("flowchart TD")
-    assert 'inicio(["Start: Fever"])' in texto
+    assert 'inicio(["Start: Chest pain"])' in texto
     assert "|Yes|" in texto and "|No|" in texto
     assert "|Sim|" not in texto
     # O texto clínico vem do campo texto_en (normalizando as quebras
     # de linha <br/> que o _quebrar mete dentro das caixas):
-    assert "Has the fever lasted more than 3 days?" in texto.replace("<br/>", " ")
+    assert "Airway compromise?" in texto.replace("<br/>", " ")
 
 
 def test_mermaid_en_recua_para_pt_quando_falta_traducao():
@@ -177,35 +179,27 @@ def test_mermaid_en_recua_para_pt_quando_falta_traducao():
         "perguntas": [
             {
                 "id": "q1",
-                "texto": "Só em português?",
-                "sim": {"resultado": {"cor": "verde", "motivo": "só PT"}},
-                "nao": {"resultado": {"cor": "azul"}},
+                "prioridade": "P4",
+                "cor": "verde",
+                "texto": "Só em português?",  # sem texto_en de propósito
             }
         ],
     }
     texto = fluxogramas.mermaid_do_fluxo(fluxo, "en")
     # Rótulos do desenho em inglês, conteúdo clínico recua para PT:
     assert "|Yes|" in texto and "Start: Teste" in texto
-    assert "Só em português?" in texto and "só PT" in texto
+    assert "Só em português?" in texto
 
 
 def _fluxo_com_todas_as_cores() -> dict:
-    cores = ["vermelho", "laranja", "amarelo", "verde", "azul"]
-    perguntas = []
-    for i, cor in enumerate(cores, start=1):
-        ramo_nao = (
-            {"proxima": f"q{i + 1}"}
-            if i < len(cores)
-            else {"resultado": {"cor": "azul", "motivo": "fim"}}
-        )
-        perguntas.append(
-            {
-                "id": f"q{i}",
-                "texto": f"Pergunta {i}?",
-                "sim": {"resultado": {"cor": cor, "motivo": f"motivo {i}"}},
-                "nao": ramo_nao,
-            }
-        )
+    # No modelo por discriminadores, o azul vem do desfecho final "sem
+    # discriminador positivo"; os P1-P4 dão as outras quatro cores.
+    perguntas = [
+        {"id": "q1", "prioridade": "P1", "cor": "vermelho", "texto": "Pergunta 1?"},
+        {"id": "q2", "prioridade": "P2", "cor": "laranja", "texto": "Pergunta 2?"},
+        {"id": "q3", "prioridade": "P3", "cor": "amarelo", "texto": "Pergunta 3?"},
+        {"id": "q4", "prioridade": "P4", "cor": "verde", "texto": "Pergunta 4?"},
+    ]
     return {"id": "sintetico", "nome": "Sintético", "nome_en": "Synthetic", "perguntas": perguntas}
 
 
@@ -234,6 +228,7 @@ def test_todas_as_classes_usadas_tem_classdef_em_ambos_os_idiomas():
 # API e página da pré-visualização viva                                   #
 # --------------------------------------------------------------------- #
 
+
 def test_api_fluxogramas_devolve_todos_os_fluxos():
     dados = cliente.get("/api/fluxogramas").json()
     assert dados["erro"] is None
@@ -245,8 +240,8 @@ def test_api_fluxogramas_devolve_todos_os_fluxos():
 def test_api_fluxogramas_em_ingles():
     dados = cliente.get("/api/fluxogramas?idioma=en").json()
     por_id = {f["id"]: f for f in dados["fluxos"]}
-    assert por_id["febre"]["nome"] == "Fever"
-    assert "|Yes|" in por_id["febre"]["mermaid"]
+    assert por_id["dor_toracica"]["nome"] == "Chest pain"
+    assert "|Yes|" in por_id["dor_toracica"]["mermaid"]
 
 
 def test_api_fluxogramas_valida_o_idioma():

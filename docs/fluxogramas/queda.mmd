@@ -1,0 +1,113 @@
+flowchart TD
+  inicio(["Início: Queda"])
+  queda_p1_1872["1. [P1] Compromisso da via aérea?"]
+  queda_p1_2143["2. [P1] Respiração ineficaz?"]
+  queda_p1_2751["3. [P1] Hemorragia catastrófica?"]
+  queda_p1_2756["4. [P1] Sinais de choque?"]
+  queda_p1_2768["5. [P1] Não reativo?"]
+  queda_p1_2958["6. [P1] Convulsão atual?"]
+  queda_p2_2959["7. [P2] Grande Hemorragia<br/>incontrolável?"]
+  queda_p2_2960["8. [P2] Alteração do estado de<br/>consciência?"]
+  queda_p2_2961["9. [P2] Défice neurológico agudo?<br/><24h"]
+  queda_p2_2962["10. [P2] Muito quente?"]
+  queda_p2_2963["11. [P2] Possível sépsis?"]
+  queda_p2_2964["12. [P2] Vertigem persistente de novo?"]
+  queda_p2_2965["13. [P2] Fratura exposta?"]
+  queda_p2_2966["14. [P2] Mecanismo significativo de<br/>lesão?"]
+  queda_p2_2967["15. [P2] Dor severa?"]
+  queda_p3_2968["16. [P3] Pequena hemorragia<br/>incontrolável?"]
+  queda_p3_2969["17. [P3] Novos sinais e/ou sintomas<br/>neurológicos?"]
+  queda_p3_2970["18. [P3] Quente?"]
+  queda_p3_2971["19. [P3] História de perda de<br/>consciência?"]
+  queda_p3_2972["20. [P3] História Inapropriada?"]
+  queda_p3_2973["21. [P3] Deformação?"]
+  queda_p3_2974["22. [P3] Dor moderada?"]
+  queda_p4_2975["23. [P4] Febre persistente?"]
+  queda_p4_2978["24. [P4] Edema?"]
+  queda_p4_2979["25. [P4] Dor persistente?"]
+  queda_p4_3225["26. [P4] Problema recente?"]
+  inicio --> queda_p1_1872
+  queda_p1_1872_sim(["VERMELHO"]):::vermelho
+  queda_p1_1872 -->|Sim| queda_p1_1872_sim
+  queda_p1_1872 -->|Não| queda_p1_2143
+  queda_p1_2143_sim(["VERMELHO"]):::vermelho
+  queda_p1_2143 -->|Sim| queda_p1_2143_sim
+  queda_p1_2143 -->|Não| queda_p1_2751
+  queda_p1_2751_sim(["VERMELHO"]):::vermelho
+  queda_p1_2751 -->|Sim| queda_p1_2751_sim
+  queda_p1_2751 -->|Não| queda_p1_2756
+  queda_p1_2756_sim(["VERMELHO"]):::vermelho
+  queda_p1_2756 -->|Sim| queda_p1_2756_sim
+  queda_p1_2756 -->|Não| queda_p1_2768
+  queda_p1_2768_sim(["VERMELHO"]):::vermelho
+  queda_p1_2768 -->|Sim| queda_p1_2768_sim
+  queda_p1_2768 -->|Não| queda_p1_2958
+  queda_p1_2958_sim(["VERMELHO"]):::vermelho
+  queda_p1_2958 -->|Sim| queda_p1_2958_sim
+  queda_p1_2958 -->|Não| queda_p2_2959
+  queda_p2_2959_sim(["LARANJA"]):::laranja
+  queda_p2_2959 -->|Sim| queda_p2_2959_sim
+  queda_p2_2959 -->|Não| queda_p2_2960
+  queda_p2_2960_sim(["LARANJA"]):::laranja
+  queda_p2_2960 -->|Sim| queda_p2_2960_sim
+  queda_p2_2960 -->|Não| queda_p2_2961
+  queda_p2_2961_sim(["LARANJA"]):::laranja
+  queda_p2_2961 -->|Sim| queda_p2_2961_sim
+  queda_p2_2961 -->|Não| queda_p2_2962
+  queda_p2_2962_sim(["LARANJA"]):::laranja
+  queda_p2_2962 -->|Sim| queda_p2_2962_sim
+  queda_p2_2962 -->|Não| queda_p2_2963
+  queda_p2_2963_sim(["LARANJA"]):::laranja
+  queda_p2_2963 -->|Sim| queda_p2_2963_sim
+  queda_p2_2963 -->|Não| queda_p2_2964
+  queda_p2_2964_sim(["LARANJA"]):::laranja
+  queda_p2_2964 -->|Sim| queda_p2_2964_sim
+  queda_p2_2964 -->|Não| queda_p2_2965
+  queda_p2_2965_sim(["LARANJA"]):::laranja
+  queda_p2_2965 -->|Sim| queda_p2_2965_sim
+  queda_p2_2965 -->|Não| queda_p2_2966
+  queda_p2_2966_sim(["LARANJA"]):::laranja
+  queda_p2_2966 -->|Sim| queda_p2_2966_sim
+  queda_p2_2966 -->|Não| queda_p2_2967
+  queda_p2_2967_sim(["LARANJA"]):::laranja
+  queda_p2_2967 -->|Sim| queda_p2_2967_sim
+  queda_p2_2967 -->|Não| queda_p3_2968
+  queda_p3_2968_sim(["AMARELO"]):::amarelo
+  queda_p3_2968 -->|Sim| queda_p3_2968_sim
+  queda_p3_2968 -->|Não| queda_p3_2969
+  queda_p3_2969_sim(["AMARELO"]):::amarelo
+  queda_p3_2969 -->|Sim| queda_p3_2969_sim
+  queda_p3_2969 -->|Não| queda_p3_2970
+  queda_p3_2970_sim(["AMARELO"]):::amarelo
+  queda_p3_2970 -->|Sim| queda_p3_2970_sim
+  queda_p3_2970 -->|Não| queda_p3_2971
+  queda_p3_2971_sim(["AMARELO"]):::amarelo
+  queda_p3_2971 -->|Sim| queda_p3_2971_sim
+  queda_p3_2971 -->|Não| queda_p3_2972
+  queda_p3_2972_sim(["AMARELO"]):::amarelo
+  queda_p3_2972 -->|Sim| queda_p3_2972_sim
+  queda_p3_2972 -->|Não| queda_p3_2973
+  queda_p3_2973_sim(["AMARELO"]):::amarelo
+  queda_p3_2973 -->|Sim| queda_p3_2973_sim
+  queda_p3_2973 -->|Não| queda_p3_2974
+  queda_p3_2974_sim(["AMARELO"]):::amarelo
+  queda_p3_2974 -->|Sim| queda_p3_2974_sim
+  queda_p3_2974 -->|Não| queda_p4_2975
+  queda_p4_2975_sim(["VERDE"]):::verde
+  queda_p4_2975 -->|Sim| queda_p4_2975_sim
+  queda_p4_2975 -->|Não| queda_p4_2978
+  queda_p4_2978_sim(["VERDE"]):::verde
+  queda_p4_2978 -->|Sim| queda_p4_2978_sim
+  queda_p4_2978 -->|Não| queda_p4_2979
+  queda_p4_2979_sim(["VERDE"]):::verde
+  queda_p4_2979 -->|Sim| queda_p4_2979_sim
+  queda_p4_2979 -->|Não| queda_p4_3225
+  queda_p4_3225_sim(["VERDE"]):::verde
+  queda_p4_3225 -->|Sim| queda_p4_3225_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  queda_p4_3225 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

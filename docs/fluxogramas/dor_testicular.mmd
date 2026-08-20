@@ -1,0 +1,81 @@
+flowchart TD
+  inicio(["Início: Dor testicular"])
+  dor_testicular_p1_1850["1. [P1] Compromisso da via aérea?"]
+  dor_testicular_p1_2121["2. [P1] Respiração ineficaz?"]
+  dor_testicular_p1_2366["3. [P1] Sinais de choque?"]
+  dor_testicular_p1_2377["4. [P1] Não reativo?"]
+  dor_testicular_p2_2396["5. [P2] Muito quente?"]
+  dor_testicular_p2_2397["6. [P2] Gangrena escrotal?"]
+  dor_testicular_p2_2398["7. [P2] Idade inferior a 25 anos?"]
+  dor_testicular_p2_2399["8. [P2] Dor severa?"]
+  dor_testicular_p3_2400["9. [P3] Vómitos incoercíveis?"]
+  dor_testicular_p3_2401["10. [P3] Quente?"]
+  dor_testicular_p3_2402["11. [P3] Celulite escrotal?"]
+  dor_testicular_p3_2403["12. [P3] Cólica?"]
+  dor_testicular_p3_2404["13. [P3] Dor moderada?"]
+  dor_testicular_p4_2405["14. [P4] Vómitos persistentes?"]
+  dor_testicular_p4_2406["15. [P4] Febre persistente?"]
+  dor_testicular_p4_2407["16. [P4] Trauma escrotal?"]
+  dor_testicular_p4_2408["17. [P4] Dor persistente?"]
+  dor_testicular_p4_2409["18. [P4] Problema recente?"]
+  inicio --> dor_testicular_p1_1850
+  dor_testicular_p1_1850_sim(["VERMELHO"]):::vermelho
+  dor_testicular_p1_1850 -->|Sim| dor_testicular_p1_1850_sim
+  dor_testicular_p1_1850 -->|Não| dor_testicular_p1_2121
+  dor_testicular_p1_2121_sim(["VERMELHO"]):::vermelho
+  dor_testicular_p1_2121 -->|Sim| dor_testicular_p1_2121_sim
+  dor_testicular_p1_2121 -->|Não| dor_testicular_p1_2366
+  dor_testicular_p1_2366_sim(["VERMELHO"]):::vermelho
+  dor_testicular_p1_2366 -->|Sim| dor_testicular_p1_2366_sim
+  dor_testicular_p1_2366 -->|Não| dor_testicular_p1_2377
+  dor_testicular_p1_2377_sim(["VERMELHO"]):::vermelho
+  dor_testicular_p1_2377 -->|Sim| dor_testicular_p1_2377_sim
+  dor_testicular_p1_2377 -->|Não| dor_testicular_p2_2396
+  dor_testicular_p2_2396_sim(["LARANJA"]):::laranja
+  dor_testicular_p2_2396 -->|Sim| dor_testicular_p2_2396_sim
+  dor_testicular_p2_2396 -->|Não| dor_testicular_p2_2397
+  dor_testicular_p2_2397_sim(["LARANJA"]):::laranja
+  dor_testicular_p2_2397 -->|Sim| dor_testicular_p2_2397_sim
+  dor_testicular_p2_2397 -->|Não| dor_testicular_p2_2398
+  dor_testicular_p2_2398_sim(["LARANJA"]):::laranja
+  dor_testicular_p2_2398 -->|Sim| dor_testicular_p2_2398_sim
+  dor_testicular_p2_2398 -->|Não| dor_testicular_p2_2399
+  dor_testicular_p2_2399_sim(["LARANJA"]):::laranja
+  dor_testicular_p2_2399 -->|Sim| dor_testicular_p2_2399_sim
+  dor_testicular_p2_2399 -->|Não| dor_testicular_p3_2400
+  dor_testicular_p3_2400_sim(["AMARELO"]):::amarelo
+  dor_testicular_p3_2400 -->|Sim| dor_testicular_p3_2400_sim
+  dor_testicular_p3_2400 -->|Não| dor_testicular_p3_2401
+  dor_testicular_p3_2401_sim(["AMARELO"]):::amarelo
+  dor_testicular_p3_2401 -->|Sim| dor_testicular_p3_2401_sim
+  dor_testicular_p3_2401 -->|Não| dor_testicular_p3_2402
+  dor_testicular_p3_2402_sim(["AMARELO"]):::amarelo
+  dor_testicular_p3_2402 -->|Sim| dor_testicular_p3_2402_sim
+  dor_testicular_p3_2402 -->|Não| dor_testicular_p3_2403
+  dor_testicular_p3_2403_sim(["AMARELO"]):::amarelo
+  dor_testicular_p3_2403 -->|Sim| dor_testicular_p3_2403_sim
+  dor_testicular_p3_2403 -->|Não| dor_testicular_p3_2404
+  dor_testicular_p3_2404_sim(["AMARELO"]):::amarelo
+  dor_testicular_p3_2404 -->|Sim| dor_testicular_p3_2404_sim
+  dor_testicular_p3_2404 -->|Não| dor_testicular_p4_2405
+  dor_testicular_p4_2405_sim(["VERDE"]):::verde
+  dor_testicular_p4_2405 -->|Sim| dor_testicular_p4_2405_sim
+  dor_testicular_p4_2405 -->|Não| dor_testicular_p4_2406
+  dor_testicular_p4_2406_sim(["VERDE"]):::verde
+  dor_testicular_p4_2406 -->|Sim| dor_testicular_p4_2406_sim
+  dor_testicular_p4_2406 -->|Não| dor_testicular_p4_2407
+  dor_testicular_p4_2407_sim(["VERDE"]):::verde
+  dor_testicular_p4_2407 -->|Sim| dor_testicular_p4_2407_sim
+  dor_testicular_p4_2407 -->|Não| dor_testicular_p4_2408
+  dor_testicular_p4_2408_sim(["VERDE"]):::verde
+  dor_testicular_p4_2408 -->|Sim| dor_testicular_p4_2408_sim
+  dor_testicular_p4_2408 -->|Não| dor_testicular_p4_2409
+  dor_testicular_p4_2409_sim(["VERDE"]):::verde
+  dor_testicular_p4_2409 -->|Sim| dor_testicular_p4_2409_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  dor_testicular_p4_2409 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

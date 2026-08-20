@@ -1,0 +1,210 @@
+{
+  "id": "dor_cervical",
+  "nome": "Dor cervical",
+  "nome_en": "Neck pain",
+  "descricao": "Dor no pescoço.",
+  "descricao_en": "Pain in the neck.",
+  "pediatrico": false,
+  "fonte": "Discriminadores do Sistema de Triagem de Manchester, organizados por prioridade clínica (P1-P5). Importados da tabela de referência; sujeitos a validação clínica antes de uso real.",
+  "fonte_en": "Manchester Triage System discriminators, organised by clinical priority (P1-P5). Imported from the reference table; subject to clinical validation before real use.",
+  "perguntas": [
+    {
+      "id": "dor_cervical_p1_1847",
+      "disc_id": 1847,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Compromisso da via aérea?",
+      "texto_utente": "A respiração está muito difícil ou ruidosa, como se o ar não passasse bem pela garganta (a roncar ou a gorgolejar)?",
+      "texto_en": "Airway compromise?",
+      "texto_utente_en": "Is breathing very difficult or noisy, as if air can't pass properly through the throat (snoring or gurgling)?",
+      "descricao": "A via aérea poderá estar comprometida, por não se conseguir manter aberta, ou porque os reflexos protetores da via respiratória (que evitam a aspiração) se perderam. A incapacidade de manter a via aérea aberta, poderá resultar numa obstrução total ou parcial, intermitente ou não. Isto manifestar-se-á por sons como o ressonar ou o gorgolejar durante a respiração."
+    },
+    {
+      "id": "dor_cervical_p1_2118",
+      "disc_id": 2118,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Respiração ineficaz?",
+      "texto_utente": "A respiração está tão fraca ou cansada que parece não entrar ar suficiente (respiração aos arrancos ou muito a custo)?",
+      "texto_en": "Ineffective breathing?",
+      "texto_utente_en": "Is breathing so weak or laboured that not enough air seems to get in (gasping or a real struggle)?",
+      "descricao": "Doentes que não conseguem respirar suficientemente bem para manter uma oxigenação adequada e com falência respiratória, sofrem de respiração ineficaz. Poderá resultar num esforço acrescentado para respirar, ou em exaustão, incluindo uma respiração tipo “gasping”."
+    },
+    {
+      "id": "dor_cervical_p1_2325",
+      "disc_id": 2325,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Sinais de choque?",
+      "texto_utente": "Tem suores frios, pele muito pálida ou acinzentada, o coração a bater depressa e uma grande fraqueza?",
+      "texto_en": "Signs of shock?",
+      "texto_utente_en": "Are there cold sweats, very pale or greyish skin, a fast heartbeat and severe weakness?",
+      "descricao": "O choque é uma entrega inadequada de oxigénio aos tecidos. Os sinais clássicos incluem suores, palidez, taquicardia, hipotensão e nível de consciência reduzido."
+    },
+    {
+      "id": "dor_cervical_p1_2326",
+      "disc_id": 2326,
+      "prioridade": "P1",
+      "cor": "vermelho",
+      "texto": "Não reativo?",
+      "texto_utente": "Está sem reagir a nada, nem quando lhe falam, lhe tocam ou lhe fazem doer?",
+      "texto_en": "Unresponsive?",
+      "texto_utente_en": "Is the person not reacting at all, even to voice, touch or pain?",
+      "descricao": "Não responde a um estímulo doloroso."
+    },
+    {
+      "id": "dor_cervical_p2_2327",
+      "disc_id": 2327,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Alteração do estado de consciência?",
+      "texto_utente": "Está sonolento ou baralhado, só reagindo quando lhe falam ou lhe tocam (não está bem desperto)?",
+      "texto_en": "Altered level of consciousness?",
+      "texto_utente_en": "Is the person drowsy or muddled, responding only to voice or touch (not fully alert)?",
+      "descricao": "Não está totalmente alerta. Só responde à voz, à dor"
+    },
+    {
+      "id": "dor_cervical_p2_2328",
+      "disc_id": 2328,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Défice neurológico agudo? <24h",
+      "texto_utente": "Nas últimas 24 horas, perdeu de repente a força, a sensibilidade ou os movimentos (por exemplo, num braço, numa perna ou na fala)?",
+      "texto_en": "Acute neurological deficit? (<24h)",
+      "texto_utente_en": "In the last 24 hours, did you suddenly lose strength, feeling or movement (for example in an arm, a leg or your speech)?",
+      "descricao": "Qualquer perda de função neurológica acontecida = 24 horas, incluindo alterações sensitivas, redução da força (temporária ou permanente) dos membros ou alterações funcionais vesicais ou do intestino."
+    },
+    {
+      "id": "dor_cervical_p2_2329",
+      "disc_id": 2329,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Muito quente?",
+      "texto_utente": "Tem febre muito alta? (num adulto, 41°C ou mais; num bebé com menos de 12 meses, 38,5°C ou mais)",
+      "texto_en": "Very hot (high temperature)?",
+      "texto_utente_en": "Do you have a very high fever? (in an adult, 41°C or more; in a baby under 12 months, 38.5°C or more)",
+      "descricao": "No Adulto temperatura igual ou superior a 41ºC; Crianças com menos de 12 meses a temperatura é igual ou superior a 38.5ºC"
+    },
+    {
+      "id": "dor_cervical_p2_2330",
+      "disc_id": 2330,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Possível sépsis?",
+      "texto_utente": "Tem sinais de uma infeção a alastrar depressa, como confusão, respiração muito acelerada ou uma fraqueza que se instala de repente?",
+      "texto_en": "Possible sepsis?",
+      "texto_utente_en": "Are there signs of a fast-spreading infection, such as confusion, very rapid breathing or weakness that comes on suddenly?",
+      "descricao": "Suspeitar de sépsis em vítimas que apresentem alteração do estado de consciência, hipotensão (sistólica inferior a 100mmHg), ou aumento da frequência respiratória (frequência superior a 22 cpm). Nas crianças deve ser determinada a possibilidade de sépsis pelas tabelas de parâmetros vitais ajustados à idade."
+    },
+    {
+      "id": "dor_cervical_p2_2331",
+      "disc_id": 2331,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Sinais de meningismo?",
+      "texto_utente": "Tem o pescoço rígido, com dor de cabeça e incómodo com a luz?",
+      "texto_en": "Signs of meningism?",
+      "texto_utente_en": "Is there a stiff neck, with a headache and discomfort in bright light?",
+      "descricao": "Classicamente, pescoço rígido concomitante com cefaleia e fotofobia."
+    },
+    {
+      "id": "dor_cervical_p2_2332",
+      "disc_id": 2332,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Erupção cutânea desconhecida?",
+      "texto_utente": "Apareceu-lhe uma erupção na pele sem se saber porquê?",
+      "texto_en": "Unknown skin rash?",
+      "texto_utente_en": "Has a rash appeared on the skin with no known cause?",
+      "descricao": "Qualquer erupção cutânea cuja a causa não se possa identificar."
+    },
+    {
+      "id": "dor_cervical_p2_2333",
+      "disc_id": 2333,
+      "prioridade": "P2",
+      "cor": "laranja",
+      "texto": "Dor severa?",
+      "texto_utente": "Tem dores muito fortes, quase a não aguentar (das piores que alguma vez sentiu)?",
+      "texto_en": "Severe pain?",
+      "texto_utente_en": "Do you have very severe pain, almost unbearable (some of the worst you've ever felt)?",
+      "descricao": "Dor significativa e insuportável, frequentemente referida como a pior de sempre. Alterações na expressão facial, de comportamento e nas atividades diárias permitem avaliar o nível de dor, especialmente nos doentes não comunicativos (por exemplo nas crianças e bebés), ou quando existem barreiras de comunicação pelo idioma ou por demência."
+    },
+    {
+      "id": "dor_cervical_p3_2334",
+      "disc_id": 2334,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Novos sinais e/ou sintomas neurológicos?",
+      "texto_utente": "Há mais de 24 horas, notou algo de novo, como perder força ou sensibilidade, ou dificuldade em controlar a urina ou as fezes?",
+      "texto_en": "New neurological signs and/or symptoms?",
+      "texto_utente_en": "More than 24 hours ago, did you notice something new, such as losing strength or feeling, or trouble controlling your bladder or bowel?",
+      "descricao": "Podem incluir alteração ou perda de sensibilidade, enfraquecimento dos membros (transitório ou permanente) ou alterações do funcionamento da bexiga ou do intestino (incontinência) há > 24 horas."
+    },
+    {
+      "id": "dor_cervical_p3_2335",
+      "disc_id": 2335,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Quente?",
+      "texto_utente": "Tem febre? (num adulto, acima de 38,5°C; numa criança, 38,5°C a 39,8°C; num recém-nascido com menos de 28 dias, 37,5°C a 38,4°C)",
+      "texto_en": "Hot (raised temperature)?",
+      "texto_utente_en": "Do you have a fever? (in an adult, above 38.5°C; in a child, 38.5°C to 39.8°C; in a newborn under 28 days, 37.5°C to 38.4°C)",
+      "descricao": "No adulto, uma temperatura > 38.5-40.9ºC; Na criança é 38.5-39.8ºC; No recém-nascido com menos de 28 dias é 37.5-38.4ºC."
+    },
+    {
+      "id": "dor_cervical_p3_2336",
+      "disc_id": 2336,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Traumatismo direto da região cervical?",
+      "texto_utente": "Levou uma pancada ou uma lesão diretamente no pescoço?",
+      "texto_en": "Direct trauma to the neck?",
+      "texto_utente_en": "Did you take a blow or an injury directly to the neck?",
+      "descricao": "Poderá ser vertical (carga), por exemplo quando algo cai sobre a cabeça, por flexão se dobra (para a frente, para trás, para os lados), por torção ou distensão (enforcamento)."
+    },
+    {
+      "id": "dor_cervical_p3_2337",
+      "disc_id": 2337,
+      "prioridade": "P3",
+      "cor": "amarelo",
+      "texto": "Dor moderada?",
+      "texto_utente": "Tem dores a sério, que o impedem de fazer algumas coisas do dia a dia?",
+      "texto_en": "Moderate pain?",
+      "texto_utente_en": "Do you have noticeable pain that stops you doing some everyday things?",
+      "descricao": "Dor significativa que incapacita para algumas atividades diárias. Alterações na expressão facial, de comportamento e nas atividades diárias permitem avaliar o nível de dor, especialmente nos doentes não comunicativos (por exemplo nas crianças e bebés), ou quando existem barreiras de comunicação pelo idioma ou por demência."
+    },
+    {
+      "id": "dor_cervical_p4_2338",
+      "disc_id": 2338,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Febre persistente?",
+      "texto_utente": "A febre não cede, mesmo alternando os medicamentos para baixar a febre (paracetamol e ibuprofeno)?",
+      "texto_en": "Persistent fever?",
+      "texto_utente_en": "Does the fever not come down, even alternating the fever medicines (paracetamol and ibuprofen)?",
+      "descricao": "Febre que não cede à toma intercalada de antipiréticos (paracetamol e ibuprofeno)"
+    },
+    {
+      "id": "dor_cervical_p4_2341",
+      "disc_id": 2341,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Dor persistente?",
+      "texto_utente": "A dor continua sem passar, mesmo depois de esperar ou de tomar um analgésico?",
+      "texto_en": "Persistent pain?",
+      "texto_utente_en": "Does the pain carry on without easing, even after waiting or taking a painkiller?",
+      "descricao": "Dor que não desaparece após algum tempo ou após tomar a medicação apropriada. Mudanças nas expressões faciais, comportamento e interrupção da atividade permitirão avaliar os níveis de dor, especialmente em pacientes não comunicativos, como por exemplo crianças muito pequenas e bebés, ou onde existam barreiras à comunicação devido ao idioma ou a demência."
+    },
+    {
+      "id": "dor_cervical_p4_2342",
+      "disc_id": 2342,
+      "prioridade": "P4",
+      "cor": "verde",
+      "texto": "Problema recente?",
+      "texto_utente": "Este problema começou na última semana?",
+      "texto_en": "Recent problem?",
+      "texto_utente_en": "Did this problem start within the last week?",
+      "descricao": "Um problema que aparece no decorrer da última semana."
+    }
+  ]
+}

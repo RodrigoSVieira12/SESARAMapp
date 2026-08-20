@@ -2,7 +2,7 @@
 
 Sem tocar na rede: as descargas são simuladas por monkeypatch de
 espera._obter_html com HTML de fixture que imita os dois formatos reais
-do SEISRAM (centros de saúde e hospital), e o ficheiro de cache é
+do SESARAM (centros de saúde e hospital), e o ficheiro de cache é
 redirecionado para tmp_path. A regra de troca e a integração no
 encaminhamento são testadas com um cache injetado.
 
@@ -25,7 +25,7 @@ SABADO_15H = datetime(2026, 7, 4, 15, 0)
 PERTO_CAMARA_LOBOS = (32.6514, -16.9799)
 EM_MACHICO = (32.7249, -16.7715)
 
-# --- fixtures HTML: imitam a estrutura das páginas do SEISRAM ---------
+# --- fixtures HTML: imitam a estrutura das páginas do SESARAM ---------
 
 FIX_CENTROS = """
 <html><body>
@@ -58,6 +58,7 @@ FIX_HOSPITAL = """
 def _fake_html(centros=FIX_CENTROS, hospital=FIX_HOSPITAL):
     def _obter(url):
         return centros if "CSP" in url else hospital
+
     return _obter
 
 
@@ -68,6 +69,7 @@ def cache_tmp(tmp_path, monkeypatch):
 
 
 # --- parsers ----------------------------------------------------------
+
 
 def test_interpretar_tempo_formatos():
     assert espera.interpretar_tempo("8m") == 8
@@ -110,6 +112,7 @@ def test_extrair_ultima_atualizacao():
 
 # --- descarga, mapeamento e cache ------------------------------------
 
+
 def test_obter_mapeia_e_grava(cache_tmp, monkeypatch):
     monkeypatch.setattr(espera, "_obter_html", _fake_html())
     dados = espera.obter(force=True)
@@ -142,7 +145,7 @@ def test_falha_herda_cache_valido(cache_tmp, monkeypatch):
 
     monkeypatch.setattr(espera, "_obter_html", _falha)
     dados = espera.obter(force=True)  # força, mas a rede falha
-    assert dados["disponivel"] is True          # herdou o cache
+    assert dados["disponivel"] is True  # herdou o cache
     assert dados["desatualizado"] is True
 
 
@@ -159,6 +162,7 @@ def test_do_cache_nunca_vai_a_rede(cache_tmp, monkeypatch):
 
 
 # --- regra de troca (isolada) ----------------------------------------
+
 
 def _unidade(uid, dist, minutos=None):
     resumo = {"id": uid, "nome": uid, "distancia_km": dist, "aberta_agora": True}
@@ -194,7 +198,7 @@ def test_nao_troca_com_desvio_grande():
 
 
 def test_sem_dados_nunca_troca():
-    perto = _unidade("perto", 2)   # sem tempo_espera
+    perto = _unidade("perto", 2)  # sem tempo_espera
     longe = _unidade("longe", 7)
     principal, _, troca = espera.escolher_principal([perto, longe])
     assert principal is perto
@@ -247,9 +251,7 @@ def test_laranja_vai_ao_hospital_com_espera_da_cor(mock_esperas):
     saida = routing.decidir_encaminhamento("laranja", *PERTO_CAMARA_LOBOS, quando=SABADO_15H)
     assert saida["unidade"]["id"] == "hnm"
     assert saida["reordenado_por_espera"] is False
-    assert saida["politica"] == {
-        "destino": "hospital", "fonte": "configuracao", "aplicada": True
-    }
+    assert saida["politica"] == {"destino": "hospital", "fonte": "configuracao", "aplicada": True}
     # O hospital mostra a espera DA COR (laranja = 8 min).
     te = saida["unidade"]["tempo_espera"]
     assert te["minutos"] == 8 and te["ambito"] == "cor"

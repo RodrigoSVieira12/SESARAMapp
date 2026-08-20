@@ -99,9 +99,7 @@ def _pedir_matriz(
                 )
             else:
                 base = (url or URL_OSRM_PUBLICO).rstrip("/")
-                coords = ";".join(
-                    f"{lng},{lat}" for lat, lng in list(origens) + list(destinos)
-                )
+                coords = ";".join(f"{lng},{lat}" for lat, lng in list(origens) + list(destinos))
                 indices_origens = ";".join(str(i) for i in range(len(origens)))
                 indices_destinos = ";".join(
                     str(i) for i in range(len(origens), len(origens) + len(destinos))
@@ -274,9 +272,7 @@ def main() -> int:
         description="Preenche tempos_medidos.json com um motor de rotas "
         "(ver o cabeçalho do ficheiro para detalhes).",
     )
-    analisador.add_argument(
-        "--motor", choices=["ors", "osrm", "osrm-publico"], default="ors"
-    )
+    analisador.add_argument("--motor", choices=["ors", "osrm", "osrm-publico"], default="ors")
     analisador.add_argument(
         "--chave",
         default=os.environ.get("ORS_API_KEY"),
@@ -288,9 +284,7 @@ def main() -> int:
         help="URL base do motor (por defeito: o ORS oficial, ou "
         f"{URL_OSRM_LOCAL} com --motor osrm)",
     )
-    analisador.add_argument(
-        "--lote", type=int, default=5, help="origens por pedido (defeito: 5)"
-    )
+    analisador.add_argument("--lote", type=int, default=5, help="origens por pedido (defeito: 5)")
     analisador.add_argument(
         "--pausa",
         type=float,

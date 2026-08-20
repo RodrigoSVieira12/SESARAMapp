@@ -1,0 +1,65 @@
+flowchart TD
+  inicio(["Início: Asma"])
+  asma_p1_1789["1. [P1] Compromisso da via aérea?"]
+  asma_p1_1790["2. [P1] Respiração ineficaz?"]
+  asma_p1_1791["3. [P1] Sinais de choque?"]
+  asma_p1_1792["4. [P1] Não reativo?"]
+  asma_p2_1793["5. [P2] Incapacidade de articular<br/>frases completas?"]
+  asma_p2_1794["6. [P2] Alteração do estado de<br/>consciência?"]
+  asma_p2_1795["7. [P2] Muito quente?"]
+  asma_p2_1796["8. [P2] Possível sépsis?"]
+  asma_p2_1797["9. [P2] História significativa de<br/>doença respiratória?"]
+  asma_p3_1798["10. [P3] Broncoespasmo?"]
+  asma_p3_1799["11. [P3] Asma sem melhoria com<br/>tratamento habitual?"]
+  asma_p3_1800["12. [P3] Quente?"]
+  asma_p4_1801["13. [P4] Tosse produtiva?"]
+  asma_p4_1804["14. [P4] Problema recente?"]
+  inicio --> asma_p1_1789
+  asma_p1_1789_sim(["VERMELHO"]):::vermelho
+  asma_p1_1789 -->|Sim| asma_p1_1789_sim
+  asma_p1_1789 -->|Não| asma_p1_1790
+  asma_p1_1790_sim(["VERMELHO"]):::vermelho
+  asma_p1_1790 -->|Sim| asma_p1_1790_sim
+  asma_p1_1790 -->|Não| asma_p1_1791
+  asma_p1_1791_sim(["VERMELHO"]):::vermelho
+  asma_p1_1791 -->|Sim| asma_p1_1791_sim
+  asma_p1_1791 -->|Não| asma_p1_1792
+  asma_p1_1792_sim(["VERMELHO"]):::vermelho
+  asma_p1_1792 -->|Sim| asma_p1_1792_sim
+  asma_p1_1792 -->|Não| asma_p2_1793
+  asma_p2_1793_sim(["LARANJA"]):::laranja
+  asma_p2_1793 -->|Sim| asma_p2_1793_sim
+  asma_p2_1793 -->|Não| asma_p2_1794
+  asma_p2_1794_sim(["LARANJA"]):::laranja
+  asma_p2_1794 -->|Sim| asma_p2_1794_sim
+  asma_p2_1794 -->|Não| asma_p2_1795
+  asma_p2_1795_sim(["LARANJA"]):::laranja
+  asma_p2_1795 -->|Sim| asma_p2_1795_sim
+  asma_p2_1795 -->|Não| asma_p2_1796
+  asma_p2_1796_sim(["LARANJA"]):::laranja
+  asma_p2_1796 -->|Sim| asma_p2_1796_sim
+  asma_p2_1796 -->|Não| asma_p2_1797
+  asma_p2_1797_sim(["LARANJA"]):::laranja
+  asma_p2_1797 -->|Sim| asma_p2_1797_sim
+  asma_p2_1797 -->|Não| asma_p3_1798
+  asma_p3_1798_sim(["AMARELO"]):::amarelo
+  asma_p3_1798 -->|Sim| asma_p3_1798_sim
+  asma_p3_1798 -->|Não| asma_p3_1799
+  asma_p3_1799_sim(["AMARELO"]):::amarelo
+  asma_p3_1799 -->|Sim| asma_p3_1799_sim
+  asma_p3_1799 -->|Não| asma_p3_1800
+  asma_p3_1800_sim(["AMARELO"]):::amarelo
+  asma_p3_1800 -->|Sim| asma_p3_1800_sim
+  asma_p3_1800 -->|Não| asma_p4_1801
+  asma_p4_1801_sim(["VERDE"]):::verde
+  asma_p4_1801 -->|Sim| asma_p4_1801_sim
+  asma_p4_1801 -->|Não| asma_p4_1804
+  asma_p4_1804_sim(["VERDE"]):::verde
+  asma_p4_1804 -->|Sim| asma_p4_1804_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  asma_p4_1804 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

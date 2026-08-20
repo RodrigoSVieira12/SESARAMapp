@@ -1,0 +1,109 @@
+flowchart TD
+  inicio(["Início: Pais preocupados"])
+  pais_preocupados_p1_1865["1. [P1] Compromisso da via aérea?"]
+  pais_preocupados_p1_2136["2. [P1] Respiração ineficaz?"]
+  pais_preocupados_p1_2742["3. [P1] Sinais de choque?"]
+  pais_preocupados_p1_2743["4. [P1] Não reativo?"]
+  pais_preocupados_p2_2778["5. [P2] Prostrado?"]
+  pais_preocupados_p2_2779["6. [P2] Alteração do estado de<br/>consciência?"]
+  pais_preocupados_p2_2781["7. [P2] Muito quente?"]
+  pais_preocupados_p2_2782["8. [P2] Possível sépsis?"]
+  pais_preocupados_p2_2783["9. [P2] Erupção cutânea desconhecida?"]
+  pais_preocupados_p2_2784["10. [P2] História de sobredosagem ou<br/>envenenamento?"]
+  pais_preocupados_p2_2785["11. [P2] Ingestão de objeto perigoso?"]
+  pais_preocupados_p2_2786["12. [P2] Alteração da imunidade<br/>conhecida?"]
+  pais_preocupados_p2_2787["13. [P2] Dor severa?"]
+  pais_preocupados_p3_2788["14. [P3] Sinais de desidratação?"]
+  pais_preocupados_p3_2789["15. [P3] Não se alimenta?"]
+  pais_preocupados_p3_2790["16. [P3] Não urina?"]
+  pais_preocupados_p3_2791["17. [P3] Quente?"]
+  pais_preocupados_p3_2792["18. [P3] Inconsolável pelos pais?"]
+  pais_preocupados_p3_2793["19. [P3] Choro prolongado ou<br/>ininterrupto?"]
+  pais_preocupados_p3_2794["20. [P3] História Inapropriada?"]
+  pais_preocupados_p3_2795["21. [P3] Dor moderada?"]
+  pais_preocupados_p4_2796["22. [P4] Febre persistente?"]
+  pais_preocupados_p4_2799["23. [P4] Comportamento estranho na<br/>criança?"]
+  pais_preocupados_p4_2800["24. [P4] Dor persistente?"]
+  pais_preocupados_p4_2803["25. [P4] Problema recente?"]
+  inicio --> pais_preocupados_p1_1865
+  pais_preocupados_p1_1865_sim(["VERMELHO"]):::vermelho
+  pais_preocupados_p1_1865 -->|Sim| pais_preocupados_p1_1865_sim
+  pais_preocupados_p1_1865 -->|Não| pais_preocupados_p1_2136
+  pais_preocupados_p1_2136_sim(["VERMELHO"]):::vermelho
+  pais_preocupados_p1_2136 -->|Sim| pais_preocupados_p1_2136_sim
+  pais_preocupados_p1_2136 -->|Não| pais_preocupados_p1_2742
+  pais_preocupados_p1_2742_sim(["VERMELHO"]):::vermelho
+  pais_preocupados_p1_2742 -->|Sim| pais_preocupados_p1_2742_sim
+  pais_preocupados_p1_2742 -->|Não| pais_preocupados_p1_2743
+  pais_preocupados_p1_2743_sim(["VERMELHO"]):::vermelho
+  pais_preocupados_p1_2743 -->|Sim| pais_preocupados_p1_2743_sim
+  pais_preocupados_p1_2743 -->|Não| pais_preocupados_p2_2778
+  pais_preocupados_p2_2778_sim(["LARANJA"]):::laranja
+  pais_preocupados_p2_2778 -->|Sim| pais_preocupados_p2_2778_sim
+  pais_preocupados_p2_2778 -->|Não| pais_preocupados_p2_2779
+  pais_preocupados_p2_2779_sim(["LARANJA"]):::laranja
+  pais_preocupados_p2_2779 -->|Sim| pais_preocupados_p2_2779_sim
+  pais_preocupados_p2_2779 -->|Não| pais_preocupados_p2_2781
+  pais_preocupados_p2_2781_sim(["LARANJA"]):::laranja
+  pais_preocupados_p2_2781 -->|Sim| pais_preocupados_p2_2781_sim
+  pais_preocupados_p2_2781 -->|Não| pais_preocupados_p2_2782
+  pais_preocupados_p2_2782_sim(["LARANJA"]):::laranja
+  pais_preocupados_p2_2782 -->|Sim| pais_preocupados_p2_2782_sim
+  pais_preocupados_p2_2782 -->|Não| pais_preocupados_p2_2783
+  pais_preocupados_p2_2783_sim(["LARANJA"]):::laranja
+  pais_preocupados_p2_2783 -->|Sim| pais_preocupados_p2_2783_sim
+  pais_preocupados_p2_2783 -->|Não| pais_preocupados_p2_2784
+  pais_preocupados_p2_2784_sim(["LARANJA"]):::laranja
+  pais_preocupados_p2_2784 -->|Sim| pais_preocupados_p2_2784_sim
+  pais_preocupados_p2_2784 -->|Não| pais_preocupados_p2_2785
+  pais_preocupados_p2_2785_sim(["LARANJA"]):::laranja
+  pais_preocupados_p2_2785 -->|Sim| pais_preocupados_p2_2785_sim
+  pais_preocupados_p2_2785 -->|Não| pais_preocupados_p2_2786
+  pais_preocupados_p2_2786_sim(["LARANJA"]):::laranja
+  pais_preocupados_p2_2786 -->|Sim| pais_preocupados_p2_2786_sim
+  pais_preocupados_p2_2786 -->|Não| pais_preocupados_p2_2787
+  pais_preocupados_p2_2787_sim(["LARANJA"]):::laranja
+  pais_preocupados_p2_2787 -->|Sim| pais_preocupados_p2_2787_sim
+  pais_preocupados_p2_2787 -->|Não| pais_preocupados_p3_2788
+  pais_preocupados_p3_2788_sim(["AMARELO"]):::amarelo
+  pais_preocupados_p3_2788 -->|Sim| pais_preocupados_p3_2788_sim
+  pais_preocupados_p3_2788 -->|Não| pais_preocupados_p3_2789
+  pais_preocupados_p3_2789_sim(["AMARELO"]):::amarelo
+  pais_preocupados_p3_2789 -->|Sim| pais_preocupados_p3_2789_sim
+  pais_preocupados_p3_2789 -->|Não| pais_preocupados_p3_2790
+  pais_preocupados_p3_2790_sim(["AMARELO"]):::amarelo
+  pais_preocupados_p3_2790 -->|Sim| pais_preocupados_p3_2790_sim
+  pais_preocupados_p3_2790 -->|Não| pais_preocupados_p3_2791
+  pais_preocupados_p3_2791_sim(["AMARELO"]):::amarelo
+  pais_preocupados_p3_2791 -->|Sim| pais_preocupados_p3_2791_sim
+  pais_preocupados_p3_2791 -->|Não| pais_preocupados_p3_2792
+  pais_preocupados_p3_2792_sim(["AMARELO"]):::amarelo
+  pais_preocupados_p3_2792 -->|Sim| pais_preocupados_p3_2792_sim
+  pais_preocupados_p3_2792 -->|Não| pais_preocupados_p3_2793
+  pais_preocupados_p3_2793_sim(["AMARELO"]):::amarelo
+  pais_preocupados_p3_2793 -->|Sim| pais_preocupados_p3_2793_sim
+  pais_preocupados_p3_2793 -->|Não| pais_preocupados_p3_2794
+  pais_preocupados_p3_2794_sim(["AMARELO"]):::amarelo
+  pais_preocupados_p3_2794 -->|Sim| pais_preocupados_p3_2794_sim
+  pais_preocupados_p3_2794 -->|Não| pais_preocupados_p3_2795
+  pais_preocupados_p3_2795_sim(["AMARELO"]):::amarelo
+  pais_preocupados_p3_2795 -->|Sim| pais_preocupados_p3_2795_sim
+  pais_preocupados_p3_2795 -->|Não| pais_preocupados_p4_2796
+  pais_preocupados_p4_2796_sim(["VERDE"]):::verde
+  pais_preocupados_p4_2796 -->|Sim| pais_preocupados_p4_2796_sim
+  pais_preocupados_p4_2796 -->|Não| pais_preocupados_p4_2799
+  pais_preocupados_p4_2799_sim(["VERDE"]):::verde
+  pais_preocupados_p4_2799 -->|Sim| pais_preocupados_p4_2799_sim
+  pais_preocupados_p4_2799 -->|Não| pais_preocupados_p4_2800
+  pais_preocupados_p4_2800_sim(["VERDE"]):::verde
+  pais_preocupados_p4_2800 -->|Sim| pais_preocupados_p4_2800_sim
+  pais_preocupados_p4_2800 -->|Não| pais_preocupados_p4_2803
+  pais_preocupados_p4_2803_sim(["VERDE"]):::verde
+  pais_preocupados_p4_2803 -->|Sim| pais_preocupados_p4_2803_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  pais_preocupados_p4_2803 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;

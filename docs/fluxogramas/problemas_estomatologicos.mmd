@@ -1,0 +1,77 @@
+flowchart TD
+  inicio(["Início: Problemas estomatológicos"])
+  problemas_estomatologicos_p1_1867["1. [P1] Compromisso da via aérea?"]
+  problemas_estomatologicos_p1_2138["2. [P1] Respiração ineficaz?"]
+  problemas_estomatologicos_p1_2746["3. [P1] Sinais de choque?"]
+  problemas_estomatologicos_p1_2764["4. [P1] Não reativo?"]
+  problemas_estomatologicos_p2_2817["5. [P2] Grande Hemorragia<br/>incontrolável?"]
+  problemas_estomatologicos_p2_2818["6. [P2] Muito quente?"]
+  problemas_estomatologicos_p2_2819["7. [P2] Possível sépsis?"]
+  problemas_estomatologicos_p2_2820["8. [P2] Dor severa?"]
+  problemas_estomatologicos_p3_2821["9. [P3] Pequena hemorragia<br/>incontrolável?"]
+  problemas_estomatologicos_p3_2822["10. [P3] Quente?"]
+  problemas_estomatologicos_p3_2823["11. [P3] Avulsão dentária recente?"]
+  problemas_estomatologicos_p3_2824["12. [P3] História Inapropriada?"]
+  problemas_estomatologicos_p3_2825["13. [P3] Dor moderada?"]
+  problemas_estomatologicos_p4_2826["14. [P4] Edema da face?"]
+  problemas_estomatologicos_p4_2829["15. [P4] Febre persistente?"]
+  problemas_estomatologicos_p4_2830["16. [P4] Dor persistente?"]
+  problemas_estomatologicos_p4_2833["17. [P4] Problema recente?"]
+  inicio --> problemas_estomatologicos_p1_1867
+  problemas_estomatologicos_p1_1867_sim(["VERMELHO"]):::vermelho
+  problemas_estomatologicos_p1_1867 -->|Sim| problemas_estomatologicos_p1_1867_sim
+  problemas_estomatologicos_p1_1867 -->|Não| problemas_estomatologicos_p1_2138
+  problemas_estomatologicos_p1_2138_sim(["VERMELHO"]):::vermelho
+  problemas_estomatologicos_p1_2138 -->|Sim| problemas_estomatologicos_p1_2138_sim
+  problemas_estomatologicos_p1_2138 -->|Não| problemas_estomatologicos_p1_2746
+  problemas_estomatologicos_p1_2746_sim(["VERMELHO"]):::vermelho
+  problemas_estomatologicos_p1_2746 -->|Sim| problemas_estomatologicos_p1_2746_sim
+  problemas_estomatologicos_p1_2746 -->|Não| problemas_estomatologicos_p1_2764
+  problemas_estomatologicos_p1_2764_sim(["VERMELHO"]):::vermelho
+  problemas_estomatologicos_p1_2764 -->|Sim| problemas_estomatologicos_p1_2764_sim
+  problemas_estomatologicos_p1_2764 -->|Não| problemas_estomatologicos_p2_2817
+  problemas_estomatologicos_p2_2817_sim(["LARANJA"]):::laranja
+  problemas_estomatologicos_p2_2817 -->|Sim| problemas_estomatologicos_p2_2817_sim
+  problemas_estomatologicos_p2_2817 -->|Não| problemas_estomatologicos_p2_2818
+  problemas_estomatologicos_p2_2818_sim(["LARANJA"]):::laranja
+  problemas_estomatologicos_p2_2818 -->|Sim| problemas_estomatologicos_p2_2818_sim
+  problemas_estomatologicos_p2_2818 -->|Não| problemas_estomatologicos_p2_2819
+  problemas_estomatologicos_p2_2819_sim(["LARANJA"]):::laranja
+  problemas_estomatologicos_p2_2819 -->|Sim| problemas_estomatologicos_p2_2819_sim
+  problemas_estomatologicos_p2_2819 -->|Não| problemas_estomatologicos_p2_2820
+  problemas_estomatologicos_p2_2820_sim(["LARANJA"]):::laranja
+  problemas_estomatologicos_p2_2820 -->|Sim| problemas_estomatologicos_p2_2820_sim
+  problemas_estomatologicos_p2_2820 -->|Não| problemas_estomatologicos_p3_2821
+  problemas_estomatologicos_p3_2821_sim(["AMARELO"]):::amarelo
+  problemas_estomatologicos_p3_2821 -->|Sim| problemas_estomatologicos_p3_2821_sim
+  problemas_estomatologicos_p3_2821 -->|Não| problemas_estomatologicos_p3_2822
+  problemas_estomatologicos_p3_2822_sim(["AMARELO"]):::amarelo
+  problemas_estomatologicos_p3_2822 -->|Sim| problemas_estomatologicos_p3_2822_sim
+  problemas_estomatologicos_p3_2822 -->|Não| problemas_estomatologicos_p3_2823
+  problemas_estomatologicos_p3_2823_sim(["AMARELO"]):::amarelo
+  problemas_estomatologicos_p3_2823 -->|Sim| problemas_estomatologicos_p3_2823_sim
+  problemas_estomatologicos_p3_2823 -->|Não| problemas_estomatologicos_p3_2824
+  problemas_estomatologicos_p3_2824_sim(["AMARELO"]):::amarelo
+  problemas_estomatologicos_p3_2824 -->|Sim| problemas_estomatologicos_p3_2824_sim
+  problemas_estomatologicos_p3_2824 -->|Não| problemas_estomatologicos_p3_2825
+  problemas_estomatologicos_p3_2825_sim(["AMARELO"]):::amarelo
+  problemas_estomatologicos_p3_2825 -->|Sim| problemas_estomatologicos_p3_2825_sim
+  problemas_estomatologicos_p3_2825 -->|Não| problemas_estomatologicos_p4_2826
+  problemas_estomatologicos_p4_2826_sim(["VERDE"]):::verde
+  problemas_estomatologicos_p4_2826 -->|Sim| problemas_estomatologicos_p4_2826_sim
+  problemas_estomatologicos_p4_2826 -->|Não| problemas_estomatologicos_p4_2829
+  problemas_estomatologicos_p4_2829_sim(["VERDE"]):::verde
+  problemas_estomatologicos_p4_2829 -->|Sim| problemas_estomatologicos_p4_2829_sim
+  problemas_estomatologicos_p4_2829 -->|Não| problemas_estomatologicos_p4_2830
+  problemas_estomatologicos_p4_2830_sim(["VERDE"]):::verde
+  problemas_estomatologicos_p4_2830 -->|Sim| problemas_estomatologicos_p4_2830_sim
+  problemas_estomatologicos_p4_2830 -->|Não| problemas_estomatologicos_p4_2833
+  problemas_estomatologicos_p4_2833_sim(["VERDE"]):::verde
+  problemas_estomatologicos_p4_2833 -->|Sim| problemas_estomatologicos_p4_2833_sim
+  sem_positivo(["AZUL<br/>Sem discriminador positivo"]):::azul
+  problemas_estomatologicos_p4_2833 -->|Não| sem_positivo
+  classDef amarelo fill:#F9A825,color:#1c1c1c,stroke:#333;
+  classDef azul fill:#1565C0,color:#ffffff,stroke:#333;
+  classDef laranja fill:#EF6C00,color:#ffffff,stroke:#333;
+  classDef verde fill:#2E7D32,color:#ffffff,stroke:#333;
+  classDef vermelho fill:#D32F2F,color:#ffffff,stroke:#333;
