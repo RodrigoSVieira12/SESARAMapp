@@ -10,6 +10,12 @@ This repository is a working prototype for a hospital-side application that guid
 ![docker](https://img.shields.io/badge/docker-ready-2496ED)
 ![status](https://img.shields.io/badge/status-prototype-orange)
 
+<p align="center">
+  <img src="docs/images/01-home.png" alt="Home screen of the application" width="380">
+</p>
+
+*The home screen: what the tool does, the emergency numbers, and the promise that nothing is stored.*
+
 ## The project in numbers
 
 | | |
@@ -123,6 +129,25 @@ flowchart LR
     R --> M["Motivos<br/>(explainability)"]
 ```
 
+### What it looks like
+
+The same three blocks, as the patient sees them.
+
+| | | |
+| --- | --- | --- |
+| ![Complaint list](docs/images/02-complaints.png) | ![Free-text search suggesting flows](docs/images/03-search.png) | ![A yes/no triage question](docs/images/04-question.png) |
+| **Pick a complaint** — 56 flows, grouped by theme. | **Or describe it** — an editable synonym dictionary suggests the likely flows; no AI, every match explainable. | **Yes/no questions** — one Manchester discriminator at a time, in plain language, with a "Listen" button. |
+
+| | |
+| --- | --- |
+| ![Red result screen](docs/images/05-red.png) | ![Yellow result screen](docs/images/06-yellow.png) |
+| **Red** — call 112 now; the discriminator that fired is quoted back, and "What you can do" carries the advice for the meantime. | **Yellow** — the target observation time, the same explain-then-advise structure, and a button that leads to the routing. |
+
+| | | |
+| --- | --- | --- |
+| ![Hospital unit card](docs/images/07-unit-hospital.png) | ![Green recommendation with self-care](docs/images/08-green.png) | ![Health centre card with alternatives](docs/images/09-unit-health-centre.png) |
+| **Where to go (red/orange/yellow)** — the reference hospital, with drive time, road distance, live waiting time in the patient's colour, phone, directions and QR. | **Where to go (green/blue)** — the nearest open unit, the reasons behind the choice, and when watching at home is reasonable. | **The unit card** — open/closed state, contacts, map, and the nearest open alternatives. |
+
 The *why* behind the design — rules as data, no database, the layered
 travel model, how the system degrades — lives in
 [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), with each decision also
@@ -192,6 +217,7 @@ onde-ir-sesaram/
 │   └── data/                 # everything editable without code (see docs/DATA_GUIDE.md)
 ├── static/                   # frontend (HTML + CSS + plain JS, vendor local)
 ├── docs/                     # architecture, ADRs, validation, performance, guides
+│   └── images/               # the screenshots used in this README
 ├── scripts/                  # tools for data editors and maintenance
 ├── tests/                    # pytest
 ├── .github/workflows/ci.yml  # CI: data validation + translation audit + tests

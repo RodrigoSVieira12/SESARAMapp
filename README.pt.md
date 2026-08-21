@@ -10,6 +10,12 @@ Este repositório contém um protótipo funcional de uma aplicação, do lado do
 ![docker](https://img.shields.io/badge/docker-ready-2496ED)
 ![status](https://img.shields.io/badge/status-prototype-orange)
 
+<p align="center">
+  <img src="docs/images/01-home.png" alt="Ecrã inicial da aplicação" width="380">
+</p>
+
+*O ecrã inicial: o que a ferramenta faz, os contactos de emergência, e a promessa de que nada é guardado.*
+
 ## O projeto em números
 
 | | |
@@ -123,6 +129,25 @@ flowchart LR
     R --> M["Motivos<br/>(explicabilidade)"]
 ```
 
+### O que o utente vê
+
+Os mesmos três blocos, do lado de quem os usa. *(As imagens estão em inglês; a aplicação existe nas duas línguas.)*
+
+| | | |
+| --- | --- | --- |
+| ![Lista de queixas](docs/images/02-complaints.png) | ![Pesquisa por texto livre](docs/images/03-search.png) | ![Pergunta de sim/não](docs/images/04-question.png) |
+| **Escolher a queixa** — 56 fluxos, organizados por temas. | **Ou descrevê-la** — um dicionário de sinónimos editável sugere os fluxos prováveis; sem IA, cada correspondência é explicável. | **Perguntas de sim/não** — um discriminador de Manchester de cada vez, em linguagem do dia a dia, com botão «Ouvir». |
+
+| | |
+| --- | --- |
+| ![Resultado vermelho](docs/images/05-red.png) | ![Resultado amarelo](docs/images/06-yellow.png) |
+| **Vermelho** — ligar 112 já; o discriminador ativado é citado, e «O que pode fazer» traz o aconselhamento para entretanto. | **Amarelo** — o tempo alvo de observação, a mesma estrutura (explicar e depois aconselhar), e o botão que leva ao encaminhamento. |
+
+| | | |
+| --- | --- | --- |
+| ![Cartão do hospital](docs/images/07-unit-hospital.png) | ![Recomendação verde com autocuidado](docs/images/08-green.png) | ![Cartão do centro de saúde com alternativas](docs/images/09-unit-health-centre.png) |
+| **Para onde ir (vermelho/laranja/amarelo)** — o hospital de referência, com tempo de carro, distância por estrada, espera atual na cor do utente, telefone, direções e QR. | **Para onde ir (verde/azul)** — a unidade aberta mais próxima, os motivos da escolha, e quando aguardar em casa é razoável. | **O cartão da unidade** — estado de aberto ou fechado, contactos, mapa, e as alternativas abertas mais próximas. |
+
 O *porquê* por trás do desenho — regras como dados, sem base de dados, o
 modelo de viagem em camadas, como o sistema degrada — vive em
 [`docs/ARQUITETURA.md`](docs/ARQUITETURA.md), com cada decisão também
@@ -193,6 +218,7 @@ onde-ir-sesaram/
 │   └── data/                 # tudo editável sem código (ver docs/GUIA_DOS_DADOS.md)
 ├── static/                   # frontend (HTML + CSS + JS simples, vendor local)
 ├── docs/                     # arquitetura, ADRs, validação, desempenho, guias
+│   └── images/               # as imagens usadas neste README
 ├── scripts/                  # ferramentas para quem edita dados e manutenção
 ├── tests/                    # pytest
 ├── .github/workflows/ci.yml  # CI: validação de dados + auditoria de traduções + testes

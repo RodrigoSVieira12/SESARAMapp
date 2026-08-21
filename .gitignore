@@ -8,3 +8,5 @@ venv/
 # artefactos de cobertura (scripts/cobertura_testes.py)
 .coverage
 htmlcov/
+
+app/data/espera_cache.json
